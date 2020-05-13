@@ -2,21 +2,24 @@ package develop.p2p.plugin.Enum;
 
 public enum  EnumCheatType
 {
-    KILLAURA("KillAura", false),
-    BHOP("BunnyHop", false),
-    REACH("Reach", false),
-    SPEED("Speed", false),
-    ANTIKNOCKBACK("AntiKnockBack", false),
-    FLY("Fly", false);
+    KILLAURA("KillAura", false, "killaura"),
+    BHOP("BunnyHop", false, "bhop"),
+    REACH("Reach", false, "reach"),
+    SPEED("Speed", false, "speed"),
+    ANTIKNOCKBACK("AntiKnockBack", false, "antiknockback"),
+    FLY("Fly", false, "fly"),
+    AUTOCLICKER("Auto Clicker", false, "autoclicker");
 
     private String text;
     private boolean isSelected;
-    private boolean isChecked = false;
+    private boolean isChecked;
+    private String sysName;
 
-    EnumCheatType(String text, boolean isSelected)
+    EnumCheatType(String text, boolean isSelected, String sysName)
     {
         this.text = text;
         this.isSelected = isSelected;
+        this.sysName = sysName;
     }
 
     public String getText()
@@ -42,5 +45,10 @@ public enum  EnumCheatType
     public void setChecked(boolean checked)
     {
         isChecked = checked;
+    }
+
+    public String getSysName()
+    {
+        return sysName;
     }
 }

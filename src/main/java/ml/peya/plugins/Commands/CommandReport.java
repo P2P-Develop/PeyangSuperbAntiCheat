@@ -8,6 +8,8 @@ import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 
+import java.util.*;
+
 public class CommandReport implements CommandExecutor
 {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
@@ -45,13 +47,35 @@ public class CommandReport implements CommandExecutor
                 return true;
             }
 
-            ItemStack book = ReportBook.getBook(target, CheatTypeUtils.getFullType().toArray(EnumCheatType.values()));
-            Book.openBook(book, target);
+            ItemStack book = ReportBook.getBook(target, (EnumCheatType[]) CheatTypeUtils.getFullType().toArray());
+            Book.openBook(book, (Player) sender);
         }
 
         Player target= Bukkit.getPlayer(args[0]);
+        ArrayList<String> reasons = (ArrayList<String>) Arrays.asList(args);
+        ArrayList<EnumCheatType> types = CheatTypeUtils.getFullType();
+        reasons.remove(0);
 
+        for (String reason: reasons)
+        {
+            for (EnumCheatType type: types)
+            {
+                if (reason.contains(type.getSysName()))
+                    type.setSelected(true);
+            }
+        }
 
+        if(reasons.get(reasons.size() - 1).equals("\\"))
+        {
+            ItemStack book = ReportBook.getBook(target, (EnumCheatType[]) reasons.toArray());
+            Book.openBook(book, target);
+            return true;
+        }
+
+        for (EnumCheatType type: types)
+        {
+
+        }
         return false;
     }
 }

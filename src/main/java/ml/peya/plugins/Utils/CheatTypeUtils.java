@@ -16,6 +16,7 @@ public class CheatTypeUtils
         types.add(EnumCheatType.KILLAURA);
         types.add(EnumCheatType.REACH);
         types.add(EnumCheatType.SPEED);
+        types.add(EnumCheatType.AUTOCLICKER);
         return types;
     }
 }
