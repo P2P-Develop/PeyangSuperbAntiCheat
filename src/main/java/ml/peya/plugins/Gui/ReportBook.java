@@ -1,6 +1,6 @@
-package develop.p2p.plugin.Gui;
+package ml.peya.plugins.Gui;
 
-import develop.p2p.plugin.Enum.*;
+import ml.peya.plugins.Enum.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;

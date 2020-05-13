@@ -1,4 +1,4 @@
-package develop.p2p.plugin.Enum;
+package ml.peya.plugins.Enum;
 
 public enum  EnumCheatType
 {

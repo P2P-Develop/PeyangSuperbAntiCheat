@@ -1,7 +1,7 @@
-package develop.p2p.plugin.Gui;
+package ml.peya.plugins.Gui;
 
-import develop.p2p.plugin.*;
-import develop.p2p.plugin.Utils.*;
+import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 

@@ -1,8 +1,8 @@
-package develop.p2p.plugin.Commands;
+package ml.peya.plugins.Commands;
 
-import develop.p2p.plugin.Enum.*;
-import develop.p2p.plugin.Gui.*;
-import develop.p2p.plugin.Utils.*;
+import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;

@@ -1,6 +1,6 @@
-package develop.p2p.plugin.Utils;
+package ml.peya.plugins.Utils;
 
-import develop.p2p.plugin.Enum.*;
+import ml.peya.plugins.Enum.*;
 
 import java.util.*;
 

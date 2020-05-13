@@ -1,4 +1,4 @@
-package develop.p2p.plugin.Utils;
+package ml.peya.plugins.Utils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;

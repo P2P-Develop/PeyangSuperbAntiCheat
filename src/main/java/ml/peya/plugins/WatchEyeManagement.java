@@ -1,6 +1,6 @@
-package develop.p2p.plugin;
+package ml.peya.plugins;
 
-import develop.p2p.plugin.Enum.*;
+import ml.peya.plugins.Enum.*;
 import org.bukkit.entity.*;
 
 import java.util.*;

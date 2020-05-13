@@ -1,14 +1,13 @@
-package develop.p2p.plugin;
+package ml.peya.plugins;
 
 import com.zaxxer.hikari.*;
-import develop.p2p.plugin.Commands.*;
-import develop.p2p.plugin.Gui.*;
+import ml.peya.plugins.Commands.*;
+import ml.peya.plugins.Gui.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.*;
 
 import java.io.*;
-import java.sql.*;
 import java.util.logging.*;
 
 public class PeyangSuperbAntiCheat extends JavaPlugin

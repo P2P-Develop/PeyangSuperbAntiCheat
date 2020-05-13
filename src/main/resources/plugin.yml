@@ -1,5 +1,5 @@
 name: PeyangSuperbAntiCheat
-main: develop.p2p.plugin.PeyangSuperbAntiCheat
+main: PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PSAC
 
