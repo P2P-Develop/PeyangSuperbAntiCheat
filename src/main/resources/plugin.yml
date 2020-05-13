@@ -1,0 +1,17 @@
+name: PeyangSuperbAntiCheat
+main: develop.p2p.plugin.PeyangSuperbAntiCheat
+version: 1.0.0
+prefix: PSAC
+
+loadbefore: ["ProtocolLib"]
+softdepend: ["ProtocolLib"]
+
+
+commands:
+  report:
+    aliases: ["peyangreport", "pcr", "rep", "report"]
+    permission: psr.report
+    usage: /peyangreport <PlayerName> <type>
+permissions:
+  psr.report:
+    default: true
