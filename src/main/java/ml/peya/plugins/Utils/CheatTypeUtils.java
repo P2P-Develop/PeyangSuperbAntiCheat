@@ -10,13 +10,14 @@ public class CheatTypeUtils
     {
         ArrayList<EnumCheatType> types = new ArrayList<>();
 
-        types.add(EnumCheatType.ANTIKNOCKBACK);
-        types.add(EnumCheatType.BHOP);
         types.add(EnumCheatType.FLY);
         types.add(EnumCheatType.KILLAURA);
-        types.add(EnumCheatType.REACH);
-        types.add(EnumCheatType.SPEED);
         types.add(EnumCheatType.AUTOCLICKER);
+        types.add(EnumCheatType.SPEED);
+        types.add(EnumCheatType.ANTIKNOCKBACK);
+        types.add(EnumCheatType.REACH);
+        types.add(EnumCheatType.DOLPHIN);
+
         for (EnumCheatType type: types)
             type.setSelected(false);
         return types.toArray(new EnumCheatType[0]);
@@ -26,13 +27,13 @@ public class CheatTypeUtils
     {
         ArrayList<EnumCheatType> types = new ArrayList<>();
 
-        types.add(EnumCheatType.ANTIKNOCKBACK);
-        types.add(EnumCheatType.BHOP);
         types.add(EnumCheatType.FLY);
         types.add(EnumCheatType.KILLAURA);
-        types.add(EnumCheatType.REACH);
-        types.add(EnumCheatType.SPEED);
         types.add(EnumCheatType.AUTOCLICKER);
+        types.add(EnumCheatType.SPEED);
+        types.add(EnumCheatType.ANTIKNOCKBACK);
+        types.add(EnumCheatType.REACH);
+        types.add(EnumCheatType.DOLPHIN);
         for (EnumCheatType type: types)
             type.setSelected(false);
         return types;

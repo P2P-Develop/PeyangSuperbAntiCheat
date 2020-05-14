@@ -1,6 +1,7 @@
 package ml.peya.plugins.Commands;
 
 
+import com.comphenix.protocol.wrappers.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.*;
@@ -81,9 +82,14 @@ public class CommandReport implements CommandExecutor
         String senderUUID  = sender instanceof ConsoleCommandSender ? "[CONSOLE]": ((Player) sender).getUniqueId().toString().replace("-", "");
 
         String id = WatchEyeManagement.add(target, senderName, senderUUID);
+        boolean successFlag = false;
+        for(EnumCheatType type: types)
+            successFlag = WatchEyeManagement.setReason(id, type, 0);
 
-        if (WatchEyeManagement.setReason(id, types))
+        if (successFlag)
             sender.sendMessage(ChatColor.GREEN + "チート報告ありがとうございます。お客様の懸念を理解し、可能ならば早急に検討させていただきます。");
+        else
+            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 不明なSQLエラーが発生しました。ADMINに報告しています。。。");
         return true;
     }
 }

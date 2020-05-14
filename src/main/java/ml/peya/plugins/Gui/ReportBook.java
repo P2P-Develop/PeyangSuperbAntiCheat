@@ -8,7 +8,6 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
-import java.util.*;
 
 public class ReportBook
 {
@@ -19,9 +18,11 @@ public class ReportBook
         StringBuilder tmpReasonText = new StringBuilder();
         for (EnumCheatType type: types)
             tmpReasonText.append(type.isSelected() ? type.getSysName() + " ": "");
-        ComponentBuilder component = new ComponentBuilder("");
+        ComponentBuilder component = new ComponentBuilder( "どんなチートを使っていましたか?");
+        component.append("\n");
+
         for (EnumCheatType type: types)
-        {//Fuck Bukkit
+        {
             String text = "◎ " + type.getText() + "\n";
             if (type.isSelected())
                 text = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + text;
@@ -35,8 +36,11 @@ public class ReportBook
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
 
-        component.append(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD +  "SUBMIT REPORT")
+        component.append(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD +  "レポートを提出")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText));
+
+        component.append(ChatColor.RED + "レポートをキャンセル")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, ""));
 
         meta.spigot().addPage(component.create());
 

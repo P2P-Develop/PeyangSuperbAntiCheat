@@ -2,14 +2,13 @@ package ml.peya.plugins.Enum;
 
 public enum  EnumCheatType
 {
+    FLY("Fly", false, "fly"),
     KILLAURA("KillAura", false, "killaura"),
-    BHOP("BunnyHop", false, "bhop"),
-    REACH("Reach", false, "reach"),
+    AUTOCLICKER("Auto Clicker", false, "autoclicker"),
     SPEED("Speed", false, "speed"),
     ANTIKNOCKBACK("AntiKnockBack", false, "antiknockback"),
-    FLY("Fly", false, "fly"),
-    AUTOCLICKER("Auto Clicker", false, "autoclicker");
-
+    REACH("Reach", false, "reach"),
+    DOLPHIN("Dolphin", false, "dolphin");
     private String text;
     private boolean isSelected;
     private boolean isChecked;
