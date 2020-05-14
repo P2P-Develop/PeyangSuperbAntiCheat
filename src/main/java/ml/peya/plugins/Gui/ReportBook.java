@@ -1,5 +1,6 @@
 package ml.peya.plugins.Gui;
 
+import javafx.event.*;
 import ml.peya.plugins.Enum.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
@@ -13,28 +14,33 @@ public class ReportBook
 {
     public static ItemStack getBook(Player player, EnumCheatType... types)
     {
-        ItemStack book = new ItemStack(Material.KNOWLEDGE_BOOK);
+        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
-        ArrayList<String> pages = new ArrayList<>();
         StringBuilder tmpReasonText = new StringBuilder();
         for (EnumCheatType type: types)
-        {
-            String text = "●" + type.getText();
+            tmpReasonText.append(type.isSelected() ? type.getSysName() + " ": "");
+        ComponentBuilder component = new ComponentBuilder("");
+        for (EnumCheatType type: types)
+        {//Fuck Bukkit
+            String text = "◎ " + type.getText() + "\n";
             if (type.isSelected())
-                text = ChatColor.GREEN + text;
-            TextComponent component = new TextComponent(text);
-            String reasonText = type.isSelected() ? type.getText(): "";
-            tmpReasonText.append(reasonText).append(" ");
-            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + tmpReasonText + "\\"));
-            pages.add(component.getText());
+                text = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + text;
+            component.append(text)
+                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " +  player.getName() + " " + tmpReasonText + " " + type.getSysName() + " \\"));
         }
-        pages.add("");
-        pages.add("");
 
-        TextComponent submit = new TextComponent(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "SUBMIT REPORT");
-        submit.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + tmpReasonText));
-        pages.add(Arrays.toString(pages.toArray()));
-        meta.setDisplayName("-");
+        component.append("\n\n");
+
+
+        meta.setTitle("-");
+        meta.setAuthor("AntiCheat Dev");
+
+        component.append(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD +  "SUBMIT REPORT")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText));
+
+        meta.spigot().addPage(component.create());
+
+        StringBuilder txt = new StringBuilder();
         book.setItemMeta(meta);
         return book;
     }

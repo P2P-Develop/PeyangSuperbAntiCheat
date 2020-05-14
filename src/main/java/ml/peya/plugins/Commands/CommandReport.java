@@ -1,5 +1,7 @@
 package ml.peya.plugins.Commands;
 
+
+import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Utils.*;
@@ -17,7 +19,7 @@ public class CommandReport implements CommandExecutor
 
         if (args.length == 0)
         {
-            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー：変数が不足しています。/" + label + "help でヘルプを見てください。");
+            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー：変数が不足しています。/" + label + " help でヘルプを見てください。");
             return true;
         }
         else if (args.length == 1)
@@ -29,10 +31,10 @@ public class CommandReport implements CommandExecutor
                         ChatColor.BLUE + "PeyangSuperbAntiCheat" +
                         ChatColor.GREEN + "]" +
                         ChatColor.AQUA);
-                sender.sendMessage(ChatColor.AQUA + "    /" + label + " <PlayerName> [reason...]");
-                sender.sendMessage(ChatColor.GREEN + "    プレイヤーを報告します。");
-                sender.sendMessage(ChatColor.AQUA + "    /" + label + " help");
-                sender.sendMessage(ChatColor.GREEN + "    このコマンドです。");
+                sender.sendMessage(ChatColor.AQUA + "/" + label + " <PlayerName> [reason...]");
+                sender.sendMessage(ChatColor.GREEN + "プレイヤーを報告します。");
+                sender.sendMessage(ChatColor.AQUA + "/" + label + " help");
+                sender.sendMessage(ChatColor.GREEN + "このコマンドです。");
                 return true;
             }
             Player target= Bukkit.getPlayer(args[0]);
@@ -47,35 +49,43 @@ public class CommandReport implements CommandExecutor
                 return true;
             }
 
-            ItemStack book = ReportBook.getBook(target, (EnumCheatType[]) CheatTypeUtils.getFullType().toArray());
-            Book.openBook(book, (Player) sender);
+            ItemStack book = ReportBook.getBook(target,  CheatTypeUtils.getFullType());
+            BookUtil.openBook(book, (Player) sender);
+            return true;
         }
 
-        Player target= Bukkit.getPlayer(args[0]);
-        ArrayList<String> reasons = (ArrayList<String>) Arrays.asList(args);
-        ArrayList<EnumCheatType> types = CheatTypeUtils.getFullType();
+        Player target = Bukkit.getPlayer(args[0]);
+        ArrayList<String> reasons = new ArrayList<>(Arrays.asList(args));
+        ArrayList<EnumCheatType> types = CheatTypeUtils.getFullTypeArrayList();
+
         reasons.remove(0);
 
         for (String reason: reasons)
         {
             for (EnumCheatType type: types)
             {
+                System.out.println(type.getText());
+                System.out.println(type.isSelected());
                 if (reason.contains(type.getSysName()))
                     type.setSelected(true);
             }
         }
 
-        if(reasons.get(reasons.size() - 1).equals("\\"))
+        if(reasons.size() != 0 &&  reasons.get(reasons.size() - 1).equals("\\"))
         {
-            ItemStack book = ReportBook.getBook(target, (EnumCheatType[]) reasons.toArray());
-            Book.openBook(book, target);
+            ItemStack book = ReportBook.getBook(target, types.toArray(new EnumCheatType[0]));
+            BookUtil.openBook(book, target);
             return true;
         }
+        types.removeIf(type -> !type.isSelected());
 
-        for (EnumCheatType type: types)
-        {
+        String senderName  = sender instanceof ConsoleCommandSender ? "[CONSOLE]": sender.getName();
+        String senderUUID  = sender instanceof ConsoleCommandSender ? "[CONSOLE]": ((Player) sender).getUniqueId().toString().replace("-", "");
 
-        }
-        return false;
+        String id = WatchEyeManagement.add(target, senderName, senderUUID);
+
+        if (WatchEyeManagement.setReason(id, types))
+            sender.sendMessage("");
+        return true;
     }
 }

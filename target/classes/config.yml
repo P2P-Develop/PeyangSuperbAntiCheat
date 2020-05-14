@@ -1,0 +1,3 @@
+#sqlite
+database:
+  path: "./eye.db"
