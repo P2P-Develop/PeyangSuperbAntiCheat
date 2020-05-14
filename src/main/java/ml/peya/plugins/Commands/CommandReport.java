@@ -64,8 +64,6 @@ public class CommandReport implements CommandExecutor
         {
             for (EnumCheatType type: types)
             {
-                System.out.println(type.getText());
-                System.out.println(type.isSelected());
                 if (reason.contains(type.getSysName()))
                     type.setSelected(true);
             }
@@ -85,7 +83,7 @@ public class CommandReport implements CommandExecutor
         String id = WatchEyeManagement.add(target, senderName, senderUUID);
 
         if (WatchEyeManagement.setReason(id, types))
-            sender.sendMessage("");
+            sender.sendMessage(ChatColor.GREEN + "チート報告ありがとうございます。お客様の懸念を理解し、可能ならば早急に検討させていただきます。");
         return true;
     }
 }

@@ -14,7 +14,7 @@ public class WatchEyeManagement
         try(Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
             Statement statement = connection.createStatement())
         {
-            statement.execute(String.format("INSERT INTO watcheye VALUES ('%s', '%s', %s, '%s', '%s', %s)",
+            statement.execute(String.format("INSERT INTO watcheye VALUES ('%s', '%s', %s, '%s', '%s', '%s')",
                     target.getUniqueId().toString().replace("-", ""),
                     target.getName(),
                     System.currentTimeMillis(),
