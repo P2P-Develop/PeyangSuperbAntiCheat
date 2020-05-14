@@ -3,15 +3,17 @@ main: ml.peya.plugins.PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PeyangSuperbAntiCheat
 
-loadbefore: ["ProtocolLib"]
-softdepend: ["ProtocolLib"]
-
-
 commands:
   report:
     aliases: ["peyangreport", "pcr", "rep", "report", "wdr"]
     permission: psr.report
     usage: /peyangreport <PlayerName> <type>
+  peyangsuperbanticheat:
+    aliases: ["psac", "anticheat", "wdadmin", "psr"]
 permissions:
   psr.report:
+    default: true
+  psr.admin:
+    default: op
+  psr.notification:
     default: true

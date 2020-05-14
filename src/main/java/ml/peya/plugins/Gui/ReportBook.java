@@ -1,6 +1,5 @@
 package ml.peya.plugins.Gui;
 
-import javafx.event.*;
 import ml.peya.plugins.Enum.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
@@ -37,14 +36,12 @@ public class ReportBook
         meta.setAuthor("AntiCheat Dev");
 
         component.append(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD +  "レポートを提出")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText));
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText + " bybooks"));
 
         component.append(ChatColor.RED + "レポートをキャンセル")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, ""));
 
         meta.spigot().addPage(component.create());
-
-        StringBuilder txt = new StringBuilder();
         book.setItemMeta(meta);
         return book;
     }

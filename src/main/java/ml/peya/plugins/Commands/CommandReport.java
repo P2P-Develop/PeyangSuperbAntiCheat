@@ -1,7 +1,6 @@
 package ml.peya.plugins.Commands;
 
 
-import com.comphenix.protocol.wrappers.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.*;
@@ -31,7 +30,7 @@ public class CommandReport implements CommandExecutor
                         ChatColor.GREEN + "[" +
                         ChatColor.BLUE + "PeyangSuperbAntiCheat" +
                         ChatColor.GREEN + "]" +
-                        ChatColor.AQUA);
+                        ChatColor.AQUA + "-----");
                 sender.sendMessage(ChatColor.AQUA + "/" + label + " <PlayerName> [reason...]");
                 sender.sendMessage(ChatColor.GREEN + "プレイヤーを報告します。");
                 sender.sendMessage(ChatColor.AQUA + "/" + label + " help");
@@ -57,18 +56,10 @@ public class CommandReport implements CommandExecutor
 
         Player target = Bukkit.getPlayer(args[0]);
         ArrayList<String> reasons = new ArrayList<>(Arrays.asList(args));
-        ArrayList<EnumCheatType> types = CheatTypeUtils.getFullTypeArrayList();
 
         reasons.remove(0);
 
-        for (String reason: reasons)
-        {
-            for (EnumCheatType type: types)
-            {
-                if (reason.contains(type.getSysName()))
-                    type.setSelected(true);
-            }
-        }
+        ArrayList<EnumCheatType> types = CheatTypeUtils.getCheatTypeArrayFromString(reasons.toArray(new String[0]));
 
         if(reasons.size() != 0 &&  reasons.get(reasons.size() - 1).equals("\\"))
         {
@@ -76,10 +67,31 @@ public class CommandReport implements CommandExecutor
             BookUtil.openBook(book, target);
             return true;
         }
+
+
         types.removeIf(type -> !type.isSelected());
+
+        for(EnumCheatType typpp: types)
+            System.out.println(typpp.getText());
+        if(types.size() == 0)
+        {
+            if(!reasons.contains("bybooks"))
+                sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 理由が正しくありません！");
+            else if (args.length == 2 && reasons.contains("bybooks"))
+                sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 理由が選択されていません！");
+
+            return true;
+        }
+
 
         String senderName  = sender instanceof ConsoleCommandSender ? "[CONSOLE]": sender.getName();
         String senderUUID  = sender instanceof ConsoleCommandSender ? "[CONSOLE]": ((Player) sender).getUniqueId().toString().replace("-", "");
+
+        if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
+        {
+            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 既に報告済みです！");
+            return true;
+        }
 
         String id = WatchEyeManagement.add(target, senderName, senderUUID);
         boolean successFlag = false;
@@ -89,7 +101,7 @@ public class CommandReport implements CommandExecutor
         if (successFlag)
             sender.sendMessage(ChatColor.GREEN + "チート報告ありがとうございます。お客様の懸念を理解し、可能ならば早急に検討させていただきます。");
         else
-            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 不明なSQLエラーが発生しました。ADMINに報告しています。。。");
+            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 不明なSQLエラーが発生しました。運営に報告しています。。。");
         return true;
     }
 }

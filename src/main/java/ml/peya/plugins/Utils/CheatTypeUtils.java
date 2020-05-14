@@ -38,4 +38,29 @@ public class CheatTypeUtils
             type.setSelected(false);
         return types;
     }
+
+    public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
+    {
+        ArrayList<EnumCheatType> types = getFullTypeArrayList();
+        for (String reason: values)
+        {
+            for (EnumCheatType type: types)
+            {
+                if (reason.contains(type.getSysName()))
+                    type.setSelected(true);
+            }
+        }
+        return types;
+    }
+
+    public static EnumCheatType getCheatTypeFromString(String sysname)
+    {
+        ArrayList<EnumCheatType> types = getFullTypeArrayList();
+        for (EnumCheatType type: types)
+        {
+            if (type.getSysName().equals(sysname))
+                return type;
+        }
+        return null;
+    }
 }

@@ -23,12 +23,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     @Override
     public void onEnable()
     {
-        if (Bukkit.getPluginManager().getPlugin("ProtocolLib") == null)
-        {
-            logger.log(Level.SEVERE, "PeyangSuperbAntiCheat has Require ProtocolLib");
-            Bukkit.getPluginManager().disablePlugin(this);
-            return;
-        }
 
         saveDefaultConfig();
 
@@ -39,6 +33,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         hManager =  new HikariDataSource(initMngDatabase(getDataFolder().getAbsolutePath() + "/"));
         createDefaultTables();
         getCommand("report").setExecutor(new CommandReport());
+        getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
         logger.info("PeyangSuperbAntiCheat has started!");
     }
 
