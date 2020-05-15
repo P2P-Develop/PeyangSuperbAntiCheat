@@ -8,11 +8,13 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+import java.math.*;
 import java.text.*;
 import java.util.*;
 
 public class Books
 {
+
     public static ItemStack getReportBook(Player player, EnumCheatType... types)
     {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
@@ -49,50 +51,61 @@ public class Books
         return book;
     }
 
-    public static ItemStack getShowBook(String id, String uuid, String issueById, String issueByUuid, int dateInt, ArrayList<EnumCheatType> types)
+    public static ItemStack getShowBook(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types)
     {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
 
-        Date date = new Date(dateInt);
+        Date date = new Date(dateInt.longValue());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 
-        ComponentBuilder hover = new ComponentBuilder( "クリックしてチャットに");
-        hover.color(net.md_5.bungee.api.ChatColor.AQUA);
-        hover.append("UUID")
+        ComponentBuilder hover = new ComponentBuilder( "UUID: ")
+                .color(net.md_5.bungee.api.ChatColor.AQUA)
+                .append(uuid)
                 .color(net.md_5.bungee.api.ChatColor.GREEN);
-        hover.append("を貼り付け")
-                .color(net.md_5.bungee.api.ChatColor.AQUA);
 
         ComponentBuilder unixTime = new ComponentBuilder(getLine("UNIX秒", String.valueOf(dateInt)));
+
+
+        ComponentBuilder hover2 = new ComponentBuilder( "UUID: ")
+                .color(net.md_5.bungee.api.ChatColor.AQUA)
+                .append(issueByUuid)
+                .color(net.md_5.bungee.api.ChatColor.GREEN);
+        HoverEvent hoverEvt2 = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover2.create());
 
         HoverEvent hoverEvt = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
 
         StringBuilder reason = new StringBuilder();
         for(EnumCheatType type: types)
-            reason.append("        ").append(ChatColor.BLUE).append(type.getText()).append("\n");
+            reason.append("\n           ").append(ChatColor.BLUE).append(type.getText());
 
         ComponentBuilder b = new ComponentBuilder( ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "チートレポート");
         b.append("\n");
-        b.append(ChatColor.GRAY + formatter.format(date));
-        b.append("\n");
-        b.append(getLine("報告対象者", id))
-                .event(hoverEvt)
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
-        b.append(getLine("報告者", issueById))
-                .event(hoverEvt)
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
-        b.append(getLine("報告日時", formatter.format(date)))
+        b.append(ChatColor.GRAY + formatter.format(date))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, unixTime.create()));
-        b.append(ChatColor.DARK_RED + "重大度レベル: " + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText());
-        b.append(getLine("報告理由", reason.toString()));
-        meta.spigot().addPage(b.create());
+        b.append("\n");
+        b.append(getLine("対象者", id))
+                .event(hoverEvt);
+        b.append("\n");
+        ComponentBuilder b1 = new ComponentBuilder(new TextComponent(b.create()));
+
+        b1.append(getLine("報告者", issueById))
+                .event(hoverEvt2);
+        b1.append("\n");
+
+        ComponentBuilder b2 = new ComponentBuilder(new TextComponent(b1.create()));
+
+        b2.append(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "重大度: " + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText() + "\n");
+        b2.append("\n");
+        b2.append(getLine("報告理由", reason.toString()));
+        b2.append("\n");
+        meta.spigot().addPage(b2.create());
         book.setItemMeta(meta);
         return book;
     }
 
     private static String getLine(String prefix, String value)
     {
-        return ChatColor.AQUA + ChatColor.BOLD.toString() + prefix + ChatColor.GREEN + ": " + ChatColor.BLUE.toString() + value + "\n";
+        return ChatColor.AQUA + ChatColor.BOLD.toString() + prefix + ChatColor.GREEN + ": " + ChatColor.BLUE.toString() + value;
     }
 }

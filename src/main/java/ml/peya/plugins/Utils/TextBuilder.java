@@ -5,6 +5,7 @@ import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 
+import java.math.*;
 import java.text.*;
 import java.util.*;
 
@@ -36,9 +37,9 @@ public class TextBuilder
         return prevBtn;
     }
 
-    public static void showText(String id, String uuid, String issueById, String issueByUuid, int dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
+    public static void showText(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
     {
-        Date date = new Date(dateInt);
+        Date date = new Date(dateInt.longValue());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 
 

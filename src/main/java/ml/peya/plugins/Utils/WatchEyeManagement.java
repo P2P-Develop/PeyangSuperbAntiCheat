@@ -7,6 +7,7 @@ import org.bukkit.entity.*;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class WatchEyeManagement
 {
@@ -19,7 +20,7 @@ public class WatchEyeManagement
             statement.execute(String.format("INSERT INTO watcheye VALUES ('%s', '%s', %s, '%s', '%s', '%s', %s)",
                     target.getUniqueId().toString().replace("-", ""),
                     target.getName(),
-                    System.currentTimeMillis(),
+                    new Date().getTime(),
                     FromName,
                     FromUUID,
                     manageId,

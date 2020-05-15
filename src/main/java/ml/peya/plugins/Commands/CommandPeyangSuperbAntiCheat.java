@@ -9,6 +9,7 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
+import java.math.*;
 import java.sql.*;
 import java.util.*;
 
@@ -72,7 +73,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
                 Statement statement = connection.createStatement())
                 {
-                    ResultSet result = statement.executeQuery("SELECT * FROM watcheye LIMIT 5 OFFSET " + start);
+                    ResultSet result = statement.executeQuery("SELECT * FROM watcheye ORDER BY LEVEL DESC LIMIT 5 OFFSET " + start);
                     while (result.next())
                     {
                         String id = result.getString("ID");
@@ -125,7 +126,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
 
                     String uuid = result.getString("UUID");
                     String id = result.getString("ID");
-                    int issuedate = result.getInt("ISSUEDATE");
+                    BigDecimal issuedate = result.getBigDecimal("ISSUEDATE");
                     String issuebyid = result.getString("ISSUEBYID");
                     String issuebyuuid = result.getString("ISSUEBYUUID");
 

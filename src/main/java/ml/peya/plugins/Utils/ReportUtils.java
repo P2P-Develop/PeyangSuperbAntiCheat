@@ -22,10 +22,10 @@ public class ReportUtils
                 ComponentBuilder hover = new ComponentBuilder("/psr show " + id);
                 hover.color(net.md_5.bungee.api.ChatColor.AQUA);
 
-                ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + "レポートを確認してください！");
+                ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + "クリックしてレポートを確認してください！");
                 builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "CLICK" + ChatColor.WHITE + "]")
                         .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                        .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show" + id));
+                        .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + id));
                 player.spigot().sendMessage(builder.create());
             }
         }
@@ -45,7 +45,7 @@ public class ReportUtils
                 ComponentBuilder hover = new ComponentBuilder(stacktrace);
 
                 ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + "カーソルを合わせて確認してください！");
-                builder.append("[>>]" + ChatColor.YELLOW + ChatColor.BOLD + "カーソルを合わせる" + ChatColor.WHITE + "]")
+                builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "カーソルを合わせる" + ChatColor.WHITE + "]")
                         .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
                 player.spigot().sendMessage(builder.create());
             }
