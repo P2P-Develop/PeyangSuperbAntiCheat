@@ -36,7 +36,7 @@ public class TextBuilder
         return prevBtn;
     }
 
-    public static void sendTable(String id, String uuid, String issueById, String issueByUuid, int dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
+    public static void showText(String id, String uuid, String issueById, String issueByUuid, int dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
     {
         Date date = new Date(dateInt);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
@@ -52,26 +52,24 @@ public class TextBuilder
         for (EnumCheatType type: types)
             reasonText.append("        ").append(type.getText()).append("\n");
 
-        ComponentBuilder b1 = new ComponentBuilder("    " + getColor("報告者", issueById));
+        ComponentBuilder b1 = new ComponentBuilder("    " + TextBuilder.getColor("報告者", issueById));
         b1.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
         b1.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
         sender.spigot().sendMessage(b1.create());
 
-        ComponentBuilder b2 = new ComponentBuilder("    " + getColor("対象者", id));
+        ComponentBuilder b2 = new ComponentBuilder("    " + TextBuilder.getColor("対象者", id));
         b2.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
         b2.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
         sender.spigot().sendMessage(b2.create());
 
-        sender.sendMessage("    " + getColor("報告日時", formatter.format(date)));
+        sender.sendMessage("    " + TextBuilder.getColor("報告日時", formatter.format(date)));
 
-        sender.sendMessage("    " + getColor("報告理由", "\n" +reasonText.toString()));
+        sender.sendMessage("    " + TextBuilder.getColor("報告理由", "\n" +reasonText.toString()));
 
-        sender.sendMessage(ChatColor.AQUA + "    脅威判定: " + getSeverity(types).getColor() + getSeverity(types).getText());
-
-
+        sender.sendMessage(ChatColor.AQUA + "    脅威判定: " + CheatTypeUtils.getSeverity(types).getColor() + CheatTypeUtils.getSeverity(types).getText());
     }
 
-    private static String getColor(String prefix, String value)
+    public static String getColor(String prefix, String value)
     {
         return ChatColor.AQUA +  prefix + ": " + ChatColor.GREEN + value;
     }
@@ -83,7 +81,7 @@ public class TextBuilder
         hover.append("詳細を表示")
                 .color(net.md_5.bungee.api.ChatColor.GREEN);
 
-        EnumSeverity severity = getSeverity(types);
+        EnumSeverity severity = CheatTypeUtils.getSeverity(types);
 
         ComponentBuilder b = new ComponentBuilder("");
 
@@ -106,21 +104,23 @@ public class TextBuilder
         return b;
     }
 
-    public static EnumSeverity getSeverity(ArrayList<EnumCheatType> types)
+    public static String getSeverityLevel(EnumSeverity severity)
     {
-        switch(types.size())
+        String prefix = ChatColor.YELLOW + "Level " + severity.getColor();
+        switch (severity)
         {
-            case 2:
-                return EnumSeverity.NORMAL;
-            case 3:
-            case 4:
-                return EnumSeverity.PRIORITY;
-            case 5:
-            case 6:
-            case 7:
-                return EnumSeverity.SEVERE;
+            case LOW:
+                return prefix + "1";
+            case NORMAL:
+                return prefix + "2";
+            case PRIORITY:
+                return prefix + "3";
+            case REQUIRE_FAST:
+                return prefix + "4";
+            case SEVERE:
+                return prefix + ChatColor.BOLD + "5";
             default:
-                return EnumSeverity.LOW;
+                return prefix + ChatColor.GRAY + "Unknown";
         }
     }
 

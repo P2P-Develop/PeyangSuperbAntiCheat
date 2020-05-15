@@ -80,7 +80,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
                     "ISSUEDATE int, " +
                     "ISSUEBYID nchar," +
                     "ISSUEBYUUID nchar," +
-                    "MNGID nchar" +
+                    "MNGID nchar," +
+                    "LEVEL int" +
                     ");");
         }
         catch(Exception e)

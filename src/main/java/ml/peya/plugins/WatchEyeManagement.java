@@ -9,19 +9,20 @@ import java.util.*;
 
 public class WatchEyeManagement
 {
-    public static String add(Player target, String FromName, String FromUUID)
+    public static String add(Player target, String FromName, String FromUUID, int level)
     {
         String manageId = UUID.randomUUID().toString().replace("-", "");
         try(Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
             Statement statement = connection.createStatement())
         {
-            statement.execute(String.format("INSERT INTO watcheye VALUES ('%s', '%s', %s, '%s', '%s', '%s')",
+            statement.execute(String.format("INSERT INTO watcheye VALUES ('%s', '%s', %s, '%s', '%s', '%s', %s)",
                     target.getUniqueId().toString().replace("-", ""),
                     target.getName(),
                     System.currentTimeMillis(),
                     FromName,
                     FromUUID,
-                    manageId));
+                    manageId,
+                    level));
             statement.close();
             return manageId;
         }

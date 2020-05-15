@@ -2,10 +2,12 @@ package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
+import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
+import org.bukkit.entity.*;
 
 import java.sql.*;
 import java.util.*;
@@ -132,8 +134,10 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                     while(reason.next())
                         types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
 
-                    TextBuilder.sendTable(id, uuid, issuebyid, issuebyuuid, issuedate, types, sender);
-
+                    if (sender instanceof Player)
+                        BookUtil.openBook(Books.getShowBook(id, uuid, issuebyid, issuebyuuid, issuedate, types), (Player) sender);
+                    else
+                        TextBuilder.showText(id, uuid, issuebyid, issuebyuuid, issuedate, types, sender);
                 }
                 catch (Exception e)
                 {

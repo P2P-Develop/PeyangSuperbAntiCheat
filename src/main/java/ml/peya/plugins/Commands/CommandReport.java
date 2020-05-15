@@ -49,7 +49,7 @@ public class CommandReport implements CommandExecutor
                 return true;
             }
 
-            ItemStack book = ReportBook.getBook(target,  CheatTypeUtils.getFullType());
+            ItemStack book = Books.getReportBook(target,  CheatTypeUtils.getFullType());
             BookUtil.openBook(book, (Player) sender);
             return true;
         }
@@ -63,7 +63,7 @@ public class CommandReport implements CommandExecutor
 
         if(reasons.size() != 0 &&  reasons.get(reasons.size() - 1).equals("\\"))
         {
-            ItemStack book = ReportBook.getBook(target, types.toArray(new EnumCheatType[0]));
+            ItemStack book = Books.getReportBook(target, types.toArray(new EnumCheatType[0]));
             BookUtil.openBook(book, target);
             return true;
         }
@@ -93,15 +93,19 @@ public class CommandReport implements CommandExecutor
             return true;
         }
 
-        String id = WatchEyeManagement.add(target, senderName, senderUUID);
+        String id = WatchEyeManagement.add(target, senderName, senderUUID, CheatTypeUtils.getSeverity(types).getLevel());
         boolean successFlag = false;
         for(EnumCheatType type: types)
             successFlag = WatchEyeManagement.setReason(id, type, 0);
 
         if (successFlag)
+        {
             sender.sendMessage(ChatColor.GREEN + "チート報告ありがとうございます。お客様の懸念を理解し、可能ならば早急に検討させていただきます。");
+        }
         else
+        {
             sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 不明なSQLエラーが発生しました。運営に報告しています。。。");
+        }
         return true;
     }
 }
