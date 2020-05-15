@@ -1,8 +1,9 @@
-package ml.peya.plugins.Gui;
+package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.Enum.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
+import org.bukkit.command.*;
 
 import java.text.*;
 import java.util.*;
@@ -35,42 +36,44 @@ public class TextBuilder
         return prevBtn;
     }
 
-    public static ComponentBuilder getTable(String id, String uuid, String issueById, String issueByUuid, int dateInt, ArrayList<EnumCheatType> types)
+    public static void sendTable(String id, String uuid, String issueById, String issueByUuid, int dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
     {
         Date date = new Date(dateInt);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 
 
-        ComponentBuilder hover = new ComponentBuilder( "クリックして\nチャットに貼り付け");
+        ComponentBuilder hover = new ComponentBuilder( "クリックして\n");
         hover.color(net.md_5.bungee.api.ChatColor.AQUA);
+        hover.append("チャットに貼り付け")
+                .color(net.md_5.bungee.api.ChatColor.AQUA);
 
         StringBuilder reasonText = new StringBuilder();
 
         for (EnumCheatType type: types)
             reasonText.append("        ").append(type.getText()).append("\n");
 
-        ComponentBuilder b = new ComponentBuilder("");
+        ComponentBuilder b1 = new ComponentBuilder("    " + getColor("報告者", issueById));
+        b1.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+        b1.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
+        sender.spigot().sendMessage(b1.create());
 
-        b.append("    ");
-        b.append(getColor("報告者", issueById))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
-        b.append("\n    ");
-        b.append(getColor("対象者", id))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
-        b.append("\n    ");
+        ComponentBuilder b2 = new ComponentBuilder("    " + getColor("対象者", id));
+        b2.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+        b2.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
+        sender.spigot().sendMessage(b2.create());
 
-        b.append(getColor("報告日時", formatter.format(date)));
+        sender.sendMessage("    " + getColor("報告日時", formatter.format(date)));
 
-        b.append(getColor("報告理由", reasonText.toString()));
+        sender.sendMessage("    " + getColor("報告理由", "\n" +reasonText.toString()));
 
-        return b;
+        sender.sendMessage(ChatColor.AQUA + "    脅威判定: " + getSeverity(types).getColor() + getSeverity(types).getText());
+
+
     }
 
     private static String getColor(String prefix, String value)
     {
-        return ChatColor.AQUA +  prefix + ": " + ChatColor.BLUE + value;
+        return ChatColor.AQUA +  prefix + ": " + ChatColor.GREEN + value;
     }
 
     public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid)
@@ -126,7 +129,7 @@ public class TextBuilder
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
         ComponentBuilder builder = new ComponentBuilder(prevFlag ? prev: uBar);
-        builder.append("------------------------")
+        builder.append("-----------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA);
         builder.append(nextFlag ? next :  uBar);
         return builder;
