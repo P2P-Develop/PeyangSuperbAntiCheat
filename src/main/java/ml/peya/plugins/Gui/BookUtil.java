@@ -30,6 +30,9 @@ public class BookUtil {
             initialised = true;
         } catch (ReflectiveOperationException e) {
             e.printStackTrace();
+            //Changed by Peyang BEGIN---
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            //End of change
             Bukkit.getServer().getLogger().warning("Cannot force open book!");
             initialised = false;
         }
@@ -60,6 +63,7 @@ public class BookUtil {
                 catch (ReflectiveOperationException e)
                 {
                     e.printStackTrace();
+                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
             }
         };
@@ -92,6 +96,9 @@ public class BookUtil {
             return asNMSCopy.invoke(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY.getClass("CraftItemStack"), item);
         } catch (Exception e) {
             e.printStackTrace();
+            //Changed by peyang BEGIN---
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            //END of Changed
         }
         return null;
     }
@@ -113,6 +120,9 @@ public class BookUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            //Changed by peyang BEGIN---
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            //END of Changed
         }
     }
 }

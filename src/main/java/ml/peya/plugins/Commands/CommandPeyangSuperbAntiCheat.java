@@ -95,6 +95,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 catch(Exception e)
                 {
                     e.printStackTrace();
+                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
 
                 sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(prevBtn, nextBtn, !(previous < 0) , !(count < 5)).create());
@@ -142,7 +143,8 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 catch (Exception e)
                 {
                     e.printStackTrace();
-                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString()  + "エラー: 不明なSQLエラーが発生しました！CONSOLEを見て対処してください。");
+                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString()  + "エラー: 不明なSQLエラーが発生しました！");
+                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
         }
 

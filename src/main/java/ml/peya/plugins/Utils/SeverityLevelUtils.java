@@ -1,0 +1,59 @@
+package ml.peya.plugins.Utils;
+
+import ml.peya.plugins.*;
+import ml.peya.plugins.Enum.*;
+
+import java.sql.*;
+import java.util.*;
+
+public class SeverityLevelUtils
+{
+    public static EnumSeverity getSeverity(ArrayList<EnumCheatType> types)
+    {
+        return getSeverity(types.size());
+    }
+
+    public static ArrayList<EnumSeverity> getAllSeverity()
+    {
+        ArrayList<EnumSeverity> severities = new ArrayList<>();
+
+        severities.add(EnumSeverity.LOW);
+        severities.add(EnumSeverity.NORMAL);
+        severities.add(EnumSeverity.PRIORITY);
+        severities.add(EnumSeverity.REQUIRE_FAST);
+        severities.add(EnumSeverity.SEVERE);
+        return severities;
+    }
+
+    public static EnumSeverity getSeverity(int level)
+    {
+        for (EnumSeverity severity: getAllSeverity())
+        {
+            if (severity.getLevel() == level)
+                return severity;
+        }
+
+        return EnumSeverity.UNKNOWN;
+    }
+
+    public static EnumSeverity getSeverityFromId(String id)
+    {
+        if (!WatchEyeManagement.isExistsRecord(id))
+            return EnumSeverity.UNKNOWN;
+        try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            ResultSet result = statement.executeQuery("SELECT * FROM watcheye WHERE MNGID = '" + id + "'");
+            if(result.next())
+                return getSeverity(result.getInt("LEVEL"));
+            else
+                return EnumSeverity.UNKNOWN;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            return EnumSeverity.UNKNOWN;
+        }
+    }
+}

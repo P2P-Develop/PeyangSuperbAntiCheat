@@ -3,6 +3,7 @@ package ml.peya.plugins;
 import com.zaxxer.hikari.*;
 import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.*;
@@ -87,6 +88,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         catch(Exception e)
         {
             e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
         }
     }
 }

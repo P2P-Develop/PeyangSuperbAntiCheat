@@ -84,7 +84,7 @@ public class Books
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
         b.append(getLine("報告日時", formatter.format(date)))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, unixTime.create()));
-        b.append(ChatColor.DARK_RED + "重大度レベル: " + CheatTypeUtils.getSeverity(types).getColor() + CheatTypeUtils.getSeverity(types).getText());
+        b.append(ChatColor.DARK_RED + "重大度レベル: " + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText());
         b.append(getLine("報告理由", reason.toString()));
         meta.spigot().addPage(b.create());
         book.setItemMeta(meta);

@@ -64,26 +64,4 @@ public class CheatTypeUtils
         return null;
     }
 
-    public static EnumSeverity getSeverity(ArrayList<EnumCheatType> types)
-    {
-        for (EnumSeverity severity: getAllSeverity())
-        {
-            if (severity.getLevel() == types.size())
-                return severity;
-        }
-
-        return EnumSeverity.UNKNOWN;
-    }
-
-    public static ArrayList<EnumSeverity> getAllSeverity()
-    {
-        ArrayList<EnumSeverity> severities = new ArrayList<>();
-
-        severities.add(EnumSeverity.LOW);
-        severities.add(EnumSeverity.NORMAL);
-        severities.add(EnumSeverity.PRIORITY);
-        severities.add(EnumSeverity.REQUIRE_FAST);
-        severities.add(EnumSeverity.SEVERE);
-        return severities;
-    }
 }

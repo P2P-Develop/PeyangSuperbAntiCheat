@@ -1,7 +1,6 @@
 package ml.peya.plugins.Commands;
 
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Utils.*;
@@ -93,18 +92,19 @@ public class CommandReport implements CommandExecutor
             return true;
         }
 
-        String id = WatchEyeManagement.add(target, senderName, senderUUID, CheatTypeUtils.getSeverity(types).getLevel());
+        String id = WatchEyeManagement.add(target, senderName, senderUUID, SeverityLevelUtils.getSeverity(types).getLevel());
         boolean successFlag = false;
         for(EnumCheatType type: types)
             successFlag = WatchEyeManagement.setReason(id, type, 0);
-
         if (successFlag)
         {
             sender.sendMessage(ChatColor.GREEN + "チート報告ありがとうございます。お客様の懸念を理解し、可能ならば早急に検討させていただきます。");
+            ReportUtils.adminNotification(id);
         }
         else
         {
             sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 不明なSQLエラーが発生しました。運営に報告しています。。。");
+            ReportUtils.errorNotification("Error: Unknown");
         }
         return true;
     }

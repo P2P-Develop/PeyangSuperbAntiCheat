@@ -66,7 +66,7 @@ public class TextBuilder
 
         sender.sendMessage("    " + TextBuilder.getColor("報告理由", "\n" +reasonText.toString()));
 
-        sender.sendMessage(ChatColor.AQUA + "    脅威判定: " + CheatTypeUtils.getSeverity(types).getColor() + CheatTypeUtils.getSeverity(types).getText());
+        sender.sendMessage(ChatColor.AQUA + "    脅威判定: " + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText());
     }
 
     public static String getColor(String prefix, String value)
@@ -81,7 +81,7 @@ public class TextBuilder
         hover.append("詳細を表示")
                 .color(net.md_5.bungee.api.ChatColor.GREEN);
 
-        EnumSeverity severity = CheatTypeUtils.getSeverity(types);
+        EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
 
         ComponentBuilder b = new ComponentBuilder("");
 

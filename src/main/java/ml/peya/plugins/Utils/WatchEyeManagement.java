@@ -1,9 +1,10 @@
-package ml.peya.plugins;
+package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
 import org.bukkit.entity.*;
 
-import javax.swing.plaf.nimbus.*;
+import java.io.*;
 import java.sql.*;
 import java.util.*;
 
@@ -29,6 +30,7 @@ public class WatchEyeManagement
         catch (Exception e)
         {
             e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
             return "";
         }
     }
@@ -50,6 +52,7 @@ public class WatchEyeManagement
         catch (Exception e)
         {
             e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
             return false;
         }
     }
@@ -65,7 +68,26 @@ public class WatchEyeManagement
         catch(Exception e)
         {
             e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
             return false;
         }
     }
+
+
+    public static boolean isExistsRecord(String id)
+    {
+        try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            ResultSet result = statement.executeQuery("SELECT * FROM watcheye WHERE MNGID = '" + id + "'");
+            return result.isBeforeFirst();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            return false;
+        }
+    }
+
 }
