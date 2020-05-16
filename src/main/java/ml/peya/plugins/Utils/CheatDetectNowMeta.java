@@ -7,10 +7,10 @@ import java.util.*;
 public class CheatDetectNowMeta
 {
     private  Player target;
-    private  ArrayList<UUID> uuids;
+    private  UUID uuids;
     private int VL;
 
-    public CheatDetectNowMeta(Player target, ArrayList<UUID> uuids)
+    public CheatDetectNowMeta(Player target, UUID uuids)
     {
         this.target = target;
         this.uuids = uuids;
@@ -22,7 +22,7 @@ public class CheatDetectNowMeta
         return target;
     }
 
-    public ArrayList<UUID> getUuids()
+    public UUID getUuids()
     {
         return uuids;
     }

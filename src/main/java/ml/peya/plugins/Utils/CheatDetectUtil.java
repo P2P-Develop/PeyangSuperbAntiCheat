@@ -21,153 +21,147 @@ public class CheatDetectUtil
 {
     public static void scan(Player player)
     {
-        ArrayList<UUID> scanNPC =  spawn(player);
-        NPC xPlusNPC = CitizensAPI.getNPCRegistry().getByUniqueId(scanNPC.get(0));
-        NPC xMinusNPC = CitizensAPI.getNPCRegistry().getByUniqueId(scanNPC.get(1));
-        NPC yPlusNPC = CitizensAPI.getNPCRegistry().getByUniqueId(scanNPC.get(2));
-        NPC zMinusNPC = CitizensAPI.getNPCRegistry().getByUniqueId(scanNPC.get(3));
-        NPC zPlusNPC = CitizensAPI.getNPCRegistry().getByUniqueId(scanNPC.get(4));
+        UUID uuid = spawn(player);
+        NPC xPlusNPC = CitizensAPI.getNPCRegistry().getByUniqueId(uuid);
 
         RandomArmor.setRandomArmor(xPlusNPC);
-        RandomArmor.setRandomArmor(xMinusNPC);
-        RandomArmor.setRandomArmor(yPlusNPC);
-        RandomArmor.setRandomArmor(zMinusNPC);
-        RandomArmor.setRandomArmor(zPlusNPC);
 
 
-        PeyangSuperbAntiCheat.cheatMeta = new CheatDetectNowMeta(player, scanNPC);
+        PeyangSuperbAntiCheat.cheatMeta = new CheatDetectNowMeta(player, uuid);
+
 
     }
 
-    private static ArrayList<UUID> spawn(Player player)
+    private static UUID spawn(Player player)
     {
         NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.RED + UUID.randomUUID().toString());
-        NPC npc2 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.RED + UUID.randomUUID().toString());
-        NPC npc3 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.RED + UUID.randomUUID().toString());
-        NPC npc4 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.RED + UUID.randomUUID().toString());
-        NPC npc5 = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.RED + UUID.randomUUID().toString());
         npc.spawn(player.getLocation().add(3, 0, 0));
-        npc2.spawn(player.getLocation().add(-3, 0, 0));
-        npc3.spawn(player.getLocation().add(0, 0, 3));
-        npc4.spawn(player.getLocation().add(-0, 0, -3));
-        npc5.spawn(player.getLocation().add(-0, 3, 0));
 
         Player player1 = (Player) npc.getEntity();
-        Player player2 = (Player) npc2.getEntity();
-        Player player3 = (Player) npc3.getEntity();
-        Player player4 = (Player) npc4.getEntity();
-        Player player5 = (Player) npc5.getEntity();
         for (Player p: Bukkit.getOnlinePlayers())
-        {
             p.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), player1);
-            p.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), player2);
-            p.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), player3);
-            p.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), player4);
-            p.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), player5);
-        }
-        List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
-        Random random = new Random();
-        setSkin(player1, uuids.get(random.nextInt(uuids.size() - 1)), player);
-        setSkin(player2, uuids.get(random.nextInt(uuids.size() - 1)), player);
-        setSkin(player3, uuids.get(random.nextInt(uuids.size() - 1)), player);
-        setSkin(player4, uuids.get(random.nextInt(uuids.size() - 1)), player);
-        setSkin(player5, uuids.get(random.nextInt(uuids.size() - 1)), player);
 
-        for (int i = 0; i < 115; i++)
-        {
-            BukkitRunnable cause = new BukkitRunnable()
-            {
-                @Override
-                public void run()
-                {
-                    npc.teleport(player.getLocation().add(3 + random.nextDouble() + random.nextDouble(), (double) random.nextInt(2) + 1 + random.nextDouble() + random.nextDouble(), 0), PlayerTeleportEvent.TeleportCause.PLUGIN);
-                    npc2.teleport(player.getLocation().add(-3, (double) random.nextInt(2) + 1 +random.nextDouble() + random.nextDouble(), 0), PlayerTeleportEvent.TeleportCause.PLUGIN);
-                    npc3.teleport(player.getLocation().add(0, (double) random.nextInt(2) + 1 + random.nextDouble() + random.nextDouble(), 3 + random.nextDouble() + random.nextDouble()), PlayerTeleportEvent.TeleportCause.PLUGIN);
-                    npc4.teleport(player.getLocation().add(0, (double) random.nextInt(2) + 1 + random.nextDouble() + random.nextDouble(), -3 + random.nextDouble() + random.nextDouble()), PlayerTeleportEvent.TeleportCause.PLUGIN);
-                    npc5.teleport(player.getLocation().add(0, (double) random.nextInt(2) + 2 + random.nextDouble() + random.nextDouble(),  0 + random.nextDouble() + random.nextDouble()), PlayerTeleportEvent.TeleportCause.PLUGIN);
-                }
-            };
-            cause.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), i);
-        }
-
-        BukkitRunnable runnable = new BukkitRunnable()
+        BukkitRunnable run = new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                npc.despawn();
-                npc2.despawn();
-                npc3.despawn();
-                npc4.despawn();
-                npc5.despawn();
-                CitizensAPI.getNPCRegistry().deregister(npc);
-                CitizensAPI.getNPCRegistry().deregister(npc2);
-                CitizensAPI.getNPCRegistry().deregister(npc3);
-                CitizensAPI.getNPCRegistry().deregister(npc4);
-                CitizensAPI.getNPCRegistry().deregister(npc5);
-            }
-        };
-        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 115L);
-
-        ArrayList<UUID> resp = new ArrayList<>();
-        resp.add(npc.getUniqueId());
-        resp.add(npc2.getUniqueId());
-        resp.add(npc3.getUniqueId());
-        resp.add(npc4.getUniqueId());
-        resp.add(npc5.getUniqueId());
-        return resp;
-    }
-
-    public static void setSkin(Player player, String uuid, Player target) {
-
-        BukkitRunnable runnable = new BukkitRunnable()
-        {
-            @Override
-            public void run()
-            {
-                GameProfile profile = ((CraftPlayer) player).getHandle().getProfile();
-                try
+                List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
+                Random random = new Random();
+                JsonNode node = getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
+                if (node != null)
                 {
-
-                    HttpsURLConnection connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
-                    if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK)
-                    {
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                        StringBuilder builder = new StringBuilder();
-                        String readed = reader.readLine();
-                        while (readed != null)
-                        {
-                            builder.append(readed);
-                            readed = reader.readLine();
-                        }
-                        ObjectMapper mapper = new ObjectMapper();
-                        JsonNode node = mapper.readTree(builder.toString());
-                        profile.getProperties().put("textures", new Property("textures", node.get("properties").get(0).get("value").asText(), node.get("properties").get(0).get("signature").asText()));
-                    }
-                    else
-                    {
-                        PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
-                    }
-
+                    GameProfile profile = ((CraftPlayer) player1).getHandle().getProfile();
+                    profile.getProperties().put("textures", new Property("textures", node.get("properties").get(0).get("value").asText(), node.get("properties").get(0).get("signature").asText()));
                 }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
+
+                player.showPlayer(PeyangSuperbAntiCheat.getPlugin(), player1);
+
+                teleport(player, npc);
+
 
                 BukkitRunnable runnable = new BukkitRunnable()
                 {
                     @Override
                     public void run()
                     {
-                        target.showPlayer(PeyangSuperbAntiCheat.getPlugin(),player);
+                        npc.despawn();
+                        CitizensAPI.getNPCRegistry().deregister(npc);
                     }
                 };
-                runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 35L);
+                runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 10);
             }
         };
 
-        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15L);
+        run.runTask(PeyangSuperbAntiCheat.getPlugin());
 
+        return npc.getUniqueId();
+    }
+
+    public static JsonNode getSkin(String uuid) {
+        try
+        {
+            HttpsURLConnection connection;
+            connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
+            if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK)
+            {
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder builder = new StringBuilder();
+                String readed = reader.readLine();
+                while (readed != null)
+                {
+                    builder.append(readed);
+                    readed = reader.readLine();
+                }
+                ObjectMapper mapper = new ObjectMapper();
+                return mapper.readTree(builder.toString());
+            }
+            else
+            {
+                PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
+                return null;
+            }
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    private static void teleport (Player player, NPC target) {
+        final double yaw = 358.0;
+        final double[] time = {0.0};
+        final double radius = 3.5;
+        final double range = 30.0;
+        new BukkitRunnable() {
+            public void run() {
+                for (double i = 0; i < Math.PI * 2; i++) {
+
+                    Location center = player.getLocation();
+                    Location n = new Location(center.getWorld(), xPos(time[0], radius, yaw) + center.getX(), center.getY(), yPos(time[0], radius) + center.getZ());
+                    target.teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
+                }
+
+                time[0] += 0.136;
+                if (time[0] >= range)
+                    this.cancel();
+            }
+        }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
+    }
+
+    /*private static void teleport (Player player, NPC target) {
+        final Location location = player.getLocation();
+        //final double yaw = location.getYaw();
+        final double[] time = {0.0};
+        final double radius = 3.5;
+        final double range = 30.0;
+        System.out.println(location.getYaw());
+        new BukkitRunnable() {
+            public void run() {
+                double yaw = location.getYaw();
+                for (double i = 0; i < Math.PI * 2; i++) {
+
+                    Location center = player.getLocation();
+                    Location n = new Location(center.getWorld(), xPos(time[0], radius, yaw) + center.getX(), center.getY(), yPos(time[0], radius) + center.getZ());
+                    target.teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
+                }
+
+                time[0] += 0.136;
+                if (time[0] >= range)
+                    this.cancel();
+            }
+        }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
+    }*/
+
+    private static double xPos(double time, double radius, double yaw){
+        return Math.sin(time) * radius * Math.cos(Math.PI/180 * yaw);
+    }
+
+    private static double yPos(double time, double radius){
+        return Math.cos(time)*radius;
     }
 }

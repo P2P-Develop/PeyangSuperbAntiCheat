@@ -30,7 +30,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     @Override
     public void onEnable()
     {
-        if (getServer().getPluginManager().getPlugin("Citizens") == null || getServer().getPluginManager().getPlugin("Citizens").isEnabled() == false)
+        if (getServer().getPluginManager().getPlugin("Citizens") == null || !getServer().getPluginManager().getPlugin("Citizens").isEnabled())
         {
             logger.log(Level.SEVERE, "This plugin is require Citizens 2.0~");
             getServer().getPluginManager().disablePlugin(this);
@@ -47,7 +47,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         createDefaultTables();
         getCommand("report").setExecutor(new CommandReport());
         getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
-
+        getServer().getPluginManager().registerEvents(new Events(), this);
 
         logger.info("PeyangSuperbAntiCheat has started!");
     }
