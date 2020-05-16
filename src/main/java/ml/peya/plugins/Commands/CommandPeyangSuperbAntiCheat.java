@@ -40,7 +40,8 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                         ChatColor.GREEN + "]" +
                         ChatColor.AQUA + "-----");
                 sender.sendMessage(ChatColor.AQUA + "/" + label + " view");
-                sender.sendMessage(ChatColor.GREEN + "view");
+                sender.sendMessage(ChatColor.GREEN + "レポートされた対処されてない問題を、");
+                sender.sendMessage(ChatColor.GREEN + "重大度順に表示します");
                 break;
             case "view":
                 sender.sendMessage(ChatColor.AQUA + "-----" +
@@ -58,7 +59,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 }
                 catch (Exception e)
                 {
-                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString()  + "エラー: 取得開始指定が数字ではありません！");
+                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 取得開始指定が数字ではありません！");
                     return true;
                 }
 
@@ -66,12 +67,12 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 previous = start - 5;
 
                 TextComponent nextBtn = TextBuilder.getNextButton(next);
-                TextComponent prevBtn= TextBuilder.getPrevButton(previous);
+                TextComponent prevBtn = TextBuilder.getPrevButton(previous);
 
                 int count = 0;
 
                 try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
-                Statement statement = connection.createStatement())
+                     Statement statement = connection.createStatement())
                 {
                     ResultSet result = statement.executeQuery("SELECT * FROM watcheye ORDER BY LEVEL DESC LIMIT 5 OFFSET " + start);
                     while (result.next())
@@ -83,7 +84,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                         ResultSet reason = statement.executeQuery("SELECT * FROM watchreason WHERE MNGID='" + mngid + "'");
 
                         ArrayList<EnumCheatType> types = new ArrayList<>();
-                        while(reason.next())
+                        while (reason.next())
                             types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
                         ComponentBuilder line = TextBuilder.getLine(id, issuebyid, types, mngid);
 
@@ -93,23 +94,23 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
 
 
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     e.printStackTrace();
                     ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
 
-                sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(prevBtn, nextBtn, !(previous < 0) , !(count < 5)).create());
+                sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(prevBtn, nextBtn, !(previous < 0), !(count < 5)).create());
                 break;
             case "show":
                 if (args.length < 2)
                 {
-                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString()  + "エラー: 引数が足りません！");
+                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 引数が足りません！");
                     return true;
                 }
-                else if(args.length > 2)
+                else if (args.length > 2)
                 {
-                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString()  + "エラー: 引数が多すぎます！");
+                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 引数が多すぎます！");
                     return true;
                 }
                 String mngid = args[1];
@@ -118,9 +119,9 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                      Statement statement = connection.createStatement())
                 {
                     ResultSet result = statement.executeQuery("SELECT * FROM watcheye WHERE MNGID='" + mngid + "'");
-                    if(!result.next())
+                    if (!result.next())
                     {
-                        sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString()  + "エラー: IDと合致するデータが見つかりませんでした！");
+                        sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: IDと合致するデータが見つかりませんでした！");
                         return true;
                     }
 
@@ -133,7 +134,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                     ResultSet reason = statement.executeQuery("SELECT * FROM watchreason WHERE MNGID='" + mngid + "'");
 
                     ArrayList<EnumCheatType> types = new ArrayList<>();
-                    while(reason.next())
+                    while (reason.next())
                         types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
 
                     if (sender instanceof Player)
@@ -144,9 +145,29 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 catch (Exception e)
                 {
                     e.printStackTrace();
-                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString()  + "エラー: 不明なSQLエラーが発生しました！");
+                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 不明なSQLエラーが発生しました！");
                     ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
+                break;
+            case "test":
+                if (args.length < 2)
+                {
+                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 引数が足りません！");
+                    return true;
+                }
+                else if (args.length > 2)
+                {
+                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 引数が多すぎます！");
+                    return true;
+                }
+                Player player = Bukkit.getPlayer(args[1]);
+                if (player == null)
+                {
+                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 対象プレイヤーが見つかりませんでした！");
+                    return true;
+                }
+
+                CheatDetectUtil.scan(player);
         }
 
         return true;

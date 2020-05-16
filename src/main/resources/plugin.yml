@@ -2,7 +2,6 @@ name: PeyangSuperbAntiCheat
 main: ml.peya.plugins.PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PeyangSuperbAntiCheat
-
 commands:
   report:
     aliases: ["peyangreport", "pcr", "rep", "report", "wdr"]
