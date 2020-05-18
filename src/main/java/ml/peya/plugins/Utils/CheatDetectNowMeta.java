@@ -9,6 +9,7 @@ public class CheatDetectNowMeta
     private  Player target;
     private  UUID uuids;
     private int VL;
+    private boolean canNPC = false;
 
     public CheatDetectNowMeta(Player target, UUID uuids)
     {
@@ -16,6 +17,15 @@ public class CheatDetectNowMeta
         this.uuids = uuids;
     }
 
+    public boolean isCanNPC()
+    {
+        return canNPC;
+    }
+
+    public void setCanNPC(boolean canNPC)
+    {
+        this.canNPC = canNPC;
+    }
 
     public Player getTarget()
     {

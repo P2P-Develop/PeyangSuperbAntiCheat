@@ -22,18 +22,27 @@ public class CheatDetectUtil
     public static void scan(Player player)
     {
         UUID uuid = spawn(player);
+        CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid);
+
         NPC xPlusNPC = CitizensAPI.getNPCRegistry().getByUniqueId(uuid);
 
         RandomArmor.setRandomArmor(xPlusNPC);
 
 
-        PeyangSuperbAntiCheat.cheatMeta = new CheatDetectNowMeta(player, uuid);
 
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 9);
 
     }
 
     private static UUID spawn(Player player)
     {
+
         NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.RED + UUID.randomUUID().toString());
         npc.spawn(player.getLocation().add(3, 0, 0));
 
@@ -69,7 +78,7 @@ public class CheatDetectUtil
                         CitizensAPI.getNPCRegistry().deregister(npc);
                     }
                 };
-                runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 10);
+                runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 5);
             }
         };
 
@@ -116,46 +125,28 @@ public class CheatDetectUtil
         final double yaw = 358.0;
         final double[] time = {0.0};
         final double radius = 3.5;
-        final double range = 30.0;
+        final double range = 25.0;
         new BukkitRunnable() {
             public void run() {
                 for (double i = 0; i < Math.PI * 2; i++) {
 
                     Location center = player.getLocation();
-                    Location n = new Location(center.getWorld(), xPos(time[0], radius, yaw) + center.getX(), center.getY(), yPos(time[0], radius) + center.getZ());
+                    Location n = new Location(center.getWorld(),
+                            xPos(time[0], radius, yaw) + center.getX(),
+                            center.getY() + 1,
+                            yPos(time[0], radius) + center.getZ());
                     target.teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
                 }
 
-                time[0] += 0.136;
+
+
+                time[0] += 0.133;
                 if (time[0] >= range)
                     this.cancel();
             }
         }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
     }
 
-    /*private static void teleport (Player player, NPC target) {
-        final Location location = player.getLocation();
-        //final double yaw = location.getYaw();
-        final double[] time = {0.0};
-        final double radius = 3.5;
-        final double range = 30.0;
-        System.out.println(location.getYaw());
-        new BukkitRunnable() {
-            public void run() {
-                double yaw = location.getYaw();
-                for (double i = 0; i < Math.PI * 2; i++) {
-
-                    Location center = player.getLocation();
-                    Location n = new Location(center.getWorld(), xPos(time[0], radius, yaw) + center.getX(), center.getY(), yPos(time[0], radius) + center.getZ());
-                    target.teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
-                }
-
-                time[0] += 0.136;
-                if (time[0] >= range)
-                    this.cancel();
-            }
-        }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
-    }*/
 
     private static double xPos(double time, double radius, double yaw){
         return Math.sin(time) * radius * Math.cos(Math.PI/180 * yaw);

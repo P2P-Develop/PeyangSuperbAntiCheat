@@ -63,7 +63,7 @@ public class CommandReport implements CommandExecutor
         if(reasons.size() != 0 &&  reasons.get(reasons.size() - 1).equals("\\"))
         {
             ItemStack book = Books.getReportBook(target, types.toArray(new EnumCheatType[0]));
-            BookUtil.openBook(book, target);
+            BookUtil.openBook(book, (Player) sender);
             return true;
         }
 
@@ -91,7 +91,7 @@ public class CommandReport implements CommandExecutor
             sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 既に報告済みです！");
             return true;
         }
-
+        
         String id = WatchEyeManagement.add(target, senderName, senderUUID, SeverityLevelUtils.getSeverity(types).getLevel());
         boolean successFlag = false;
         for(EnumCheatType type: types)

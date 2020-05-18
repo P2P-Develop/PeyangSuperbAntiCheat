@@ -2,6 +2,10 @@
 database:
   path: "./eye.db"
 
+detection:
+  vl:
+    killaura: 50
+
 #skins uuid
 skins:
   - 6b93a8e658ee4794b69a56a3c2287010

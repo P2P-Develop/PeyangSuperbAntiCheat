@@ -2,20 +2,14 @@ package ml.peya.plugins;
 
 import com.zaxxer.hikari.*;
 import ml.peya.plugins.Commands.*;
-import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Utils.*;
-import net.citizensnpcs.api.*;
-import net.citizensnpcs.api.trait.*;
-import org.apache.logging.log4j.core.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.*;
 
 import java.io.*;
 import java.sql.*;
-import java.util.*;
 import java.util.logging.*;
-import java.util.logging.Logger;
 
 public class PeyangSuperbAntiCheat extends JavaPlugin
 {
@@ -24,7 +18,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static FileConfiguration config;
     public static String databasePath;
     public static HikariDataSource hManager = null;
-    public static CheatDetectNowMeta cheatMeta;
+    public static DetectingList cheatMeta;
 
     private static PeyangSuperbAntiCheat plugin;
     @Override
