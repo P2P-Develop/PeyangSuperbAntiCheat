@@ -4,7 +4,6 @@ import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import org.bukkit.entity.*;
 
-import java.io.*;
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
@@ -17,7 +16,7 @@ public class WatchEyeManagement
         try(Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
             Statement statement = connection.createStatement())
         {
-            statement.execute(String.format("INSERT INTO watcheye VALUES ('%s', '%s', %s, '%s', '%s', '%s', %s)",
+            statement.execute(String.format("INSERT INTO WaTcHeYe VALUES ('%s', '%s', %s, '%s', '%s', '%s', %s)",
                     target.getUniqueId().toString().replace("-", ""),
                     target.getName(),
                     new Date().getTime(),
@@ -44,7 +43,7 @@ public class WatchEyeManagement
             String reasonString = reason.getSysName();
             if (reasonString.endsWith(" "))
                 reasonString = reasonString.substring(0, reasonString.length() - 1);
-            statement.execute(String.format("INSERT INTO watchreason VALUES ('%s', '%s', %s)",
+            statement.execute(String.format("INSERT INTO WaTcHrEaSoN VALUES ('%s', '%s', %s)",
                     id,
                     reasonString,
                     vl));
@@ -63,7 +62,7 @@ public class WatchEyeManagement
         try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
             Statement statement = connection.createStatement())
         {
-            ResultSet result = statement.executeQuery("SELECT * FROM watcheye WHERE UUID = '" + targetUuid + "' AND ISSUEBYUUID = '" + fromUuid + "'");
+            ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UUID = '" + targetUuid + "' AND ISSUEBYUUID = '" + fromUuid + "'");
             return result.isBeforeFirst();
         }
         catch(Exception e)
@@ -80,7 +79,7 @@ public class WatchEyeManagement
         try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
              Statement statement = connection.createStatement())
         {
-            ResultSet result = statement.executeQuery("SELECT * FROM watcheye WHERE MNGID = '" + id + "'");
+            ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");
             return result.isBeforeFirst();
         }
         catch(Exception e)

@@ -1,24 +1,28 @@
 package ml.peya.plugins.Enum;
 
+import java.util.*;
+
 public enum  EnumCheatType
 {
-    FLY("Fly", false, "fly"),
-    KILLAURA("KillAura", false, "killaura"),
-    AUTOCLICKER("Auto Clicker", false, "autoclicker"),
+    FLY("Fly", false, "fly", "flight"),
+    KILLAURA("KillAura", false, "killaura", "aura", "ka"),
+    AUTOCLICKER("Auto Clicker", false, "autoclicker", "ac", "autoclick"),
     SPEED("Speed", false, "speed"),
-    ANTIKNOCKBACK("AntiKnockBack", false, "antiknockback"),
+    ANTIKNOCKBACK("AntiKnockBack", false, "antiknockback", "antikb", "akb"),
     REACH("Reach", false, "reach"),
     DOLPHIN("Dolphin", false, "dolphin");
     private String text;
     private boolean isSelected;
     private boolean isChecked;
     private String sysName;
+    private ArrayList<String> alias;
 
-    EnumCheatType(String text, boolean isSelected, String sysName)
+    EnumCheatType(String text, boolean isSelected, String sysName, String... alias)
     {
         this.text = text;
         this.isSelected = isSelected;
         this.sysName = sysName;
+        this.alias = (ArrayList<String>) Arrays.asList(alias);
     }
 
     public String getText()
@@ -49,5 +53,10 @@ public enum  EnumCheatType
     public String getSysName()
     {
         return sysName;
+    }
+
+    public ArrayList<String> getAlias()
+    {
+        return alias;
     }
 }

@@ -46,7 +46,9 @@ public class CheatTypeUtils
         {
             for (EnumCheatType type: types)
             {
-                if (reason.contains(type.getSysName()))
+                if (reason.equals(type.getSysName()))
+                    type.setSelected(true);
+                else if (aliasEquals(type, reason))
                     type.setSelected(true);
             }
         }
@@ -64,4 +66,15 @@ public class CheatTypeUtils
         return null;
     }
 
+
+    public static boolean aliasEquals(EnumCheatType types, String name)
+    {
+        for (String type: types.getAlias())
+        {
+            if (type.equals("name"))
+                return true;
+        }
+
+        return false;
+    }
 }

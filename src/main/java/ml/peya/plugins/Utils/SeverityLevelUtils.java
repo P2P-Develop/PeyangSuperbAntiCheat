@@ -43,7 +43,7 @@ public class SeverityLevelUtils
         try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
              Statement statement = connection.createStatement())
         {
-            ResultSet result = statement.executeQuery("SELECT * FROM watcheye WHERE MNGID = '" + id + "'");
+            ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");
             if(result.next())
                 return getSeverity(result.getInt("LEVEL"));
             else

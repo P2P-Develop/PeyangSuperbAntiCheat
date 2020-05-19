@@ -87,7 +87,8 @@ public class CheatDetectUtil
         return npc.getUniqueId();
     }
 
-    public static JsonNode getSkin(String uuid) {
+    public static JsonNode getSkin(String uuid)
+    {
         try
         {
             HttpsURLConnection connection;
@@ -111,17 +112,15 @@ public class CheatDetectUtil
                 PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
                 return null;
             }
-
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             e.printStackTrace();
             return null;
         }
-
     }
 
-    private static void teleport (Player player, NPC target) {
+        private static void teleport (Player player, NPC target) {
         final double yaw = 358.0;
         final double[] time = {0.0};
         final double radius = 3.5;
@@ -137,7 +136,6 @@ public class CheatDetectUtil
                             yPos(time[0], radius) + center.getZ());
                     target.teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
                 }
-
 
 
                 time[0] += 0.133;

@@ -83,7 +83,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
                     "REASON nchar," +
                     "VL int" +
                     ");");
-            statement.execute("CREATE TABLE IF NOT EXISTS watcheye(" +
+            statement.execute("CREATE TABLE IF NOT EXISTS WaTcHeYe(" +
                     "UUID nchar(32), " +
                     "ID nchar, " +
                     "ISSUEDATE int, " +
