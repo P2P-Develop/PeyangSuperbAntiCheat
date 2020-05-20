@@ -82,6 +82,12 @@ public class TextBuilder
         hover.append("詳細を表示")
                 .color(net.md_5.bungee.api.ChatColor.GREEN);
 
+        ComponentBuilder dropHover = new ComponentBuilder( "クリックして\n");
+        dropHover.color(net.md_5.bungee.api.ChatColor.GREEN);
+        dropHover.append("レポートを削除")
+                .color(net.md_5.bungee.api.ChatColor.GREEN);
+
+
         EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
 
         ComponentBuilder b = new ComponentBuilder("");
@@ -102,6 +108,10 @@ public class TextBuilder
                 .color(severity.getColor())
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + mngid))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+        b.append("   ");
+        b.append(ChatColor.WHITE + "[" + ChatColor.YELLOW + ChatColor.BOLD + "削除" + ChatColor.WHITE + "]")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr drop " + mngid))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, dropHover.create()));
         return b;
     }
 
@@ -130,7 +140,7 @@ public class TextBuilder
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
         ComponentBuilder builder = new ComponentBuilder(prevFlag ? prev: uBar);
-        builder.append("-----------------------")
+        builder.append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA);
         builder.append(nextFlag ? next :  uBar);
         return builder;

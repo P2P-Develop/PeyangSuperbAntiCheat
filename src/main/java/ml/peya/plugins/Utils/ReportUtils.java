@@ -42,7 +42,7 @@ public class ReportUtils
                         ChatColor.GREEN + "] " +
                         ChatColor.RED + "プレイヤーレポートでエラーが発生しました！");
 
-                ComponentBuilder hover = new ComponentBuilder(stacktrace);
+                ComponentBuilder hover = new ComponentBuilder(stacktrace.replace("\r", "\n").replace("\t", "    "));
 
                 ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + "カーソルを合わせて確認してください！");
                 builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "カーソルを合わせる" + ChatColor.WHITE + "]")

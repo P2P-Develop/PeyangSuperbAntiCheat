@@ -23,7 +23,7 @@ public class View
         int next;
         int previous;
         boolean nameFlag = false;
-        String offName = args[0];
+        String offName = "";
         try
         {
             if (args.length == 2)
@@ -32,6 +32,7 @@ public class View
         catch (Exception e)
         {
             nameFlag = true;
+            offName = args[1];
         }
 
         next = start + 5;
@@ -42,22 +43,22 @@ public class View
 
         int count = 0;
 
-        int allCount = 0;
 
         try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
              Statement statement = connection.createStatement())
         {
             String idReq = nameFlag ? String.format("WhErE id = '%s'", offName): "";
-            String querey = "SeLeCt * FrOm WaTcHeYe " + idReq + " OrDer By LeVel DeSc LiMiT 5 OfFsEt " + start;
-            ResultSet result = statement.executeQuery(querey);
+            String query = "SeLeCt * FrOm WaTcHeYe " + idReq + " OrDer By LeVel DeSc LiMiT 5 OfFsEt " + start;
+            ResultSet result = statement.executeQuery(query);
             while (result.next())
             {
+
                 String id = result.getString("ID");
                 String issuebyid = result.getString("ISSUEBYID");
                 String mngid = result.getString("MNGID");
 
-                ResultSet reason = statement.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
-
+                Statement statement2 = connection.createStatement();
+                ResultSet reason = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
                 ArrayList<EnumCheatType> types = new ArrayList<>();
                 while (reason.next())
                     types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
@@ -65,11 +66,8 @@ public class View
 
                 sender.spigot().sendMessage(line.create());
                 count++;
+                statement2.close();
             }
-
-            ResultSet allCounts = statement.executeQuery("SeLeCt CoUnT(*) FrOm WaTcHeYe");
-            allCounts.next();
-            allCount = allCounts.getInt("CoUnT");
         }
         catch (Exception e)
         {
@@ -82,9 +80,6 @@ public class View
             sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: レポートが1件も見つかりませんでした。");
             return;
         }
-
-        sender.sendMessage(ChatColor.GOLD + String.format("                         (%s/%s)",
-                (start + count), allCount));
         sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(prevBtn, nextBtn, !(previous < 0), !(count < 5)).create());
     }
 }

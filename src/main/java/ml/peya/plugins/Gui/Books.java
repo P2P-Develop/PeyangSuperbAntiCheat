@@ -40,7 +40,7 @@ public class Books
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
 
-        component.append(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD +  "レポートを提出")
+        component.append(ChatColor.DARK_GREEN + ChatColor.BOLD.toString() +  "レポートを提出")
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText + " bybooks"));
 
         component.append(ChatColor.RED + "レポートをキャンセル")
@@ -79,7 +79,7 @@ public class Books
         for(EnumCheatType type: types)
             reason.append("\n           ").append(ChatColor.BLUE).append(type.getText());
 
-        ComponentBuilder b = new ComponentBuilder( ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "チートレポート");
+        ComponentBuilder b = new ComponentBuilder( ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + "チートレポート");
         b.append("\n");
         b.append(ChatColor.GRAY + formatter.format(date))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, unixTime.create()));

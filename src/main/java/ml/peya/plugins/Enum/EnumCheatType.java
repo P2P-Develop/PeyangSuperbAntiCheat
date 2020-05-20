@@ -22,7 +22,7 @@ public enum  EnumCheatType
         this.text = text;
         this.isSelected = isSelected;
         this.sysName = sysName;
-        this.alias = (ArrayList<String>) Arrays.asList(alias);
+        this.alias = new ArrayList<>(Arrays.asList(alias));
     }
 
     public String getText()

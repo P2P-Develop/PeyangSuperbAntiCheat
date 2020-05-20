@@ -18,7 +18,7 @@ public class CommandReport implements CommandExecutor
 
         if (args.length == 0)
         {
-            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー：変数が不足しています。/" + label + " help でヘルプを見てください。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：変数が不足しています。/" + label + " help でヘルプを見てください。");
             return true;
         }
         else if (args.length == 1)
@@ -39,12 +39,12 @@ public class CommandReport implements CommandExecutor
             Player target= Bukkit.getPlayer(args[0]);
             if (target == null)
             {
-                sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー：報告対象プレイヤーが見つかりませんでした。");
+                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：報告対象プレイヤーが見つかりませんでした。");
                 return true;
             }
             else if(sender instanceof ConsoleCommandSender)
             {
-                sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー：理由短縮モードは、プレイヤーからのみ実行することができます。");
+                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：理由短縮モードは、プレイヤーからのみ実行することができます。");
                 return true;
             }
 
@@ -75,9 +75,9 @@ public class CommandReport implements CommandExecutor
         if(types.size() == 0)
         {
             if(!reasons.contains("bybooks"))
-                sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 理由が正しくありません！");
+                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 理由が正しくありません！");
             else if (args.length == 2 && reasons.contains("bybooks"))
-                sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 理由が選択されていません！");
+                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 理由が選択されていません！");
 
             return true;
         }
@@ -88,7 +88,7 @@ public class CommandReport implements CommandExecutor
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
         {
-            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 既に報告済みです！");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 既に報告済みです！");
             return true;
         }
         
@@ -103,7 +103,7 @@ public class CommandReport implements CommandExecutor
         }
         else
         {
-            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー: 不明なSQLエラーが発生しました。運営に報告しています。。。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 不明なSQLエラーが発生しました。運営に報告しています。");
             ReportUtils.errorNotification("Error: Unknown");
         }
         return true;

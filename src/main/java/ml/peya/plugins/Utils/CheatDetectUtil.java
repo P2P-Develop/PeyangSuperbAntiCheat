@@ -116,6 +116,7 @@ public class CheatDetectUtil
         catch (Exception e)
         {
             e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
             return null;
         }
     }

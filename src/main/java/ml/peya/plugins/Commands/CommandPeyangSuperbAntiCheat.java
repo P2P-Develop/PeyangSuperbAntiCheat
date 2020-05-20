@@ -17,7 +17,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
 
         if (args.length == 0)
         {
-            sender.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "エラー：変数が不足しています。/" + label + " help でヘルプを見てください。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 引数の数が不正です。/psr help でヘルプを見てください。");
             return true;
         }
 
@@ -34,6 +34,12 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 break;
             case "test":
                 Test.run(sender, args);
+                break;
+            case "drop":
+                Drop.run(sender, args);
+                break;
+            default:
+                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 対応するコマンドが見つかりませんでした。/" + label + " help でヘルプを見てください。");
         }
 
         return true;

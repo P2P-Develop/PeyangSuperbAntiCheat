@@ -71,7 +71,7 @@ public class CheatTypeUtils
     {
         for (String type: types.getAlias())
         {
-            if (type.equals("name"))
+            if (type.equals(name))
                 return true;
         }
 

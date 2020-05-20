@@ -78,12 +78,12 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         try(Connection connection = hManager.getConnection();
         Statement statement = connection.createStatement())
         {
-            statement.execute("CREATE TABLE IF NOT EXISTS watchreason(" +
+            statement.execute("CrEaTe TaBlE If NoT ExIsTs watchreason(" +
                     "MNGID nchar," +
                     "REASON nchar," +
                     "VL int" +
                     ");");
-            statement.execute("CREATE TABLE IF NOT EXISTS WaTcHeYe(" +
+            statement.execute("CrEaTe TaBlE If NoT ExIsTs watcheye(" +
                     "UUID nchar(32), " +
                     "ID nchar, " +
                     "ISSUEDATE int, " +
