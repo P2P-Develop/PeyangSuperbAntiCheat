@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.*;
 import com.mojang.authlib.properties.*;
 import ml.peya.plugins.*;
+import ml.peya.plugins.Commands.CmdPub.*;
 import net.citizensnpcs.api.*;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.*;
@@ -19,25 +20,41 @@ import java.util.*;
 
 public class CheatDetectUtil
 {
-    public static void scan(Player player)
+    public static CheatDetectNowMeta spawnWithArmor(Player player)
     {
         UUID uuid = spawn(player);
+
         CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid);
+        meta.setCanNPC(true);
+        NPC npc = CitizensAPI.getNPCRegistry().getByUniqueId(uuid);
+        RandomArmor.setRandomArmor(npc);
+        return meta;
+    }
 
-        NPC xPlusNPC = CitizensAPI.getNPCRegistry().getByUniqueId(uuid);
-
-        RandomArmor.setRandomArmor(xPlusNPC);
-
-
+    public static void scan(Player player)
+    {
+        CheatDetectNowMeta meta = spawnWithArmor(player);
 
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-            }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 9);
+                meta.setCanNPC(false);
+                if (PeyangSuperbAntiCheat.banLeft >= meta.getVL())
+                    KickUtil.kickPlayer(player);
 
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        PeyangSuperbAntiCheat.cheatMeta.remove(meta.getUuids());
+                    }
+                }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
+
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 *  7);
     }
 
     private static UUID spawn(Player player)
@@ -67,22 +84,24 @@ public class CheatDetectUtil
                 player.showPlayer(PeyangSuperbAntiCheat.getPlugin(), player1);
 
                 teleport(player, npc);
-
-
-                BukkitRunnable runnable = new BukkitRunnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        npc.despawn();
-                        CitizensAPI.getNPCRegistry().deregister(npc);
-                    }
-                };
-                runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 5);
             }
         };
-
         run.runTask(PeyangSuperbAntiCheat.getPlugin());
+
+
+
+
+        BukkitRunnable runnable = new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                npc.despawn();
+                CitizensAPI.getNPCRegistry().deregister(npc);
+            }
+        };
+        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 6);
+
 
         return npc.getUniqueId();
     }
@@ -125,7 +144,7 @@ public class CheatDetectUtil
         final double yaw = 358.0;
         final double[] time = {0.0};
         final double radius = 3.5;
-        final double range = 25.0;
+        final double range = 30.0;
         new BukkitRunnable() {
             public void run() {
                 for (double i = 0; i < Math.PI * 2; i++) {

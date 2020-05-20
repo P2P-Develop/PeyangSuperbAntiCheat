@@ -2,7 +2,9 @@ package ml.peya.plugins;
 
 import ml.peya.plugins.Utils.*;
 import net.citizensnpcs.api.event.*;
+import org.bukkit.entity.*;
 import org.bukkit.event.*;
+import org.bukkit.event.entity.*;
 
 public class Events implements Listener
 {
@@ -18,5 +20,14 @@ public class Events implements Listener
                 System.out.println(meta.addVL());
         }
 
+    }
+
+    @EventHandler
+    public void onKill(PlayerDeathEvent e)
+    {
+        if (e.getEntity().getKiller() == null)
+            return;
+
+        PeyangSuperbAntiCheat.counting.kill(e.getEntity().getKiller().getUniqueId());
     }
 }

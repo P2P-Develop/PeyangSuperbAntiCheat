@@ -38,6 +38,9 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
             case "drop":
                 Drop.run(sender, args);
                 break;
+            case "learn":
+                Learn.run(sender);
+                break;
             default:
                 sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 対応するコマンドが見つかりませんでした。/" + label + " help でヘルプを見てください。");
         }

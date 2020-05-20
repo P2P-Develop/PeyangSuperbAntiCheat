@@ -62,7 +62,7 @@ public class View
                 ArrayList<EnumCheatType> types = new ArrayList<>();
                 while (reason.next())
                     types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
-                ComponentBuilder line = TextBuilder.getLine(id, issuebyid, types, mngid);
+                ComponentBuilder line = TextBuilder.getLine(id, issuebyid, types, mngid, sender);
 
                 sender.spigot().sendMessage(line.create());
                 count++;

@@ -16,7 +16,7 @@ public class WatchEyeManagement
         try(Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
             Statement statement = connection.createStatement())
         {
-            statement.execute(String.format("INSERT INTO WaTcHeYe VALUES ('%s', '%s', %s, '%s', '%s', '%s', %s)",
+            statement.execute(String.format("InSeRt InTo WaTcHeYe VaLuEs ('%s', '%s', %s, '%s', '%s', '%s', %s)",
                     target.getUniqueId().toString().replace("-", ""),
                     target.getName(),
                     new Date().getTime(),
@@ -43,7 +43,7 @@ public class WatchEyeManagement
             String reasonString = reason.getSysName();
             if (reasonString.endsWith(" "))
                 reasonString = reasonString.substring(0, reasonString.length() - 1);
-            statement.execute(String.format("INSERT INTO WaTcHrEaSoN VALUES ('%s', '%s', %s)",
+            statement.execute(String.format("InSeRt InTo WaTcHrEaSoN VaLuEs ('%s', '%s', %s)",
                     id,
                     reasonString,
                     vl));

@@ -4,6 +4,7 @@ import ml.peya.plugins.Enum.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
+import org.bukkit.entity.*;
 
 import java.math.*;
 import java.text.*;
@@ -75,7 +76,7 @@ public class TextBuilder
         return ChatColor.AQUA +  prefix + ": " + ChatColor.GREEN + value;
     }
 
-    public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid)
+    public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid, CommandSender sender)
     {
         ComponentBuilder hover = new ComponentBuilder( "クリックして\n");
         hover.color(net.md_5.bungee.api.ChatColor.GREEN);
@@ -86,7 +87,6 @@ public class TextBuilder
         dropHover.color(net.md_5.bungee.api.ChatColor.GREEN);
         dropHover.append("レポートを削除")
                 .color(net.md_5.bungee.api.ChatColor.GREEN);
-
 
         EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
 
@@ -109,9 +109,16 @@ public class TextBuilder
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + mngid))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
         b.append("   ");
-        b.append(ChatColor.WHITE + "[" + ChatColor.YELLOW + ChatColor.BOLD + "削除" + ChatColor.WHITE + "]")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr drop " + mngid))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, dropHover.create()));
+        if (sender instanceof Player)
+        {
+            b.append(ChatColor.WHITE + "[" + ChatColor.YELLOW + ChatColor.BOLD + "削除" + ChatColor.WHITE + "]")
+                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr drop " + mngid))
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, dropHover.create()));
+
+        }
+        else
+            b.append(ChatColor.YELLOW + mngid);
+
         return b;
     }
 

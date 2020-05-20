@@ -1,8 +1,10 @@
 package ml.peya.plugins;
 
 import com.zaxxer.hikari.*;
+import jdk.internal.dynalink.beans.*;
 import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.Utils.*;
+import org.apache.commons.io.filefilter.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.*;
@@ -19,6 +21,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static String databasePath;
     public static HikariDataSource hManager = null;
     public static DetectingList cheatMeta;
+    public static int banLeft;
+    public static KillCounting counting;
 
     private static PeyangSuperbAntiCheat plugin;
     @Override
@@ -38,9 +42,15 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         databasePath = config.getString("database.path");
 
         hManager =  new HikariDataSource(initMngDatabase(getDataFolder().getAbsolutePath() + "/"));
-        createDefaultTables();
+
+        cheatMeta = new DetectingList();
+
+        if (!(createDefaultTables() && initBypass()))
+            Bukkit.getPluginManager().disablePlugin(this);
+
         getCommand("report").setExecutor(new CommandReport());
         getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
+
         getServer().getPluginManager().registerEvents(new Events(), this);
 
         logger.info("PeyangSuperbAntiCheat has started!");
@@ -73,7 +83,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         return hConfig;
     }
 
-    public static void createDefaultTables()
+    public static boolean createDefaultTables()
     {
         try(Connection connection = hManager.getConnection();
         Statement statement = connection.createStatement())
@@ -92,11 +102,45 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
                     "MNGID nchar," +
                     "LEVEL int" +
                     ");");
+
+            statement.execute("CrEaTe TaBlE If NoT ExIsTs wdlearn(" +
+                    "DATA int" +
+                    ");");
+            return true;
         }
         catch(Exception e)
         {
             e.printStackTrace();
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            return false;
         }
     }
+
+    public static boolean initBypass()
+    {
+        try(Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
+            Statement statement = connection.createStatement())
+        {
+            long ctl = 0;
+            int cBypass = 1;
+            ResultSet resultSet = statement.executeQuery("SeLeCt * FrOm WdLeArN");
+            while (resultSet.next())
+            {
+                int cot = resultSet.getInt("DATA");
+
+                ctl += cot;
+
+                cBypass++;
+            }
+
+            banLeft = Math.toIntExact(ctl / cBypass);
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

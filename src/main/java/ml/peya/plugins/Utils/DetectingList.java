@@ -2,7 +2,6 @@ package ml.peya.plugins.Utils;
 
 import org.bukkit.entity.*;
 
-import java.lang.annotation.*;
 import java.util.*;
 
 public class DetectingList
