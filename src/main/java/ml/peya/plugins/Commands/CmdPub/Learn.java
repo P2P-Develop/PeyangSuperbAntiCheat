@@ -26,11 +26,11 @@ public class Learn
             @Override
             public void run()
             {
-                try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
+                try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
                      Statement statement = connection.createStatement())
                 {
                     statement.execute("InSeRt InTo WdLeArN VaLuEs (" + meta.getVL() + ")");
-                    PeyangSuperbAntiCheat.initBypass();
+                    Init.initBypass();
                     PeyangSuperbAntiCheat.cheatMeta.remove(meta.getUuids());
                 }
                 catch (Exception e)

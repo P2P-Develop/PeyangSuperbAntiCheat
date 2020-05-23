@@ -44,8 +44,9 @@ public class View
         int count = 0;
 
 
-        try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
-             Statement statement = connection.createStatement())
+        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+             Statement statement = connection.createStatement();
+             Statement statement2 = connection.createStatement())
         {
             String idReq = nameFlag ? String.format("WhErE id = '%s'", offName): "";
             String query = "SeLeCt * FrOm WaTcHeYe " + idReq + " OrDer By LeVel DeSc LiMiT 5 OfFsEt " + start;
@@ -57,7 +58,6 @@ public class View
                 String issuebyid = result.getString("ISSUEBYID");
                 String mngid = result.getString("MNGID");
 
-                Statement statement2 = connection.createStatement();
                 ResultSet reason = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
                 ArrayList<EnumCheatType> types = new ArrayList<>();
                 while (reason.next())
@@ -66,7 +66,6 @@ public class View
 
                 sender.spigot().sendMessage(line.create());
                 count++;
-                statement2.close();
             }
         }
         catch (Exception e)

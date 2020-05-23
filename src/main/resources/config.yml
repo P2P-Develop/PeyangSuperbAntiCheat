@@ -1,6 +1,7 @@
 #sqlite
 database:
   path: "./eye.db"
+  logPath: "./log.db"
 
 npc:
   seconds: 10

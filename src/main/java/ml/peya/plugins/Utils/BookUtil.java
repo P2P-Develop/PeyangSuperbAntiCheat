@@ -1,4 +1,4 @@
-package ml.peya.plugins.Gui;
+package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;

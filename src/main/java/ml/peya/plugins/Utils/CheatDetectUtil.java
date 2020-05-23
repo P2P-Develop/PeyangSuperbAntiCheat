@@ -41,7 +41,7 @@ public class CheatDetectUtil
             public void run()
             {
                 meta.setCanNPC(false);
-                if (PeyangSuperbAntiCheat.banLeft >= meta.getVL())
+                if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
                     KickUtil.kickPlayer(player);
 
                 new BukkitRunnable()

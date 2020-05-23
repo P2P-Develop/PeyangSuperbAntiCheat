@@ -2,7 +2,6 @@ package ml.peya.plugins.Commands.CmdPub;
 
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
-import net.citizensnpcs.npc.ai.speech.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 
@@ -24,8 +23,8 @@ public class Drop
             return;
         }
 
-        try (Connection connection = PeyangSuperbAntiCheat.hManager.getConnection();
-            Statement statement = connection.createStatement())
+        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+             Statement statement = connection.createStatement())
         {
             statement.execute("DeLeTe FrOm WaTcHeYe WhErE MnGiD = '" + args[1] + "'");
             statement.execute("DeLeTe FrOm WaTcHrEaSon WhErE MnGiD = '" + args[1] + "'");
