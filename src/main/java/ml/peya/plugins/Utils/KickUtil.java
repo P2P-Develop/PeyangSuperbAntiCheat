@@ -2,6 +2,8 @@ package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.*;
 import net.md_5.bungee.api.ChatColor;
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
@@ -20,7 +22,7 @@ public class KickUtil
             @Override
             public void run()
             {
-                kick(player, isTest, wdFlag);
+                kick(player, isTest, !wdFlag);
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("kick.delay"));
 
@@ -54,7 +56,17 @@ public class KickUtil
 
     private static void kick(Player player, boolean isTest, boolean opFlag)
     {
-        UUID uuid = UUID.randomUUID();
+
+        StringBuilder id = new StringBuilder("#");
+        Random random = new Random();
+        for (int i = 0; i < 8; i++)
+        {
+            if (random.nextBoolean())
+                id.append(random.nextInt(9));
+            else
+                id.append((char)(random.nextInt(5) + 'A'));
+        }
+
         String reason;
 
         if (isTest)
@@ -72,10 +84,9 @@ public class KickUtil
                 "\n" +
                 "\n" +
                 ChatColor.GRAY + "Kick ID: " +
-                ChatColor.WHITE + uuid.toString();
+                ChatColor.WHITE + id.toString();
         if (isTest)
         {
-
             player.kickPlayer(message);
             return;
         }
@@ -88,7 +99,7 @@ public class KickUtil
             kickS.execute("InSeRt InTo KiCk VaLuEs(" +
                     "'" + player.getName() + "'," +
                     "'" + player.getUniqueId().toString() + "'," +
-                    "'" + uuid.toString() + "'," +
+                    "'" + id.toString() + "'," +
                     "'" + new Date().getTime() + "');");
 
             ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "") + "'");

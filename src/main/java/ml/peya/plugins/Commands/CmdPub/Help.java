@@ -27,11 +27,10 @@ public class Help
 
             sender.sendMessage(ChatColor.AQUA + "/" + label + " drop " + ChatColor.DARK_AQUA + "<管理iD>");
             sender.sendMessage(ChatColor.GREEN + "レポートを削除します。");
-            if (sender instanceof Player)
+            if (!(sender instanceof Player))
                 return;
             sender.sendMessage(ChatColor.YELLOW + "注意: 管理IDはランダムでつけられるものです。\n");
-            sender.sendMessage(ChatColor.YELLOW + "プレイヤーからも操作できますが、コンソールでは管理IDを見れるので、");
-            sender.sendMessage(ChatColor.YELLOW + "コンソールから操作してください。");
+            sender.sendMessage(ChatColor.YELLOW + "プレイヤーからも操作できますが、コンソールから操作してください。");
             return;
         }
 
