@@ -41,7 +41,7 @@ public class Learn
                 }
 
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 7);
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 5);
 
 
     }

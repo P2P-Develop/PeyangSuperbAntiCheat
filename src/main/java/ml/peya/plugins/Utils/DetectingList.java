@@ -50,4 +50,9 @@ public class DetectingList
         return null;
     }
 
+    public boolean exists(UUID uuid)
+    {
+        CheatDetectNowMeta meta = this.getMetaByPlayerUUID(uuid);
+        return meta != null;
+    }
 }

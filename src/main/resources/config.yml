@@ -3,9 +3,14 @@ database:
   path: "./eye.db"
   logPath: "./log.db"
 
+#noc Trigger path
 npc:
   seconds: 10
   kill: 4
+
+kick:
+  delay: 2
+
 
 #skins uuid
 skins:

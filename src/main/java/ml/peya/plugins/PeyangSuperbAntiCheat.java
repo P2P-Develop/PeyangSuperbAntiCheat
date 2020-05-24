@@ -44,6 +44,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         banKick =  new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
 
         cheatMeta = new DetectingList();
+        counting = new KillCounting();
 
         if (!(Init.createDefaultTables() && Init.initBypass()))
             Bukkit.getPluginManager().disablePlugin(this);

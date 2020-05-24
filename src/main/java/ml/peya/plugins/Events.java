@@ -2,7 +2,6 @@ package ml.peya.plugins;
 
 import ml.peya.plugins.Utils.*;
 import net.citizensnpcs.api.event.*;
-import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.*;
 
@@ -27,7 +26,7 @@ public class Events implements Listener
     {
         if (e.getEntity().getKiller() == null)
             return;
-
         PeyangSuperbAntiCheat.counting.kill(e.getEntity().getKiller().getUniqueId());
+
     }
 }

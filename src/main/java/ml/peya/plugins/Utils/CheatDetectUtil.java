@@ -42,7 +42,7 @@ public class CheatDetectUtil
             {
                 meta.setCanNPC(false);
                 if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
-                    KickUtil.kickPlayer(player);
+                    KickUtil.kickPlayer(player, true, false);
 
                 new BukkitRunnable()
                 {
@@ -54,7 +54,7 @@ public class CheatDetectUtil
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
 
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 *  7);
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 *  6);
     }
 
     private static UUID spawn(Player player)
@@ -100,7 +100,7 @@ public class CheatDetectUtil
                 CitizensAPI.getNPCRegistry().deregister(npc);
             }
         };
-        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 6);
+        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 4);
 
 
         return npc.getUniqueId();
@@ -144,7 +144,7 @@ public class CheatDetectUtil
         final double yaw = 358.0;
         final double[] time = {0.0};
         final double radius = 3.5;
-        final double range = 30.0;
+        final double range = 25.0;
         new BukkitRunnable() {
             public void run() {
                 for (double i = 0; i < Math.PI * 2; i++) {
@@ -158,7 +158,8 @@ public class CheatDetectUtil
                 }
 
 
-                time[0] += 0.133;
+                //time[0] += 0.133;
+                time[0] += 0.18;
                 if (time[0] >= range)
                     this.cancel();
             }

@@ -18,25 +18,36 @@ public class KillCounting
         players = new HashMap<>();
     }
 
-    public void kill(UUID killer)
+    public void kill(UUID killer)//killされたときに呼び出されるやつ(?)
     {
         FileConfiguration config = PeyangSuperbAntiCheat.config;
         if (players.containsKey(killer))
         {
             players.put(killer, players.get(killer) + 1);
+            System.out.println(players.get(killer));
+            if (players.get(killer) >= PeyangSuperbAntiCheat.config.getInt("npc.kill"))
+            {//カウント
+                if (!PeyangSuperbAntiCheat.cheatMeta.exists(killer))
+                    CheatDetectUtil.scan(Bukkit.getPlayer(killer));
+                players.remove(killer);
+            }//検証用
             return;
         }
         players.put(killer, 1);
+
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                if (players.get(killer) <= config.getInt("npc.kill"))
-                    CheatDetectUtil.scan(Bukkit.getPlayer(killer));
                 players.remove(killer);
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * config.getInt("npc.seconds"));
 
+    }
+
+    public HashMap<UUID, Integer> getPlayers()
+    {
+        return players;
     }
 }

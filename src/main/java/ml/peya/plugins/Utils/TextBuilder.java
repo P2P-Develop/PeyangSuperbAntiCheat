@@ -1,11 +1,13 @@
 package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.Gui.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
+import javax.xml.soap.*;
 import java.math.*;
 import java.text.*;
 import java.util.*;
@@ -151,5 +153,30 @@ public class TextBuilder
                 .color(net.md_5.bungee.api.ChatColor.AQUA);
         builder.append(nextFlag ? next :  uBar);
         return builder;
+    }
+
+    public static ComponentBuilder getBroadCastWdDetectionTexdt()
+    {
+        return new ComponentBuilder("[PEYANG CHEAT DETECTION] "+
+                net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +
+                "プレイヤーはハッキングなどの理由でゲームから削除されました。");
+    }
+
+    public static ComponentBuilder getBroadCastWdDetectionTexdt(Player player)
+    {
+        ComponentBuilder component = new ComponentBuilder("[PEYANG CHEAT DETECTION] "+
+                net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +
+                "プレイヤーはハッキングなどの理由でゲームから削除されました。");
+
+        ComponentBuilder hover = new ComponentBuilder(getLine("プレイヤー", player.getName()) + "\n" +
+                                                getLine("UUID", player.getUniqueId().toString()));
+        HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
+        component.event(event);
+        return component;
+    }
+
+    public static String getLine(String prefix, String value)
+    {
+        return ChatColor.AQUA + ChatColor.BOLD.toString() + prefix + ChatColor.GREEN + ": " + ChatColor.BLUE.toString() + value;
     }
 }

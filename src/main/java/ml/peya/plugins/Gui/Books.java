@@ -64,7 +64,7 @@ public class Books
                 .append(uuid)
                 .color(net.md_5.bungee.api.ChatColor.GREEN);
 
-        ComponentBuilder unixTime = new ComponentBuilder(getLine("UNIX秒", String.valueOf(dateInt)));
+        ComponentBuilder unixTime = new ComponentBuilder(TextBuilder.getLine("UNIX秒", String.valueOf(dateInt)));
 
 
         ComponentBuilder hover2 = new ComponentBuilder( "UUID: ")
@@ -84,12 +84,12 @@ public class Books
         b.append(ChatColor.GRAY + formatter.format(date))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, unixTime.create()));
         b.append("\n");
-        b.append(getLine("対象者", id))
+        b.append(TextBuilder.getLine("対象者", id))
                 .event(hoverEvt);
         b.append("\n");
         ComponentBuilder b1 = new ComponentBuilder(new TextComponent(b.create()));
 
-        b1.append(getLine("報告者", issueById))
+        b1.append(TextBuilder.getLine("報告者", issueById))
                 .event(hoverEvt2);
         b1.append("\n");
 
@@ -97,15 +97,11 @@ public class Books
 
         b2.append(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "重大度: " + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText() + "\n");
         b2.append("\n");
-        b2.append(getLine("報告理由", reason.toString()));
+        b2.append(TextBuilder.getLine("報告理由", reason.toString()));
         b2.append("\n");
         meta.spigot().addPage(b2.create());
         book.setItemMeta(meta);
         return book;
     }
 
-    private static String getLine(String prefix, String value)
-    {
-        return ChatColor.AQUA + ChatColor.BOLD.toString() + prefix + ChatColor.GREEN + ": " + ChatColor.BLUE.toString() + value;
-    }
 }
