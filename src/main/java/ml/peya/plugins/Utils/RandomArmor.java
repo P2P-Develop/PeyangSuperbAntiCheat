@@ -1,14 +1,8 @@
 package ml.peya.plugins.Utils;
 
-import jdk.internal.dynalink.beans.*;
-import ml.peya.plugins.*;
-import net.citizensnpcs.api.ai.tree.*;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.trait.*;
+import net.citizensnpcs.api.npc.*;
 import net.citizensnpcs.api.trait.trait.*;
 import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.player.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
@@ -88,10 +82,33 @@ public class RandomArmor
         return getRandomItems(swords);
     }
 
-    public static ItemStack getRandomItems(ArrayList<Material> items)
+    private static boolean isGold(Material item)
+    {
+        ArrayList<Material> items = new ArrayList<>();
+
+        items.add(Material.GOLD_BOOTS);
+        items.add(Material.GOLD_CHESTPLATE);
+        items.add(Material.GOLD_HELMET);
+        items.add(Material.GOLD_LEGGINGS);
+
+        return items.contains(item);
+    }
+
+    public static ItemStack getRandomItems(ArrayList<Material> itemsArg)
     {
         Random random = new Random();
+
+        ArrayList<Material> items = new ArrayList<>();
+
+        for (Material item: itemsArg)
+        {
+            if (isGold(item))
+                items.add(item);
+            items.add(item);
+        }
+
         ItemStack stack = new ItemStack(items.get(random.nextInt(items.size() - 1)), 1);
+
         if (stack.getType() == Material.LEATHER_BOOTS || stack.getType() == Material.LEATHER_CHESTPLATE || stack.getType() == Material.LEATHER_HELMET || stack.getType() == Material.LEATHER_LEGGINGS)
         {
             LeatherArmorMeta meta = (LeatherArmorMeta) stack.getItemMeta();

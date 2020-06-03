@@ -61,7 +61,7 @@ public class CheatDetectUtil
     {
 
         NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.RED + UUID.randomUUID().toString());
-        npc.spawn(player.getLocation().add(3, 0, 0));
+        npc.spawn(player.getLocation().add(3, 1, 0));
 
         Player player1 = (Player) npc.getEntity();
         for (Player p: Bukkit.getOnlinePlayers())
@@ -80,7 +80,6 @@ public class CheatDetectUtil
                     GameProfile profile = ((CraftPlayer) player1).getHandle().getProfile();
                     profile.getProperties().put("textures", new Property("textures", node.get("properties").get(0).get("value").asText(), node.get("properties").get(0).get("signature").asText()));
                 }
-
                 player.showPlayer(PeyangSuperbAntiCheat.getPlugin(), player1);
 
                 teleport(player, npc);
@@ -143,23 +142,38 @@ public class CheatDetectUtil
         private static void teleport (Player player, NPC target) {
         final double yaw = 358.0;
         final double[] time = {0.0};
-        final double radius = 3.5;
-        final double range = 25.0;
+        final double radius = 2;
+        final double range = 13.5;
+        Random generator = new Random();
+        int dob = generator.nextInt(3);
+        WaveCreator creator = new WaveCreator(1.0, 0.5, 0.0);
+            final int[] count = {0};
         new BukkitRunnable() {
             public void run() {
                 for (double i = 0; i < Math.PI * 2; i++) {
 
                     Location center = player.getLocation();
+                    /*
                     Location n = new Location(center.getWorld(),
                             xPos(time[0], radius, yaw) + center.getX(),
-                            center.getY() + 1,
-                            yPos(time[0], radius) + center.getZ());
+                            center.getY() + creator.get(0.01),
+                            zPos(time[0], radius) + center.getZ());
+                    */
+
+                    Location n = new Location(center.getWorld(),
+                            zPos(time[0], radius) + center.getX(),
+                            center.getY() + creator.get(0.1, count[0] < 20),
+                            xPos(time[0], radius, yaw) + center.getZ());
+
                     target.teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
+
+                    System.out.println(n.getY());
+                    count[0]++;
                 }
 
 
                 //time[0] += 0.133;
-                time[0] += 0.18;
+                time[0] += 0.16 + (dob / 100.0);
                 if (time[0] >= range)
                     this.cancel();
             }
@@ -171,7 +185,7 @@ public class CheatDetectUtil
         return Math.sin(time) * radius * Math.cos(Math.PI/180 * yaw);
     }
 
-    private static double yPos(double time, double radius){
+    private static double zPos(double time, double radius){
         return Math.cos(time)*radius;
     }
 }
