@@ -48,7 +48,7 @@ public class KickUtil
             public void run()
             {
                 Bukkit.broadcast(ChatColor.RED + ChatColor.BOLD.toString() +
-                        "プレイヤーはハッキングなどの理由でゲームから削除されました。" +
+                        "違反行為をしたプレイヤーをゲームから対処しました。\n" +
                         ChatColor.AQUA + "ご報告ありがとうございました！", "psr.notification");
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);

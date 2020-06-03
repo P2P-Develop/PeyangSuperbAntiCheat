@@ -159,14 +159,14 @@ public class TextBuilder
     {
         return new ComponentBuilder("[PEYANG CHEAT DETECTION] "+
                 net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +
-                "プレイヤーはハッキングなどの理由でゲームから削除されました。");
+                "ハッキング、または不適切な発言によってゲームからプレイヤーが削除\n" +
+                net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +
+                "されました。");
     }
 
     public static ComponentBuilder getBroadCastWdDetectionTexdt(Player player)
     {
-        ComponentBuilder component = new ComponentBuilder("[PEYANG CHEAT DETECTION] "+
-                net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +
-                "プレイヤーはハッキングなどの理由でゲームから削除されました。");
+        ComponentBuilder component = getBroadCastWdDetectionTexdt();
 
         ComponentBuilder hover = new ComponentBuilder(getLine("プレイヤー", player.getName()) + "\n" +
                                                 getLine("UUID", player.getUniqueId().toString()));
