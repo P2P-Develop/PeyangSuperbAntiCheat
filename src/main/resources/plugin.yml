@@ -15,8 +15,14 @@ commands:
     aliases: ["psac", "anticheat", "wdadmin", "psr"]
 permissions:
   psr.report:
+    description: この権限を有効にすると、プレイヤーは、ハッキングレポートができます。
     default: true
   psr.admin:
+    description: この権限を有効にすると、プレイヤーは、プレイヤーから寄せられたレポートを見たり、NPCを送ったり、レポートを削除することができます。
     default: op
   psr.notification:
+    description: プレイヤーがゲームから対処された際、通知が表示されます。
     default: true
+  psr.viewnpc:
+    description: 他プレイヤーを判定するNPCをこの権限がある人には可視化されます。
+    default: op

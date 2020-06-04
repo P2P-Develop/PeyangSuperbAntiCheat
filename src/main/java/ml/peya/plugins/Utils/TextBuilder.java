@@ -157,7 +157,7 @@ public class TextBuilder
 
     public static ComponentBuilder getBroadCastWdDetectionTexdt()
     {
-        return new ComponentBuilder("[PEYANG CHEAT DETECTION] "+
+        return new ComponentBuilder("[PEYANG CHEAT DETECTION]\n"+
                 net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +
                 "ハッキング、または不適切な発言によってゲームからプレイヤーが削除\n" +
                 net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +

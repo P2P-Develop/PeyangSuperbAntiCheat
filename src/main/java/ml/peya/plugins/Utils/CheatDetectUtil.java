@@ -54,7 +54,7 @@ public class CheatDetectUtil
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
 
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 *  6);
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
     }
 
     private static UUID spawn(Player player)
@@ -80,6 +80,13 @@ public class CheatDetectUtil
                     GameProfile profile = ((CraftPlayer) player1).getHandle().getProfile();
                     profile.getProperties().put("textures", new Property("textures", node.get("properties").get(0).get("value").asText(), node.get("properties").get(0).get("signature").asText()));
                 }
+
+                for (Player p: Bukkit.getOnlinePlayers())
+                {
+                    if (!p.hasPermission("psr.viewnpc"))
+                        continue;
+                    p.showPlayer(PeyangSuperbAntiCheat.getPlugin(), player1);
+                }
                 player.showPlayer(PeyangSuperbAntiCheat.getPlugin(), player1);
 
                 teleport(player, npc);
@@ -99,7 +106,7 @@ public class CheatDetectUtil
                 CitizensAPI.getNPCRegistry().deregister(npc);
             }
         };
-        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 4);
+        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
 
 
         return npc.getUniqueId();
@@ -139,17 +146,20 @@ public class CheatDetectUtil
         }
     }
 
-        private static void teleport (Player player, NPC target) {
+    private static void teleport (Player player, NPC target)
+    {
         final double yaw = 358.0;
         final double[] time = {0.0};
-        final double radius = 2;
-        final double range = 13.5;
+        final double radius = PeyangSuperbAntiCheat.config.getDouble("npc.range");
+        final double range = PeyangSuperbAntiCheat.config.getDouble("npc.bump");
         Random generator = new Random();
         int dob = generator.nextInt(3);
-        WaveCreator creator = new WaveCreator(1.0, 0.5, 0.0);
-            final int[] count = {0};
+        WaveCreator creator = new WaveCreator(1.0, 2.0, 0.0);
+        final int[] count = {0};
+
         new BukkitRunnable() {
-            public void run() {
+            public void run()
+            {
                 for (double i = 0; i < Math.PI * 2; i++) {
 
                     Location center = player.getLocation();
@@ -162,18 +172,16 @@ public class CheatDetectUtil
 
                     Location n = new Location(center.getWorld(),
                             zPos(time[0], radius) + center.getX(),
-                            center.getY() + creator.get(0.1, count[0] < 20),
+                            center.getY() + creator.get(0.01, count[0] < 20),
                             xPos(time[0], radius, yaw) + center.getZ());
 
                     target.teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
-
-                    System.out.println(n.getY());
                     count[0]++;
                 }
 
 
                 //time[0] += 0.133;
-                time[0] += 0.16 + (dob / 100.0);
+                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time") + (dob / 100.0);
                 if (time[0] >= range)
                     this.cancel();
             }

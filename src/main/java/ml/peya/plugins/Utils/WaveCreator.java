@@ -1,7 +1,5 @@
 package ml.peya.plugins.Utils;
 
-import com.sun.org.apache.bcel.internal.generic.*;
-
 public class WaveCreator
 {
     private boolean flag; //上昇フラグ

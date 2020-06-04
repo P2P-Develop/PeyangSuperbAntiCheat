@@ -1,15 +1,25 @@
-#sqlite
+#データベースのパス
+#相対座標が利用できます。
 database:
   path: "./eye.db"
   logPath: "./log.db"
 
-#noc Trigger path
+#npc関係のコンフィグです。
 npc:
-  seconds: 10
+  #指定された秒数、NPCを出します。
+  seconds: 6
+  #NPCのテレポートが途中で止まってしまった場合、増やしてください。
+  bump: 30.0
+  #npcの速度などを変えるとき、微調整してください。
+  time: 0.2
+  #npcのプレイヤーからの半径です。
+  range: 2.8
+
   kill: 4
 
 kick:
   delay: 2
+  thunder: true
 
 
 #skins uuid
