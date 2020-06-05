@@ -3,11 +3,12 @@ package ml.peya.plugins.Utils;
 import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.*;
 import com.mojang.authlib.properties.*;
+import javafx.util.*;
 import ml.peya.plugins.*;
-import ml.peya.plugins.Commands.CmdPub.*;
 import net.citizensnpcs.api.*;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.*;
+import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
@@ -31,7 +32,7 @@ public class CheatDetectUtil
         return meta;
     }
 
-    public static void scan(Player player)
+    public static void scan(Player player, CommandSender sender)
     {
         CheatDetectNowMeta meta = spawnWithArmor(player);
 
@@ -49,6 +50,19 @@ public class CheatDetectUtil
                     @Override
                     public void run()
                     {
+                        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") "));
+                        if (sender != null)
+                            sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
+                        else
+                        {
+                            for (Player np: Bukkit.getOnlinePlayers())
+                            {
+                                if (!np.hasPermission("psr.admin"))
+                                    continue;
+                                np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
+                            }
+                        }
+
                         PeyangSuperbAntiCheat.cheatMeta.remove(meta.getUuids());
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);

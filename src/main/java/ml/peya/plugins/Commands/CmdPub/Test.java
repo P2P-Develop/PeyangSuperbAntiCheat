@@ -1,5 +1,6 @@
 package ml.peya.plugins.Commands.CmdPub;
 
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -22,6 +23,10 @@ public class Test
             return;
         }
 
-        CheatDetectUtil.scan(player);
+        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") "));
+
+        sender.sendMessage(ChatColor.GREEN + name + "さんをKillauraテストします。");
+        sender.sendMessage(ChatColor.GREEN + PeyangSuperbAntiCheat.config.getString("npc.seconds") + "秒間お待ちください。");
+        CheatDetectUtil.scan(player, sender);
     }
 }

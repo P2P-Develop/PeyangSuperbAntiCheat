@@ -24,11 +24,10 @@ public class KillCounting
         if (players.containsKey(killer))
         {
             players.put(killer, players.get(killer) + 1);
-            System.out.println(players.get(killer));
             if (players.get(killer) >= PeyangSuperbAntiCheat.config.getInt("npc.kill"))
             {//カウント
                 if (!PeyangSuperbAntiCheat.cheatMeta.exists(killer))
-                    CheatDetectUtil.scan(Bukkit.getPlayer(killer));
+                    CheatDetectUtil.scan(Bukkit.getPlayer(killer), null);
                 players.remove(killer);
             }//検証用
             return;

@@ -94,7 +94,8 @@ public class KickUtil
              Connection eyeC = PeyangSuperbAntiCheat.eye.getConnection();
              Statement kickS = kickC.createStatement();
              Statement eyeS = eyeC.createStatement();
-             Statement eyeS2 = eyeC.createStatement())
+             Statement eyeS2 = eyeC.createStatement();
+             Statement eyeS3 = eyeC.createStatement())
         {
             kickS.execute("InSeRt InTo KiCk VaLuEs(" +
                     "'" + player.getName() + "'," +
@@ -108,7 +109,9 @@ public class KickUtil
             {
                 String MNGID = eyeList.getString("MNGID");
                 eyeS2.execute("DeLeTe FrOm WaTcHrEaSoN WhErE MnGiD = '" + MNGID + "'");
+                eyeS3.execute("DeLeTe FrOm WaTchEyE WhErE MnGiD = '" + MNGID + "'");
             }
+
         }
         catch (Exception e)
         {

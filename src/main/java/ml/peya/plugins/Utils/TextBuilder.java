@@ -1,8 +1,11 @@
 package ml.peya.plugins.Utils;
 
+import javafx.scene.input.*;
+import javafx.util.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.*;
 import net.md_5.bungee.api.chat.*;
+import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -178,5 +181,59 @@ public class TextBuilder
     public static String getLine(String prefix, String value)
     {
         return ChatColor.AQUA + ChatColor.BOLD.toString() + prefix + ChatColor.GREEN + ": " + ChatColor.BLUE.toString() + value;
+    }
+
+
+    public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
+    {
+        ComponentBuilder builder = new ComponentBuilder(ChatColor.AQUA + "-----" +
+                ChatColor.GREEN + "[" +
+                ChatColor.BLUE + "PeyangSuperbAntiCheat" +
+                ChatColor.GREEN + "]" +
+                ChatColor.AQUA + "-----\n");
+
+        builder.append(ChatColor.GREEN + name + "さんのKillauraチェック結果");
+        builder.append("\n");
+        builder.append(getLine("VL", String.valueOf(VL)));
+        builder.append("\n");
+        builder.append(String.format("%s0%%   %s50%%  %s100%%", EnumChatFormat.GREEN, EnumChatFormat.YELLOW, EnumChatFormat.RED));
+        builder.append("\n");
+        builder.append(genGraph(VL, kickVL));
+        builder.append("\n");
+        builder.append(ChatColor.AQUA + "結果: " +
+                (VL >= kickVL ? (EnumChatFormat.RED + "KICK"): (EnumChatFormat.GREEN + "スルー")));
+        return builder;
+    }
+
+    private static int calcVLGlaph(int VL, int max)
+    {
+        double tendNum = 10.0 / (double) max;
+
+        double VlMeta = tendNum * (double) VL;
+
+        return Math.toIntExact(Math.round(VlMeta));
+    }
+
+    private static String genGraph(int VL, int max)
+    {
+        int genVL = calcVLGlaph(VL, max);
+
+        StringBuilder builder = new StringBuilder("[");
+
+        for (int i = 1; i < 11; i++)
+        {
+
+            if (i == genVL)
+                builder.append(ChatColor.WHITE).append("|");
+            else if (i < 5)
+                builder.append(ChatColor.GREEN).append("=");
+            else if (i < 8)
+                builder.append(ChatColor.YELLOW).append("=");
+            else
+                builder.append(ChatColor.RED).append("=");
+        }
+
+        builder.append(ChatColor.WHITE).append("]");
+        return builder.toString();
     }
 }

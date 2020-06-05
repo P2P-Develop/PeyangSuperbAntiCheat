@@ -70,8 +70,6 @@ public class CommandReport implements CommandExecutor
 
         types.removeIf(type -> !type.isSelected());
 
-        for(EnumCheatType typpp: types)
-            System.out.println(typpp.getText());
         if(types.size() == 0)
         {
             if(!reasons.contains("bybooks"))
