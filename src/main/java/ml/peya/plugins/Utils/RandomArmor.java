@@ -1,14 +1,7 @@
 package ml.peya.plugins.Utils;
 
-import net.citizensnpcs.api.npc.*;
-import net.citizensnpcs.api.trait.trait.*;
-import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
-import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_12_R1.entity.*;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
 import org.bukkit.inventory.*;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 
 import java.util.*;

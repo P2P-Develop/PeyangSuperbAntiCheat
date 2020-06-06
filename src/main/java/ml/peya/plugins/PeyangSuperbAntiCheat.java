@@ -1,5 +1,8 @@
 package ml.peya.plugins;
 
+import com.comphenix.protocol.*;
+import com.comphenix.protocol.events.*;
+import com.sun.javafx.sg.prism.web.*;
 import com.zaxxer.hikari.*;
 import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.Utils.*;
@@ -21,14 +24,16 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static DetectingList cheatMeta;
     public static int banLeft;
     public static KillCounting counting;
+    public static ProtocolManager protocolManager;
+
 
     private static PeyangSuperbAntiCheat plugin;
     @Override
     public void onEnable()
     {
-        if (getServer().getPluginManager().getPlugin("Citizens") == null || !getServer().getPluginManager().getPlugin("Citizens").isEnabled())
+        if (getServer().getPluginManager().getPlugin("ProtocolLib") == null || !getServer().getPluginManager().getPlugin("ProtocolLib").isEnabled())
         {
-            logger.log(Level.SEVERE, "This plugin is require Citizens 2.0~");
+            logger.log(Level.SEVERE, "This plugin is require ProtocolLib");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -45,6 +50,16 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         cheatMeta = new DetectingList();
         counting = new KillCounting();
+        protocolManager = ProtocolLibrary.getProtocolManager();
+
+        protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
+        {
+            @Override
+            public void onPacketReceiving(PacketEvent event)
+            {
+                new Packets().onPacketReceiving(event);
+            }
+        });
 
         if (!(Init.createDefaultTables() && Init.initBypass()))
             Bukkit.getPluginManager().disablePlugin(this);

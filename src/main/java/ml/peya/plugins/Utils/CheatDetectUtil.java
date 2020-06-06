@@ -16,7 +16,6 @@ import org.bukkit.scheduler.*;
 
 import javax.net.ssl.*;
 import java.io.*;
-import java.lang.reflect.*;
 import java.net.*;
 import java.util.*;
 
@@ -25,8 +24,7 @@ public class CheatDetectUtil
     public static CheatDetectNowMeta spawnWithArmor(Player player)
     {
         EntityPlayer uuid = spawn(player);
-
-        CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid.getUniqueID());
+        CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId());
         meta.setCanNPC(true);
         System.out.println(uuid);
         return meta;

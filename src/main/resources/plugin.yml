@@ -3,8 +3,8 @@ main: ml.peya.plugins.PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PeyangSuperbAntiCheat
 
-depend: ["Citizens"]
-loadbefore: ["Citizens"]
+depend: ["ProtocolLib"]
+loadbefore: ["ProtocolLib"]
 
 commands:
   report:

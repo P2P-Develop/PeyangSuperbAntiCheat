@@ -13,9 +13,9 @@ public class DetectingList
         return meta.size();
     }
 
-    public CheatDetectNowMeta add(Player target, UUID npc)
+    public CheatDetectNowMeta add(Player target, UUID npc, int id)
     {
-        CheatDetectNowMeta meta = new CheatDetectNowMeta(target, npc);
+        CheatDetectNowMeta meta = new CheatDetectNowMeta(target, npc, id);
         this.meta.add(meta);
         return meta;
     }
