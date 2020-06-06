@@ -197,7 +197,7 @@ public class TextBuilder
         builder.append(genGraph(VL, kickVL));
         builder.append("\n");
         builder.append(ChatColor.AQUA + "結果: " +
-                (VL >= kickVL ? (EnumChatFormat.RED + "KICK"): (EnumChatFormat.GREEN + "スルー")));
+                (VL >= kickVL ? (EnumChatFormat.RED + "強制退出"): (EnumChatFormat.GREEN + "問題なし")));
         return builder;
     }
 
@@ -218,7 +218,10 @@ public class TextBuilder
 
         for (int i = 1; i < 11; i++)
         {
-
+            if (VL >= max && i == 10)
+                builder.append(ChatColor.WHITE).append("|");
+            else if (VL == 0 && i == 1)
+                builder.append(ChatColor.WHITE).append("|");
             if (i == genVL)
                 builder.append(ChatColor.WHITE).append("|");
             else if (i < 5)
