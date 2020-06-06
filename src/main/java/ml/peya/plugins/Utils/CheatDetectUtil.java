@@ -7,12 +7,17 @@ import javafx.util.*;
 import ml.peya.plugins.*;
 import net.citizensnpcs.api.*;
 import net.citizensnpcs.api.npc.NPC;
+import net.citizensnpcs.api.trait.trait.*;
+import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
+import org.bukkit.craftbukkit.v1_12_R1.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.*;
+import sun.security.krb5.internal.*;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -23,12 +28,11 @@ public class CheatDetectUtil
 {
     public static CheatDetectNowMeta spawnWithArmor(Player player)
     {
-        UUID uuid = spawn(player);
+        EntityPlayer uuid = spawn(player);
 
-        CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid);
+        CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid.getUniqueID());
         meta.setCanNPC(true);
-        NPC npc = CitizensAPI.getNPCRegistry().getByUniqueId(uuid);
-        RandomArmor.setRandomArmor(npc);
+        System.out.println(uuid);
         return meta;
     }
 
@@ -71,17 +75,18 @@ public class CheatDetectUtil
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
     }
 
-    private static UUID spawn(Player player)
+    private static void setLocation(Location location, EntityPlayer player)
     {
+        player.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+    }
 
-        NPC npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, ChatColor.RED + UUID.randomUUID().toString());
-        npc.spawn(player.getLocation().add(3, 1, 0));
-
-        Player player1 = (Player) npc.getEntity();
-        for (Player p: Bukkit.getOnlinePlayers())
-            p.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), player1);
-
-        BukkitRunnable run = new BukkitRunnable()
+    private static EntityPlayer spawn(Player player)
+    {
+        UUID uuid = UUID.randomUUID();
+        MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
+        WorldServer worldServer = ((CraftWorld) player.getWorld()).getHandle();
+        GameProfile profile = new GameProfile(uuid, ChatColor.RED + "[WATCHDOG]");
+        new BukkitRunnable()
         {
             @Override
             public void run()
@@ -90,24 +95,50 @@ public class CheatDetectUtil
                 Random random = new Random();
                 JsonNode node = getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
                 if (node != null)
-                {
-                    GameProfile profile = ((CraftPlayer) player1).getHandle().getProfile();
                     profile.getProperties().put("textures", new Property("textures", node.get("properties").get(0).get("value").asText(), node.get("properties").get(0).get("signature").asText()));
-                }
+
+            }
+        }.runTask(PeyangSuperbAntiCheat.getPlugin());
+        PlayerInteractManager plMng = new PlayerInteractManager(worldServer);
+
+        EntityPlayer npc = new EntityPlayer(server, worldServer, profile, plMng);
+
+        setLocation(player.getLocation().add(3, 1, 0), npc);
+
+        PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
+
+        ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
+                CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
+                CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
+                CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
+                CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
+
+        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
+        connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+
+        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+
+
+        BukkitRunnable run = new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
 
                 for (Player p: Bukkit.getOnlinePlayers())
                 {
                     if (!p.hasPermission("psr.viewnpc"))
                         continue;
-                    p.showPlayer(PeyangSuperbAntiCheat.getPlugin(), player1);
-                }
-                player.showPlayer(PeyangSuperbAntiCheat.getPlugin(), player1);
+                    PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
+                    c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
+                    c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
 
-                teleport(player, npc);
+                    c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+                }
+                teleport(player, npc, arm);
             }
         };
         run.runTask(PeyangSuperbAntiCheat.getPlugin());
-
 
 
 
@@ -116,14 +147,23 @@ public class CheatDetectUtil
             @Override
             public void run()
             {
-                npc.despawn();
-                CitizensAPI.getNPCRegistry().deregister(npc);
+                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+                connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
+                for (Player p: Bukkit.getOnlinePlayers())
+                {
+                    if (!p.hasPermission("psr.viewnpc"))
+                        continue;
+                    PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
+                    c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+                    c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+                }
             }
         };
         runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
 
 
-        return npc.getUniqueId();
+
+        return npc;
     }
 
     public static JsonNode getSkin(String uuid)
@@ -160,7 +200,19 @@ public class CheatDetectUtil
         }
     }
 
-    private static void teleport (Player player, NPC target)
+    private static void setArmor(Player target, EntityPlayer player,  ItemStack[] arm)
+    {
+
+        PlayerConnection connection = ((CraftPlayer)target).getHandle().playerConnection;
+        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.HEAD, arm[0]));
+        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.CHEST, arm[1]));
+        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.LEGS, arm[2]));
+        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]));
+        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4]));
+    }
+
+
+    private static void teleport (Player player, EntityPlayer target, ItemStack[] arm)
     {
         final double yaw = 358.0;
         final double[] time = {0.0};
@@ -188,8 +240,26 @@ public class CheatDetectUtil
                             zPos(time[0], radius) + center.getX(),
                             center.getY() + creator.get(0.01, count[0] < 20),
                             xPos(time[0], radius, yaw) + center.getZ());
-
-                    target.teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
+                    setLocation(n, target);
+                    target.getBukkitEntity().teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
+                    PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
+                    connection.sendPacket(new PacketPlayOutEntityTeleport(target));
+                    setArmor(player, target, arm);
+                    new BukkitRunnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            for (Player p: Bukkit.getOnlinePlayers())
+                            {
+                                if (!p.hasPermission("psr.viewnpc"))
+                                    continue;
+                                PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
+                                c.sendPacket(new PacketPlayOutEntityTeleport(target));
+                                setArmor(p, target, arm);
+                            }
+                        }
+                    }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     count[0]++;
                 }
 
