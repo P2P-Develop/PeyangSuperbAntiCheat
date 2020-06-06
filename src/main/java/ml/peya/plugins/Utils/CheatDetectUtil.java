@@ -3,11 +3,7 @@ package ml.peya.plugins.Utils;
 import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.*;
 import com.mojang.authlib.properties.*;
-import javafx.util.*;
 import ml.peya.plugins.*;
-import net.citizensnpcs.api.*;
-import net.citizensnpcs.api.npc.NPC;
-import net.citizensnpcs.api.trait.trait.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -17,10 +13,10 @@ import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.*;
-import sun.security.krb5.internal.*;
 
 import javax.net.ssl.*;
 import java.io.*;
+import java.lang.reflect.*;
 import java.net.*;
 import java.util.*;
 
@@ -86,6 +82,27 @@ public class CheatDetectUtil
         MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
         WorldServer worldServer = ((CraftWorld) player.getWorld()).getHandle();
         GameProfile profile = new GameProfile(uuid, ChatColor.RED + "[WATCHDOG]");
+
+
+        PlayerInteractManager plMng = new PlayerInteractManager(worldServer);
+
+        EntityPlayer npc = new EntityPlayer(server, worldServer, profile, plMng);
+
+        setLocation(player.getLocation().add(3, 1, 0), npc);
+
+        PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
+
+
+
+        ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
+                CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
+                CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
+                CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
+                CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
+
+        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
+        connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
         new BukkitRunnable()
         {
             @Override
@@ -96,28 +113,11 @@ public class CheatDetectUtil
                 JsonNode node = getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
                 if (node != null)
                     profile.getProperties().put("textures", new Property("textures", node.get("properties").get(0).get("value").asText(), node.get("properties").get(0).get("signature").asText()));
-
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());
-        PlayerInteractManager plMng = new PlayerInteractManager(worldServer);
 
-        EntityPlayer npc = new EntityPlayer(server, worldServer, profile, plMng);
-
-        setLocation(player.getLocation().add(3, 1, 0), npc);
-
-        PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
-
-        ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
-                CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
-                CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
-                CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
-                CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
-
-        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
-        connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-
-        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
-
+        player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
+        player.showPlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
         BukkitRunnable run = new BukkitRunnable()
         {
@@ -134,6 +134,8 @@ public class CheatDetectUtil
                     c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
 
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+                    p.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
+                    p.showPlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
                 }
                 teleport(player, npc, arm);
             }
