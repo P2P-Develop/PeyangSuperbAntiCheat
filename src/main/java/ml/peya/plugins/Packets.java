@@ -1,14 +1,11 @@
 package ml.peya.plugins;
 
 import com.comphenix.protocol.events.*;
-import com.comphenix.protocol.reflect.*;
+import com.comphenix.protocol.wrappers.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
-import org.bukkit.*;
-import org.bukkit.entity.Entity;
 
 import java.lang.reflect.*;
-import java.security.*;
 
 public class Packets
 {
@@ -22,7 +19,7 @@ public class Packets
             Field field = entity.getClass().getDeclaredField("a");
             field.setAccessible(true);
             int entityId = field.getInt(entity);
-
+            if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK) return;
             DetectingList metas = PeyangSuperbAntiCheat.cheatMeta;
             for (CheatDetectNowMeta meta: metas.getMetas())
             {

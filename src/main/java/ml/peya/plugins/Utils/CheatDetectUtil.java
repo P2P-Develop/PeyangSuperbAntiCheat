@@ -1,9 +1,11 @@
 package ml.peya.plugins.Utils;
 
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.deser.std.*;
 import com.mojang.authlib.*;
 import com.mojang.authlib.properties.*;
 import ml.peya.plugins.*;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -13,11 +15,16 @@ import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.*;
+import org.bukkit.scoreboard.*;
+import org.bukkit.scoreboard.Scoreboard;
 
 import javax.net.ssl.*;
+import javax.print.attribute.standard.*;
+import java.awt.*;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.List;
 
 public class CheatDetectUtil
 {
@@ -76,20 +83,40 @@ public class CheatDetectUtil
 
     private static EntityPlayer spawn(Player player)
     {
-        UUID uuid = UUID.randomUUID();
+        final String[] name = {"", UUID.randomUUID().toString()};
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                JsonNode node = StringUtil.getRandomUser();
+                String first = Objects.requireNonNull(node).get("results").get(0).get("name").get("first").asText();
+                String last = node.get("results").get(0).get("name").get("last").asText();
+                System.out.println(first);
+                System.out.println(last);
+                Random random = new Random();
+                name[0] = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ?  "19" + random.nextInt(120): "");
+                if (name[0].length() > 16)
+                    name[0] = random.nextBoolean() ? first: last;
+                System.out.println(name[0]);
+                name[1] = node.get("results").get(0).get("login").get("uuid").asText();
+            }
+        }.runTask(PeyangSuperbAntiCheat.getPlugin());
+
+        UUID uuid = UUID.fromString(name[1]);
         MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
         WorldServer worldServer = ((CraftWorld) player.getWorld()).getHandle();
-        GameProfile profile = new GameProfile(uuid, ChatColor.RED + "[WATCHDOG]");
-
+        GameProfile profile = new GameProfile(uuid, name[0]);
 
         PlayerInteractManager plMng = new PlayerInteractManager(worldServer);
 
         EntityPlayer npc = new EntityPlayer(server, worldServer, profile, plMng);
 
+
+
         setLocation(player.getLocation().add(3, 1, 0), npc);
 
         PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
-
 
 
         ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
@@ -98,6 +125,7 @@ public class CheatDetectUtil
                 CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
                 CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
 
+        Player nmPlayer= npc.getBukkitEntity();
         connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
         connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
         connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
@@ -116,7 +144,6 @@ public class CheatDetectUtil
 
         player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
         player.showPlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
-
         BukkitRunnable run = new BukkitRunnable()
         {
             @Override
@@ -155,7 +182,7 @@ public class CheatDetectUtil
                         continue;
                     PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
-                    c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+                    c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
                 }
             }
         };
@@ -210,6 +237,7 @@ public class CheatDetectUtil
         connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]));
         connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4]));
     }
+
 
 
     private static void teleport (Player player, EntityPlayer target, ItemStack[] arm)
