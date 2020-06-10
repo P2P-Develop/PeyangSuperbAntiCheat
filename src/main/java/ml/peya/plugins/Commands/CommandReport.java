@@ -16,6 +16,7 @@ public class CommandReport implements CommandExecutor
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
 
+
         if (args.length == 0)
         {
             sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：変数が不足しています。/" + label + " help でヘルプを見てください。");
@@ -36,8 +37,7 @@ public class CommandReport implements CommandExecutor
                 sender.sendMessage(ChatColor.GREEN + "このコマンドです。");
                 return true;
             }
-            Player target= Bukkit.getPlayer(args[0]);
-            if (target == null)
+            if (Bukkit.getPlayer(args[0]) == null)
             {
                 sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：報告対象プレイヤーが見つかりませんでした。");
                 return true;
@@ -47,19 +47,26 @@ public class CommandReport implements CommandExecutor
                 sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：理由短縮モードは、プレイヤーからのみ実行することができます。");
                 return true;
             }
-
+            Player target= Bukkit.getPlayer(args[0]);
             ItemStack book = Books.getReportBook(target,  CheatTypeUtils.getFullType());
             BookUtil.openBook(book, (Player) sender);
             return true;
         }
 
-        Player target = Bukkit.getPlayer(args[0]);
+
         ArrayList<String> reasons = new ArrayList<>(Arrays.asList(args));
 
         reasons.remove(0);
 
         ArrayList<EnumCheatType> types = CheatTypeUtils.getCheatTypeArrayFromString(reasons.toArray(new String[0]));
 
+        if (Bukkit.getPlayer(args[0]) == null)
+        {
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：報告対象プレイヤーが見つかりませんでした。");
+            return true;
+        }
+
+        Player target= Bukkit.getPlayer(args[0]);
         if(reasons.size() != 0 &&  reasons.get(reasons.size() - 1).equals("\\"))
         {
             ItemStack book = Books.getReportBook(target, types.toArray(new EnumCheatType[0]));

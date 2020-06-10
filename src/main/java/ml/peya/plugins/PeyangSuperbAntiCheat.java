@@ -5,6 +5,7 @@ import com.comphenix.protocol.events.*;
 import com.sun.javafx.sg.prism.web.*;
 import com.zaxxer.hikari.*;
 import ml.peya.plugins.Commands.*;
+import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
@@ -66,6 +67,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         getCommand("report").setExecutor(new CommandReport());
         getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
+        getCommand("aurabot").setExecutor(new AuraBot());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
 

@@ -32,9 +32,6 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
             case "show":
                 Show.run(sender, args);
                 break;
-            case "test":
-                Test.run(sender, args);
-                break;
             case "drop":
                 Drop.run(sender, args);
                 break;

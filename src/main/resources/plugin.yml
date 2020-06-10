@@ -13,12 +13,20 @@ commands:
     usage: /peyangreport <PlayerName> <type>
   peyangsuperbanticheat:
     aliases: ["psac", "anticheat", "wdadmin", "psr"]
+  aurabot:
+    aliases: ["testaura", "auratest", "killauratest"]
+    permission: psr.mod
+    usage: /aurabot <PlayerName>
+
 permissions:
   psr.report:
     description: この権限を有効にすると、プレイヤーは、ハッキングレポートができます。
     default: true
   psr.admin:
     description: この権限を有効にすると、プレイヤーは、プレイヤーから寄せられたレポートを見たり、NPCを送ったり、レポートを削除することができます。
+    default: op
+  psr.mod:
+    description: この権限を持つプレイヤーは、AuraBotを召喚したり、AuraPanicをテストすることができます。
     default: op
   psr.notification:
     description: プレイヤーがゲームから対処された際、通知が表示されます。

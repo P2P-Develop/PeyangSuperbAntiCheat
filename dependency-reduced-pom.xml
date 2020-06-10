@@ -51,6 +51,10 @@
       <id>minecraft-repo</id>
       <url>https://libraries.minecraft.net/</url>
     </repository>
+    <repository>
+      <id>alvinb-repo</id>
+      <url>http://repo.bringholm.com/</url>
+    </repository>
   </repositories>
   <dependencies>
     <dependency>
