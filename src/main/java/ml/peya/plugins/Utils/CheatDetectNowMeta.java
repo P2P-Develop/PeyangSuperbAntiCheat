@@ -1,5 +1,7 @@
 package ml.peya.plugins.Utils;
 
+import ml.peya.plugins.Detect.*;
+import ml.peya.plugins.Enum.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.entity.*;
 
@@ -12,12 +14,14 @@ public class CheatDetectNowMeta
     private  int id;
     private int VL;
     private boolean canNPC = false;
+    private DetectType type;
 
-    public CheatDetectNowMeta(Player target, UUID uuids, int id)
+    public CheatDetectNowMeta(Player target, UUID uuids, int id, DetectType type)
     {
         this.target = target;
         this.uuids = uuids;
         this.id = id;
+        this.type = type;
     }
 
     public boolean isCanNPC()
@@ -60,5 +64,10 @@ public class CheatDetectNowMeta
     public int getId()
     {
         return id;
+    }
+
+    public DetectType getType()
+    {
+        return type;
     }
 }

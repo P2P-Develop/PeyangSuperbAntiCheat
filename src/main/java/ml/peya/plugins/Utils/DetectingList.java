@@ -1,5 +1,6 @@
 package ml.peya.plugins.Utils;
 
+import ml.peya.plugins.Enum.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
@@ -13,9 +14,9 @@ public class DetectingList
         return meta.size();
     }
 
-    public CheatDetectNowMeta add(Player target, UUID npc, int id)
+    public CheatDetectNowMeta add(Player target, UUID npc, int id, DetectType type)
     {
-        CheatDetectNowMeta meta = new CheatDetectNowMeta(target, npc, id);
+        CheatDetectNowMeta meta = new CheatDetectNowMeta(target, npc, id, type);
         this.meta.add(meta);
         return meta;
     }

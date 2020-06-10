@@ -1,12 +1,12 @@
 package ml.peya.plugins;
 
-import io.netty.util.*;
-import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.Detect.*;
+import ml.peya.plugins.Enum.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
-import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
 
+import java.lang.reflect.*;
 import java.util.*;
 
 public class KillCounting
@@ -27,7 +27,7 @@ public class KillCounting
             if (players.get(killer) >= PeyangSuperbAntiCheat.config.getInt("npc.kill"))
             {//カウント
                 if (!PeyangSuperbAntiCheat.cheatMeta.exists(killer))
-                    CheatDetectUtil.scan(Bukkit.getPlayer(killer), null);
+                    NPCConnection.scan(Bukkit.getPlayer(killer), DetectType.AURA_BOT, null);
                 players.remove(killer);
             }//検証用
             return;

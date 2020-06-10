@@ -17,7 +17,10 @@ commands:
     aliases: ["testaura", "auratest", "killauratest"]
     permission: psr.mod
     usage: /aurabot <PlayerName>
-
+  acpanic:
+    aliases: ["testpanic", "panictest", "aurapanictest"]
+    permission: psr.mod
+    usage: /acpanic <PlayerName>
 permissions:
   psr.report:
     description: この権限を有効にすると、プレイヤーは、ハッキングレポートができます。

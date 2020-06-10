@@ -1,6 +1,8 @@
 package ml.peya.plugins.Commands.CmdPub;
 
 import ml.peya.plugins.*;
+import ml.peya.plugins.Detect.*;
+import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -19,7 +21,7 @@ public class Learn
             return;
         }
 
-        CheatDetectNowMeta meta = CheatDetectUtil.spawnWithArmor((Player) sender);
+        CheatDetectNowMeta meta = NPCConnection.spawnWithArmor((Player) sender, DetectType.AURA_BOT);
 
         new BukkitRunnable()
         {

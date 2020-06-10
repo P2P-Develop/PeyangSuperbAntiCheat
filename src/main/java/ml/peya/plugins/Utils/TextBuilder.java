@@ -188,7 +188,7 @@ public class TextBuilder
                 ChatColor.GREEN + "]" +
                 ChatColor.AQUA + "-----\n");
 
-        builder.append(ChatColor.GREEN + name + "さんのKillauraチェック結果");
+        builder.append(ChatColor.GREEN + name + "さんのKillAuraチェック結果");
         builder.append("\n");
         builder.append(getLine("VL", String.valueOf(VL)));
         builder.append("\n");
@@ -198,6 +198,20 @@ public class TextBuilder
         builder.append("\n");
         builder.append(ChatColor.AQUA + "結果: " +
                 (VL >= kickVL ? (EnumChatFormat.RED + "強制退出"): (EnumChatFormat.GREEN + "問題なし")));
+        return builder;
+    }
+
+    public static ComponentBuilder textPanicRep(String name, int vl)
+    {
+        ComponentBuilder builder = new ComponentBuilder(ChatColor.AQUA + "-----" +
+                ChatColor.GREEN + "[" +
+                ChatColor.BLUE + "PeyangSuperbAntiCheat" +
+                ChatColor.GREEN + "]" +
+                ChatColor.AQUA + "-----\n");
+
+        builder.append(ChatColor.GREEN + name + "さんのKillAuraチェック結果");
+        builder.append("\n");
+        builder.append(ChatColor.GREEN + "VL: " + ChatColor.YELLOW + vl);
         return builder;
     }
 
