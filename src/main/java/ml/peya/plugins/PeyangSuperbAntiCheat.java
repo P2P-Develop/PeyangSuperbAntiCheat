@@ -34,7 +34,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         if (getServer().getPluginManager().getPlugin("ProtocolLib") == null || !getServer().getPluginManager().getPlugin("ProtocolLib").isEnabled())
         {
-            logger.log(Level.SEVERE, "This plugin is require ProtocolLib");
+            logger.log(Level.SEVERE, "This plugin requires ProtocolLib!");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -72,7 +72,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         getServer().getPluginManager().registerEvents(new Events(), this);
 
-        logger.info("PeyangSuperbAntiCheat has started!");
+        logger.info("PeyangSuperbAntiCheat has been activated!");
     }
 
     @Override
@@ -80,7 +80,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         if (eye != null)
             eye.close();
-        logger.info("PeyangSuperbAntiCheat has stopped!");
+        logger.info("PeyangSuperbAntiCheat has disabled!");
     }
 
     public static PeyangSuperbAntiCheat getPlugin()
