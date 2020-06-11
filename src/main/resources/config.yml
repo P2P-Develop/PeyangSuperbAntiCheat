@@ -19,7 +19,8 @@ npc:
 
 kick:
   delay: 2
-  thunder: true
+  #プレイヤーがキックされるときに雷を召喚するスイッチです。
+  lightning: true
 
 
 #skins uuid

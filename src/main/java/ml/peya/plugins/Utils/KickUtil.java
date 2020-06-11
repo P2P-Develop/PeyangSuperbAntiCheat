@@ -56,6 +56,8 @@ public class KickUtil
 
     private static void kick(Player player, boolean isTest, boolean opFlag)
     {
+        if (PeyangSuperbAntiCheat.config.getBoolean("kick.lightning"))
+            player.getWorld().strikeLightningEffect(player.getLocation());
 
         StringBuilder id = new StringBuilder("#");
         Random random = new Random();
