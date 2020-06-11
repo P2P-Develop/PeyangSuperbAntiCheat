@@ -11,13 +11,13 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
     {
         if(!sender.hasPermission("psr.admin"))
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: あなたには権限がありません！");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：権限がありません！");
             return true;
         }
 
         if (args.length == 0)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 引数の数が不正です。/psr help でヘルプを見てください。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
             return true;
         }
 
@@ -42,7 +42,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 Kick.run(sender, args);
                 break;
             default:
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 対応するコマンドが見つかりませんでした。/" + label + " help でヘルプを見てください。");
+                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対応するコマンドが見つかりませんでした。/" + label + " help でヘルプを見てください。");
         }
 
         return true;

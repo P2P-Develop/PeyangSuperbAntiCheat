@@ -80,9 +80,9 @@ public class CommandReport implements CommandExecutor
         if(types.size() == 0)
         {
             if(!reasons.contains("bybooks"))
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 理由が正しくありません！");
+                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：理由が正しくありません！");
             else if (args.length == 2 && reasons.contains("bybooks"))
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 理由が選択されていません！");
+                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：理由が選択されていません！");
 
             return true;
         }
@@ -93,7 +93,7 @@ public class CommandReport implements CommandExecutor
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 既に報告済みです！");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：既に報告済みです！");
             return true;
         }
         

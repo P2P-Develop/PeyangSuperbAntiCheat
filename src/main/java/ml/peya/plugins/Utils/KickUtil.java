@@ -72,13 +72,13 @@ public class KickUtil
         String reason;
 
         if (isTest)
-            reason = "PYGANTICHEAT TEST";
+            reason = "PEYANG ANTI CHEAT TEST";
         else if (opFlag)
             reason = "KICKED BY STAFF";
         else
-            reason = "PYGANTICHEAT DETECTION ";
+            reason = "PEYANG ANTI CHEAT DETECTION ";
 
-        String message = ChatColor.RED + "あなたは、このサーバーからKickされました！" +
+        String message = ChatColor.RED + "あなたは、このサーバーからキックされました！" +
                 "\n" +
                 ChatColor.GRAY + "理由: " +
                 ChatColor.WHITE +
