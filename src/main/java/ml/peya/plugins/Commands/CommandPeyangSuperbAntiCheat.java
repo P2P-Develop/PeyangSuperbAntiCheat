@@ -9,7 +9,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if(!sender.hasPermission("psr.admin"))
+        if(!sender.hasPermission("psr.admin") && !sender.hasPermission("psr.mod"))
         {
             sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：権限がありません！");
             return true;
