@@ -9,6 +9,9 @@ import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
 
+import java.sql.*;
+import java.util.*;
+
 public class NPCConnection
 {
     public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type)
@@ -30,8 +33,29 @@ public class NPCConnection
             {
                 meta.setCanNPC(false);
                 if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
-                    KickUtil.kickPlayer(player, true, false);
+                {
+                    ArrayList<String> reason = new ArrayList<>();
+                    try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+                    Statement statement = connection.createStatement();
+                    Statement statement2 = connection.createStatement())
+                    {
+                        ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
+                        while (rs.next())
+                        {
+                            ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
+                                    rs.getString("MNGID") + "'");
+                            while (set.next())
+                                reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。運営に報告しています。");
+                        ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                    }
 
+                    KickUtil.kickPlayer(player, String.join(", ", reason), true, false);
+                }
                 new BukkitRunnable()
                 {
                     @Override

@@ -14,7 +14,7 @@ import java.util.*;
 
 public class KickUtil
 {
-    public static void kickPlayer (Player player, boolean wdFlag, boolean isTest)
+    public static void kickPlayer (Player player, String reason, boolean wdFlag, boolean isTest)
     {
         broadCast(wdFlag, player);
         new BukkitRunnable()
@@ -22,7 +22,7 @@ public class KickUtil
             @Override
             public void run()
             {
-                kick(player, isTest, !wdFlag);
+                kick(player, reason, isTest, !wdFlag);
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("kick.delay"));
@@ -56,7 +56,7 @@ public class KickUtil
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
     }
 
-    private static void kick(Player player, boolean isTest, boolean opFlag)
+    private static void kick(Player player, String reason, boolean isTest, boolean opFlag)
     {
         if (PeyangSuperbAntiCheat.config.getBoolean("kick.lightning"))
             player.getWorld().strikeLightningEffect(player.getLocation());
@@ -71,20 +71,20 @@ public class KickUtil
                 id.append((char)(random.nextInt(5) + 'A'));
         }
 
-        String reason;
+        String reasonP;
 
         if (isTest)
-            reason = "PEYANG ANTI CHEAT TEST";
+            reasonP = "PEYANG ANTI CHEAT TEST";
         else if (opFlag)
-            reason = "KICKED BY STAFF";
+            reasonP = "KICKED BY STAFF";
         else
-            reason = "PEYANG ANTI CHEAT DETECTION ";
+            reasonP = "PEYANG ANTI CHEAT DETECTION ";
 
         String message = ChatColor.RED + "あなたは、このサーバーからキックされました！" +
                 "\n" +
                 ChatColor.GRAY + "理由：" +
                 ChatColor.WHITE +
-                reason +
+                reasonP +
                 "\n" +
                 "\n" +
                 ChatColor.GRAY + "Kick ID：" +
@@ -105,7 +105,9 @@ public class KickUtil
                     "'" + player.getName() + "'," +
                     "'" + player.getUniqueId().toString() + "'," +
                     "'" + id.toString() + "'," +
-                    "'" + new Date().getTime() + "');");
+                    "'" + new Date().getTime() + "'," +
+                    "'" + reason + "'"+
+                    ");");
 
             ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "") + "'");
 

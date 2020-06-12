@@ -38,13 +38,6 @@ public class ReportUtils
         {
             if (!player.hasPermission("psr.admin"))
                 continue;
-            StringBuilder reason = new StringBuilder();
-            for (String res: reasons)
-                reason.append(res).append(", ");
-
-            if (reason.toString().endsWith(", "))
-                reason.setLength(reason.length() - 2);
-
             ComponentBuilder hover = new ComponentBuilder("/psr show " + id);
             hover.color(net.md_5.bungee.api.ChatColor.AQUA);
 
@@ -58,7 +51,7 @@ public class ReportUtils
             component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
             builder.addExtra(component);
 
-            builder.addExtra(" " + reason.toString());
+            builder.addExtra(" " + String.join(", ", reasons));
             player.spigot().sendMessage(builder);
         }
     }

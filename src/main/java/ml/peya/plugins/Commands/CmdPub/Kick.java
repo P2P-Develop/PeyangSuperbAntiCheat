@@ -5,17 +5,15 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
+import java.util.*;
+
 public class Kick
 {
     public static void run(CommandSender sender, String[] args)
     {
-        if (args.length == 3)
+        if (args.length == 3 && args[2].equals("test"))
         {
-            if (!args[2].equals("test"))
-            {
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
-                return;
-            }
+
             sender.sendMessage(ChatColor.GREEN + "テストモード" + ChatColor.RED + ChatColor.BOLD + "で、プレイヤーをキックします。");
             Player player = Bukkit.getPlayer(args[1]);
             if (player == null)
@@ -24,11 +22,11 @@ public class Kick
                 return;
             }
 
-            KickUtil.kickPlayer(player, true, true);
+            KickUtil.kickPlayer(player, args[2], true, true);
             return;
         }
 
-        if (args.length != 2)
+        if (args.length < 3)
         {
             sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
             return;
@@ -41,6 +39,12 @@ public class Kick
             return;
         }
 
-        KickUtil.kickPlayer(player, false, false);
+        ArrayList<String> argSet = new ArrayList<>(Arrays.asList(args));
+
+        argSet.remove(1);
+        argSet.remove(0);
+
+
+        KickUtil.kickPlayer(player, String.join(", ", argSet), false, false);
     }
 }
