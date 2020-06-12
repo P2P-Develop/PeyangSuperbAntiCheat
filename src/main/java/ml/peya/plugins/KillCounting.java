@@ -40,6 +40,7 @@ public class KillCounting
             public void run()
             {
                 players.remove(killer);
+                this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * config.getInt("npc.seconds"));
 

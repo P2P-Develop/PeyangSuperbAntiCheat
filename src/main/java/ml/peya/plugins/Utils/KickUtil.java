@@ -23,6 +23,7 @@ public class KickUtil
             public void run()
             {
                 kick(player, isTest, !wdFlag);
+                this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("kick.delay"));
 
@@ -50,6 +51,7 @@ public class KickUtil
                 Bukkit.broadcast(ChatColor.RED + ChatColor.BOLD.toString() +
                         "違反行為をしたプレイヤーをゲームから対処しました。\n" +
                         ChatColor.AQUA + "ご報告ありがとうございました！", "psr.notification");
+                this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
     }

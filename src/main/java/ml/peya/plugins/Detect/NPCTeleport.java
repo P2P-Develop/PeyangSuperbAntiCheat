@@ -57,6 +57,7 @@ public class NPCTeleport
                                 c.sendPacket(new PacketPlayOutEntityTeleport(target));
                                 NPC.setArmor(p, target, arm);
                             }
+                            this.cancel();
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                 }
@@ -114,6 +115,7 @@ public class NPCTeleport
                                 c.sendPacket(new PacketPlayOutEntityTeleport(target));
                                 NPC.setArmor(p, target, arm);
                             }
+                            this.cancel();
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     count[0]++;

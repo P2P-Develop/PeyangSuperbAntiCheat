@@ -19,7 +19,7 @@ import java.util.*;
  *
  */
 public class BookUtil {
-    private static boolean initialised = false;
+    private static boolean initialised;
     private static Method getHandle;
     private static Method openBook;
 
@@ -44,7 +44,7 @@ public class BookUtil {
      * Open a "Virtual" Book ItemStack.
      * @param i Book ItemStack.
      * @param p Player that will open the book.
-     * @return
+     * @return raft
      */
     public static boolean openBook(ItemStack i, Player p) {
         if (!initialised) return false;
@@ -65,6 +65,7 @@ public class BookUtil {
                     e.printStackTrace();
                     ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
+                this.cancel();
             }
         };
         runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10L);
@@ -76,6 +77,7 @@ public class BookUtil {
             public void run()
             {
                 p.getInventory().setItemInMainHand(held);
+                this.cancel();
             }
         };
         runnable2.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20L);

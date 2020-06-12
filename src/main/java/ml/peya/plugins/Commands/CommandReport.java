@@ -9,6 +9,7 @@ import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 
+import java.sql.*;
 import java.util.*;
 
 public class CommandReport implements CommandExecutor
