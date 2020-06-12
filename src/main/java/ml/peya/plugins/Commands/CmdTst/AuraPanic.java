@@ -48,8 +48,8 @@ public class AuraPanic implements CommandExecutor
             return true;
         }
 
-        sender.sendMessage(ChatColor.GREEN + name + "さんにAuraBotを召喚します。");
-        sender.sendMessage(ChatColor.GREEN + PeyangSuperbAntiCheat.config.getString("npc.seconds") + "秒間お待ちください。");
+        sender.sendMessage(ChatColor.GREEN + name + "さんにAuraPanicBotを召喚します。");
+        sender.sendMessage(ChatColor.GREEN + String.valueOf(sec) + "秒間お待ちください。");
 
         DetectType type = DetectType.AURA_PANIC;
         type.setPanicTime(sec);
