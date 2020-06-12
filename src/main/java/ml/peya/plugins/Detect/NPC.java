@@ -33,6 +33,8 @@ public class NPC
         String first = Objects.requireNonNull(node).get("results").get(0).get("name").get("first").asText();
         String last = node.get("results").get(0).get("name").get("last").asText();
 
+        first = first.replaceAll("[^a-zA-Z0-9]", "");
+        last = last.replaceAll("[^a-zA-Z0-9]", "");
 
         Random random = new Random();
 

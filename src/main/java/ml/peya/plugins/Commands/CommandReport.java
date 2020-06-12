@@ -1,16 +1,13 @@
 package ml.peya.plugins.Commands;
 
-
-import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
-import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
@@ -106,7 +103,7 @@ public class CommandReport implements CommandExecutor
             successFlag = WatchEyeManagement.setReason(id, type, 0);
         if (successFlag)
         {
-            sender.sendMessage(ChatColor.GREEN + "チート報告ありがとうございます。お客様の懸念を理解し、可能ならば早急に検討させていただきます。");
+            sender.sendMessage(ChatColor.GREEN + "不正行為の報告、ありがとうございます。私たちはあなたの懸念を理解しており、できるだけ早急に審査いたします。");
 
             if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
             {

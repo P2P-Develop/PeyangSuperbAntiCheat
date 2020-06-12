@@ -71,7 +71,6 @@ public class NPCConnection
                         PeyangSuperbAntiCheat.cheatMeta.remove(meta.getUuids());
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
-
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
     }
