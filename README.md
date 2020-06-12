@@ -149,7 +149,7 @@ etc…
 実際のチートを用いて学習させることにより、キックの精度が向上する… **（と思って作ったものです）**
 ~~実際、意味は皆無でした。~~
 # 謝辞
-このプラグインは、以下のライブラリ / API を使用しています。
+このプラグインは、以下のライブラリ / API を使用しています。  
 [brettwooldridge](https://github.com/brettwooldridge/)氏 [HikariCP](https://github.com/brettwooldridge/HikariCP)  
 [dmulloy2](https://github.com/dmulloy2/)氏 [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib)  
 [jedk1](https://www.spigotmc.org/members/jedk1.43536/)氏 [BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
