@@ -70,7 +70,7 @@ public class NPCConnection
                             {
                                 for (Player np : Bukkit.getOnlinePlayers())
                                 {
-                                    if (!np.hasPermission("psr.admin") && !np.hasPermission("psr.mod"))
+                                    if (!Permission.hasStaff(player))
                                         continue;
                                     np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
                                 }
@@ -85,7 +85,7 @@ public class NPCConnection
                             {
                                 for (Player np : Bukkit.getOnlinePlayers())
                                 {
-                                    if (!np.hasPermission("psr.admin") && !np.hasPermission("psr.mod"))
+                                    if (!Permission.hasStaff(player))
                                         continue;
                                     np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 }

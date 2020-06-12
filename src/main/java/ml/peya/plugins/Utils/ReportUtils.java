@@ -13,7 +13,7 @@ public class ReportUtils
     {
         for(Player player: Bukkit.getOnlinePlayers())
         {
-            if (player.hasPermission("psr.admin") || player.hasPermission("psr.mod"))
+            if (Permission.hasStaff(player))
             {
                 player.sendMessage(ChatColor.GREEN + "[" +
                         ChatColor.BLUE + "PeyangSuperbAntiCheat" +
@@ -36,7 +36,7 @@ public class ReportUtils
     {
         for(Player player: Bukkit.getOnlinePlayers())
         {
-            if (!player.hasPermission("psr.admin") && !player.hasPermission("psr.mod"))
+            if (!Permission.hasStaff(player))
                 continue;
             ComponentBuilder hover = new ComponentBuilder("/psr show " + id);
             hover.color(net.md_5.bungee.api.ChatColor.AQUA);

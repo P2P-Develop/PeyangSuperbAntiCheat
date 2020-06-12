@@ -1,5 +1,6 @@
 package ml.peya.plugins.Commands.CmdPub;
 
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -15,7 +16,7 @@ public class Help
                 ChatColor.BLUE + "PeyangSuperbAntiCheat" +
                 ChatColor.GREEN + "]" +
                 ChatColor.AQUA + "-----");
-        if (sender.hasPermission("psr.mod") || sender.hasPermission("psr.admin"))
+        if (Permission.hasStaff(sender))
         {
             sender.sendMessage(ChatColor.AQUA + "/" + label + " view " + ChatColor.DARK_PURPLE + "[ページ数 | プレイヤ名] [ページ数]");
             sender.sendMessage(ChatColor.GREEN + "レポートされた対処されてない問題を、");

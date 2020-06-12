@@ -1,6 +1,7 @@
 package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Commands.CmdPub.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 
@@ -9,7 +10,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if(!sender.hasPermission("psr.admin") && !sender.hasPermission("psr.mod"))
+        if(!Permission.hasStaff(sender))
         {
             sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：権限がありません！");
             return true;

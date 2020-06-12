@@ -36,7 +36,7 @@ public class KickUtil
         {
             for (Player player: Bukkit.getOnlinePlayers())
             {
-                if(player.hasPermission("psr.admin") || player.hasPermission("psr.mod"))
+                if(Permission.hasStaff(player))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionTexdt(target).create());
                 else if (player.hasPermission("psr.notification"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionTexdt().create());
