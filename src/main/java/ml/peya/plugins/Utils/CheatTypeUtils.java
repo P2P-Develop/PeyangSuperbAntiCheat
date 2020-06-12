@@ -46,9 +46,9 @@ public class CheatTypeUtils
         {
             for (EnumCheatType type: types)
             {
-                if (reason.equals(type.getSysName()))
+                if (reason.toLowerCase().equals(type.getSysName()))
                     type.setSelected(true);
-                else if (aliasEquals(type, reason))
+                else if (aliasEquals(type, reason.toLowerCase()))
                     type.setSelected(true);
             }
         }

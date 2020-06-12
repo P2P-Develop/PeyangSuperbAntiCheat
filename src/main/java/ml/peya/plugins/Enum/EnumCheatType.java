@@ -4,13 +4,13 @@ import java.util.*;
 
 public enum  EnumCheatType
 {
-    FLY("Fly", false, "fly", "flight", "Flight"),
-    KILLAURA("KillAura", false, "killaura", "aura", "ka", "Killaura"),
-    AUTOCLICKER("AutoClicker", false, "autoclicker", "ac", "autoclick", "Autoclicker"),
-    SPEED("Speed", false, "speed", "Speed"),
-    ANTIKNOCKBACK("AntiKnockback", false, "antiknockback", "antikb", "akb", "Antiknockback", "velocity"),
-    REACH("Reach", false, "reach", "Reach"),
-    DOLPHIN("Dolphin", false, "dolphin", "Dolphin");
+    FLY("Fly", false, "fly", "flight"),
+    KILLAURA("KillAura", false, "killaura", "aura", "ka"),
+    AUTOCLICKER("AutoClicker", false, "autoclicker", "ac", "autoclick"),
+    SPEED("Speed", false, "speed", "bhop", "timer"),
+    ANTIKNOCKBACK("AntiKnockback", false, "antiknockback", "antikb", "akb", "velocity"),
+    REACH("Reach", false, "reach"),
+    DOLPHIN("Dolphin", false, "dolphin");
     private String text;
     private boolean isSelected;
     private boolean isChecked;
