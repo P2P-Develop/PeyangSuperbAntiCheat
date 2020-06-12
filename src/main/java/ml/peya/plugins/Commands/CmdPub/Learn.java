@@ -38,7 +38,7 @@ public class Learn
                 catch (Exception e)
                 {
                     e.printStackTrace();
-                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 不明なSQLエラーが発生しました。");
+                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。");
                     ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
 

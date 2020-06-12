@@ -59,7 +59,7 @@ public class Books
         Date date = new Date(dateInt.longValue());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 
-        ComponentBuilder hover = new ComponentBuilder( "UUID: ")
+        ComponentBuilder hover = new ComponentBuilder( "UUID：")
                 .color(net.md_5.bungee.api.ChatColor.AQUA)
                 .append(uuid)
                 .color(net.md_5.bungee.api.ChatColor.GREEN);
@@ -67,7 +67,7 @@ public class Books
         ComponentBuilder unixTime = new ComponentBuilder(TextBuilder.getLine("UNIX秒", String.valueOf(dateInt)));
 
 
-        ComponentBuilder hover2 = new ComponentBuilder( "UUID: ")
+        ComponentBuilder hover2 = new ComponentBuilder( "UUID：")
                 .color(net.md_5.bungee.api.ChatColor.AQUA)
                 .append(issueByUuid)
                 .color(net.md_5.bungee.api.ChatColor.GREEN);
@@ -95,7 +95,7 @@ public class Books
 
         ComponentBuilder b2 = new ComponentBuilder(new TextComponent(b1.create()));
 
-        b2.append(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "重大度: " + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText() + "\n");
+        b2.append(ChatColor.DARK_RED + ChatColor.BOLD.toString() + "重大度：" + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText() + "\n");
         b2.append("\n");
         b2.append(TextBuilder.getLine("報告理由", reason.toString()));
         b2.append("\n");

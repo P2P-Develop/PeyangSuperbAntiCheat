@@ -69,7 +69,7 @@ public class TextBuilder
 
         sender.sendMessage("    " + TextBuilder.getColor("報告理由", "\n" +reasonText.toString()));
 
-        sender.sendMessage(ChatColor.AQUA + "    脅威判定: " + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText());
+        sender.sendMessage(ChatColor.AQUA + "    脅威判定：" + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText());
     }
 
     public static String getColor(String prefix, String value)
@@ -128,16 +128,20 @@ public class TextBuilder
         String prefix = ChatColor.YELLOW + "Level " + severity.getColor();
         switch (severity)
         {
-            case LOW:
+            case FINE:
                 return prefix + "1";
-            case NORMAL:
+            case FINER:
                 return prefix + "2";
-            case PRIORITY:
+            case FINEST:
                 return prefix + "3";
-            case REQUIRE_FAST:
+            case NORMAL:
                 return prefix + "4";
-            case SEVERE:
+            case PRIORITY:
                 return prefix + ChatColor.BOLD + "5";
+            case REQUIRE_FAST:
+                return prefix + ChatColor.BOLD + "6";
+            case SEVERE:
+                return prefix + ChatColor.BOLD + "7";
             default:
                 return prefix + ChatColor.GRAY + "Unknown";
         }
@@ -196,7 +200,7 @@ public class TextBuilder
         builder.append("\n");
         builder.append(genGraph(VL, kickVL));
         builder.append("\n");
-        builder.append(ChatColor.AQUA + "結果: " +
+        builder.append(ChatColor.AQUA + "結果：" +
                 (VL >= kickVL ? (EnumChatFormat.RED + "強制退出"): (EnumChatFormat.GREEN + "問題なし")));
         return builder;
     }
@@ -211,7 +215,7 @@ public class TextBuilder
 
         builder.append(ChatColor.GREEN + name + "さんのKillAuraチェック結果");
         builder.append("\n");
-        builder.append(ChatColor.GREEN + "VL: " + ChatColor.YELLOW + vl);
+        builder.append(ChatColor.GREEN + "VL：" + ChatColor.YELLOW + vl);
         return builder;
     }
 

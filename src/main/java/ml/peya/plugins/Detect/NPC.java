@@ -32,7 +32,16 @@ public class NPC
         JsonNode node = StringUtil.getRandomUser();
         String first = Objects.requireNonNull(node).get("results").get(0).get("name").get("first").asText();
         String last = node.get("results").get(0).get("name").get("last").asText();
+
+
         Random random = new Random();
+
+        if (random.nextBoolean())
+        {
+            first = LeetConverter.convert(first);
+            last = LeetConverter.convert(last);
+        }
+
         name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ?  "19" + random.nextInt(120): "");
         if (name.length() > 16)
             name = random.nextBoolean() ? first: last;
@@ -75,9 +84,17 @@ public class NPC
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());
 
-        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.UPDATE_DISPLAY_NAME, npc));
-        connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.UPDATE_DISPLAY_NAME, npc));
+                connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20);
+
 
         BukkitRunnable run = new BukkitRunnable()
         {
@@ -100,7 +117,7 @@ public class NPC
                 NPCTeleport.teleport(player, npc, arm, teleportCase);
             }
         };
-        run.runTask(PeyangSuperbAntiCheat.getPlugin());
+        run.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20);
 
 
 
@@ -121,7 +138,7 @@ public class NPC
                 }
             }
         };
-        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
+        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds")) + 20);
 
 
 

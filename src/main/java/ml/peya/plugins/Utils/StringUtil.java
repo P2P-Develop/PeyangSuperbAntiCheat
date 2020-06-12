@@ -2,8 +2,6 @@ package ml.peya.plugins.Utils;
 
 import com.fasterxml.jackson.databind.*;
 import ml.peya.plugins.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -28,6 +26,7 @@ public class StringUtil
                     builder.append(readed);
                     readed = reader.readLine();
                 }
+                System.out.println(builder.toString());
                 ObjectMapper mapper = new ObjectMapper();
                 return mapper.readTree(builder.toString());
             }

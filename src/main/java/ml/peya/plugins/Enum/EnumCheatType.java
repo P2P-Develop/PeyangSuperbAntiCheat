@@ -6,9 +6,9 @@ public enum  EnumCheatType
 {
     FLY("Fly", false, "fly", "flight", "Flight"),
     KILLAURA("KillAura", false, "killaura", "aura", "ka", "Killaura"),
-    AUTOCLICKER("Auto Clicker", false, "autoclicker", "ac", "autoclick", "Autoclicker"),
+    AUTOCLICKER("AutoClicker", false, "autoclicker", "ac", "autoclick", "Autoclicker"),
     SPEED("Speed", false, "speed", "Speed"),
-    ANTIKNOCKBACK("AntiKnockBack", false, "antiknockback", "antikb", "akb", "Antiknockback", "velocity"),
+    ANTIKNOCKBACK("AntiKnockback", false, "antiknockback", "antikb", "akb", "Antiknockback", "velocity"),
     REACH("Reach", false, "reach", "Reach"),
     DOLPHIN("Dolphin", false, "dolphin", "Dolphin");
     private String text;

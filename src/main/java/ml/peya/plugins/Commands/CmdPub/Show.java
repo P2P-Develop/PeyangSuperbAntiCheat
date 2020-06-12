@@ -18,7 +18,7 @@ public class Show
     {
         if (args.length != 2)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 引数の数が不正です。/psr help でヘルプを見てください。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
             return;
         }
 
@@ -30,7 +30,7 @@ public class Show
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD='" + mngid + "'");
             if (!result.next())
             {
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: IDと合致するデータが見つかりませんでした！");
+                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：IDと合致するデータが見つかりませんでした！");
                 return;
             }
 
@@ -54,7 +54,7 @@ public class Show
         catch (Exception e)
         {
             e.printStackTrace();
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 不明なSQLエラーが発生しました。運営に報告しています。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。運営に報告しています。");
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
         }
     }

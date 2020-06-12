@@ -17,7 +17,9 @@ public class SeverityLevelUtils
     {
         ArrayList<EnumSeverity> severities = new ArrayList<>();
 
-        severities.add(EnumSeverity.LOW);
+        severities.add(EnumSeverity.FINE);
+        severities.add(EnumSeverity.FINER);
+        severities.add(EnumSeverity.FINEST);
         severities.add(EnumSeverity.NORMAL);
         severities.add(EnumSeverity.PRIORITY);
         severities.add(EnumSeverity.REQUIRE_FAST);

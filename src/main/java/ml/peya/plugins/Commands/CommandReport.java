@@ -1,13 +1,16 @@
 package ml.peya.plugins.Commands;
 
 
+import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Utils.*;
+import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
 
@@ -104,12 +107,24 @@ public class CommandReport implements CommandExecutor
         if (successFlag)
         {
             sender.sendMessage(ChatColor.GREEN + "チート報告ありがとうございます。お客様の懸念を理解し、可能ならば早急に検討させていただきます。");
-            ReportUtils.adminNotification(id);
+
+            if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+            {
+                ReportUtils.adminNotification(id);
+                return true;
+            }
+
+            ArrayList<String> resStr = new ArrayList<>();
+
+            for (EnumCheatType type: types)
+                resStr.add(type.getText());
+
+            ReportUtils.adminNotification(target.getName(), id, resStr.toArray(new String[0]));
         }
         else
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 不明なSQLエラーが発生しました。運営に報告しています。");
-            ReportUtils.errorNotification("Error: Unknown");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。運営に報告しています。");
+            ReportUtils.errorNotification("Error：Unknown");
         }
         return true;
     }

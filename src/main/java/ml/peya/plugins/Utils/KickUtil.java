@@ -80,12 +80,12 @@ public class KickUtil
 
         String message = ChatColor.RED + "あなたは、このサーバーからキックされました！" +
                 "\n" +
-                ChatColor.GRAY + "理由: " +
+                ChatColor.GRAY + "理由：" +
                 ChatColor.WHITE +
                 reason +
                 "\n" +
                 "\n" +
-                ChatColor.GRAY + "Kick ID: " +
+                ChatColor.GRAY + "Kick ID：" +
                 ChatColor.WHITE + id.toString();
         if (isTest)
         {

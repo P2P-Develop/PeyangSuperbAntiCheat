@@ -4,6 +4,7 @@ import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 
+import javax.xml.soap.*;
 import java.io.*;
 
 public class ReportUtils
@@ -28,6 +29,37 @@ public class ReportUtils
                         .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + id));
                 player.spigot().sendMessage(builder.create());
             }
+        }
+    }
+
+    public static void adminNotification(String name, String id, String[] reasons)
+    {
+        for(Player player: Bukkit.getOnlinePlayers())
+        {
+            if (!player.hasPermission("psr.admin"))
+                continue;
+            StringBuilder reason = new StringBuilder();
+            for (String res: reasons)
+                reason.append(res).append(", ");
+
+            if (reason.toString().endsWith(", "))
+                reason.setLength(reason.length() - 2);
+
+            ComponentBuilder hover = new ComponentBuilder("/psr show " + id);
+            hover.color(net.md_5.bungee.api.ChatColor.AQUA);
+
+            TextComponent builder = new TextComponent("");
+            builder.addExtra(ChatColor.AQUA + "[STAFF] ");
+            builder.addExtra(ChatColor.RED + "[ADMIN] Fishy");
+            builder.addExtra(ChatColor.WHITE + ": Report of ");
+
+            BaseComponent component = new TextComponent(name);
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + id));
+            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+            builder.addExtra(component);
+
+            builder.addExtra(" " + reason.toString());
+            player.spigot().sendMessage(builder);
         }
     }
 

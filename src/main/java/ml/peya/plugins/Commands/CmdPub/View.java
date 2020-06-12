@@ -76,7 +76,7 @@ public class View
 
         if (count == 0)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: レポートが1件も見つかりませんでした。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：レポートが1件も見つかりませんでした。");
             return;
         }
         sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(prevBtn, nextBtn, !(previous < 0), !(count < 5)).create());

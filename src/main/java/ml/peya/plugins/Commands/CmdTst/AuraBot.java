@@ -14,14 +14,14 @@ public class AuraBot implements CommandExecutor
     {
         if (args.length != 1)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 引数の数が不正です。/psr help でヘルプを見てください。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
             return true;
         }
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 対象プレイヤーが見つかりませんでした！");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対象プレイヤーが見つかりませんでした！");
             return true;
         }
 
@@ -29,7 +29,7 @@ public class AuraBot implements CommandExecutor
 
         if(PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー: 対象プレイヤーはテスト中です。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対象プレイヤーはテスト中です。");
             return true;
         }
 

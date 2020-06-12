@@ -4,11 +4,13 @@ import net.md_5.bungee.api.*;
 
 public enum EnumSeverity
 {
-    LOW("Low", ChatColor.GREEN, 1),
-    NORMAL("Normal", ChatColor.BLUE, 2),
-    PRIORITY("Priority", ChatColor.YELLOW,3),
-    REQUIRE_FAST("Require Fast", ChatColor.LIGHT_PURPLE, 4),
-    SEVERE("Severe", ChatColor.DARK_RED, 5),
+    FINEST("Finest", ChatColor.GREEN, 1),
+    FINER("Finer", ChatColor.BLUE, 2),
+    NORMAL("Normal", ChatColor.BLUE, 3),
+    FINE("Fine", ChatColor.DARK_GREEN, 4),
+    PRIORITY("Priority", ChatColor.YELLOW,5),
+    REQUIRE_FAST("REQUIRE FAST", ChatColor.LIGHT_PURPLE, 6),
+    SEVERE("SEVERE", ChatColor.DARK_RED, 7),
     UNKNOWN("Unknown", ChatColor.GRAY, 0);
 
     private String text;

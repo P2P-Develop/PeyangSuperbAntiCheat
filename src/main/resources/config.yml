@@ -22,8 +22,14 @@ kick:
   #プレイヤーがキックされるときに雷を召喚するやつです。
   lightning: true
 
+message:
+  #プレイヤーがレポートを提出した時などのメッセージを
+  #「Lynx」Modと互換性をもたせます。
+  lynx: true
 
-#skins uuid
+
+
+#スキンのuuidセットです。
 skins:
   - 6b93a8e658ee4794b69a56a3c2287010
   - 36f2cdbc77d545c7a205f5e8e6c0fb3b
