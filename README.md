@@ -5,7 +5,8 @@ Bukkit / Spigot / PaperMC のプラグインです。
 このプラグインは、Bukkit / Spigot / PaperMC サーバーで使用できる、**チートレポート管理** / **チートテスト**プラグインです。
 
 また、ハックと言う読み方は実際に（Minecraft）サーバーをハッキング（クラッキング）しません。
-そのため、この README ではハックをあえてチートと呼んでいます。 
+そのため、この README ではハックをあえてチートと呼んでいます。  
+↑ごめん＾＾；  
 **ご理解のほど、よろしくお願いします。**
 
 ## インストール方法
@@ -151,6 +152,6 @@ etc…
 # 謝辞
 このプラグインは、以下のライブラリ / API を使用しています。  
 [brettwooldridge](https://github.com/brettwooldridge/)氏 [HikariCP](https://github.com/brettwooldridge/HikariCP)  
-[dmulloy2](https://github.com/dmulloy2/)氏 [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib)  
+[dmulloy2](https://github.com/dmulloy2/)氏 [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*)](https://dev.bukkit.org/projects/protocollib)  
 [jedk1](https://www.spigotmc.org/members/jedk1.43536/)氏 [BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
 [DarkBlade12](https://github.com/DarkBlade12/)氏 [ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)  
