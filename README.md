@@ -3,6 +3,9 @@ Bukkit / Spigot / PaperMC のプラグインです。
 1.12.2で動作確認/絶賛開発中です（たぶん）
 
 このプラグインは、Bukkit / Spigot / PaperMC サーバーで使用できる、**チートレポート管理** / **チートテスト**プラグインです。
+また、ハックと言う読み方は実際に（Minecraft）サーバーをハッキング（クラッキング）しません。
+そのため、この README ではハックをあえてチートと呼んでいます。 
+**ご理解のほど、よろしくお願いします。**
 
 ## インストール方法
 
@@ -26,23 +29,22 @@ Hypixel の**~~パクリ~~**コマンドです。
 
 このモードは、<details><summary>█████</summary>Kam7</details>によって**リークされた** Hypixel Lynx Mod との互換性をもたせるモードです。  
 この Mod は、Hypixel では Bannable であり、この Mod を使用したまま、Hypixel には、**絶対に**行かないでください。
-Hypixel から Ban されます。
-
+Hypixel から BAN されます。
 #### 使用法
 + /wdr \<PlayerName\>
 この状態で実行すると、本が開きます。
 この本の文字をクリックすると、理由が追加されます。
 
-**緑太字**の文字をクリックで送信するか、
-**赤太字**の文字をクリックで破棄します。
+- ![#008000](https://via.placeholder.com/15/008000/000000?text=+) **緑太字**の文字をクリックで送信するか、
+- ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) **赤太字**の文字をクリックで破棄します。
 
 **注意：このプラグインでは超原始的な本の実装方法を使用しています。**
 
 + /wdr \<PlayerName\> \<理由1\> \[理由2\]...
 これは、本を開かずにそのまま理由を入力して、報告する方法です。
 本を開かないため、**意味を感じられませんが**、コンソールからでも報告できます。
-#### レポートに使用できる理由一覧
-##### 本で表示される順に書きます。多分。
+#### 報告に使用できる理由一覧
+##### 本で表示される順に書きます。
 | 理由 | エイリアス | 簡単な説明 |
 |:-:|:-:|-|
 | Fly | flight | プレイヤーが空を飛べるようにできるチートです。 |
@@ -53,7 +55,7 @@ Hypixel から Ban されます。
 | Reach | reach | 攻撃できる距離を伸ばすことができるチートです。 |
 | Dolphin | dolphin | イルカのように、水を自動で泳ぐチートです。 |
 
-###### 同じ人から同じ人へのレポートはできないようになっています。レポートスパム防止です。
+###### 同じ人から同じ人への報告はできないようになっています。報告スパム防止です。
 
 #### 権限
 ``` psr.report ``` です。
@@ -108,11 +110,8 @@ etc…
 ### ブロードキャストメッセージについて
 **プレイヤーがキックされるとき、以下のブロードキャストメッセージが流れます。**  
 
-「\[PEYANG CHEAT DETECTION\] ハッキング、または不適切な発言によってゲームからプレイヤーが削除されました。」  
-
-「違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！」  
-
-というメッセージが送信されます。  
+「\[PEYANG CHEAT DETECTION\] ハッキング、または不適切な発言によってゲームからプレイヤーが削除されました。」
+「違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！」
 
 このメッセージは、チートを自動検出した時のメッセージです。  
 スタッフによるキックの場合は、「違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！」だけが流れます。  
@@ -124,7 +123,7 @@ etc…
 スタッフによるキックコマンドです。
 ### PEYANG ANTI CHEAT TEST
 このプラグインのテストです。
-## NPCについて
+## NPC について
 現NPCは、[@randomapi](https://twitter.com/randomapi)によるAPI「[RandomUserGenerator](https://randomuser.me/)」を使用して、  
 ランダムなユーザ名をもつプレイヤーを召喚します。  
 スキンはランダムですが。現段階では、コンフィグに登録されたUUIDのスキンのみがランダム表示されます。
@@ -144,18 +143,13 @@ etc…
 | kick.defaultKick | 40 | 学習済データが見つからないとき、この回数NPCを殴ると、Kickされます。 |
 | message.lynx | true | リークされた Mod「Lynx」と互換性を保たせるかどうかです。 |
 | skins | \(省略\) | NPC に適用するスキンです。この中からランダムで選ばれます。 |
-
-# AIについて
+# AI もどきについて
 このプラグインでは、クソ雑魚ナメクジゴミAIとよばれる、AI**もどき**があります。
-実際のチートを用いて学習させることにより、キックの精度が向上する… **（と思って作ったものです）**  
-
-...
-
+実際のチートを用いて学習させることにより、キックの精度が向上する… **（と思って作ったものです）**
 ~~実際、意味は皆無でした。~~
-
 # 謝辞
 このプラグインは、以下のライブラリ / API を使用しています。
-[brettwooldridge](https://github.com/brettwooldridge/)氏 [Hikari(光)CP](https://github.com/brettwooldridge/HikariCP)  
+[brettwooldridge](https://github.com/brettwooldridge/)氏 [HikariCP](https://github.com/brettwooldridge/HikariCP)  
 [dmulloy2](https://github.com/dmulloy2/)氏 [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib)  
-[jedk1(Jed)](https://www.spigotmc.org/members/jedk1.43536/)氏 [BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
+[jedk1](https://www.spigotmc.org/members/jedk1.43536/)氏 [BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
 [DarkBlade12](https://github.com/DarkBlade12/)氏 [ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)  
