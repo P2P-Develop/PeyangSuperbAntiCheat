@@ -1,6 +1,7 @@
 package ml.peya.plugins;
 
 import com.zaxxer.hikari.*;
+import io.netty.channel.*;
 import ml.peya.plugins.Utils.*;
 
 import java.io.*;
@@ -85,9 +86,13 @@ public class Init
                 ctl += cot;
 
                 cBypass++;
+
             }
 
-            PeyangSuperbAntiCheat.banLeft = Math.toIntExact(ctl / cBypass);
+            if (cBypass -1 != 0)
+                PeyangSuperbAntiCheat.banLeft = Math.toIntExact(ctl / cBypass);
+            else
+                PeyangSuperbAntiCheat.banLeft = PeyangSuperbAntiCheat.config.getInt("kick.defaultKick");
             return true;
         }
         catch (Exception e)
