@@ -5,15 +5,15 @@ Bukkit / Spigot / PaperMC のプラグインです。
 このプラグインは、Bukkit / Spigot / PaperMC サーバーで使用できる、**チートレポート管理** / **チートテスト**プラグインです。
 
 また、ハックと言う読み方は実際に（Minecraft）サーバーをハッキング（クラッキング）しません。
-そのため、この README ではハックをあえてチートと呼んでいます。  
+そのため、この README ではハックをあえてチートと呼んでいます。
 ↑ごめん＾＾；  
 **ご理解のほど、よろしくお願いします。**
 
 ## インストール方法
 
 + 適当にダウンロードします
-+ [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) を plugins フォルダに入れます。  
-+ このプラグインを plugins フォルダに入れます。
++ [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) を plugins フォルダーに入れます。  
++ このプラグインを plugins フォルダーに入れます。
 + 再起動して、適用してください。
 
 ## コマンド
@@ -49,10 +49,10 @@ Hypixel の**~~パクリ~~**コマンドです。
 | 理由 | エイリアス | 簡単な説明 |
 |:-:|:-:|-|
 | Fly | flight | プレイヤーが空を飛べるようにできるチートです。 |
-| KillAura | killaura, aura, ka | 範囲に入った人をより早く攻撃することができるチートです。 |
-| AutoClicker | autoclicker, ac, autoclick | 自動で左クリックを可能にするチートです。 |
-| Speed | speed, bhop, timer | ありえない速度で歩くことができるチートです。（Bunnyhop や、Timer は Speed に値します） |
-| AntiKnockback | akb, velocity, antikb | 攻撃を受けても一切ノックバックしないチートです。。 |
+| KillAura | killaura, aura, ka | 範囲に入った人をより早く攻撃できるチートです。 |
+| AutoClicker | autoclicker, ac, autoclick | 自動で左クリックができるチートです（高橋名人などのツールやマウスなどについているマクロでもAutoClickerとなります） |
+| Speed | speed, bhop, timer | ありえない速度で歩くことができるチートです（BunnyHop や、Timer は Speed に値します） |
+| AntiKnockback | akb, velocity, antikb | ノックバックを軽減するチートです。 |
 | Reach | reach | 攻撃できる距離を伸ばすことができるチートです。 |
 | Dolphin | dolphin | イルカのように、水を自動で泳ぐチートです。 |
 
