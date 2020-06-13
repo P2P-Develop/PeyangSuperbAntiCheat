@@ -27,7 +27,7 @@ Hypixel の**~~パクリ~~**コマンドです。
 「\[PeyangSuperbAntiCheat\] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ \[CLICK\]」  
 と  
 「\[STAFF\] \[ADMIN\] Fishy: Report of \<PlayerName\> \<理由1\>, \[理由2\]...」  
-の形で表示されます。コンフィグを編集することにより、どちらか選ぶことができます。
+の形で表示されます。コンフィグを編集することにより変更できます。
 
 このモードは、<details><summary>█████</summary>Kam7</details>によって**リークされた** Hypixel Lynx Mod との互換性をもたせるモードです。  
 この Mod は、Hypixel では Bannable であり、この Mod を使用したまま、Hypixel には、**絶対に**行かないでください。Hypixel から BAN されます。
