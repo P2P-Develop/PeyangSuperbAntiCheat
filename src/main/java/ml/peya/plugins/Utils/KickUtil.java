@@ -72,11 +72,11 @@ public class KickUtil
         String reasonP;
 
         if (isTest)
-            reasonP = "PEYANG ANTI CHEAT TEST";
+            reasonP = "PEYANG CHEAT TEST";
         else if (opFlag)
             reasonP = "KICKED BY STAFF";
         else
-            reasonP = "PEYANG ANTI CHEAT DETECTION ";
+            reasonP = "PEYANG CHEAT DETECTION ";
 
         String message = ChatColor.RED + "あなたは、このサーバーからキックされました！" +
                 "\n" +
