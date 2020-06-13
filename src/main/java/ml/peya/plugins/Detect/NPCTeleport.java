@@ -10,7 +10,9 @@ import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.*;
 import org.bukkit.util.Vector;
+import org.yaml.snakeyaml.representer.*;
 
+import java.lang.reflect.*;
 import java.util.*;
 
 public class NPCTeleport
@@ -25,7 +27,7 @@ public class NPCTeleport
 
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int sec)
     {
-        final double range = PeyangSuperbAntiCheat.config.getDouble("npc.range");
+        final double range = PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
         final double[] clt = {0.0};
 
         new BukkitRunnable() {
@@ -35,9 +37,14 @@ public class NPCTeleport
 
                     Location center = player.getLocation();
 
-                    Vector vec = center.getDirection().normalize().multiply(0 - range);
+                    if (center.getPitch() <= 0.0f || center.getPitch() > 15.0f)
+                    center.setPitch(0.0f);
+
+                    Vector vec = center.getDirection().multiply(0 - range);
 
                     Location n = center.add(vec);
+
+                    n.setY(center.getY() + range);
 
                     NPC.setLocation(n, target);
                     target.getBukkitEntity().teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
@@ -86,12 +93,6 @@ public class NPCTeleport
                 for (double i = 0; i < Math.PI * 2; i++) {
 
                     Location center = player.getLocation();
-                    /*
-                    Location n = new Location(center.getWorld(),
-                            xPos(time[0], radius, yaw) + center.getX(),
-                            center.getY() + creator.get(0.01),
-                            zPos(time[0], radius) + center.getZ());
-                    */
 
                     Location n = new Location(center.getWorld(),
                             auraBot_xPos(time[0], radius) + center.getX(),

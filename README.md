@@ -83,6 +83,16 @@ Hypixel の**~~パクリ~~**コマンドです。
 #### 権限
 ``` psr.mod ``` です。
   
+### /bans
+#### 説明
+**このプラグインに残っている**、プレイヤーのKICK\(BAN\)履歴を表示します。
+#### 使用法
+##### /bans \[-a | ban | kick\] \<PlayerName\>
+\<PlayerName\>に指定されたプレイヤーのBAN履歴を表示します。  
+\-aをつけると、BANとKICKをすべて表示します。あとは察してください。
+#### 権限
+``` psr.mod ``` です。
+
 ### /peyangsuperbanticheat
 #### エイリアス
 + /psac

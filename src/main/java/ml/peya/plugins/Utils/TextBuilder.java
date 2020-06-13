@@ -1,5 +1,6 @@
 package ml.peya.plugins.Utils;
 
+import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import net.md_5.bungee.api.chat.*;
 import net.minecraft.server.v1_12_R1.*;
@@ -8,6 +9,7 @@ import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.math.*;
+import java.nio.*;
 import java.text.*;
 import java.util.*;
 
@@ -158,7 +160,7 @@ public class TextBuilder
         return builder;
     }
 
-    public static ComponentBuilder getBroadCastWdDetectionTexdt()
+    public static ComponentBuilder getBroadCastWdDetectionText()
     {
         return new ComponentBuilder("[PEYANG CHEAT DETECTION]\n"+
                 net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +
@@ -167,9 +169,9 @@ public class TextBuilder
                 "されました。");
     }
 
-    public static ComponentBuilder getBroadCastWdDetectionTexdt(Player player)
+    public static ComponentBuilder getBroadCastWdDetectionText(Player player)
     {
-        ComponentBuilder component = getBroadCastWdDetectionTexdt();
+        ComponentBuilder component = getBroadCastWdDetectionText();
 
         ComponentBuilder hover = new ComponentBuilder(getLine("プレイヤー", player.getName()) + "\n" +
                                                 getLine("UUID", player.getUniqueId().toString()));
@@ -180,7 +182,7 @@ public class TextBuilder
 
     public static String getLine(String prefix, String value)
     {
-        return ChatColor.AQUA + ChatColor.BOLD.toString() + prefix + ChatColor.GREEN + ": " + ChatColor.BLUE.toString() + value;
+        return ChatColor.AQUA + ChatColor.BOLD.toString() + prefix + ChatColor.GREEN + "：" + ChatColor.BLUE.toString() + value;
     }
 
 
@@ -198,7 +200,7 @@ public class TextBuilder
         builder.append("\n");
         builder.append(String.format("%s0%%   %s50%%  %s100%%", EnumChatFormat.GREEN, EnumChatFormat.YELLOW, EnumChatFormat.RED));
         builder.append("\n");
-        builder.append(genGraph(VL, kickVL));
+        builder.append(OptGraphGenerator.genGraph(VL, kickVL));
         builder.append("\n");
         builder.append(ChatColor.AQUA + "結果：" +
                 (VL >= kickVL ? (EnumChatFormat.RED + "強制退出"): (EnumChatFormat.GREEN + "問題なし")));
@@ -219,38 +221,29 @@ public class TextBuilder
         return builder;
     }
 
-    private static int calcVLGlaph(int VL, int max)
+
+    public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
     {
-        double tendNum = 10.0 / (double) max;
-
-        double VlMeta = tendNum * (double) VL;
-
-        return Math.toIntExact(Math.round(VlMeta));
-    }
-
-    private static String genGraph(int VL, int max)
-    {
-        int genVL = calcVLGlaph(VL, max);
-
-        StringBuilder builder = new StringBuilder("[");
-
-        for (int i = 1; i < 11; i++)
+        Date date = new Date(ban.getDate());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"));
+        builder.append(" - " + formatter.format(date));
+        StringBuilder reasonSet = new StringBuilder();
+        for (String reason: ban.getReason().split(", "))
         {
-            if (VL >= max && i == 10)
-                builder.append(ChatColor.WHITE).append("|");
-            else if (VL == 0 && i == 1)
-                builder.append(ChatColor.WHITE).append("|");
-            if (i == genVL)
-                builder.append(ChatColor.WHITE).append("|");
-            else if (i < 5)
-                builder.append(ChatColor.GREEN).append("=");
-            else if (i < 8)
-                builder.append(ChatColor.YELLOW).append("=");
+            EnumCheatType tp = CheatTypeUtils.getCheatTypeFromString(reason);
+            if (tp == null)
+                reasonSet.append(reason).append(", ");
             else
-                builder.append(ChatColor.RED).append("=");
+                reasonSet.append(tp.getText());
         }
 
-        builder.append(ChatColor.WHITE).append("]");
-        return builder.toString();
+        if (reasonSet.toString().endsWith(", "))
+            reasonSet.setLength(reasonSet.length() - 2);
+
+        builder.append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
+
+        return builder;
     }
+
 }

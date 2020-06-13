@@ -69,6 +69,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
         getCommand("aurabot").setExecutor(new AuraBot());
         getCommand("acpanic").setExecutor(new AuraPanic());
+        getCommand("bans").setExecutor(new CommandBans());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
 

@@ -21,6 +21,9 @@ commands:
     aliases: ["testpanic", "panictest", "aurapanictest"]
     permission: psr.mod
     usage: /acpanic <PlayerName>
+  bans:
+    aliases: ["banlist", "playerbans", "banlookup"]
+    permission: psr.mod
 permissions:
   psr.report:
     description: この権限を有効にすると、プレイヤーは、ハッキングレポートができます。

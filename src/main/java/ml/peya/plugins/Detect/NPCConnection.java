@@ -50,11 +50,14 @@ public class NPCConnection
                     }
                     catch (Exception e)
                     {
+                        e.printStackTrace();
                         sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。運営に報告しています。");
                         ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                     }
 
-                    KickUtil.kickPlayer(player, String.join(", ", reason), true, false);
+                    ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
+
+                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": String.join(", ", realReason)), true, false);
                 }
                 new BukkitRunnable()
                 {

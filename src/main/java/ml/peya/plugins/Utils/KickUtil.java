@@ -2,8 +2,6 @@ package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.*;
 import net.md_5.bungee.api.ChatColor;
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang3.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
@@ -37,9 +35,9 @@ public class KickUtil
             for (Player player: Bukkit.getOnlinePlayers())
             {
                 if(Permission.hasStaff(player))
-                    player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionTexdt(target).create());
+                    player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
                 else if (player.hasPermission("psr.notification"))
-                    player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionTexdt().create());
+                    player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
             }
         }
 
