@@ -78,8 +78,8 @@ Hypixel の**~~パクリ~~**コマンドです。
 #### 説明
 このコマンドを実行すると、プレイヤーの背後にへばりつくように NPC を召喚します。  
 #### 使用法
-##### /acpanic \<PlayerName\> \[seconds\]
-\<PlayerName\> に指定されたプレイヤーに \[seconds\] で指定された秒数、背後にNPCを召喚します。
+##### /acpanic \<PlayerName\>
+\<PlayerName\> に指定されたプレイヤーに、背後にNPCを召喚します。
 #### 権限
 ``` psr.mod ``` です。
   
