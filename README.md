@@ -138,23 +138,23 @@ etc…
 ## NPC について
 現NPCは、[@randomapi](https://twitter.com/randomapi)によるAPI「[RandomUserGenerator](https://randomuser.me/)」を使用して、  
 ランダムなユーザー名をもつプレイヤーを召喚します。  
-スキンはランダムですが。現段階では、コンフィグに登録されたUUIDのスキンのみがランダム表示されます。
+スキンはランダムですが。現段階では、コンフィグに登録された UUID のスキンのみがランダム表示されます。
 ## コンフィグについて
 このプラグインでは、以下のコンフィグを使用しています。適当に変えてください。
 | 設定名 | デフォルト値 | 説明 |
 |:-:|:-:|-|
-| database.path | ./eye.db | レポート情報などを保存するSQLiteのデータベースの置き場所です。 |
-| database.logPath | ./log.db | キック情報などを保存するSQLiteのデータベースの置き場所です。 |
-| npc.seconds | 6                                                           | NPCが回る時間です。 |
+| database.path | ./eye.db | レポート情報などを保存する SQLite のデータベースの置き場所です。 |
+| database.logPath | ./log.db | キック情報などを保存する SQLite のデータベースの置き場所です。 |
+| npc.seconds | 6                                                           | NPC が回る時間です。 |
 | npc.bump | 30.0                          | NPC が途中で落ちてしまったり、動きが止まってしまった場合などに、適度に増やす値です。 |
 | npc.time | 0.25 | NPC が回る速さです。感覚で調整してください。 |
 | npc.range | 2.1 | NPC が回る半径です。 |
-| npc.panicRange | 1.5 | PanicNPC が回る高さです。 |
+| npc.panicRange | 1.5 | Panic NPC が回る高さです。 |
 | npc.kill | 3                             | NPC を出す数です。この場合では、10秒間に3キルを表します。 |
 | kick.delay | 2                   | プレイヤーをキックするまでの遅延です。メッセージが送信された瞬間から数えられます。 |
 | kick.lightning | true | プレイヤーがキックされるときに（エフェクトだけの）雷を落とすかどうかです。 |
 | kick.defaultKick | 40 | 学習済データが見つからないとき、この回数 NPC を殴ると、キックされます。 |
-| message.lynx | true | Mod「Lynx」と互換性を保たせるかどうかです。 |
+| message.lynx | true | Lynx Modと互換性を保たせるかどうかです。 |
 | skins | \(省略\) | NPC に適用するスキンです。この中からランダムで選ばれます。 |
 # 人工知能もどきについて
 このプラグインでは、クソ雑魚ナメクジゴミ人工知能とよばれる、人工知能**もどき**があります。
