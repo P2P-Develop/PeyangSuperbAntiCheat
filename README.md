@@ -1,178 +1,187 @@
-# PeyangSuperbAntiCheat（略称：PSAC）
-Bukkit / Spigot / PaperMC のプラグインです。
-1.12.2で動作確認/絶賛開発中です（たぶん）
+**このリポジトリは開発者によってコミットメッセージなどにネタが散りばめられています。  
+どうか混乱しないようによろしくお願い申し上げます。**
 
-このプラグインは、Bukkit / Spigot / PaperMC サーバーで使用できる、**チートレポート管理** / **チートテスト**プラグインです。
+# PeyangSuperbAntiCheat(略称：PSAC)
 
-また、ハックと言う読み方は実際に（Minecraft）サーバーをハッキング（クラッキング）しません。
-そのため、この README ではハックをあえてチートと呼んでいます。  
-↑ごめん＾＾；  
+Bukkit / Spigotベースで動作するMinecraftサーバー用のプラグインです。
+1.12.2で動作が確認されています。
+
+このプラグインは、Bukkit / Spigotベースのサーバーで使用できる、**チート報告管理** / **チート検出テスト**プラグインです。
+
+また、ハックと言う読み方ではサーバー自体のハッキング(クラッキング)との意味が曖昧なため、**チート**として扱っています。
 **ご理解のほど、よろしくお願いします。**
 
 ## インストール方法
 
-+ 適当にダウンロードします
-+ [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) を plugins フォルダーに入れます。  
-+ このプラグインを plugins フォルダーに入れます。
-+ 再起動して、適用してください。
++ リポジトリをクローンし、お使いのJava環境でビルドします。
+  Java8までのJavaでビルドすることができます。
+  **重要: 本リポジトリではコンパイルされたjarファイルがリリースされていません。コンパイル可能な環境がご用意できない場合はリリースをお待ちください。
++ [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) を`plugins`フォルダーに入れます。  
++ ビルドしたプラグインを`plugins`フォルダに入れます。
++ サーバーを再起動してプラグインを適用してください。
+
+---
 
 ## コマンド
-### /wdr
-Hypixel の**~~パクリ~~**コマンドです。
+### /report
+#### エイリアス
++ /peyangreport
++ /pcr
++ /rep
++ /report
++ /wdr
 #### 説明
-「こんなものをつかってるぷれいやーがいるよ！みてみて！」
-っていうコマンドです。
-##### 運営側サイド
-プレイヤーからのレポートは、2形式で表示されます。  
-「\[PeyangSuperbAntiCheat\] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ \[CLICK\]」  
-と  
-「\[STAFF\] \[ADMIN\] Fishy: Report of \<PlayerName\> \<理由1\>, \[理由2\]...」  
-の形で表示されます。コンフィグを編集することにより変更できます。
-
-このモードは、<details><summary>█████</summary>Kam7</details>によって**リークされた** Hypixel Lynx Mod との互換性をもたせるモードです。  
-この Mod は、Hypixel では Bannable であり、この Mod を使用したまま、Hypixel には、**絶対に**行かないでください。Hypixel から BAN されます。
+プレイヤーが選択して提出した報告内容をスタッフに送信します。
+スタッフはプレイヤーが報告内容と同じ行動をしているかどうか確認することができます。  
+また、スタッフが受信する報告はプライバシー設定を管理することができます。 
+```[PeyangSuperbAntiCheat] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ [CLICK]```
+この報告形式はスタッフにしか表示されず、他プレイヤーには表示されません。
+```\[STAFF\] \[ADMIN\] Fishy: Report of \<PlayerName\> \<理由1\>, \[理由2\]...```
+この報告形式はプレイヤー全員に表示され、プレイヤー全員が誰が誰をどういった理由で報告したのかを知ることができます。  
+このモードは、<details><summary>█████</summary>Kam7</details>によって*リークされた*Hypixel Lynx Modとの互換性を持たせる事ができるモードです。  
+このModをHypixelサーバーで使用することはBANされる可能性があり、この Mod を使用したままHypixelサーバーには、**絶対に**行かないでください。ライセンスに伴い**開発者は一切責任を負いません。**
 #### 使用法
-+ /wdr \<PlayerName\>
-この状態で実行すると、本が開きます。
-この本の文字をクリックすると、理由が追加されます。
++ /report \<PlayerName\>
+この引数を渡した状態でコマンドを実行すると報告事由を選択できる本を開くことができます。
+本に表示されている報告事由をクリックすると、報告内容として事由が追加されます。
 
 - ![#008000](https://via.placeholder.com/15/008000/000000?text=+) **緑太字**の文字をクリックで送信するか、
 - ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) **赤太字**の文字をクリックで破棄します。
 
-**注意：このプラグインでは超原始的な本の実装方法を使用しています。**
-
-+ /wdr \<PlayerName\> \<理由1\> \[理由2\]...
-これは、本を開かずにそのまま理由を入力して、報告する方法です。
-本を開かないため、**全くもって意味を感じられませんが**、コンソールからでも報告できます。
++ /report \<PlayerName\> \<理由1\> \[理由2\]...
+このコマンドの場合は本を使用せずにチャット/コンソール上で報告をすることができます。
+ダイレクトに報告する場合に有用です。
+__このコマンドの事由にはエイリアスを使用することができます。下記をご覧ください。__
 #### 報告に使用できる理由一覧
-##### 本で表示される順に書きます。
 | 理由 | エイリアス | 簡単な説明 |
 |:-:|:-:|-|
-| Fly | flight | プレイヤーが空を飛べるようにできるチートです。 |
-| KillAura | killaura, aura, ka | 範囲に入った人をより早く攻撃できるチートです。 |
-| AutoClicker | autoclicker, ac, autoclick | 自動で左クリックができるチートです（高橋名人などのツールやマウスなどについているマクロでもAutoClickerに値します） |
-| Speed | speed, bhop, timer | ありえない速度で歩くことができるチートです（BunnyHop や、Timer は Speed に値します） |
-| AntiKnockback | akb, velocity, antikb | ノックバックを軽減するチートです。 |
+| Fly | flight | プレイヤーがクリエイティブモードでなくても空を飛べるようになるチートです。 |
+| KillAura | killaura, aura, ka | 攻撃範囲に入った人をエイムを合わせずに攻撃出来るチートです。 |
+| AutoClicker | autoclicker, ac, autoclick | 自動で左クリックができるチートです(連打ツールやマクロもAutoClickerに属します)。 |
+| Speed | speed, bhop, timer | 通常ではありえない速度で歩くことができるチートです(BunnyHopやTimerはSpeedに属します)。 |
+| AntiKnockback | akb, velocity, antikb | ノックバックを全く受けないようになるチートです。 |
 | Reach | reach | 攻撃できる距離を伸ばすことができるチートです。 |
 | Dolphin | dolphin | イルカのように、水を自動で泳ぐチートです。 |
 
-###### 同じ人から同じ人への報告はできません。報告スパムの防止です。
+###### 報告をスパムに利用されることを避けるため、同じ人から同じ人への報告はできません。
 
 #### 権限
-``` psr.report ``` です。
+#### ```psr.report```
+報告コマンドを実行する権限を管理します。
 初期では全員が持っている権限です。
-
+この権限を剥奪されたプレイヤーは報告をすることが出来なくなります。
 ### /aurabot
-
+#### エイリアス
++ /testaura
++ /auratest
++ /killauratest
 #### 説明
-このコマンドを実行すると、プレイヤーの周りにプレイヤーの周囲を回る NPC を召喚します。  
-この NPC は、特定の速度でプレイヤーの周りを回り、特定の回数ヒットした場合、プレイヤーをキックします。  
-
+このコマンドを実行すると、プレイヤーの周囲を一定の速度で回るNPCを召喚します。 
+NPCに対して特定の回数以上攻撃がヒットした場合、そのプレイヤーをキックします。  
 #### 使用法
-##### /aurabot \<PlayerName\>
-\<PlayerName\> に指定されたプレイヤーに、回るNPCを召喚します。
++ /aurabot \<PlayerName\>
+\<PlayerName\> に指定されたプレイヤーに上記の動作をするNPCを召喚します。
 #### 権限
-``` psr.mod ``` です。
-  
+#### ```psr.mod```
+Aurabotや下記のWatchdogの召喚コマンドを実行する権限を管理します。
+この権限を付与されたプレイヤーはWatchdogを召喚することが出来ます。
 ### /acpanic
+#### エイリアス
++ /testpanic
++ /panictest
++ /aurapanictest
 #### 説明
-このコマンドを実行すると、プレイヤーの背後にへばりつくように NPC を召喚します。  
+このコマンドを実行すると、常にプレイヤーの背後に移動しようとするNPCを召喚します。
+NPCに対して特定の回数以上攻撃がヒットした場合、そのプレイヤーをキックします。
 #### 使用法
 ##### /acpanic \<PlayerName\>
-\<PlayerName\> に指定されたプレイヤーに、背後にNPCを召喚します。
+\<PlayerName\>に指定されたプレイヤーに上記の動作をするNPCを召喚します。
 #### 権限
-``` psr.mod ``` です。
-  
-### /bans
-#### 説明
-**このプラグインに残っている**、プレイヤーのKICK\(BAN\)履歴を表示します。
-#### 使用法
-##### /bans \[-a | ban | kick\] \<PlayerName\>
-\<PlayerName\>に指定されたプレイヤーのBAN履歴を表示します。  
-\-aをつけると、BANとKICKをすべて表示します。あとは察してください。
-#### 権限
-``` psr.mod ``` です。
-
-### /peyangsuperbanticheat
+#### ```psr.mod```  
+### /psac
 #### エイリアス
-+ /psac
++ /peyangsuperbanticheat
 + /psr
-etc…
++ /wdadmin
++ /anticheat
 #### 説明
 このプラグインのメインコマンドです。引数をつけることによって動作します。
 #### 引数一覧
 ##### /psac help
 このプラグインコマンドのヘルプを表示します。
-``` psac.mod ``` または ``` psac.admin ``` 権限を持っている人には、以下のヘルプも表示されます。
+`psac.mod`または`psac.admin`の権限を持っている人には、以下のヘルプも表示されます。
+**管理IDに関するコマンドは`psac.mod`には使用することはできますがヘルプに表示されません。**
   
 ##### /psac view \[ページ数\]
-プレイヤーが提出したレポートを確認できます。
-脅威度順に5件ずつ表示されます。
+プレイヤーが提出した報告を確認できます。
+報告は危険度が高い順に並べ替えられ、一度に5件ずつ表示されます。
   
 ##### /psac show \<管理ID\>
-プレイヤーが提出したレポートの詳細を表示します。
-このコマンドをプレイヤーから実行すると、本が開き、報告の詳細を確認できます。
-コンソールから実行した場合、コンソールにそのまま表示されます。
+プレイヤーが提出した報告の詳細を表示します。
+このコマンドをプレイヤーから実行すると、本によって報告の詳細を確認することができます。
+コンソールから実行した場合、コンソールにログとして表示されます。
   
 ##### /psac drop \<管理ID\>
 プレイヤーが提出した報告を**完全**に破棄します。
-ログなども残らずに消えます。**ご注意ください。**
+**削除ログは一切表示されません。破棄する場合には十分ご注意ください。**
   
 ##### /psac kick \<PlayerName\> \[test\]
 \<PlayerName\>で指定したプレイヤーをキックします。
-第2引数に``` test ``` を指定すると、テストモードでキックされます。  
+第2引数に`test`を指定すると、テストモードとしてキックされます。  
   
 #### \<管理ID\>について
-\<管理ID\>は、プレイヤーがレポートした際に、自動的に振り分けられる32文字の英数文字列です。  
-このIDは、コンソールから ``` /psr view ``` をした際に表示されます。  
-プレイヤーからも 管理ID に関連した操作をできます。
+\<管理ID\>はプレイヤーが報告を提出した際に自動的に割り当てられる32文字の英数文字列です。  
+このIDは、コンソールから`/psr view`を実行した際に表示されます。  
+また、プレイヤーからも管理IDに関連したコマンドを実行することが出来ます。
 ## キックについて
-このプラグインでは誤検出などのためにプレイヤーが 誤BAN されることを危惧しています。
-そのため、自動BAN はこのプラグインには含まれません。
+このプラグインではWatchdogの誤検出などのためにプレイヤーが誤ってBANされることを危惧しています。
+そのため、プラグインが自動でプレイヤーをBANすることは絶対にございません。
 ### ブロードキャストメッセージについて
 **プレイヤーがキックされるとき、以下のブロードキャストメッセージが流れます。**  
 
-「\[PEYANG CHEAT DETECTION\] ハッキング、または不適切な発言によってゲームからプレイヤーが削除されました。」
-「違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！」
+```[PEYANG CHEAT DETECTION] ハッキング、または不適切な発言によってゲームからプレイヤーが削除されました。```
+```違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！```
 
-このメッセージは、チートを自動検出した時のメッセージです。  
-スタッフによるキックの場合は、「違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！」だけが流れます。  
-### キック理由について
-キックの理由は以下の通りです。
-#### PEYANG ANTI CHEAT DETECTION
-このプラグインが自動で検知した場合のメッセージです。
+このメッセージは、Watchdogがチートを自動で検出した際に流れるメッセージです。  
+スタッフによるキックの場合は、`違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！`のみのメッセージが流れます。  
+### キック事由について
+キック事由は下記の3種類に分かれています。
+#### PEYANG CHEAT DETECTION
+このプラグインがチートを自動で検知した場合のメッセージです。
 #### KICKED BY STAFF
-スタッフによるキックコマンドです。
-### PEYANG ANTI CHEAT TEST
-このプラグインのテストです。
+スタッフによるキックコマンドが実行された場合のメッセージです。
+#### PEYANG ANTI CHEAT TEST
+このプラグインのテストメッセージです。デバッグ用にお使いください。
 ## NPC について
-現NPCは、[@randomapi](https://twitter.com/randomapi)によるAPI「[RandomUserGenerator](https://randomuser.me/)」を使用して、  
-ランダムなユーザー名をもつプレイヤーを召喚します。  
-スキンはランダムですが。現段階では、コンフィグに登録された UUID のスキンのみがランダム表示されます。
+NPCは、[@randomapi](https://twitter.com/randomapi)氏によるAPI「[RandomUserGenerator](https://randomuser.me/)」を使用して、ランダムなユーザー名をもつプレイヤーを召喚して動作しています。スキンはコンフィグに登録されたUUIDのスキンを参照してランダムに表示されます。
 ## コンフィグについて
 このプラグインでは、以下のコンフィグを使用しています。適当に変えてください。
 | 設定名 | デフォルト値 | 説明 |
 |:-:|:-:|-|
-| database.path | ./eye.db | レポート情報などを保存する SQLite のデータベースの置き場所です。 |
-| database.logPath | ./log.db | キック情報などを保存する SQLite のデータベースの置き場所です。 |
-| npc.seconds | 6                                                           | NPC が回る時間です。 |
-| npc.bump | 30.0                          | NPC が途中で落ちてしまったり、動きが止まってしまった場合などに、適度に増やす値です。 |
-| npc.time | 0.25 | NPC が回る速さです。感覚で調整してください。 |
-| npc.range | 2.1 | NPC が回る半径です。 |
-| npc.panicRange | 1.5 | Panic NPC が回る高さです。 |
-| npc.kill | 3                             | NPC を出す数です。この場合では、10秒間に3キルを表します。 |
-| kick.delay | 2                   | プレイヤーをキックするまでの遅延です。メッセージが送信された瞬間から数えられます。 |
-| kick.lightning | true | プレイヤーがキックされるときに（エフェクトだけの）雷を落とすかどうかです。 |
-| kick.defaultKick | 40 | 学習済データが見つからないとき、この回数 NPC を殴ると、キックされます。 |
-| message.lynx | true | Lynx Modと互換性を保たせるかどうかです。 |
-| skins | \(省略\) | NPC に適用するスキンです。この中からランダムで選ばれます。 |
-# 人工知能もどきについて
-このプラグインでは、クソ雑魚ナメクジゴミ人工知能とよばれる、人工知能**もどき**があります。
-実際のチートを用いて学習させることにより、キックの精度が向上する… **（と思って作ったものです）**
-~~実際、意味は皆無でした。~~
+| database.path | ./eye.db | 報告情報などを保存するSQLiteのデータベースの保存場所を指定します。 |
+| database.logPath | ./log.db | キック情報などを保存するSQLiteのデータベースの保存場所を指定します。 |
+| npc.seconds | 6                                                           | NPCがプレイヤーの周囲を回る時間を秒数単位で指定します。 |
+| npc.bump | 30.0                          | NPCが途中で落ちてしまったり、動きが止まってしまった場合などに解決する為の値を指定します。 |
+| npc.time | 0.25 | NPCが回る速さを指定します。 |
+| npc.range | 2.1 | NPCが回る半径を指定します。デフォルトの距離がKillAuraの検出に適しています。 |
+| npc.panicRange | 1.5 | Panic NPCとプレイヤーの相対的な高さを指定します。 |
+| npc.kill | 3                             | 10秒間にNPCがキルされた場合に召喚する最大数を指定します。 |
+| kick.delay | 2                   | ブロードキャストメッセージが送信されてからプレイヤーをキックするまでの遅延時間を指定します。 |
+| kick.lightning | true | プレイヤーがキックされるときにダメージを受けない雷を落とすかどうかを指定します。 |
+| kick.defaultKick | 40 | NPCがこの値以上攻撃された場合にキックします。学習済データが見つからない場合はこの値が優先されます。 |
+| message.lynx | true | Lynx Modと互換性を持たせるかどうかを指定します。 |
+| skins | \(UUID\) | NPCに適用するスキンを指定します。UUIDは複数指定することが可能で、ランダムのUUIDから選ばれます。 |
+# 学習機能(上記の学習済データ)について
+このプラグインでは、実際のチート資料を使って自動でパラメータを調整する学習機能があります。
+チートデータを学習させることによってキックするかどうかの判断精度を向上させることが出来ます。  
+__この機能は開発中です。完全に学習が可能な訳ではございませんのでご注意ください。__
+
+---
+
 # 謝辞
-このプラグインは、以下のライブラリ / API を使用しています。  
-[brettwooldridge](https://github.com/brettwooldridge/)氏 [HikariCP](https://github.com/brettwooldridge/HikariCP)  
-[dmulloy2](https://github.com/dmulloy2/)氏 [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*)](https://dev.bukkit.org/projects/protocollib)  
-[jedk1](https://www.spigotmc.org/members/jedk1.43536/)氏 [BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
-[DarkBlade12](https://github.com/DarkBlade12/)氏 [ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)  
+このプラグインは、以下のライブラリ/APIを使用しています。  
++ [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)  
++ [dmulloy2/Protocollib(spigot)](https://www.spigotmc.org/resources/protocollib.1997/) 
++ [dmylloy2/Protocollib(bukkit)](https://dev.bukkit.org/projects/protocollib)  
++ [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
++ [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)  
