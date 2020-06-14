@@ -284,8 +284,7 @@ In this plugin, the following config is set by default.
 |  kick.lightning  |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                                                      |
 | kick.defaultKick |      40       | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                                                     |
 |   message.lynx   |     true      | Specifies whether Lynx Mod compatible.                                                                                                                     |
-|      skins       |   \(UUID\)    | Specifies the skin to apply to the NPC.  
-                                     You can specify multiple UUIDs and it will be selected from a random UUID.                                                                                 |
+|      skins       |   \(UUID\)    | Specifies the skin to apply to the NPC.<br>You can specify multiple UUIDs and it will be selected from a random UUID. |
 
 ## What is learning function
 
