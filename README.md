@@ -1,6 +1,6 @@
 <h1 align="center">PeyangSuperbAntiCheat(PSAC)</h1>
 
-<p align="center">If possible</p>
+<p align="center">"If possible."</p>
 
 <p align="center">
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/commits/master"
@@ -32,7 +32,9 @@
 
 ---
 
-<p align="center">このプラグインのドキュメントは多言語に対応していますがネタ成分が次第に多くなっています。<br>真面目なドキュメントを読みたい方は英語ドキュメントをお読みください。</p>
+<p align="center">このプラグインのドキュメントは多言語に対応していますがネタ成分が次第に多くなっています。<br>
+  真面目なドキュメントを読みたい方は英語ドキュメントをお読みください。
+</p>
 
 <p align="center">
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-en.md"
