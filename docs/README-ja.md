@@ -12,10 +12,10 @@ Bukkit/Spigot/PaperMCのプラグインです。
 ↑ごめん＾＾；
 
 ### インストール方法
-+ 適当にダウンロードします。
-+ [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) をpluginsフォルダーに入れます。  
-+ このプラグインをpluginsフォルダーに入れます。
-+ 再起動して、適用してください。
+* 適当にダウンロードします。
+* [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) をpluginsフォルダーに入れます。  
+* このプラグインをpluginsフォルダーに入れます。
+* 再起動して、適用してください。
 
 
 ### コマンド
@@ -45,7 +45,7 @@ Hypixelの**~~パクリ~~**コマンドです。
 「\[STAFF\] \[ADMIN\] Fishy: Report of \<PlayerName\> \<理由1\>, \[理由2\]...」  
 の形で表示されます。コンフィグを編集することにより変更できます。  
 
-このモードは、<details><summary>█████</summary>Kam7</details>によって**リークされた**Hypixel Lynx Modとの互換性を持たせる事ができるモードです。  
+このモードは、<details><summary>████</summary>Kam7</details>によって**リークされた**Hypixel Lynx Modとの互換性を持たせる事ができるモードです。  
 このModは、HypixelでBANされる可能性があります。  
 このModを使用したままHypixelには**絶対に**行かないでください。
 
