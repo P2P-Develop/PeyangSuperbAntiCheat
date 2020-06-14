@@ -82,18 +82,16 @@ public class Init
             ResultSet resultSet = statement.executeQuery("SeLeCt * FrOm WdLeArN");
             while (resultSet.next())
             {
-                int cot = resultSet.getInt("DATA");
-
-                ctl += cot;
+                ctl += resultSet.getInt("DATA");
 
                 cBypass++;
-
             }
 
             if (cBypass -1 != 0)
                 PeyangSuperbAntiCheat.banLeft = Math.toIntExact(ctl / cBypass);
-            else
-                PeyangSuperbAntiCheat.banLeft = PeyangSuperbAntiCheat.config.getInt("kick.defaultKick");
+
+            PeyangSuperbAntiCheat.banLeft = PeyangSuperbAntiCheat.config.getInt("kick.defaultKick");
+
             return true;
         }
         catch (Exception e)

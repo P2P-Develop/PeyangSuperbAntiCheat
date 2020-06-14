@@ -54,6 +54,6 @@ public class DetectingList
     public boolean exists(UUID uuid)
     {
         CheatDetectNowMeta meta = this.getMetaByPlayerUUID(uuid);
-        return meta != null;
+        return (meta != null);
     }
 }

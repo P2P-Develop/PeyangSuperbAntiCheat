@@ -79,8 +79,7 @@ public class NPC
             public void run()
             {
                 List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
-                Random random = new Random();
-                JsonNode node = getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
+                JsonNode node = getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
                 if (node != null)
                     profile.getProperties().put("textures", new Property("textures", node.get("properties").get(0).get("value").asText(), node.get("properties").get(0).get("signature").asText()));
             }

@@ -1,25 +1,19 @@
 package ml.peya.plugins.Enum;
 
-public enum DetectType
-{
-    AURA_BOT,
-    AURA_PANIC;
+public enum DetectType {
+    AURA_BOT, AURA_PANIC;
 
     private int time;
 
-
-    DetectType ()
-    {
+    DetectType() {
         time = 5;
     }
 
-    public void setPanicTime(int time)
-    {
+    public void setPanicTime(int time) {
         this.time = time;
     }
 
-    public int getPanicTime()
-    {
+    public int getPanicTime() {
         return time;
     }
 }

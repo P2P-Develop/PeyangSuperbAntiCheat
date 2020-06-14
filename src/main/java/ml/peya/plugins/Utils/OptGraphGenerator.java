@@ -6,11 +6,7 @@ public class OptGraphGenerator
 {
     private static int calcVLGraph(int VL, int max)
     {
-        double tendNum = 10.0 / (double) max;
-
-        double VlMeta = tendNum * (double) VL;
-
-        return Math.toIntExact(Math.round(VlMeta));
+        return Math.toIntExact(Math.round((10.0 / (double) max) * (double) VL));
     }
 
     static String genGraph(int VL, int max)

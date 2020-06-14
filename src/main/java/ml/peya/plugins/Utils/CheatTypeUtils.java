@@ -63,6 +63,7 @@ public class CheatTypeUtils
             if (type.getSysName().equals(sysname))
                 return type;
         }
+
         return null;
     }
 

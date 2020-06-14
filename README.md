@@ -1,4 +1,4 @@
-# PeyangSuperbAntiCheat(PSAC)
+<h1 align="center">PeyangSuperbAntiCheat(PSAC)</h1>
 
 <p align="center">If possible</p>
 
@@ -32,17 +32,19 @@
 
 ---
 
+<p align="center">このプラグインのドキュメントは多言語に対応していますがネタ成分が次第に多くなっています。<br>真面目なドキュメントを読みたい方は英語ドキュメントをお読みください。</p>
+
 <p align="center">
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-en.md"
     ><img
-      height="20"
+      height="40"
       src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/US.svg"
       alt="English"
   /></a>
   &nbsp;
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-ja.md"
     ><img
-      height="20"
+      height="40"
       src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/JP.svg"
       alt="日本語"
   /></a>
