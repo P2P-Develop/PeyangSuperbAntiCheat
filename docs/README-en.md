@@ -14,7 +14,7 @@ In the description of **hack**, the meaning of hacking (cracking) of the server 
 
 1. Clone this repository and build in Java environment.  
    **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**
-2. Move / Copy [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(Bukkit)](https://dev.bukkit.org/projects/protocollib) to the `plugins` folder.
+2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
 3. Move / Copy the built plugin in the `plugins` folder.
 4. Start / Restart server.
 
