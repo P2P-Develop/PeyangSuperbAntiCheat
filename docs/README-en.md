@@ -80,7 +80,7 @@ The books are sorted in the order they are displayed.
 #### Permissions
 ---
 
-#### `psr.report`
+- `psr.report`
 
 Manages permissions to execute report commands.  
 Everyone has this permission.  
