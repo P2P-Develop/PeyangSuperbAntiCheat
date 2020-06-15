@@ -278,7 +278,7 @@ In this plugin, the following config is set by default.
 |     npc.bump     |     30.0      | Specifies the value to resolve when the NPC is stuck or stopped in the middle.                                                                            |
 |     npc.time     |     0.25      | Specifies the value of NPC orbit speed.                                                                                                                    |
 |    npc.range     |      2.1      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.                                                    |
-|  npc.panicRange  |      1.5      | Specifies the relative height of the [Panic NPC](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/README-en.md#acpanic) and player.  |
+|  npc.panicRange  |      1.5      | Specifies the relative height of the [Panic NPC](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-en.md#acpanic) and player.  |
 |     npc.kill     |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                                                              |
 |    kick.delay    |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                                                            |
 |  kick.lightning  |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                                                      |
