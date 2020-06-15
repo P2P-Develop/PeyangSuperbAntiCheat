@@ -54,8 +54,8 @@ Hypixelの**~~パクリ~~**コマンドです。
 
 この状態で実行すると、報告事由を選択できる本が\(**自動的に**\)開きます。  
 この本に表示されている報告事由をクリックすると、報告内容として事由が追加されます。  
-- 「<font style="color: dark_green; font-weight: bold;">レポートを送信</font>」をクリックで送信するか、  
-- 「<font style="color: dark_red; font-weight: bold;">レポートをキャンセル</font>」をクリックでキャンセルします。  
+- 「<span style="color: dark_green; font-weight: bold;">レポートを送信</span>」をクリックで送信するか、  
+- 「<span style="color: red; font-weight: bold;">レポートをキャンセル</span>」をクリックでキャンセルします。  
 
 **注意：このプラグインでは超原始的な本の実装方法を使用しています。ご了承しろやください。**
 
