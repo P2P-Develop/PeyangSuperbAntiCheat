@@ -303,7 +303,6 @@ The learning feature of this plugin adjusts key parameters by iteratively calcul
 This plugin uses the following libraries/APIs:  
 
 - [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
-- [dmulloy2/Protocollib(spigot)](https://www.spigotmc.org/resources/protocollib.1997/)
-- [dmylloy2/Protocollib(bukkit)](https://dev.bukkit.org/projects/protocollib)
+- dmulloy2/Protocollib [\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)
 - [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)
 - [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
