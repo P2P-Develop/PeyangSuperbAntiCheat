@@ -290,7 +290,7 @@ In this plugin, the following config is set by default.
 
 This plugin has a learning function that automatically adjusts the parameters using the actual cheat material.  
 Learning cheat data can improve the accuracy of your decision to kick or not.  
-**This feature is under development. Please note that you cannot study completely.**  
+**This feature is under development. Please note that this function cannot learn completely.**  
 
 ### Learning mechanism
 
