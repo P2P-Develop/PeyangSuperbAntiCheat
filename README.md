@@ -1,5 +1,4 @@
-PeyangSuperbAntiCheat (PSAC)
-======
+<h1 align="center">PeyangSuperbAntiCheat (PSAC)</h1>
 
 <p align="center">"If possible."</p>
 
@@ -12,7 +11,7 @@ PeyangSuperbAntiCheat (PSAC)
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases"
     ><img
       src="https://img.shields.io/github/v/release/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
-      alt="Github Latest Release"
+      alt="GitHub Latest Release"
   /></a>
   <a href="https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html"
     ><img
@@ -33,22 +32,22 @@ PeyangSuperbAntiCheat (PSAC)
 
 ---
 
-<p align="center">
-  言語を選択してください。<br>
-  Please select your language.
+<p align="center" style="color: #6A737D"><strong>このプラグインのドキュメントは多言語に対応していますがネタ成分が次第に多くなっています。<br>
+  真面目なドキュメントを読みたい方は英語ドキュメントをお読みください。</strong>
+  This plugin document are supported multi language.
 </p>
 
 <p align="center">
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-en.md"
     ><img
-      height="20"
+      height="40"
       src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/US.svg"
       alt="English"
   /></a>
   &nbsp;
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-ja.md"
     ><img
-      height="20"
+      height="40"
       src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/JP.svg"
       alt="日本語"
   /></a>
