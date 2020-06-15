@@ -52,10 +52,12 @@ This mode is compatible with the Hypixel Lynx Mod _leaked_ from █████.
 - /report \<PlayerName\>
   Player can execute this command with this argument to open a book where you can select the reason for the report.  
   If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.  
-
-- Click to send report in "<span style="color: dark_green; font-weight: bold;">レポートを送信</span>" , or
-- Click the "<span style="color: red; font-weight: bold;">レポートをキャンセル</span>" to discard.
-
+  
+<ul>
+  <li>Click to send report in "<span style="color: dark_green; font-weight: bold;">レポートを送信</span>" , or</li>
+  <li>Click the "<span style="color: red; font-weight: bold;">レポートをキャンセル</span>" to discard.</li>
+</ul>
+  
 - /report \<PlayerName\> \<Reason1\> \[Reason2\]...
   Player can execute this command with this argument to report directly in chat/console without using a book.  
   **Can use an alias for this reason. Please read below.**  
