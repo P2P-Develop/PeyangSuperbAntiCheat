@@ -22,17 +22,19 @@ public class Show
             return;
         }
 
+        if (WatchEyeManagement.isInjection(args[1]) || !WatchEyeManagement.isExistsRecord(args[1]))
+        {
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：IDに合致するレポートが見つかりませんでした！");
+            return;
+        }
+
         String mngid = args[1];
 
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD='" + mngid + "'");
-            if (!result.next())
-            {
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：IDと合致するデータが見つかりませんでした！");
-                return;
-            }
+            result.next();
 
             String uuid = result.getString("UUID");
             String id = result.getString("ID");

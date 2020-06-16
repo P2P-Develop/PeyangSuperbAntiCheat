@@ -17,7 +17,7 @@ public class Drop
             return;
         }
 
-        if (!WatchEyeManagement.isExistsRecord(args[1]))
+        if (WatchEyeManagement.isInjection(args[1]) || !WatchEyeManagement.isExistsRecord(args[1]))
         {
             sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：IDに合致するレポートが見つかりませんでした！");
             return;

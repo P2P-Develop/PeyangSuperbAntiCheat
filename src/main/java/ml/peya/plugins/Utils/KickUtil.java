@@ -100,14 +100,14 @@ public class KickUtil
              Statement eyeS3 = eyeC.createStatement())
         {
             kickS.execute("InSeRt InTo KiCk VaLuEs(" +
-                    "'" + player.getName() + "'," +
-                    "'" + player.getUniqueId().toString() + "'," +
+                    "'" + player.getName().replace("'", "\\'") + "'," +
+                    "'" + player.getUniqueId().toString().replace("'","\\'") + "'," +
                     "'" + id.toString() + "'," +
                     "'" + new Date().getTime() + "'," +
-                    "'" + reason + "'" +
+                    "'" + reason.replace("'","\\'") + "'" +
                     ");");
 
-            ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "") + "'");
+            ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "").replace("'","\\'") + "'");
 
             while (eyeList.next())
             {

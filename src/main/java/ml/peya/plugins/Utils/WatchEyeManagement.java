@@ -90,4 +90,8 @@ public class WatchEyeManagement
         }
     }
 
+    public static boolean isInjection(String sql)
+    {
+        return sql.contains("'") || sql.contains("\"");
+    }
 }
