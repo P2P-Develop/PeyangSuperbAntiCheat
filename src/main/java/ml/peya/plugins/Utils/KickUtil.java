@@ -12,7 +12,7 @@ import java.util.*;
 
 public class KickUtil
 {
-    public static void kickPlayer (Player player, String reason, boolean wdFlag, boolean isTest)
+    public static void kickPlayer(Player player, String reason, boolean wdFlag, boolean isTest)
     {
         broadCast(wdFlag, player);
         new BukkitRunnable()
@@ -32,9 +32,9 @@ public class KickUtil
     {
         if (wdFlag)
         {
-            for (Player player: Bukkit.getOnlinePlayers())
+            for (Player player : Bukkit.getOnlinePlayers())
             {
-                if(Permission.hasStaff(player))
+                if (Permission.hasStaff(player))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
                 else if (player.hasPermission("psr.notification"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
@@ -66,7 +66,7 @@ public class KickUtil
             if (random.nextBoolean())
                 id.append(random.nextInt(9));
             else
-                id.append((char)(random.nextInt(5) + 'A'));
+                id.append((char) (random.nextInt(5) + 'A'));
         }
 
         String reasonP;
@@ -104,7 +104,7 @@ public class KickUtil
                     "'" + player.getUniqueId().toString() + "'," +
                     "'" + id.toString() + "'," +
                     "'" + new Date().getTime() + "'," +
-                    "'" + reason + "'"+
+                    "'" + reason + "'" +
                     ");");
 
             ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "") + "'");

@@ -1,7 +1,7 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
@@ -36,8 +36,8 @@ public class NPCConnection
                 {
                     ArrayList<String> reason = new ArrayList<>();
                     try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-                    Statement statement = connection.createStatement();
-                    Statement statement2 = connection.createStatement())
+                         Statement statement = connection.createStatement();
+                         Statement statement2 = connection.createStatement())
                     {
                         ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
                         while (rs.next())
@@ -45,7 +45,9 @@ public class NPCConnection
                             ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
                                     rs.getString("MNGID") + "'");
                             while (set.next())
+                            {
                                 reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
+                            }
                         }
                     }
                     catch (Exception e)
@@ -57,7 +59,7 @@ public class NPCConnection
 
                     ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
 
-                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": String.join(", ", realReason)), true, false);
+                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura" : String.join(", ", realReason)), true, false);
                 }
                 new BukkitRunnable()
                 {
