@@ -40,8 +40,8 @@ public class NPC
 
         if (random.nextBoolean())
         {
-            first = LeetConverter.convert(first);
-            last = LeetConverter.convert(last);
+            first = develop.p2p.lib.LeetConverter.convert(first);
+            last = develop.p2p.lib.LeetConverter.convert(last);
         }
 
         name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ?  "19" + random.nextInt(120): "");

@@ -265,3 +265,4 @@ __このコマンドの事由には、エイリアスを使用できます。下
 [dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*Bukkit)](https://dev.bukkit.org/projects/protocollib)  
 [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
 [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)  
+[P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)  

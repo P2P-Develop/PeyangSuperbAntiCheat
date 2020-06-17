@@ -1,8 +1,8 @@
 package ml.peya.plugins.Detect;
 
+import develop.p2p.lib.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
@@ -10,9 +10,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.*;
 import org.bukkit.util.Vector;
-import org.yaml.snakeyaml.representer.*;
 
-import java.lang.reflect.*;
 import java.util.*;
 
 public class NPCTeleport
