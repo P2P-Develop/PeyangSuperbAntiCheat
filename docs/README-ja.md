@@ -260,7 +260,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 
 ### 謝辞
 このプラグインは、以下のライブラリ / API を使用しています。  
-[RandomApi/RandomUserGenerator](https://randomuser.me/)
+[RandomApi/RandomUserGenerator](https://randomuser.me/)  
 [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)  
 [dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*Bukkit)](https://dev.bukkit.org/projects/protocollib)  
 [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
