@@ -11,24 +11,33 @@ import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.*;
+import org.bukkit.scheduler.*;
 
+import java.sql.*;
 import java.util.logging.*;
 
 public class PeyangSuperbAntiCheat extends JavaPlugin
 {
-    public static Logger logger= Bukkit.getServer().getLogger();
+    public static Logger logger = Logger.getLogger("PeyangSuperbAntiCheat");
 
     public static FileConfiguration config;
+
     public static String databasePath;
     public static String banKickPath;
-    public static HikariDataSource eye = null;
-    public static HikariDataSource banKick = null;
+
     public static DetectingList cheatMeta;
-    public static int banLeft;
+
+
     public static KillCounting counting;
     public static ProtocolManager protocolManager;
-    public static boolean isAutoMessageEnabled = false;
+
     public static long time = 0L;
+    public static int banLeft;
+
+    public static HikariDataSource eye = null;
+    public static HikariDataSource banKick = null;
+    public static boolean isAutoMessageEnabled = false;
+    public static BukkitRunnable autoMessage = null;
 
     private static PeyangSuperbAntiCheat plugin;
     @Override
@@ -82,6 +91,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         if (time == 0L)
             time = 1L;
 
+        autoMessage = new AutoMessageTask();
+
+        logger.info("Starting Auto-Message Task...");
+
+        if (isAutoMessageEnabled)
+            autoMessage.runTaskTimer(this, 0, 20 * (time * 60));
+
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }
 
@@ -92,6 +108,11 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             eye.close();
         if (banKick != null)
             banKick.close();
+        eye = null;
+        banKick = null;
+        logger.info("Starting Auto-Message Task...");
+        if (autoMessage != null && RunnableUtil.isStarted(autoMessage))
+            autoMessage.cancel();
         logger.info("PeyangSuperbAntiCheat has disabled!");
     }
 

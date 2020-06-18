@@ -103,8 +103,9 @@ public class KickUtil
                     "'" + player.getName().replace("'", "\\'") + "'," +
                     "'" + player.getUniqueId().toString().replace("'","\\'") + "'," +
                     "'" + id.toString() + "'," +
-                    "'" + new Date().getTime() + "'," +
-                    "'" + reason.replace("'","\\'") + "'" +
+                    "" + new Date().getTime() + "," +
+                    "'" + reason.replace("'","\\'") + "', " +
+                    (opFlag ? 1: 0) +
                     ");");
 
             ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "").replace("'","\\'") + "'");

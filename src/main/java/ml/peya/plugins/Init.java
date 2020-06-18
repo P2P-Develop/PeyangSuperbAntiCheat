@@ -59,8 +59,9 @@ public class Init
                     "PLAYER nchar," +
                     "UUID nchar," +
                     "KICKID nchar," +
-                    "DATE nchar," +
-                    "REASON nchar" +
+                    "DATE bigint," +
+                    "REASON nchar," +
+                    "STAFF int" +
                     ");");
             return true;
         }

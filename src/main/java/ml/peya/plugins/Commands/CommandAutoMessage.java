@@ -1,6 +1,5 @@
 package ml.peya.plugins.Commands;
 
-import com.fasterxml.jackson.core.sym.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
@@ -58,10 +57,19 @@ public class CommandAutoMessage implements CommandExecutor
                 PeyangSuperbAntiCheat.getPlugin().reloadConfig();
                 sender.sendMessage(ChatColor.GREEN + "成功：定期メッセージを、" +
                         (PeyangSuperbAntiCheat.isAutoMessageEnabled ? "有効": "無効") +
-                        "化しました！");
-                return true;
+                        "化し1ました！");
+
+                if (!PeyangSuperbAntiCheat.isAutoMessageEnabled)
+                {
+                    if (RunnableUtil.isStarted(PeyangSuperbAntiCheat.autoMessage))
+                        PeyangSuperbAntiCheat.autoMessage.cancel();
+                }
+                else
+                    if (!RunnableUtil.isStarted(PeyangSuperbAntiCheat.autoMessage))
+                        PeyangSuperbAntiCheat.autoMessage.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 20 * (PeyangSuperbAntiCheat.time * 60));
+                    return true;
             case "time":
-                long time = 0L;
+                long time;
                 try
                 {
                     time = Long.parseLong(value);
@@ -80,6 +88,15 @@ public class CommandAutoMessage implements CommandExecutor
                 PeyangSuperbAntiCheat.getPlugin().saveConfig();
                 PeyangSuperbAntiCheat.getPlugin().reloadConfig();
                 sender.sendMessage(ChatColor.GREEN + "成功：定期メッセージの時間を、" + BigDecimal.valueOf(time).toPlainString() + " 分にセットしました！");
+
+                if (PeyangSuperbAntiCheat.isAutoMessageEnabled)
+                {
+                    if (RunnableUtil.isStarted(PeyangSuperbAntiCheat.autoMessage))
+                        PeyangSuperbAntiCheat.autoMessage.cancel();
+
+                    PeyangSuperbAntiCheat.autoMessage.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 20 * (time * 60));
+                }
+
                 return true;
             default:
                 sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：設定項目が見つかりませんでした！");
