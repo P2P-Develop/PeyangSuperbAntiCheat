@@ -69,6 +69,8 @@ public class CommandBans implements CommandExecutor
 
         for (BanAnalyzer.Bans ban: bans)
             sender.spigot().sendMessage(TextBuilder.getTextBan(ban, ban.getType()).create());
+        if (bans.size() == 0)
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：データベースに情報が見つかりませんでした。");
         return true;
     }
 }

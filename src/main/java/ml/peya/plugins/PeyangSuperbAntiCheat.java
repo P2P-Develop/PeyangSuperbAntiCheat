@@ -6,8 +6,10 @@ import com.zaxxer.hikari.*;
 import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Utils.*;
+
+
 import org.bukkit.*;
-import org.bukkit.configuration.file.*;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.*;
 
 import java.util.logging.*;
@@ -48,7 +50,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         eye =  new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
         banKick =  new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
 
-
         cheatMeta = new DetectingList();
         counting = new KillCounting();
         protocolManager = ProtocolLibrary.getProtocolManager();
@@ -81,6 +82,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         if (eye != null)
             eye.close();
+        if (banKick != null)
+            banKick.close();
         logger.info("PeyangSuperbAntiCheat has disabled!");
     }
 
