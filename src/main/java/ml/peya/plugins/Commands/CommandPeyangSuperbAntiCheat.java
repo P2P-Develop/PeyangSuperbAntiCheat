@@ -1,14 +1,9 @@
 package ml.peya.plugins.Commands;
 
-import com.sun.scenario.effect.impl.prism.sw.*;
 import ml.peya.plugins.Commands.CmdPub.*;
 import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.Utils.Permission;
 import org.bukkit.*;
 import org.bukkit.command.*;
-import org.bukkit.permissions.*;
-
-import java.util.logging.*;
 
 public class CommandPeyangSuperbAntiCheat implements CommandExecutor
 {

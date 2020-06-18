@@ -1,9 +1,8 @@
 package ml.peya.plugins.Commands.CmdTst;
 
-import com.sun.scenario.effect.impl.prism.sw.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
