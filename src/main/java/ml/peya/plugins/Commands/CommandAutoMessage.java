@@ -91,9 +91,12 @@ public class CommandAutoMessage implements CommandExecutor
 
                 if (PeyangSuperbAntiCheat.isAutoMessageEnabled)
                 {
-                    if (RunnableUtil.isStarted(PeyangSuperbAntiCheat.autoMessage))
+                    try
+                    {
                         PeyangSuperbAntiCheat.autoMessage.cancel();
-
+                    }
+                    catch (Exception ignored) { }
+                    PeyangSuperbAntiCheat.autoMessage = new AutoMessageTask();
                     PeyangSuperbAntiCheat.autoMessage.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 20 * (time * 60));
                 }
 

@@ -10,9 +10,6 @@ public class RunnableUtil
     {
         try
         {
-            Method method = BukkitRunnable.class.getDeclaredMethod("checkScheduled");
-            method.setAccessible(true);
-            method.invoke(runnable);
             return !runnable.isCancelled();
         }
         catch (Exception e)
