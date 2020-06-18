@@ -2,6 +2,9 @@ name: PeyangSuperbAntiCheat
 main: ml.peya.plugins.PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PeyangSuperbAntiCheat
+load: STARTUP
+
+api-version: 1.12.2
 
 depend: ["ProtocolLib"]
 loadbefore: ["ProtocolLib"]
@@ -15,28 +18,101 @@ commands:
     aliases: ["psac", "anticheat", "wdadmin", "psr"]
   aurabot:
     aliases: ["testaura", "auratest", "killauratest"]
-    permission: psr.mod
     usage: /aurabot <PlayerName>
   acpanic:
     aliases: ["testpanic", "panictest", "aurapanictest"]
-    permission: psr.mod
     usage: /acpanic <PlayerName>
   bans:
     aliases: ["banlist", "playerbans", "banlookup"]
-    permission: psr.mod
+    usage: /bans [-a | kick | ban] <Player_Name>
+
 permissions:
-  psr.report:
-    description: この権限を有効にすると、プレイヤーは、ハッキングレポートができます。
+  #Core
+  psr.member:
+    description: このプラグインのサーバメンバ用の権限セットです。レポートとかできます。
     default: true
+    children:
+      psr.help: true
+      psr.report: true
+      psr.notification: true
+
   psr.admin:
     description: このプラグインすべての権限を持ちます。
     default: op
+    children:
+      psr.drop: true
+      psr.mod: true
+      psr.error: true
+
   psr.mod:
     description: この権限を有効にすると、プレイヤーは、プレイヤーから寄せられたレポートを見たり、NPCを送ったり、レポートを削除することができます。
     default: op
+    children:
+      psr.kick: true
+      psr.aurapanic: true
+      psr.aurabot: true
+      psr.viewnpc: true
+      psr.viewreport: true
+      psr.showreport: true
+      psr.bans: true
+      psr.ntfadmin: true
+      psr.reportntf: true
+
+  #Member
+  psr.help:
+    description: この権限を持つプレイヤーは、PSRのヘルプが表示されます。
+    default: true
+
+  psr.report:
+    description: この権限を有効にすると、プレイヤーは、ハッキングレポートができます。
+    default: true
   psr.notification:
     description: プレイヤーがゲームから対処された際、通知が表示されます。
     default: true
+
+  #Moderator
+  psr.kick:
+    description: 他プレイヤーをキックできます。
+    default: op
+  psr.bans:
+    description: プレイヤーのBanを検索します。
+    default: op
+  psr.reportntf:
+    description: プレイヤーがレポートを出したときに通知されます。
+    default: op
+  psr.ntfadmin:
+    description: Peyang Cheat Detectに、プレイヤー名を含めます。
+    default: op
+
+  #NPC
+  psr.aurapanic:
+    description: この権限を持つプレイヤーは、他プレイヤーにPanicNPCを送りつけることができます。
+    default: op
+  psr.aurabot:
+    description: AuraBotNPCを送りつけられます。
+    default: op
   psr.viewnpc:
     description: 他プレイヤーを判定するNPCをこの権限がある人には可視化されます。
     default: op
+
+
+  #Report
+  psr.viewreport:
+    description: Reportを見ることができます。
+    default: op
+  psr.showreport:
+    description: Reportの詳細を見ることができます。
+    default: op
+
+  #Admin
+  psr.drop:
+    description: プレイヤーのReportをなかったことにします。
+    default: false
+  psr.error:
+    description: エラーが発生した際、通知されます。
+    default: false
+
+  #lock
+  psr.learn:
+    description: 実際のチートを用いて、NPCを学習させます。
+    default: false

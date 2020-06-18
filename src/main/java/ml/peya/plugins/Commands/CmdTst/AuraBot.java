@@ -1,8 +1,10 @@
 package ml.peya.plugins.Commands.CmdTst;
 
+import com.sun.scenario.effect.impl.prism.sw.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -12,6 +14,9 @@ public class AuraBot implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
+        if (!Permission.unPermMessage(sender, "psr.aurabot"))
+            return true;
+
         if (args.length != 1)
         {
             sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");

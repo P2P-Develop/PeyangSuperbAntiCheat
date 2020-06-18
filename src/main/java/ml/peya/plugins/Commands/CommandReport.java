@@ -15,7 +15,8 @@ public class CommandReport implements CommandExecutor
 {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-
+        if (!Permission.unPermMessage(sender, "psr.report"))
+            return true;
 
         if (args.length == 0)
         {

@@ -14,11 +14,8 @@ public class CommandBans implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if(!Permission.hasStaff(sender))
-        {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：権限がありません！");
+        if (!Permission.unPermMessage(sender, "psr.bans"))
             return true;
-        }
 
         if (args.length < 1)
         {

@@ -13,7 +13,7 @@ public class ReportUtils
     {
         for(Player player: Bukkit.getOnlinePlayers())
         {
-            if (Permission.hasStaff(player))
+            if (player.hasPermission("psr.reportntf"))
             {
                 player.sendMessage(ChatColor.GREEN + "[" +
                         ChatColor.BLUE + "PeyangSuperbAntiCheat" +
@@ -36,7 +36,7 @@ public class ReportUtils
     {
         for(Player player: Bukkit.getOnlinePlayers())
         {
-            if (!Permission.hasStaff(player))
+            if (!player.hasPermission("psr.reportntf"))
                 continue;
             ComponentBuilder hover = new ComponentBuilder("/psr show " + id);
             hover.color(net.md_5.bungee.api.ChatColor.AQUA);
@@ -60,7 +60,7 @@ public class ReportUtils
     {
         for(Player player: Bukkit.getOnlinePlayers())
         {
-            if (player.hasPermission("psr.admin"))
+            if (player.hasPermission("psr.error"))
             {
                 player.sendMessage(ChatColor.GREEN + "[" +
                         ChatColor.BLUE + "PeyangSuperbAntiCheat" +
