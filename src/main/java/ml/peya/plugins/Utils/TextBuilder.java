@@ -182,7 +182,7 @@ public class TextBuilder
 
     public static String getLine(String prefix, String value)
     {
-        return ChatColor.AQUA + ChatColor.BOLD.toString() + prefix + ChatColor.GREEN + "：" + ChatColor.BLUE.toString() + value;
+        return ChatColor.AQUA + prefix + ChatColor.WHITE + "：" + ChatColor.GREEN + value;
     }
 
 

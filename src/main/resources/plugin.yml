@@ -25,6 +25,9 @@ commands:
   bans:
     aliases: ["banlist", "playerbans", "banlookup"]
     usage: /bans [-a | kick | ban] <Player_Name>
+  automessage:
+    aliases: ["automsg"]
+    usage: /automessage <args>
 
 permissions:
   #Core
@@ -35,6 +38,7 @@ permissions:
       psr.help: true
       psr.report: true
       psr.notification: true
+      psr.regular: true
 
   psr.admin:
     description: このプラグインすべての権限を持ちます。
@@ -57,17 +61,20 @@ permissions:
       psr.bans: true
       psr.ntfadmin: true
       psr.reportntf: true
+      psr.automsg: true
 
   #Member
   psr.help:
     description: この権限を持つプレイヤーは、PSRのヘルプが表示されます。
     default: true
-
   psr.report:
     description: この権限を有効にすると、プレイヤーは、ハッキングレポートができます。
     default: true
   psr.notification:
-    description: プレイヤーがゲームから対処された際、通知が表示されます。
+    description: プレイヤーがゲームから対処された際に、通知が表示されます。
+    default: true
+  psr.regular:
+    description: 定期メッセージが送信されます。
     default: true
 
   #Moderator
@@ -82,6 +89,9 @@ permissions:
     default: op
   psr.ntfadmin:
     description: Peyang Cheat Detectに、プレイヤー名を含めます。
+    default: op
+  psr.automsg:
+    description: 定期メッセージの設定ができます。
     default: op
 
   #NPC

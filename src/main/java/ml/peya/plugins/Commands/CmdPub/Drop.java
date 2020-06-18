@@ -28,7 +28,7 @@ public class Drop
         {
             statement.execute("DeLeTe FrOm WaTcHeYe WhErE MnGiD = '" + args[1] + "'");
             statement.execute("DeLeTe FrOm WaTcHrEaSon WhErE MnGiD = '" + args[1] + "'");
-            sender.sendMessage(ChatColor.GREEN + ChatColor.BOLD.toString() + "成功：レポートの削除に成功しました！");
+            sender.sendMessage(ChatColor.GREEN+ "成功：レポートの削除に成功しました！");
         }
         catch (Exception e)
         {

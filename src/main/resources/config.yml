@@ -32,7 +32,12 @@ message:
   #「Lynx」Modと互換性をもたせます。
   lynx: true
 
+autoMessage:
+  #定期メッセージの有効/無効です
+  enabled: true
 
+  #定期メッセージの周期です。(分指定)
+  time: 15
 
 #スキンのuuidセットです。
 skins:

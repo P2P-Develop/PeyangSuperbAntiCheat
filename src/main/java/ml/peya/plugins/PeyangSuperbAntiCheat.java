@@ -27,7 +27,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static int banLeft;
     public static KillCounting counting;
     public static ProtocolManager protocolManager;
-
+    public static boolean isAutoMessageEnabled = false;
+    public static long time = 0L;
 
     private static PeyangSuperbAntiCheat plugin;
     @Override
@@ -71,8 +72,15 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("aurabot").setExecutor(new AuraBot());
         getCommand("acpanic").setExecutor(new AuraPanic());
         getCommand("bans").setExecutor(new CommandBans());
+        getCommand("automessage").setExecutor(new CommandAutoMessage());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
+
+        isAutoMessageEnabled = config.getBoolean("autoMessage.enabled");
+        time = config.getLong("autoMessage.time");
+
+        if (time == 0L)
+            time = 1L;
 
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }

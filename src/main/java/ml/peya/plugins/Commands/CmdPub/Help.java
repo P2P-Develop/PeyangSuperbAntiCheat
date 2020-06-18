@@ -34,6 +34,12 @@ public class Help
             flag = true;
         }
 
+        if (sender.hasPermission("psr.automessage"))
+        {
+            sender.sendMessage(ChatColor.AQUA + "/automessage" + ChatColor.DARK_PURPLE + " <項目名> [設置値]");
+            sender.sendMessage(ChatColor.GREEN + "定期メッセージの設定をします。");
+        }
+
         if (sender.hasPermission("psr.aurapanic"))
         {
             sender.sendMessage(ChatColor.AQUA + "/acpanic " + ChatColor.DARK_AQUA + "<PlayerName>" + ChatColor.DARK_PURPLE + " [Seconds]");
