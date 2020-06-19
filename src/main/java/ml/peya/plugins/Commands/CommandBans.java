@@ -1,6 +1,5 @@
 package ml.peya.plugins.Commands;
 
-import com.comphenix.protocol.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
@@ -14,14 +13,9 @@ public class CommandBans implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (!Permission.unPermMessage(sender, "psr.bans"))
+        if (ErrorMessageSender.unPermMessage(sender, "psr.bans") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
             return true;
 
-        if (args.length < 1)
-        {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
-            return true;
-        }
 
         String type;
         String name;

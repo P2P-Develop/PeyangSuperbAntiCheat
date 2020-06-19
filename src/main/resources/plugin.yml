@@ -56,8 +56,8 @@ permissions:
       psr.aurapanic: true
       psr.aurabot: true
       psr.viewnpc: true
-      psr.viewreport: true
-      psr.showreport: true
+      psr.view: true
+      psr.show: true
       psr.bans: true
       psr.ntfadmin: true
       psr.reportntf: true
@@ -107,10 +107,10 @@ permissions:
 
 
   #Report
-  psr.viewreport:
+  psr.view:
     description: Reportを見ることができます。
     default: op
-  psr.showreport:
+  psr.show:
     description: Reportの詳細を見ることができます。
     default: op
 

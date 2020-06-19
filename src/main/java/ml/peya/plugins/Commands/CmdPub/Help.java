@@ -25,7 +25,7 @@ public class Help
             flag = true;
         }
 
-        if (sender.hasPermission("psr.viewreport"))
+        if (sender.hasPermission("psr.view"))
         {
             sender.sendMessage(ChatColor.AQUA + "/" + label + " view " + ChatColor.DARK_PURPLE + "[ページ数 | プレイヤ名] [ページ数]");
             sender.sendMessage(ChatColor.GREEN + "レポートされた対処されてない問題を、");
@@ -55,7 +55,7 @@ public class Help
             flag = true;
         }
 
-        if (sender.hasPermission("psr.showreport"))
+        if (sender.hasPermission("psr.show"))
         {
             sender.sendMessage(ChatColor.AQUA + "/" + label + " show " + ChatColor.DARK_AQUA + "<管理iD>");
             sender.sendMessage(ChatColor.GREEN + "レポートを表示します。");
@@ -71,7 +71,7 @@ public class Help
         if (!(sender instanceof Player))
             return;
 
-        if (sender.hasPermission("psr.drop") || sender.hasPermission("psr.showreport"))
+        if (sender.hasPermission("psr.drop") || sender.hasPermission("psr.show"))
         {
             sender.sendMessage(ChatColor.YELLOW + "注意: 管理IDはランダムでつけられるものです。\n");
             sender.sendMessage(ChatColor.YELLOW + "プレイヤーからも操作できますが、コンソールから操作してください。");

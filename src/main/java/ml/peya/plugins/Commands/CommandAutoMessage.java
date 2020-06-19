@@ -12,7 +12,7 @@ public class CommandAutoMessage implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (!Permission.unPermMessage(sender, "psr.automsg"))
+        if (ErrorMessageSender.unPermMessage(sender, "psr.automsg"))
             return true;
 
         if (args.length == 0)

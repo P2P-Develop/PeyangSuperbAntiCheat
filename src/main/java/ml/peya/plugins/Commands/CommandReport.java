@@ -15,12 +15,12 @@ public class CommandReport implements CommandExecutor
 {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (!Permission.unPermMessage(sender, "psr.report"))
+        if (ErrorMessageSender.unPermMessage(sender, "psr.report"))
             return true;
 
         if (args.length == 0)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：変数が不足しています。/" + label + " help でヘルプを見てください。");
+            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数が不足しています。/" + label + " help でヘルプを見てください。");
             return true;
         }
         else if (args.length == 1)

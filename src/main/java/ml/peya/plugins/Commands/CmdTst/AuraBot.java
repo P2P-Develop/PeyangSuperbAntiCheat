@@ -3,7 +3,6 @@ package ml.peya.plugins.Commands.CmdTst;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -13,15 +12,8 @@ public class AuraBot implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (!Permission.unPermMessage(sender, "psr.aurabot"))
+        if (ErrorMessageSender.unPermMessage(sender, "psr.aurabot") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
             return true;
-
-        if (args.length != 1)
-        {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
-            return true;
-        }
-
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
