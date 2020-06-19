@@ -180,6 +180,40 @@ Add \-a to show all bans and kicks.
 
 ---
 
+### /automessage
+
+#### Alias
+---
+
+* /automsg
+
+#### Description
+---
+
+Set a auto notification message.
+
+#### Arguments
+---
+
+* /automsg  
+View settings.
+* /automsg \<Setkey\> \<Value\>  
+Set the value in the setting key.
+* /automsg toggle  
+Toggle display auto message.
+
+#### Settings
+---
+
+Server admin can change the following settings in the configuration file:  
+  
+| Name | Default value | Description |
+|:----:|:-------------:|-------------|
+| enabled | true | Toggle display auto message. |
+| time | 15 | Specifies the auto message cycle in minutes. |
+
+---
+
 ### /psac
 
 #### Aliases
