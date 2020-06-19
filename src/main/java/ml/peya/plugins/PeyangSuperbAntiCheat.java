@@ -110,7 +110,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             banKick.close();
         eye = null;
         banKick = null;
-        logger.info("Starting Auto-Message Task...");
+        logger.info("Stopping Auto-Message Task...");
         if (autoMessage != null && RunnableUtil.isStarted(autoMessage))
             autoMessage.cancel();
         logger.info("PeyangSuperbAntiCheat has disabled!");

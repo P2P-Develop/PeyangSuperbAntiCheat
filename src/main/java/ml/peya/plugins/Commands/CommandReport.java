@@ -122,10 +122,7 @@ public class CommandReport implements CommandExecutor
             ReportUtils.adminNotification(target.getName(), id, resStr.toArray(new String[0]));
         }
         else
-        {
             sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。運営に報告しています。");
-            ReportUtils.errorNotification("Error：Unknown");
-        }
         return true;
     }
 }
