@@ -6,7 +6,7 @@
 
     <groupId>ml.peya.plugins</groupId>
     <artifactId>PeyangSuperbAntiCheat</artifactId>
-    <version>Alpha-20050001</version>
+    <version>Alpha-20060001</version>
     <build>
         <plugins>
             <plugin>
