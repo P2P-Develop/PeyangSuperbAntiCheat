@@ -3,13 +3,11 @@ package ml.peya.plugins.Utils;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import net.md_5.bungee.api.chat.*;
-import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.math.*;
-import java.nio.*;
 import java.text.*;
 import java.util.*;
 
@@ -21,7 +19,7 @@ public class TextBuilder
                 ChatColor.AQUA + "=>" +
                 ChatColor.GREEN + ")");
         nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr view " + next));
-        ComponentBuilder nextHover = new ComponentBuilder(ChatColor.AQUA + "次へ行く");
+        ComponentBuilder nextHover = new ComponentBuilder(MessageEngihe.get("book.words.next"));
 
         nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, nextHover.create()));
         return nextBtn;
@@ -34,7 +32,7 @@ public class TextBuilder
                 ChatColor.AQUA + "<=" +
                 ChatColor.GREEN + ")");
         prevBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr view " + previous));
-        ComponentBuilder prevHover = new ComponentBuilder(ChatColor.AQUA + "前へ戻る");
+        ComponentBuilder prevHover = new ComponentBuilder(MessageEngihe.get("book.words.back"));
 
         prevBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, prevHover.create()));
 
@@ -47,49 +45,39 @@ public class TextBuilder
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 
 
-        ComponentBuilder hover = new ComponentBuilder( "クリックして\n");
-        hover.color(net.md_5.bungee.api.ChatColor.AQUA);
-        hover.append("チャットに貼り付け")
-                .color(net.md_5.bungee.api.ChatColor.AQUA);
+        ComponentBuilder hover = new ComponentBuilder(MessageEngihe.get("book.clickable"));
 
         StringBuilder reasonText = new StringBuilder();
 
         for (EnumCheatType type: types)
             reasonText.append("        ").append(type.getText()).append("\n");
 
-        ComponentBuilder b1 = new ComponentBuilder("    " + TextBuilder.getColor("報告者", issueById));
+        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngihe.get("book.text.issueBy", MessageEngihe.hsh("id", issueById)));
         b1.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
         b1.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
         sender.spigot().sendMessage(b1.create());
 
-        ComponentBuilder b2 = new ComponentBuilder("    " + TextBuilder.getColor("対象者", id));
+        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngihe.get("book.text.issueTo", MessageEngihe.hsh("id", id)));
         b2.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
         b2.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
         sender.spigot().sendMessage(b2.create());
 
-        sender.sendMessage("    " + TextBuilder.getColor("報告日時", formatter.format(date)));
+        sender.sendMessage("    " + MessageEngihe.get("book.text.dateTime", MessageEngihe.hsh("time", formatter.format(date))));
 
-        sender.sendMessage("    " + TextBuilder.getColor("報告理由", "\n" +reasonText.toString()));
+        sender.sendMessage("    " + MessageEngihe.get("book.text.reason", MessageEngihe.hsh("reason", reasonText.toString())));
 
-        sender.sendMessage(ChatColor.AQUA + "    脅威判定：" + SeverityLevelUtils.getSeverity(types).getColor() + SeverityLevelUtils.getSeverity(types).getText());
+        HashMap<String, Object> serv = new HashMap<>();
+        serv.put("color", SeverityLevelUtils.getSeverity(types).getColor());
+        serv.put("level", SeverityLevelUtils.getSeverity(types).getText());
+        sender.sendMessage(MessageEngihe.get("book.text.severity", serv));
     }
 
-    public static String getColor(String prefix, String value)
-    {
-        return ChatColor.AQUA +  prefix + ": " + ChatColor.GREEN + value;
-    }
 
     public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid, CommandSender sender)
     {
-        ComponentBuilder hover = new ComponentBuilder( "クリックして\n");
-        hover.color(net.md_5.bungee.api.ChatColor.GREEN);
-        hover.append("詳細を表示")
-                .color(net.md_5.bungee.api.ChatColor.GREEN);
+        ComponentBuilder hover = new ComponentBuilder(MessageEngihe.get("book.click.openAbout"));
 
-        ComponentBuilder dropHover = new ComponentBuilder( "クリックして\n");
-        dropHover.color(net.md_5.bungee.api.ChatColor.GREEN);
-        dropHover.append("レポートを削除")
-                .color(net.md_5.bungee.api.ChatColor.GREEN);
+        ComponentBuilder dropHover = new ComponentBuilder( MessageEngihe.get("book.click.deleteReport"));
 
         EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
 
@@ -114,7 +102,7 @@ public class TextBuilder
         b.append("   ");
         if (sender instanceof Player)
         {
-            b.append(ChatColor.WHITE + "[" + ChatColor.YELLOW + ChatColor.BOLD + "削除" + ChatColor.WHITE + "]")
+            b.append(MessageEngihe.get("book.click.delete"))
                     .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr drop " + mngid))
                     .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, dropHover.create()));
 
@@ -162,19 +150,18 @@ public class TextBuilder
 
     public static ComponentBuilder getBroadCastWdDetectionText()
     {
-        return new ComponentBuilder("[PEYANG CHEAT DETECTION]\n"+
-                net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +
-                "ハッキング、または不適切な発言によってゲームからプレイヤーが削除\n" +
-                net.md_5.bungee.api.ChatColor.RED + net.md_5.bungee.api.ChatColor.BOLD.toString() +
-                "されました。");
+        return new ComponentBuilder(MessageEngihe.get("kick.broadcastWd"));
     }
 
     public static ComponentBuilder getBroadCastWdDetectionText(Player player)
     {
         ComponentBuilder component = getBroadCastWdDetectionText();
 
-        ComponentBuilder hover = new ComponentBuilder(getLine("プレイヤー", player.getName()) + "\n" +
-                                                getLine("UUID", player.getUniqueId().toString()));
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", player.getName());
+        map.put("uuid", player.getUniqueId().toString());
+
+        ComponentBuilder hover = new ComponentBuilder(MessageEngihe.get("kick.broadcastAdmin", map));
         HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
         component.event(event);
         return component;
@@ -188,36 +175,31 @@ public class TextBuilder
 
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
     {
-        ComponentBuilder builder = new ComponentBuilder(ChatColor.AQUA + "-----" +
-                ChatColor.GREEN + "[" +
-                ChatColor.BLUE + "PeyangSuperbAntiCheat" +
-                ChatColor.GREEN + "]" +
-                ChatColor.AQUA + "-----\n");
+        ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("base.prefix") + "\n");
 
-        builder.append(ChatColor.GREEN + name + "さんのKillAuraチェック結果");
+        builder.append(MessageEngihe.get("message.auraCheck.result.prefix", MessageEngihe.hsh("name", name)));
         builder.append("\n");
-        builder.append(getLine("VL", String.valueOf(VL)));
+        builder.append(MessageEngihe.get("message.auraCheck.result.vl", MessageEngihe.hsh("vl", String.valueOf(VL))));
         builder.append("\n");
-        builder.append(String.format("%s0%%   %s50%%  %s100%%", EnumChatFormat.GREEN, EnumChatFormat.YELLOW, EnumChatFormat.RED));
+        builder.append(MessageEngihe.get("message.auraCheck.result.vlGraph"));
         builder.append("\n");
         builder.append(OptGraphGenerator.genGraph(VL, kickVL));
         builder.append("\n");
-        builder.append(ChatColor.AQUA + "結果：" +
-                (VL >= kickVL ? (EnumChatFormat.RED + "強制退出"): (EnumChatFormat.GREEN + "問題なし")));
+
+        String result = VL >= kickVL ? MessageEngihe.get("message.auraCheck.result.words.kick"): MessageEngihe.get("message.auraCheck.result.words.ok");
+
+        builder.append(MessageEngihe.get("message.auraCheck.result.result", MessageEngihe.hsh("result", result)));
+
         return builder;
     }
 
     public static ComponentBuilder textPanicRep(String name, int vl)
     {
-        ComponentBuilder builder = new ComponentBuilder(ChatColor.AQUA + "-----" +
-                ChatColor.GREEN + "[" +
-                ChatColor.BLUE + "PeyangSuperbAntiCheat" +
-                ChatColor.GREEN + "]" +
-                ChatColor.AQUA + "-----\n");
+        ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("base.prefix"));
 
-        builder.append(ChatColor.GREEN + name + "さんのKillAuraチェック結果");
+        builder.append(MessageEngihe.get("message.auraCheck.result.prefix", MessageEngihe.hsh("name", name)));
         builder.append("\n");
-        builder.append(ChatColor.GREEN + "VL：" + ChatColor.YELLOW + vl);
+        builder.append(MessageEngihe.get("message.auraCheck.result.vl", MessageEngihe.hsh("vl", String.valueOf(vl))));
         return builder;
     }
 

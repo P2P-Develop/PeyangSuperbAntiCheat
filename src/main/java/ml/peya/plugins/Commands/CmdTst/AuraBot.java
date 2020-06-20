@@ -7,6 +7,8 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
+import java.util.*;
+
 public class AuraBot implements CommandExecutor
 {
     @Override
@@ -17,7 +19,8 @@ public class AuraBot implements CommandExecutor
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対象プレイヤーが見つかりませんでした！");
+            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+
             return true;
         }
 
@@ -25,12 +28,18 @@ public class AuraBot implements CommandExecutor
 
         if(PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対象プレイヤーはテスト中です。");
+            sender.sendMessage(MessageEngihe.get("error.aura.testingNow"));
+
             return true;
         }
 
-        sender.sendMessage(ChatColor.GREEN + name + "さんにAuraBotを召喚します。");
-        sender.sendMessage(ChatColor.GREEN + PeyangSuperbAntiCheat.config.getString("npc.seconds") + "秒間お待ちください。");
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("type", "AuraBot");
+        map.put("seconds", PeyangSuperbAntiCheat.config.getString("npc.seconds"));
+
+        sender.sendMessage(MessageEngihe.get("message.aura.summon", map));
+
         NPCConnection.scan(player, DetectType.AURA_BOT, sender);
         return true;
     }

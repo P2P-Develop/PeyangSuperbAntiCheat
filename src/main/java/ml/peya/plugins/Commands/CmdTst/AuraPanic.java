@@ -7,6 +7,8 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
+import java.util.*;
+
 public class AuraPanic implements CommandExecutor
 {
     @Override
@@ -25,7 +27,8 @@ public class AuraPanic implements CommandExecutor
             }
             catch (Exception e)
             {
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：指定された秒数が数字ではありません。/psr help でヘルプを見てください。");
+                sender.sendMessage(MessageEngihe.get("error.aura.notNumeric"));
+
                 return true;
             }
         }
@@ -33,7 +36,8 @@ public class AuraPanic implements CommandExecutor
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対象プレイヤーが見つかりませんでした！");
+            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+
             return true;
         }
 
@@ -41,12 +45,18 @@ public class AuraPanic implements CommandExecutor
 
         if(PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対象プレイヤーはテスト中です。");
+            sender.sendMessage(MessageEngihe.get("error.aura.testingNow"));
+
             return true;
         }
 
-        sender.sendMessage(ChatColor.GREEN + name + "さんにAuraPanicBotを召喚します。");
-        sender.sendMessage(ChatColor.GREEN + String.valueOf(sec) + "秒間お待ちください。");
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("type", "AuraPanicBot");
+        map.put("seconds", String.valueOf(sec));
+
+        sender.sendMessage(MessageEngihe.get("message.aura.summon", map));
+
 
         DetectType type = DetectType.AURA_PANIC;
         type.setPanicTime(sec);

@@ -6,6 +6,7 @@ import ml.peya.plugins.*;
 import javax.net.ssl.*;
 import java.io.*;
 import java.net.*;
+import java.nio.charset.*;
 
 public class StringUtil
 {
@@ -18,7 +19,7 @@ public class StringUtil
             if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK)
             {
 
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));
                 StringBuilder builder = new StringBuilder();
                 String readed = reader.readLine();
                 while (readed != null)
@@ -26,7 +27,6 @@ public class StringUtil
                     builder.append(readed);
                     readed = reader.readLine();
                 }
-                System.out.println(builder.toString());
                 ObjectMapper mapper = new ObjectMapper();
                 return mapper.readTree(builder.toString());
             }

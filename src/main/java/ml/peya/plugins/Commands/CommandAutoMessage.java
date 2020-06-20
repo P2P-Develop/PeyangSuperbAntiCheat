@@ -6,6 +6,7 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 
 import java.math.*;
+import java.util.*;
 
 public class CommandAutoMessage implements CommandExecutor
 {
@@ -17,15 +18,14 @@ public class CommandAutoMessage implements CommandExecutor
 
         if (args.length == 0)
         {
-            sender.sendMessage(ChatColor.AQUA + "-----" +
-                    ChatColor.GREEN + "[" +
-                    ChatColor.BLUE + "PeyangSuperbAntiCheat" +
-                    ChatColor.GREEN + "]" +
-                    ChatColor.AQUA + "-----");
-            sender.sendMessage(ChatColor.AQUA + "項目名" + ChatColor.WHITE + "：" + ChatColor.GREEN + "現在値");
-            sender.sendMessage(TextBuilder.getLine("enable", PeyangSuperbAntiCheat.isAutoMessageEnabled ? "True": "False"));
-            sender.sendMessage(TextBuilder.getLine("time", PeyangSuperbAntiCheat.time + ChatColor.RED.toString() + "(分)"));
-            sender.sendMessage(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Tips：/automsg toggle で有効/無効を切り替えることができます。");
+            sender.sendMessage(MessageEngihe.get("base.prefix"));
+
+
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("enableValue", PeyangSuperbAntiCheat.isAutoMessageEnabled ? MessageEngihe.get("base.true"): MessageEngihe.get("base.false"));
+            map.put("time", PeyangSuperbAntiCheat.time);
+
+            sender.sendMessage(MessageEngihe.get("message.autoMsg.zeroLeng", map));
             return true;
         }
         else if (args.length == 1 && args[0].equals("toggle"))
@@ -34,11 +34,8 @@ public class CommandAutoMessage implements CommandExecutor
             return true;
         }
 
-        if (args.length != 2)
-        {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))
             return true;
-        }
 
         String path = args[0].toLowerCase();
         String value = args[1];
@@ -48,16 +45,20 @@ public class CommandAutoMessage implements CommandExecutor
             case "enable":
                 if (!value.toLowerCase().equals("true") && !value.toLowerCase().equals("false"))
                 {
-                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：" + value + "は、TrueでもFalseでもありません！");
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("value", value);
+                    map.put("true", MessageEngihe.get("base.true"));
+                    map.put("false", MessageEngihe.get("base.false"));
+                    sender.sendMessage(MessageEngihe.get("error.automessage.notTrueOrFalse", map));
                     return true;
                 }
                 PeyangSuperbAntiCheat.isAutoMessageEnabled = Boolean.parseBoolean(value.toLowerCase());
                 PeyangSuperbAntiCheat.config.set("autoMessage.enabled", PeyangSuperbAntiCheat.isAutoMessageEnabled);
                 PeyangSuperbAntiCheat.getPlugin().saveConfig();
                 PeyangSuperbAntiCheat.getPlugin().reloadConfig();
-                sender.sendMessage(ChatColor.GREEN + "成功：定期メッセージを、" +
-                        (PeyangSuperbAntiCheat.isAutoMessageEnabled ? "有効": "無効") +
-                        "化し1ました！");
+
+                sender.sendMessage(MessageEngihe.get("message.autoMsg.successTrueChange", MessageEngihe.hsh("value",
+                        PeyangSuperbAntiCheat.isAutoMessageEnabled ? MessageEngihe.get("base.enable"): MessageEngihe.get("base.disable"))));
 
                 if (!PeyangSuperbAntiCheat.isAutoMessageEnabled)
                 {
@@ -76,7 +77,7 @@ public class CommandAutoMessage implements CommandExecutor
                 }
                 catch (Exception e)
                 {
-                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString()+ "エラー：" + value + " は、有効な数字ではありません！");
+                    sender.sendMessage(MessageEngihe.get("error.automessage.notNumeric", MessageEngihe.hsh("value", value)));
                     return true;
                 }
 
@@ -87,7 +88,7 @@ public class CommandAutoMessage implements CommandExecutor
                 PeyangSuperbAntiCheat.config.set("autoMessage.time", PeyangSuperbAntiCheat.time);
                 PeyangSuperbAntiCheat.getPlugin().saveConfig();
                 PeyangSuperbAntiCheat.getPlugin().reloadConfig();
-                sender.sendMessage(ChatColor.GREEN + "成功：定期メッセージの時間を、" + BigDecimal.valueOf(time).toPlainString() + " 分にセットしました！");
+                sender.sendMessage(MessageEngihe.get("message.autoMsg.successTimeChange", MessageEngihe.hsh("value", BigDecimal.valueOf(time).toPlainString())));
 
                 if (PeyangSuperbAntiCheat.isAutoMessageEnabled)
                 {
@@ -102,7 +103,8 @@ public class CommandAutoMessage implements CommandExecutor
 
                 return true;
             default:
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：設定項目が見つかりませんでした！");
+                sender.sendMessage(MessageEngihe.get("error.automessage.notFoundSettings"));
+
                 return true;
         }
     }

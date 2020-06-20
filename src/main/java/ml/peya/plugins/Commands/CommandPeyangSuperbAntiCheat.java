@@ -1,8 +1,7 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Commands.CmdPub.*;
-import org.bukkit.*;
+import ml.peya.plugins.*;
 import org.bukkit.command.*;
 
 import java.util.*;
@@ -49,7 +48,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 Kick.run(sender, args);
                 break;
             default:
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対応するコマンドが見つかりませんでした。/" + label + " help でヘルプを見てください。");
+                sender.sendMessage(MessageEngihe.get("error.main.notFoundCommand", MessageEngihe.hsh("label", label)));
         }
 
         return true;

@@ -15,11 +15,8 @@ public class View
 {
     public static void run(CommandSender sender,  String[] args)
     {
-        sender.sendMessage(ChatColor.AQUA + "-----" +
-                ChatColor.GREEN + "[" +
-                ChatColor.BLUE + "PeyangSuperbAntiCheat" +
-                ChatColor.GREEN + "]" +
-                ChatColor.AQUA + "-----");
+        sender.sendMessage(MessageEngihe.get("base.prefix"));
+
         int start = 0;
         int next;
         int previous;
@@ -77,7 +74,8 @@ public class View
 
         if (count == 0)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：レポートが1件も見つかりませんでした。");
+            sender.sendMessage(MessageEngihe.get("error.view.notFoundReport"));
+
             return;
         }
         sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(prevBtn, nextBtn, !(previous < 0), !(count < 5)).create());

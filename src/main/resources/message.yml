@@ -1,0 +1,194 @@
+base:
+  prefix: "%%aqua%%-----%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%]%%aqua%%-----"
+  true: "%%green%%True"
+  false: "%%red%%False"
+  enable: "%%green%%有効"
+  disable: "%%red%%無効"
+
+
+error:
+  minArgs: "%%red%%%%bold%%エラー：引数が不足しています。/%%label%% help でヘルプを見てください。"
+  playerNotFound: "%%red%%%%bold%%エラー：対象プレイヤーが見つかりませんでした。"
+  unknownSQLError: "%%red%%%%bold%%エラー：不明なSQLエラーが発生しました。運営に報告しています。"
+  notHavePermission: "%%red%%%%bold%%エラー：権限がありません！"
+  invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psr help でヘルプを見てください。"
+
+  report:
+    requirePlayer: "%%red%%%%bold%%エラー：理由短縮モードは、プレイヤーからのみ実行することができます。"
+    invalidReason: "%%red%%%%bold%%エラー：理由が正しくありません！"
+    reasonNotSelected: "%%red%%%%bold%%エラー：理由が選択されていません！"
+    alreadyReported: "%%red%%%%bold%%エラー：既に報告済みです！"
+
+  main:
+    notFoundCommand: "%%red%%%%bold%%エラー：対応するコマンドが見つかりませんでした。/%%label%% help でヘルプを見てください。"
+
+  psr:
+    notPage: "%%red%%%%bold%%エラー：表示できるものが何もありません！"
+
+  view:
+    notFoundReport: "%%red%%%%bold%%エラー：レポートが1件も見つかりませんでした。"
+
+  showDrop:
+    notFoundReport: "%%red%%%%bold%%エラー：IDに合致するレポートが見つかりませんでした！"
+
+  learn:
+    requirePlayer: "%%red%%%%bold%%エラー：学習は、プレイヤーからのみ実行することができます。"
+
+  aura:
+    testingNow: "%%red%%%%bold%%エラー：対象プレイヤーは、現在テスト中です。"
+    notNumeric: "%%red%%%%bold%%エラー：指定された秒数が数字ではありません。/psr helpでヘルプを見てください。"
+
+  bans:
+    unknownSearchType: "%%red%%%%bold%%エラー：検索タイプが不明です。"
+    databaseInfoNotFound: "%%red%%%%bold%%エラー：データベースに情報が見つかりませんでした。"
+
+  automessage:
+    notTrueOrFalse: "%%red%%%%bold%%%%value%% は、%%true%%%%red%%でも、%%false%%でもありません。"
+    notNumeric: "%%red%%%bold%エラー：%%value%%は、有効な数字ではありません！"
+    notFoundSettings: "%%red%%%%bold%%エラー：設定項目が見つかりませんでした！"
+
+command:
+  report:
+    help: "\
+    %%aqua%%/%%label%% <PlayerName> [reason...]\n\
+    %%green%%プレイヤーを報告します。\n\
+    %%aqua%%/%%label%% help\n\
+    %%green%%このコマンドです。
+    "
+  help:
+    report: "\
+    %%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>\n\
+    %%green%%プレイヤーをレポートします。\
+    "
+    view: "\
+    %%aqua%%/%%label%% view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]\n\
+    %%green%%レポートされた、対処されていない問題を重大度順に表示します。
+    "
+    automessage: "\
+    %%aqua%%/automessage%%dark_purple%% <項目名>%%dark_purple%% [設定値]\n\
+    %%green%%定期メッセージの設定をします。
+    "
+    aurapanic: "\
+    %%aqua%%/acpanic %%dark_aqua%%<PlayerName>\n\
+    %%green%%指定したプレイヤーの背後に、NPCを召喚します。
+    "
+    aurabot: "\
+    %%aqua%%/aurabot%%dark_aqua%% <PlayerName>\n\
+    %%green%%指定したプレイヤーを中心に\n\
+    %%green%%回るNPCを召喚します。
+    "
+    show: "\
+    %%aqua%%/%%label%% show %%dark_aqua%%<管理iD>\n\
+    %%green%%レポートを表示します。
+    "
+    drop: "\
+    %%aqua%%/%%label%% drop%%dark_aqua%% <管理iD>\n\
+    %%green%%レポートを削除します。
+    "
+    kick: "\
+    %%aqua%%/%%label%% kick %%dark_aqua%% <PlayerName>%%dark_purple%% [理由...]\n\
+    %%green%%プレイヤーをキックします。\n\
+    %%gray%%%%italic%%Tips：第2引数に、testをセットすると、テストモードでキックされます。
+    "
+    bans: "\
+    %%aqua%%/babs %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>\n\
+    %%green%%プレイヤーのBAN(キック)履歴を照会します。
+    "
+
+    mngIdWarning: "\
+    %%yellow%%注意：管理iDはランダムで割り当てられる32文字の英数文字列です。\n\
+    %%yellow%%プレイヤーからも操作できますが、コンソールから操作することを推奨します。
+    "
+
+message:
+  report:
+    thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの権限を理解しており、できるだけ早急に審査いたします。"
+  drop:
+    success: "%%green%%成功：レポートの削除に成功しました！"
+  kick:
+    test: "%%green%%テストモード%%red%%%%bold%%で、プレイヤーをキックします。"
+  aura:
+    summon: "\
+    %%green%%%%name%%さんに%%type%%を召喚します。\n\
+    %%green%%%%seconds%%秒間お待ち下さい。
+    "
+  autoMsg:
+    zeroLeng: "\
+    %%aqua%%項目名%%white%%：%%green%%現在値%%\n\
+    %%aqua%%enable%%white%%：%%enableValue%%\n\
+    %%aqua%%timer%%white%%：%%time%%%%red%%(分)\n\
+    %%gray%%%%italic%%Tips：/automsg toggle で%%green%%有効%%gray%%/%%red%%無効 %%gray%%を切り替えることができます。
+    "
+    successTrueChange: "%%green%%成功：定期メッセージを%%value%%化%%green%%しました！"
+    successTimeChange: "%%green%%成功：定期メッセージの時間を、%%value%%分にセットしました！"
+
+  auraCheck:
+    result:
+      prefix: "%%green%%%%name%% さんのKillAuraチェック結果"
+      vl: "%%aqua%%VL%%white%%：%%vl%%"
+      vlGraph: "%%green%%0%   %%yellow%%50%   %%red%%100%"
+      result: "%%aqua%%結果%%white%%：%%result%%"
+      words:
+        kick: "%%red%%強制退出"
+        ok: "%%green%%問題なし"
+
+autoMessage: "\
+%%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\
+%%white%%Peyang Anti Cheat はこの７日間に %%red%%%%bold%%%%count%%%%reset%% 人のプレイヤーをキックしました。\n\
+%%white%%スタッフがこの７日間に追加で %%red%%%%bold%%%%staff_count%%%%reset%% 人をキックしました。\n\
+%%red%%禁止されている MOD はアクセス禁止の対象です！
+"
+reportbook:
+  cheat: "どんなチートを使っていましたか？"
+  submit: "%%dark_green%%%%bold%%レポートを提出"
+  cancel: "%%red%%レポートをキャンセル"
+
+
+book:
+  words:
+    next: "%%aqua%%次へ行く"
+    back: "%%aqua%%前へ戻る"
+    delete: "%%white%%[%%yellow%%%%bold%%削除%%reset%%%%white%%]"
+  clickable: "\
+  %%aqua%%クリックして\n\
+  %%aqua%%チャットに貼り付け
+  "
+  text:
+    report : "%%dark_green%%%%bold%%チートレポート"
+    uuid: "%%aqua%%%%bold%%UUID%%black%%：%%blue%%%%uuid%%"
+    unix: "%%aqua%%%%bold%%UNIX秒%%black%%：%%blue%%%%unix%%"
+    issueBy: "%%aqua%%%%bold%%報告者%%black%%：%%blue%%%%id%%"
+    issueTo: "%%aqua%%%%bold%%対象者%%black%%：%%blue%%%%id%%"
+    dateTime: "%%aqua%%%%bold%%報告日時%%black%%：%%blue%%%%time%%"
+    reason: "%%aqua%%%%bold%%報告理由%%black%%：%%blue%%%%reason%%"
+    severity: "%%aqua%%%%bold%%脅威判定%%black%%：%%color%%%%bold%%%%level%%"
+
+  click:
+    openAbout: "%%green%%クリックして詳細を表示"
+    deleteReport: "%%green%%クリックしてレポートを%%red%%削除"
+    delete: "%%white%%[%%yellow%%%%bold%%削除%%reset%%]"
+
+kick:
+  broadcastWd: "\
+  [PEYANG CHEAT DETECTION]\n\
+  %%red%%%%bold%%ハッキング、または不適切な発言によってゲームからプレイヤーが削除\n\
+  %%red%%%%bold%%されました。
+  "
+
+  broadcast: "\
+  %%red%%%%bold%%違反行為をしたプレイヤーをゲームから対処しました。\n\
+  %%reset%%%%aqua%%ご報告ありがとうございました！
+  "
+
+  broadcastAdmin: "\
+  %%aqua%%プレイヤー%%white%%：%%blue%%%%name%%\n\
+  %%aqua%%UUID%%white%%：%%blue%%%%uuid%%
+  "
+
+  reason: "\
+  %%red%%あなたは、このサーバーからキックされました！\n
+  \n\
+  %%gray%%理由： %%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+  \n\
+  %%gray%%Kick ID：%%white%%%%id%%
+  "

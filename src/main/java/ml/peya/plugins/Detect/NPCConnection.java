@@ -53,7 +53,6 @@ public class NPCConnection
                     catch (Exception e)
                     {
                         e.printStackTrace();
-                        sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。運営に報告しています。");
                         ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                     }
 

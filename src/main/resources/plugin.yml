@@ -39,7 +39,6 @@ permissions:
       psr.report: true
       psr.notification: true
       psr.regular: true
-
   psr.admin:
     description: このプラグインすべての権限を持ちます。
     default: op

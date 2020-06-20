@@ -1,5 +1,6 @@
 package ml.peya.plugins.Commands.CmdPub;
 
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -14,11 +15,13 @@ public class Kick
         if (args.length == 3 && args[2].equals("test"))
         {
 
-            sender.sendMessage(ChatColor.GREEN + "テストモード" + ChatColor.RED + ChatColor.BOLD + "で、プレイヤーをキックします。");
+            sender.sendMessage(MessageEngihe.get("message.kick.test"));
+
             Player player = Bukkit.getPlayer(args[1]);
             if (player == null)
             {
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対象プレイヤーが見つかりませんでした！");
+                sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+
                 return;
             }
 
@@ -28,14 +31,16 @@ public class Kick
 
         if (args.length < 3)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
+            sender.sendMessage(MessageEngihe.get("error.minArgs", MessageEngihe.hsh("label", "psr")));
+
             return;
         }
 
         Player player = Bukkit.getPlayer(args[1]);
         if (player == null)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：対象プレイヤーが見つかりませんでした！");
+            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+
             return;
         }
 

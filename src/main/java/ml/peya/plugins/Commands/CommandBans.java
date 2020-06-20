@@ -13,7 +13,7 @@ public class CommandBans implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psr.bans") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
+        if (ErrorMessageSender.unPermMessage(sender, "psr.bans") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
             return true;
 
 
@@ -32,7 +32,8 @@ public class CommandBans implements CommandExecutor
 
         if (!type.equals("-a") && !type.toLowerCase().equals("ban") && !type.toLowerCase().equals("kick"))
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：検索のタイプが不明です。");
+            sender.sendMessage(MessageEngihe.get("error.bans.unknownSearchType"));
+
             return true;
         }
 
@@ -52,7 +53,7 @@ public class CommandBans implements CommandExecutor
 
         if (player == null)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：プレイヤーが見つかりませんでした。");
+            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
             return true;
         }
 
@@ -61,7 +62,7 @@ public class CommandBans implements CommandExecutor
         for (BanAnalyzer.Bans ban: bans)
             sender.spigot().sendMessage(TextBuilder.getTextBan(ban, ban.getType()).create());
         if (bans.size() == 0)
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：データベースに情報が見つかりませんでした。");
+            sender.sendMessage(MessageEngihe.get("error.bans.databaseInfoNotFound"));
         return true;
     }
 }

@@ -17,7 +17,8 @@ public class Learn
     {
         if (sender instanceof ConsoleCommandSender)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：学習は、プレイヤーからのみ実行することができます。");
+            sender.sendMessage(MessageEngihe.get("error.learn.requirePlayer"));
+
             return;
         }
 
@@ -38,7 +39,8 @@ public class Learn
                 catch (Exception e)
                 {
                     e.printStackTrace();
-                    sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。");
+                    sender.sendMessage(MessageEngihe.get("error.unknownSQLError"));
+
                     ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
 

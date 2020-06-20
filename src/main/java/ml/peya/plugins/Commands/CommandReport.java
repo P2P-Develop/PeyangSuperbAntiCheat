@@ -20,32 +20,25 @@ public class CommandReport implements CommandExecutor
 
         if (args.length == 0)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数が不足しています。/" + label + " help でヘルプを見てください。");
+            sender.sendMessage(MessageEngihe.get("error.minArgs", MessageEngihe.hsh("label", label)));
             return true;
         }
         else if (args.length == 1)
         {
             if (args[0].equals("help"))
             {
-                sender.sendMessage(ChatColor.AQUA + "-----" +
-                        ChatColor.GREEN + "[" +
-                        ChatColor.BLUE + "PeyangSuperbAntiCheat" +
-                        ChatColor.GREEN + "]" +
-                        ChatColor.AQUA + "-----");
-                sender.sendMessage(ChatColor.AQUA + "/" + label + " <PlayerName> [reason...]");
-                sender.sendMessage(ChatColor.GREEN + "プレイヤーを報告します。");
-                sender.sendMessage(ChatColor.AQUA + "/" + label + " help");
-                sender.sendMessage(ChatColor.GREEN + "このコマンドです。");
+                sender.sendMessage(MessageEngihe.get("base.prefix"));
+                sender.sendMessage(MessageEngihe.get("command.report.help", MessageEngihe.hsh("label", label)));
                 return true;
             }
             if (Bukkit.getPlayer(args[0]) == null)
             {
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：報告対象プレイヤーが見つかりませんでした。");
+                sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
                 return true;
             }
             else if (sender instanceof ConsoleCommandSender)
             {
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：理由短縮モードは、プレイヤーからのみ実行することができます。");
+                sender.sendMessage(MessageEngihe.get("error.report.requirePlayer"));
                 return true;
             }
             Player target = Bukkit.getPlayer(args[0]);
@@ -63,7 +56,7 @@ public class CommandReport implements CommandExecutor
 
         if (Bukkit.getPlayer(args[0]) == null)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：報告対象プレイヤーが見つかりませんでした。");
+            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
             return true;
         }
 
@@ -81,9 +74,9 @@ public class CommandReport implements CommandExecutor
         if (types.size() == 0)
         {
             if (!reasons.contains("bybooks"))
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：理由が正しくありません！");
+                sender.sendMessage(MessageEngihe.get("error.report.invalidReason"));
             else if (args.length == 2 && reasons.contains("bybooks"))
-                sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：理由が選択されていません！");
+                sender.sendMessage(MessageEngihe.get("error.report.reasonNotSelected"));
 
             return true;
         }
@@ -94,7 +87,7 @@ public class CommandReport implements CommandExecutor
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：既に報告済みです！");
+            sender.sendMessage(MessageEngihe.get("error.report.alreadyReported"));
             return true;
         }
 
@@ -106,7 +99,7 @@ public class CommandReport implements CommandExecutor
 
         if (successFlag)
         {
-            sender.sendMessage(ChatColor.GREEN + "不正行為の報告、ありがとうございます。私たちはあなたの懸念を理解しており、できるだけ早急に審査いたします。");
+            sender.sendMessage(MessageEngihe.get("message.report.thanks"));
 
             if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
             {
@@ -122,7 +115,7 @@ public class CommandReport implements CommandExecutor
             ReportUtils.adminNotification(target.getName(), id, resStr.toArray(new String[0]));
         }
         else
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。運営に報告しています。");
+            sender.sendMessage(MessageEngihe.get("error.unknownSQLError"));
         return true;
     }
 }

@@ -9,7 +9,7 @@ public class ErrorMessageSender
     {
         if (sender.hasPermission(perm))
             return false;
-        sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：権限がありません！");
+        sender.sendMessage(MessageEngihe.get("error.notHavePermission"));
         return true;
     }
 
@@ -17,7 +17,7 @@ public class ErrorMessageSender
     {
         if (args.length < min || args.length > max)
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
+            sender.sendMessage(MessageEngihe.get("error.invalidArgument"));
             return true;
         }
 

@@ -1,8 +1,6 @@
 package ml.peya.plugins;
 
 import ml.peya.plugins.Utils.*;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
@@ -52,45 +50,12 @@ public class AutoMessageTask extends BukkitRunnable
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
         }
 
-        ComponentBuilder builder = new ComponentBuilder("");
-        builder.append("\n");
-        builder.append("[PEYANG ANTI CHEAT からのお知らせ]")
-                .color(ChatColor.DARK_RED);;
-        builder.append("\n");
-
-        builder.append("Peyang Anti Cheat はこの７日間に ")
-                .color(ChatColor.WHITE);
-
-        builder.append(String.format("%,d", watchdog))
-                .color(ChatColor.RED)
-                .bold(true);
-
-        builder.append(" 人のプレイヤーをキックしました。")
-                .color(ChatColor.WHITE)
-                .bold(false);
-
-        builder.append("\n");
-
-        builder.append("スタッフがこの７日間に追加で ")
-                .color(ChatColor.WHITE);
-
-        builder.append(String.format("%,d", staff))
-                .color(ChatColor.RED)
-                .bold(true);
-
-        builder.append(" 人をキックしました。")
-                .color(ChatColor.WHITE)
-                .bold(false);
-
-        builder.append("\n");
-
-        builder.append("禁止されている MOD はアクセス禁止の対象です！")
-                .color(ChatColor.RED);
-
-        builder.append("\n");
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("count", String.valueOf(watchdog));
+        map.put("staff_count", String.valueOf(staff));
 
         for (Player player: Bukkit.getOnlinePlayers())
             if (player.hasPermission("psr.regular"))
-                player.spigot().sendMessage(builder.create());
+                player.sendMessage(MessageEngihe.get("autoMessage", map));
     }
 }

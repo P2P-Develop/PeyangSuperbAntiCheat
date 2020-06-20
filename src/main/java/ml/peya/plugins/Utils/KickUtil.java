@@ -46,9 +46,7 @@ public class KickUtil
             @Override
             public void run()
             {
-                Bukkit.broadcast(ChatColor.RED + ChatColor.BOLD.toString() +
-                        "違反行為をしたプレイヤーをゲームから対処しました。\n" +
-                        ChatColor.AQUA + "ご報告ありがとうございました！", "psr.notification");
+                Bukkit.broadcast(MessageEngihe.get("kick.broadcast"), "psr.notification");
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
@@ -59,15 +57,19 @@ public class KickUtil
         if (PeyangSuperbAntiCheat.config.getBoolean("kick.lightning"))
             player.getWorld().strikeLightningEffect(player.getLocation());
 
-        StringBuilder id = new StringBuilder("#");
+        StringBuilder id = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < 8; i++)
-        {
             if (random.nextBoolean())
                 id.append(random.nextInt(9));
             else
                 id.append((char) (random.nextInt(5) + 'A'));
-        }
+
+        StringBuilder ggId = new StringBuilder();
+        for (int i = 0; i < 7; i++)
+            if (random.nextBoolean())
+                ggId.append(random.nextInt(9));
+
 
         String reasonP;
 
@@ -78,15 +80,14 @@ public class KickUtil
         else
             reasonP = "PEYANG CHEAT DETECTION ";
 
-        String message = ChatColor.RED + "あなたは、このサーバーからキックされました！" +
-                "\n" +
-                ChatColor.GRAY + "理由：" +
-                ChatColor.WHITE +
-                reasonP +
-                "\n" +
-                "\n" +
-                ChatColor.GRAY + "Kick ID：" +
-                ChatColor.WHITE + id.toString();
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("reason", reasonP);
+        map.put("ggid", ggId.toString());
+        map.put("id", id.toString());
+
+        String message = MessageEngihe.get("kick.reason", map);
+
         if (isTest)
         {
             player.kickPlayer(message);

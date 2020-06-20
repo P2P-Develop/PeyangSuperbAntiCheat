@@ -3,17 +3,14 @@ package ml.peya.plugins;
 import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
 import com.zaxxer.hikari.*;
-import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.Commands.CmdTst.*;
+import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.Utils.*;
-
-
 import org.bukkit.*;
-import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.*;
 import org.bukkit.scheduler.*;
 
-import java.sql.*;
 import java.util.logging.*;
 
 public class PeyangSuperbAntiCheat extends JavaPlugin

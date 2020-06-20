@@ -1,5 +1,6 @@
 package ml.peya.plugins.Commands.CmdPub;
 
+import com.sun.org.apache.xerces.internal.util.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.*;
@@ -16,15 +17,13 @@ public class Show
 {
     public static void run(CommandSender sender,  String[] args)
     {
-        if (args.length != 2)
-        {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：引数の数が不正です。/psr help でヘルプを見てください。");
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))
             return;
-        }
 
         if (WatchEyeManagement.isInjection(args[1]) || !WatchEyeManagement.isExistsRecord(args[1]))
         {
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：IDに合致するレポートが見つかりませんでした！");
+            sender.sendMessage(MessageEngihe.get("error.showDrop.notFoundReport"));
+
             return;
         }
 
@@ -56,7 +55,8 @@ public class Show
         catch (Exception e)
         {
             e.printStackTrace();
-            sender.sendMessage(ChatColor.RED + ChatColor.BOLD.toString() + "エラー：不明なSQLエラーが発生しました。運営に報告しています。");
+            sender.sendMessage(MessageEngihe.get("error.unknownSQLError"));
+
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
         }
     }
