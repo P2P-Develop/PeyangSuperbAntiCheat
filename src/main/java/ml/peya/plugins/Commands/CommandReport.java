@@ -48,9 +48,21 @@ public class CommandReport implements CommandExecutor
         }
 
 
-        ArrayList<String> reasons = new ArrayList<>(Arrays.asList(args));
+        ArrayList<String> reasonsV = new ArrayList<>(Arrays.asList(args));
+        reasonsV.remove(0);
 
-        reasons.remove(0);
+        ArrayList<String> reasons = new ArrayList<>();
+
+        for (String reason: reasonsV)
+        {
+            if (reasons.contains(reason))
+            {
+                reasons.remove(reason);
+                continue;
+            }
+
+            reasons.add(reason);
+        }
 
         ArrayList<EnumCheatType> types = CheatTypeUtils.getCheatTypeArrayFromString(reasons.toArray(new String[0]));
 

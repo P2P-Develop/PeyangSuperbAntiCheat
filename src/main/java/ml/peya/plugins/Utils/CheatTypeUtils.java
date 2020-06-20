@@ -52,6 +52,7 @@ public class CheatTypeUtils
                     type.setSelected(true);
             }
         }
+
         return types;
     }
 
