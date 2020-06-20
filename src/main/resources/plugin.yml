@@ -3,7 +3,7 @@ main: ml.peya.plugins.PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PeyangSuperbAntiCheat
 load: STARTUP
-
+authors: ["Peyang#0001", "Lemonade19x", "Potato1682"]
 api-version: 1.12.2
 
 depend: ["ProtocolLib"]
@@ -12,22 +12,27 @@ loadbefore: ["ProtocolLib"]
 commands:
   report:
     aliases: ["peyangreport", "pcr", "rep", "report", "wdr"]
-    permission: psr.report
-    usage: /peyangreport <PlayerName> <type>
+    usage: /report <PlayerName> [type]
+    description: "プレイヤーをレポートします。"
   peyangsuperbanticheat:
     aliases: ["psac", "anticheat", "wdadmin", "psr"]
+    description: "PeyangSuperbAntiCheatのメインコマンドです。"
   aurabot:
     aliases: ["testaura", "auratest", "killauratest"]
     usage: /aurabot <PlayerName>
+    description: "プレイヤーに回るNPCを召喚します。。"
   acpanic:
     aliases: ["testpanic", "panictest", "aurapanictest"]
     usage: /acpanic <PlayerName>
+    description: "プレイヤーの背後にNPCを召喚します。"
   bans:
     aliases: ["banlist", "playerbans", "banlookup"]
     usage: /bans [-a | kick | ban] <Player_Name>
+    description: "プレイヤーのBAN(Kick)履歴を参照します。"
   automessage:
     aliases: ["automsg"]
     usage: /automessage <args>
+    description: "定期メッセージの設定をします。"
 
 permissions:
   #Core

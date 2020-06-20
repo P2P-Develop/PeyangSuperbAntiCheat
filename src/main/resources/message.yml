@@ -103,6 +103,7 @@ command:
 message:
   report:
     thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの権限を理解しており、できるだけ早急に審査いたします。"
+    cancel: "%%red%%報告を閉じました！"
   drop:
     success: "%%green%%成功：レポートの削除に成功しました！"
   kick:

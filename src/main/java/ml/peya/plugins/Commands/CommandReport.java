@@ -31,7 +31,13 @@ public class CommandReport implements CommandExecutor
                 sender.sendMessage(MessageEngihe.get("command.report.help", MessageEngihe.hsh("label", label)));
                 return true;
             }
-            if (Bukkit.getPlayer(args[0]) == null)
+
+            if (args[0].equals("$$cancel$$"))
+            {
+                sender.sendMessage(MessageEngihe.get("message.report.cancel"));
+                return true;
+            }
+            else if (Bukkit.getPlayer(args[0]) == null)
             {
                 sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
                 return true;
