@@ -125,7 +125,7 @@ message:
   auraCheck:
     result:
       prefix: "%%green%%%%name%% さんのKillAuraチェック結果"
-      vl: "%%aqua%%VL%%white%%：%%vl%%"
+      vl: "%%aqua%%VL%%white%%：%%blue%%%%vl%%"
       vlGraph: "%%green%%0%   %%yellow%%50%   %%red%%100%"
       result: "%%aqua%%結果%%white%%：%%result%%"
       words:
