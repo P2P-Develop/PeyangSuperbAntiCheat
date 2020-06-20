@@ -69,7 +69,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 本で表示される順に書きます（たぶん）
 | 理由 | エイリアス | 簡単な説明 |
 |:-:|:-:|-|
-| Fly | flight | プレイヤーが空を飛べるようにできるチートです。 |
+| Fly | flight | プレイヤーがクリエイティブモード以外でも空を飛べるようにできるチートです。 |
 | KillAura | killaura, aura, ka | 範囲に入った人をより早く攻撃できるチートです。 |
 | AutoClicker | autoclicker, ac, autoclick | 自動で左クリックができるチートです（高橋名人などのツールやマウスなどについているマクロでもAutoClickerに値します） |
 | Speed | speed, bhop, timer | ありえない速度で歩けるようになるチートです（BunnyHopやTimerはSpeedに値します） |
