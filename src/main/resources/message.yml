@@ -103,6 +103,7 @@ command:
 message:
   report:
     thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの懸念を理解しており、できるだけ早急に審査いたします。"
+    cancel: "%%red%%報告を閉じました！"
   drop:
     success: "%%green%%成功：報告の削除に成功しました！"
   kick:
@@ -125,7 +126,7 @@ message:
   auraCheck:
     result:
       prefix: "%%green%%%%name%% さんのKillAuraチェック結果"
-      vl: "%%aqua%%VL%%white%%：%%vl%%"
+      vl: "%%aqua%%VL%%white%%：%%blue%%%%vl%%"
       vlGraph: "%%green%%0%   %%yellow%%50%   %%red%%100%"
       result: "%%aqua%%結果%%white%%：%%result%%"
       words:

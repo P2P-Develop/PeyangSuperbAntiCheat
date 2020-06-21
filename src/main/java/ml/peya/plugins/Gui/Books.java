@@ -28,7 +28,7 @@ public class Books
 
         for (EnumCheatType type: types)
         {
-            String text = " ◎ " + type.getText() + "\n";
+            String text = " ⦾ " + type.getText() + "\n";
             if (type.isSelected())
                 text = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + text;
             component.append(text)
@@ -45,7 +45,7 @@ public class Books
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText + " bybooks"));
 
         component.append(MessageEngihe.get("reportbook.cancel"))
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, ""));
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report $$cancel$$"));
 
         meta.spigot().addPage(component.create());
         book.setItemMeta(meta);

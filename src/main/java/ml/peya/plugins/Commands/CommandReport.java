@@ -31,7 +31,13 @@ public class CommandReport implements CommandExecutor
                 sender.sendMessage(MessageEngihe.get("command.report.help", MessageEngihe.hsh("label", label)));
                 return true;
             }
-            if (Bukkit.getPlayer(args[0]) == null)
+
+            if (args[0].equals("$$cancel$$"))
+            {
+                sender.sendMessage(MessageEngihe.get("message.report.cancel"));
+                return true;
+            }
+            else if (Bukkit.getPlayer(args[0]) == null)
             {
                 sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
                 return true;
@@ -48,9 +54,21 @@ public class CommandReport implements CommandExecutor
         }
 
 
-        ArrayList<String> reasons = new ArrayList<>(Arrays.asList(args));
+        ArrayList<String> reasonsV = new ArrayList<>(Arrays.asList(args));
+        reasonsV.remove(0);
 
-        reasons.remove(0);
+        ArrayList<String> reasons = new ArrayList<>();
+
+        for (String reason: reasonsV)
+        {
+            if (reasons.contains(reason))
+            {
+                reasons.remove(reason);
+                continue;
+            }
+
+            reasons.add(reason);
+        }
 
         ArrayList<EnumCheatType> types = CheatTypeUtils.getCheatTypeArrayFromString(reasons.toArray(new String[0]));
 
