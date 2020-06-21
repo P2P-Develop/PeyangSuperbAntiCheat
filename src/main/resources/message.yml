@@ -14,7 +14,7 @@ error:
   invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psr help でヘルプを見てください。"
 
   report:
-    requirePlayer: "%%red%%%%bold%%エラー：理由短縮モードは、プレイヤーからのみ実行することができます。"
+    requirePlayer: "%%red%%%%bold%%エラー：理由短縮モードは、プレイヤーからのみ実行できます。"
     invalidReason: "%%red%%%%bold%%エラー：理由が正しくありません！"
     reasonNotSelected: "%%red%%%%bold%%エラー：理由が選択されていません！"
     alreadyReported: "%%red%%%%bold%%エラー：既に報告済みです！"
@@ -32,19 +32,19 @@ error:
     notFoundReport: "%%red%%%%bold%%エラー：IDに合致するレポートが見つかりませんでした！"
 
   learn:
-    requirePlayer: "%%red%%%%bold%%エラー：学習は、プレイヤーからのみ実行することができます。"
+    requirePlayer: "%%red%%%%bold%%エラー：学習はプレイヤーからのみ実行できます。"
 
   aura:
     testingNow: "%%red%%%%bold%%エラー：対象プレイヤーは、現在テスト中です。"
-    notNumeric: "%%red%%%%bold%%エラー：指定された秒数が数字ではありません。/psr helpでヘルプを見てください。"
+    notNumeric: "%%red%%%%bold%%エラー：指定された秒数が数字ではありません。/psr help でヘルプを見てください。"
 
   bans:
     unknownSearchType: "%%red%%%%bold%%エラー：検索タイプが不明です。"
     databaseInfoNotFound: "%%red%%%%bold%%エラー：データベースに情報が見つかりませんでした。"
 
   automessage:
-    notTrueOrFalse: "%%red%%%%bold%%%%value%% は、%%true%%%%red%%でも、%%false%%でもありません。"
-    notNumeric: "%%red%%%bold%エラー：%%value%%は、有効な数字ではありません！"
+    notTrueOrFalse: "%%red%%%%bold%%%%value%% は%%true%%%%red%%でも、%%false%%でもありません！"
+    notNumeric: "%%red%%%bold%エラー：%%value%%は有効な数字ではありません！"
     notFoundSettings: "%%red%%%%bold%%エラー：設定項目が見つかりませんでした！"
 
 command:
@@ -92,26 +92,26 @@ command:
     "
     bans: "\
     %%aqua%%/babs %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>\n\
-    %%green%%プレイヤーのBAN(キック)履歴を照会します。
+    %%green%%プレイヤーのBAN（キック）履歴を照会します。
     "
 
     mngIdWarning: "\
-    %%yellow%%注意：管理iDはランダムで割り当てられる32文字の英数文字列です。\n\
+    %%yellow%%注意：管理IDはランダムで割り当てられる32文字の英数文字列です。\n\
     %%yellow%%プレイヤーからも操作できますが、コンソールから操作することを推奨します。
     "
 
 message:
   report:
-    thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの権限を理解しており、できるだけ早急に審査いたします。"
+    thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの懸念を理解しており、できるだけ早急に審査いたします。"
     cancel: "%%red%%報告を閉じました！"
   drop:
-    success: "%%green%%成功：レポートの削除に成功しました！"
+    success: "%%green%%成功：報告の削除に成功しました！"
   kick:
     test: "%%green%%テストモード%%red%%%%bold%%で、プレイヤーをキックします。"
   aura:
     summon: "\
     %%green%%%%name%%さんに%%type%%を召喚します。\n\
-    %%green%%%%seconds%%秒間お待ち下さい。
+    %%green%%%%seconds%%秒間お待ちください。
     "
   autoMsg:
     zeroLeng: "\
@@ -187,9 +187,9 @@ kick:
   "
 
   reason: "\
-  %%red%%あなたは、このサーバーからキックされました！\n
+  %%red%%ゲームから退出させられました！\n
   \n\
-  %%gray%%理由： %%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+  %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
   \n\
   %%gray%%Kick ID：%%white%%%%id%%
   "
