@@ -282,6 +282,12 @@ __このコマンドの事由には、エイリアスを使用できます。下
 
 ↑ハハッ ＾＾；
 
+### message.ymlについて
+PeyangSuperbAntiCheat.jarを```mvn package```でビルドすると、```mvn shade ```が自動実行されます。(多分)  
+そんとき、message.ymlとかもくっついてきます。
+えっと、それがPeyangSuperbAntiCheat.jarのなかに同梱されています。
+message.ymlをいじくり倒すことで、いろいろできますが、まぁ、、、うん。後はすべて察しろ。
+
 ### 謝辞
 このプラグインは、以下のライブラリ / API を使用しています。  
 [RandomApi/RandomUserGenerator](https://randomuser.me/)  
