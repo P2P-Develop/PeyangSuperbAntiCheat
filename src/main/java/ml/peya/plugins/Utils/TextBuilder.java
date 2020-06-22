@@ -1,5 +1,6 @@
 package ml.peya.plugins.Utils;
 
+import com.sun.xml.internal.ws.policy.jaxws.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import net.md_5.bungee.api.chat.*;
@@ -13,30 +14,27 @@ import java.util.*;
 
 public class TextBuilder
 {
-    public static TextComponent getNextButton(int next)
+    private static TextComponent getPrevNextButton(int bind, String button)
     {
         TextComponent nextBtn = new TextComponent(ChatColor.GREEN + "(" +
-                ChatColor.AQUA + "=>" +
+                ChatColor.AQUA + button +
                 ChatColor.GREEN + ")");
-        nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr view " + next));
+        nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr view " + bind));
         ComponentBuilder nextHover = new ComponentBuilder(MessageEngihe.get("book.words.next"));
 
         nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, nextHover.create()));
         return nextBtn;
     }
 
+
+    public static TextComponent getNextButton(int next)
+    {
+        return getPrevNextButton(next, "=>");
+    }
+
     public static TextComponent getPrevButton(int previous)
     {
-
-        TextComponent prevBtn = new TextComponent(ChatColor.GREEN + "(" +
-                ChatColor.AQUA + "<=" +
-                ChatColor.GREEN + ")");
-        prevBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr view " + previous));
-        ComponentBuilder prevHover = new ComponentBuilder(MessageEngihe.get("book.words.back"));
-
-        prevBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, prevHover.create()));
-
-        return prevBtn;
+        return getPrevNextButton(previous, "<=");
     }
 
     public static void showText(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
@@ -83,16 +81,10 @@ public class TextBuilder
 
         ComponentBuilder b = new ComponentBuilder("");
 
-        b.append(id)
-                .color(net.md_5.bungee.api.ChatColor.AQUA)
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + mngid))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+        b.append(id);
         b.append("   ");
 
-        b.append(issueById)
-                .color(net.md_5.bungee.api.ChatColor.GREEN)
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + mngid))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+        b.append(issueById);
         b.append("   ");
 
         b.append(severity.getText())
