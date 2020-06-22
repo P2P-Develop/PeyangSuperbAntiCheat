@@ -1,7 +1,7 @@
 package ml.peya.plugins.Gui;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;

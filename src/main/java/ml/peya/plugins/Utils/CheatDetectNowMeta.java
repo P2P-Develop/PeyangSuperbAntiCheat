@@ -1,8 +1,6 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
-import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.entity.*;
 
 import java.util.*;

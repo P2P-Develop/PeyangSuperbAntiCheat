@@ -1,7 +1,6 @@
 package ml.peya.plugins;
 
 import com.zaxxer.hikari.*;
-import io.netty.channel.*;
 import ml.peya.plugins.Utils.*;
 
 import java.io.*;

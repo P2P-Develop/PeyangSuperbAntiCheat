@@ -45,9 +45,7 @@ public class NPCConnection
                             ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
                                     rs.getString("MNGID") + "'");
                             while (set.next())
-                            {
                                 reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
-                            }
                         }
                     }
                     catch (Exception e)
@@ -58,23 +56,23 @@ public class NPCConnection
 
                     ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
 
-                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura" : String.join(", ", realReason)), true, false);
+                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura" : "Report: " + String.join(", ", realReason)), true, false);
                 }
                 new BukkitRunnable()
                 {
                     @Override
                     public void run()
                     {
+                        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") "));
                         if (type == DetectType.AURA_BOT)
                         {
-                            String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") "));
                             if (sender != null)
                                 sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
                             else
                             {
                                 for (Player np : Bukkit.getOnlinePlayers())
                                 {
-                                    if (!np.hasPermission("psr.mod"))
+                                    if (!np.hasPermission("psr.aurabot"))
                                         continue;
                                     np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
                                 }
@@ -82,14 +80,13 @@ public class NPCConnection
                         }
                         else
                         {
-                            String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") "));
                             if (sender != null)
                                 sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                             else
                             {
                                 for (Player np : Bukkit.getOnlinePlayers())
                                 {
-                                    if (!np.hasPermission("psr.mod"))
+                                    if (!np.hasPermission("psr.aurapanic"))
                                         continue;
                                     np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 }

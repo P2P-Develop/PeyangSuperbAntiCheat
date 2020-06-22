@@ -6,7 +6,6 @@ import org.bukkit.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.scheduler.*;
 
-import java.lang.reflect.*;
 import java.util.*;
 
 public class KillCounting

@@ -91,7 +91,7 @@ command:
     %%gray%%%%italic%%Tips：第2引数に、testをセットすると、テストモードでキックされます。
     "
     bans: "\
-    %%aqua%%/babs %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>\n\
+    %%aqua%%/bans %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>\n\
     %%green%%プレイヤーのBAN（キック）履歴を照会します。
     "
 

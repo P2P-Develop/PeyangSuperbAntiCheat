@@ -54,6 +54,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         databasePath = config.getString("database.path");
         banKickPath = config.getString("database.logPath");
 
+
         eye =  new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
         banKick =  new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
 

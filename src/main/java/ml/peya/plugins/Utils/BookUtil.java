@@ -1,7 +1,6 @@
 package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;

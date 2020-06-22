@@ -1,8 +1,8 @@
 package ml.peya.plugins.Commands.CmdTst;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
