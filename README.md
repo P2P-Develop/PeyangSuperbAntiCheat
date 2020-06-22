@@ -28,6 +28,11 @@
       src="https://img.shields.io/github/license/peyang-Celeron/PeyangSuperbAntiCheat?color=blue&style=flat-square"
       alt="GitHub License"
   /></a>
+  <a href="https://codeclimate.com/github/peyang-Celeron/PeyangSuperbAntiCheat"
+     ><img
+       src="https://img.shields.io/codeclimate/maintainability/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
+       alt="Code Climate maintainability"
+  /></a>
 </p>
 
 ---
