@@ -24,7 +24,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
         commandList.add("kick");
 
         if (commandList.contains(args[0]))
-            if (ErrorMessageSender.unPermMessage(sender, "psr." + args[0]))
+            if (ErrorMessageSender.unPermMessage(sender, "psac." + args[0]))
                 return true;
 
         switch (args[0].toLowerCase())

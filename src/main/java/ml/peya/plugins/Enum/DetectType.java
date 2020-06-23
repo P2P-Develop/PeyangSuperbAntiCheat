@@ -3,23 +3,24 @@ package ml.peya.plugins.Enum;
 public enum DetectType
 {
     AURA_BOT,
-    AURA_PANIC;
+    AURA_PANIC,
+    ANTI_KB;
 
-    private int time;
+    private int count;
 
 
     DetectType ()
     {
-        time = 5;
+        count = 5;
     }
 
-    public void setPanicTime(int time)
+    public void setKBCount(int time)
     {
-        this.time = time;
+        this.count = time;
     }
 
-    public int getPanicTime()
+    public int getKBCount()
     {
-        return time;
+        return count;
     }
 }

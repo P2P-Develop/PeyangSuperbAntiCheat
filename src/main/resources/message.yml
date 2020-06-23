@@ -42,11 +42,6 @@ error:
     unknownSearchType: "%%red%%%%bold%%エラー：検索タイプが不明です。"
     databaseInfoNotFound: "%%red%%%%bold%%エラー：データベースに情報が見つかりませんでした。"
 
-  automessage:
-    notTrueOrFalse: "%%red%%%%bold%%%%value%% は%%true%%%%red%%でも、%%false%%でもありません！"
-    notNumeric: "%%red%%%bold%エラー：%%value%%は有効な数字ではありません！"
-    notFoundSettings: "%%red%%%%bold%%エラー：設定項目が見つかりませんでした！"
-
 command:
   report:
     help: "\
@@ -64,10 +59,7 @@ command:
     %%aqua%%/%%label%% view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]\n\
     %%green%%レポートされた、対処されていない問題を重大度順に表示します。
     "
-    automessage: "\
-    %%aqua%%/automessage%%dark_purple%% <項目名>%%dark_purple%% [設定値]\n\
-    %%green%%定期メッセージの設定をします。
-    "
+
     aurapanic: "\
     %%aqua%%/acpanic %%dark_aqua%%<PlayerName>\n\
     %%green%%指定したプレイヤーの背後に、NPCを召喚します。
@@ -113,15 +105,6 @@ message:
     %%green%%%%name%%さんに%%type%%を召喚します。\n\
     %%green%%%%seconds%%秒間お待ちください。
     "
-  autoMsg:
-    zeroLeng: "\
-    %%aqua%%項目名%%white%%：%%green%%現在値%%\n\
-    %%aqua%%enable%%white%%：%%enableValue%%\n\
-    %%aqua%%timer%%white%%：%%time%%%%red%%(分)\n\
-    %%gray%%%%italic%%Tips：/automsg toggle で%%green%%有効%%gray%%/%%red%%無効 %%gray%%を切り替えることができます。
-    "
-    successTrueChange: "%%green%%成功：定期メッセージを%%value%%化%%green%%しました！"
-    successTimeChange: "%%green%%成功：定期メッセージの時間を、%%value%%分にセットしました！"
 
   auraCheck:
     result:
@@ -132,6 +115,8 @@ message:
       words:
         kick: "%%red%%強制退出"
         ok: "%%green%%問題なし"
+
+  testkb: "%%aqua%%Anti kbのために、 '%%name%%' をテストしました！"
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\

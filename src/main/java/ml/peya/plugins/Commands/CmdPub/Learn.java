@@ -21,7 +21,7 @@ public class Learn
             return;
         }
 
-        CheatDetectNowMeta meta = NPCConnection.spawnWithArmor((Player) sender, DetectType.AURA_BOT);
+        CheatDetectNowMeta meta = DetectConnection.spawnWithArmor((Player) sender, DetectType.AURA_BOT);
 
         new BukkitRunnable()
         {

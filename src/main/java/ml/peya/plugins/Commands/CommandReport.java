@@ -15,7 +15,7 @@ public class CommandReport implements CommandExecutor
 {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psr.report"))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.report"))
             return true;
 
         if (args.length == 0)

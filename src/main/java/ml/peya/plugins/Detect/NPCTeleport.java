@@ -20,7 +20,7 @@ public class NPCTeleport
         if (tpCase == DetectType.AURA_BOT)
             auraBot_teleport(player, target, arm);
         else if (tpCase == DetectType.AURA_PANIC)
-            auraPanic_teleport(player, target, arm, tpCase.getPanicTime());
+            auraPanic_teleport(player, target, arm, PeyangSuperbAntiCheat.config.getInt("npc.time"));
     }
 
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int sec)
@@ -56,7 +56,7 @@ public class NPCTeleport
                         {
                             for (Player p: Bukkit.getOnlinePlayers())
                             {
-                                if (!p.hasPermission("psr.viewnpc"))
+                                if (!p.hasPermission("psac.viewnpc"))
                                     continue;
                                 PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
                                 c.sendPacket(new PacketPlayOutEntityTeleport(target));
@@ -108,7 +108,7 @@ public class NPCTeleport
                         {
                             for (Player p: Bukkit.getOnlinePlayers())
                             {
-                                if (!p.hasPermission("psr.viewnpc"))
+                                if (!p.hasPermission("psac.viewnpc"))
                                     continue;
                                 PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
                                 c.sendPacket(new PacketPlayOutEntityTeleport(target));

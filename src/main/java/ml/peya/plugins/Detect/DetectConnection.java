@@ -12,18 +12,24 @@ import org.bukkit.scheduler.*;
 import java.sql.*;
 import java.util.*;
 
-public class NPCConnection
+public class DetectConnection
 {
     public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type)
     {
         EntityPlayer uuid = NPC.spawn(player, type);
         CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
-        meta.setCanNPC(true);
+        meta.setCanTesting(true);
         return meta;
     }
 
     public static void scan(Player player, DetectType type, CommandSender sender)
     {
+        if (type == DetectType.ANTI_KB)
+        {
+            TestKnockback.scan(player, type, sender);
+            return;
+        }
+
         CheatDetectNowMeta meta = spawnWithArmor(player, type);
 
         new BukkitRunnable()
@@ -31,7 +37,7 @@ public class NPCConnection
             @Override
             public void run()
             {
-                meta.setCanNPC(false);
+                meta.setCanTesting(false);
                 if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
                 {
                     ArrayList<String> reason = new ArrayList<>();
@@ -64,33 +70,36 @@ public class NPCConnection
                     public void run()
                     {
                         String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") "));
-                        if (type == DetectType.AURA_BOT)
+
+                        switch (type)
                         {
-                            if (sender != null)
-                                sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
-                            else
-                            {
-                                for (Player np : Bukkit.getOnlinePlayers())
+                            case AURA_BOT:
+                                if (sender != null)
+                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
+                                else
                                 {
-                                    if (!np.hasPermission("psr.aurabot"))
-                                        continue;
-                                    np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
+                                    for (Player np : Bukkit.getOnlinePlayers())
+                                    {
+                                        if (!np.hasPermission("psac.aurabot"))
+                                            continue;
+                                        np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
+                                    }
                                 }
-                            }
-                        }
-                        else
-                        {
-                            if (sender != null)
-                                sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
-                            else
-                            {
-                                for (Player np : Bukkit.getOnlinePlayers())
+                                break;
+
+                            case AURA_PANIC:
+                                if (sender != null)
+                                    sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
+                                else
                                 {
-                                    if (!np.hasPermission("psr.aurapanic"))
-                                        continue;
-                                    np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
+                                    for (Player np : Bukkit.getOnlinePlayers())
+                                    {
+                                        if (!np.hasPermission("psac.aurapanic"))
+                                            continue;
+                                        np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
+                                    }
                                 }
-                            }
+                                break;
                         }
 
                         PeyangSuperbAntiCheat.cheatMeta.remove(meta.getUuids());

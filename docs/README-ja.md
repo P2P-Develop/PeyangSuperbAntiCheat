@@ -79,7 +79,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 * 報告をスパムに利用されることを避けるため、同じ人から同じ人への報告はできません。
 
 ### 権限
-* psr.report
+* psac.report
 
 初期では全員が持っている権限です。  
 この権限を剥奪されたプレイヤーは報告が出来なくなります。
@@ -103,8 +103,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 \<PlayerName\>に指定されたプレイヤーに、回転NPCを召喚します。
 
 ### 権限
-* psr.mod
-* psr.admin
+* psac.aurabot
 
 ---
 
@@ -124,8 +123,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 \<PlayerName\> に指定されたプレイヤーの背後にNPCを召喚します。
 
 ### 権限
-* psr.mod
-* psr.admin
+* psac.aurapanic
 
 ---
 
@@ -146,32 +144,30 @@ __このコマンドの事由には、エイリアスを使用できます。下
 \-aをつけると、BANとキックをすべて表示します。あとは察してください。
 
 ### 権限
-* psr.mod
-* psr.admin
+* psac.bans
 
 ---
 
-### /automessage
+### /testkb
 
 ### エイリアス
-* /automsg
+* /testknockback
+* /kbtest
+* /knockbacktest
 
 ### 説明
-お知らせ定期メッセージの設定をします。
+指定されたプレイヤーに、**見えない矢**をぶち込みます。    
+そのノックバックでAntiKBか どうか判定して、どうぞ。
 
-### 引数一覧
-* /automsg
-設定一覧を表示します。
-* /automsg \<設定キー\> \<値\>
-設定キーに、値をセットします。
-* /automsg toggle
-定期メッセージの有効/無効を切り替えます。
+### 使用法
+* /testkb <PlayerName/>
 
-### 設定一覧
-| 設定名 | デフォルト値 | 説明 |
-|:-:|:-:|-|
-| enabled | true | 定期メッセージの有効/無効を切り替えます。 |
-| time | 15 | 定期メッセージの周期を分で指定します。 |
+\<PlayerName\>に指定されたプレイヤーに矢をぶち込みます。
+
+### 権限
+* psac.testkb
+
+---
 
 ### /psac
 
@@ -213,10 +209,42 @@ __このコマンドの事由には、エイリアスを使用できます。下
 第2引数に```test```を指定すると、テストモードとしてキックされます。  
 
 ### 権限
-* psr.mod
-* psr.admin
+\(上から順に\)  
+* psac.help
+* psac.view
+* psac.show
+* psac.drop
+* psac.kick
+
 
 ---
+
+### 権限について
+権限は、最低限、コマンドに1つ割り当てられています。  
+その他、細かく調整することができます。
+| 権限 | 割り当てられているコマンド/動作 | その他説明  | デフォルト | グループ |
+|:-:|:-:|:-:|:-:|:-:|
+| psac.member | サーバメンバー用の権限です。  |  | true |  |
+| psac.report | /wdr \(report\) | レポートができます。  | true | psac.member |
+| psac.report | /psac help | このプラグインの\(メンバー\)ヘルプを見ることができます。  | true | psac.member |
+| psac.notification | プレイヤーが対処されたとき、通知が飛ばされます。  |  | true | psac.member |
+| psac.regular | 定期メッセージが流れます。 |  | true | psac.member |
+| ----------------- | --------------------------------------------------- | --------------------------------------------------------- | ---------- | ----------- |
+| psac.mod | プレイヤーのキックや、テストをできます。  |  | op |  |
+| psac.kick | /psac kick | プレイヤーをキックすることができます。  | op | psac.mod |
+| psac.aurapanic  | /aurapanic <\PlyerName\> | プレイヤーに回るNPCを送りつけることができます。  | op | psac.mod |
+| psac.aurabot | /aurabot <\PlayerName\> | プレイヤーの背後に貼り付く、NPCを召喚出ます。 | op | psac.mod |
+| psac.testkb | /testkb <\PlayerName\>  | プレイヤーに見えない弓を放ち、ノックバックを確かめます。  | op | psac.mod |
+| psac.viewnpc | 対象プレイヤー以外に、NPCを見ることができます。  |  | op | psac.mod |
+| psac.view | /view | レポートを表示することができます。 | op | psac.mod |
+| psac.show | /show <\ManagementID\> | レポートを詳細表示します。  | op | psac.mod |
+| psac.bans | /bans \[-a \| kick \| ban\] | プレイヤーのBAN履歴を参照します。  | op | psac.mod |
+| psac.ntfadmin | PEYANG CHEAT DETECTION に、名前を含みます。  |  | op | psac.mod |
+| psac.reportntf | プレイや～がレポートを送信したとき通知が届きます。  |  | op | psac.mod |
+| ----------------- | --------------------------------------------------- | --------------------------------------------------------- | ---------- | ----------- |
+| psac.admin | レポートの削除や、サーバの根幹に関わる権限です。  |  | false |  |
+| psac.drop | /psac drop \<ManagementID\> | プレイヤーからのレポートを跡形も残らずに消します。  | false | psac.admin |
+| psac.error | エラーが発生したとき、通知されます。  |  | false | psac.admin |
 
 ### \<管理ID\>について
 \<管理ID\>は、プレイヤーが報告を提出した際に、自動的に割当られる32文字の英数文字列です。  

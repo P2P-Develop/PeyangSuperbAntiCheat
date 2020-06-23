@@ -33,9 +33,9 @@ public class KickUtil
         {
             for (Player player : Bukkit.getOnlinePlayers())
             {
-                if (player.hasPermission("psr.ntfadmin"))
+                if (player.hasPermission("psac.ntfadmin"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
-                else if (player.hasPermission("psr.notification"))
+                else if (player.hasPermission("psac.notification"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
             }
         }
@@ -45,7 +45,7 @@ public class KickUtil
             @Override
             public void run()
             {
-                Bukkit.broadcast(MessageEngihe.get("kick.broadcast"), "psr.notification");
+                Bukkit.broadcast(MessageEngihe.get("kick.broadcast"), "psac.notification");
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);

@@ -106,7 +106,7 @@ public class NPC
 
                 for (Player p: Bukkit.getOnlinePlayers())
                 {
-                    if (!p.hasPermission("psr.viewnpc"))
+                    if (!p.hasPermission("psac.viewnpc"))
                         continue;
                     PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
@@ -132,7 +132,7 @@ public class NPC
                 connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
                 for (Player p: Bukkit.getOnlinePlayers())
                 {
-                    if (!p.hasPermission("psr.viewnpc"))
+                    if (!p.hasPermission("psac.viewnpc"))
                         continue;
                     PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));

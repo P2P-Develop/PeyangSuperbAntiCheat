@@ -81,7 +81,7 @@ The books are sorted in the order they are displayed.
 #### Permissions
 ---
 
-- `psr.report`
+- `psac.report`
 
 Manages permissions to execute report commands.  
 Everyone has this permission.  
@@ -113,8 +113,8 @@ When an NPC is attacked a certain number of times, it kicks that player.
 #### Permissions
 ---
 
-- `psr.mod`
-- `psr.admin`
+- `psac.mod`
+- `psac.admin`
   
 Manages the permission to execute the summon commands of Aurabot and Watchdog.  
 Players with this permission can summon Watchdogs.  
@@ -145,8 +145,8 @@ When an NPC is attacked a certain number of times, it kicks that player.
 #### Permissions
 ---
 
-- `psr.mod`
-- `psr.admin`
+- `psac.mod`
+- `psac.admin`
 
 ---
 
@@ -175,44 +175,11 @@ Add \-a to show all bans and kicks.
 #### Permissions
 ---
 
-- `psr.mod`
-- `psr.admin`
+- `psac.mod`
+- `psac.admin`
 
 ---
 
-### /automessage
-
-#### Alias
----
-
-* /automsg
-
-#### Description
----
-
-Set a auto notification message.
-
-#### Arguments
----
-
-* /automsg  
-View settings.
-* /automsg \<Setkey\> \<Value\>  
-Set the value in the setting key.
-* /automsg toggle  
-Toggle display auto message.
-
-#### Settings
----
-
-Server admin can change the following settings in the configuration file:  
-  
-| Name | Default value | Description |
-|:----:|:-------------:|-------------|
-| enabled | true | Toggle display auto message. |
-| time | 15 | Specifies the auto message cycle in minutes. |
-
----
 
 ### /psac
 

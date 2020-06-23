@@ -29,104 +29,105 @@ commands:
     aliases: ["banlist", "playerbans", "banlookup"]
     usage: /bans [-a | kick | ban] <Player_Name>
     description: "プレイヤーのBAN(Kick)履歴を参照します。"
-  automessage:
-    aliases: ["automsg"]
-    usage: /automessage <args>
-    description: "定期メッセージの設定をします。"
+  testknockback:
+    aliases: ["testkb", "kbtest", "knockbacktest"]
+    usage: /testkb <Player>
+    description: "プレイヤーのノックバックを可視テストします。"
 
 permissions:
   #Core
-  psr.member:
+  psac.member:
     description: このプラグインのサーバメンバ用の権限セットです。レポートとかできます。
     default: true
     children:
-      psr.help: true
-      psr.report: true
-      psr.notification: true
-      psr.regular: true
-  psr.admin:
-    description: このプラグインすべての権限を持ちます。
-    default: op
-    children:
-      psr.drop: true
-      psr.mod: true
-      psr.error: true
+      psac.help: true
+      psac.report: true
+      psac.notification: true
+      psac.regular: true
 
-  psr.mod:
+  psac.mod:
     description: この権限を有効にすると、プレイヤーは、プレイヤーから寄せられたレポートを見たり、NPCを送ったり、レポートを削除することができます。
     default: op
     children:
-      psr.kick: true
-      psr.aurapanic: true
-      psr.aurabot: true
-      psr.viewnpc: true
-      psr.view: true
-      psr.show: true
-      psr.bans: true
-      psr.ntfadmin: true
-      psr.reportntf: true
-      psr.automsg: true
+      psac.kick: true
+      psac.aurapanic: true
+      psac.aurabot: true
+      psac.testkb: true
+      psac.viewnpc: true
+      psac.view: true
+      psac.show: true
+      psac.bans: true
+      psac.ntfadmin: true
+      psac.reportntf: true
+
+  psac.admin:
+    description: このプラグインすべての権限を持ちます。
+    default: op
+    children:
+      psac.drop: true
+      psac.mod: true
+      psac.error: true
+
 
   #Member
-  psr.help:
+  psac.help:
     description: この権限を持つプレイヤーは、PSRのヘルプが表示されます。
     default: true
-  psr.report:
+  psac.report:
     description: この権限を有効にすると、プレイヤーは、ハッキングレポートができます。
     default: true
-  psr.notification:
+  psac.notification:
     description: プレイヤーがゲームから対処された際に、通知が表示されます。
     default: true
-  psr.regular:
+  psac.regular:
     description: 定期メッセージが送信されます。
     default: true
 
   #Moderator
-  psr.kick:
+  psac.kick:
     description: 他プレイヤーをキックできます。
     default: op
-  psr.bans:
+  psac.bans:
     description: プレイヤーのBanを検索します。
     default: op
-  psr.reportntf:
+  psac.reportntf:
     description: プレイヤーがレポートを出したときに通知されます。
     default: op
-  psr.ntfadmin:
+  psac.ntfadmin:
     description: Peyang Cheat Detectに、プレイヤー名を含めます。
     default: op
-  psr.automsg:
-    description: 定期メッセージの設定ができます。
-    default: op
 
-  #NPC
-  psr.aurapanic:
+  #Detect
+  psac.aurapanic:
     description: この権限を持つプレイヤーは、他プレイヤーにPanicNPCを送りつけることができます。
     default: op
-  psr.aurabot:
+  psac.aurabot:
     description: AuraBotNPCを送りつけられます。
     default: op
-  psr.viewnpc:
+  psac.viewnpc:
     description: 他プレイヤーを判定するNPCをこの権限がある人には可視化されます。
     default: op
-
+  psac.testkb:
+    description: プレイヤーのくのっくばっくをてすとできます。
+    default: op
 
   #Report
-  psr.view:
+  psac.view:
     description: Reportを見ることができます。
     default: op
-  psr.show:
+  psac.show:
     description: Reportの詳細を見ることができます。
     default: op
 
   #Admin
-  psr.drop:
+  psac.drop:
     description: プレイヤーのReportをなかったことにします。
     default: false
-  psr.error:
+  psac.error:
     description: エラーが発生した際、通知されます。
     default: false
 
   #lock
-  psr.learn:
+  psac.learn:
     description: 実際のチートを用いて、NPCを学習させます。
     default: false

@@ -14,7 +14,7 @@ public class AuraBot implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psr.aurabot") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.aurabot") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
             return true;
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
@@ -40,7 +40,7 @@ public class AuraBot implements CommandExecutor
 
         sender.sendMessage(MessageEngihe.get("message.aura.summon", map));
 
-        NPCConnection.scan(player, DetectType.AURA_BOT, sender);
+        DetectConnection.scan(player, DetectType.AURA_BOT, sender);
         return true;
     }
 }

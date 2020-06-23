@@ -14,24 +14,10 @@ public class AuraPanic implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psr.aurapanic") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.aurapanic") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
             return true;
 
         int sec = 5;
-
-        if (args.length == 2)
-        {
-            try
-            {
-                sec = Integer.parseInt(args[1]);
-            }
-            catch (Exception e)
-            {
-                sender.sendMessage(MessageEngihe.get("error.aura.notNumeric"));
-
-                return true;
-            }
-        }
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
@@ -59,9 +45,8 @@ public class AuraPanic implements CommandExecutor
 
 
         DetectType type = DetectType.AURA_PANIC;
-        type.setPanicTime(sec);
 
-        NPCConnection.scan(player, type, sender);
+        DetectConnection.scan(player, type, sender);
         return true;
     }
 }
