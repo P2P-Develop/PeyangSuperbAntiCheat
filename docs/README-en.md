@@ -3,22 +3,79 @@
 **WARNING: This repository has jokes in commit messages by developer(and little contributor).  
 If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
   
-Anti Cheat plugin for Bukkit / Spigot based server.  
+## Introduction
+
+Anti Cheat plugin for Bukkit / Spigot / PaperMC based server.  
 It has been confirmed to work with version 1.12.2.  
   
 This plugin is a **Cheat Report Management** / **Cheat Detection Test** plugin.  
   
 In the description of **hack**, the meaning of hacking (cracking) of the server itself is ambiguous, so it is written as **cheat**.
+  
+  
+#### Markdown formatting (This area is not so important)
 
+This document defines a simple markdown grammar to make it easy for users to understand.
+  
+**WARNING: foo is bar, please understand.**
+  
+**This represents information that all users should know.**
+  
+```Message[CLICK]```
+  
+This means that the messages within the code block will send to the Minecraft chat area.
+  
+**IMPORTANT: foo, bar.**
+  
+This means important items that the user should read.
+  
+- /foo \<bar\> \[player\]
+  
+This list a represents command and argmuents.  
+Argument enclosed in <>, it represents the necessary command, Enclosed in \[\] indicates an arbitrary command.
+
+- `fooperm.bar`
+  
+This block of code represents a permission.  
+**WARNING: No authority group is described. Before referring to permissions, make sure you understand it.**
+  
 ## Installation
 
-1. Clone this repository and build in Java environment.  
+1. Clone this repository.
+2. enter repository root and build in Java environment **with Maven**(execute ```mvn build```).  
    **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**
 2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
 3. Move / Copy the built plugin in the `plugins` folder.
 4. Start / Restart server.
 
 ---
+
+## Permissions
+Commands are always assigned one or more premissions.  
+Other settings can be done using permissions.  
+  
+|     Permission    |           Assigned Command           | Description | Default Value | Permission Group |
+|:-----------------:|:------------------------------------:|:------------|:-------------:|:----------------:|
+|    psac.member    |                 group                | This is a server member privilege group. | true | none |
+|    psac.report    |          [/report](#report)          | This permission can execute report commands.  Player deprived of this permission cannot report. | true | psac.member |
+|    psac.report    |       [/psac help](#arguments)       | This permission can view help for members of this plugin. | true | psac.member |
+| psac.notification |                 none                 | Send a notification when a player with this privilege is reported. | true | psac.member |
+|    psac.regular   |                 none                 | This permission can visible sended regular messages. | true | psac.member |
+|     psac.mod      |                 group                | This permission can kick or test the player. | op | none |
+|     psac.kick     |       [/psac kick](#arguments)       | This permission can kick player manually. | op | psac.mod |
+|   psac.aurabot    |         [/aurabot](#aurabot)         | This permission can summon [KillAura Test NPC](#aurabot). | op | psac.mod |
+|   psac.aurapanic  |         [/acpanic](#acpanic)         | This permission can summon [Panic NPC](#acpanic). | op | psac.mod |
+|    psac.testkb    |          [/testkb](#testkb)          | This permission can release invisible arrow to the player and check for knockback. | op | psac.mod |
+|   psac.viewnpc    |                 none                 | This permission visible NPC other than the target player. | op | psac.mod |
+|     psac.view     |       [/psac view](#arguments)       | This permission can view report information. | op | psac.mod |
+|     psac.show     |       [/psac show](#arguments)       | This permission can view *verbose* report information. | op | psac.mod |
+|     psac.bans     | [/bans \[-a \| kick \| ban\]](#bans) | This permission can view ban statics. | op | psac.mod |
+|   psac.ntfadmin   |                 none                 | If the player calling the NPC has this permission, when that player detects a cheat, a message will be sent indicating the player's name. | op | psac.mod |
+|   psac.reportntf  | none | Players with this permission can be notified when the player submits a report. | op | psac.mod |
+|     psac.admin    | group | This permission can use all commands of the plugin. | false | none |
+|     psac.drop     | /psac drop \<ManagementID\> | This permission can delete submitted report. | false | psac.admin |
+|     psac.error    | none | This permission can get error information when the plugin encountered an internal error. | false | psac.admin |
+  
 
 ## Commands
 
@@ -36,17 +93,22 @@ In the description of **hack**, the meaning of hacking (cracking) of the server 
 ---
 
 Send the content of the report selected and submitted by the player to the staff.  
+**WARNING: It is not a command to automatically summon NPC.**  
 The staff can see if the player is doing the same as the report.  
-User can also set the privacy settings for the report.  
-`[PeyangSuperbAntiCheat] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ [CLICK]`  
+User can also set the format for the report.  
+  
+```[PeyangSuperbAntiCheat] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ [CLICK]```  
+  
 Staff can check the contents of the report with the `[CLICK]` button.  
-`\[STAFF\] \[ADMIN\] Fishy: Report of \<PlayerName\> \<Reason1\>, \[Reason2\]...`  
+  
+```[STAFF] [ADMIN] Fishy: Report of <PlayerName> <Reason1>, [Reason2]...```  
+  
 This report format is lets them know who reported who and why.  
-This mode is compatible with the Hypixel Lynx Mod _leaked_ from █████.  
-**This mod may be Bannable on Hypixel server, so never use this on Hypixel server.**  
-**The developer does not take any responsibility.**  
+**WARNING: This report format is compatible with the Hypixel Lynx Mod (Keep leaking users down).  
+This mod may be Bannable on Hypixel server, so never use this on Hypixel server.  
+[Developer](https://github.com/peyang-Celeron) does not take any responsibility.**  
 
-#### Usage
+#### Usages
 ---
 
 - /report \<PlayerName\>  
@@ -54,8 +116,8 @@ This mode is compatible with the Hypixel Lynx Mod _leaked_ from █████.
   If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.  
   
 
-<p>Click to send report in "<span style="color: dark_green; font-weight: bold;">レポートを送信</span>" , or</p>
-<p>Click the "<span style="color: red; font-weight: bold;">レポートをキャンセル</span>" to discard.</p>
+<font color="Green">Click to send report in "レポートを送信" , or</font>
+<font color="Red">Click the "レポートをキャンセル" to discard.</font>
   
 - /report \<PlayerName\> \<Reason1\> \[Reason2\]...  
   Player can execute this command with this argument to report directly in chat/console without using a book.  
@@ -67,7 +129,7 @@ This mode is compatible with the Hypixel Lynx Mod _leaked_ from █████.
 The books are sorted in the order they are displayed.
 
 |    Reason     |          Aliases           | Description                                                                                         |
-| :-----------: | :------------------------: | --------------------------------------------------------------------------------------------------- |
+| :-----------: | :------------------------: | :-------------------------------------------------------------------------------------------------- |
 |      Fly      |           flight           | Fly without creative mode.                                                                          |
 |   KillAura    |     killaura, aura, ka     | Attack entity without aiming.                                                                       |
 |  AutoClicker  | autoclicker, ac, autoclick | Click Entity/Block automatically(External software clickers and macros also belong to AutoClicker). |
@@ -78,14 +140,10 @@ The books are sorted in the order they are displayed.
 
 ##### To avoid reporting spam, the same player cannot report to the same player.
 
-#### Permissions
+#### Permission
 ---
 
 - `psac.report`
-
-Manages permissions to execute report commands.  
-Everyone has this permission.  
-Player deprived of this permission cannot report.  
 
 ---
 
@@ -113,8 +171,7 @@ When an NPC is attacked a certain number of times, it kicks that player.
 #### Permissions
 ---
 
-- `psac.mod`
-- `psac.admin`
+- `psac.aurabot`
   
 Manages the permission to execute the summon commands of Aurabot and Watchdog.  
 Players with this permission can summon Watchdogs.  
@@ -145,8 +202,7 @@ When an NPC is attacked a certain number of times, it kicks that player.
 #### Permissions
 ---
 
-- `psac.mod`
-- `psac.admin`
+- `psac.aurapanic`
 
 ---
 
@@ -175,11 +231,36 @@ Add \-a to show all bans and kicks.
 #### Permissions
 ---
 
-- `psac.mod`
-- `psac.admin`
+- `psac.bans`
 
 ---
 
+### /testkb
+
+#### Aliases
+- /testknockback
+- /kbtest
+- /knockbacktest
+
+#### Description
+---
+
+Fire a **invisible arrow** at the specified player.  
+This allows you to see if the player is knocking back.
+
+#### Usage
+---
+
+- /testkb <PlayerName/>
+
+Fire invisible arrow at \<PlayerName\>.
+
+#### Permission
+---
+
+- `psac.testkb`
+
+---
 
 ### /psac
 
@@ -257,7 +338,7 @@ This is the message when this plugin automatically detects cheats.
   
 #### KICKED BY STAFF
   
-This message is displayed when a staff member issues a [kick command](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-en.md#psac-kick-playername-test).
+This message is displayed when a staff member issues a [kick command](#psac-kick-playername-test).
   
 #### PEYANG ANTI CHEAT TEST
   
@@ -272,21 +353,23 @@ The skin is displayed randomly by referring to the UUID skin settting.
 
 In this plugin, the following config is set by default.
   
-|   Setting name   | Default value | Description                                                                                                                                                |
-| :--------------: | :-----------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------|
-|  database.path   |   ./eye.db    | Save report information by specifying location of SQLite database path.                                                                                    |
-| database.logPath |   ./log.db    | Save kick infomation by specifying location of SQLite database path.                                                                                      |
-|   npc.seconds    |       6       | Specifies the number of seconds the NPC will orbit the player.                                                                                            |
-|     npc.bump     |     30.0      | Specifies the value to resolve when the NPC is stuck or stopped in the middle.                                                                            |
-|     npc.time     |     0.25      | Specifies the value of NPC orbit speed.                                                                                                                    |
-|    npc.range     |      2.1      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.                                                    |
-|  npc.panicRange  |      1.5      | Specifies the relative height of the [Panic NPC](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-en.md#acpanic) and player.  |
-|     npc.kill     |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                                                              |
-|    kick.delay    |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                                                            |
-|  kick.lightning  |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                                                      |
-| kick.defaultKick |      40       | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                                                    |
-|   message.lynx   |     true      | Specifies whether Lynx Mod compatible.                                                                                                                    |
-|      skins       |   \(UUID\)    | Specifies the skin to apply to the NPC.<br>You can specify multiple UUIDs and it will be selected from a random UUID. |
+|     Setting name    | Default value | Description                                                                                                           |
+| :-----------------: | :-----------: | :-------------------------------------------------------------------------------------------------------------------- |
+|    database.path    |   ./eye.db    | Save report information by specifying location of SQLite database path.                                               |
+|   database.logPath  |   ./log.db    | Save kick infomation by specifying location of SQLite database path.                                                  |
+|     npc.seconds     |       6       | Specifies the number of seconds the [NPC]NPC(#aurabot) will orbit the player.                                         |
+|       npc.bump      |     30.0      | Specifies the value to resolve when the [NPC](#aurabot) is stuck or stopped in the middle.                            |
+|       npc.time      |     0.25      | Specifies the value of [NPC](#aurabot) orbit speed.                                                                   |
+|      npc.range      |      2.1      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.               |
+|    npc.panicRange   |      1.5      | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                |
+|       npc.kill      |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                         |
+|      kick.delay     |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                       |
+|    kick.lightning   |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                 |
+|   kick.defaultKick  |      40       | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                |
+|     message.lynx    |     true      | Specifies whether Lynx Mod compatible.                                                                                |
+| autoMessage.enabled |     true      | Toggle the presence or absence of regular messages.                                                                   |
+|   autoMessage.time  |      15       | Specify a minuites for recurring messages.                                                                            |
+|        skins        |   \(UUID\)    | Specifies the skin to apply to the NPC.<br>You can specify multiple UUIDs and it will be selected from a random UUID. |
 
 ## What is learning function
 
@@ -297,6 +380,12 @@ Learning cheat data can improve the accuracy of your decision to kick or not.
 ### Learning mechanism
 
 The learning feature of this plugin adjusts key parameters by iteratively calculating the average of the parameters when it detects a cheat or kick.
+
+## What is *message.yml*
+
+When you build PeyangSuperbAntiCheat.jar with "mvn package", "mvn shade" is automatically executed.  
+You can edit this file to change the plugin messages before building.  
+At build time, *message.yml* is **automatically include jar resource**.
 
 ---
 
