@@ -13,7 +13,7 @@ This plugin is a **Cheat Report Management** / **Cheat Detection Test** plugin.
 In the description of **hack**, the meaning of hacking (cracking) of the server itself is ambiguous, so it is written as **cheat**.
   
   
-#### Markdown formatting (This area is not so important)
+### Markdown formatting (This area is not so important)
 
 This document defines a simple markdown grammar to make it easy for users to understand.
   
