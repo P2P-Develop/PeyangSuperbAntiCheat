@@ -232,12 +232,12 @@ __このコマンドの事由には、エイリアスを使用できます。下
 | ----------------- | --------------------------------------------------- | --------------------------------------------------------- | ---------- | ----------- |
 | psac.mod | プレイヤーのキックや、テストをできます。  |  | op |  |
 | psac.kick | /psac kick | プレイヤーをキックすることができます。  | op | psac.mod |
-| psac.aurapanic  | /aurapanic <\PlyerName\> | プレイヤーに回るNPCを送りつけることができます。  | op | psac.mod |
-| psac.aurabot | /aurabot <\PlayerName\> | プレイヤーの背後に貼り付く、NPCを召喚出ます。 | op | psac.mod |
-| psac.testkb | /testkb <\PlayerName\>  | プレイヤーに見えない弓を放ち、ノックバックを確かめます。  | op | psac.mod |
+| psac.aurapanic  | /aurapanic \<\PlyerName\> | プレイヤーに回るNPCを送りつけることができます。  | op | psac.mod |
+| psac.aurabot | /aurabot \<PlayerName\> | プレイヤーの背後に貼り付く、NPCを召喚出ます。 | op | psac.mod |
+| psac.testkb | /testkb \<PlayerName\>  | プレイヤーに見えない弓を放ち、ノックバックを確かめます。  | op | psac.mod |
 | psac.viewnpc | 対象プレイヤー以外に、NPCを見ることができます。  |  | op | psac.mod |
 | psac.view | /view | レポートを表示することができます。 | op | psac.mod |
-| psac.show | /show <\ManagementID\> | レポートを詳細表示します。  | op | psac.mod |
+| psac.show | /show \<ManagementID\> | レポートを詳細表示します。  | op | psac.mod |
 | psac.bans | /bans \[-a \| kick \| ban\] | プレイヤーのBAN履歴を参照します。  | op | psac.mod |
 | psac.ntfadmin | PEYANG CHEAT DETECTION に、名前を含みます。  |  | op | psac.mod |
 | psac.reportntf | プレイや～がレポートを送信したとき通知が届きます。  |  | op | psac.mod |
