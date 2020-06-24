@@ -69,7 +69,7 @@ Other settings can be done using permissions.
 |   psac.viewnpc    |                 none                 | This permission visible NPC other than the target player. | op | psac.mod |
 |     psac.view     |       [/psac view](#arguments)       | This permission can view report information. | op | psac.mod |
 |     psac.show     |       [/psac show](#arguments)       | This permission can view *verbose* report information. | op | psac.mod |
-|     psac.bans     | [/bans \[-a \| kick \| ban\]](#bans) | This permission can view ban statics. | op | psac.mod |
+|     psac.bans     |            [/bans](#bans)            | This permission can view ban statics. | op | psac.mod |
 |   psac.ntfadmin   |                 none                 | If the player calling the NPC has this permission, when that player detects a cheat, a message will be sent indicating the player's name. | op | psac.mod |
 |   psac.reportntf  | none | Players with this permission can be notified when the player submits a report. | op | psac.mod |
 |     psac.admin    | group | This permission can use all commands of the plugin. | false | none |
