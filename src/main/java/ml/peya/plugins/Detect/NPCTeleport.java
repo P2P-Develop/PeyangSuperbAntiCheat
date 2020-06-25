@@ -36,7 +36,7 @@ public class NPCTeleport
                     Location center = player.getLocation();
 
                     if (center.getPitch() <= 0.0f || center.getPitch() > 15.0f)
-                    center.setPitch(0.0f);
+                        center.setPitch(0.0f);
 
                     Vector vec = center.getDirection().multiply(0 - range);
 
@@ -83,6 +83,7 @@ public class NPCTeleport
         Random generator = new Random();
         int dob = generator.nextInt(3);
         WaveCreator creator = new WaveCreator(1.0, 2.0, 0.0);
+        WaveCreator ypp = new WaveCreator(20.0, 90.0, 20.0);
         final int[] count = {0};
 
         new BukkitRunnable() {
@@ -95,7 +96,10 @@ public class NPCTeleport
                     Location n = new Location(center.getWorld(),
                             auraBot_xPos(time[0], radius) + center.getX(),
                             center.getY() + creator.get(0.01, count[0] < 20),
-                            auraBot_zPos(time[0], radius, yaw) + center.getZ());
+                            auraBot_zPos(time[0], radius, yaw) + center.getZ(),
+                            (float) ypp.getStatic(),
+                            (float) ypp.get(3, false));
+
                     NPC.setLocation(n, target);
                     target.getBukkitEntity().teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
                     PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;

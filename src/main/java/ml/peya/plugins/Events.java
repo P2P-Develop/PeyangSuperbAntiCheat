@@ -13,7 +13,6 @@ public class Events implements Listener
         if (e.getEntity().getKiller() == null)
             return;
         PeyangSuperbAntiCheat.counting.kill(e.getEntity().getKiller().getUniqueId());
-
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -21,12 +20,12 @@ public class Events implements Listener
     {
         if (!(e.getEntity() instanceof CraftPlayer))
             return;
-        if ((e.getDamager().getType() == EntityType.TIPPED_ARROW))
+        if ((e.getDamager().getType() != EntityType.TIPPED_ARROW))
             return;
 
         if (!PeyangSuperbAntiCheat.cheatMeta.exists(e.getEntity().getUniqueId()))
             return;
-
+        
         e.setDamage(0);
     }
 }

@@ -69,8 +69,6 @@ public class NPC
                 CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
                 CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
 
-
-
         connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
 
         new BukkitRunnable()
