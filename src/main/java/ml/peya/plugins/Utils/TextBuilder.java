@@ -187,7 +187,7 @@ public class TextBuilder
     public static ComponentBuilder textPanicRep(String name, int vl)
     {
         ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("base.prefix"));
-
+        builder.append("\n");
         builder.append(MessageEngihe.get("message.auraCheck.result.prefix", MessageEngihe.hsh("name", name)));
         builder.append("\n");
         builder.append(MessageEngihe.get("message.auraCheck.result.vl", MessageEngihe.hsh("vl", String.valueOf(vl))));

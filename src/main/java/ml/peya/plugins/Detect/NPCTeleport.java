@@ -20,7 +20,7 @@ public class NPCTeleport
         if (tpCase == DetectType.AURA_BOT)
             auraBot_teleport(player, target, arm);
         else if (tpCase == DetectType.AURA_PANIC)
-            auraPanic_teleport(player, target, arm, PeyangSuperbAntiCheat.config.getInt("npc.time"));
+            auraPanic_teleport(player, target, arm, PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
     }
 
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int sec)
@@ -76,7 +76,7 @@ public class NPCTeleport
 
     private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm)
     {
-        final double yaw = 358.0;
+        final double yaw = 360.0;
         final double[] time = {0.0};
         final double radius = PeyangSuperbAntiCheat.config.getDouble("npc.range");
         final double range = PeyangSuperbAntiCheat.config.getDouble("npc.bump");

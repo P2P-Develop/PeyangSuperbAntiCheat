@@ -20,12 +20,12 @@ public class Events implements Listener
     {
         if (!(e.getEntity() instanceof CraftPlayer))
             return;
-        if ((e.getDamager().getType() != EntityType.TIPPED_ARROW))
+        if (!(e.getDamager() instanceof  CraftArrow))
             return;
 
         if (!PeyangSuperbAntiCheat.cheatMeta.exists(e.getEntity().getUniqueId()))
             return;
-        
+
         e.setDamage(0);
     }
 }

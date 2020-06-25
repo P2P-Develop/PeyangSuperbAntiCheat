@@ -46,6 +46,7 @@ public class AuraPanic implements CommandExecutor
 
         DetectType type = DetectType.AURA_PANIC;
 
+
         DetectConnection.scan(player, type, sender);
         return true;
     }
