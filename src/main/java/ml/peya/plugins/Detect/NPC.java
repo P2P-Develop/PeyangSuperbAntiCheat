@@ -45,7 +45,7 @@ public class NPC
         }
 
         name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ?  "19" + random.nextInt(120): "");
-        if (name.length() > 16)
+        if (name.length() > 14)
             name = random.nextBoolean() ? first: last;
 
 
