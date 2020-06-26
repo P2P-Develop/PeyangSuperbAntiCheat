@@ -8,6 +8,7 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
+import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 import org.bukkit.util.*;
 
@@ -26,7 +27,7 @@ class TestKnockback
         location.add(loc);
 
         Arrow arrow = (Arrow) player.getWorld().spawnEntity(location, EntityType.ARROW);
-
+        arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), player.getUniqueId()));
         for (Player hide: Bukkit.getOnlinePlayers())
         {
             PlayerConnection connection = ((CraftPlayer) hide).getHandle().playerConnection;
@@ -35,7 +36,7 @@ class TestKnockback
         }
 
         Vector speed = location.getDirection();
-        speed.multiply(10f);
+        speed.multiply(32767f);
         arrow.setVelocity(speed);
 
         CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type);

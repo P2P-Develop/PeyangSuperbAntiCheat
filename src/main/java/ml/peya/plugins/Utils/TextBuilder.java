@@ -80,10 +80,10 @@ public class TextBuilder
 
         ComponentBuilder b = new ComponentBuilder("");
 
-        b.append(id);
+        b.append(ChatColor.GREEN + id);
         b.append("   ");
 
-        b.append(issueById);
+        b.append(ChatColor.BLUE + issueById);
         b.append("   ");
 
         b.append(severity.getText())
@@ -91,7 +91,7 @@ public class TextBuilder
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + mngid))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
         b.append("   ");
-        if (sender instanceof Player)
+        if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
             b.append(MessageEngihe.get("book.click.delete"))
                     .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr drop " + mngid))

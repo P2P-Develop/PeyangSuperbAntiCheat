@@ -1,7 +1,6 @@
 package ml.peya.plugins;
 
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
-import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.*;
 
@@ -24,6 +23,9 @@ public class Events implements Listener
             return;
 
         if (!PeyangSuperbAntiCheat.cheatMeta.exists(e.getEntity().getUniqueId()))
+            return;
+
+        if (!e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
             return;
 
         e.setDamage(0);

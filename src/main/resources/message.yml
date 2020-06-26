@@ -11,7 +11,7 @@ error:
   playerNotFound: "%%red%%%%bold%%エラー：対象プレイヤーが見つかりませんでした。"
   unknownSQLError: "%%red%%%%bold%%エラー：不明なSQLエラーが発生しました。運営に報告しています。"
   notHavePermission: "%%red%%%%bold%%エラー：権限がありません！"
-  invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psr help でヘルプを見てください。"
+  invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
 
   report:
     requirePlayer: "%%red%%%%bold%%エラー：理由短縮モードは、プレイヤーからのみ実行できます。"
