@@ -1,10 +1,12 @@
 package ml.peya.plugins.Utils;
 
+import ml.peya.plugins.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 
 import java.io.*;
+import java.util.*;
 
 public class ReportUtils
 {
@@ -14,15 +16,12 @@ public class ReportUtils
         {
             if (player.hasPermission("psac.reportntf"))
             {
-                player.sendMessage(ChatColor.GREEN + "[" +
-                        ChatColor.BLUE + "PeyangSuperbAntiCheat" +
-                        ChatColor.GREEN + "] " +
-                        ChatColor.RED + "プレイヤーがレポートを提出しました！");
+                player.sendMessage(MessageEngihe.get("report.submited"));
 
                 ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
                 hover.color(net.md_5.bungee.api.ChatColor.AQUA);
 
-                ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + "クリックしてレポートを確認してください！");
+                ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("report.click"));
                 builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "CLICK" + ChatColor.WHITE + "]")
                         .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
                         .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
@@ -40,17 +39,15 @@ public class ReportUtils
             ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
             hover.color(net.md_5.bungee.api.ChatColor.AQUA);
 
-            TextComponent builder = new TextComponent("");
-            builder.addExtra(ChatColor.AQUA + "[STAFF] ");
-            builder.addExtra(ChatColor.RED + "[ADMIN] Fishy");
-            builder.addExtra(ChatColor.WHITE + ": Report of ");
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("name", name);
+            map.put("reason", String.join(", ", reasons));
 
-            BaseComponent component = new TextComponent(name);
-            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
-            component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
-            builder.addExtra(component);
+            TextComponent builder = new TextComponent(MessageEngihe.get("report.lynx.submited", map));
 
-            builder.addExtra(" " + String.join(", ", reasons));
+            builder.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
+            builder.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+
             player.spigot().sendMessage(builder);
         }
     }

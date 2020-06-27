@@ -91,6 +91,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("bans").setExecutor(new CommandBans());
         getCommand("pull").setExecutor(new CommandPull());
 
+
         getServer().getPluginManager().registerEvents(new Events(), this);
 
         isAutoMessageEnabled = config.getBoolean("autoMessage.enabled");
