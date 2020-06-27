@@ -5,6 +5,7 @@ import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
+import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
@@ -20,10 +21,10 @@ public class NPCTeleport
         if (tpCase == DetectType.AURA_BOT)
             auraBot_teleport(player, target, arm);
         else if (tpCase == DetectType.AURA_PANIC)
-            auraPanic_teleport(player, target, arm, PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
+            auraPanic_teleport(player, target, arm);
     }
 
-    private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int sec)
+    private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm)
     {
         final double range = PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
         final double[] clt = {0.0};
@@ -48,6 +49,7 @@ public class NPCTeleport
                     target.getBukkitEntity().teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
                     PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
                     connection.sendPacket(new PacketPlayOutEntityTeleport(target));
+
                     NPC.setArmor(player, target, arm);
                     new BukkitRunnable()
                     {
@@ -68,7 +70,7 @@ public class NPCTeleport
                 }
 
                 clt[0] += 0.001;
-                if (clt[0] >= sec)
+                if (clt[0] >= PeyangSuperbAntiCheat.config.getInt("npc.seconds"))
                     this.cancel();
             }
         }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);

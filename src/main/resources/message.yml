@@ -36,7 +36,7 @@ error:
 
   aura:
     testingNow: "%%red%%%%bold%%エラー：対象プレイヤーは、現在テスト中です。"
-    notNumeric: "%%red%%%%bold%%エラー：指定された秒数が数字ではありません。/psr help でヘルプを見てください。"
+    notNumeric: "%%red%%%%bold%%エラー：指定された秒数が数字ではありません。/psac help でヘルプを見てください。"
 
   bans:
     unknownSearchType: "%%red%%%%bold%%エラー：検索タイプが不明です。"
@@ -105,6 +105,7 @@ message:
     %%green%%%%name%%さんに%%type%%を召喚します。\n\
     %%green%%%%seconds%%秒間お待ちください。
     "
+    lynx: "%%yellow%%Testing, please wait…"
 
   auraCheck:
     result:
@@ -115,8 +116,14 @@ message:
       words:
         kick: "%%red%%強制退出"
         ok: "%%green%%問題なし"
+    bot:
+      lynx: "%%aqua%%Hit the player %%red%%%%hit%% %%aqua%%times!"
+    panic:
+      lynx: "%%yellow%% Hit them %%hit%%/%%max%%"
 
-  testkb: "%%aqua%%Anti kbのために、 '%%name%%' をテストしました！"
+  testkb:
+    normal: "%%aqua%%Anti kbのために、 '%%name%%' をテストしました！"
+    lynx: "%%aqua%%Tested '%%name%%' for anti kb!"
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\

@@ -33,12 +33,20 @@ public class AuraBot implements CommandExecutor
             return true;
         }
 
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("name", name);
-        map.put("type", "AuraBot");
-        map.put("seconds", PeyangSuperbAntiCheat.config.getString("npc.seconds"));
 
-        sender.sendMessage(MessageEngihe.get("message.aura.summon", map));
+        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+            sender.sendMessage(MessageEngihe.get("message.aura.lynx"));
+        else
+        {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("name", name);
+            map.put("type", "AuraBot");
+            map.put("seconds", PeyangSuperbAntiCheat.config.getString("npc.seconds"));
+
+            sender.sendMessage(MessageEngihe.get("message.aura.summon", map));
+        }
+
+
 
         DetectConnection.scan(player, DetectType.AURA_BOT, sender);
         return true;

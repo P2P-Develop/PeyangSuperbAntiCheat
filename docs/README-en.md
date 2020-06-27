@@ -310,7 +310,7 @@ Specifying \[test\] as the second argument kick player in test mode.
 #### What is \<ManagementID\>
 
 \<ManagementID\> is a 32-character alphanumeric string that is automatically assigned when the player submits the report.  
-This ID is displayed when you run `/psr view` from console.  
+This ID is displayed when you run `/psac view` from console.  
 Also, can execute commands related to the \<ManagementID\> from the player.  
 
 ## Why not execute BAN command in this plugin

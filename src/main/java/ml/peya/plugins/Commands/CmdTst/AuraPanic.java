@@ -36,12 +36,18 @@ public class AuraPanic implements CommandExecutor
             return true;
         }
 
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("name", name);
-        map.put("type", "AuraPanicBot");
-        map.put("seconds", String.valueOf(sec));
+        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+            sender.sendMessage(MessageEngihe.get("message.aura.lynx"));
+        else
+        {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("name", name);
+            map.put("type", "AuraPanicBot");
+            map.put("seconds", String.valueOf(sec));
 
-        sender.sendMessage(MessageEngihe.get("message.aura.summon", map));
+            sender.sendMessage(MessageEngihe.get("message.aura.summon", map));
+
+        }
 
 
         DetectType type = DetectType.AURA_PANIC;

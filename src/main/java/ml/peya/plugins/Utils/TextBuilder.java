@@ -18,7 +18,7 @@ public class TextBuilder
         TextComponent nextBtn = new TextComponent(ChatColor.GREEN + "(" +
                 ChatColor.AQUA + button +
                 ChatColor.GREEN + ")");
-        nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr view " + bind));
+        nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac view " + bind));
         ComponentBuilder nextHover = new ComponentBuilder(MessageEngihe.get("book.words.next"));
 
         nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, nextHover.create()));
@@ -88,13 +88,13 @@ public class TextBuilder
 
         b.append(severity.getText())
                 .color(severity.getColor())
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + mngid))
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + mngid))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
         b.append("   ");
         if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
             b.append(MessageEngihe.get("book.click.delete"))
-                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr drop " + mngid))
+                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac drop " + mngid))
                     .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, dropHover.create()));
 
         }
@@ -166,6 +166,9 @@ public class TextBuilder
 
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
     {
+        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+            return new ComponentBuilder(MessageEngihe.get("message.auraCheck.bot.lynx", MessageEngihe.hsh("hit", VL)));
+
         ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("base.prefix") + "\n");
 
         builder.append(MessageEngihe.get("message.auraCheck.result.prefix", MessageEngihe.hsh("name", name)));
@@ -186,6 +189,8 @@ public class TextBuilder
 
     public static ComponentBuilder textPanicRep(String name, int vl)
     {
+        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+            return new ComponentBuilder("");
         ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("base.prefix"));
         builder.append("\n");
         builder.append(MessageEngihe.get("message.auraCheck.result.prefix", MessageEngihe.hsh("name", name)));

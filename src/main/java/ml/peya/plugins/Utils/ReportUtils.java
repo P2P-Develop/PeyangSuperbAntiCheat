@@ -19,13 +19,13 @@ public class ReportUtils
                         ChatColor.GREEN + "] " +
                         ChatColor.RED + "プレイヤーがレポートを提出しました！");
 
-                ComponentBuilder hover = new ComponentBuilder("/psr show " + id);
+                ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
                 hover.color(net.md_5.bungee.api.ChatColor.AQUA);
 
                 ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + "クリックしてレポートを確認してください！");
                 builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "CLICK" + ChatColor.WHITE + "]")
                         .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                        .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + id));
+                        .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
                 player.spigot().sendMessage(builder.create());
             }
         }
@@ -37,7 +37,7 @@ public class ReportUtils
         {
             if (!player.hasPermission("psac.reportntf"))
                 continue;
-            ComponentBuilder hover = new ComponentBuilder("/psr show " + id);
+            ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
             hover.color(net.md_5.bungee.api.ChatColor.AQUA);
 
             TextComponent builder = new TextComponent("");
@@ -46,7 +46,7 @@ public class ReportUtils
             builder.addExtra(ChatColor.WHITE + ": Report of ");
 
             BaseComponent component = new TextComponent(name);
-            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psr show " + id));
+            component.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
             component.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
             builder.addExtra(component);
 

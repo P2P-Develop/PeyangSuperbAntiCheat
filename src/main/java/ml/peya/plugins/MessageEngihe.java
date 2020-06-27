@@ -9,7 +9,7 @@ import java.util.*;
 
 public class MessageEngihe
 {
-    public static HashMap<String, Object> hsh(String path, String obj)
+    public static HashMap<String, Object> hsh(String path, Object obj)
     {
         HashMap<String, Object> map = new HashMap<>();
 
@@ -56,6 +56,7 @@ public class MessageEngihe
 
     private static HashMap<String, ChatColor> getColor()
     {
+
         HashMap<String, ChatColor> map = new HashMap<>();
 
         map.put("%%black%%", ChatColor.BLACK);
