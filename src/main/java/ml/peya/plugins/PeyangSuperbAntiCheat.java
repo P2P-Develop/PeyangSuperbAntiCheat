@@ -89,6 +89,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("acpanic").setExecutor(new AuraPanic());
         getCommand("testknockback").setExecutor(new TestKnockback());
         getCommand("bans").setExecutor(new CommandBans());
+        getCommand("pull").setExecutor(new CommandPull());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
 

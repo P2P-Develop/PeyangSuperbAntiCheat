@@ -16,7 +16,7 @@ public class Learn
     {
         if (sender instanceof ConsoleCommandSender)
         {
-            sender.sendMessage(MessageEngihe.get("error.learn.requirePlayer"));
+            sender.sendMessage(MessageEngihe.get("error.requirePlayer"));
 
             return;
         }

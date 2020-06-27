@@ -33,7 +33,10 @@ commands:
     aliases: ["testkb", "kbtest", "knockbacktest"]
     usage: /testkb <Player>
     description: "プレイヤーのノックバックを可視テストします。"
-
+  pull:
+    aliases: ["s"]
+    usage: /pull <Player>
+    description: "プレイヤーを引き寄せます。"
 permissions:
   #Core
   psac.member:
@@ -59,6 +62,7 @@ permissions:
       psac.bans: true
       psac.ntfadmin: true
       psac.reportntf: true
+      psac.pull: true
 
   psac.admin:
     description: このプラグインすべての権限を持ちます。
@@ -95,6 +99,9 @@ permissions:
     default: op
   psac.ntfadmin:
     description: Peyang Cheat Detectに、プレイヤー名を含めます。
+    default: op
+  psac.pull:
+    description: プレイヤーを引き寄せます。
     default: op
 
   #Detect

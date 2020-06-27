@@ -12,9 +12,8 @@ error:
   unknownSQLError: "%%red%%%%bold%%エラー：不明なSQLエラーが発生しました。運営に報告しています。"
   notHavePermission: "%%red%%%%bold%%エラー：権限がありません！"
   invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
-
+  requirePlayer: "%%red%%%%bold%%エラー：プレイヤーから実行してください。"
   report:
-    requirePlayer: "%%red%%%%bold%%エラー：理由短縮モードは、プレイヤーからのみ実行できます。"
     invalidReason: "%%red%%%%bold%%エラー：理由が正しくありません！"
     reasonNotSelected: "%%red%%%%bold%%エラー：理由が選択されていません！"
     alreadyReported: "%%red%%%%bold%%エラー：既に報告済みです！"
@@ -31,8 +30,6 @@ error:
   showDrop:
     notFoundReport: "%%red%%%%bold%%エラー：IDに合致するレポートが見つかりませんでした！"
 
-  learn:
-    requirePlayer: "%%red%%%%bold%%エラー：学習はプレイヤーからのみ実行できます。"
 
   aura:
     testingNow: "%%red%%%%bold%%エラー：対象プレイヤーは、現在テスト中です。"
@@ -124,6 +121,10 @@ message:
   testkb:
     normal: "%%aqua%%Anti kbのために、 '%%name%%' をテストしました！"
     lynx: "%%aqua%%Tested '%%name%%' for anti kb!"
+
+  pull:
+    normal: "%%yellow%%プレイヤー %%name%% を引き寄せました！"
+    lynx: "%%yellow%%Pulled player '%%name%%' to you!"
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\

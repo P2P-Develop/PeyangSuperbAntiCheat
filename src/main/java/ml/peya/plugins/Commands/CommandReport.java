@@ -44,7 +44,7 @@ public class CommandReport implements CommandExecutor
             }
             else if (sender instanceof ConsoleCommandSender)
             {
-                sender.sendMessage(MessageEngihe.get("error.report.requirePlayer"));
+                sender.sendMessage(MessageEngihe.get("error.requirePlayer"));
                 return true;
             }
             Player target = Bukkit.getPlayer(args[0]);
