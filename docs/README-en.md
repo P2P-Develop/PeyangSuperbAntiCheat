@@ -373,8 +373,8 @@ A test message for this plugin. Please use it for testing.
   
 ## What is this NPC\(WatchDog\)
 
-This NPC uses the API "[RandomUserGenerator](https://randomuser.me/)" by [@randomapi](https://twitter.com/randomapi) to call the player with a random username to interact with.  
-The skin is displayed randomly by referring to the UUID skin settting.  
+The Watchdog calls the NPC with a random username using the API "[RandomUserGenerator](https://randomuser.me/)" by [@randomapi](https://twitter.com/randomapi).    
+The NPC skin is displayed randomly by referring to the UUID skin settting.  
 
 ## Config settings
 
