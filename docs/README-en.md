@@ -54,27 +54,28 @@ This block of code represents a permission.
 Commands are always assigned one or more premissions.  
 Other settings can be done using permissions.  
   
-|     Permission    |           Assigned Command           | Description | Default Value | Permission Group |
-|:-----------------:|:------------------------------------:|:------------|:-------------:|:----------------:|
-|    psac.member    |                 group                | This is a server member privilege group. | true | none |
-|    psac.report    |          [/report](#report)          | This permission can execute report commands.  Player deprived of this permission cannot report. | true | psac.member |
-|    psac.report    |       [/psac help](#arguments)       | This permission can view help for members of this plugin. | true | psac.member |
-| psac.notification |                 none                 | Send a notification when a player with this privilege is reported. | true | psac.member |
-|    psac.regular   |                 none                 | This permission can visible sended regular messages. | true | psac.member |
-|     psac.mod      |                 group                | This permission can kick or test the player. | op | none |
-|     psac.kick     |       [/psac kick](#arguments)       | This permission can kick player manually. | op | psac.mod |
-|   psac.aurabot    |         [/aurabot](#aurabot)         | This permission can summon [KillAura Test NPC](#aurabot). | op | psac.mod |
-|   psac.aurapanic  |         [/acpanic](#acpanic)         | This permission can summon [Panic NPC](#acpanic). | op | psac.mod |
-|    psac.testkb    |          [/testkb](#testkb)          | This permission can release invisible arrow to the player and check for knockback. | op | psac.mod |
-|   psac.viewnpc    |                 none                 | This permission visible NPC other than the target player. | op | psac.mod |
-|     psac.view     |       [/psac view](#arguments)       | This permission can view report information. | op | psac.mod |
-|     psac.show     |       [/psac show](#arguments)       | This permission can view *verbose* report information. | op | psac.mod |
-|     psac.bans     |            [/bans](#bans)            | This permission can view ban statics. | op | psac.mod |
-|   psac.ntfadmin   |                 none                 | If the player calling the NPC has this permission, when that player detects a cheat, a message will be sent indicating the player's name. | op | psac.mod |
-|   psac.reportntf  | none | Players with this permission can be notified when the player submits a report. | op | psac.mod |
-|     psac.admin    | group | This permission can use all commands of the plugin. | false | none |
-|     psac.drop     | /psac drop \<ManagementID\> | This permission can delete submitted report. | false | psac.admin |
-|     psac.error    | none | This permission can get error information when the plugin encountered an internal error. | false | psac.admin |
+|       Permission        |           Assigned Command           | Description | Default Value | Permission Group |
+|:-----------------------:|:------------------------------------:|:------------|:-------------:|:----------------:|
+|     **psac.member**     |                 group                | This is a server member privilege group. | true | none |
+|    ```psac.report```    |          [/report](#report)          | This permission can execute report commands.  Player deprived of this permission cannot report. | true | psac.member |
+|    ```psac.report```    |       [/psac help](#arguments)       | This permission can view help for members of this plugin. | true | psac.member |
+| ```psac.notification``` |                 none                 | Send a notification when a player with this privilege is reported. | true | psac.member |
+|    ```psac.regular```   |                 none                 | This permission can visible sended regular messages. | true | psac.member |
+|      **psac.mod**       |                 group                | This permission can kick or test the player. | op | none |
+|     ```psac.kick```     |       [/psac kick](#arguments)       | This permission can kick player manually. | op | psac.mod |
+|   ```psac.aurabot```    |         [/aurabot](#aurabot)         | This permission can summon [KillAura Test NPC](#aurabot). | op | psac.mod |
+|   ```psac.aurapanic```  |         [/acpanic](#acpanic)         | This permission can summon [Panic NPC](#acpanic). | op | psac.mod |
+|    ```psac.testkb```    |          [/testkb](#testkb)          | This permission can release invisible arrow to the player and check for knockback. | op | psac.mod |
+|   ```psac.viewnpc```    |                 none                 | This permission visible NPC other than the target player. | op | psac.mod |
+|     ```psac.view```     |       [/psac view](#arguments)       | This permission can view report information. | op | psac.mod |
+|     ```psac.show```     |       [/psac show](#arguments)       | This permission can view *verbose* report information. | op | psac.mod |
+|     ```psac.bans```     |            [/bans](#bans)            | This permission can view ban statics. | op | psac.mod |
+|   ```psac.ntfadmin```   |                 none                 | If the player calling the NPC has this permission, when that player detects a cheat, a message will be sent indicating the player's name. | op | psac.mod |
+|   ```psac.reportntf```  |                 none                 | Players with this permission can be notified when the player submits a report. | op | psac.mod |
+|     ```psac.pull```     |            [/pull](#pull)            | This permission can pull other players. | op | psac.mod |
+|      **psac.admin**     |                 group                | This permission can use all commands of the plugin. | false | none |
+|     ```psac.drop```     |       [/psac drop](#arguments)       | This permission can delete submitted report. | false | psac.admin |
+|     ```psac.error```    |                 none                 | This permission can get error information when the plugin encountered an internal error. | false | psac.admin |
   
 
 ## Commands
@@ -206,6 +207,59 @@ When an NPC is attacked a certain number of times, it kicks that player.
 
 ---
 
+### /testkb
+
+#### Aliases
+- /testknockback
+- /kbtest
+- /knockbacktest
+
+#### Description
+---
+
+Fire a **invisible arrow** at the specified player.  
+This allows you to see if the player is knocking back.
+
+#### Usage
+---
+
+- /testkb \<PlayerName\>
+
+Fire invisible arrow at \<PlayerName\>.
+
+#### Permission
+---
+
+- `psac.testkb`
+
+---
+
+### /pull
+
+Pull the specified player.
+
+#### Aliases
+---
+
+* /s
+
+#### Description
+---
+
+Pull the specified player to the executed player.
+It cannot be run from console.
+
+#### Usage
+---
+
+* /pull \<PlayerName\>
+
+#### Permissions
+---
+
+* psac.pull
+---
+
 ### /bans
 
 #### Aliases
@@ -232,33 +286,6 @@ Add \-a to show all bans and kicks.
 ---
 
 - `psac.bans`
-
----
-
-### /testkb
-
-#### Aliases
-- /testknockback
-- /kbtest
-- /knockbacktest
-
-#### Description
----
-
-Fire a **invisible arrow** at the specified player.  
-This allows you to see if the player is knocking back.
-
-#### Usage
----
-
-- /testkb <PlayerName/>
-
-Fire invisible arrow at \<PlayerName\>.
-
-#### Permission
----
-
-- `psac.testkb`
 
 ---
 
