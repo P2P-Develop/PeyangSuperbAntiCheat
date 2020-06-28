@@ -1,6 +1,6 @@
 # PeyangSuperbAntiCheat(PSAC) English Documentation
 
-**WARNING: This repository has jokes in commit messages by developer(and little contributor).  
+**WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
 If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
   
 ## Introduction
