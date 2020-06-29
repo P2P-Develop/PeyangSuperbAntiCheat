@@ -17,7 +17,7 @@ In the description of **hack**, the meaning of hacking (cracking) of the server 
 
 This document defines a simple markdown grammar to make it easy for users to understand.
   
-**WARNING: foo is bar, please understand.**
+**WARNING: foo is __not__ bar, please understand.**
   
 **This represents information that all users should know.**
   
@@ -42,7 +42,7 @@ This block of code represents a permission.
 ## Installation
 
 1. Clone this repository.
-2. enter repository root and build in Java environment **with Maven**(execute ```mvn build```).  
+2. enter repository root and build in Java environment **with Maven**(execute "mvn build").  
    **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**
 2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
 3. Move / Copy the built plugin in the `plugins` folder.
