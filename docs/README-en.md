@@ -210,6 +210,8 @@ When an NPC is attacked a certain number of times, it kicks that player.
 ### /testkb
 
 #### Aliases
+---
+
 - /testknockback
 - /kbtest
 - /knockbacktest
