@@ -81,24 +81,32 @@ public class NPCTeleport
         final double yaw = 360.0;
         final double[] time = {0.0};
         final double radius = PeyangSuperbAntiCheat.config.getDouble("npc.range");
-        final double range = PeyangSuperbAntiCheat.config.getDouble("npc.bump");
+        final double range = radius * 6;
         Random generator = new Random();
         int dob = generator.nextInt(3);
         WaveCreator creator = new WaveCreator(1.0, 2.0, 0.0);
         WaveCreator ypp = new WaveCreator(20.0, 90.0, 20.0);
-        final int[] count = {0};
+        final boolean waveFlag = PeyangSuperbAntiCheat.config.getBoolean("npc.wave");
 
+        WaveCreator wave = new WaveCreator(radius, radius, PeyangSuperbAntiCheat.config.getDouble("npc.waveMin"));
+
+        final int[] count = {0};
         new BukkitRunnable() {
             public void run()
             {
                 for (double i = 0; i < Math.PI * 2; i++) {
 
+                    double rangeTmp = radius;
+
+                    if (waveFlag)
+                        rangeTmp = wave.get(0.01, true);
+
                     Location center = player.getLocation();
 
                     Location n = new Location(center.getWorld(),
-                            auraBot_xPos(time[0], radius) + center.getX(),
+                            auraBot_xPos(time[0], rangeTmp) + center.getX(),
                             center.getY() + creator.get(0.01, count[0] < 20),
-                            auraBot_zPos(time[0], radius, yaw) + center.getZ(),
+                            auraBot_zPos(time[0], rangeTmp, yaw) + center.getZ(),
                             (float) ypp.getStatic(),
                             (float) ypp.get(3, false));
 

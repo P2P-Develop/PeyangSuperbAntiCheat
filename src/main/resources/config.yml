@@ -8,12 +8,16 @@ database:
 npc:
   #指定された秒数、NPCを出します。
   seconds: 6
-  #NPCのテレポートが途中で止まってしまった場合、増やしてください。
-  bump: 30.0
   #npcの速度などを変えるとき、微調整してください。
   time: 0.25
   #npcのプレイヤーからの半径です。
   range: 2.1
+
+  #npcがWaveを描くかどうかです。
+  wave: true
+
+  #waveの最小です。
+  waveMin: 0.3
 
   panicRange: 1.5
 

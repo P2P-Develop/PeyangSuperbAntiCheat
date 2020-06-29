@@ -190,4 +190,4 @@ report:
   submited: "%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%] プレイヤーがレポートを提出しました！"
   click: "%%yellow%%クリックしてレポートを確認してください！"
   lynx:
-    submited: "%%aqua%%[STAFF] %%red%%[ADMIN] %%white%%Fishy: Report of %%name%% %%reason%%"
+    submited: "%%aqua%%[STAFF] %%red%%[ADMIN] Fishy%%white%%: Report of %%name%% %%reason%%"
