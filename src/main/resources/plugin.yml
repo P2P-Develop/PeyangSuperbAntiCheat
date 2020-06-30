@@ -22,7 +22,7 @@ commands:
     usage: /aurabot <PlayerName>
     description: "プレイヤーに回るNPCを召喚します。。"
   acpanic:
-    aliases: ["testpanic", "panictest", "aurapanictest"]
+    aliases: ["testpanic", "panictest", "aurapanictest", "aurapanic"]
     usage: /acpanic <PlayerName>
     description: "プレイヤーの背後にNPCを召喚します。"
   bans:
@@ -37,6 +37,9 @@ commands:
     aliases: ["s"]
     usage: /pull <Player>
     description: "プレイヤーを引き寄せます。"
+  target:
+    usage: /target <Player>
+    description: "プレイヤーをターゲットにします。"
 permissions:
   #Core
   psac.member:
@@ -63,6 +66,7 @@ permissions:
       psac.ntfadmin: true
       psac.reportntf: true
       psac.pull: true
+      psac.target: true
 
   psac.admin:
     description: このプラグインすべての権限を持ちます。
@@ -102,6 +106,9 @@ permissions:
     default: op
   psac.pull:
     description: プレイヤーを引き寄せます。
+    default: op
+  psac.target:
+    description: プレイヤーをターゲットにします。
     default: op
 
   #Detect

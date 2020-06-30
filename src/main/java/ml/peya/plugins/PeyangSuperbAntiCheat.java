@@ -5,6 +5,8 @@ import com.comphenix.protocol.events.*;
 import com.zaxxer.hikari.*;
 import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Commands.*;
+import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
@@ -23,10 +25,9 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static String banKickPath;
 
     public static DetectingList cheatMeta;
-
-
     public static KillCounting counting;
     public static ProtocolManager protocolManager;
+    public static Item item;
 
     public static long time = 0L;
     public static int banLeft;
@@ -62,6 +63,12 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         counting = new KillCounting();
         protocolManager = ProtocolLibrary.getProtocolManager();
 
+        item = new Item();
+
+        item.register(new ml.peya.plugins.Gui.Items.AuraBot());
+        item.register(new ml.peya.plugins.Gui.Items.AuraPanic());
+        item.register(new ml.peya.plugins.Gui.Items.TestKnockBack());
+
         protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
         {
             @Override
@@ -90,9 +97,12 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("testknockback").setExecutor(new TestKnockback());
         getCommand("bans").setExecutor(new CommandBans());
         getCommand("pull").setExecutor(new CommandPull());
-
+        getCommand("target").setExecutor(new CommandTarget());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
+        getServer().getPluginManager().registerEvents(new Run(), this);
+        getServer().getPluginManager().registerEvents(new Drop(), this);
+        getServer().getPluginManager().registerEvents(new PickUp(), this);
 
         isAutoMessageEnabled = config.getBoolean("autoMessage.enabled");
         time = config.getLong("autoMessage.time");

@@ -191,3 +191,8 @@ report:
   click: "%%yellow%%クリックしてレポートを確認してください！"
   lynx:
     submited: "%%aqua%%[STAFF] %%red%%[ADMIN] Fishy%%white%%: Report of %%name%% %%reason%%"
+
+item:
+  execute: "%%red%%%%command%% %%green%%を実行する"
+  stopTarget: "%%red%%監視モードを止めました。"
+  reloadItem: "%%red%%リロード中…"

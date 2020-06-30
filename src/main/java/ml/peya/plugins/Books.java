@@ -1,4 +1,4 @@
-package ml.peya.plugins.Gui;
+package ml.peya.plugins;
 
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
