@@ -17,7 +17,7 @@ In the description of **hack**, the meaning of hacking (cracking) of the server 
 
 This document defines a simple markdown grammar to make it easy for users to understand.
   
-**WARNING: foo is bar, please understand.**
+**WARNING: foo is __not__ bar, please understand.**
   
 **This represents information that all users should know.**
   
@@ -42,7 +42,7 @@ This block of code represents a permission.
 ## Installation
 
 1. Clone this repository.
-2. enter repository root and build in Java environment **with Maven**(execute ```mvn build```).  
+2. enter repository root and build in Java environment **with Maven**(execute "mvn build").  
    **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**
 2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
 3. Move / Copy the built plugin in the `plugins` folder.
@@ -210,6 +210,8 @@ When an NPC is attacked a certain number of times, it kicks that player.
 ### /testkb
 
 #### Aliases
+---
+
 - /testknockback
 - /kbtest
 - /knockbacktest
@@ -384,11 +386,12 @@ In this plugin, the following config is set by default.
 | :-----------------: | :-----------: | :-------------------------------------------------------------------------------------------------------------------- |
 |    database.path    |   ./eye.db    | Save report information by specifying location of SQLite database path.                                               |
 |   database.logPath  |   ./log.db    | Save kick infomation by specifying location of SQLite database path.                                                  |
-|     npc.seconds     |       6       | Specifies the number of seconds the [NPC]NPC(#aurabot) will orbit the player.                                         |
-|       npc.bump      |     30.0      | Specifies the value to resolve when the [NPC](#aurabot) is stuck or stopped in the middle.                            |
+|     npc.seconds     |       6       | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                            |
 |       npc.time      |     0.25      | Specifies the value of [NPC](#aurabot) orbit speed.                                                                   |
 |      npc.range      |      2.1      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.               |
 |    npc.panicRange   |      1.5      | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                |
+|       npc.wave      |      true     | Whether the [NPC](#aurabot) spins like a wave.                                                                        |
+|     npc.waveMin     |      1.0      | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                       |
 |       npc.kill      |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                         |
 |      kick.delay     |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                       |
 |    kick.lightning   |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                 |
