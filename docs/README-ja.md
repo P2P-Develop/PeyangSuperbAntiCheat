@@ -40,9 +40,9 @@ Hypixelの**~~パクリ~~**コマンドです。
 * スタッフ側
 
 プレイヤーからのレポートは、2形式で表示されます。  
-「\\[PeyangSuperbAntiCheat\\] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ \\[CLICK\\]」  
+「\[PeyangSuperbAntiCheat\] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ \[CLICK\]」  
 または、  
-「\\[STAFF\\] \\[ADMIN\\] Fishy: Report of \\<PlayerName\\> \\<理由1\\>, \\[理由2\\]...」  
+「\[STAFF\] \[ADMIN\] Fishy: Report of \<PlayerName\> \<理由1\>, \[理由2\]...」  
 の形で表示されます。コンフィグを編集することにより変更できます。  
 
 このモードは、<details><summary>████</summary>Kam7</details>によって**リークされた**Hypixel Lynx Modとの互換性を持たせる事ができるモードです。  
@@ -50,16 +50,16 @@ Hypixelの**~~パクリ~~**コマンドです。
 このModを使用したままHypixelには**絶対に**行かないでください。
 
 ### 使用法
-* /wdr \\<PlayerName\\>
+* /wdr \<PlayerName\>
 
-この状態で実行すると、報告事由を選択できる本が\\(**自動的に**\\)開きます。  
+この状態で実行すると、報告事由を選択できる本が\(**自動的に**\)開きます。  
 この本に表示されている報告事由をクリックすると、報告内容として事由が追加されます。  
-- 「<span style=\"color: dark_green; font-weight: bold;\">レポートを送信</span>」をクリックで送信するか、  
-- 「<span style=\"color: red; font-weight: bold;\">レポートをキャンセル</span>」をクリックでキャンセルします。  
+- 「<span style="color: dark_green; font-weight: bold;">レポートを送信</span>」をクリックで送信するか、  
+- 「<span style="color: red; font-weight: bold;">レポートをキャンセル</span>」をクリックでキャンセルします。  
 
 **注意：このプラグインでは超原始的な本の実装方法を使用しています。ご了承しろやください。**
 
-* /wdr \\<PlayerName\\> \\<理由1\\> \\[理由2\\]…
+* /wdr \<PlayerName\> \<理由1\> \[理由2\]…
 
 このコマンドは、本を使用せずに、コマンドのみで報告できます。  
 本を開かないため、**全くもって意味を感じられませんが**、コンソールからでも報告できます。  
@@ -98,9 +98,9 @@ __このコマンドの事由には、エイリアスを使用できます。下
 このNPCに対して、一定の回数以上ヒットした場合、そのプレイヤーをキックします。
 
 ### 使用法
-* /aurabot \\<PlayerName\\>
+* /aurabot \<PlayerName\>
 
-\\<PlayerName\\>に指定されたプレイヤーに、回転NPCを召喚します。
+\<PlayerName\>に指定されたプレイヤーに、回転NPCを召喚します。
 
 ### 権限
 * psac.aurabot
@@ -118,9 +118,9 @@ __このコマンドの事由には、エイリアスを使用できます。下
 このコマンドを実行すると、プレイヤーの背後にへばりつくようにNPCを指定された秒数召喚します。
 
 ### 使用法
-* /acpanic \\<PlayerName\\>
+* /acpanic \<PlayerName\>
 
-\\<PlayerName\\> に指定されたプレイヤーの背後にNPCを召喚します。
+\<PlayerName\> に指定されたプレイヤーの背後にNPCを召喚します。
 
 ### 権限
 * psac.aurapanic
@@ -138,10 +138,10 @@ __このコマンドの事由には、エイリアスを使用できます。下
 **このプラグインに残っている**、プレイヤーのキック（BAN）履歴を表示します。
 
 ### 使用法
-* /bans \\[-a | ban | kick\\] \\<PlayerName\\>
+* /bans \\[-a | ban | kick\] \<PlayerName\>
 
-\\<PlayerName\\>に指定されたプレイヤーのBAN履歴を表示します。  
-\\-aをつけると、BANとキックをすべて表示します。あとは察してください。
+\\<PlayerName\>に指定されたプレイヤーのBAN履歴を表示します。  
+\-aをつけると、BANとキックをすべて表示します。あとは察してください。
 
 ### 権限
 * psac.bans
@@ -160,9 +160,9 @@ __このコマンドの事由には、エイリアスを使用できます。下
 そのノックバックでAntiKBか どうか判定して、どうぞ。
 
 ### 使用法
-* /testkb \\<PlayerName/>
+* /testkb \<PlayerName\>
 
-\\<PlayerName\\>に指定されたプレイヤーに矢をぶち込みます。
+\<PlayerName\>に指定されたプレイヤーに矢をぶち込みます。
 
 ### 権限
 * psac.testkb
@@ -180,7 +180,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 コンソールからは実行できません。
 
 ### 使用法
-* /pull \\<PlayerName\\>
+* /pull \<PlayerName\>
 
 ### 権限
 * psac.pull
@@ -196,7 +196,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 ドロップすると全部消えるよ！
 
 ### 使用法
-* /target \\<PlayerName\\>
+* /target \<PlayerName\>
 
 ### 権限
 * psac.target
@@ -220,30 +220,30 @@ __このコマンドの事由には、エイリアスを使用できます。下
 このプラグインコマンドのヘルプを表示します。  
 ```psac.mod```または、```psac.admin```権限を持っている人には、以下のヘルプも表示されます。
  
-* /psac view \\[ページ数\\]
+* /psac view \[ページ数\]
 
 プレイヤーが提出したレポートを確認できます。  
 危険度順に5件ずつ表示されます。
   
-* /psac show \\<管理ID\\>
+* /psac show \<管理ID\
 
 プレイヤーが提出したレポートの詳細を表示します。  
 このコマンドをプレイヤーから実行すると、本が開き、報告の詳細を確認できます。  
 コンソールから実行した場合、コンソールにそのまま表示されます。
   
-* /psac drop \\<管理ID\\>
+* /psac drop \<管理ID\>
 
 プレイヤーが提出した報告を**完全**に破棄します。  
 **削除ログは一切記録されません。破棄する場合には十分ご注意ください。**  
 *（コマンド操作ログは記録されるかも（たぶん））*
 
-* /psac kick \\<PlayerName\\> \\[test\\]
+* /psac kick \<PlayerName\> \[test\]
 
-\\<PlayerName\\>で指定したプレイヤーをキックします。  
+\<PlayerName\>で指定したプレイヤーをキックします。  
 第2引数に```test```を指定すると、テストモードとしてキックされます。  
 
 ### 権限
-\\(上から順に\\)  
+\(上から順に\)  
 * psac.help
 * psac.view
 * psac.show
@@ -259,26 +259,26 @@ __このコマンドの事由には、エイリアスを使用できます。下
 | 権限 | 割り当てられているコマンド/動作 | その他説明  | デフォルト | グループ |
 |:-:|:-:|:-:|:-:|:-:|
 | psac.member | サーバーメンバー用の権限です。  |  | true |  |
-| psac.report | /wdr \\(report\\) | レポートができます。  | true | psac.member |
+| psac.report | /wdr \(report\) | レポートができます。  | true | psac.member |
 | psac.report | /psac help | このプラグインの\\(メンバー\\)ヘルプを見ることができます。  | true | psac.member |
 | psac.notification | プレイヤーが対処されたとき、通知が飛ばされます。  |  | true | psac.member |
 | psac.regular | 定期メッセージが流れます。 |  | true | psac.member |
 | ----------------- | --------------------------------------------------- | --------------------------------------------------------- | ---------- | ----------- |
 | psac.mod | プレイヤーのキックや、テストをできます。  |  | op |  |
 | psac.kick | /psac kick | プレイヤーをキックできます。  | op | psac.mod |
-| psac.aurapanic  | /aurapanic \\<\\PlyerName\\> | プレイヤーに回るNPCを送りつけることができます。  | op | psac.mod |
-| psac.aurabot | /aurabot \\<PlayerName\\> | プレイヤーの背後に貼り付く、NPCを召喚します。 | op | psac.mod |
-| psac.testkb | /testkb \\<PlayerName\\>  | プレイヤーに見えない弓を放ち、ノックバックを確かめます。  | op | psac.mod |
+| psac.aurapanic  | /aurapanic \<\PlyerName\> | プレイヤーに回るNPCを送りつけることができます。  | op | psac.mod |
+| psac.aurabot | /aurabot \<PlayerName\> | プレイヤーの背後に貼り付く、NPCを召喚します。 | op | psac.mod |
+| psac.testkb | /testkb \<PlayerName\>  | プレイヤーに見えない弓を放ち、ノックバックを確かめます。  | op | psac.mod |
 | psac.viewnpc | 対象プレイヤー以外に、NPCを見ることができます。  |  | op | psac.mod |
 | psac.view | /view | レポートを表示できます。 | op | psac.mod |
-| psac.show | /show \\<ManagementID\\> | レポートを詳細表示します。  | op | psac.mod |
-| psac.bans | /bans \\[-a \\| kick \\| ban\\] | プレイヤーのBAN履歴を参照します。  | op | psac.mod |
+| psac.show | /show \<ManagementID\> | レポートを詳細表示します。  | op | psac.mod |
+| psac.bans | /bans \[-a \\| kick \| bans\] | プレイヤーのBAN履歴を参照します。  | op | psac.mod |
 | psac.ntfadmin | PEYANG CHEAT DETECTION に、名前を含みます。  |  | op | psac.mod |
 | psac.reportntf | プレイや～がレポートを送信したとき通知が届きます。  |  | op | psac.mod |
 | psac.pull | プレイヤーを自分に引き寄せます。  |  | op | psac.mod |
 | ----------------- | --------------------------------------------------- | --------------------------------------------------------- | ---------- | ----------- |
 | psac.admin | レポートの削除や、サーバーの根幹に関わる権限です。  |  | false |  |
-| psac.drop | /psac drop \\<ManagementID\\> | プレイヤーからのレポートを跡形も残らずに消します。  | false | psac.admin |
+| psac.drop | /psac drop \<ManagementID\> | プレイヤーからのレポートを跡形も残らずに消します。  | false | psac.admin |
 | psac.error | エラーが発生したとき、通知されます。  |  | false | psac.admin |
 
 ### \\<管理ID\\>について
@@ -295,7 +295,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 ### ブロードキャストメッセージについて
 プレイヤーが自動でキックされるとき、以下のブロードキャストメッセージが流れます。  
 
-「\\[PEYANG CHEAT DETECTION\\] ハッキング、または不適切な発言によってゲームからプレイヤーが削除されました。」  
+「\[PEYANG CHEAT DETECTION\] ハッキング、または不適切な発言によってゲームからプレイヤーが削除されました。」  
 「違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！」  
   
 このメッセージは、チートを自動検出した時のメッセージです。  
@@ -337,7 +337,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 | message.lynx | true | Lynx Modと互換性を持たせるかどうかです。 |
 | autoMessage.enabled | true | 定期メッセージの有効または無効を切り替えます。 |
 | autoMessage.time | 15 | 定期メッセージの時間周期です。分で指定します。 |
-| skins | \\(UUID...\\) | NPC に適用するスキンです。この中からランダムで選ばれます。 |
+| skins | \(UUID...\) | NPC に適用するスキンです。この中からランダムで選ばれます。 |
 
 ### 人工知能もどきについて
 このプラグインでは、開発名「クソ雑魚ナメクジゴミ人工知能」とよばれる、人工知能**もどき**があります。  
