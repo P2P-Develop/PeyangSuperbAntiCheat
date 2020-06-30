@@ -5,14 +5,11 @@ import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
-import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.scheduler.*;
-import org.bukkit.util.Vector;
-
-import java.util.*;
+import org.bukkit.util.*;
 
 public class NPCTeleport
 {
@@ -81,17 +78,16 @@ public class NPCTeleport
         final double yaw = 360.0;
         final double[] time = {0.0};
         final double radius = PeyangSuperbAntiCheat.config.getDouble("npc.range");
-        final double range = radius * 6;
-        Random generator = new Random();
-        int dob = generator.nextInt(3);
+
         WaveCreator creator = new WaveCreator(1.0, 2.0, 0.0);
         WaveCreator ypp = new WaveCreator(20.0, 90.0, 20.0);
+
         final boolean waveFlag = PeyangSuperbAntiCheat.config.getBoolean("npc.wave");
 
-        WaveCreator wave = new WaveCreator(radius, radius, PeyangSuperbAntiCheat.config.getDouble("npc.waveMin"));
+        WaveCreator wave = new WaveCreator(radius - 0.1, radius, PeyangSuperbAntiCheat.config.getDouble("npc.waveMin"));
 
         final int[] count = {0};
-        new BukkitRunnable() {
+        BukkitRunnable r = new BukkitRunnable() {
             public void run()
             {
                 for (double i = 0; i < Math.PI * 2; i++) {
@@ -133,14 +129,21 @@ public class NPCTeleport
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     count[0]++;
                 }
-
-
-                //time[0] += 0.133;
-                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time") + (dob / 100.0);
-                if (time[0] >= range)
-                    this.cancel();
+                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time");
             }
-        }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
+        };
+        r.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
+
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                r.cancel();
+                this.cancel();
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getLong("npc.seconds"));
+
     }
 
     private static double auraBot_zPos(double time, double radius, double yaw){

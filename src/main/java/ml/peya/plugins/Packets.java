@@ -2,12 +2,17 @@ package ml.peya.plugins;
 
 import com.comphenix.protocol.events.*;
 import com.comphenix.protocol.wrappers.*;
+import com.fasterxml.jackson.databind.*;
+import com.mojang.authlib.properties.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import sun.java2d.pipe.*;
 
+import javax.net.ssl.*;
+import java.io.*;
 import java.lang.reflect.*;
+import java.net.*;
 import java.util.*;
 
 public class Packets
@@ -53,6 +58,49 @@ public class Packets
                 0,
                 infoData.getGameMode(),
                 WrappedChatComponent.fromText(ChatColor.RED + infoData.getProfile().getName()));
+        List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
+        Random random = new Random();
+        JsonNode nodeb = getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
+        newInfo.getProfile().getProperties().put("textures", new WrappedSignedProperty("textures",
+                Objects.requireNonNull(nodeb).get("properties").get(0).get("value").asText(),
+                nodeb.get("properties").get(0).get("signature").asText()));
+
         e.getPacket().getPlayerInfoDataLists().write(0, Collections.singletonList(newInfo));
     }
+
+
+    private static JsonNode getSkin(String uuid)
+    {
+        try
+        {
+            HttpsURLConnection connection;
+            connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
+            if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK)
+            {
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                StringBuilder builder = new StringBuilder();
+                String readed = reader.readLine();
+                while (readed != null)
+                {
+                    builder.append(readed);
+                    readed = reader.readLine();
+                }
+                ObjectMapper mapper = new ObjectMapper();
+                return mapper.readTree(builder.toString());
+            }
+            else
+            {
+                PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            return null;
+        }
+    }
+
 }

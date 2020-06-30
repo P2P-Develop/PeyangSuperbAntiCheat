@@ -72,25 +72,13 @@ public class NPC
 
         connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
 
-        new BukkitRunnable()
-        {
-            @Override
-            public void run()
-            {
-                List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
-                Random random = new Random();
-                JsonNode node = getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
-                if (node != null)
-                    profile.getProperties().put("textures", new Property("textures", node.get("properties").get(0).get("value").asText(), node.get("properties").get(0).get("signature").asText()));
-            }
-        }.runTask(PeyangSuperbAntiCheat.getPlugin());
+
 
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.UPDATE_DISPLAY_NAME, npc));
                 connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
                 connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
             }
@@ -146,40 +134,6 @@ public class NPC
         return npc;
     }
 
-    public static JsonNode getSkin(String uuid)
-    {
-        try
-        {
-            HttpsURLConnection connection;
-            connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
-            if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK)
-            {
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder builder = new StringBuilder();
-                String readed = reader.readLine();
-                while (readed != null)
-                {
-                    builder.append(readed);
-                    readed = reader.readLine();
-                }
-                ObjectMapper mapper = new ObjectMapper();
-                return mapper.readTree(builder.toString());
-            }
-            else
-            {
-                PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
-                return null;
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-            return null;
-        }
-    }
-
     public  static void setArmor(Player target, EntityPlayer player,  ItemStack[] arm)
     {
 
@@ -190,5 +144,5 @@ public class NPC
         connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]));
         connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4]));
     }
-
 }
+

@@ -75,7 +75,8 @@ public class RandomArmor
         swords.add(Material.IRON_AXE);
         swords.add(Material.STONE_AXE);
         swords.add(Material.WOOD_AXE);
-        swords.add(Material.AIR);
+        for (int i = 0; i < 5; i++)
+            swords.add(Material.AIR);
 
         return getRandomItems(swords);
     }
