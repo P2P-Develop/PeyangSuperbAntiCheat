@@ -99,13 +99,19 @@ public class CommandReport implements CommandExecutor
         }
 
 
+        report(sender, types, target);
+        return true;
+    }
+
+    private void report(CommandSender sender, ArrayList<EnumCheatType> types, Player target)
+    {
         String senderName = sender instanceof ConsoleCommandSender ? "[CONSOLE]" : sender.getName();
         String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]" : ((Player) sender).getUniqueId().toString().replace("-", "");
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
         {
             sender.sendMessage(MessageEngihe.get("error.report.alreadyReported"));
-            return true;
+            return;
         }
 
         String id = WatchEyeManagement.add(target, senderName, senderUUID, SeverityLevelUtils.getSeverity(types).getLevel());
@@ -121,7 +127,7 @@ public class CommandReport implements CommandExecutor
             if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
             {
                 ReportUtils.adminNotification(id);
-                return true;
+                return;
             }
 
             ArrayList<String> resStr = new ArrayList<>();
@@ -133,6 +139,5 @@ public class CommandReport implements CommandExecutor
         }
         else
             sender.sendMessage(MessageEngihe.get("error.unknownSQLError"));
-        return true;
     }
 }
