@@ -2,6 +2,8 @@
 
 **WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
 If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
+***VERY WARNING***: **With this plugin, detectopm will run +4 timers at the same time.  
+In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**
   
 ## Introduction
 
@@ -117,8 +119,8 @@ This mod may be Bannable on Hypixel server, so never use this on Hypixel server.
   If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.  
   
 
-<font color="Green">Click to send report in "レポートを送信" , or</font>
-<font color="Red">Click the "レポートをキャンセル" to discard.</font>
+- ![#008000](https://via.placeholder.com/15/008000/000000?text=+) Click to send report in "レポートを送信" , or
+- ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Click the "レポートをキャンセル" to discard.</font>
   
 - /report \<PlayerName\> \<Reason1\> \[Reason2\]...  
   Player can execute this command with this argument to report directly in chat/console without using a book.  
@@ -416,6 +418,15 @@ The learning feature of this plugin adjusts key parameters by iteratively calcul
 When you build PeyangSuperbAntiCheat.jar with "mvn package", "mvn shade" is automatically executed.  
 You can edit this file to change the plugin messages before building.  
 At build time, *message.yml* is **automatically include jar resource**.
+
+## Did you find any bugs or errors?
+
+We accept bugs and errors related to [GitHub issues](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues).  
+I think that it will be handled by about two people, so please feel free to post.
+
+#### Assignees
+Japanese Assignee: [peyang-Celeron](https://github.com/peyang-Celeron) (and [Lemonade19x](https://github.com/Lemonade19x)?)
+English Assignee: [Potato1682](https://github.com/Potato1682)
 
 ---
 
