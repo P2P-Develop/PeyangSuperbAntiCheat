@@ -26,7 +26,10 @@ class TestKnockback
         loc.multiply(-0.1f);
         location.add(loc);
 
+
+
         Arrow arrow = (Arrow) player.getWorld().spawnEntity(location, EntityType.ARROW);
+        PeyangSuperbAntiCheat.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), DetectType.ANTI_KB);
         arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), player.getUniqueId()));
         for (Player hide: Bukkit.getOnlinePlayers())
         {
@@ -55,7 +58,7 @@ class TestKnockback
                 arrow.remove();
                 PeyangSuperbAntiCheat.cheatMeta.remove(arrow.getUniqueId());
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20);
 
     }
 }

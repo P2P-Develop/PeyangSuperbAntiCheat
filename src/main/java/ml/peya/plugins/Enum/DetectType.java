@@ -4,17 +4,24 @@ import org.bukkit.command.*;
 
 public enum DetectType
 {
-    AURA_BOT,
-    AURA_PANIC,
-    ANTI_KB;
+    AURA_BOT("AuraBot"),
+    AURA_PANIC("AuraPanic"),
+    ANTI_KB("TestKB");
 
     private int count;
     private CommandSender sender;
+    private String name;
 
-    DetectType ()
+    DetectType (String name)
     {
         count = 5;
         sender = null;
+        this.name = name;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
     public void getPanicCount(int time)

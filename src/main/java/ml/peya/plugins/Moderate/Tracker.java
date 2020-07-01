@@ -1,6 +1,7 @@
 package ml.peya.plugins.Moderate;
 
 import ml.peya.plugins.*;
+import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.Item;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
@@ -81,7 +82,19 @@ public class Tracker
             map.put("z", scaleSet(location.getZ(), 2));
 
             map.put("distance", scaleSet(location.distance(player.getLocation()), 1));
-
+            if (PeyangSuperbAntiCheat.cheatMeta.exists(target.getUniqueId()))
+            {
+                String test = String.valueOf(PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType().getName());
+                HashMap<String, Object> repKey = new HashMap<>();
+                repKey.put("type", test);
+                if (PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType() == DetectType.ANTI_KB)
+                    repKey.put("vl", "N/A");
+                else
+                    repKey.put("vl", PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getVL());
+                map.put("tests", MessageEngihe.get("item.tracking.testing", repKey));
+            }
+            else
+                map.put("tests", "");
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngihe.get("item.tracking.text", map)));
 
             for (ItemStack itemStack: player.getInventory().getContents())

@@ -199,4 +199,5 @@ item:
   compass: "%%green%%%%bold%%Compass Tracker %%reset%%%%red%%3000%%green%%%%bold%%™"
   tracking:
     noTarget: "%%red%%ターゲットなし"
-    text: "%%red%%%%bold%%ターゲット：%%reset%%%%green%%%%name%%%%red%%%%bold%%, ワールド：%%reset%%%%green%%%%world%%%%red%%%%bold%%, X：%%reset%%%%green%%%%x%%%%red%%%%bold%%, Y：%%reset%%%%green%%%%y%%%%red%%%%bold%%, Z：%%reset%%%%green%%%%z%%%%red%%%%bold%%, 距離: %%reset%%%%green%%%%distance%%"
+    text: "%%red%%%%bold%%ターゲット：%%reset%%%%green%%%%name%%%%red%%%%bold%%, ワールド：%%reset%%%%green%%%%world%%%%red%%%%bold%%, X：%%reset%%%%green%%%%x%%%%red%%%%bold%%, Y：%%reset%%%%green%%%%y%%%%red%%%%bold%%, Z：%%reset%%%%green%%%%z%%%%red%%%%bold%%, 距離: %%reset%%%%green%%%%distance%%%%tests%%"
+    testing: "%%reset%%%%aqua%%(テスト中：%%red%%%%bold%%%%type%%%%reset%%%%aqua%%, VL：%%red%%%%bold%%%%vl%%%%reset%%%%aqua%%)"
