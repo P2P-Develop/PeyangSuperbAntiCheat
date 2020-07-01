@@ -358,7 +358,7 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 余裕のあるサーバーで実行することを推奨します。
 
 ## バグ等
-バグ等は、**[こ↑こ↓]**(https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)にて、受け付けております。
+バグ等は、**[こ↑こ↓](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)**にて、受け付けております。
 
 ### 謝辞
 このプラグインは、以下のライブラリ / API を使用しています。
