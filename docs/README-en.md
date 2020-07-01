@@ -54,7 +54,7 @@ $ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git
 ```bash
 $ cd PeyangSuperbAntiCheat && mvn package
 ```
-   **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**
+**IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**  
 2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
 ```bash
 $ mv ProtocolLib.jar (Your plugins folder)
