@@ -352,6 +352,14 @@ PeyangSuperbAntiCheat.jarを```mvn package```でビルドすると、```mvn shad
 えっと、それがPeyangSuperbAntiCheat.jarのなかに同梱されています。
 message.ymlをいじくり倒すことで、いろいろできますが、まぁ、、、うん。後はすべて察しろ。
 
+## 注意
+このプラグインでは、常時2個、Detectopmで+4個タイマーが動いています。(2020/7/01現在)  
+~~最近改善した某有名系Googleブラウザ同様、~~メモリ、CPUともに大食いです。  
+余裕のあるサーバで実行することを推奨します。
+
+## バグ等
+バグ等は、**[こ↑こ↓](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)** にて、受け付けております。  
+
 ### 謝辞
 このプラグインは、以下のライブラリ / API を使用しています。  
 [RandomApi/RandomUserGenerator](https://randomuser.me/)  
