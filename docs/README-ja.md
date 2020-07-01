@@ -13,7 +13,7 @@ Bukkit/Spigot/PaperMCのプラグインです。
 
 ### インストール方法
 * 適当にダウンロードします。
-* [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\\*)](https://dev.bukkit.org/projects/protocollib) をpluginsフォルダーに入れます。  
+* [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) をpluginsフォルダーに入れます。  
 * このプラグインをpluginsフォルダーに入れます。
 * 再起動して、適用してください。
 
@@ -281,8 +281,8 @@ __このコマンドの事由には、エイリアスを使用できます。下
 | psac.drop | /psac drop \<ManagementID\> | プレイヤーからのレポートを跡形も残らずに消します。  | false | psac.admin |
 | psac.error | エラーが発生したとき、通知されます。  |  | false | psac.admin |
 
-### \\<管理ID\\>について
-\\<管理ID\\>は、プレイヤーが報告を提出した際に、自動的に割当られる32文字の英数文字列です。  
+### \<管理ID\\について
+\<管理ID\>は、プレイヤーが報告を提出した際に、自動的に割当られる32文字の英数文字列です。  
 このIDは、コンソールから ``` /psr view ``` をした際に表示されます。  
 プレイヤーからも管理IDに関連したコマンドを実行できますが、**意味は全くもってないでしょう。**
 
