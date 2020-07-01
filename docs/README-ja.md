@@ -359,6 +359,12 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 
 ## バグ等
 バグ等は、[**こ↑こ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)にて、受け付けております。
+見つけたら報告お願い申し上げますだなも(?)  
+
+#### こ↑こ↓場所の担当者
+
+日本語: [ぺやんぐ](https://github.com/peyang-Celeron)←開発者（と[Lemonade19x](https://github.com/Lemonade19x)?）  
+英語: [Potato1682](https://github.com/Potato1682)←ここのコミットした人♡
 
 ### 謝辞
 このプラグインは、以下のライブラリ / API を使用しています。
