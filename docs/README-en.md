@@ -384,7 +384,7 @@ Therefore, the plugin does not ban players _automatically_.
 ```
   
 This message is sent when the watchdog automatically detects a cheat.  
-For staff kicks, you will only broadcast second message.
+For staff kicks, you will only broadcast secondary message.
   
 ### Kick reasons
   
