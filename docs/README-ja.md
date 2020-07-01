@@ -345,53 +345,36 @@ __このコマンドの事由には、エイリアスを使用できます。下
 | skins | \(UUID...\) | NPCに適用するスキンです。この中からランダムで選ばれます。 |
 
 ### 人工知能もどきについて
-このプラグインでは、開発名「クソ雑魚ナメクジゴミ人工知能」とよばれる、人工知能**もどき**があります。
-<br>
-実際のチートを用いて学習させることにより、キックの精度が向上する…（**と思って**作ったものです）
-<br>
-~~まぁ平均の平均の平均…をとるだけの単純な機構なんですけどね.~~
-<br>
+このプラグインでは、開発名「クソ雑魚ナメクジゴミ人工知能」とよばれる、人工知能**もどき**があります。  
+実際のチートを用いて学習させることにより、キックの精度が向上する…（**と思って**作ったものです）  
+~~まぁ平均の平均の平均…をとるだけの単純な機構なんですけどね.~~  
 ↑ハハッ ＾＾；
 
 ### message.ymlについて
-PeyangSuperbAntiCheat.jarを```mvn package```でビルドすると、```mvn shade ```が自動実行されます（たぶん）
-<br>
-その時、message.ymlとかもくっついてきます。
-<br>
-えっと、それがPeyangSuperbAntiCheat.jarのなかに同梱されています。
-<br>
+PeyangSuperbAntiCheat.jarを```mvn package```でビルドすると、```mvn shade ```が自動実行されます（たぶん）  
+その時、message.ymlとかもくっついてきます。    
+えっと、それがPeyangSuperbAntiCheat.jarのなかに同梱されています。  
 message.ymlをいじくり倒すことで、いろいろできますが、まぁ…うん。後はすべて察しろ。
 
 ## 注意
-このプラグインでは、常時2個、Detectopmで+4個タイマーが動いています（2020/7/1現在）
-<br>
-~~某有名系Googleブラウザー同様~~、RAM、CPUともに大食いです。
-<br>
+このプラグインでは、常時2個、Detectopmで+4個タイマーが動いています（2020/7/1現在）  
+~~某有名系Googleブラウザー同様~~、RAM、CPUともに大食いです。  
 余裕のあるサーバーで実行することを推奨します。
 
 ## バグ等
-バグ等は、[**こ↑こ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)にて受け付けております。
-<br>
+バグ等は、[**こ↑こ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)にて受け付けております。  
 見つけたら報告お願い申し上げますだなも（？）
 
 #### [**こ↑こ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)場所の担当者
-日本語：[ぺやんぐ](https://github.com/peyang-Celeron)←開発者
-<br>
-日本語校正：[Lemonade19x](https://github.com/Lemonade19x)←~~自称ﾌﾟﾛｸﾞﾗﾏｰ&ここのコミット100回くらいやり直した人♡~~
-<br>
+日本語：[ぺやんぐ](https://github.com/peyang-Celeron)←開発者  
+日本語校正：[Lemonade19x](https://github.com/Lemonade19x)←~~自称ﾌﾟﾛｸﾞﾗﾏｰ&ここのコミット100回くらいやり直した人♡~~  
 英語：[Potato1682](https://github.com/Potato1682)←ここのコミット~~3回くらいやり直した~~人♡
 
 ### 謝辞
-このプラグインは、以下のライブラリ / API を使用しています。
-<br>
-[RandomApi/RandomUserGenerator](https://randomuser.me/)
-<br>
-[brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
-<br>
-[dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*Bukkit)](https://dev.bukkit.org/projects/protocollib)
-<br>
-[jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)
-<br>
-[DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
-<br>
+このプラグインは、以下のライブラリ / API を使用しています。  
+[RandomApi/RandomUserGenerator](https://randomuser.me/)  
+[brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)  
+[dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*)](https://dev.bukkit.org/projects/protocollib)  
+[jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
+[DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)  
 [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
