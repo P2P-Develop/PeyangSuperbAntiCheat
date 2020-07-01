@@ -2,12 +2,11 @@ package ml.peya.plugins;
 
 import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
-import com.sun.javafx.sg.prism.web.*;
 import com.zaxxer.hikari.*;
-import ml.peya.plugins.Commands.CmdTst.*;
-import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.Commands.CmdTst.AuraBot;
 import ml.peya.plugins.Commands.CmdTst.AuraPanic;
+import ml.peya.plugins.Commands.CmdTst.*;
+import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Gui.*;
