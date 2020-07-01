@@ -425,7 +425,8 @@ We accept bugs and errors related to [GitHub issues](https://github.com/peyang-C
 I think that it will be handled by about two people, so please feel free to post.
 
 #### Assignees
-Japanese Assignee: [peyang-Celeron](https://github.com/peyang-Celeron) (and [Lemonade19x](https://github.com/Lemonade19x)?)
+
+Japanese Assignee: [peyang-Celeron](https://github.com/peyang-Celeron) (and [Lemonade19x](https://github.com/Lemonade19x)?)  
 English Assignee: [Potato1682](https://github.com/Potato1682)
 
 ---
