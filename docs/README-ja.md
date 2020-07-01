@@ -359,7 +359,7 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 
 ## バグ等
 バグ等は、[**こ↑こ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)にて、受け付けております。
-見つけたら報告お願い申し上げますだなも(?)  
+見つけたら報告お願い申し上げますだなも（？）  
 
 #### こ↑こ↓場所の担当者
 
