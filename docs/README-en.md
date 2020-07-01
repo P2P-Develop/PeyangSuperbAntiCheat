@@ -3,7 +3,8 @@
 **WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
 If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
 ***VERY WARNING***: **With this plugin, detectopm will run +4 timers at the same time.  
-In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**
+In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**  
+For more information on the number of threads, see [Plugin Threads Summary](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt).  
   
 ## Introduction
 
@@ -426,8 +427,9 @@ I think that it will be handled by about two people, so please feel free to post
 
 #### Assignees
 
-Japanese Assignee: [peyang-Celeron](https://github.com/peyang-Celeron) (and [Lemonade19x](https://github.com/Lemonade19x)?)  
-English Assignee: [Potato1682](https://github.com/Potato1682)
+Depending on the language of the problem, the following persons are responsible for resolution:
+- Japanese issue assignee: [peyang-Celeron](https://github.com/peyang-Celeron) (and [Lemonade19x](https://github.com/Lemonade19x)?)
+- English issue assignee: [Potato1682](https://github.com/Potato1682)
 
 ---
 
