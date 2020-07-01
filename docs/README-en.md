@@ -51,19 +51,19 @@ This block of code represents a permission.
 $ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git
 ```
 2. enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-messageyml)\).  
+   **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**  
 ```bash
 $ cd PeyangSuperbAntiCheat && mvn package
 ```
-**IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**  
-2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
+3. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
 ```bash
 $ mv ProtocolLib.jar (Your plugins folder)
 ```
-3. Move / Copy the built plugin in the `plugins` folder.
+4. Move / Copy the built plugin in the `plugins` folder.
 ```bash
 $ mv (PSAC jar file) (Your plugins folder)
 ```
-4. Start / Restart server.
+5. Start / Restart server.
 ```bash
 /stop
 ```
