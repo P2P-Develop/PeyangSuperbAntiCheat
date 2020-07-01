@@ -52,10 +52,10 @@ Hypixelの**~~パクリ~~**コマンドです。
 ### 使用法
 * /wdr \<PlayerName\>
 
-この状態で実行すると、報告事由を選択できる本が\(**自動的に**\)開きます。  
+この状態で実行すると、報告事由を選択できる本が開きます。  
 この本に表示されている報告事由をクリックすると、報告内容として事由が追加されます。  
-- 「<span style="color: dark_green; font-weight: bold;">レポートを送信</span>」をクリックで送信するか、  
-- 「<span style="color: red; font-weight: bold;">レポートをキャンセル</span>」をクリックでキャンセルします。  
+![#008000](https://via.placeholder.com/15/008000/000000)**レポートを送信**をクリックで送信するか、  
+![#008000](https://via.placeholder.com/15/ff0000/000000)**レポートを放棄**クリックで破棄します。 
 
 **注意：このプラグインでは超原始的な本の実装方法を使用しています。ご了承しろやください。**
 
@@ -243,13 +243,12 @@ __このコマンドの事由には、エイリアスを使用できます。下
 第2引数に```test```を指定すると、テストモードとしてキックされます。  
 
 ### 権限
-\(上から順に\)  
+（上から順に）
 * psac.help
 * psac.view
 * psac.show
 * psac.drop
 * psac.kick
-
 
 ---
 
@@ -260,7 +259,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 |:-:|:-:|:-:|:-:|:-:|
 | psac.member | サーバーメンバー用の権限です。  |  | true |  |
 | psac.report | /wdr \(report\) | レポートができます。  | true | psac.member |
-| psac.report | /psac help | このプラグインの\\(メンバー\\)ヘルプを見ることができます。  | true | psac.member |
+| psac.report | /psac help | このプラグインの（メンバー）ヘルプを見ることができます。  | true | psac.member |
 | psac.notification | プレイヤーが対処されたとき、通知が飛ばされます。  |  | true | psac.member |
 | psac.regular | 定期メッセージが流れます。 |  | true | psac.member |
 | ----------------- | --------------------------------------------------- | --------------------------------------------------------- | ---------- | ----------- |
@@ -325,46 +324,45 @@ __このコマンドの事由には、エイリアスを使用できます。下
 | database.path | ./eye.db | レポート情報などを保存する、SQLiteデータベースの置き場所です。 |
 | database.logPath | ./log.db | キック情報などを保存する、SQLiteデータベースの置き場所です。 |
 | npc.seconds | 6                                                           | NPCがプレイヤーの周りを回る秒数です。 |
-| npc.time | 0.25 | NPC が回る速さです。感覚で調整してください。 |
-| npc.range | 2.1 | NPC が回る半径です。ロマンが全て。デフォルトが最高。 |
-| npc.wave | true | NPC が波を描くようにして回るかどうかです。 |
-| npc.waveMin | 1.0 | NPC が波を描くようにして回る最低ラインです。 |
-| npc.panicRange | 1.5 | Panic NPC がプレイヤーの背後をへばりつく相対的な高さでえす。 |
-| npc.kill | 3                             | 10秒間にプレイヤーがキルされたときに、プレイヤーがレポートされているとき、この数を超えた場合は、NPCを召喚します。  | 
+| npc.time | 0.25 | NPCが回る速さです。感覚で調整してください。 |
+| npc.range | 2.1 | NPCが回る半径です。ロマンが全て。デフォルトが最高。 |
+| npc.wave | true | NPCが波を描くようにして回るかどうかです。 |
+| npc.waveMin | 1.0 | NPCが波を描くようにして回る最低ラインです。 |
+| npc.panicRange | 1.5 | Panic NPCがプレイヤーの背後をへばりつく相対的な高さでえす。 |
+| npc.kill | 3                             | 10秒間プレイヤーをキルされていて、なおかつこの数を超えた場合は、NPCを召喚します。  | 
 | kick.delay | 2                   | プレイヤーをキックするまでの遅延です。ブロードキャストメッセージが流れた瞬間から数えられます。 |
 | kick.lightning | true | プレイヤーがキックされるときに、（ダメージを受けない）雷を落とすかどうかです。 |
 | kick.defaultKick | 40 | NPCがこの値以上殴られた場合にキックします。学習済データが見つからない場合はこの値が優先されます。 |
 | message.lynx | true | Lynx Modと互換性を持たせるかどうかです。 |
 | autoMessage.enabled | true | 定期メッセージの有効または無効を切り替えます。 |
 | autoMessage.time | 15 | 定期メッセージの時間周期です。分で指定します。 |
-| skins | \(UUID...\) | NPC に適用するスキンです。この中からランダムで選ばれます。 |
+| skins | \(UUID...\) | NPCに適用するスキンです。この中からランダムで選ばれます。 |
 
 ### 人工知能もどきについて
-このプラグインでは、開発名「クソ雑魚ナメクジゴミ人工知能」とよばれる、人工知能**もどき**があります。  
+このプラグインでは、開発名「クソ雑魚ナメクジゴミ人工知能」とよばれる、人工知能**もどき**があります。
 実際のチートを用いて学習させることにより、キックの精度が向上する…（**と思って**作ったものです）
 ~~まぁ平均の平均の平均…をとるだけの単純な機構なんですけどね.~~
-
 ↑ハハッ ＾＾；
 
 ### message.ymlについて
-PeyangSuperbAntiCheat.jarを```mvn package```でビルドすると、```mvn shade ```が自動実行されます。(多分)  
-そんとき、message.ymlとかもくっついてきます。
+PeyangSuperbAntiCheat.jarを```mvn package```でビルドすると、```mvn shade ```が自動実行されます（たぶん）
+その時、message.ymlとかもくっついてきます。
 えっと、それがPeyangSuperbAntiCheat.jarのなかに同梱されています。
-message.ymlをいじくり倒すことで、いろいろできますが、まぁ、、、うん。後はすべて察しろ。
+message.ymlをいじくり倒すことで、いろいろできますが、まぁ…うん。後はすべて察しろ。
 
 ## 注意
-このプラグインでは、常時2個、Detectopmで+4個タイマーが動いています。(2020/7/01現在)  
-~~最近改善した某有名系Googleブラウザ同様、~~メモリ、CPUともに大食いです。  
-余裕のあるサーバで実行することを推奨します。
+このプラグインでは、常時2個、Detectopmで+4個タイマーが動いています（2020/7/1現在）
+~~某有名系Googleブラウザー同様、~~RAM、CPUともに大食いです。
+余裕のあるサーバーで実行することを推奨します。
 
 ## バグ等
-バグ等は、**[こ↑こ↓](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)** にて、受け付けております。  
+バグ等は、**[こ↑こ↓]**(https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)にて、受け付けております。
 
 ### 謝辞
-このプラグインは、以下のライブラリ / API を使用しています。  
-[RandomApi/RandomUserGenerator](https://randomuser.me/)  
-[brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)  
-[dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*Bukkit)](https://dev.bukkit.org/projects/protocollib)  
-[jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
-[DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)  
-[P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)  
+このプラグインは、以下のライブラリ / API を使用しています。
+[RandomApi/RandomUserGenerator](https://randomuser.me/)
+[brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
+[dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*Bukkit)](https://dev.bukkit.org/projects/protocollib)
+[jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)
+[DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
+[P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
