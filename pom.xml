@@ -6,7 +6,8 @@
 
     <groupId>ml.peya.plugins</groupId>
     <artifactId>PeyangSuperbAntiCheat</artifactId>
-    <version>Alpha-20060001</version>
+
+    <version>0.1</version>
     <build>
         <plugins>
             <plugin>
@@ -29,6 +30,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+
                             <minimizeJar>true</minimizeJar>
                             <artifactSet>
                                 <includes>
@@ -42,7 +44,6 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 

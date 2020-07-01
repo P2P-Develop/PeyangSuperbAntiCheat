@@ -13,7 +13,7 @@ import java.util.*;
 
 public class Run implements Listener
 {
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onInteract(PlayerInteractEvent e)
     {
         ItemStack itemStack = e.getItem();

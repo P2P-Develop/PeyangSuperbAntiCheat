@@ -23,6 +23,13 @@ npc:
 
   kill: 3
 
+mod:
+  tracking:
+    ##有効/無効
+    enabled: true
+    #CompassTracker3000™のトラックチックです。
+    trackTicks: 10
+
 kick:
   delay: 2
   #プレイヤーがキックされるときに雷を召喚するやつです。

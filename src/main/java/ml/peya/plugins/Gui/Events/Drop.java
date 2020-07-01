@@ -4,6 +4,9 @@ import com.sun.corba.se.spi.ior.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Item;
+import ml.peya.plugins.Moderate.*;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
@@ -17,7 +20,7 @@ import java.util.*;
 
 public class Drop implements Listener
 {
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onDrop(PlayerDropItemEvent e)
     {
         ItemStack item = e.getItemDrop().getItemStack();
@@ -43,7 +46,8 @@ public class Drop implements Listener
                 this.cancel();
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());
-
+        PeyangSuperbAntiCheat.tracker.remove(e.getPlayer().getName());
+        e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngihe.get("item.tracking.noTarget")));
         e.getPlayer().sendMessage(MessageEngihe.get("item.stopTarget"));
     }
 }

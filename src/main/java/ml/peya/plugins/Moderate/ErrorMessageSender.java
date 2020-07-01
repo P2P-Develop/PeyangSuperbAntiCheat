@@ -1,5 +1,6 @@
-package ml.peya.plugins;
+package ml.peya.plugins.Moderate;
 
+import ml.peya.plugins.*;
 import org.bukkit.command.*;
 
 public class ErrorMessageSender

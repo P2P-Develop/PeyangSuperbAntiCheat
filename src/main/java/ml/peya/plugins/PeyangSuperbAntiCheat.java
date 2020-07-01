@@ -2,11 +2,18 @@ package ml.peya.plugins;
 
 import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
+import com.sun.javafx.sg.prism.web.*;
 import com.zaxxer.hikari.*;
 import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Commands.*;
-import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.Commands.CmdTst.AuraBot;
+import ml.peya.plugins.Commands.CmdTst.AuraPanic;
+import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.Events.*;
+import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.Gui.Items.*;
+import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.Task.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
@@ -28,6 +35,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static KillCounting counting;
     public static ProtocolManager protocolManager;
     public static Item item;
+    public static Tracker tracker;
 
     public static long time = 0L;
     public static int banLeft;
@@ -35,7 +43,9 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static HikariDataSource eye = null;
     public static HikariDataSource banKick = null;
     public static boolean isAutoMessageEnabled = false;
+    public static boolean isTrackEnabled = false;
     public static BukkitRunnable autoMessage = null;
+    public static BukkitRunnable trackerTask = null;
 
     private static PeyangSuperbAntiCheat plugin;
     @Override
@@ -61,6 +71,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         cheatMeta = new DetectingList();
         counting = new KillCounting();
+        tracker = new Tracker();
+
         protocolManager = ProtocolLibrary.getProtocolManager();
 
         item = new Item();
@@ -68,6 +80,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         item.register(new ml.peya.plugins.Gui.Items.AuraBot());
         item.register(new ml.peya.plugins.Gui.Items.AuraPanic());
         item.register(new ml.peya.plugins.Gui.Items.TestKnockBack());
+        item.register(new CompassTracker3000_tm());
 
         protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
         {
@@ -102,7 +115,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new Run(), this);
         getServer().getPluginManager().registerEvents(new Drop(), this);
-        getServer().getPluginManager().registerEvents(new PickUp(), this);
 
         isAutoMessageEnabled = config.getBoolean("autoMessage.enabled");
         time = config.getLong("autoMessage.time");
@@ -111,11 +123,22 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             time = 1L;
 
         autoMessage = new AutoMessageTask();
+        trackerTask = new TrackerTask();
 
-        logger.info("Starting Auto-Message Task...");
+        isTrackEnabled = config.getBoolean("mod.tracking.enabled");
+
+        if (isTrackEnabled)
+        {
+            logger.info("Starting Tracker Task...");
+            trackerTask.runTaskTimer(this, 0, config.getInt("mod.tracking.trackTicks"));
+        }
 
         if (isAutoMessageEnabled)
+        {
+            logger.info("Starting Auto-Message Task...");
             autoMessage.runTaskTimer(this, 0, 20 * (time * 60));
+        }
+
 
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }
@@ -129,9 +152,18 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             banKick.close();
         eye = null;
         banKick = null;
-        logger.info("Stopping Auto-Message Task...");
         if (autoMessage != null && RunnableUtil.isStarted(autoMessage))
+        {
+            logger.info("Stopping Auto-Message Task...");
             autoMessage.cancel();
+        }
+
+        if (trackerTask != null && RunnableUtil.isStarted(trackerTask))
+        {
+            logger.info("Stopping Tracker Task...");
+            trackerTask.cancel();
+        }
+
         logger.info("PeyangSuperbAntiCheat has disabled!");
     }
 

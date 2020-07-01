@@ -1,5 +1,6 @@
-package ml.peya.plugins;
+package ml.peya.plugins.Task;
 
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -25,8 +26,8 @@ public class AutoMessageTask extends BukkitRunnable
         int staff = 0;
 
         try (Connection connection = PeyangSuperbAntiCheat.banKick.getConnection();
-        Statement statement = connection.createStatement();
-        Statement statement2 = connection.createStatement())
+             Statement statement = connection.createStatement();
+             Statement statement2 = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm kIcK WhErE DaTe BeTwEeN " +
                     date.getTime() +

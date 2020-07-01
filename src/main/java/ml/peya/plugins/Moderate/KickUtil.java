@@ -1,6 +1,7 @@
-package ml.peya.plugins.Utils;
+package ml.peya.plugins.Moderate;
 
 import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;

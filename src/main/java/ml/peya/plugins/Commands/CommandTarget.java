@@ -2,6 +2,7 @@ package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.*;
 import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.Moderate.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -30,6 +31,8 @@ public class CommandTarget implements CommandExecutor
             sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
             return true;
         }
+
+        PeyangSuperbAntiCheat.tracker.add(sender.getName(), args[0]);
 
         new BukkitRunnable()
         {

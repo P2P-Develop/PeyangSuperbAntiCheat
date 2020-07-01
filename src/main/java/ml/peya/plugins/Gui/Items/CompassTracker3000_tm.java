@@ -1,48 +1,44 @@
 package ml.peya.plugins.Gui.Items;
 
+import com.sun.corba.se.spi.ior.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Item;
-import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
-import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 
-public class TestKnockBack implements IItems
+public class CompassTracker3000_tm implements IItems
 {
     @Override
     public void run(Player player, String target)
     {
-        player.performCommand("testkb " + target);
+        player.performCommand("tp " + target);
     }
 
     @Override
     public ItemStack getItem(String target)
     {
-        ItemStack stack = new ItemStack(Material.ARROW);
-
-        ItemMeta meta = stack.getItemMeta();
-
-        meta.setDisplayName(MessageEngihe.get("item.execute", MessageEngihe.hsh("command", "TestKnockBack")));
+        ItemStack item = new ItemStack(Material.COMPASS);
+        ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(MessageEngihe.get("item.compass"));
 
         meta.setLore(Item.getLore(this, target));
-        stack.setItemMeta(meta);
 
-        return stack;
+        item.setItemMeta(meta);
+        return item;
     }
 
     @Override
     public boolean canSpace()
     {
-        return false;
+        return true;
     }
 
     @Override
     public String getExecName()
     {
-        return "TEST_KB";
+        return "TRACKER";
     }
 }

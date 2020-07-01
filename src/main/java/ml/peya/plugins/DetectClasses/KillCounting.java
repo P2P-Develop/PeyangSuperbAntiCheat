@@ -1,5 +1,6 @@
-package ml.peya.plugins;
+package ml.peya.plugins.DetectClasses;
 
+import ml.peya.plugins.*;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
 import org.bukkit.*;

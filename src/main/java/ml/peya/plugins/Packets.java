@@ -3,11 +3,10 @@ package ml.peya.plugins;
 import com.comphenix.protocol.events.*;
 import com.comphenix.protocol.wrappers.*;
 import com.fasterxml.jackson.databind.*;
-import com.mojang.authlib.properties.*;
+import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
-import sun.java2d.pipe.*;
 
 import javax.net.ssl.*;
 import java.io.*;

@@ -1,5 +1,6 @@
 package ml.peya.plugins.Utils;
 
+import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 

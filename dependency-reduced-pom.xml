@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ml.peya.plugins</groupId>
   <artifactId>PeyangSuperbAntiCheat</artifactId>
-  <version>Alpha-20060001</version>
+  <version>0.1</version>
   <build>
     <plugins>
       <plugin>

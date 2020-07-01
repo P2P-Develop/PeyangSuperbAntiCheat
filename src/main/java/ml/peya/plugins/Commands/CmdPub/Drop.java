@@ -1,6 +1,8 @@
 package ml.peya.plugins.Commands.CmdPub;
 
 import ml.peya.plugins.*;
+import ml.peya.plugins.DetectClasses.*;
+import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.command.*;
 

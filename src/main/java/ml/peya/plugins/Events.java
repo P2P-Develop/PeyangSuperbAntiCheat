@@ -1,8 +1,11 @@
 package ml.peya.plugins;
 
+import com.comphenix.protocol.injector.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
+import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.player.*;
 
 public class Events implements Listener
 {
@@ -29,5 +32,13 @@ public class Events implements Listener
             return;
 
         e.setDamage(0);
+    }
+
+    @EventHandler
+    public void onLeave(PlayerQuitEvent e)
+    {
+        Player player = e.getPlayer();
+
+        PeyangSuperbAntiCheat.tracker.remove(player.getName());
     }
 }

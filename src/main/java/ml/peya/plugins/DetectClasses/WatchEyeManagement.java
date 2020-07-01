@@ -1,7 +1,8 @@
-package ml.peya.plugins.Utils;
+package ml.peya.plugins.DetectClasses;
 
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.entity.*;
 
 import java.sql.*;
