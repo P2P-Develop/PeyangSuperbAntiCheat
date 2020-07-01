@@ -1,0 +1,23 @@
+###########################
+PSAC plugin threads summary
+###########################
+
+Idle: 4
+Learn: 1
+Target: 2
+
+----------
+
+DetectConnection: 2
+NPC: 3
+NPCTeleport: 5
+KillCounting: 2
+->12 Threads
+
+----------
+
+TestKnockback: 1
+Drop: 1
+KickUtil: 2
+Tracker: 1
+Report: 5
