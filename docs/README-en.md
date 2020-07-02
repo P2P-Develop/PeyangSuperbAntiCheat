@@ -415,8 +415,8 @@ In this plugin, the following config is set by default.
 | :-----------------: | :-----------: | :-------------------------------------------------------------------------------------------------------------------- |
 |    database.path    |   ./eye.db    | Save report information by specifying location of SQLite database path.                                               |
 |   database.logPath  |   ./log.db    | Save kick infomation by specifying location of SQLite database path.                                                  |
-|     npc.seconds     |       6       | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                            |
-|       npc.time      |     0.25      | Specifies the value of [NPC](#aurabot) orbit speed.                                                                   |
+|     npc.seconds     |       4       | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                            |
+|       npc.time      |      0.3      | Specifies the value of [NPC](#aurabot) orbit speed.                                                                   |
 |      npc.range      |      2.1      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.               |
 |    npc.panicRange   |      1.5      | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                |
 |       npc.wave      |      true     | Whether the [NPC](#aurabot) spins like a wave.                                                                        |

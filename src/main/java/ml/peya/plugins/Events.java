@@ -1,6 +1,5 @@
 package ml.peya.plugins;
 
-import com.comphenix.protocol.injector.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
@@ -9,7 +8,6 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.metadata.*;
 
-import javax.jws.*;
 
 public class Events implements Listener
 {

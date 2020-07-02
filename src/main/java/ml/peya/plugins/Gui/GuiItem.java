@@ -22,7 +22,8 @@ public class GuiItem
 
             if (stack != null && stack.getType() != Material.AIR)
             {
-                player.getWorld().dropItem(player.getLocation().add(0, 1, 0), stack);
+                if (!Item.canGuiItem(stack))
+                    player.getWorld().dropItem(player.getLocation().add(0, 1, 0), stack);
                 inventory.remove(stack);
             }
 
