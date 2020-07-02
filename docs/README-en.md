@@ -3,9 +3,10 @@
 **WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
 If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
 ***VERY WARNING***: **With this plugin, detectopm will run +4 timers at the same time.  
-In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**
+In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**  
+For more information on the number of threads, see [Plugin Threads Summary](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt).  
   
-## Introduction
+## Overview
 
 Anti Cheat plugin for Bukkit / Spigot / PaperMC based server.  
 It has been confirmed to work with version 1.12.2.  
@@ -23,7 +24,9 @@ This document defines a simple markdown grammar to make it easy for users to und
   
 **This represents information that all users should know.**
   
-```Message[CLICK]```
+```tst
+This is message[CLICK]
+```
   
 This means that the messages within the code block will send to the Minecraft chat area.
   
@@ -44,11 +47,26 @@ This block of code represents a permission.
 ## Installation
 
 1. Clone this repository.
-2. enter repository root and build in Java environment **with Maven**(execute "mvn build").  
-   **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**
-2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
-3. Move / Copy the built plugin in the `plugins` folder.
-4. Start / Restart server.
+```bash
+$ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git
+```
+2. enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-messageyml)\).  
+   **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**  
+```bash
+$ cd PeyangSuperbAntiCheat && mvn package
+```
+3. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
+```bash
+$ mv ProtocolLib.jar (Your plugins folder)
+```
+4. Move / Copy the built plugin in the `plugins` folder.
+```bash
+$ mv (PSAC jar file) (Your plugins folder)
+```
+5. Start / Restart server.
+```bash
+/stop
+```
 
 ---
 
@@ -59,25 +77,25 @@ Other settings can be done using permissions.
 |       Permission        |           Assigned Command           | Description | Default Value | Permission Group |
 |:-----------------------:|:------------------------------------:|:------------|:-------------:|:----------------:|
 |     **psac.member**     |                 group                | This is a server member privilege group. | true | none |
-|    ```psac.report```    |          [/report](#report)          | This permission can execute report commands.  Player deprived of this permission cannot report. | true | psac.member |
-|    ```psac.report```    |       [/psac help](#arguments)       | This permission can view help for members of this plugin. | true | psac.member |
-| ```psac.notification``` |                 none                 | Send a notification when a player with this privilege is reported. | true | psac.member |
-|    ```psac.regular```   |                 none                 | This permission can visible sended regular messages. | true | psac.member |
-|      **psac.mod**       |                 group                | This permission can kick or test the player. | op | none |
-|     ```psac.kick```     |       [/psac kick](#arguments)       | This permission can kick player manually. | op | psac.mod |
-|   ```psac.aurabot```    |         [/aurabot](#aurabot)         | This permission can summon [KillAura Test NPC](#aurabot). | op | psac.mod |
-|   ```psac.aurapanic```  |         [/acpanic](#acpanic)         | This permission can summon [Panic NPC](#acpanic). | op | psac.mod |
-|    ```psac.testkb```    |          [/testkb](#testkb)          | This permission can release invisible arrow to the player and check for knockback. | op | psac.mod |
-|   ```psac.viewnpc```    |                 none                 | This permission visible NPC other than the target player. | op | psac.mod |
-|     ```psac.view```     |       [/psac view](#arguments)       | This permission can view report information. | op | psac.mod |
-|     ```psac.show```     |       [/psac show](#arguments)       | This permission can view *verbose* report information. | op | psac.mod |
-|     ```psac.bans```     |            [/bans](#bans)            | This permission can view ban statics. | op | psac.mod |
-|   ```psac.ntfadmin```   |                 none                 | If the player calling the NPC has this permission, when that player detects a cheat, a message will be sent indicating the player's name. | op | psac.mod |
-|   ```psac.reportntf```  |                 none                 | Players with this permission can be notified when the player submits a report. | op | psac.mod |
-|     ```psac.pull```     |            [/pull](#pull)            | This permission can pull other players. | op | psac.mod |
-|      **psac.admin**     |                 group                | This permission can use all commands of the plugin. | false | none |
-|     ```psac.drop```     |       [/psac drop](#arguments)       | This permission can delete submitted report. | false | psac.admin |
-|     ```psac.error```    |                 none                 | This permission can get error information when the plugin encountered an internal error. | false | psac.admin |
+|    `psac.report`    |          [/report](#report)          | This permission can execute report commands.  Player deprived of this permission cannot report. | true | psac.member |
+|    `psac.report`    |       [/psac help](#arguments)       | This permission can view help for members of this plugin. | true | psac.member |
+| `psac.notification` |                 none                 | Send a notification when a player with this privilege is reported. | true | psac.member |
+|    `psac.regular`   |                 none                 | This permission can visible sended regular messages. | true | psac.member |
+|    **psac.mod**     |                 group                | This permission can kick or test the player. | op | none |
+|     `psac.kick`     |       [/psac kick](#arguments)       | This permission can kick player manually. | op | psac.mod |
+|   `psac.aurabot`    |         [/aurabot](#aurabot)         | This permission can summon [KillAura Test NPC](#aurabot). | op | psac.mod |
+|   `psac.aurapanic`  |         [/acpanic](#acpanic)         | This permission can summon [Panic NPC](#acpanic). | op | psac.mod |
+|    `psac.testkb`    |          [/testkb](#testkb)          | This permission can release invisible arrow to the player and check for knockback. | op | psac.mod |
+|   `psac.viewnpc`    |                 none                 | This permission visible NPC other than the target player. | op | psac.mod |
+|     `psac.view`     |       [/psac view](#arguments)       | This permission can view report information. | op | psac.mod |
+|     `psac.show`     |       [/psac show](#arguments)       | This permission can view *verbose* report information. | op | psac.mod |
+|     `psac.bans`     |            [/bans](#bans)            | This permission can view ban statics. | op | psac.mod |
+|   `psac.ntfadmin`   |                 none                 | If the player calling the NPC has this permission, when that player detects a cheat, a message will be sent indicating the player's name. | op | psac.mod |
+|   `psac.reportntf`  |                 none                 | Players with this permission can be notified when the player submits a report. | op | psac.mod |
+|     `psac.pull`     |            [/pull](#pull)            | This permission can pull other players. | op | psac.mod |
+|    **psac.admin**   |                 group                | This permission can use all commands of the plugin. | false | none |
+|     `psac.drop`     |       [/psac drop](#arguments)       | This permission can delete submitted report. | false | psac.admin |
+|     `psac.error`    |                 none                 | This permission can get error information when the plugin encountered an internal error. | false | psac.admin |
   
 
 ## Commands
@@ -100,11 +118,15 @@ Send the content of the report selected and submitted by the player to the staff
 The staff can see if the player is doing the same as the report.  
 User can also set the format for the report.  
   
-```[PeyangSuperbAntiCheat] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ [CLICK]```  
+```tst
+[PeyangSuperbAntiCheat] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ [CLICK]
+```  
   
 Staff can check the contents of the report with the `[CLICK]` button.  
   
-```[STAFF] [ADMIN] Fishy: Report of <PlayerName> <Reason1>, [Reason2]...```  
+```tst
+[STAFF] [ADMIN] Fishy: Report of <PlayerName> <Reason1>, [Reason2]...
+```  
   
 This report format is lets them know who reported who and why.  
 **WARNING: This report format is compatible with the Hypixel Lynx Mod (Keep leaking users down).  
@@ -353,12 +375,17 @@ Therefore, the plugin does not ban players _automatically_.
 
 **The following broadcast message will be played when the player is kicked.**  
   
-`[PEYANG CHEAT DETECTION] ハッキング、または不適切な発言によってゲームからプレイヤーが削除されました。`  
-`違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！`  
+```tst
+[PEYANG CHEAT DETECTION] ハッキング、または不適切な発言によってゲームからプレイヤーが削除されました。
+```
+  
+```tst
+違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！
+```
   
 This message is sent when the watchdog automatically detects a cheat.  
-For staff kicks, you will only see the message: `違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！`  
-
+For staff kicks, you will only broadcast secondary message.
+  
 ### Kick reasons
   
 There are three types of kick reasons:
@@ -426,8 +453,9 @@ I think that it will be handled by about two people, so please feel free to post
 
 #### Assignees
 
-Japanese Assignee: [peyang-Celeron](https://github.com/peyang-Celeron) (and [Lemonade19x](https://github.com/Lemonade19x)?)  
-English Assignee: [Potato1682](https://github.com/Potato1682)
+Depending on the language of the problem, the following persons are responsible for resolution:
+- Japanese issue assignee: [peyang-Celeron](https://github.com/peyang-Celeron) (and [Lemonade19x](https://github.com/Lemonade19x)?)
+- English issue assignee: [Potato1682](https://github.com/Potato1682)
 
 ---
 
