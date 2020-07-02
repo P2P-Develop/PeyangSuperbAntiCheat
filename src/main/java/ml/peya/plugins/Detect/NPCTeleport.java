@@ -80,7 +80,7 @@ public class NPCTeleport
         final double radius = PeyangSuperbAntiCheat.config.getDouble("npc.range");
 
         WaveCreator creator = new WaveCreator(1.0, 2.0, 0.0);
-        WaveCreator ypp = new WaveCreator(20.0, 90.0, 20.0);
+        WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
 
         final boolean waveFlag = PeyangSuperbAntiCheat.config.getBoolean("npc.wave");
 
@@ -104,7 +104,7 @@ public class NPCTeleport
                             center.getY() + creator.get(0.01, count[0] < 20),
                             auraBot_zPos(time[0], rangeTmp, yaw) + center.getZ(),
                             (float) ypp.getStatic(),
-                            (float) ypp.get(3, false));
+                            (float) ypp.get(4.5, false));
 
                     NPC.setLocation(n, target);
                     target.getBukkitEntity().teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
