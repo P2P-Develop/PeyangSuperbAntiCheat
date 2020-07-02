@@ -1,14 +1,14 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.Item;
+import ml.peya.plugins.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.bukkit.event.player.*;
 import org.bukkit.inventory.*;
+import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
 import java.math.*;
@@ -52,6 +52,11 @@ public class Tracker
         return tracker.containsKey(player);
     }
 
+    public boolean isTrackingByPlayer(String player)
+    {
+        return tracker.containsValue(player);
+    }
+
     public void tick()
     {
         for (String playerName: tracker.keySet())
@@ -68,6 +73,7 @@ public class Tracker
             if (target == null)
             {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngihe.get("item.tracking.noTarget")));
+                tracker.remove(playerName);
                 continue;
             }
 
@@ -80,6 +86,8 @@ public class Tracker
             map.put("x", scaleSet(location.getX(), 2));
             map.put("y", scaleSet(location.getY(), 2));
             map.put("z", scaleSet(location.getZ(), 2));
+
+
 
             map.put("distance", scaleSet(location.distance(player.getLocation()), 1));
             if (PeyangSuperbAntiCheat.cheatMeta.exists(target.getUniqueId()))
@@ -95,6 +103,16 @@ public class Tracker
             }
             else
                 map.put("tests", "");
+
+            if (target.hasMetadata("speed"))
+            {
+                for (MetadataValue value: player.getMetadata("speed"))
+                    if (value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName()))
+                        map.put("velocity", scaleSet((Double) value.value(), 2));
+            }
+            else
+                map.put("velocity", 0.0);
+
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngihe.get("item.tracking.text", map)));
 
             for (ItemStack itemStack: player.getInventory().getContents())

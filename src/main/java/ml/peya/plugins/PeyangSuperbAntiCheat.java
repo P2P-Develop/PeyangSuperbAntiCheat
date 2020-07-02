@@ -80,6 +80,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         item.register(new ml.peya.plugins.Gui.Items.AuraPanic());
         item.register(new ml.peya.plugins.Gui.Items.TestKnockBack());
         item.register(new CompassTracker3000_tm());
+        item.register(new BanBook());
 
         protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
         {

@@ -67,8 +67,7 @@ public class KickUtil
 
         StringBuilder ggId = new StringBuilder();
         for (int i = 0; i < 7; i++)
-            if (random.nextBoolean())
-                ggId.append(random.nextInt(9));
+            ggId.append(random.nextInt(9));
 
 
         String reasonP;

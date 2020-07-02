@@ -33,7 +33,7 @@ public class CompassTracker3000_tm implements IItems
     @Override
     public boolean canSpace()
     {
-        return true;
+        return false;
     }
 
     @Override
