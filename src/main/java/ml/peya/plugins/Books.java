@@ -1,5 +1,6 @@
 package ml.peya.plugins;
 
+import com.comphenix.protocol.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
@@ -99,6 +100,28 @@ public class Books
         b2.append(MessageEngihe.get("book.text.reason", MessageEngihe.hsh("reason", reason.toString())));
         b2.append("\n");
         meta.spigot().addPage(b2.create());
+        book.setItemMeta(meta);
+        return book;
+    }
+
+    public static ItemStack getModsBook(Player player, HashMap<String, String> mods)
+    {
+        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
+        BookMeta meta = (BookMeta) book.getItemMeta();
+
+        ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("message.mods.title", MessageEngihe.hsh("name", player.getName())));
+
+        builder.append("\n");
+        builder.append("\n");
+
+        for (String id: mods.keySet())
+        {
+            String version = mods.get(id);
+            builder.append(ChatColor.RED + id + ChatColor.GRAY + ": " + ChatColor.BLUE + version);
+            builder.append("\n");
+        }
+
+        meta.spigot().addPage(builder.create());
         book.setItemMeta(meta);
         return book;
     }

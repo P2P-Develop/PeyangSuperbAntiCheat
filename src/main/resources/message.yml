@@ -130,6 +130,8 @@ message:
   bans:
     message: "%%prefix%%\n%%gold%%--- %%name%% さんのBAN情報 ---"
     lynx: "%%gold%%--- Bans for %%name%% ---"
+  mods:
+    title: "%%blue%%%%name%% %%gold%%さんの導入Mod一覧"
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\

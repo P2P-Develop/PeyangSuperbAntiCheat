@@ -8,7 +8,7 @@ import org.bukkit.event.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.metadata.*;
-
+import org.bukkit.scheduler.*;
 
 public class Events implements Listener
 {
@@ -43,6 +43,8 @@ public class Events implements Listener
         Player player = e.getPlayer();
 
         PeyangSuperbAntiCheat.tracker.remove(player.getName());
+
+        PeyangSuperbAntiCheat.mods.remove(e.getPlayer().getUniqueId());
     }
 
     @EventHandler
@@ -76,10 +78,26 @@ public class Events implements Listener
 
         for (Player receiver: e.getRecipients())
         {
-            if (!receiver.hasPermission("psac.chattarget"))
+            if (!receiver.hasPermission("psac.chattarget") || PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()).containsKey("Lynx"))
                 receiver.sendMessage(format);
             else
                 receiver.spigot().sendMessage(builder.create());
         }
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent e)
+    {
+        Player p = e.getPlayer();
+
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[] { -2, 0 });
+                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[] { 0, 2, 0, 0, 0, 0 });
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 5);
     }
 }

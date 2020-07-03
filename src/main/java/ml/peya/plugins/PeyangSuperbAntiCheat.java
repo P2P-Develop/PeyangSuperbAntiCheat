@@ -20,6 +20,7 @@ import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.*;
 import org.bukkit.scheduler.*;
 
+import java.util.*;
 import java.util.logging.*;
 
 public class PeyangSuperbAntiCheat extends JavaPlugin
@@ -49,7 +50,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
     private static PeyangSuperbAntiCheat plugin;
 
-    @SuppressWarnings("X")
+    public static HashMap<UUID, HashMap<String,String>> mods;
+
     @Override
     public void onEnable()
     {
@@ -116,6 +118,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("bans").setExecutor(new CommandBans());
         getCommand("pull").setExecutor(new CommandPull());
         getCommand("target").setExecutor(new CommandTarget());
+        getCommand("mods").setExecutor(new CommandMods());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new Run(), this);
@@ -144,6 +147,10 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             autoMessage.runTaskTimer(this, 0, 20 * (time * 60));
         }
 
+        mods = new HashMap<>();
+
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "FML|HS");
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new PluginMessageListener());
 
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }

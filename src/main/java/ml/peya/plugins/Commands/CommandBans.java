@@ -17,7 +17,6 @@ public class CommandBans implements CommandExecutor
         if (ErrorMessageSender.unPermMessage(sender, "psac.bans") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
             return true;
 
-
         String type;
         String name;
         if (args.length == 2)
@@ -64,6 +63,7 @@ public class CommandBans implements CommandExecutor
             sender.sendMessage(MessageEngihe.get("message.bans.lynx", MessageEngihe.hsh("name", name)));
         else
             sender.sendMessage(MessageEngihe.get("message.bans.message", MessageEngihe.hsh("name", name)));
+
 
         for (BanAnalyzer.Bans ban: bans)
             sender.spigot().sendMessage(TextBuilder.getTextBan(ban, ban.getType()).create());

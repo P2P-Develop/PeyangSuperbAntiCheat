@@ -40,6 +40,9 @@ commands:
   target:
     usage: /target <Player>
     description: "プレイヤーをターゲットにします。"
+  mods:
+    usage: /mods <Player>
+    description: "プレイヤーのModを見ます。"
 permissions:
   #Core
   psac.member:
@@ -68,6 +71,7 @@ permissions:
       psac.pull: true
       psac.target: true
       psac.chattarget: true
+      psac.mods: true
 
   psac.admin:
     description: このプラグインすべての権限を持ちます。
@@ -113,6 +117,9 @@ permissions:
     default: op
   psac.chattarget:
     description: チャットのプレイヤーネームの左にターゲッティングボタンを追加します。
+    default: op
+  psac.mods:
+    description: プレイヤーのModを見ます。
     default: op
 
   #Detect
