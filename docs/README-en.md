@@ -74,28 +74,28 @@ $ mv (PSAC jar file) (Your plugins folder)
 Commands are always assigned one or more premissions.  
 Other settings can be done using permissions.  
   
-|       Permission        |           Assigned Command           | Description | Default Value | Permission Group |
-|:-----------------------:|:------------------------------------:|:------------|:-------------:|:----------------:|
-|     **psac.member**     |                 group                | This is a server member privilege group. | true | none |
-|    `psac.report`    |          [/report](#report)          | This permission can execute report commands.  Player deprived of this permission cannot report. | true | psac.member |
-|    `psac.report`    |       [/psac help](#arguments)       | This permission can view help for members of this plugin. | true | psac.member |
-| `psac.notification` |                 none                 | Send a notification when a player with this privilege is reported. | true | psac.member |
-|    `psac.regular`   |                 none                 | This permission can visible sended regular messages. | true | psac.member |
-|    **psac.mod**     |                 group                | This permission can kick or test the player. | op | none |
-|     `psac.kick`     |       [/psac kick](#arguments)       | This permission can kick player manually. | op | psac.mod |
-|   `psac.aurabot`    |         [/aurabot](#aurabot)         | This permission can summon [KillAura Test NPC](#aurabot). | op | psac.mod |
-|   `psac.aurapanic`  |         [/acpanic](#acpanic)         | This permission can summon [Panic NPC](#acpanic). | op | psac.mod |
-|    `psac.testkb`    |          [/testkb](#testkb)          | This permission can release invisible arrow to the player and check for knockback. | op | psac.mod |
-|   `psac.viewnpc`    |                 none                 | This permission visible NPC other than the target player. | op | psac.mod |
-|     `psac.view`     |       [/psac view](#arguments)       | This permission can view report information. | op | psac.mod |
-|     `psac.show`     |       [/psac show](#arguments)       | This permission can view *verbose* report information. | op | psac.mod |
-|     `psac.bans`     |            [/bans](#bans)            | This permission can view ban statics. | op | psac.mod |
-|   `psac.ntfadmin`   |                 none                 | If the player calling the NPC has this permission, when that player detects a cheat, a message will be sent indicating the player's name. | op | psac.mod |
-|   `psac.reportntf`  |                 none                 | Players with this permission can be notified when the player submits a report. | op | psac.mod |
-|     `psac.pull`     |            [/pull](#pull)            | This permission can pull other players. | op | psac.mod |
-|    **psac.admin**   |                 group                | This permission can use all commands of the plugin. | false | none |
-|     `psac.drop`     |       [/psac drop](#arguments)       | This permission can delete submitted report. | false | psac.admin |
-|     `psac.error`    |                 none                 | This permission can get error information when the plugin encountered an internal error. | false | psac.admin |
+|     Permission      |           Assigned Command           | Description                                                                                                                               | Default Value | Permission Group |
+| :-----------------: | :----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------| :-----------: | :--------------: |
+|   **psac.member**   |                 group                | This is a server member permission group.                                                                                                 |      true     |       none       |
+|    `psac.report`    |          [/report](#report)          | This permission can execute report commands.  Player deprived of this permission cannot report.                                           |      true     |    psac.member   |
+|    `psac.report`    |       [/psac help](#arguments)       | This permission can view help for members of this plugin.                                                                                 |      true     |    psac.member   |
+| `psac.notification` |                 none                 | Send a notification when a player with this permission is reported.                                                                       |      true     |    psac.member   |
+|    `psac.regular`   |                 none                 | This permission can visible sended regular messages.                                                                                      |      true     |    psac.member   |
+|    **psac.mod**     |                 group                | This permission can kick or test the player.                                                                                              |       op      |       none       |
+|     `psac.kick`     |       [/psac kick](#arguments)       | This permission can kick player manually.                                                                                                 |       op      |     psac.mod     |
+|   `psac.aurabot`    |         [/aurabot](#aurabot)         | This permission can summon [KillAura Test NPC](#aurabot).                                                                                 |       op      |     psac.mod     |
+|   `psac.aurapanic`  |         [/acpanic](#acpanic)         | This permission can summon [Panic NPC](#acpanic).                                                                                         |       op      |     psac.mod     |
+|    `psac.testkb`    |          [/testkb](#testkb)          | This permission can release invisible arrow to the player and check for knockback.                                                        |       op      |     psac.mod     |
+|   `psac.viewnpc`    |                 none                 | This permission visible NPC other than the target player.                                                                                 |       op      |     psac.mod     |
+|     `psac.view`     |       [/psac view](#arguments)       | This permission can view report information.                                                                                              |       op      |     psac.mod     |
+|     `psac.show`     |       [/psac show](#arguments)       | This permission can view *verbose* report information.                                                                                    |       op      |     psac.mod     |
+|     `psac.bans`     |            [/bans](#bans)            | This permission can view ban statics.                                                                                                     |       op      |     psac.mod     |
+|   `psac.ntfadmin`   |                 none                 | If the player calling the NPC has this permission, when that player detects a cheat, a message will be sent indicating the player's name. |       op      |     psac.mod     |
+|   `psac.reportntf`  |                 none                 | Players with this permission can be notified when the player submits a report.                                                            |       op      |     psac.mod     |
+|     `psac.pull`     |            [/pull](#pull)            | This permission can pull other players.                                                                                                   |       op      |     psac.mod     |
+|    **psac.admin**   |                 group                | This permission can use all commands of the plugin.                                                                                       |      false    |       none       |
+|     `psac.drop`     |       [/psac drop](#arguments)       | This permission can delete submitted report.                                                                                              |      false    |    psac.admin    |
+|     `psac.error`    |                 none                 | This permission can get error information when the plugin encountered an internal error.                                                  |      false    |    psac.admin    |
   
 
 ## Commands
@@ -140,9 +140,8 @@ This mod may be Bannable on Hypixel server, so never use this on Hypixel server.
   Player can execute this command with this argument to open a book where you can select the reason for the report.  
   If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.  
   
-
 - ![#008000](https://via.placeholder.com/15/008000/000000?text=+) Click to send report in "レポートを送信" , or
-- ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Click the "レポートをキャンセル" to discard.</font>
+- ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Click the "レポートをキャンセル" to discard.
   
 - /report \<PlayerName\> \<Reason1\> \[Reason2\]...  
   Player can execute this command with this argument to report directly in chat/console without using a book.  
@@ -337,7 +336,7 @@ The main command of this plugin. It works by adding an argument.
 
 Displays help for this plugin command.  
 **Commands related to management ID can be used in `psac.mod`, but they are not shown in help.**  
-Players with `psac.mod` or `psac.admin` privileges will also see the following help:  
+Players with `psac.mod` or `psac.admin` permissions will also see the following help:  
 
 ##### /psac view \[Page\]
 
@@ -442,7 +441,7 @@ The learning feature of this plugin adjusts key parameters by iteratively calcul
 
 ## What is *message.yml*
 
-When you build PeyangSuperbAntiCheat.jar with "mvn package", "mvn shade" is automatically executed.  
+When you build PeyangSuperbAntiCheat.jar with `mvn package`, `mvn shade` is automatically executed.  
 You can edit this file to change the plugin messages before building.  
 At build time, *message.yml* is **automatically include jar resource**.
 
