@@ -48,12 +48,12 @@ This block of code represents a permission.
 
 1. Clone this repository.
 ```bash
-$ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git
+$ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git PSACBuild
 ```
 2. enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-messageyml)\).  
    **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**  
 ```bash
-$ cd PeyangSuperbAntiCheat && mvn package
+$ cd PSACBuild && mvn package
 ```
 3. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
 ```bash
