@@ -70,26 +70,16 @@ public class NPC
                 CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
                 CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
 
-        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
-
-
-
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
+                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
+
                 connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
-            }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20);
 
-
-        BukkitRunnable run = new BukkitRunnable()
-        {
-            @Override
-            public void run()
-            {
+                player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
                 for (Player p: Bukkit.getOnlinePlayers())
                 {
@@ -98,38 +88,30 @@ public class NPC
                     PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
                     c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-
-                    c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
-                    p.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
-                    p.showPlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
                 }
+
                 NPCTeleport.teleport(player, npc, arm, teleportCase);
-            }
-        };
-        run.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20);
 
 
-
-        BukkitRunnable runnable = new BukkitRunnable()
-        {
-            @Override
-            public void run()
-            {
-                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
-                connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
-                for (Player p: Bukkit.getOnlinePlayers())
+                new BukkitRunnable()
                 {
-                    if (!p.hasPermission("psac.viewnpc"))
-                        continue;
-                    PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
-                    c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
-                    c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
-                }
+                    @Override
+                    public void run()
+                    {
+                        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+                        connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
+                        for (Player p: Bukkit.getOnlinePlayers())
+                        {
+                            if (!p.hasPermission("psac.viewnpc"))
+                                continue;
+                            PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
+                            c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+                            c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
+                        }
+                    }
+                }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
             }
-        };
-        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds")) + 20);
-
-
+        }.runTask(PeyangSuperbAntiCheat.getPlugin());
 
         return npc;
     }
