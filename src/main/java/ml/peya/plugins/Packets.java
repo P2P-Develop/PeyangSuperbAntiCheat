@@ -58,7 +58,7 @@ public class Packets
                 infoData.getGameMode(),
                 WrappedChatComponent.fromText(ChatColor.RED + infoData.getProfile().getName()));
         List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
-        Random random = new Random();
+        Random random = new Random(infoData.getProfile().getUUID().hashCode());
         JsonNode nodeb = getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
         newInfo.getProfile().getProperties().put("textures", new WrappedSignedProperty("textures",
                 Objects.requireNonNull(nodeb).get("properties").get(0).get("value").asText(),
