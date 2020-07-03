@@ -29,7 +29,6 @@ public class Drop implements Listener
             return;
         e.setCancelled(true);
 
-        String target = Item.getTarget(item);
 
         new BukkitRunnable()
         {
@@ -40,8 +39,7 @@ public class Drop implements Listener
                 {
                     if (!Item.canGuiItem(stack))
                         continue;
-                    if (Objects.equals(Item.getTarget(stack), target))
-                        stack.setAmount(0);
+                    stack.setAmount(0);
                 }
                 this.cancel();
             }
