@@ -65,13 +65,14 @@ public class Events implements Listener
 
         ComponentBuilder builder = new ComponentBuilder("");
 
-        builder.append(ChatColor.RED + ChatColor.BOLD.toString() +
-                "[" + ChatColor.YELLOW  + ChatColor.BOLD +
-                "▶" + ChatColor.RED + ChatColor.BOLD + "] ");
-        builder.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()));
-        builder.append("");
-        builder.reset();
+        builder.append(ChatColor.RED +
+                "[" + ChatColor.YELLOW + ChatColor.BOLD +
+                "➤" + ChatColor.RESET + ChatColor.RED +
+                "] ");
         builder.append(format);
+        builder.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()));
+        builder.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
+                new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()));
 
         for (Player receiver: e.getRecipients())
         {
