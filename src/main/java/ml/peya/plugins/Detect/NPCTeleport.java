@@ -85,6 +85,7 @@ public class NPCTeleport
         final boolean waveFlag = PeyangSuperbAntiCheat.config.getBoolean("npc.wave");
 
         WaveCreator wave = new WaveCreator(radius - 0.1, radius, PeyangSuperbAntiCheat.config.getDouble("npc.waveMin"));
+        PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
 
         final int[] count = {0};
         BukkitRunnable r = new BukkitRunnable() {
@@ -107,9 +108,8 @@ public class NPCTeleport
                             (float) ypp.get(4.5, false));
 
                     NPC.setLocation(n, target);
-                    target.getBukkitEntity().teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
-                    PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
                     connection.sendPacket(new PacketPlayOutEntityTeleport(target));
+
                     NPC.setArmor(player, target, arm);
                     new BukkitRunnable()
                     {
