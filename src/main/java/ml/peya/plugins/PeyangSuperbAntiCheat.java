@@ -91,7 +91,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             @Override
             public void onPacketReceiving(PacketEvent event)
             {
-                new Packets().onPacketReceiving(event);
+                new Packets().useEntity(event);
             }
         });
 
@@ -100,9 +100,10 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             @Override
             public void onPacketSending(PacketEvent event)
             {
-                new Packets().onPacketSending(event);
+                new Packets().playerInfo(event);
             }
         });
+
 
         if (!(Init.createDefaultTables() && Init.initBypass()))
             Bukkit.getPluginManager().disablePlugin(this);

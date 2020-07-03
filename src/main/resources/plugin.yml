@@ -67,6 +67,7 @@ permissions:
       psac.reportntf: true
       psac.pull: true
       psac.target: true
+      psac.chattarget: true
 
   psac.admin:
     description: このプラグインすべての権限を持ちます。
@@ -109,6 +110,9 @@ permissions:
     default: op
   psac.target:
     description: プレイヤーをターゲットにします。
+    default: op
+  psac.chattarget:
+    description: チャットのプレイヤーネームの左にターゲッティングボタンを追加します。
     default: op
 
   #Detect

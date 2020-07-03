@@ -12,11 +12,12 @@ import javax.net.ssl.*;
 import java.io.*;
 import java.lang.reflect.*;
 import java.net.*;
+import java.sql.*;
 import java.util.*;
 
 public class Packets
 {
-    public void onPacketReceiving(PacketEvent e)
+    public void useEntity(PacketEvent e)
     {
         try
         {
@@ -43,7 +44,7 @@ public class Packets
         }
     }
 
-    public void onPacketSending(PacketEvent e)
+    public void playerInfo(PacketEvent e)
     {
         if(e.getPacket().getPlayerInfoAction().read(0) != EnumWrappers.PlayerInfoAction.ADD_PLAYER)
             return;

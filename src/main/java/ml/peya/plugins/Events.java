@@ -1,5 +1,6 @@
 package ml.peya.plugins;
 
+import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
@@ -19,7 +20,7 @@ public class Events implements Listener
         PeyangSuperbAntiCheat.counting.kill(e.getEntity().getKiller().getUniqueId());
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent e)
     {
         if (!(e.getEntity() instanceof CraftPlayer))
@@ -54,5 +55,30 @@ public class Events implements Listener
         double distance = from.distance(to);
         Player player = e.getPlayer();
         player.setMetadata("speed", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), distance));
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onChat(AsyncPlayerChatEvent e)
+    {
+        e.setCancelled(true);
+        String format = e.getFormat().replace("%1$s", e.getPlayer().getDisplayName()).replace("%2$s", e.getMessage());
+
+        ComponentBuilder builder = new ComponentBuilder("");
+
+        builder.append(ChatColor.RED + ChatColor.BOLD.toString() +
+                "[" + ChatColor.YELLOW  + ChatColor.BOLD +
+                "▶" + ChatColor.RED + ChatColor.BOLD + "] ");
+        builder.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()));
+        builder.append("");
+        builder.reset();
+        builder.append(format);
+
+        for (Player receiver: e.getRecipients())
+        {
+            if (!receiver.hasPermission("psac.chattarget"))
+                receiver.sendMessage(format);
+            else
+                receiver.spigot().sendMessage(builder.create());
+        }
     }
 }
