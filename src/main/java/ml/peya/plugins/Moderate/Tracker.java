@@ -106,7 +106,7 @@ public class Tracker
 
             if (target.hasMetadata("speed"))
             {
-                for (MetadataValue value: player.getMetadata("speed"))
+                for (MetadataValue value: target.getMetadata("speed"))
                     if (value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName()))
                         map.put("velocity", scaleSet((Double) value.value(), 2));
             }
@@ -123,6 +123,8 @@ public class Tracker
                     continue;
                 player.setCompassTarget(location);
             }
+
+            target.removeMetadata("speed", PeyangSuperbAntiCheat.getPlugin());
         }
     }
 
