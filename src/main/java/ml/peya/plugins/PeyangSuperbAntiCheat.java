@@ -10,7 +10,7 @@ import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Gui.Items.*;
+import ml.peya.plugins.Gui.Items.Target.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Task.*;
 import ml.peya.plugins.Utils.*;
@@ -47,6 +47,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static BukkitRunnable trackerTask = null;
 
     private static PeyangSuperbAntiCheat plugin;
+
+    @SuppressWarnings("X")
     @Override
     public void onEnable()
     {
@@ -76,9 +78,9 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         item = new Item();
 
-        item.register(new ml.peya.plugins.Gui.Items.AuraBot());
-        item.register(new ml.peya.plugins.Gui.Items.AuraPanic());
-        item.register(new ml.peya.plugins.Gui.Items.TestKnockBack());
+        item.register(new ml.peya.plugins.Gui.Items.Target.AuraBot());
+        item.register(new ml.peya.plugins.Gui.Items.Target.AuraPanic());
+        item.register(new TestKnockBack());
         item.register(new CompassTracker3000_tm());
         item.register(new BanBook());
 

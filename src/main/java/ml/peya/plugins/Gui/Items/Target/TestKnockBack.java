@@ -1,13 +1,10 @@
-package ml.peya.plugins.Gui.Items;
+package ml.peya.plugins.Gui.Items.Target;
 
 import ml.peya.plugins.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Item;
-import net.minecraft.server.v1_12_R1.*;
-import org.bukkit.*;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.*;
 
@@ -44,5 +41,11 @@ public class TestKnockBack implements IItems
     public String getExecName()
     {
         return "TEST_KB";
+    }
+
+    @Override
+    public Type getType()
+    {
+        return Type.TARGET;
     }
 }

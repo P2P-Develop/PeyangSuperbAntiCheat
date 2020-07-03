@@ -45,7 +45,7 @@ public class CommandTarget implements CommandExecutor
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15L);
 
-        GuiItem.giveAllItems((Player) sender, player.getName());
+        GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());
         return true;
     }
 }

@@ -1,4 +1,4 @@
-package ml.peya.plugins.Gui.Items;
+package ml.peya.plugins.Gui.Items.Target;
 
 import com.mojang.authlib.*;
 import com.mojang.authlib.properties.*;
@@ -86,5 +86,9 @@ public class AuraBot implements IItems
         throw new IllegalArgumentException("Cannot find field with type " + fieldType);
     }
 
-
+    @Override
+    public Type getType()
+    {
+        return Type.TARGET;
+    }
 }

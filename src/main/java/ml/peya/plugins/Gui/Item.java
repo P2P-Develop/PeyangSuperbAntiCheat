@@ -1,8 +1,6 @@
 package ml.peya.plugins.Gui;
 
-import com.comphenix.protocol.*;
 import org.bukkit.*;
-import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
@@ -10,7 +8,7 @@ import java.util.*;
 
 public class Item
 {
-    private ArrayList<IItems> items;
+    private final ArrayList<IItems> items;
 
     public Item()
     {
@@ -38,15 +36,6 @@ public class Item
         return items;
     }
 
-    public ItemStack getItemByType(String type, String target)
-    {
-        for (IItems item: getItems())
-        {
-            if (item.getExecName().equals(type))
-                return item.getItem(target);
-        }
-        return new ItemStack(Material.BEDROCK);
-    }
 
     public static boolean canGuiItem(ItemStack item)
     {
@@ -86,7 +75,13 @@ public class Item
 
         list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.");
         list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: " + item.getExecName());
-        list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: " + target);
+
+        if (item.getType() == IItems.Type.TARGET)
+            list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: " + target);
+
+        list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Type: " + item.getType());
+
         return list;
     }
+
 }

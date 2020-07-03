@@ -7,7 +7,7 @@ import org.bukkit.inventory.*;
 
 public class GuiItem
 {
-    public static void giveAllItems(Player player, String target)
+    public static void giveAllItems(Player player, IItems.Type type, String target)
     {
         Item item = PeyangSuperbAntiCheat.item;
 
@@ -19,7 +19,6 @@ public class GuiItem
 
             ItemStack stack = inventory.getItem(i);
 
-
             if (stack != null && stack.getType() != Material.AIR)
             {
                 if (!Item.canGuiItem(stack))
@@ -27,7 +26,9 @@ public class GuiItem
                 inventory.remove(stack);
             }
 
-            inventory.setItem(i, items.getItem(target));
+
+            if (items.getType() == type)
+                inventory.setItem(i, items.getItem(target));
 
             if (items.canSpace())
                 i++;

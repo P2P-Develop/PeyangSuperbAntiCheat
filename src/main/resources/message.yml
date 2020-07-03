@@ -203,3 +203,4 @@ item:
     testing: "%%reset%%%%aqua%%(テスト中：%%red%%%%bold%%%%type%%%%reset%%%%aqua%%, VL：%%red%%%%bold%%%%vl%%%%reset%%%%aqua%%)"
   banBook:
     title: "%%red%%%%name%% の処罰一覧"
+  targetStick: "%%gold%%%%bold%%ターゲットスティック"

@@ -1,6 +1,5 @@
-package ml.peya.plugins.Gui.Items;
+package ml.peya.plugins.Gui.Items.Target;
 
-import io.netty.handler.ssl.util.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
@@ -41,4 +40,9 @@ public class AuraPanic implements IItems
         return "AURA_PANIC";
     }
 
+    @Override
+    public Type getType()
+    {
+        return Type.TARGET;
+    }
 }

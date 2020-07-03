@@ -1,18 +1,12 @@
-package ml.peya.plugins.Gui.Items;
+package ml.peya.plugins.Gui.Items.Target;
 
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
-import org.bukkit.craftbukkit.libs.it.unimi.dsi.fastutil.Stack;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
-
-import java.util.*;
 
 public class BanBook implements IItems
 {
@@ -44,5 +38,11 @@ public class BanBook implements IItems
     public String getExecName()
     {
         return "BANS";
+    }
+
+    @Override
+    public Type getType()
+    {
+        return Type.TARGET;
     }
 }
