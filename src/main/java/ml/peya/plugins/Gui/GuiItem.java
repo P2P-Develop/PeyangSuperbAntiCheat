@@ -27,7 +27,7 @@ public class GuiItem
             }
 
 
-            if (items.getType() == type)
+            if (items.getType() == type || items.getType() == IItems.Type.ALL)
                 inventory.setItem(i, items.getItem(target));
 
             if (items.canSpace())

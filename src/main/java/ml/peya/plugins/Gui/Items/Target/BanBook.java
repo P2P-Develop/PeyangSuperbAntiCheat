@@ -4,6 +4,7 @@ import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.*;
 import org.bukkit.*;
+import org.bukkit.enchantments.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
@@ -21,7 +22,6 @@ public class BanBook implements IItems
     {
         ItemStack stack = new ItemStack(Material.PAPER);
         ItemMeta meta = stack.getItemMeta();
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.setDisplayName(MessageEngihe.get("item.banBook.title", MessageEngihe.hsh("name", target)));
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);

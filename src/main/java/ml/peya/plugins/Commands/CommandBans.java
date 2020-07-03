@@ -60,6 +60,11 @@ public class CommandBans implements CommandExecutor
 
         ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player, typeP);
 
+        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+            sender.sendMessage(MessageEngihe.get("message.bans.lynx", MessageEngihe.hsh("name", name)));
+        else
+            sender.sendMessage(MessageEngihe.get("message.bans.message", MessageEngihe.hsh("name", name)));
+
         for (BanAnalyzer.Bans ban: bans)
             sender.spigot().sendMessage(TextBuilder.getTextBan(ban, ban.getType()).create());
         if (bans.size() == 0)

@@ -10,6 +10,7 @@ import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.Gui.Items.All.*;
 import ml.peya.plugins.Gui.Items.Target.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Task.*;
@@ -83,6 +84,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         item.register(new TestKnockBack());
         item.register(new CompassTracker3000_tm());
         item.register(new BanBook());
+        item.register(new TargetStick());
 
         protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
         {

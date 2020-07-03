@@ -18,7 +18,8 @@ public interface IItems
     enum Type
     {
         MAIN("MAIN"),
-        TARGET("TARGET");
+        TARGET("TARGET"),
+        ALL("ALL");
         String name;
         Type(String name)
         {

@@ -13,6 +13,7 @@ error:
   notHavePermission: "%%red%%%%bold%%エラー：権限がありません！"
   invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
   requirePlayer: "%%red%%%%bold%%エラー：プレイヤーから実行してください。"
+  notPlayerFoundInRange: "%%red%%%%bold%%エラー：範囲内にプレイヤーが見つかりませんでした。"
   report:
     invalidReason: "%%red%%%%bold%%エラー：理由が正しくありません！"
     reasonNotSelected: "%%red%%%%bold%%エラー：理由が選択されていません！"
@@ -125,6 +126,10 @@ message:
   pull:
     normal: "%%yellow%%プレイヤー %%name%% を引き寄せました！"
     lynx: "%%yellow%%Pulled player '%%name%%' to you!"
+
+  bans:
+    message: "%%prefix%%\n%%gold%%--- %%name%% さんのBAN情報 ---"
+    lynx: "%%gold%%--- Bans for %%name%% ---"
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\
