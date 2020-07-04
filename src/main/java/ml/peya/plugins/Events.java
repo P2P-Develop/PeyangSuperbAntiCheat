@@ -71,10 +71,11 @@ public class Events implements Listener
                 "[" + ChatColor.YELLOW + ChatColor.BOLD +
                 "➤" + ChatColor.RESET + ChatColor.RED +
                 "] ");
-        builder.append(format);
         builder.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()));
         builder.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                 new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()));
+        builder.append(format);
+
 
         for (Player receiver: e.getRecipients())
         {
