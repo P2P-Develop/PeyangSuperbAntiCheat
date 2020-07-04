@@ -44,6 +44,8 @@ Argument enclosed in <>, it represents the necessary command, Enclosed in \[\] i
 This block of code represents a permission.  
 **WARNING: No authority group is described. Before referring to permissions, make sure you understand it.**
   
+---
+  
 ## Installation
 
 1. Clone this repository.
@@ -67,10 +69,11 @@ $ mv (PSAC jar file) (Your plugins folder)
 ```bash
 /stop
 ```
-
+  
 ---
-
+  
 ## Permissions
+
 Commands are always assigned one or more premissions.  
 Other settings can be done using permissions.  
   
@@ -93,25 +96,28 @@ Other settings can be done using permissions.
 |   `psac.ntfadmin`   |                 none                 | If the player calling the NPC has this permission, when that player detects a cheat, a message will be sent indicating the player's name. |       op      |     psac.mod     |
 |   `psac.reportntf`  |                 none                 | Players with this permission can be notified when the player submits a report.                                                            |       op      |     psac.mod     |
 |     `psac.pull`     |            [/pull](#pull)            | This permission can pull other players.                                                                                                   |       op      |     psac.mod     |
-|    **psac.admin**   |                 group                | This permission can use all commands of the plugin.                                                                                       |      false    |       none       |
+|  `psac.chattarget`  |                 none                 | A mark will be added to the left of the chat for players with this permission.                                                            |       op      |     psac.mod     |
+|     `psac.mods`     |                 none                 | This permission can see the mods that other players have introduced.                                                                      |       op      |     psac.mod     |
+|   **psac.admin**    |                 group                | This permission can use all commands of the plugin.                                                                                       |      false    |       none       |
 |     `psac.drop`     |       [/psac drop](#arguments)       | This permission can delete submitted report.                                                                                              |      false    |    psac.admin    |
 |     `psac.error`    |                 none                 | This permission can get error information when the plugin encountered an internal error.                                                  |      false    |    psac.admin    |
   
-
+---
+  
 ## Commands
 
-### /report
+This section are describe plugin commands.
 
-#### Aliases
----
+## /report
+
+### Aliases
 
 - /peyangreport
 - /pcr
 - /rep
 - /wdr
 
-#### Description
----
+### Description
 
 Send the content of the report selected and submitted by the player to the staff.  
 **WARNING: It is not a command to automatically summon NPC.**  
@@ -133,8 +139,7 @@ This report format is lets them know who reported who and why.
 This mod may be Bannable on Hypixel server, so never use this on Hypixel server.  
 [Developer](https://github.com/peyang-Celeron) does not take any responsibility.**  
 
-#### Usages
----
+### Usages
 
 - /report \<PlayerName\>  
   Player can execute this command with this argument to open a book where you can select the reason for the report.  
@@ -147,8 +152,7 @@ This mod may be Bannable on Hypixel server, so never use this on Hypixel server.
   Player can execute this command with this argument to report directly in chat/console without using a book.  
   **Can use an alias for this reason. Please read below.**  
 
-#### Reasons
----
+### Reasons
 
 The books are sorted in the order they are displayed.
 
@@ -164,208 +168,214 @@ The books are sorted in the order they are displayed.
 
 ##### To avoid reporting spam, the same player cannot report to the same player.
 
-#### Permission
----
+### Permission
 
 - `psac.report`
+  
+## /aurabot
 
----
-
-### /aurabot
-
-#### Aliases
----
+### Aliases
 
 - /testaura
 - /auratest
 - /killauratest
 
-#### Description
----
+### Description
 
 Executing this command will summon an NPC that spins around the player at a constant speed.  
 When an NPC is attacked a certain number of times, it kicks that player.  
 
-#### Usage
----
+### Usage
 
 - /aurabot \<PlayerName\>
   Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.  
 
-#### Permissions
----
+### Permission
 
 - `psac.aurabot`
   
 Manages the permission to execute the summon commands of Aurabot and Watchdog.  
 Players with this permission can summon Watchdogs.  
+  
+## /acpanic
 
----
-
-### /acpanic
-
-#### Aliases
----
+### Aliases
 
 - /testpanic
 - /panictest
 - /aurapanictest
 
-#### Description
----
+### Description
 
 This command always summons the NPC that is trying to move behind the player.  
 When an NPC is attacked a certain number of times, it kicks that player.  
 
-#### Usage
----
+### Usage
 
 - /acpanic \<PlayerName\>
   Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.  
 
-#### Permissions
----
+### Permission
 
 - `psac.aurapanic`
+  
+## /testkb
 
----
-
-### /testkb
-
-#### Aliases
----
+### Aliases
 
 - /testknockback
 - /kbtest
 - /knockbacktest
 
-#### Description
----
+### Description
 
 Fire a **invisible arrow** at the specified player.  
 This allows you to see if the player is knocking back.
 
-#### Usage
----
+### Usage
 
 - /testkb \<PlayerName\>
 
 Fire invisible arrow at \<PlayerName\>.
 
-#### Permission
----
+### Permission
 
 - `psac.testkb`
-
----
-
-### /pull
+  
+## /pull
 
 Pull the specified player.
 
-#### Aliases
----
+### Aliases
 
-* /s
+- /s
 
-#### Description
----
+### Description
 
 Pull the specified player to the executed player.
 It cannot be run from console.
 
-#### Usage
----
+### Usage
 
-* /pull \<PlayerName\>
+- /pull \<PlayerName\>
 
-#### Permissions
----
+### Permission
 
-* psac.pull
----
+- `psac.pull`
+  
+## /bans
 
-### /bans
-
-#### Aliases
----
+### Aliases
 
 - /banlist
 - /playerbans
 - /banlookup
 
-#### Description
----
+### Description
 
 Displays the player's kick (BAN) history **remaining in this plugin**.
 
-#### Usage
----
+### Usage
 
 - /bans \[\-a | ban | kick\] \<PlayerName\>
 
 Displays the BAN history of player specified by \<PlayerName\>.  
 Add \-a to show all bans and kicks.  
 
-#### Permissions
----
+### Permission
 
 - `psac.bans`
+  
+## /mods
 
----
+Displays the mods installed by the specified player.
 
-### /psac
+### Description
 
-#### Aliases
----
+If the mod loader is Forge, can view the mods installed by the player.  
+The response is returned as the Mod ID.  
+
+### Usage
+
+- /mods \<PlayerName\>
+
+Displays the mods of the player specified by \<PlayerName\>.
+
+### Permission
+
+- `psac.mods`
+
+**WARNING: This command uses `psac.mods` permissions. Not `psac.mod`.**
+  
+## /target
+
+Tracks the specified player as a target.
+
+### Description
+
+Executing this command gives utility items.  
+These items allow you to execute useful commands with a click.  
+Dropping a gived item, clears all items.  
+
+### Usage
+
+- /target \<PlayerName\>
+
+Start tracking \<PlayerName\>.
+
+### Permission
+
+- `psac.target`
+  
+## /psac
+
+### Aliases
 
 - /peyangsuperbanticheat
 - /psr
 - /wdadmin
 - /anticheat
 
-#### Description
----
+### Description
 
 The main command of this plugin. It works by adding an argument.
 
-#### Arguments
----
+### Arguments
 
-##### /psac help
+#### /psac help
 
 Displays help for this plugin command.  
 **Commands related to management ID can be used in `psac.mod`, but they are not shown in help.**  
 Players with `psac.mod` or `psac.admin` permissions will also see the following help:  
 
-##### /psac view \[Page\]
+#### /psac view \[Pages\]
 
 See the report submitted by player.  
 The reports are sorted by highest risk, five at a time.  
 
-##### /psac show \<ManagementID\>
+#### /psac show \<ManagementID\>
 
 View details of the report sent by player.  
 You can run this command from the player to view the report details by book.  
 If you run it from the console, it will appear as a log in the console.  
 
-##### /psac drop \<ManagementID\>
+#### /psac drop \<ManagementID\>
 
 **Completely** discards the reports sent by the player, except the command execution log.  
 **The log of the deletion itself is not displayed. Be careful when discarding.**  
 
-##### /psac kick \<PlayerName\> \[test\]
+#### /psac kick \<PlayerName\> \[test\]
 
 Kick player specified by \<PlayerName\>.  
 Specifying \[test\] as the second argument kick player in test mode.  
 
-#### What is \<ManagementID\>
+### What is \<ManagementID\>
 
 \<ManagementID\> is a 32-character alphanumeric string that is automatically assigned when the player submits the report.  
 This ID is displayed when you run `/psac view` from console.  
 Also, can execute commands related to the \<ManagementID\> from the player.  
 
-## Why not execute BAN command in this plugin
+### Why not execute BAN command in this plugin
 
 The plugin is concerned about falsely banning players due to false Watchdog detection.  
 Therefore, the plugin does not ban players _automatically_.  
@@ -401,10 +411,12 @@ This message is displayed when a staff member issues a [kick command](#psac-kick
   
 A test message for this plugin. Please use it for testing.
   
-## What is this NPC\(WatchDog\)
+### What is this NPC\(WatchDog\)
 
 The Watchdog calls the NPC with a random username using the API "[RandomUserGenerator](https://randomuser.me/)" by [@randomapi](https://twitter.com/randomapi).    
 The NPC skin is displayed randomly by referring to the UUID skin settting.  
+
+---
 
 ## Config settings
 
@@ -428,8 +440,10 @@ In this plugin, the following config is set by default.
 | autoMessage.enabled |     true      | Toggle the presence or absence of regular messages.                                                                   |
 |   autoMessage.time  |      15       | Specify a minuites for recurring messages.                                                                            |
 |        skins        |   \(UUID\)    | Specifies the skin to apply to the NPC.<br>You can specify multiple UUIDs and it will be selected from a random UUID. |
-
-## What is learning function
+  
+---
+  
+## What is learning function?
 
 This plugin has a learning function that automatically adjusts the parameters using the actual cheat material.  
 Learning cheat data can improve the accuracy of your decision to kick or not.  
@@ -439,7 +453,7 @@ Learning cheat data can improve the accuracy of your decision to kick or not.
 
 The learning feature of this plugin adjusts key parameters by iteratively calculating the average of the parameters when it detects a cheat or kick.
 
-## What is *message.yml*
+## What is *message.yml*?
 
 When you build PeyangSuperbAntiCheat.jar with `mvn package`, `mvn shade` is automatically executed.  
 You can edit this file to change the plugin messages before building.  
@@ -455,10 +469,10 @@ I think that it will be handled by about two people, so please feel free to post
 Depending on the language of the problem, the following persons are responsible for resolution:
 - Japanese issue assignee: [peyang-Celeron](https://github.com/peyang-Celeron) (and [Lemonade19x](https://github.com/Lemonade19x)?)
 - English issue assignee: [Potato1682](https://github.com/Potato1682)
-
+  
 ---
-
-# Thanks
+  
+## Thanks
 
 This plugin uses the following libraries/APIs:  
 
