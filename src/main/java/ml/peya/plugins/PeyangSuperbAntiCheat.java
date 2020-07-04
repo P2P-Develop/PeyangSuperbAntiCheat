@@ -38,24 +38,27 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static ProtocolManager protocolManager;
     public static Item item;
     public static Tracker tracker;
+    public static HashMap<UUID, HashMap<String,String>> mods;
 
     public static long time = 0L;
     public static int banLeft;
 
-    public static HikariDataSource eye = null;
-    public static HikariDataSource banKick = null;
-    public static boolean isAutoMessageEnabled = false;
-    public static boolean isTrackEnabled = false;
-    public static BukkitRunnable autoMessage = null;
-    public static BukkitRunnable trackerTask = null;
+    public static HikariDataSource eye;
+    public static HikariDataSource banKick;
+    public static boolean isAutoMessageEnabled;
+    public static boolean isTrackEnabled;
+    public static BukkitRunnable autoMessage;
+    public static BukkitRunnable trackerTask;
 
     private static PeyangSuperbAntiCheat plugin;
 
-    public static HashMap<UUID, HashMap<String,String>> mods;
+    private static final int __BSTATS_PLUGIN_ID = 8084;
 
     @Override
     public void onEnable()
     {
+        new Metrics(this, __BSTATS_PLUGIN_ID);
+
         if (getServer().getPluginManager().getPlugin("ProtocolLib") == null || !getServer().getPluginManager().getPlugin("ProtocolLib").isEnabled())
         {
             logger.log(Level.SEVERE, "This plugin requires ProtocolLib!");
@@ -159,6 +162,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "FML|HS");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new PluginMessageListener());
+
 
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }
