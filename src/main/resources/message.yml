@@ -214,3 +214,4 @@ item:
     title: "%%red%%%%name%% の処罰一覧"
   targetStick: "%%gold%%%%bold%%ターゲットスティック"
   lead: "%%red%%プレイヤーを引き寄せる"
+  mods: "%%red%%MOD一覧"

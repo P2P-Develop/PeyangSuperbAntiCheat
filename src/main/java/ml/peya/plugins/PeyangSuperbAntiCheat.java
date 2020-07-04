@@ -92,6 +92,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         item.register(new BackToPage1());                              //====Page2
         item.register(new Lead());
+        item.register(new ModList());
 
         item.register(new TargetStick());                              //====Main
 
