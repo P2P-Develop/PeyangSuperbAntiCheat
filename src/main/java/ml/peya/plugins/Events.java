@@ -78,7 +78,7 @@ public class Events implements Listener
 
         for (Player receiver: e.getRecipients())
         {
-            if (!receiver.hasPermission("psac.chattarget") || PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()).containsKey("Lynx"))
+            if (!receiver.hasPermission("psac.chattarget") || (PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()) != null && PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()).containsKey("Lynx")))
                 receiver.sendMessage(format);
             else
                 receiver.spigot().sendMessage(builder.create());

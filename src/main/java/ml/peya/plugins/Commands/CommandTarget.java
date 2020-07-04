@@ -32,7 +32,7 @@ public class CommandTarget implements CommandExecutor
             return true;
         }
 
-        PeyangSuperbAntiCheat.tracker.add(sender.getName(), args[0]);
+
 
         if (args.length >= 2)
         {
@@ -40,7 +40,8 @@ public class CommandTarget implements CommandExecutor
                 GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());
             else if (args[1].equals("2"))
                 GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET_2, player.getName());
-            ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1);
+            else
+                ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1);
             return true;
         }
 
@@ -54,6 +55,8 @@ public class CommandTarget implements CommandExecutor
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15L);
+
+        PeyangSuperbAntiCheat.tracker.add(sender.getName(), args[0]);
 
         GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());
 
