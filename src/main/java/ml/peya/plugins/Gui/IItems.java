@@ -19,6 +19,7 @@ public interface IItems
     {
         MAIN("MAIN"),
         TARGET("TARGET"),
+        TARGET_2("TARGET_2"),
         ALL("ALL");
         String name;
         Type(String name)

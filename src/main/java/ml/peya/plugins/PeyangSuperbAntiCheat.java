@@ -10,8 +10,9 @@ import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Gui.Items.All.*;
+import ml.peya.plugins.Gui.Items.Main.*;
 import ml.peya.plugins.Gui.Items.Target.*;
+import ml.peya.plugins.Gui.Items.Target.Page2.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Task.*;
 import ml.peya.plugins.Utils.*;
@@ -81,12 +82,18 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         item = new Item();
 
-        item.register(new ml.peya.plugins.Gui.Items.Target.AuraBot());
+        item.register(new ml.peya.plugins.Gui.Items.Target.AuraBot());  //====Page1
         item.register(new ml.peya.plugins.Gui.Items.Target.AuraPanic());
         item.register(new TestKnockBack());
         item.register(new CompassTracker3000_tm());
         item.register(new BanBook());
-        item.register(new TargetStick());
+        item.register(new ToPage2());                                   //
+        item.register(new BackButton());
+
+        item.register(new BackToPage1());                              //====Page2
+        item.register(new Lead());
+
+        item.register(new TargetStick());                              //====Main
 
         protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
         {

@@ -19,7 +19,7 @@ public class CommandTarget implements CommandExecutor
             return true;
         }
 
-        if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
             return true;
         if (ErrorMessageSender.unPermMessage(sender, "psac.target"))
             return true;
@@ -34,6 +34,16 @@ public class CommandTarget implements CommandExecutor
 
         PeyangSuperbAntiCheat.tracker.add(sender.getName(), args[0]);
 
+        if (args.length >= 2)
+        {
+            if (args[1].equals("1"))
+                GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());
+            else if (args[1].equals("2"))
+                GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET_2, player.getName());
+            ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1);
+            return true;
+        }
+
         new BukkitRunnable()
         {
 
@@ -46,6 +56,7 @@ public class CommandTarget implements CommandExecutor
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15L);
 
         GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());
+
         return true;
     }
 }

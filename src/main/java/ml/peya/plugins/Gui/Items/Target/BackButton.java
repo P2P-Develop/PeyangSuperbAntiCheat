@@ -3,31 +3,36 @@ package ml.peya.plugins.Gui.Items.Target;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Item;
-import org.bukkit.Material;
+import net.md_5.bungee.api.*;
+import net.md_5.bungee.api.chat.*;
+import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
-public class TestKnockBack implements IItems
+public class BackButton implements IItems
 {
     @Override
     public void run(Player player, String target)
     {
-        player.performCommand("testkb " + target);
+        PeyangSuperbAntiCheat.tracker.remove(player.getName());
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngihe.get("item.tracking.noTarget")));
+        player.sendMessage(MessageEngihe.get("item.stopTarget"));
+        GuiItem.giveAllItems(player, Type.MAIN, target);
     }
 
     @Override
     public ItemStack getItem(String target)
     {
-        ItemStack stack = new ItemStack(Material.SLIME_BALL);
+        ItemStack stack = new ItemStack(Material.WATCH);
 
         ItemMeta meta = stack.getItemMeta();
 
-        meta.setDisplayName(MessageEngihe.get("item.execute", MessageEngihe.hsh("command", "TestKnockBack")));
+        meta.setDisplayName(MessageEngihe.get("book.words.back"));
 
         meta.setLore(Item.getLore(this, target));
-        stack.setItemMeta(meta);
 
+        stack.setItemMeta(meta);
         return stack;
     }
 
@@ -40,7 +45,7 @@ public class TestKnockBack implements IItems
     @Override
     public String getExecName()
     {
-        return "TEST_KB";
+        return "BACK";
     }
 
     @Override

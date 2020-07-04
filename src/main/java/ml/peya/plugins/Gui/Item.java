@@ -76,7 +76,7 @@ public class Item
         list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.");
         list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: " + item.getExecName());
 
-        if (item.getType() == IItems.Type.TARGET)
+        if (item.getType() == IItems.Type.TARGET || item.getType() == IItems.Type.TARGET_2)
             list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: " + target);
 
         list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Type: " + item.getType());

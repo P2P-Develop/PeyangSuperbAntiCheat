@@ -1,4 +1,4 @@
-package ml.peya.plugins.Gui.Items.All;
+package ml.peya.plugins.Gui.Items.Main;
 
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
@@ -56,7 +56,7 @@ public class TargetStick implements IItems
     @Override
     public Type getType()
     {
-        return Type.ALL;
+        return Type.MAIN;
     }
 
 

@@ -1,33 +1,29 @@
 package ml.peya.plugins.Gui.Items.Target;
 
-import ml.peya.plugins.*;
-import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Item;
-import org.bukkit.Material;
+import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.*;
+import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
-public class TestKnockBack implements IItems
+public class ToPage2 implements IItems
 {
     @Override
     public void run(Player player, String target)
     {
-        player.performCommand("testkb " + target);
+        player.performCommand("target " + target + " 2");
     }
 
     @Override
     public ItemStack getItem(String target)
     {
-        ItemStack stack = new ItemStack(Material.SLIME_BALL);
-
+        ItemStack stack = new ItemStack(Material.ARROW);
         ItemMeta meta = stack.getItemMeta();
-
-        meta.setDisplayName(MessageEngihe.get("item.execute", MessageEngihe.hsh("command", "TestKnockBack")));
-
+        meta.setDisplayName(MessageEngihe.get("book.words.next"));
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);
-
         return stack;
     }
 
@@ -40,7 +36,7 @@ public class TestKnockBack implements IItems
     @Override
     public String getExecName()
     {
-        return "TEST_KB";
+        return "TO_TARGET_2";
     }
 
     @Override
