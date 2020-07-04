@@ -141,6 +141,7 @@ autoMessage: "\
 %%white%%スタッフがこの７日間に追加で %%red%%%%bold%%%%staff_count%%%%reset%% 人をキックしました。\n\
 %%red%%禁止されている MOD はアクセス禁止の対象です！
 "
+
 reportbook:
   cheat: "どんなチートを使っていましたか？"
   submit: "%%dark_green%%%%bold%%レポートを提出"
