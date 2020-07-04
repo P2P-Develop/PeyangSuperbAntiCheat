@@ -39,6 +39,8 @@ error:
   bans:
     unknownSearchType: "%%red%%%%bold%%エラー：検索タイプが不明です。"
     databaseInfoNotFound: "%%red%%%%bold%%エラー：データベースに情報が見つかりませんでした。"
+  mods:
+    noDataFound: "%%red%%%%bold%%エラー：このプレイヤーの導入しているMODが見つかりませんでした。"
 
 command:
   report:

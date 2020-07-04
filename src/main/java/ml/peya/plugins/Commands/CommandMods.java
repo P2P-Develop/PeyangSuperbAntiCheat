@@ -27,9 +27,15 @@ public class CommandMods implements CommandExecutor
 
         HashMap<String, String> mods = Mods.getMods(player);
 
+        if (mods == null)
+        {
+            sender.sendMessage(MessageEngihe.get("error.mods.noDataFound"));
+            return true;
+        }
+
         if (sender instanceof ConsoleCommandSender)
         {
-            for (String id: Objects.requireNonNull(mods).keySet())
+            for (String id: mods.keySet())
             {
                 String version = mods.get(id);
                 sender.sendMessage(ChatColor.RED + id + ChatColor.GREEN + ": " + ChatColor.BLUE + version);
@@ -37,7 +43,7 @@ public class CommandMods implements CommandExecutor
             return true;
         }
 
-        ItemStack book = Books.getModsBook(player, Objects.requireNonNull(mods));
+        ItemStack book = Books.getModsBook(player, mods);
         BookUtil.openBook(book, (Player) sender);
         return true;
     }
