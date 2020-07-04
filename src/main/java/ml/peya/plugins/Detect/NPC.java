@@ -111,7 +111,7 @@ public class NPC
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
             }
-        }.runTask(PeyangSuperbAntiCheat.getPlugin());
+        }.runTaskAsynchronously(PeyangSuperbAntiCheat.getPlugin());
 
         return npc;
     }
