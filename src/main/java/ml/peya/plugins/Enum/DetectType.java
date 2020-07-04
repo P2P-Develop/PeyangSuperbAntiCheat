@@ -2,6 +2,8 @@ package ml.peya.plugins.Enum;
 
 import org.bukkit.command.*;
 
+import java.util.*;
+
 public enum DetectType
 {
     AURA_BOT("AuraBot"),
@@ -11,6 +13,7 @@ public enum DetectType
     private int count;
     private CommandSender sender;
     private String name;
+    private HashMap<String, Object> meta;
 
     DetectType (String name)
     {
@@ -42,5 +45,15 @@ public enum DetectType
     public CommandSender getSender()
     {
         return sender;
+    }
+
+    public HashMap<String, Object> getMeta()
+    {
+        return meta;
+    }
+
+    public void setMeta(HashMap<String, Object> meta)
+    {
+        this.meta = meta;
     }
 }

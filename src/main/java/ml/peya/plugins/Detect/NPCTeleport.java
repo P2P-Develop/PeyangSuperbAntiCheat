@@ -7,7 +7,6 @@ import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
-import org.bukkit.event.player.*;
 import org.bukkit.scheduler.*;
 import org.bukkit.util.*;
 
@@ -26,6 +25,9 @@ public class NPCTeleport
         final double range = PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
         final double[] clt = {0.0};
 
+        PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
+        connection.sendPacket(new PacketPlayOutUpdateHealth((float) player.getHealth() - 0.1f, target.getBukkitEntity().getEntityId(), player.getSaturation()));
+
         new BukkitRunnable() {
             public void run()
             {
@@ -42,12 +44,20 @@ public class NPCTeleport
 
                     n.setY(center.getY() + range);
 
+                    n.setPitch(50);
+
+                    float head = ((CraftPlayer) player).getHandle().getHeadRotation() * 0.75f;
+
+                    if (head < 0)
+                        head = head * 2;
+
                     NPC.setLocation(n, target);
-                    target.getBukkitEntity().teleport(n, PlayerTeleportEvent.TeleportCause.PLUGIN);
-                    PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
                     connection.sendPacket(new PacketPlayOutEntityTeleport(target));
+                    connection.sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte)head));
+
 
                     NPC.setArmor(player, target, arm);
+                    float finalHead = head;
                     new BukkitRunnable()
                     {
                         @Override
@@ -59,6 +69,8 @@ public class NPCTeleport
                                     continue;
                                 PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
                                 c.sendPacket(new PacketPlayOutEntityTeleport(target));
+                                connection.sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) finalHead));
+
                                 NPC.setArmor(p, target, arm);
                             }
                             this.cancel();
@@ -66,11 +78,12 @@ public class NPCTeleport
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                 }
 
-                clt[0] += 0.001;
-                if (clt[0] >= PeyangSuperbAntiCheat.config.getInt("npc.seconds"))
+                clt[0] += 0.035;
+                if (clt[0] >= PeyangSuperbAntiCheat.config.getDouble("npc.seconds"))
                     this.cancel();
             }
         }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
+
     }
 
     private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm)
@@ -99,7 +112,6 @@ public class NPCTeleport
                         rangeTmp = wave.get(0.01, true);
 
                     Location center = player.getLocation();
-
                     Location n = new Location(center.getWorld(),
                             auraBot_xPos(time[0], rangeTmp) + center.getX(),
                             center.getY() + creator.get(0.01, count[0] < 20),

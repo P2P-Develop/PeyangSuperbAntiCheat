@@ -84,6 +84,7 @@ public class Events implements Listener
             else
                 receiver.spigot().sendMessage(builder.create());
         }
+        Bukkit.getConsoleSender().sendMessage(format);
     }
 
     @EventHandler

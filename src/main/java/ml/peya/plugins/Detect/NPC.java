@@ -2,22 +2,19 @@ package ml.peya.plugins.Detect;
 
 import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.*;
-import com.mojang.authlib.properties.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.StringUtil;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
-import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
+import org.bukkit.util.Vector;
 
-import javax.net.ssl.*;
-import java.io.*;
-import java.net.*;
 import java.util.*;
 
 public class NPC
@@ -59,7 +56,14 @@ public class NPC
 
         EntityPlayer npc = new EntityPlayer(server, worldServer, profile, plMng);
 
-        setLocation(player.getLocation().add(3, 1, 0), npc);
+        Location center = player.getLocation();
+
+        if (center.getPitch() <= 0.0f || center.getPitch() > 15.0f)
+            center.setPitch(0.0f);
+
+        Vector vec = center.getDirection().multiply(-3);
+
+        setLocation(player.getLocation().add(0, 1, 0).add(vec), npc);
 
         PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
 
@@ -111,7 +115,7 @@ public class NPC
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
             }
-        }.runTaskAsynchronously(PeyangSuperbAntiCheat.getPlugin());
+        }.runTask(PeyangSuperbAntiCheat.getPlugin());
 
         return npc;
     }
