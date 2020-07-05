@@ -66,7 +66,7 @@ Hypixelの**~~パクリ~~**コマンドです。
 
 このモードは、<details><summary>████</summary>Kam7</details>によって**リークされた**Hypixel Lynx Modとの互換性を持たせる事ができるモードです。  
 このModは、HypixelでBANされる可能性があります。  
-このModを適用したままHypixelには**絶対に**行かないでください。
+このModを適用したまま、Hypixelには**絶対に**行かないでください。
 
 ### 使用法
 * /wdr \<PlayerName\>
