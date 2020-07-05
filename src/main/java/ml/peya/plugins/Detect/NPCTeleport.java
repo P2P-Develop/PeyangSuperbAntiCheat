@@ -42,13 +42,9 @@ public class NPCTeleport
             {
                 now[0]++;
 
-                //double health = player.getHealth();
 
                 PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 1);
                 connection.sendPacket(animation);
-
-                /*connection.sendPacket(new PacketPlayOutUpdateHealth((float) health - 0.01f, player.getFoodLevel(), player.getSaturation()));
-                connection.sendPacket(new PacketPlayOutUpdateHealth((float) health, player.getFoodLevel(), player.getSaturation()));*/
 
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("hit", now[0]);
