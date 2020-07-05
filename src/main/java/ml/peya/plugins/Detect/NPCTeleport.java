@@ -1,10 +1,5 @@
 package ml.peya.plugins.Detect;
 
-import com.comphenix.protocol.*;
-import com.comphenix.protocol.events.*;
-import com.comphenix.protocol.wrappers.*;
-import com.google.common.collect.*;
-import com.sun.javafx.sg.prism.web.*;
 import develop.p2p.lib.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
@@ -13,15 +8,9 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
-import org.bukkit.entity.Entity;
-import org.bukkit.event.*;
-import org.bukkit.event.entity.*;
 import org.bukkit.scheduler.*;
 import org.bukkit.util.Vector;
-import sun.net.*;
 
-import javax.swing.*;
-import java.lang.reflect.*;
 import java.util.*;
 
 public class NPCTeleport
