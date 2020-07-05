@@ -18,7 +18,7 @@ public class AuraPanic implements CommandExecutor
         if (ErrorMessageSender.unPermMessage(sender, "psac.aurapanic") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
             return true;
 
-        int sec = 5;
+        int count = 5;
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
@@ -44,14 +44,30 @@ public class AuraPanic implements CommandExecutor
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", name);
             map.put("type", "AuraPanicBot");
-            map.put("seconds", String.valueOf(sec));
+            map.put("seconds", String.valueOf(PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
 
             sender.sendMessage(MessageEngihe.get("message.aura.summon", map));
 
         }
 
+        if (args.length == 2)
+        {
+            try
+            {
+                count = Integer.parseInt(args[1]);
+            }
+            catch (Exception e)
+            {
+                sender.sendMessage(MessageEngihe.get("error.invalidArgument"));
+                return true;
+            }
+
+        }
+
 
         DetectType type = DetectType.AURA_PANIC;
+        type.setPanicCount(count);
+        type.setSender(sender);
 
         DetectConnection.scan(player, type, sender);
         return true;

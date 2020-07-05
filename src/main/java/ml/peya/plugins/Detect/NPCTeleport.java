@@ -1,14 +1,28 @@
 package ml.peya.plugins.Detect;
 
+import com.comphenix.protocol.*;
+import com.comphenix.protocol.events.*;
+import com.comphenix.protocol.wrappers.*;
+import com.google.common.collect.*;
+import com.sun.javafx.sg.prism.web.*;
 import develop.p2p.lib.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
+import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.event.*;
+import org.bukkit.event.entity.*;
 import org.bukkit.scheduler.*;
-import org.bukkit.util.*;
+import org.bukkit.util.Vector;
+import sun.net.*;
+
+import javax.swing.*;
+import java.lang.reflect.*;
+import java.util.*;
 
 public class NPCTeleport
 {
@@ -17,18 +31,48 @@ public class NPCTeleport
         if (tpCase == DetectType.AURA_BOT)
             auraBot_teleport(player, target, arm);
         else if (tpCase == DetectType.AURA_PANIC)
-            auraPanic_teleport(player, target, arm);
+            auraPanic_teleport(player, target, arm, tpCase.getPanicCount(), tpCase.getSender());
     }
 
-    private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm)
+    private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender)
     {
         final double range = PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
         final double[] clt = {0.0};
+        final int[] now = {0};
 
         PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
-        connection.sendPacket(new PacketPlayOutUpdateHealth((float) player.getHealth() - 0.1f, target.getBukkitEntity().getEntityId(), player.getSaturation()));
 
-        new BukkitRunnable() {
+        int sec = PeyangSuperbAntiCheat.config.getInt("npc.seconds");
+        double delay = (1.5 /  count) * sec;
+
+
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                now[0]++;
+
+                //double health = player.getHealth();
+
+                PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 1);
+                connection.sendPacket(animation);
+
+                /*connection.sendPacket(new PacketPlayOutUpdateHealth((float) health - 0.01f, player.getFoodLevel(), player.getSaturation()));
+                connection.sendPacket(new PacketPlayOutUpdateHealth((float) health, player.getFoodLevel(), player.getSaturation()));*/
+
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("hit", now[0]);
+                map.put("max", count);
+
+                sender.sendMessage(MessageEngihe.get("message.auraCheck.panic.lynx", map));
+                if (now[0] >= count)
+                    this.cancel();
+            }
+        }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 15 * (long) delay);
+
+        new BukkitRunnable()
+        {
             public void run()
             {
                 for (double i = 0; i < Math.PI * 2; i++) {
@@ -46,7 +90,7 @@ public class NPCTeleport
 
                     n.setPitch(50);
 
-                    float head = ((CraftPlayer) player).getHandle().getHeadRotation() * 0.75f;
+                    float head = ((CraftPlayer) player).getHandle().getHeadRotation() * 0.5f;
 
                     if (head < 0)
                         head = head * 2;
@@ -79,7 +123,7 @@ public class NPCTeleport
                 }
 
                 clt[0] += 0.035;
-                if (clt[0] >= PeyangSuperbAntiCheat.config.getDouble("npc.seconds"))
+                if (clt[0] >= sec)
                     this.cancel();
             }
         }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
