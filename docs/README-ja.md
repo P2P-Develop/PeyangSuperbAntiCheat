@@ -26,7 +26,8 @@ NPCが出てくるたび12個くらいタイマーが増えます。
 管理IDに関するコマンドは`psac.mod`を持つプレイヤーも使用できますが、ヘルプに表示されません。
 
 ### インストール方法
-* 適当にダウンロードします。
+* 適当にCloneします。
+* Mavenでビルドします。
 * [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) をpluginsフォルダーに入れます。
 * このプラグインをpluginsフォルダーに入れます。
 * 再起動して、適用してください。
