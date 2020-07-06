@@ -5,6 +5,8 @@ prefix: PeyangSuperbAntiCheat
 load: STARTUP
 authors: ["Peyang#0001", "Lemonade19x", "Potato1682"]
 api-version: 1.12.2
+website: "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat"
+awareness: ["!@UTF-8", "!@Shift-JIS"]
 
 depend: ["ProtocolLib"]
 loadbefore: ["ProtocolLib"]
