@@ -43,7 +43,7 @@ public class Books
         meta.setAuthor("AntiCheat Dev");
 
         component.append(MessageEngihe.get("reportbook.submit"))
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText + " bybooks"));
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText + " $__BOOKS__;"));
 
         component.append(MessageEngihe.get("reportbook.cancel"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report $$cancel$$"));

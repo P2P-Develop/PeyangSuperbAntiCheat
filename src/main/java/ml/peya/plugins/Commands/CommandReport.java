@@ -92,9 +92,9 @@ public class CommandReport implements CommandExecutor
 
         if (types.size() == 0)
         {
-            if (!reasons.contains("bybooks"))
+            if (!reasons.contains("$__BOOKS__;"))
                 sender.sendMessage(MessageEngihe.get("error.report.invalidReason"));
-            else if (args.length == 2 && reasons.contains("bybooks"))
+            else if (args.length == 2 && reasons.contains("$__BOOKS__;"))
                 sender.sendMessage(MessageEngihe.get("error.report.reasonNotSelected"));
 
             return true;
