@@ -17,7 +17,7 @@ commands:
     usage: /report <PlayerName> [type]
     description: "プレイヤーをレポートします。"
   peyangsuperbanticheat:
-    aliases: ["psac", "anticheat", "wdadmin", "psr"]
+    aliases: ["psac", "anticheat", "wdadmin", "psr", "antihack"]
     description: "PeyangSuperbAntiCheatのメインコマンドです。"
   aurabot:
     aliases: ["testaura", "auratest", "killauratest"]
