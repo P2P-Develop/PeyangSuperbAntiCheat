@@ -22,14 +22,14 @@ public class TestKnockback implements CommandExecutor
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
 
             return true;
         }
 
         if(PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
         {
-            sender.sendMessage(MessageEngihe.get("error.aura.testingNow"));
+            sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
 
             return true;
         }
