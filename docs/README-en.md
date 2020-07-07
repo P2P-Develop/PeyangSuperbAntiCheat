@@ -63,7 +63,7 @@ $ mv ProtocolLib.jar (Your plugins dir)
 ```
 3. Move / Copy the built plugin in the `plugins` directory.
 ```bash
-$ mv (PSAC jar file) target/(Your plugins dir)
+$ mv target/(PSAC jar file) (Your plugins dir)
 ```
 4. Start / Restart server.
 ```bash
@@ -90,7 +90,7 @@ $ mv ProtocolLib.jar (Your plugins dir)
 ```
 4. Move / Copy the built plugin in the `plugins` directory.
 ```bash
-$ mv (PSAC jar file) target/(Your plugins dir)
+$ mv target/(PSAC jar file) (Your plugins dir)
 ```
 5. Start / Restart server.
 ```bash
