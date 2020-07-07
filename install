@@ -1,0 +1,47 @@
+#!/bin/bash
+
+BUILDPATH=$(pwd)/PSACBuild
+GITHUB_URL=https://github.com/peyang-Celeron/PeyangSuperbAntiCheat
+
+# Colored output
+ESC=$(printf '\033')
+RESET="${ESC}[0m"
+BOLD="${ESC}[1m"
+RED="${ESC}[31m"
+YELLOW="${ESC}[33m"
+GREEN="${ESC}[32m"
+
+if type "git" > /dev/null 2>&1; then
+	git clone --depth 1 --recursive "$GITHUB_URL" "$DOTPATH"
+
+elif type "curl" > /dev/null 2>&1 || type "wget" > /dev/null 2>&1; then
+	tarball="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/archive/master.tar.gz"
+
+	if type "curl" > /dev/null 2>&1; then
+		curl -L "$tarball"
+
+	elif type "wget" > /dev/null 2>&1; then
+		wget -O - "$tarball"
+	fi | tar zx
+
+	mv -f PeyangSuperbAntiCheat-master "$BUILDPATH"
+
+else
+	echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}curl${RESET} or ${BOLD}wget${RESET} required"
+	exit 1
+fi
+
+cd "$(pwd)/PSACBuild"
+if [ $? -ne 0  ]; then
+	echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}$BUILDPATH not found${RESET}"
+	exit 1
+fi
+
+# Build
+
+if type "mvn" > /dev/null 2>&1; then
+  mvn package
+  echo "${GREEN}${BOLD}SUCCESS${RESET}: PeyangSuperbAntiCheat build completed successfly.
+  exit 0
+else
+  echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}maven${RESET} required"
