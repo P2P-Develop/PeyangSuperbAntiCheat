@@ -23,7 +23,7 @@ public class ModList implements IItems
 
         ItemMeta meta = stack.getItemMeta();
         meta.setLore(Item.getLore(this, target));
-        meta.setDisplayName(MessageEngihe.get("item.mods"));
+        meta.setDisplayName(MessageEngine.get("item.mods"));
         stack.setItemMeta(meta);
         return stack;
 
