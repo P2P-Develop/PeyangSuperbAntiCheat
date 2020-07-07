@@ -20,7 +20,7 @@ public class TextBuilder
                 ChatColor.AQUA + button +
                 ChatColor.GREEN + ")");
         nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac view " + bind));
-        ComponentBuilder nextHover = new ComponentBuilder(MessageEngihe.get("book.words.next"));
+        ComponentBuilder nextHover = new ComponentBuilder(MessageEngine.get("book.words.next"));
 
         nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, nextHover.create()));
         return nextBtn;
@@ -43,39 +43,39 @@ public class TextBuilder
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 
 
-        ComponentBuilder hover = new ComponentBuilder(MessageEngihe.get("book.clickable"));
+        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.clickable"));
 
         StringBuilder reasonText = new StringBuilder();
 
         for (EnumCheatType type: types)
             reasonText.append("        ").append(type.getText()).append("\n");
 
-        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngihe.get("book.text.issueBy", MessageEngihe.hsh("id", issueById)));
+        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)));
         b1.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
         b1.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
         sender.spigot().sendMessage(b1.create());
 
-        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngihe.get("book.text.issueTo", MessageEngihe.hsh("id", id)));
+        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueTo", MessageEngine.hsh("id", id)));
         b2.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
         b2.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
         sender.spigot().sendMessage(b2.create());
 
-        sender.sendMessage("    " + MessageEngihe.get("book.text.dateTime", MessageEngihe.hsh("time", formatter.format(date))));
+        sender.sendMessage("    " + MessageEngine.get("book.text.dateTime", MessageEngine.hsh("time", formatter.format(date))));
 
-        sender.sendMessage("    " + MessageEngihe.get("book.text.reason", MessageEngihe.hsh("reason", reasonText.toString())));
+        sender.sendMessage("    " + MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", reasonText.toString())));
 
         HashMap<String, Object> serv = new HashMap<>();
         serv.put("color", SeverityLevelUtils.getSeverity(types).getColor());
         serv.put("level", SeverityLevelUtils.getSeverity(types).getText());
-        sender.sendMessage(MessageEngihe.get("book.text.severity", serv));
+        sender.sendMessage(MessageEngine.get("book.text.severity", serv));
     }
 
 
     public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid, CommandSender sender)
     {
-        ComponentBuilder hover = new ComponentBuilder(MessageEngihe.get("book.click.openAbout"));
+        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.click.openAbout"));
 
-        ComponentBuilder dropHover = new ComponentBuilder( MessageEngihe.get("book.click.deleteReport"));
+        ComponentBuilder dropHover = new ComponentBuilder( MessageEngine.get("book.click.deleteReport"));
 
         EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
 
@@ -94,7 +94,7 @@ public class TextBuilder
         b.append("   ");
         if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
-            b.append(MessageEngihe.get("book.click.delete"))
+            b.append(MessageEngine.get("book.click.delete"))
                     .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac drop " + mngid))
                     .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, dropHover.create()));
 
@@ -142,7 +142,7 @@ public class TextBuilder
 
     public static ComponentBuilder getBroadCastWdDetectionText()
     {
-        return new ComponentBuilder(MessageEngihe.get("kick.broadcastWd"));
+        return new ComponentBuilder(MessageEngine.get("kick.broadcastWd"));
     }
 
     public static ComponentBuilder getBroadCastWdDetectionText(Player player)
@@ -153,7 +153,7 @@ public class TextBuilder
         map.put("name", player.getName());
         map.put("uuid", player.getUniqueId().toString());
 
-        ComponentBuilder hover = new ComponentBuilder(MessageEngihe.get("kick.broadcastAdmin", map));
+        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("kick.broadcastAdmin", map));
         HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
         component.event(event);
         return component;
@@ -168,22 +168,22 @@ public class TextBuilder
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
     {
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            return new ComponentBuilder(MessageEngihe.get("message.auraCheck.bot.lynx", MessageEngihe.hsh("hit", VL)));
+            return new ComponentBuilder(MessageEngine.get("message.auraCheck.bot.lynx", MessageEngine.hsh("hit", VL)));
 
-        ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("base.prefix") + "\n");
+        ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("base.prefix") + "\n");
 
-        builder.append(MessageEngihe.get("message.auraCheck.result.prefix", MessageEngihe.hsh("name", name)));
+        builder.append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)));
         builder.append("\n");
-        builder.append(MessageEngihe.get("message.auraCheck.result.vl", MessageEngihe.hsh("vl", String.valueOf(VL))));
+        builder.append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(VL))));
         builder.append("\n");
-        builder.append(MessageEngihe.get("message.auraCheck.result.vlGraph"));
+        builder.append(MessageEngine.get("message.auraCheck.result.vlGraph"));
         builder.append("\n");
         builder.append(OptGraphGenerator.genGraph(VL, kickVL));
         builder.append("\n");
 
-        String result = VL >= kickVL ? MessageEngihe.get("message.auraCheck.result.words.kick"): MessageEngihe.get("message.auraCheck.result.words.ok");
+        String result = VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok");
 
-        builder.append(MessageEngihe.get("message.auraCheck.result.result", MessageEngihe.hsh("result", result)));
+        builder.append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", result)));
 
         return builder;
     }
@@ -192,11 +192,11 @@ public class TextBuilder
     {
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
             return new ComponentBuilder("");
-        ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("base.prefix"));
+        ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("base.prefix"));
         builder.append("\n");
-        builder.append(MessageEngihe.get("message.auraCheck.result.prefix", MessageEngihe.hsh("name", name)));
+        builder.append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)));
         builder.append("\n");
-        builder.append(MessageEngihe.get("message.auraCheck.result.vl", MessageEngihe.hsh("vl", String.valueOf(vl))));
+        builder.append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(vl))));
         return builder;
     }
 
