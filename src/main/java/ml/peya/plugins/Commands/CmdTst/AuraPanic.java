@@ -23,7 +23,7 @@ public class AuraPanic implements CommandExecutor
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
 
             return true;
         }
@@ -32,13 +32,13 @@ public class AuraPanic implements CommandExecutor
 
         if(PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
         {
-            sender.sendMessage(MessageEngihe.get("error.aura.testingNow"));
+            sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
 
             return true;
         }
 
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            sender.sendMessage(MessageEngihe.get("message.aura.lynx"));
+            sender.sendMessage(MessageEngine.get("message.aura.lynx"));
         else
         {
             HashMap<String, Object> map = new HashMap<>();
@@ -46,7 +46,7 @@ public class AuraPanic implements CommandExecutor
             map.put("type", "AuraPanicBot");
             map.put("seconds", String.valueOf(PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
 
-            sender.sendMessage(MessageEngihe.get("message.aura.summon", map));
+            sender.sendMessage(MessageEngine.get("message.aura.summon", map));
 
         }
 
@@ -58,7 +58,7 @@ public class AuraPanic implements CommandExecutor
             }
             catch (Exception e)
             {
-                sender.sendMessage(MessageEngihe.get("error.invalidArgument"));
+                sender.sendMessage(MessageEngine.get("error.invalidArgument"));
                 return true;
             }
 
