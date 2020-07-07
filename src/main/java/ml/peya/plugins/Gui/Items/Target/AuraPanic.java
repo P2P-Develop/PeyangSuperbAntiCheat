@@ -23,7 +23,7 @@ public class AuraPanic implements IItems
 
         ItemMeta meta = stack.getItemMeta();
         meta.setLore(Item.getLore(this, target));
-        meta.setDisplayName(MessageEngihe.get("item.execute", MessageEngihe.hsh("command", "AuraPanic")));
+        meta.setDisplayName(MessageEngine.get("item.execute", MessageEngine.hsh("command", "AuraPanic")));
         stack.setItemMeta(meta);
         return stack;
     }
