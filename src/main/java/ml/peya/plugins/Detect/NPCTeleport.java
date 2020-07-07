@@ -50,7 +50,7 @@ public class NPCTeleport
                 map.put("hit", now[0]);
                 map.put("max", count);
 
-                sender.sendMessage(MessageEngihe.get("message.auraCheck.panic.lynx", map));
+                sender.sendMessage(MessageEngine.get("message.auraCheck.panic.lynx", map));
                 if (now[0] >= count)
                     this.cancel();
             }
