@@ -23,7 +23,7 @@ public class TestKnockBack implements IItems
 
         ItemMeta meta = stack.getItemMeta();
 
-        meta.setDisplayName(MessageEngihe.get("item.execute", MessageEngihe.hsh("command", "TestKnockBack")));
+        meta.setDisplayName(MessageEngine.get("item.execute", MessageEngine.hsh("command", "TestKnockBack")));
 
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);
