@@ -48,6 +48,32 @@ This block of code represents a permission.
   
 ## Installation
 
+### Auto Build
+
+1. Execute this command.
+   maven and curl and git required.
+```bash
+$ bash -c "$(curl -fsSL https://raw.githubusercontent.com/peyang-Celeron/PeyangSuperbAntiCheat/master/install)"
+```
+2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
+```bash
+$ mv ProtocolLib.jar (Your plugins folder)
+```
+3. Move / Copy the built plugin in the `plugins` folder.
+```bash
+$ mv (PSAC jar file) (Your plugins folder)
+```
+4. Start / Restart server.
+```bash
+/stop
+```
+or
+```bash
+$ java -jar server.jar
+```
+
+### Manual Build
+  
 1. Clone this repository.
 ```bash
 $ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git PSACBuild
