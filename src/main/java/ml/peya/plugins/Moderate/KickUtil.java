@@ -46,7 +46,7 @@ public class KickUtil
             @Override
             public void run()
             {
-                Bukkit.broadcast(MessageEngihe.get("kick.broadcast"), "psac.notification");
+                Bukkit.broadcast(MessageEngine.get("kick.broadcast"), "psac.notification");
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
@@ -85,7 +85,7 @@ public class KickUtil
         map.put("ggid", ggId.toString());
         map.put("id", id.toString());
 
-        String message = MessageEngihe.get("kick.reason", map);
+        String message = MessageEngine.get("kick.reason", map);
 
         if (isTest)
         {
