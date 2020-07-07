@@ -41,7 +41,7 @@ fi
 
 if type "mvn" > /dev/null 2>&1; then
   mvn package
-  echo "${GREEN}${BOLD}SUCCESS${RESET}: PeyangSuperbAntiCheat build completed successfly.
+  echo "${GREEN}${BOLD}SUCCESS${RESET}: PeyangSuperbAntiCheat build completed successfly."
   exit 0
 else
   echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}maven${RESET} required"
