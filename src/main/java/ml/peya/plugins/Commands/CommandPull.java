@@ -38,9 +38,9 @@ public class CommandPull implements CommandExecutor
             pull(player, playerSender.getLocation());
 
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            sender.sendMessage(MessageEngine.get("message.pull.lynx", MessageEngihe.hsh("name", player.getName())));
+            sender.sendMessage(MessageEngine.get("message.pull.lynx", MessageEngine.hsh("name", player.getName())));
         else
-            sender.sendMessage(MessageEngine.get("message.pull.normal", MessageEngihe.hsh("name", player.getName())));
+            sender.sendMessage(MessageEngine.get("message.pull.normal", MessageEngine.hsh("name", player.getName())));
 
         return true;
     }
