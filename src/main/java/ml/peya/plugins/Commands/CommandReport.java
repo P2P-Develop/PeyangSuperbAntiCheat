@@ -21,31 +21,31 @@ public class CommandReport implements CommandExecutor
 
         if (args.length == 0)
         {
-            sender.sendMessage(MessageEngihe.get("error.minArgs", MessageEngihe.hsh("label", label)));
+            sender.sendMessage(MessageEngine.get("error.minArgs", MessageEngine.hsh("label", label)));
             return true;
         }
         else if (args.length == 1)
         {
             if (args[0].equals("help"))
             {
-                sender.sendMessage(MessageEngihe.get("base.prefix"));
-                sender.sendMessage(MessageEngihe.get("command.report.help", MessageEngihe.hsh("label", label)));
+                sender.sendMessage(MessageEngine.get("base.prefix"));
+                sender.sendMessage(MessageEngine.get("command.report.help", MessageEngine.hsh("label", label)));
                 return true;
             }
 
             if (args[0].equals("$$cancel$$"))
             {
-                sender.sendMessage(MessageEngihe.get("message.report.cancel"));
+                sender.sendMessage(MessageEngine.get("message.report.cancel"));
                 return true;
             }
             else if (Bukkit.getPlayer(args[0]) == null)
             {
-                sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+                sender.sendMessage(MessageEngine.get("error.playerNotFound"));
                 return true;
             }
             else if (sender instanceof ConsoleCommandSender)
             {
-                sender.sendMessage(MessageEngihe.get("error.requirePlayer"));
+                sender.sendMessage(MessageEngine.get("error.requirePlayer"));
                 return true;
             }
             Player target = Bukkit.getPlayer(args[0]);
@@ -75,7 +75,7 @@ public class CommandReport implements CommandExecutor
 
         if (Bukkit.getPlayer(args[0]) == null)
         {
-            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
             return true;
         }
 
@@ -93,9 +93,9 @@ public class CommandReport implements CommandExecutor
         if (types.size() == 0)
         {
             if (!reasons.contains("$__BOOKS__;"))
-                sender.sendMessage(MessageEngihe.get("error.report.invalidReason"));
+                sender.sendMessage(MessageEngine.get("error.report.invalidReason"));
             else if (args.length == 2 && reasons.contains("$__BOOKS__;"))
-                sender.sendMessage(MessageEngihe.get("error.report.reasonNotSelected"));
+                sender.sendMessage(MessageEngine.get("error.report.reasonNotSelected"));
 
             return true;
         }
@@ -112,7 +112,7 @@ public class CommandReport implements CommandExecutor
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
         {
-            sender.sendMessage(MessageEngihe.get("error.report.alreadyReported"));
+            sender.sendMessage(MessageEngine.get("error.report.alreadyReported"));
             return;
         }
 
@@ -124,7 +124,7 @@ public class CommandReport implements CommandExecutor
 
         if (successFlag)
         {
-            sender.sendMessage(MessageEngihe.get("message.report.thanks"));
+            sender.sendMessage(MessageEngine.get("message.report.thanks"));
 
             if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
             {
@@ -140,6 +140,6 @@ public class CommandReport implements CommandExecutor
             ReportUtils.adminNotification(target.getName(), id, resStr.toArray(new String[0]));
         }
         else
-            sender.sendMessage(MessageEngihe.get("error.unknownSQLError"));
+            sender.sendMessage(MessageEngine.get("error.unknownSQLError"));
     }
 }
