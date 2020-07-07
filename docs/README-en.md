@@ -48,7 +48,7 @@ This block of code represents a permission.
   
 ## Installation
 
-### Auto Build
+### Auto Build (Linux only)
 
 1. Execute this command.
    maven and curl and git required.
