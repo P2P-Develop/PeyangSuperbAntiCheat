@@ -16,12 +16,12 @@ public class ReportUtils
         {
             if (player.hasPermission("psac.reportntf"))
             {
-                player.sendMessage(MessageEngihe.get("report.submited"));
+                player.sendMessage(MessageEngine.get("report.submited"));
 
                 ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
                 hover.color(net.md_5.bungee.api.ChatColor.AQUA);
 
-                ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("report.click"));
+                ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("report.click"));
                 builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "CLICK" + ChatColor.WHITE + "]")
                         .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
                         .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
@@ -43,7 +43,7 @@ public class ReportUtils
             map.put("name", name);
             map.put("reason", String.join(", ", reasons));
 
-            TextComponent builder = new TextComponent(MessageEngihe.get("report.lynx.submited", map));
+            TextComponent builder = new TextComponent(MessageEngine.get("report.lynx.submited", map));
 
             builder.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
             builder.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
