@@ -36,7 +36,7 @@ public class Drop implements Listener
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());
         PeyangSuperbAntiCheat.tracker.remove(e.getPlayer().getName());
-        e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngihe.get("item.tracking.noTarget")));
-        e.getPlayer().sendMessage(MessageEngihe.get("item.stopTarget"));
+        e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.noTarget")));
+        e.getPlayer().sendMessage(MessageEngine.get("item.stopTarget"));
     }
 }
