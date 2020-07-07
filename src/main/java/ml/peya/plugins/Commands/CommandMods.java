@@ -21,7 +21,7 @@ public class CommandMods implements CommandExecutor
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
             return true;
         }
 
@@ -29,7 +29,7 @@ public class CommandMods implements CommandExecutor
 
         if (mods == null)
         {
-            sender.sendMessage(MessageEngihe.get("error.mods.noDataFound"));
+            sender.sendMessage(MessageEngine.get("error.mods.noDataFound"));
             return true;
         }
 
