@@ -17,7 +17,7 @@ public class CommandPull implements CommandExecutor
 
         if (!(sender instanceof Player))
         {
-            sender.sendMessage(MessageEngihe.get("error.requirePlayer"));
+            sender.sendMessage(MessageEngine.get("error.requirePlayer"));
             return true;
         }
 
@@ -26,7 +26,7 @@ public class CommandPull implements CommandExecutor
 
         if (player == null)
         {
-            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
             return true;
         }
 
@@ -38,9 +38,9 @@ public class CommandPull implements CommandExecutor
             pull(player, playerSender.getLocation());
 
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            sender.sendMessage(MessageEngihe.get("message.pull.lynx", MessageEngihe.hsh("name", player.getName())));
+            sender.sendMessage(MessageEngine.get("message.pull.lynx", MessageEngihe.hsh("name", player.getName())));
         else
-            sender.sendMessage(MessageEngihe.get("message.pull.normal", MessageEngihe.hsh("name", player.getName())));
+            sender.sendMessage(MessageEngine.get("message.pull.normal", MessageEngihe.hsh("name", player.getName())));
 
         return true;
     }
