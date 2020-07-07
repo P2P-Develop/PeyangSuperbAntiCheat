@@ -45,3 +45,4 @@ if type "mvn" > /dev/null 2>&1; then
   exit 0
 else
   echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}maven${RESET} required"
+fi
