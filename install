@@ -1,0 +1,5 @@
+#!bin/bash
+
+BUILTFILE=$(find $(pwd) target -name "PeyangSuperbAntiCheat*.jar" -type f 2> /dev/null)
+
+read -p "Plugin install dir(Auto create directory):" ans && install -Dm755 $BUILTFILE $ans

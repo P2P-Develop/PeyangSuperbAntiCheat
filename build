@@ -31,7 +31,7 @@ else
 	exit 1
 fi
 
-cd "$BUILDPATH"
+cd "$(pwd)/PSACBuild"
 if [ $? -ne 0  ]; then
 	echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}$BUILDPATH not found${RESET}"
 	exit 1
@@ -39,10 +39,11 @@ fi
 
 # Build
 
-if -n type "mvn" > /dev/null 2>&1; then
+if type "mvn" > /dev/null 2>&1; then
+  mvn package && \
+  echo "${GREEN}${BOLD}SUCCESS${RESET}: PeyangSuperbAntiCheat build completed successfly." && \
+  exit 0
+  echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}Unknown error occured"
+else
   echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}maven${RESET} required"
-  exit 1
 fi
-
-mvn package
-echo "${GREEN}${BOLD}SUCCESS${RESET}: PeyangSuperbAntiCheat build completed successfly."
