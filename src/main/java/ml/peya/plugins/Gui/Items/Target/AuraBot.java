@@ -29,7 +29,7 @@ public class AuraBot implements IItems
 
         ItemStack stack = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(MessageEngihe.get("item.execute", MessageEngihe.hsh("command", "AuraBot")));
+        meta.setDisplayName(MessageEngine.get("item.execute", MessageEngine.hsh("command", "AuraBot")));
 
         GameProfile profile = new GameProfile(UUID.randomUUID(), "AURA_BOT");
 
