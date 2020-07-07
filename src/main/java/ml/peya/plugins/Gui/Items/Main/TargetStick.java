@@ -19,7 +19,7 @@ public class TargetStick implements IItems
         Player lookingPlayer = getLookingEntity(player);
         if (lookingPlayer == null)
         {
-            player.sendMessage(MessageEngihe.get("error.notPlayerFoundInRange"));
+            player.sendMessage(MessageEngine.get("error.notPlayerFoundInRange"));
             return;
         }
         player.performCommand("target " + lookingPlayer.getName());
@@ -35,7 +35,7 @@ public class TargetStick implements IItems
 
         meta.setLore(Item.getLore(this, target));
 
-        meta.setDisplayName(MessageEngihe.get("item.targetStick"));
+        meta.setDisplayName(MessageEngine.get("item.targetStick"));
 
         stack.setItemMeta(meta);
         return stack;
