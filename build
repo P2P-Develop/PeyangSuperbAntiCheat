@@ -12,7 +12,7 @@ YELLOW="${ESC}[33m"
 GREEN="${ESC}[32m"
 
 if type "git" > /dev/null 2>&1; then
-	git clone --depth 1 --recursive "$GITHUB_URL" "$BUILDPATH"
+	git clone --depth 1 --recursive "$GITHUB_URL" "PSACBuild"
 
 elif type "curl" > /dev/null 2>&1 || type "wget" > /dev/null 2>&1; then
 	tarball="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/archive/master.tar.gz"
