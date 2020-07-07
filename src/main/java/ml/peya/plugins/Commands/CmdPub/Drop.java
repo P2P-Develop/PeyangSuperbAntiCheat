@@ -27,13 +27,13 @@ public class Drop
         {
             statement.execute("DeLeTe FrOm WaTcHeYe WhErE mNGiD = '" + args[1] + "'");
             statement.execute("DeLeTe FrOm WaTcHrEaSon WHeRe MnGiD = '" + args[1] + "'");
-            sender.sendMessage(MessageEngihe.get("message.drop.success"));
+            sender.sendMessage(MessageEngine.get("message.drop.success"));
 
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            sender.sendMessage(MessageEngihe.get("error.unknownSQLError"));
+            sender.sendMessage(MessageEngine.get("error.unknownSQLError"));
 
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
         }
