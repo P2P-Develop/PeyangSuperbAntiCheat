@@ -32,7 +32,7 @@ public class CommandBans implements CommandExecutor
 
         if (!type.equals("-a") && !type.toLowerCase().equals("ban") && !type.toLowerCase().equals("kick"))
         {
-            sender.sendMessage(MessageEngihe.get("error.bans.unknownSearchType"));
+            sender.sendMessage(MessageEngine.get("error.bans.unknownSearchType"));
 
             return true;
         }
@@ -53,22 +53,22 @@ public class CommandBans implements CommandExecutor
 
         if (player == null)
         {
-            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
             return true;
         }
 
         ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player, typeP);
 
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            sender.sendMessage(MessageEngihe.get("message.bans.lynx", MessageEngihe.hsh("name", name)));
+            sender.sendMessage(MessageEngine.get("message.bans.lynx", MessageEngine.hsh("name", name)));
         else
-            sender.sendMessage(MessageEngihe.get("message.bans.message", MessageEngihe.hsh("name", name)));
+            sender.sendMessage(MessageEngine.get("message.bans.message", MessageEngine.hsh("name", name)));
 
 
         for (BanAnalyzer.Bans ban: bans)
             sender.spigot().sendMessage(TextBuilder.getTextBan(ban, ban.getType()).create());
         if (bans.size() == 0)
-            sender.sendMessage(MessageEngihe.get("error.bans.databaseInfoNotFound"));
+            sender.sendMessage(MessageEngine.get("error.bans.databaseInfoNotFound"));
         return true;
     }
 }
