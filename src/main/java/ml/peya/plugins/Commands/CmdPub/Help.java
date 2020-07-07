@@ -13,13 +13,13 @@ public class Help
 
         if (sender.hasPermission("psac.report"))
         {
-            sender.sendMessage(MessageEngine.get("command.help.report", MessageEngihe.hsh("label", label)));
+            sender.sendMessage(MessageEngine.get("command.help.report", MessageEngine.hsh("label", label)));
             flag = true;
         }
 
         if (sender.hasPermission("psac.view"))
         {
-            sender.sendMessage(MessageEngine.get("command.help.view", MessageEngihe.hsh("label", label)));
+            sender.sendMessage(MessageEngine.get("command.help.view", MessageEngine.hsh("label", label)));
             flag = true;
         }
 
@@ -37,19 +37,19 @@ public class Help
 
         if (sender.hasPermission("psac.show"))
         {
-            sender.sendMessage(MessageEngine.get("command.help.show", MessageEngihe.hsh("label", label)));
+            sender.sendMessage(MessageEngine.get("command.help.show", MessageEngine.hsh("label", label)));
             flag = true;
         }
 
         if (sender.hasPermission("psac.drop"))
         {
-            sender.sendMessage(MessageEngine.get("command.help.drop", MessageEngihe.hsh("label", label)));
+            sender.sendMessage(MessageEngine.get("command.help.drop", MessageEngine.hsh("label", label)));
             flag = true;
         }
 
         if (sender.hasPermission("psac.kick"))
         {
-            sender.sendMessage(MessageEngine.get("command.help.kick", MessageEngihe.hsh("label", label)));
+            sender.sendMessage(MessageEngine.get("command.help.kick", MessageEngine.hsh("label", label)));
             flag = true;
         }
 
