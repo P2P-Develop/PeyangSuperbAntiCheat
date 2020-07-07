@@ -21,7 +21,7 @@ public class ToPage2 implements IItems
     {
         ItemStack stack = new ItemStack(Material.ARROW);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(MessageEngihe.get("book.words.next"));
+        meta.setDisplayName(MessageEngine.get("book.words.next"));
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);
         return stack;
