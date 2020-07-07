@@ -15,7 +15,7 @@ public class CommandTarget implements CommandExecutor
     {
         if (!(sender instanceof Player))
         {
-            sender.sendMessage(MessageEngihe.get("error.requirePlayer"));
+            sender.sendMessage(MessageEngine.get("error.requirePlayer"));
             return true;
         }
 
@@ -28,7 +28,7 @@ public class CommandTarget implements CommandExecutor
 
         if (player == null)
         {
-            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
             return true;
         }
 
