@@ -14,7 +14,7 @@ public class View
 {
     public static void run(CommandSender sender,  String[] args)
     {
-        sender.sendMessage(MessageEngihe.get("base.prefix"));
+        sender.sendMessage(MessageEngine.get("base.prefix"));
 
         int start = 0;
         int next;
@@ -73,7 +73,7 @@ public class View
 
         if (count == 0)
         {
-            sender.sendMessage(MessageEngihe.get("error.view.notFoundReport"));
+            sender.sendMessage(MessageEngine.get("error.view.notFoundReport"));
 
             return;
         }
