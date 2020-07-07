@@ -59,7 +59,7 @@ public class AutoMessageTask extends BukkitRunnable
             if (player.hasPermission("psac.regular"))
             {
                 player.sendMessage("");
-                player.sendMessage(MessageEngihe.get("autoMessage", map));
+                player.sendMessage(MessageEngine.get("autoMessage", map));
                 player.sendMessage("");
             }
     }
