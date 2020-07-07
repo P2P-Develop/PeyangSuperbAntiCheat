@@ -57,13 +57,13 @@ This block of code represents a permission.
 ```bash
 $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/peyang-Celeron/PeyangSuperbAntiCheat/master/build)"
 ```
-2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
+2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` directory.
 ```bash
-$ mv ProtocolLib.jar (Your plugins folder)
+$ mv ProtocolLib.jar (Your plugins dir)
 ```
-3. Move / Copy the built plugin in the `plugins` folder.
+3. Move / Copy the built plugin in the `plugins` directory.
 ```bash
-$ mv (PSAC jar file) (Your plugins folder)
+$ mv (PSAC jar file) target/(Your plugins dir)
 ```
 4. Start / Restart server.
 ```bash
@@ -84,13 +84,13 @@ $ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git PSACBuil
 ```bash
 $ cd PSACBuild && mvn package
 ```
-3. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` folder.
+3. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` directory.
 ```bash
-$ mv ProtocolLib.jar (Your plugins folder)
+$ mv ProtocolLib.jar (Your plugins dir)
 ```
-4. Move / Copy the built plugin in the `plugins` folder.
+4. Move / Copy the built plugin in the `plugins` directory.
 ```bash
-$ mv (PSAC jar file) (Your plugins folder)
+$ mv (PSAC jar file) target/(Your plugins dir)
 ```
 5. Start / Restart server.
 ```bash
