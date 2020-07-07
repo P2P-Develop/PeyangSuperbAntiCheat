@@ -96,6 +96,10 @@ $ mv (PSAC jar file) (Your plugins folder)
 ```bash
 /stop
 ```
+or
+```bash
+$ java -jar server.jar
+```
   
 ---
   
