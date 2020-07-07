@@ -17,7 +17,7 @@ public class Learn
     {
         if (sender instanceof ConsoleCommandSender)
         {
-            sender.sendMessage(MessageEngihe.get("error.requirePlayer"));
+            sender.sendMessage(MessageEngine.get("error.requirePlayer"));
 
             return;
         }
@@ -39,7 +39,7 @@ public class Learn
                 catch (Exception e)
                 {
                     e.printStackTrace();
-                    sender.sendMessage(MessageEngihe.get("error.unknownSQLError"));
+                    sender.sendMessage(MessageEngine.get("error.unknownSQLError"));
 
                     ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
