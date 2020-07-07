@@ -48,6 +48,8 @@ This block of code represents a permission.
   
 ## Installation
 
+**IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**  
+
 ### Auto Build (Linux only)
 
 1. Execute this command.
@@ -79,7 +81,6 @@ $ java -jar server.jar
 $ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git PSACBuild
 ```
 2. enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-messageyml)\).  
-   **IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**  
 ```bash
 $ cd PSACBuild && mvn package
 ```
