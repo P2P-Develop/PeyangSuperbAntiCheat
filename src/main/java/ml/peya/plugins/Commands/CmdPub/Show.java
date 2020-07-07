@@ -21,7 +21,7 @@ public class Show
 
         if (WatchEyeManagement.isInjection(args[1]) || !WatchEyeManagement.isExistsRecord(args[1]))
         {
-            sender.sendMessage(MessageEngihe.get("error.showDrop.notFoundReport"));
+            sender.sendMessage(MessageEngine.get("error.showDrop.notFoundReport"));
 
             return;
         }
@@ -54,7 +54,7 @@ public class Show
         catch (Exception e)
         {
             e.printStackTrace();
-            sender.sendMessage(MessageEngihe.get("error.unknownSQLError"));
+            sender.sendMessage(MessageEngine.get("error.unknownSQLError"));
 
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
         }
