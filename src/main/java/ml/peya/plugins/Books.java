@@ -24,7 +24,7 @@ public class Books
         StringBuilder tmpReasonText = new StringBuilder();
         for (EnumCheatType type: types)
             tmpReasonText.append(type.isSelected() ? type.getSysName() + " ": "");
-        ComponentBuilder component = new ComponentBuilder(MessageEngihe.get("reportbook.cheat"));
+        ComponentBuilder component = new ComponentBuilder(MessageEngine.get("reportbook.cheat"));
         component.append("\n");
 
         for (EnumCheatType type: types)
@@ -42,10 +42,10 @@ public class Books
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
 
-        component.append(MessageEngihe.get("reportbook.submit"))
+        component.append(MessageEngine.get("reportbook.submit"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText + " $__BOOKS__;"));
 
-        component.append(MessageEngihe.get("reportbook.cancel"))
+        component.append(MessageEngine.get("reportbook.cancel"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report $$cancel$$"));
 
         meta.spigot().addPage(component.create());
@@ -61,12 +61,12 @@ public class Books
         Date date = new Date(dateInt.longValue());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 
-        ComponentBuilder hover = new ComponentBuilder(MessageEngihe.get("book.text.uuid", MessageEngihe.hsh("uuid", uuid)));
+        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", uuid)));
 
         ComponentBuilder unixTime = new ComponentBuilder(TextBuilder.getLine("UNIX秒", String.valueOf(dateInt)));
 
 
-        ComponentBuilder hover2 = new ComponentBuilder( MessageEngihe.get("book.text.uuid", MessageEngihe.hsh("uuid", issueByUuid)));
+        ComponentBuilder hover2 = new ComponentBuilder( MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", issueByUuid)));
         HoverEvent hoverEvt2 = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover2.create());
 
         HoverEvent hoverEvt = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
@@ -75,17 +75,17 @@ public class Books
         for(EnumCheatType type: types)
             reason.append("\n           ").append(ChatColor.BLUE).append(type.getText());
 
-        ComponentBuilder b = new ComponentBuilder( MessageEngihe.get("book.text.report"));
+        ComponentBuilder b = new ComponentBuilder( MessageEngine.get("book.text.report"));
         b.append("\n");
         b.append(ChatColor.GRAY + formatter.format(date))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, unixTime.create()));
         b.append("\n");
-        b.append(MessageEngihe.get("book.text.issueTo", MessageEngihe.hsh("id", id)))
+        b.append(MessageEngine.get("book.text.issueTo", MessageEngine.hsh("id", id)))
                 .event(hoverEvt);
         b.append("\n");
         ComponentBuilder b1 = new ComponentBuilder(new TextComponent(b.create()));
 
-        b1.append(MessageEngihe.get("book.text.issueBy", MessageEngihe.hsh("id", issueById)))
+        b1.append(MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)))
                 .event(hoverEvt2);
         b1.append("\n");
 
@@ -95,9 +95,9 @@ public class Books
         map.put("color", SeverityLevelUtils.getSeverity(types).getColor());
         map.put("level", SeverityLevelUtils.getSeverity(types).getText());
 
-        b2.append(MessageEngihe.get("book.text.severity", map));
+        b2.append(MessageEngine.get("book.text.severity", map));
         b2.append("\n");
-        b2.append(MessageEngihe.get("book.text.reason", MessageEngihe.hsh("reason", reason.toString())));
+        b2.append(MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", reason.toString())));
         b2.append("\n");
         meta.spigot().addPage(b2.create());
         book.setItemMeta(meta);
@@ -109,7 +109,7 @@ public class Books
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
 
-        ComponentBuilder builder = new ComponentBuilder(MessageEngihe.get("message.mods.title", MessageEngihe.hsh("name", player.getName())));
+        ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("message.mods.title", MessageEngine.hsh("name", player.getName())));
 
         builder.append("\n");
         builder.append("\n");
