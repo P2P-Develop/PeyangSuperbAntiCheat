@@ -9,7 +9,7 @@ public class ErrorMessageSender
     {
         if (sender.hasPermission(perm))
             return false;
-        sender.sendMessage(MessageEngihe.get("error.notHavePermission"));
+        sender.sendMessage(MessageEngine.get("error.notHavePermission"));
         return true;
     }
 
@@ -17,7 +17,7 @@ public class ErrorMessageSender
     {
         if (args.length < min || args.length > max)
         {
-            sender.sendMessage(MessageEngihe.get("error.invalidArgument"));
+            sender.sendMessage(MessageEngine.get("error.invalidArgument"));
             return true;
         }
 
