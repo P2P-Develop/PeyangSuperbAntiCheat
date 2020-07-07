@@ -8,7 +8,7 @@ import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
 
-public class MessageEngihe
+public class MessageEngine
 {
     public static HashMap<String, Object> hsh(String path, Object obj)
     {
