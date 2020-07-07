@@ -21,7 +21,7 @@ public class Lead implements IItems
     {
         ItemStack stack = new ItemStack(Material.LEASH);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(MessageEngihe.get("item.lead"));
+        meta.setDisplayName(MessageEngine.get("item.lead"));
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);
         return stack;
