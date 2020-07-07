@@ -15,12 +15,12 @@ public class Kick
         if (args.length == 3 && args[2].equals("test"))
         {
 
-            sender.sendMessage(MessageEngihe.get("message.kick.test"));
+            sender.sendMessage(MessageEngine.get("message.kick.test"));
 
             Player player = Bukkit.getPlayer(args[1]);
             if (player == null)
             {
-                sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+                sender.sendMessage(MessageEngine.get("error.playerNotFound"));
 
                 return;
             }
@@ -31,7 +31,7 @@ public class Kick
 
         if (args.length < 3)
         {
-            sender.sendMessage(MessageEngihe.get("error.minArgs", MessageEngihe.hsh("label", "psr")));
+            sender.sendMessage(MessageEngine.get("error.minArgs", MessageEngine.hsh("label", "psr")));
 
             return;
         }
@@ -39,7 +39,7 @@ public class Kick
         Player player = Bukkit.getPlayer(args[1]);
         if (player == null)
         {
-            sender.sendMessage(MessageEngihe.get("error.playerNotFound"));
+            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
 
             return;
         }
