@@ -24,7 +24,7 @@ __~~このプラグインはほぼネタプラグインd（殴~~__ **[削除済�
 このプラグインでは、常時2個Detectopmで+4個タイマーが動いています（2015/10/21 16:29現在）※2020年です  
 NPCが出てくるたび12個くらいタイマーが増えます。  
 すぐ消えるけどね。JavaのVMによっては消えるのに時間かかる時もあるけど。  
-詳しくは[こ↑こ↓](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads-ja.txt) 見て、どうぞ。  
+詳しくは[こ↑こ↓](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt) 見て、どうぞ。  
 ~~某有名系Googleブラウザー同様~~、メモリー、CPUともにフードファイターの100倍くらい大食いします。  
 余裕のあるサーバーで実行することを推奨します。
 
