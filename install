@@ -1,18 +1,22 @@
-#!bin/bash
-
-BUILTFILE=$(find $(pwd) target -name "PeyangSuperbAntiCheat*.jar" -type f 2> /dev/null)
+#!/bin/bash
 
 if [ ! -z $1 ]; then
-  export reporoot=${1}
+  export psacsrc="${1}/target/PeyangSuperbAntiCheat-0.1.jar"
 else
   read -p "Repository Root:" reporoot
-  export reporoot
+  export psacsrc="${reporoot}/target/PeyangSuperbAntiCheat-0.1.jar"
+fi
+
+if [ $1 -eq "-h" ] || [ $1 -eq "--help" ]; then
+  echo "Usage: ./install [PSAC repo root] [dist]"
+  echo "Ask both without arguments."
 fi
 
 if [ ! -z $2 ]; then
-  export ans=${2}
+  export psacdist=${2}
 else
   read -p "Plugin install dir(Auto create directory):" ans
+  export psacdist="${ans}/PSAC.jar"
 fi
 
-install -m755 ${reporoot}/target/PeyangSuperbAntiCheat-0.1.jar ${ans}/PSAC.jar
+install -Dm755 ${psacsrc} ${psacdist} && echo "SUCCESS: PeyangSuperbAntiCheat Successfly Installed."
