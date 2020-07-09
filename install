@@ -1,15 +1,16 @@
 #!/bin/bash
 
 if [ ! -z $1 ]; then
+  if [ $1 -eq "-h" ] || [ $1 -eq "--help" ]; then
+    echo "Usage: ./install [PSAC repo root] [dist]"
+    echo "Ask both without arguments."
+    exit 0
+  fi
+  
   export psacsrc="${1}/target/PeyangSuperbAntiCheat-0.1.jar"
 else
   read -p "Repository Root:" reporoot
   export psacsrc="${reporoot}/target/PeyangSuperbAntiCheat-0.1.jar"
-fi
-
-if [ $1 -eq "-h" ] || [ $1 -eq "--help" ]; then
-  echo "Usage: ./install [PSAC repo root] [dist]"
-  echo "Ask both without arguments."
 fi
 
 if [ ! -z $2 ]; then
