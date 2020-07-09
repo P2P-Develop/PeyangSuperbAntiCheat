@@ -15,4 +15,4 @@ else
   read -p "Plugin install dir(Auto create directory):" ans
 fi
 
-install -m755 ${reporoot}/PeyangSuperbAntiCheat*.jar ${ans}/PSAC.jar
+install -m755 ${reporoot}/target/PeyangSuperbAntiCheat-0.1.jar ${ans}/PSAC.jar
