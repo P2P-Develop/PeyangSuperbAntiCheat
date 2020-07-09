@@ -13,7 +13,7 @@ Bukkit/Spigot/PaperMCのプラグインだった気がします。
 ↑ごめん＾＾；
 
 大手サーバ/運営が常に(ほぼ)いるサーバ向け。
-([これ](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/memo/memo01.txt)参照。
+([ぺやんぐ研究員の研究メモ](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/memo/memo01.txt)参照。
 
 ### 注意
 __~~このプラグインはほぼネタプラグインd（殴~~__ **[削除済み]** **[削除済み]** **[削除済み]** **[権限なし]** **[編集済]**
