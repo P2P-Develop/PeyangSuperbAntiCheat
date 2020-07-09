@@ -33,11 +33,6 @@
        src="https://img.shields.io/codeclimate/maintainability/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
        alt="Code Climate maintainability"
   /></a>
-  <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/actions"
-     ><img
-       src="https://xxx.execute-api.us-west-2.amazonaws.com/production/badge/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
-       alt="GitHub Actions status"
-  /></a>
 </p>
 
 ---
