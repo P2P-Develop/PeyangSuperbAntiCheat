@@ -2,5 +2,15 @@
 
 BUILTFILE=$(find $(pwd) target -name "PeyangSuperbAntiCheat*.jar" -type f 2> /dev/null)
 
-read -p "Repository Root:" reporoot
-read -p "Plugin install dir(Auto create directory):" ans && install -m755 ${reporoot}/PeyangSuperbAntiCheat*.jar ${ans}/PSAC.jar
+if [ ! -z $1 ]; then
+  export reporoot=${1}
+else
+  read -p "Repository Root:" reporoot
+  export reporoot
+
+if [ ! -z $2 ]; then
+  export ans=${2}
+else
+  read -p "Plugin install dir(Auto create directory):" ans
+
+install -m755 ${reporoot}/PeyangSuperbAntiCheat*.jar ${ans}/PSAC.jar
