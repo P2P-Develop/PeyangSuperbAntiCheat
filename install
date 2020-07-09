@@ -7,10 +7,12 @@ if [ ! -z $1 ]; then
 else
   read -p "Repository Root:" reporoot
   export reporoot
+fi
 
 if [ ! -z $2 ]; then
   export ans=${2}
 else
   read -p "Plugin install dir(Auto create directory):" ans
+fi
 
 install -m755 ${reporoot}/PeyangSuperbAntiCheat*.jar ${ans}/PSAC.jar
