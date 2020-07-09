@@ -39,7 +39,7 @@
 
 <p align="center" style="color: #6A737D"><strong>このプラグインのドキュメントは多言語に対応していますがネタ成分が次第に多くなっています。<br>
   真面目なドキュメントを読みたい方は英語ドキュメントをお読みください。</strong><br>
-  This plugin document are supported multi language.
+  This plugin document supported multi language.
 </p>
 
 <p align="center">
