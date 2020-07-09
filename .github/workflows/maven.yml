@@ -24,5 +24,6 @@ jobs:
       run: mvn -B package --file pom.xml
     - name: Install
       run: |
+        bash ${GITHUB_WORKSPACE}/install --help
         mkdir -p ${GITHUB_WORKSPACE}/ins
         bash ${GITHUB_WORKSPACE}/install ${GITHUB_WORKSPACE} ${GITHUB_WORKSPACE}/ins
