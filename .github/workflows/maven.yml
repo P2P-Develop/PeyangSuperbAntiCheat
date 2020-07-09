@@ -23,4 +23,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Install
-      run: yes "${GITHUB_WORKSPACE}/ist" | bash ${GITHUB_WORKSPACE}/install
+      run: |
+        mkdir -p ${GITHUB_WORKSPACE}/ins
+        bash ${GITHUB_WORKSPACE}/install ${GITHUB_WORKSPACE} ${GITHUB_WORKSPACE}/ins
