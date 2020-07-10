@@ -36,7 +36,7 @@ commands:
     usage: /testkb <Player>
     description: "プレイヤーのノックバックを可視テストします。"
   pull:
-    aliases: ["s"]
+    aliases: ["pul"]
     usage: /pull <Player>
     description: "プレイヤーを引き寄せます。"
   target:

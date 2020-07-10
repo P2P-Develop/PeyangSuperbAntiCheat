@@ -279,7 +279,7 @@ Pull the specified player.
 
 ### Aliases
 
-- /s
+- /pul
 
 ### Description
 
