@@ -127,6 +127,7 @@ public class NPCTeleport
         final boolean waveFlag = PeyangSuperbAntiCheat.config.getBoolean("npc.wave");
 
         WaveCreator wave = new WaveCreator(radius - 0.1, radius, PeyangSuperbAntiCheat.config.getDouble("npc.waveMin"));
+        WaveCreator speedWave = new WaveCreator(0.0, 0.04, -0.04);
         PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
 
         final int[] count = {0};
@@ -170,7 +171,7 @@ public class NPCTeleport
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     count[0]++;
                 }
-                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time");
+                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time") + speedWave.get(0.01, true);
             }
         };
         r.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
