@@ -4,6 +4,7 @@ import com.sun.org.apache.bcel.internal.generic.*;
 import ml.peya.plugins.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
+import org.bukkit.scheduler.*;
 
 import java.util.*;
 
@@ -11,26 +12,34 @@ public class Help
 {
     public static void run(CommandSender sender, String label)
     {
-        boolean flag = false;
+        final boolean[] flag = {false};
         sender.sendMessage(MessageEngine.get("base.prefix"));
 
         ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes(): getNodes();
 
-        for (String node: nodes)
+        new BukkitRunnable()
         {
-            if (sender.hasPermission("psac." + node))
+            @Override
+            public void run()
             {
-                sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.hsh("label", label)));
-                flag = true; //ここFlagの都合で短縮不可
+                for (String node: nodes)
+                {
+                    if (sender.hasPermission("psac." + node))
+                    {
+                        sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.hsh("label", label)));
+                        flag[0] = true; //ここFlagの都合で短縮不可
+                    }
+                }
+
+                if ((sender.hasPermission("psac.drop") || sender.hasPermission("psac.show")) && sender instanceof Player)
+                    sender.sendMessage(MessageEngine.get("command.help.mngIdWarning"));
+
+
+                if (!flag[0])
+                    sender.sendMessage(MessageEngine.get("error.psac.notPage"));
             }
-        }
+        }.runTaskAsynchronously(PeyangSuperbAntiCheat.getPlugin());
 
-        if ((sender.hasPermission("psac.drop") || sender.hasPermission("psac.show")) && sender instanceof Player)
-            sender.sendMessage(MessageEngine.get("command.help.mngIdWarning"));
-
-
-        if (!flag)
-            sender.sendMessage(MessageEngine.get("error.psac.notPage"));
     }
 
     private static ArrayList<String> getNodes()

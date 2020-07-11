@@ -22,7 +22,7 @@ error:
   main:
     notFoundCommand: "%%red%%%%bold%%エラー：対応するコマンドが見つかりませんでした。/%%label%% help でヘルプを見てください。"
 
-  psr:
+  psac:
     notPage: "%%red%%%%bold%%エラー：表示できるものが何もありません！"
 
   view:
