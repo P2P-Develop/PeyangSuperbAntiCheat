@@ -190,7 +190,7 @@ The books are sorted in the order they are displayed.
 |    Reason     |          Aliases           | Description                                                                                         |
 | :-----------: | :------------------------: | :-------------------------------------------------------------------------------------------------- |
 |      Fly      |           flight           | Fly without creative mode.                                                                          |
-|   KillAura    |     killaura, aura, ka     | Attack entity without aiming.                                                                       |
+|   KillAura    |     killaura, aura, ka     | Attack to entity without aiming.                                                                    |
 |  AutoClicker  | autoclicker, ac, autoclick | Click Entity/Block automatically(External software clickers and macros also belong to AutoClicker). |
 |     Speed     |     speed, bhop, timer     | Run at a impossible speed(Bunny hops and Timer belong to speed).                                    |
 | AntiKnockback |   akb, velocity, antikb    | Never be knocked back.                                                                              |
