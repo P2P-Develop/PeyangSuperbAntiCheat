@@ -75,25 +75,23 @@ public class Packets
         {
             HttpsURLConnection connection;
             connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
-            if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK)
-            {
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder builder = new StringBuilder();
-                String readed = reader.readLine();
-                while (readed != null)
-                {
-                    builder.append(readed);
-                    readed = reader.readLine();
-                }
-                ObjectMapper mapper = new ObjectMapper();
-                return mapper.readTree(builder.toString());
-            }
-            else
+            
+            if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK)
             {
                 PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
                 return null;
             }
+            
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String readed = reader.readLine();
+            while (readed != null)
+            {
+                builder.append(readed);
+                readed = reader.readLine();
+            }
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readTree(builder.toString());
         }
         catch (Exception e)
         {
