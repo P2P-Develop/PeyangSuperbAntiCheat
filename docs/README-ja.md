@@ -424,4 +424,4 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 <br />
 <br />
 <br />
-[裔漆裔示裔耳?ﾈ骼ｩ叱鴣治裔式?ﾈ骼ｩ叱裙治裙爾](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/memo/memo02.txt)
+[縺吶∋縺ｦ縺ｯ隕∫ｴ?↓驕弱℃縺ｾ縺帙ｓ縲ょ?縺ｦ縺ｯ?遨ｶ繝｡?縺ｫ譖ｸ縺?※縺ゅｊ縺ｾ縺吶?ゅ％縺薙ｒ繧ｯ繝ｪ繝?け縺励※隱ｭ繧?縺薙→縺後〒縺阪∪縺吶?](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/tree/master/docs/memo)
