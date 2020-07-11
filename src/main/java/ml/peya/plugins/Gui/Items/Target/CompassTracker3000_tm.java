@@ -13,7 +13,7 @@ public class CompassTracker3000_tm implements IItems
     @Override
     public void run(Player player, String target)
     {
-        player.performCommand("tp " + target);
+        player.performCommand("stp " + target);
     }
 
     @Override
