@@ -17,7 +17,7 @@ public class GuiItem
 
         for (ItemStack stack: player.getInventory().getContents())
         {
-            if (stack == null && stack.getType() == Material.AIR)
+            if (stack == null || stack.getType() == Material.AIR)
                 continue;
 
             if (!Item.canGuiItem(stack))
