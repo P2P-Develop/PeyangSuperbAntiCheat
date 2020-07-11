@@ -30,15 +30,15 @@ public class KickUtil
 
     private static void broadCast(boolean wdFlag, Player target)
     {
-        if (wdFlag)
+        if (!wdFlag)
+            continue;
+
+        for (Player player : Bukkit.getOnlinePlayers())
         {
-            for (Player player : Bukkit.getOnlinePlayers())
-            {
-                if (player.hasPermission("psac.ntfadmin"))
-                    player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
-                else if (player.hasPermission("psac.notification"))
-                    player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
-            }
+            if (player.hasPermission("psac.ntfadmin"))
+                player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
+            else if (player.hasPermission("psac.notification"))
+                player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
         }
 
         new BukkitRunnable()
