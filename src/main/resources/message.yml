@@ -60,6 +60,7 @@ command:
     %%green%%レポートされた、対処されていない問題を重大度順に表示します。
     "
 
+
     aurapanic: "\
     %%aqua%%/acpanic %%dark_aqua%%<PlayerName>\n\
     %%green%%指定したプレイヤーの背後に、NPCを召喚します。
@@ -85,6 +86,34 @@ command:
     bans: "\
     %%aqua%%/bans %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>\n\
     %%green%%プレイヤーのBAN（キック）履歴を照会します。
+    "
+
+    testkb: "\
+    %%aqua%%/testkb %%dark_aqua%%<PlayerName>\n\
+    %%green%%指定したプレイヤーに、見えない矢を打ち込みます。
+    "
+
+    pull: "\
+    %%aqua%%/pull %%dark_aqua%%<PlayerName>\n\
+    %%green%%指定したプレイヤーを、自分側に引き寄せます。
+    "
+
+    target: "\
+    %%aqua%%/target %%dark_aqua%%<PlayerName>\n\
+    %%green%%指定したプレイヤーを、ターゲットとします。\n\
+    %%green%%このとき、クリックでできる操作用アイテムが手に入ります。
+    "
+
+    tracking: "\
+    %%aqua%%/track %%dark_purple%%[PlayerName]\n\
+    %%green%%指定したプレイヤーを、追跡します。\n\
+    %%green%%引数を付けずに実行すると、追跡モードを終了します。
+    "
+
+    silentteleport: "\
+    %%aqua%%/stp %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>\n\
+    %%green%%指定したプレイヤーにログを残さずにテレポートします。\n\
+    %%green%%引数を2つつけると、引数1のプレイヤーが、引数2のプレイヤーにテレポートします。
     "
 
     mngIdWarning: "\
