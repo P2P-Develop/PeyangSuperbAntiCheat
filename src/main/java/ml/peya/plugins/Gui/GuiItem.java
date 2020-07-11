@@ -17,12 +17,13 @@ public class GuiItem
 
         for (ItemStack stack: player.getInventory().getContents())
         {
-            if (stack != null && stack.getType() != Material.AIR)
-            {
-                if (!Item.canGuiItem(stack))
-                    player.getWorld().dropItem(player.getLocation().add(0, 1, 0), stack);
-                player.getInventory().remove(stack);
-            }
+            if (stack == null && stack.getType() == Material.AIR)
+                continue;
+
+            if (!Item.canGuiItem(stack))
+                player.getWorld().dropItem(player.getLocation().add(0, 1, 0), stack);
+
+            player.getInventory().remove(stack);
         }
 
 
@@ -30,6 +31,7 @@ public class GuiItem
         {
             if (items.getType() != type && type != IItems.Type.ALL)
                 continue;
+
             player.getInventory().setItem(i, items.getItem(target));
             i++;
             if (items.canSpace())
