@@ -122,12 +122,12 @@ public class Books
             builder.append(ChatColor.RED + id + ChatColor.GRAY + ": " + ChatColor.BLUE + version);
             builder.append("\n");
             count++;
-            if (count >= 10)
-            {
-                count = 0;
-                meta.spigot().addPage(builder.create());
-                builder = new ComponentBuilder("");
-            }
+            if (count < 10)
+                continue;
+
+            count = 0;
+            meta.spigot().addPage(builder.create());
+            builder = new ComponentBuilder("");
         }
 
         meta.spigot().addPage(builder.create());
