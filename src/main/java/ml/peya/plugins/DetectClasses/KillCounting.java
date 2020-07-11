@@ -1,8 +1,8 @@
 package ml.peya.plugins.DetectClasses;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.scheduler.*;

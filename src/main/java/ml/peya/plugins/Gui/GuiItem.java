@@ -1,10 +1,8 @@
 package ml.peya.plugins.Gui;
 
-import jdk.internal.dynalink.beans.*;
 import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.bukkit.event.inventory.*;
 import org.bukkit.inventory.*;
 
 public class GuiItem

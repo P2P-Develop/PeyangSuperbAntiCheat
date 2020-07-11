@@ -1,8 +1,8 @@
 package ml.peya.plugins.Gui.Items.Target.Page2;
 
-import ml.peya.plugins.*;
-import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Item;
+import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
