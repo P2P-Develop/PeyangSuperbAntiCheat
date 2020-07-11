@@ -36,9 +36,8 @@ public class Tracker
             @Override
             public void run()
             {
-                if (target.get(player) != null)
-                    if (Bukkit.getPlayer(player) == null)
-                        Bukkit.getPlayer(player).setCompassTarget(target.get(player));
+                if (target.get(player) != null && Bukkit.getPlayer(player) == null)
+                    Bukkit.getPlayer(player).setCompassTarget(target.get(player));
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20L);
 
