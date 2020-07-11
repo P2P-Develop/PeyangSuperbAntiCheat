@@ -137,6 +137,8 @@ message:
   tracking:
     track: "%%red%%%%player%%さんを追跡します。"
     unTrack: "%%red%%追跡モードを解除しました。"
+  teleport:
+    teleport: "%%aqua%%%%player%% さんにテレポートしました。"
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\
