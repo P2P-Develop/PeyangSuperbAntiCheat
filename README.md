@@ -57,3 +57,21 @@
       alt="日本語"
   /></a>
 </p>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>Do not access docs/memo.</p>
