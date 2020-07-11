@@ -373,6 +373,8 @@ Mod IDの変換は実装しま~~す~~ん。
 | npc.wave | true | NPCが波を描くようにして回るかどうかです。 |
 | npc.waveMin | 1.0 | NPCが波を描くようにして回る最低ラインです。 |
 | npc.panicRange | 1.5 | Panic NPCがプレイヤーの背後をへばりつく相対的な高さでえす。 |
+| npc.speed.wave | true | NPCのスピードをWaveで変更するかどうかです。 |
+| npc.speed.waveRange | 0.03 | Waveで変更する範囲です。 |
 | npc.kill | 3 | 10秒間プレイヤーをキルされていて、なおかつこの数を超えた場合は、NPCを召喚します。 |
 | kick.delay | 2 | プレイヤーをキックするまでの遅延です。ブロードキャストメッセージが流れた瞬間から数えられます。 |
 | kick.lightning | true | プレイヤーがキックされるときに、（ダメージを受けない）雷を落とすかどうかです。 |

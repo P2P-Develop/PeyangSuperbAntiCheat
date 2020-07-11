@@ -463,6 +463,8 @@ In this plugin, the following config is set by default.
 |    npc.panicRange   |      1.5      | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                |
 |       npc.wave      |      true     | Whether the [NPC](#aurabot) spins like a wave.                                                                        |
 |     npc.waveMin     |      1.0      | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                       |
+|    npc.speed.wave   |     true      | Specify whether to make the orbital velocity of NPC variable.                                                         |
+| npc.speed.waveRange |     0.03      | Specify the speed change range.                                                                                       |
 |       npc.kill      |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                         |
 |      kick.delay     |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                       |
 |    kick.lightning   |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                 |
