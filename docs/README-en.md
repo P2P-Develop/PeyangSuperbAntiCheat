@@ -48,7 +48,15 @@ This block of code represents a permission.
   
 ## Installation
 
-**IMPORTANT: Compiled jar files have not yet been released in this repository. If you can not prepare a compilable environment, please wait until it is released.**  
+### Download binary
+
+1. Download binary jar file from [releases](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases).
+2. Move / Copy plugin in the `plugins` directory.
+
+for bash command:
+```bash
+$ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/download/0.1a/PSAC.jar" -o (Your plugins dir)
+```
 
 ### Auto Build (Linux only)
 
@@ -190,7 +198,7 @@ The books are sorted in the order they are displayed.
 |    Reason     |          Aliases           | Description                                                                                         |
 | :-----------: | :------------------------: | :-------------------------------------------------------------------------------------------------- |
 |      Fly      |           flight           | Fly without creative mode.                                                                          |
-|   KillAura    |     killaura, aura, ka     | Attack entity without aiming.                                                                       |
+|   KillAura    |     killaura, aura, ka     | Attack to entity without aiming.                                                                    |
 |  AutoClicker  | autoclicker, ac, autoclick | Click Entity/Block automatically(External software clickers and macros also belong to AutoClicker). |
 |     Speed     |     speed, bhop, timer     | Run at a impossible speed(Bunny hops and Timer belong to speed).                                    |
 | AntiKnockback |   akb, velocity, antikb    | Never be knocked back.                                                                              |
@@ -336,7 +344,7 @@ Displays the mods of the player specified by \<PlayerName\>.
 
 - `psac.mods`
 
-**WARNING: This command uses `psac.mods` permissions. Not `psac.mod`.**
+**WARNING: This command use `psac.mods` permission. Not `psac.mod` permission.**
   
 ## /target
 
@@ -463,6 +471,8 @@ In this plugin, the following config is set by default.
 |    npc.panicRange   |      1.5      | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                |
 |       npc.wave      |      true     | Whether the [NPC](#aurabot) spins like a wave.                                                                        |
 |     npc.waveMin     |      1.0      | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                       |
+|    npc.speed.wave   |     true      | Specify whether to make the orbital velocity of NPC variable.                                                         |
+| npc.speed.waveRange |     0.03      | Specify the speed change range.                                                                                       |
 |       npc.kill      |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                         |
 |      kick.delay     |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                       |
 |    kick.lightning   |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                 |

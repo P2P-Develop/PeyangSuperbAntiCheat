@@ -24,7 +24,7 @@ elif type "curl" > /dev/null 2>&1 || type "wget" > /dev/null 2>&1; then
 		wget -O - "$tarball"
 	fi | tar zx
 
-	mv -f PeyangSuperbAntiCheat-master "$BUILDPATH"
+	mv -f PeyangSuperbAntiCheat-master "PSACBuild"
 
 else
 	echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}curl${RESET} or ${BOLD}wget${RESET} required"
