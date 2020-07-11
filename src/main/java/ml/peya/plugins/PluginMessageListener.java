@@ -12,27 +12,27 @@ public class PluginMessageListener implements org.bukkit.plugin.messaging.Plugin
         if(player == null || !player.isOnline())
             return;
 
-        if(channel.equals("FML|HS"))
+        if(!channel.equals("FML|HS"))
+            return;
+            
+        HashMap<String, String> mods = new HashMap<>();
+        boolean store = false;
+        String tempName = null;
+
+        for(int i = 2; i < data.length; store = !store)
         {
-            HashMap<String, String> mods = new HashMap<>();
-            boolean store = false;
-            String tempName = null;
+            int end = i + data[i] + 1;
+            byte[] range = Arrays.copyOfRange(data, i + 1, end);
+            String mod = new String(range);
 
-            for(int i = 2; i < data.length; store = !store)
-            {
-                int end = i + data[i] + 1;
-                byte[] range = Arrays.copyOfRange(data, i + 1, end);
-                String mod = new String(range);
+            if(store)
+                mods.put(tempName, mod);
+            else
+                tempName = mod;
 
-                if(store)
-                    mods.put(tempName, mod);
-                else
-                    tempName = mod;
-
-                i = end;
-            }
-
-            PeyangSuperbAntiCheat.mods.put(player.getUniqueId(), mods);
+            i = end;
         }
+
+        PeyangSuperbAntiCheat.mods.put(player.getUniqueId(), mods);
     }
 }
