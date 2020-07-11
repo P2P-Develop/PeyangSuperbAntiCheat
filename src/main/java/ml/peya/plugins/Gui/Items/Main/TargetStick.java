@@ -32,7 +32,6 @@ public class TargetStick implements IItems
 
         ItemMeta meta = stack.getItemMeta();
 
-
         meta.setLore(Item.getLore(this, target));
 
         meta.setDisplayName(MessageEngine.get("item.targetStick"));
@@ -71,20 +70,19 @@ public class TargetStick implements IItems
 
         for (Location location: sight)
             for (Entity entity: entities)
-                if (isLooking(entity, location))
-                    if (entity.getType() == EntityType.PLAYER)
-                        return (Player) entity;
+                if (isLooking(entity, location) && entity.getType() == EntityType.PLAYER)
+                    return (Player) entity;
 
         return null;
     }
 
     private static boolean isLooking(Entity entity, Location location)
     {
-        if (Math.abs(entity.getLocation().getX() - location.getX()) < 1.3)
-        {
-            if (Math.abs(entity.getLocation().getY() - location.getY()) < 1.5)
-                return Math.abs(entity.getLocation().getZ() - location.getZ()) < 1.3;
-        }
+        if (Math.abs(entity.getLocation().getX() - location.getX()) >= 1.3)
+            continue;
+
+        if (Math.abs(entity.getLocation().getY() - location.getY()) < 1.5)
+            return Math.abs(entity.getLocation().getZ() - location.getZ()) < 1.3;
 
         return false;
     }
