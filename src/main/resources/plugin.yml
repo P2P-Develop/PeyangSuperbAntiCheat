@@ -48,6 +48,10 @@ commands:
     aliases: ["track"]
     usage: /tracking <Player>
     description: "プレイヤーを追跡します。"
+  silentteleport:
+    aliases: ["stp"]
+    usage: /stp [Player] <Player>
+    description: "サイレントにテレポートします。"
 permissions:
   #Core
   psac.member:
@@ -78,6 +82,7 @@ permissions:
       psac.chattarget: true
       psac.mods: true
       psac.tracking: true
+      psac.silentteleport: true
 
   psac.admin:
     description: このプラグインすべての権限を持ちます。
@@ -129,6 +134,9 @@ permissions:
     default: op
   psac.tracking:
     description: プレイヤーを追跡するコマンドです。
+    default: op
+  psac.silentteleport:
+    description: サイレントにテレポートします。
     default: op
   #Detect
   psac.aurapanic:
