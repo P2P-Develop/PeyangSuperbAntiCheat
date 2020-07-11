@@ -8,6 +8,7 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
+import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 import org.bukkit.util.Vector;
 
@@ -135,6 +136,15 @@ public class NPCTeleport
         BukkitRunnable r = new BukkitRunnable() {
             public void run()
             {
+
+                double speed = 0.0;
+
+                if (player.hasMetadata("speed"))
+                {
+                    for (MetadataValue value: player.getMetadata("speed"))
+                        if (value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName()))
+                            speed = value.asDouble() * 2.0;
+                }
                 for (double i = 0; i < Math.PI * 2; i++) {
 
                     double rangeTmp = radius;
@@ -144,9 +154,9 @@ public class NPCTeleport
 
                     Location center = player.getLocation();
                     Location n = new Location(center.getWorld(),
-                            auraBot_xPos(time[0], rangeTmp) + center.getX(),
+                            auraBot_xPos(time[0], rangeTmp + speed) + center.getX(),
                             center.getY() + creator.get(0.01, count[0] < 20),
-                            auraBot_zPos(time[0], rangeTmp, yaw) + center.getZ(),
+                            auraBot_zPos(time[0], rangeTmp + speed, yaw) + center.getZ(),
                             (float) ypp.getStatic(),
                             (float) ypp.get(4.5, false));
 
@@ -172,7 +182,7 @@ public class NPCTeleport
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     count[0]++;
                 }
-                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time") + (speedWaveFlag ? speedWave.get(0.01, true): 0.0);
+                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time") + (speedWaveFlag ? speedWave.get(0.001, true): 0.0);
             }
         };
         r.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
@@ -185,7 +195,7 @@ public class NPCTeleport
                 r.cancel();
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getLong("npc.seconds"));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * (PeyangSuperbAntiCheat.config.getLong("npc.seconds")));
 
     }
 

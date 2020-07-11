@@ -50,7 +50,7 @@ public class Events implements Listener
     @EventHandler
     public void onMove(PlayerMoveEvent e)
     {
-        if (!PeyangSuperbAntiCheat.tracker.isTrackingByPlayer(e.getPlayer().getName()))
+        if (!PeyangSuperbAntiCheat.tracker.isTrackingByPlayer(e.getPlayer().getName()) && !PeyangSuperbAntiCheat.cheatMeta.exists(e.getPlayer().getUniqueId()))
             return;
         Location from = e.getFrom();
         Location to = e.getTo();

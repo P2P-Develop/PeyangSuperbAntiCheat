@@ -7,7 +7,7 @@ database:
 #npc関係のコンフィグです。
 npc:
   #指定された秒数、NPCを出します。
-  seconds: 3
+  seconds: 5
   #npcの速度などを変えるとき、微調整してください。
   time: 0.3
   #npcのプレイヤーからの半径です。
