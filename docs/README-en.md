@@ -366,6 +366,30 @@ Start tracking \<PlayerName\>.
 
 - `psac.target`
   
+## /tracking
+
+Tracks the specified player as a target without utility items.
+
+**IMPORTANT: /target give utility items, but /track does not.**
+
+### Alias
+
+- /track
+
+### Description
+
+Tracks the specified player.  
+If tracking is currently started and no argument is specified, tracking will be stopped.  
+
+### Usage
+* /tracking \[PlayerName\]
+
+Start / stop tracking \[PlayerName\].
+
+### Permission
+
+- `psac.tracking`
+  
 ## /psac
 
 ### Aliases
