@@ -336,7 +336,7 @@ Displays the mods of the player specified by \<PlayerName\>.
 
 - `psac.mods`
 
-**WARNING: This command uses `psac.mods` permissions. Not `psac.mod`.**
+**WARNING: This command use `psac.mods` permission. Not `psac.mod` permission.**
   
 ## /target
 
