@@ -75,14 +75,13 @@ public class TargetStick implements IItems
 
         return null;
     }
-
     private static boolean isLooking(Entity entity, Location location)
     {
-        if (Math.abs(entity.getLocation().getX() - location.getX()) >= 1.3)
-            continue;
-
-        if (Math.abs(entity.getLocation().getY() - location.getY()) < 1.5)
-            return Math.abs(entity.getLocation().getZ() - location.getZ()) < 1.3;
+        if (Math.abs(entity.getLocation().getX() - location.getX()) < 1.3)
+        {
+            if (Math.abs(entity.getLocation().getY() - location.getY()) < 1.5)
+                return Math.abs(entity.getLocation().getZ() - location.getZ()) < 1.3;
+        }
 
         return false;
     }
