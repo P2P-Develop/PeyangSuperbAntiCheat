@@ -14,19 +14,19 @@ public class ReportUtils
     {
         for(Player player: Bukkit.getOnlinePlayers())
         {
-            if (player.hasPermission("psac.reportntf"))
-            {
-                player.sendMessage(MessageEngine.get("report.submited"));
+            if (!player.hasPermission("psac.reportntf"))
+                continue;
 
-                ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
-                hover.color(net.md_5.bungee.api.ChatColor.AQUA);
+            player.sendMessage(MessageEngine.get("report.submited"));
 
-                ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("report.click"));
-                builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "CLICK" + ChatColor.WHITE + "]")
-                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                        .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
-                player.spigot().sendMessage(builder.create());
-            }
+            ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
+            hover.color(net.md_5.bungee.api.ChatColor.AQUA);
+
+            ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("report.click"));
+            builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "CLICK" + ChatColor.WHITE + "]")
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
+                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
+            player.spigot().sendMessage(builder.create());
         }
     }
 
@@ -56,20 +56,20 @@ public class ReportUtils
     {
         for(Player player: Bukkit.getOnlinePlayers())
         {
-            if (player.hasPermission("psac.error"))
-            {
-                player.sendMessage(ChatColor.GREEN + "[" +
-                        ChatColor.BLUE + "PeyangSuperbAntiCheat" +
-                        ChatColor.GREEN + "] " +
-                        ChatColor.RED + "プレイヤーレポートでエラーが発生しました！");
+            if (!player.hasPermission("psac.error"))
+                continue;
 
-                ComponentBuilder hover = new ComponentBuilder(stacktrace.replace("\r", "\n").replace("\t", "    "));
+            player.sendMessage(ChatColor.GREEN + "[" +
+                    ChatColor.BLUE + "PeyangSuperbAntiCheat" +
+                    ChatColor.GREEN + "] " +
+                    ChatColor.RED + "プレイヤーレポートでエラーが発生しました！");
 
-                ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + "カーソルを合わせて確認してください！");
-                builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "カーソルを合わせる" + ChatColor.WHITE + "]")
-                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
-                player.spigot().sendMessage(builder.create());
-            }
+            ComponentBuilder hover = new ComponentBuilder(stacktrace.replace("\r", "\n").replace("\t", "    "));
+
+            ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + "カーソルを合わせて確認してください！");
+            builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "カーソルを合わせる" + ChatColor.WHITE + "]")
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+            player.spigot().sendMessage(builder.create());
         }
     }
 
