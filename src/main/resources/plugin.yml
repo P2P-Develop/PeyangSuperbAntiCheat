@@ -44,6 +44,10 @@ commands:
   mods:
     usage: /mods <Player>
     description: "プレイヤーのModを見ます。"
+  tracking:
+    aliases: ["track"]
+    usage: /tracking <Player>
+    description: "プレイヤーを追跡します。"
 permissions:
   #Core
   psac.member:
@@ -73,6 +77,7 @@ permissions:
       psac.target: true
       psac.chattarget: true
       psac.mods: true
+      psac.tracking: true
 
   psac.admin:
     description: このプラグインすべての権限を持ちます。
@@ -122,7 +127,9 @@ permissions:
   psac.mods:
     description: プレイヤーのModを見ます。
     default: op
-
+  psac.tracking:
+    description: プレイヤーを追跡するコマンドです。
+    default: op
   #Detect
   psac.aurapanic:
     description: この権限を持つプレイヤーは、他プレイヤーにPanicNPCを送りつけることができます。

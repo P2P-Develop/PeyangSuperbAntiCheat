@@ -40,7 +40,7 @@ public class Tracker
                     if (Bukkit.getPlayer(player) == null)
                         Bukkit.getPlayer(player).setCompassTarget(target.get(player));
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 11L);
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20L);
 
 
         this.target.remove(player);
@@ -72,7 +72,6 @@ public class Tracker
 
             if (target == null)
             {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.noTarget")));
                 tracker.remove(playerName);
                 continue;
             }
