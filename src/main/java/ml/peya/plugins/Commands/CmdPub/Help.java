@@ -1,8 +1,11 @@
 package ml.peya.plugins.Commands.CmdPub;
 
+import com.sun.org.apache.bcel.internal.generic.*;
 import ml.peya.plugins.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
+
+import java.util.*;
 
 public class Help
 {
@@ -11,62 +14,47 @@ public class Help
         boolean flag = false;
         sender.sendMessage(MessageEngine.get("base.prefix"));
 
-        if (sender.hasPermission("psac.report"))
+        ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes(): getNodes();
+
+        for (String node: nodes)
         {
-            sender.sendMessage(MessageEngine.get("command.help.report", MessageEngine.hsh("label", label)));
-            flag = true;
+            if (sender.hasPermission("psac." + node))
+            {
+                sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.hsh("label", label)));
+                flag = true; //ここFlagの都合で短縮不可
+            }
         }
 
-        if (sender.hasPermission("psac.view"))
-        {
-            sender.sendMessage(MessageEngine.get("command.help.view", MessageEngine.hsh("label", label)));
-            flag = true;
-        }
-
-        if (sender.hasPermission("psac.aurapanic"))
-        {
-            sender.sendMessage(MessageEngine.get("command.help.aurapanic"));
-            flag = true;
-        }
-
-        if (sender.hasPermission("psac.aurabot"))
-        {
-            sender.sendMessage(MessageEngine.get("command.help.aurabot"));
-            flag = true;
-        }
-
-        if (sender.hasPermission("psac.show"))
-        {
-            sender.sendMessage(MessageEngine.get("command.help.show", MessageEngine.hsh("label", label)));
-            flag = true;
-        }
-
-        if (sender.hasPermission("psac.drop"))
-        {
-            sender.sendMessage(MessageEngine.get("command.help.drop", MessageEngine.hsh("label", label)));
-            flag = true;
-        }
-
-        if (sender.hasPermission("psac.kick"))
-        {
-            sender.sendMessage(MessageEngine.get("command.help.kick", MessageEngine.hsh("label", label)));
-            flag = true;
-        }
-
-        if (sender.hasPermission("psac.bans"))
-        {
-            sender.sendMessage(MessageEngine.get("command.help.bans"));
-            flag = true;
-        }
-
-        if (!(sender instanceof Player))
-            return;
-
-        if (sender.hasPermission("psac.drop") || sender.hasPermission("psac.show"))
+        if ((sender.hasPermission("psac.drop") || sender.hasPermission("psac.show")) && sender instanceof Player)
             sender.sendMessage(MessageEngine.get("command.help.mngIdWarning"));
 
 
         if (!flag)
             sender.sendMessage(MessageEngine.get("error.psac.notPage"));
+    }
+
+    private static ArrayList<String> getNodes()
+    {
+        ArrayList<String> nodes = new ArrayList<>();
+        nodes.add("report");
+        nodes.add("view");
+        nodes.add("aurapanic");
+        nodes.add("aurabot");
+        nodes.add("show");
+        nodes.add("drop");
+        nodes.add("kick");
+        nodes.add("bans");
+        nodes.add("testkb");
+        return nodes;
+    }
+
+    private static ArrayList<String> getPlayerNodes()
+    {
+        ArrayList<String> nodes = getNodes();
+        nodes.add("pull");
+        nodes.add("target");
+        nodes.add("silentteleport");
+        nodes.add("tracking");
+        return nodes;
     }
 }
