@@ -23,6 +23,10 @@ npc:
 
   kill: 3
 
+  speed:
+    wave: true
+    waveRange: 0.03
+
 mod:
   tracking:
     ##有効/無効
