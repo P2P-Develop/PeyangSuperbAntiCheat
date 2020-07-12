@@ -16,7 +16,7 @@ KillCounting: 2
 
 ----------
 
-TestKnockback: 1
+TestKnockBack: 1
 Drop: 1
 KickUtil: 2
 ----------
