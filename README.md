@@ -33,7 +33,11 @@
        src="https://img.shields.io/codeclimate/maintainability/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
        alt="Code Climate maintainability"
   /></a>
-</p>
+  <a href="https://www.codefactor.io/repository/github/peyang-celeron/peyangsuperbanticheat"
+     ><img 
+           alt="CodeFactor Grade" 
+           src="https://img.shields.io/codefactor/grade/github/peyang-celeron/peyangsuperbanticheat?style=flat-square"
+  /></a>
 
 ---
 
