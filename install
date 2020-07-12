@@ -3,14 +3,14 @@
 if [ ! -z $1 ]; then
   export psacsrc="${1}/target/PeyangSuperbAntiCheat-0.1.jar"
 else
-  read -p "Repository Root:" reporoot
+  read -rp "Repository Root:" reporoot
   export psacsrc="${reporoot}/target/PeyangSuperbAntiCheat-0.1.jar"
 fi
 
 if [ ! -z $2 ]; then
   export psacdist=${2}
 else
-  read -p "Plugin install dir(Auto create directory):" ans
+  read -rp "Plugin install dir(Auto create directory):" ans
   export psacdist="${ans}/PSAC.jar"
 fi
 
