@@ -3,7 +3,8 @@ main: ml.peya.plugins.PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PeyangSuperbAntiCheat
 load: STARTUP
-authors: ["Peyang#0001", "Lemonade19x", "Potato1682"]
+author: Peyang_JP
+authors: ["Lemonade19x", "Potato1682"]
 api-version: 1.12.2
 website: "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat"
 
