@@ -40,7 +40,7 @@ kick:
   lightning: true
 
   #Kickまでのデータが見つからない場合のデフォルト値
-  defaultKick: 40
+  defaultKick: 25
 
 message:
   #プレイヤーがレポートを提出した時などのメッセージを
