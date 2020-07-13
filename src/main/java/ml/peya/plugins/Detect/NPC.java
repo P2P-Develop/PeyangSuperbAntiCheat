@@ -36,8 +36,8 @@ public class NPC
         String last;
         if (node == null)
         {
-            first = RandomStringUtils.randomAlphanumeric(new Random().nextInt(15) + 1);
-            last = RandomStringUtils.randomAlphanumeric(new Random().nextInt(15) + 1);
+            first = RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1);
+            last = RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1);
         }
         else
         {
