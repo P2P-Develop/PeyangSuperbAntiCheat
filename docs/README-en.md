@@ -533,7 +533,7 @@ In this plugin, the following config is set by default.
 |       npc.kill      |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                         |
 |      kick.delay     |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                       |
 |    kick.lightning   |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                 |
-|   kick.defaultKick  |      40       | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                |
+|   kick.defaultKick  |      25       | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                |
 |     message.lynx    |     true      | Specifies whether Lynx Mod compatible.                                                                                |
 | autoMessage.enabled |     true      | Toggle the presence or absence of regular messages.                                                                   |
 |   autoMessage.time  |      15       | Specify a minuites for recurring messages.                                                                            |
