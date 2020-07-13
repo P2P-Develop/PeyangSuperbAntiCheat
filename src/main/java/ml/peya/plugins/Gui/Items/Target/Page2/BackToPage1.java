@@ -36,7 +36,7 @@ public class BackToPage1 implements IItems
     @Override
     public String getExecName()
     {
-        return "TO_TARGET_1";
+        return "BACK_TARGET_1";
     }
 
     @Override

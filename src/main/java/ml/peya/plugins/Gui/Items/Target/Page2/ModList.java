@@ -38,7 +38,7 @@ public class ModList implements IItems
     @Override
     public String getExecName()
     {
-        return "BAN_LIST";
+        return "MOD_LIST";
     }
 
     @Override
