@@ -381,14 +381,47 @@ Tracks the specified player as a target without utility items.
 Tracks the specified player.  
 If tracking is currently started and no argument is specified, tracking will be stopped.  
 
-### Usage
-* /tracking \[PlayerName\]
+### Usages
 
-Start / stop tracking \[PlayerName\].
+- /tracking \[PlayerName\]
+
+Start \[PlayerName\].
+
+- /tracking
+
+Stop track if tracking.
 
 ### Permission
 
 - `psac.tracking`
+  
+## /silentteleport
+
+Causes the specified player to teleport you or the specified player.  
+Used for utility item internal commands in the [/target](#target).  
+It also suppresses broadcast messages on servers that do not have Essentials installed.  
+
+### Aliases
+
+- /stp
+
+### Description
+
+Teleports to the player specified in the argument.
+
+### Usages
+
+- /stp \[PlayerName\]
+
+Teleport to \[PlayerName\].
+
+- /stp \[PlayerName\] \[DestPlayerName\]
+
+Teleport \[PlayerName\] to \[DestPlayerName\].
+
+### Permission
+
+- `psac.silentteleport`
   
 ## /psac
 
@@ -532,8 +565,8 @@ I think that it will be handled by about two people, so please feel free to post
 #### Assignees
 
 Depending on the language of the problem, the following persons are responsible for resolution:
-- Japanese issue assignee: [peyang-Celeron](https://github.com/peyang-Celeron) (and [Lemonade19x](https://github.com/Lemonade19x)?)
-- English issue assignee: [Potato1682](https://github.com/Potato1682)
+- Japanese issue assignee: [@peyang-Celeron](https://github.com/peyang-Celeron) (and [@Lemonade19x](https://github.com/Lemonade19x)?)
+- English issue assignee: [@Potato1682](https://github.com/Potato1682)
   
 ---
   
