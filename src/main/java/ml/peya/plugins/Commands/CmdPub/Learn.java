@@ -45,7 +45,7 @@ public class Learn
                 }
 
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 5);
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
 
 
     }
