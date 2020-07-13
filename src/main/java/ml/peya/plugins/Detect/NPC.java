@@ -7,6 +7,7 @@ import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.StringUtil;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
+import org.apache.commons.lang.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
@@ -28,8 +29,22 @@ public class NPC
     {
         String name;
         JsonNode node = StringUtil.getRandomUser();
-        String first = Objects.requireNonNull(node).get("results").get(0).get("name").get("first").asText();
-        String last = node.get("results").get(0).get("name").get("last").asText();
+
+
+
+        String first;
+        String last;
+        if (node == null)
+        {
+            first = RandomStringUtils.randomAlphanumeric(new Random().nextInt(15) + 1);
+            last = RandomStringUtils.randomAlphanumeric(new Random().nextInt(15) + 1);
+        }
+        else
+        {
+            last = node.get("results").get(0).get("name").get("last").asText();
+            first = node.get("results").get(0).get("name").get("first").asText();
+        }
+
 
         first = first.replaceAll("[^a-zA-Z0-9]", "");
         last = last.replaceAll("[^a-zA-Z0-9]", "");
@@ -47,7 +62,12 @@ public class NPC
             name = random.nextBoolean() ? first: last;
 
 
-        UUID uuid = UUID.fromString(node.get("results").get(0).get("login").get("uuid").asText());
+        UUID uuid;
+        if (node != null)
+            uuid = UUID.fromString(node.get("results").get(0).get("login").get("uuid").asText());
+        else
+            uuid = UUID.randomUUID();
+
         MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
         WorldServer worldServer = ((CraftWorld) player.getWorld()).getHandle();
         GameProfile profile = new GameProfile(uuid, name);
