@@ -35,6 +35,8 @@ public class Packets
                     return;
                 if (meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId())
                     System.out.println(meta.addVL());
+                if (Criticals.hasCritical(e.getPlayer()))
+                    System.out.println(meta.addVL());
             }
         }
         catch (Exception ex)
