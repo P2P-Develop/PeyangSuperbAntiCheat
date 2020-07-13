@@ -19,7 +19,7 @@ public class GuiItem
                 continue;
 
             if (!Item.canGuiItem(stack))
-                player.getWorld().dropItem(player.getLocation().add(0, 1, 0), stack);
+                player.getWorld().dropItem(player.getEyeLocation(), stack);
 
             player.getInventory().remove(stack);
         }
