@@ -1,3 +1,9 @@
+// Compass Tracker 3000™
+//
+// © 2020 Peyang.
+//
+// This source code licensed by GNU General Public License 3.0.
+
 package ml.peya.plugins.Gui.Items.Target;
 
 import ml.peya.plugins.Gui.Item;
