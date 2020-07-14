@@ -192,7 +192,7 @@ book:
   %%aqua%%チャットに貼り付け
   "
   text:
-    report : "%%dark_green%%%%bold%%チートレポート"
+    report: "%%dark_green%%%%bold%%チートレポート"
     uuid: "%%aqua%%%%bold%%UUID%%black%%：%%blue%%%%uuid%%"
     unix: "%%aqua%%%%bold%%UNIX秒%%black%%：%%blue%%%%unix%%"
     issueBy: "%%aqua%%%%bold%%報告者%%black%%：%%blue%%%%id%%"

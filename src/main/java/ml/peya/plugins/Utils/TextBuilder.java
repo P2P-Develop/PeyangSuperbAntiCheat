@@ -141,7 +141,7 @@ public class TextBuilder
         ComponentBuilder builder = new ComponentBuilder(prevFlag ? prev: uBar);
         builder.append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA);
-        builder.append(nextFlag ? next :  uBar);
+        builder.append(nextFlag ? next:  uBar);
         return builder;
     }
 

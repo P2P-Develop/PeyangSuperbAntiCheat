@@ -28,7 +28,7 @@ public class Packets
             int entityId = field.getInt(entity);
             if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK) return;
             DetectingList metas = PeyangSuperbAntiCheat.cheatMeta;
-            for (CheatDetectNowMeta meta : metas.getMetas())
+            for (CheatDetectNowMeta meta: metas.getMetas())
             {
 
                 if (meta.getId() != entityId)

@@ -32,7 +32,7 @@ public class KickUtil
     {
         if (wdFlag)
         {
-            for (Player player : Bukkit.getOnlinePlayers())
+            for (Player player: Bukkit.getOnlinePlayers())
             {
                 if (player.hasPermission("psac.ntfadmin"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());

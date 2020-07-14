@@ -115,7 +115,7 @@ public class BookUtil {
         Object page;
         try {
             p = (List<Object>) ReflectionUtils.getField(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY.getClass("CraftMetaBook"), true, "pages").get(metadata);
-            for (String text : pages) {
+            for (String text: pages) {
                 page = ReflectionUtils.invokeMethod(ReflectionUtils.PackageType.MINECRAFT_SERVER.getClass("IChatBaseComponent$ChatSerializer").newInstance(), "a", text);
                 p.add(page);
             }
