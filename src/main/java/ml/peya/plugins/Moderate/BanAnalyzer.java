@@ -37,6 +37,9 @@ public class BanAnalyzer
             default:
                 return abuses;
         }
+        
+        // fuki
+        return abuses;
     }
     public enum Type
     {
