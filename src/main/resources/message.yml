@@ -148,7 +148,7 @@ message:
     bot:
       lynx: "%%aqua%%Hit the player %%red%%%%hit%% %%aqua%%times!"
     panic:
-      lynx: "%%yellow%% Hit them %%hit%%/%%max%%"
+      lynx: "%%yellow%%Hit them %%hit%%/%%max%%"
 
   testkb:
     normal: "%%aqua%%Anti kbのために、 '%%name%%' をテストしました！"
