@@ -41,32 +41,34 @@ public class DetectConnection
             {
                 meta.setCanTesting(false);
                 
-                if (PeyangSuperbAntiCheat.banLeft > meta.getVL())
-                    return;
-
-                ArrayList<String> reason = new ArrayList<>();
-                try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-                     Statement statement = connection.createStatement();
-                     Statement statement2 = connection.createStatement())
+                if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
                 {
-                    ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
-                    while (rs.next())
+                    ArrayList<String> reason = new ArrayList<>();
+                    try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+                         Statement statement = connection.createStatement();
+                         Statement statement2 = connection.createStatement())
                     {
-                        ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
-                                rs.getString("MNGID") + "'");
-                        while (set.next())
-                            reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
+                        ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
+                        while (rs.next())
+                        {
+                            ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
+                                    rs.getString("MNGID") + "'");
+                            while (set.next())
+                                reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
+                        }
                     }
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                        ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                    }
+
+                    ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
+
+                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
+
                 }
 
-                ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
-
-                KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
 
                 new BukkitRunnable()
                 {
