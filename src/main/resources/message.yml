@@ -160,6 +160,9 @@ message:
 
   bans:
     message: "%%prefix%%\n%%gold%%--- %%name%% さんのBAN情報 ---"
+    more:
+      lynx: "%%yellow%%More %%count%% Bans(Kicks)."
+      normal: "%%aqua%%ほか %%yellow%%%%count%% %%aqua%%件"
     lynx: "%%gold%%--- Bans for %%name%% ---"
   mods:
     title: "%%blue%%%%name%% %%gold%%さんの導入Mod一覧"

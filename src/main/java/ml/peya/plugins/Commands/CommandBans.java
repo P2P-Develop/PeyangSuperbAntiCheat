@@ -64,11 +64,21 @@ public class CommandBans implements CommandExecutor
         else
             sender.sendMessage(MessageEngine.get("message.bans.message", MessageEngine.hsh("name", name)));
 
-
-        for (BanAnalyzer.Bans ban: bans)
-            sender.spigot().sendMessage(TextBuilder.getTextBan(ban, ban.getType()).create());
         if (bans.size() == 0)
             sender.sendMessage(MessageEngine.get("error.bans.databaseInfoNotFound"));
+
+        for (int ii = 0; ii < 5; ii++)
+            sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(ii), bans.get(ii).getType()).create());
+
+        if (bans.size() <= 5)
+            return true;
+
+        int count = bans.size() - 5;
+        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+            sender.sendMessage(MessageEngine.get("message.bans.more.lynx", MessageEngine.hsh("count", count)));
+        else
+            sender.sendMessage(MessageEngine.get("message.bans.more.normal", MessageEngine.hsh("count", count)));
+
         return true;
     }
 }
