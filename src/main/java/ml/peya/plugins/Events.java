@@ -1,14 +1,22 @@
 package ml.peya.plugins;
 
+import com.comphenix.protocol.wrappers.*;
+import com.fasterxml.jackson.databind.*;
+import com.mojang.authlib.properties.*;
 import net.md_5.bungee.api.chat.*;
+import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
+import org.bukkit.craftbukkit.v1_12_R1.util.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
+
+import java.sql.*;
+import java.util.*;
 
 public class Events implements Listener
 {
@@ -101,5 +109,41 @@ public class Events implements Listener
                 p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[] { 0, 2, 0, 0, 0, 0 });
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 5);
+
+        EntityPlayer tab = RandomPlayer.getPlayer(e.getPlayer().getWorld());
+        tab.getBukkitEntity().setPlayerListName(ChatColor.RED + tab.getName());
+        PlayerConnection connection = ((CraftPlayer)e.getPlayer()).getHandle().playerConnection;
+
+        List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
+
+        Random random = new Random();
+
+
+        new BukkitRunnable()
+        {
+
+            @Override
+            public void run()
+            {
+                JsonNode node = Packets.getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
+
+                tab.getProfile().getProperties().put("textures",
+                        new Property(
+                                "textures",
+                                Objects.requireNonNull(node).get("properties").get(0).get("value").asText(),
+                                node.get("properties").get(0).get("signature").asText()));
+
+                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, tab));
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
+
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, tab));
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 3);
     }
 }

@@ -70,7 +70,7 @@ public class Packets
     }
 
 
-    private static JsonNode getSkin(String uuid)
+    public static JsonNode getSkin(String uuid)
     {
         try
         {
