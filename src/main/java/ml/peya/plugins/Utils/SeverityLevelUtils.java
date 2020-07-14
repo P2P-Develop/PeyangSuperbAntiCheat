@@ -14,6 +14,17 @@ public class SeverityLevelUtils
         return getSeverity(types.size());
     }
 
+    public static EnumSeverity getSeverity(int level)
+    {
+        for (EnumSeverity severity: getAllSeverity())
+        {
+            if (severity.getLevel() == level)
+                return severity;
+        }
+
+        return EnumSeverity.UNKNOWN;
+    }
+
     public static ArrayList<EnumSeverity> getAllSeverity()
     {
         ArrayList<EnumSeverity> severities = new ArrayList<>();
@@ -26,17 +37,6 @@ public class SeverityLevelUtils
         severities.add(EnumSeverity.REQUIRE_FAST);
         severities.add(EnumSeverity.SEVERE);
         return severities;
-    }
-
-    public static EnumSeverity getSeverity(int level)
-    {
-        for (EnumSeverity severity: getAllSeverity())
-        {
-            if (severity.getLevel() == level)
-                return severity;
-        }
-
-        return EnumSeverity.UNKNOWN;
     }
 
     public static EnumSeverity getSeverityFromId(String id)
