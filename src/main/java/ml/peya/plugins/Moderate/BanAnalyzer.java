@@ -22,7 +22,7 @@ public class BanAnalyzer
                     ResultSet set = statement.executeQuery("SeLeCt * FrOm KiCk WhErE UUID='" + uuid.toString() + "'");
                     while(set.next())
                     {
-                        abuses.add(new Bans(set.getLong("DATE"), set.getString("REASON"), set.getString("PLAYER"), set.getString("UUID"), set.getString("KICKID").replace("#", ""), Type.KICK););
+                        abuses.add(new Bans(set.getLong("DATE"), set.getString("REASON"), set.getString("PLAYER"), set.getString("UUID"), set.getString("KICKID").replace("#", ""), Type.KICK));
                     }
                 }
                 catch (Exception e)
