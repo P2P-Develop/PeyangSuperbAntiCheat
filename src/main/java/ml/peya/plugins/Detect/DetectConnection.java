@@ -40,32 +40,34 @@ public class DetectConnection
             public void run()
             {
                 meta.setCanTesting(false);
-                if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
+                
+                if (PeyangSuperbAntiCheat.banLeft > meta.getVL())
+                    return;
+
+                ArrayList<String> reason = new ArrayList<>();
+                try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+                     Statement statement = connection.createStatement();
+                     Statement statement2 = connection.createStatement())
                 {
-                    ArrayList<String> reason = new ArrayList<>();
-                    try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-                         Statement statement = connection.createStatement();
-                         Statement statement2 = connection.createStatement())
+                    ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
+                    while (rs.next())
                     {
-                        ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
-                        while (rs.next())
-                        {
-                            ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
-                                    rs.getString("MNGID") + "'");
-                            while (set.next())
-                                reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
-                        }
+                        ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
+                                rs.getString("MNGID") + "'");
+                        while (set.next())
+                            reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
                     }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                        ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-                    }
-
-                    ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
-
-                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura" : "Report: " + String.join(", ", realReason)), true, false);
                 }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                }
+
+                ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
+
+                KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura" : "Report: " + String.join(", ", realReason)), true, false);
+
                 new BukkitRunnable()
                 {
                     @Override
@@ -76,9 +78,7 @@ public class DetectConnection
                         switch (type)
                         {
                             case AURA_BOT:
-                                if (sender != null)
-                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
-                                else
+                                if (sender == null)
                                 {
                                     for (Player np : Bukkit.getOnlinePlayers())
                                     {
@@ -87,12 +87,12 @@ public class DetectConnection
                                         np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
                                     }
                                 }
+                                else
+                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
                                 break;
 
                             case AURA_PANIC:
-                                if (sender != null)
-                                    sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
-                                else
+                                if (sender == null)
                                 {
                                     for (Player np : Bukkit.getOnlinePlayers())
                                     {
@@ -101,11 +101,13 @@ public class DetectConnection
                                         np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                     }
                                 }
+                                else
+                                    sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 break;
+                            default:
+                                PeyangSuperbAntiCheat.cheatMeta.remove(meta.getUuids());
+                                this.cancel();
                         }
-
-                        PeyangSuperbAntiCheat.cheatMeta.remove(meta.getUuids());
-                        this.cancel();
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
                 this.cancel();
