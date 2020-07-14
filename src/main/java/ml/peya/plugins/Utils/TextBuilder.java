@@ -105,6 +105,11 @@ public class TextBuilder
         return b;
     }
 
+    public static String getLine(String prefix, String value)
+    {
+        return ChatColor.AQUA + prefix + ChatColor.WHITE + "：" + ChatColor.GREEN + value;
+    }
+
     public static String getSeverityLevel(EnumSeverity severity)
     {
         String prefix = ChatColor.YELLOW + "Level " + severity.getColor();
@@ -158,12 +163,6 @@ public class TextBuilder
         component.event(event);
         return component;
     }
-
-    public static String getLine(String prefix, String value)
-    {
-        return ChatColor.AQUA + prefix + ChatColor.WHITE + "：" + ChatColor.GREEN + value;
-    }
-
 
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
     {
