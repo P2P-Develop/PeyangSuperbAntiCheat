@@ -22,16 +22,7 @@ public class BanAnalyzer
                     ResultSet set = statement.executeQuery("SeLeCt * FrOm KiCk WhErE UUID='" + uuid.toString() + "'");
                     while(set.next())
                     {
-                        String name = set.getString("PLAYER");
-                        String id = set.getString("UUID");
-                        String kickId = set.getString("KICKID");
-
-
-                        long date  = set.getLong("DATE");
-                        String reason = set.getString("REASON");
-
-                        Bans bans = new Bans(date, reason, name, id, kickId.replace("#", ""), Type.KICK);
-                        abuses.add(bans);
+                        abuses.add(new Bans(set.getLong("DATE"), set.getString("REASON"), set.getString("PLAYER"), set.getString("UUID"), set.getString("KICKID").replace("#", ""), Type.KICK););
                     }
                 }
                 catch (Exception e)
@@ -43,9 +34,9 @@ public class BanAnalyzer
                     break;
             case BAN:
                 break;
+            default:
+                return abuses;
         }
-
-        return abuses;
     }
     public enum Type
     {
