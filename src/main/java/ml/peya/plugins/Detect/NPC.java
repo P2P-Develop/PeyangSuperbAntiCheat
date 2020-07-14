@@ -103,6 +103,8 @@ public class NPC
 
                 connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
 
+                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
                 for (Player p: Bukkit.getOnlinePlayers())
@@ -112,6 +114,8 @@ public class NPC
                     PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
                     c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+
+                    c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
                 }
 
                 NPCTeleport.teleport(player, npc, arm, teleportCase);
@@ -122,14 +126,12 @@ public class NPC
                     @Override
                     public void run()
                     {
-                        connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
                         connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
                         for (Player p: Bukkit.getOnlinePlayers())
                         {
                             if (!p.hasPermission("psac.viewnpc"))
                                 continue;
                             PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
-                            c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
                             c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
                         }
                     }
