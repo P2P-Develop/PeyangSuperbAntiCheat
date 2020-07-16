@@ -102,6 +102,9 @@ public class Books
         b2.append("\n");
         b2.append(MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", reason.toString())));
         b2.append("\n");
+        meta.setTitle("-");
+        meta.setAuthor("AntiCheat Dev");
+        meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
         meta.spigot().addPage(b2.create());
         book.setItemMeta(meta);
         return book;
