@@ -73,8 +73,7 @@ public class Events implements Listener
         ComponentBuilder builder = new ComponentBuilder("");
 
         builder.append(ChatColor.RED +
-                "[" + ChatColor.YELLOW + ChatColor.BOLD +
-                "➤" + ChatColor.RESET + ChatColor.RED +
+                "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED +
                 "] ");
         builder.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()));
         builder.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
@@ -142,5 +141,12 @@ public class Events implements Listener
                 connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, tab));
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 3);
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onDrop(PlayerDropItemEvent e)
+    {
+        if (Books.hasPSACBook(e.getItemDrop().getItemStack()))
+            e.setCancelled(true);
     }
 }

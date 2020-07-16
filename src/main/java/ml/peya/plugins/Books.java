@@ -41,6 +41,7 @@ public class Books
 
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
+        meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
 
         component.append(MessageEngine.get("reportbook.submit"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText + " $__BOOKS__;"));
@@ -133,8 +134,27 @@ public class Books
         }
 
         meta.spigot().addPage(builder.create());
+
+        meta.setTitle("-");
+        meta.setAuthor("AntiCheat Dev");
+        meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
+
         book.setItemMeta(meta);
         return book;
     }
 
+    public static boolean hasPSACBook(ItemStack book)
+    {
+        if (book.getType() != Material.WRITTEN_BOOK)
+            return false;
+        BookMeta meta = (BookMeta) book.getItemMeta();
+
+        if (!meta.hasTitle() || !meta.getTitle().equals("-"))
+            return false;
+
+        if (!meta.hasAuthor() || !meta.getAuthor().equals("AntiCheat Dev"))
+            return false;
+
+        return meta.hasLore() && meta.getLore().size() == 1 && meta.getLore().get(0).equals(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book");
+    }
 }

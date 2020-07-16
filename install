@@ -1,10 +1,10 @@
 #!/bin/bash
 
 if [ ! -z $1 ]; then
-  export psacsrc="${1}/target/PeyangSuperbAntiCheat-0.2.jar"
+  export psacsrc="${1}/target/PeyangSuperbAntiCheat-0.2.1.jar"
 else
   read -rp "Repository Root:" reporoot
-  export psacsrc="${reporoot}/target/PeyangSuperbAntiCheat-0.2.jar"
+  export psacsrc="${reporoot}/target/PeyangSuperbAntiCheat-0.2.1.jar"
 fi
 
 if [ ! -z $2 ]; then
