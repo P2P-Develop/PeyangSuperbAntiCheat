@@ -13,7 +13,7 @@ public class GuiItem
 
         int i = 0;
 
-        for (ItemStack stack: player.getInventory().getContents())
+        for (ItemStack stack : player.getInventory().getContents())
         {
             if (stack == null || stack.getType() == Material.AIR)
                 continue;
@@ -25,7 +25,7 @@ public class GuiItem
         }
 
 
-        for (IItems items: item.getItems())
+        for (IItems items : item.getItems())
         {
             if (items.getType() != type && type != IItems.Type.ALL)
                 continue;

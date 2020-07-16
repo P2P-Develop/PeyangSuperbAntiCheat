@@ -40,17 +40,19 @@ public class MessageEngine
         return null;
     }
 
-
-
     public static String format(String text, HashMap<String, Object> format)
     {
         HashMap<String, ChatColor> map = getColor();
 
-        for (String key: map.keySet())
+        for (String key : map.keySet())
+        {
             text = text.replace(key, map.get(key).toString());
+        }
 
-        for (String key: format.keySet())
+        for (String key : format.keySet())
+        {
             text = text.replace("%%" + key + "%%", String.valueOf(format.get(key)));
+        }
 
         return text;
     }

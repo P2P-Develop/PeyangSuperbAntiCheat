@@ -12,7 +12,7 @@ import java.util.*;
 
 public class View
 {
-    public static void run(CommandSender sender,  String[] args)
+    public static void run(CommandSender sender, String[] args)
     {
         sender.sendMessage(MessageEngine.get("base.prefix"));
 
@@ -45,7 +45,7 @@ public class View
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
         {
-            String idReq = nameFlag ? String.format("WhErE id = '%s'", offName): "";
+            String idReq = nameFlag ? String.format("WhErE id = '%s'", offName) : "";
             String query = "SeLeCt * FrOm WaTcHeYe " + idReq + " OrDer By LeVel DeSc LiMiT 5 OfFsEt " + start;
             ResultSet result = statement.executeQuery(query);
             while (result.next())
@@ -58,7 +58,9 @@ public class View
                 ResultSet reason = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
                 ArrayList<EnumCheatType> types = new ArrayList<>();
                 while (reason.next())
+                {
                     types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
+                }
                 ComponentBuilder line = TextBuilder.getLine(id, issuebyid, types, mngid, sender);
 
                 sender.spigot().sendMessage(line.create());

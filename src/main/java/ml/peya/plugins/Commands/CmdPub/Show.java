@@ -14,7 +14,7 @@ import java.util.*;
 
 public class Show
 {
-    public static void run(CommandSender sender,  String[] args)
+    public static void run(CommandSender sender, String[] args)
     {
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))
             return;
@@ -44,7 +44,9 @@ public class Show
 
             ArrayList<EnumCheatType> types = new ArrayList<>();
             while (reason.next())
+            {
                 types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
+            }
 
             if (sender instanceof Player)
                 BookUtil.openBook(Books.getShowBook(id, uuid, issuebyid, issuebyuuid, issuedate, types), (Player) sender);

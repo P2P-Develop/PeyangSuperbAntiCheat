@@ -60,7 +60,7 @@ public class CommandReport implements CommandExecutor
 
         ArrayList<String> reasons = new ArrayList<>();
 
-        for (String reason: reasonsV)
+        for (String reason : reasonsV)
         {
             if (reasons.contains(reason))
             {
@@ -107,8 +107,8 @@ public class CommandReport implements CommandExecutor
 
     private void report(CommandSender sender, ArrayList<EnumCheatType> types, Player target)
     {
-        String senderName = sender instanceof ConsoleCommandSender ? "[CONSOLE]": sender.getName();
-        String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]": ((Player) sender).getUniqueId().toString().replace("-", "");
+        String senderName = sender instanceof ConsoleCommandSender ? "[CONSOLE]" : sender.getName();
+        String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]" : ((Player) sender).getUniqueId().toString().replace("-", "");
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
         {
@@ -118,8 +118,10 @@ public class CommandReport implements CommandExecutor
 
         String id = WatchEyeManagement.add(target, senderName, senderUUID, SeverityLevelUtils.getSeverity(types).getLevel());
         boolean successFlag = false;
-        for (EnumCheatType type: types)
+        for (EnumCheatType type : types)
+        {
             successFlag = WatchEyeManagement.setReason(id, type, 0);
+        }
 
 
         if (successFlag)
@@ -134,8 +136,10 @@ public class CommandReport implements CommandExecutor
 
             ArrayList<String> resStr = new ArrayList<>();
 
-            for (EnumCheatType type: types)
+            for (EnumCheatType type : types)
+            {
                 resStr.add(type.getText());
+            }
 
             ReportUtils.adminNotification(target.getName(), id, resStr.toArray(new String[0]));
         }

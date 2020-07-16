@@ -22,8 +22,8 @@ public class Init
 
     public static boolean createDefaultTables()
     {
-        try(Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-            Statement statement = connection.createStatement())
+        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+             Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs watchreason(" +
                     "MNGID nchar," +
@@ -44,15 +44,15 @@ public class Init
                     "DATA int" +
                     ");");
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             e.printStackTrace();
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
             return false;
         }
 
-        try(Connection connection = PeyangSuperbAntiCheat.banKick.getConnection();
-            Statement statement = connection.createStatement())
+        try (Connection connection = PeyangSuperbAntiCheat.banKick.getConnection();
+             Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs kick(" +
                     "PLAYER nchar," +
@@ -64,7 +64,7 @@ public class Init
                     ");");
             return true;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             e.printStackTrace();
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
@@ -74,8 +74,8 @@ public class Init
 
     public static boolean initBypass()
     {
-        try(Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-            Statement statement = connection.createStatement())
+        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+             Statement statement = connection.createStatement())
         {
             long ctl = 0;
             int cBypass = 1;
@@ -90,7 +90,7 @@ public class Init
 
             }
 
-            if (cBypass -1 != 0)
+            if (cBypass - 1 != 0)
                 PeyangSuperbAntiCheat.banLeft = Math.toIntExact(ctl / cBypass);
             else
                 PeyangSuperbAntiCheat.banLeft = PeyangSuperbAntiCheat.config.getInt("kick.defaultKick");

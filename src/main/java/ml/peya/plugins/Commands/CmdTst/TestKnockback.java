@@ -13,11 +13,11 @@ public class TestKnockback implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
-       if (ErrorMessageSender.unPermMessage(sender, "psac.testkb"))
-           return true;
+        if (ErrorMessageSender.unPermMessage(sender, "psac.testkb"))
+            return true;
 
-       if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
-           return true;
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
+            return true;
 
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
@@ -27,7 +27,7 @@ public class TestKnockback implements CommandExecutor
             return true;
         }
 
-        if(PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
+        if (PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
         {
             sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
 

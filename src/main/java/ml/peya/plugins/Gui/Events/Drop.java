@@ -26,7 +26,7 @@ public class Drop implements Listener
             @Override
             public void run()
             {
-                for (ItemStack stack: e.getPlayer().getInventory().getContents())
+                for (ItemStack stack : e.getPlayer().getInventory().getContents())
                 {
                     if (!Item.canGuiItem(stack))
                         continue;

@@ -27,11 +27,10 @@ class TestKnockback
         location.add(loc);
 
 
-
         Arrow arrow = (Arrow) player.getWorld().spawnEntity(location, EntityType.ARROW);
         PeyangSuperbAntiCheat.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), DetectType.ANTI_KB);
         arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), player.getUniqueId()));
-        for (Player hide: Bukkit.getOnlinePlayers())
+        for (Player hide : Bukkit.getOnlinePlayers())
         {
             PlayerConnection connection = ((CraftPlayer) hide).getHandle().playerConnection;
 

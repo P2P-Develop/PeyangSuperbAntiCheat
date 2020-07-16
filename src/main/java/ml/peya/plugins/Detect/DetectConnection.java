@@ -40,7 +40,7 @@ public class DetectConnection
             public void run()
             {
                 meta.setCanTesting(false);
-                
+
                 if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
                 {
                     ArrayList<String> reason = new ArrayList<>();
@@ -54,7 +54,9 @@ public class DetectConnection
                             ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
                                     rs.getString("MNGID") + "'");
                             while (set.next())
+                            {
                                 reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
+                            }
                         }
                     }
                     catch (Exception e)
@@ -65,7 +67,7 @@ public class DetectConnection
 
                     ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
 
-                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
+                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura" : "Report: " + String.join(", ", realReason)), true, false);
 
                 }
 
@@ -75,14 +77,14 @@ public class DetectConnection
                     @Override
                     public void run()
                     {
-                        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") "));
+                        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") "));
 
                         switch (type)
                         {
                             case AURA_BOT:
                                 if (sender == null)
                                 {
-                                    for (Player np: Bukkit.getOnlinePlayers())
+                                    for (Player np : Bukkit.getOnlinePlayers())
                                     {
                                         if (!np.hasPermission("psac.aurabot"))
                                             continue;
@@ -96,7 +98,7 @@ public class DetectConnection
                             case AURA_PANIC:
                                 if (sender == null)
                                 {
-                                    for (Player np: Bukkit.getOnlinePlayers())
+                                    for (Player np : Bukkit.getOnlinePlayers())
                                     {
                                         if (!np.hasPermission("psac.aurapanic"))
                                             continue;

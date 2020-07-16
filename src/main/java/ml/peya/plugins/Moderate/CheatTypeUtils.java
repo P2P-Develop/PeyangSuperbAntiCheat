@@ -18,8 +18,10 @@ public class CheatTypeUtils
         types.add(EnumCheatType.REACH);
         types.add(EnumCheatType.DOLPHIN);
 
-        for (EnumCheatType type: types)
+        for (EnumCheatType type : types)
+        {
             type.setSelected(false);
+        }
         return types.toArray(new EnumCheatType[0]);
     }
 
@@ -34,17 +36,19 @@ public class CheatTypeUtils
         types.add(EnumCheatType.ANTIKNOCKBACK);
         types.add(EnumCheatType.REACH);
         types.add(EnumCheatType.DOLPHIN);
-        for (EnumCheatType type: types)
+        for (EnumCheatType type : types)
+        {
             type.setSelected(false);
+        }
         return types;
     }
 
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
         ArrayList<EnumCheatType> types = getFullTypeArrayList();
-        for (String reason: values)
+        for (String reason : values)
         {
-            for (EnumCheatType type: types)
+            for (EnumCheatType type : types)
             {
                 if (reason.toLowerCase().equals(type.getSysName()))
                     type.setSelected(true);
@@ -59,7 +63,7 @@ public class CheatTypeUtils
     public static EnumCheatType getCheatTypeFromString(String sysname)
     {
         ArrayList<EnumCheatType> types = getFullTypeArrayList();
-        for (EnumCheatType type: types)
+        for (EnumCheatType type : types)
         {
             if (type.getSysName().equals(sysname))
                 return type;
@@ -67,10 +71,9 @@ public class CheatTypeUtils
         return null;
     }
 
-
     public static boolean aliasEquals(EnumCheatType types, String name)
     {
-        for (String type: types.getAlias())
+        for (String type : types.getAlias())
         {
             if (type.equals(name))
                 return true;

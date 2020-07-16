@@ -32,7 +32,7 @@ public class NPC
 
         setLocation(player.getLocation().add(0, 1, 0).add(vec), npc);
 
-        PlayerConnection connection = ((CraftPlayer)player).getHandle().playerConnection;
+        PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
 
         ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
@@ -54,11 +54,11 @@ public class NPC
 
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
-                for (Player p: Bukkit.getOnlinePlayers())
+                for (Player p : Bukkit.getOnlinePlayers())
                 {
                     if (!p.hasPermission("psac.viewnpc"))
                         continue;
-                    PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
+                    PlayerConnection c = ((CraftPlayer) p).getHandle().playerConnection;
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
                     c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
 
@@ -74,11 +74,11 @@ public class NPC
                     public void run()
                     {
                         connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
-                        for (Player p: Bukkit.getOnlinePlayers())
+                        for (Player p : Bukkit.getOnlinePlayers())
                         {
                             if (!p.hasPermission("psac.viewnpc"))
                                 continue;
-                            PlayerConnection c = ((CraftPlayer)p).getHandle().playerConnection;
+                            PlayerConnection c = ((CraftPlayer) p).getHandle().playerConnection;
                             c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
                         }
                     }
@@ -89,10 +89,10 @@ public class NPC
         return npc;
     }
 
-    public  static void setArmor(Player target, EntityPlayer player,  ItemStack[] arm)
+    public static void setArmor(Player target, EntityPlayer player, ItemStack[] arm)
     {
 
-        PlayerConnection connection = ((CraftPlayer)target).getHandle().playerConnection;
+        PlayerConnection connection = ((CraftPlayer) target).getHandle().playerConnection;
         connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.HEAD, arm[0]));
         connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.CHEST, arm[1]));
         connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.LEGS, arm[2]));

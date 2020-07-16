@@ -2,7 +2,7 @@ package ml.peya.plugins.Enum;
 
 import java.util.*;
 
-public enum  EnumCheatType
+public enum EnumCheatType
 {
     FLY("Fly", false, "fly", "flight"),
     KILLAURA("KillAura", false, "killaura", "aura", "ka"),

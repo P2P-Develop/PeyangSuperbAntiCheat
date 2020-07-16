@@ -42,14 +42,18 @@ public class CommandBans implements CommandExecutor
 
         UUID player = null;
 
-        for (OfflinePlayer ofPly: Bukkit.getOfflinePlayers())
+        for (OfflinePlayer ofPly : Bukkit.getOfflinePlayers())
+        {
             if (ofPly.getName().toLowerCase().equals(name.toLowerCase()))
                 player = ofPly.getUniqueId();
+        }
 
         if (player == null)
-            for (Player onPly: Bukkit.getOnlinePlayers())
+            for (Player onPly : Bukkit.getOnlinePlayers())
+            {
                 if (onPly.getName().toLowerCase().equals(name.toLowerCase()))
                     player = onPly.getUniqueId();
+            }
 
         if (player == null)
         {
@@ -68,7 +72,9 @@ public class CommandBans implements CommandExecutor
             sender.sendMessage(MessageEngine.get("error.bans.databaseInfoNotFound"));
 
         for (int ii = 0; ii < 5; ii++)
+        {
             sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(ii), bans.get(ii).getType()).create());
+        }
 
         if (bans.size() <= 5)
             return true;

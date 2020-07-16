@@ -38,7 +38,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static ProtocolManager protocolManager;
     public static Item item;
     public static Tracker tracker;
-    public static HashMap<UUID, HashMap<String,String>> mods;
+    public static HashMap<UUID, HashMap<String, String>> mods;
 
     public static long time = 0L;
     public static int banLeft;
@@ -74,8 +74,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         banKickPath = config.getString("database.logPath");
 
 
-        eye =  new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
-        banKick =  new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
+        eye = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
+        banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
 
         cheatMeta = new DetectingList();
         counting = new KillCounting();

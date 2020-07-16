@@ -1,13 +1,11 @@
 package ml.peya.plugins;
 
-import com.comphenix.protocol.wrappers.*;
 import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.properties.*;
 import net.md_5.bungee.api.chat.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
-import org.bukkit.craftbukkit.v1_12_R1.util.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.*;
@@ -15,7 +13,6 @@ import org.bukkit.event.player.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
-import java.sql.*;
 import java.util.*;
 
 public class Events implements Listener
@@ -33,7 +30,7 @@ public class Events implements Listener
     {
         if (!(e.getEntity() instanceof CraftPlayer))
             return;
-        if (!(e.getDamager() instanceof  CraftArrow))
+        if (!(e.getDamager() instanceof CraftArrow))
             return;
 
         if (!PeyangSuperbAntiCheat.cheatMeta.exists(e.getEntity().getUniqueId()))
@@ -85,7 +82,7 @@ public class Events implements Listener
         builder.append(format);
 
 
-        for (Player receiver: e.getRecipients())
+        for (Player receiver : e.getRecipients())
         {
             if (!receiver.hasPermission("psac.chattarget") || (PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()) != null && PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()).containsKey("Lynx")))
                 receiver.sendMessage(format);
@@ -105,14 +102,14 @@ public class Events implements Listener
             @Override
             public void run()
             {
-                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[] { -2, 0 });
-                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[] { 0, 2, 0, 0, 0, 0 });
+                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[]{-2, 0});
+                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[]{0, 2, 0, 0, 0, 0});
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 5);
 
         EntityPlayer tab = RandomPlayer.getPlayer(e.getPlayer().getWorld());
         tab.getBukkitEntity().setPlayerListName(ChatColor.RED + tab.getName());
-        PlayerConnection connection = ((CraftPlayer)e.getPlayer()).getHandle().playerConnection;
+        PlayerConnection connection = ((CraftPlayer) e.getPlayer()).getHandle().playerConnection;
 
         List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
 

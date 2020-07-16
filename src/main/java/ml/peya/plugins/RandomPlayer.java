@@ -5,8 +5,8 @@ import com.mojang.authlib.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang.*;
-import org.bukkit.*;
 import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.*;
 
 import java.util.*;
@@ -43,9 +43,9 @@ public class RandomPlayer
             last = develop.p2p.lib.LeetConverter.convert(last);
         }
 
-        name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ?  "19" + random.nextInt(120): "");
+        name = first + (random.nextBoolean() ? "_" : "") + last + (random.nextBoolean() ? "19" + random.nextInt(120) : "");
         if (name.length() > 14)
-            name = random.nextBoolean() ? first: last;
+            name = random.nextBoolean() ? first : last;
 
 
         UUID uuid;

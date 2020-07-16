@@ -18,7 +18,7 @@ public class AutoMessageTask extends BukkitRunnable
         Calendar calender = Calendar.getInstance();
         calender.setTime(new Date());
 
-        calender.add(Calendar.DAY_OF_MONTH, - 7);
+        calender.add(Calendar.DAY_OF_MONTH, -7);
 
         Date date = Date.from(calender.toInstant());
 
@@ -35,7 +35,9 @@ public class AutoMessageTask extends BukkitRunnable
                     new Date().getTime() +
                     " AnD StAfF=0");
             while (result.next())
+            {
                 watchdog++;
+            }
 
             ResultSet result2 = statement2.executeQuery("SeLeCt * FrOm kIcK WhErE DaTe BeTwEeN " +
                     date.getTime() +
@@ -43,7 +45,9 @@ public class AutoMessageTask extends BukkitRunnable
                     new Date().getTime() +
                     " AnD StAfF=1");
             while (result2.next())
+            {
                 staff++;
+            }
         }
         catch (Exception e)
         {
@@ -55,7 +59,7 @@ public class AutoMessageTask extends BukkitRunnable
         map.put("count", String.valueOf(watchdog));
         map.put("staff_count", String.valueOf(staff));
 
-        for (Player player: Bukkit.getOnlinePlayers())
+        for (Player player : Bukkit.getOnlinePlayers())
         {
             if (!player.hasPermission("psac.regular"))
                 continue;

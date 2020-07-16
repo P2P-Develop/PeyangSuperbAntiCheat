@@ -33,7 +33,6 @@ public class CommandTarget implements CommandExecutor
         }
 
 
-
         if (args.length >= 2)
         {
             if (args[1].equals("1"))

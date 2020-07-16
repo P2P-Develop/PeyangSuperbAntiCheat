@@ -58,7 +58,7 @@ public class Tracker
 
     public void tick()
     {
-        for (String playerName: tracker.keySet())
+        for (String playerName : tracker.keySet())
         {
             Player player = Bukkit.getPlayer(playerName);
             Player target = Bukkit.getPlayer(tracker.get(playerName));
@@ -86,7 +86,6 @@ public class Tracker
             map.put("z", scaleSet(location.getZ(), 2));
 
 
-
             map.put("distance", scaleSet(location.distance(player.getLocation()), 1));
             if (PeyangSuperbAntiCheat.cheatMeta.exists(target.getUniqueId()))
             {
@@ -104,16 +103,18 @@ public class Tracker
 
             if (target.hasMetadata("speed"))
             {
-                for (MetadataValue value: target.getMetadata("speed"))
+                for (MetadataValue value : target.getMetadata("speed"))
+                {
                     if (value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName()))
                         map.put("velocity", scaleSet((Double) value.value(), 2));
+                }
             }
             else
                 map.put("velocity", 0.0);
 
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.text", map)));
 
-            for (ItemStack itemStack: player.getInventory().getContents())
+            for (ItemStack itemStack : player.getInventory().getContents())
             {
                 if (!Item.canGuiItem(itemStack))
                     continue;

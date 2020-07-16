@@ -58,7 +58,6 @@ public class TargetStick implements IItems
         return Type.MAIN;
     }
 
-
     private static Player getLookingEntity(Player player)
     {
         ArrayList<Entity> entities = (ArrayList<Entity>) player.getNearbyEntities(3.5, 3.5, 3.5);
@@ -66,15 +65,23 @@ public class TargetStick implements IItems
 
         ArrayList<Location> sight = new ArrayList<>();
 
-        for (Block block: sightBlock) sight.add(block.getLocation());
+        for (Block block : sightBlock)
+        {
+            sight.add(block.getLocation());
+        }
 
-        for (Location location: sight)
-            for (Entity entity: entities)
+        for (Location location : sight)
+        {
+            for (Entity entity : entities)
+            {
                 if (isLooking(entity, location) && entity.getType() == EntityType.PLAYER)
                     return (Player) entity;
+            }
+        }
 
         return null;
     }
+
     private static boolean isLooking(Entity entity, Location location)
     {
         if (Math.abs(entity.getLocation().getX() - location.getX()) < 1.3)

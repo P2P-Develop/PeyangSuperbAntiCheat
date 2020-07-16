@@ -26,7 +26,6 @@ public class TextBuilder
         return nextBtn;
     }
 
-
     public static TextComponent getNextButton(int next)
     {
         return getPrevNextButton(next, "=>");
@@ -47,8 +46,10 @@ public class TextBuilder
 
         StringBuilder reasonText = new StringBuilder();
 
-        for (EnumCheatType type: types)
+        for (EnumCheatType type : types)
+        {
             reasonText.append("        ").append(type.getText()).append("\n");
+        }
 
         ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)));
         b1.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
@@ -70,12 +71,11 @@ public class TextBuilder
         sender.sendMessage(MessageEngine.get("book.text.severity", serv));
     }
 
-
     public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid, CommandSender sender)
     {
         ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.click.openAbout"));
 
-        ComponentBuilder dropHover = new ComponentBuilder( MessageEngine.get("book.click.deleteReport"));
+        ComponentBuilder dropHover = new ComponentBuilder(MessageEngine.get("book.click.deleteReport"));
 
         EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
 
@@ -138,10 +138,10 @@ public class TextBuilder
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        ComponentBuilder builder = new ComponentBuilder(prevFlag ? prev: uBar);
+        ComponentBuilder builder = new ComponentBuilder(prevFlag ? prev : uBar);
         builder.append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA);
-        builder.append(nextFlag ? next:  uBar);
+        builder.append(nextFlag ? next : uBar);
         return builder;
     }
 
@@ -180,7 +180,7 @@ public class TextBuilder
         builder.append(OptGraphGenerator.genGraph(VL, kickVL));
         builder.append("\n");
 
-        String result = VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok");
+        String result = VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick") : MessageEngine.get("message.auraCheck.result.words.ok");
 
         builder.append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", result)));
 
@@ -199,15 +199,14 @@ public class TextBuilder
         return builder;
     }
 
-
     public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
     {
         Date date = new Date(ban.getDate());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"));
+        ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick" : "Ban"));
         builder.append(" - " + formatter.format(date));
         StringBuilder reasonSet = new StringBuilder();
-        for (String reason: ban.getReason().split(", "))
+        for (String reason : ban.getReason().split(", "))
         {
             EnumCheatType tp = CheatTypeUtils.getCheatTypeFromString(reason);
             if (tp == null)

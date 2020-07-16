@@ -7,9 +7,9 @@ import java.util.*;
 
 public class CheatDetectNowMeta
 {
-    private  Player target;
-    private  UUID uuids;
-    private  int id;
+    private Player target;
+    private UUID uuids;
+    private int id;
     private int VL;
     private boolean canTesting = false;
     private DetectType type;

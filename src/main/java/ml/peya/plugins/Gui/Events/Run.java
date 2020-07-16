@@ -28,7 +28,7 @@ public class Run implements Listener
 
         e.setCancelled(true);
 
-        for (IItems items: item.getItems())
+        for (IItems items : item.getItems())
         {
             String type = items.getExecName();
             if (Objects.equals(Item.getType(itemStack), type))

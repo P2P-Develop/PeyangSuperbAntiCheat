@@ -32,7 +32,7 @@ public class KickUtil
     {
         if (wdFlag)
         {
-            for (Player player: Bukkit.getOnlinePlayers())
+            for (Player player : Bukkit.getOnlinePlayers())
             {
                 if (player.hasPermission("psac.ntfadmin"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
@@ -60,14 +60,18 @@ public class KickUtil
         StringBuilder id = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < 8; i++)
+        {
             if (random.nextBoolean())
                 id.append(random.nextInt(9));
             else
                 id.append((char) (random.nextInt(5) + 'A'));
+        }
 
         StringBuilder ggId = new StringBuilder();
         for (int i = 0; i < 7; i++)
+        {
             ggId.append(random.nextInt(9));
+        }
 
 
         String reasonP;
@@ -101,14 +105,14 @@ public class KickUtil
         {
             kickS.execute("InSeRt InTo KiCk VaLuEs(" +
                     "'" + player.getName().replace("'", "\\'") + "'," +
-                    "'" + player.getUniqueId().toString().replace("'","\\'") + "'," +
+                    "'" + player.getUniqueId().toString().replace("'", "\\'") + "'," +
                     "'" + id.toString() + "'," +
                     "" + new Date().getTime() + "," +
-                    "'" + reason.replace("'","\\'") + "', " +
-                    (opFlag ? 1: 0) +
+                    "'" + reason.replace("'", "\\'") + "', " +
+                    (opFlag ? 1 : 0) +
                     ");");
 
-            ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "").replace("'","\\'") + "'");
+            ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "").replace("'", "\\'") + "'");
 
             while (eyeList.next())
             {

@@ -14,14 +14,14 @@ public class Help
         final boolean[] flag = {false};
         sender.sendMessage(MessageEngine.get("base.prefix"));
 
-        ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes(): getNodes();
+        ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes() : getNodes();
 
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                for (String node: nodes)
+                for (String node : nodes)
                 {
                     if (sender.hasPermission("psac." + node))
                     {

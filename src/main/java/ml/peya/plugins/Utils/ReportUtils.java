@@ -12,7 +12,7 @@ public class ReportUtils
 {
     public static void adminNotification(String id)
     {
-        for(Player player: Bukkit.getOnlinePlayers())
+        for (Player player : Bukkit.getOnlinePlayers())
         {
             if (!player.hasPermission("psac.reportntf"))
                 continue;
@@ -32,7 +32,7 @@ public class ReportUtils
 
     public static void adminNotification(String name, String id, String[] reasons)
     {
-        for(Player player: Bukkit.getOnlinePlayers())
+        for (Player player : Bukkit.getOnlinePlayers())
         {
             if (!player.hasPermission("psac.reportntf"))
                 continue;
@@ -54,7 +54,7 @@ public class ReportUtils
 
     public static void errorNotification(String stacktrace)
     {
-        for(Player player: Bukkit.getOnlinePlayers())
+        for (Player player : Bukkit.getOnlinePlayers())
         {
             if (!player.hasPermission("psac.error"))
                 continue;

@@ -70,7 +70,7 @@ public class AuraBot implements IItems
 
     private static <T> Field getField(Class<?> target, String name, Class<T> fieldType, int index)
     {
-        for (final Field field: target.getDeclaredFields())
+        for (final Field field : target.getDeclaredFields())
         {
             if ((name == null || field.getName().equals(name)) &&
                     fieldType.isAssignableFrom(field.getType()) &&

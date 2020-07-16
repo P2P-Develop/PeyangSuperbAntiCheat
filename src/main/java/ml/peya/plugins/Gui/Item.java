@@ -17,7 +17,7 @@ public class Item
 
     public void register(IItems item)
     {
-        for (IItems items: this.items)
+        for (IItems items : this.items)
         {
             if (items.getExecName().equals(item.getExecName()))
                 return;
@@ -35,7 +35,6 @@ public class Item
     {
         return items;
     }
-
 
     public static boolean canGuiItem(ItemStack item)
     {
@@ -67,7 +66,6 @@ public class Item
         return item.getItemMeta().getLore().get(2).replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: ", "");
 
     }
-
 
     public static ArrayList<String> getLore(IItems item, String target)
     {

@@ -10,7 +10,7 @@ import java.sql.*;
 
 public class Drop
 {
-    public static void run(CommandSender sender,  String[] args)
+    public static void run(CommandSender sender, String[] args)
     {
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))
             return;

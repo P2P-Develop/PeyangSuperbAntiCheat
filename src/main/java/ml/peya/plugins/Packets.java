@@ -28,7 +28,7 @@ public class Packets
             int entityId = field.getInt(entity);
             if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK) return;
             DetectingList metas = PeyangSuperbAntiCheat.cheatMeta;
-            for (CheatDetectNowMeta meta: metas.getMetas())
+            for (CheatDetectNowMeta meta : metas.getMetas())
             {
 
                 if (meta.getId() != entityId)
@@ -47,7 +47,7 @@ public class Packets
 
     public void playerInfo(PacketEvent e)
     {
-        if(e.getPacket().getPlayerInfoAction().read(0) != EnumWrappers.PlayerInfoAction.ADD_PLAYER)
+        if (e.getPacket().getPlayerInfoAction().read(0) != EnumWrappers.PlayerInfoAction.ADD_PLAYER)
             return;
 
         PlayerInfoData infoData = e.getPacket().getPlayerInfoDataLists().read(0).get(0);
@@ -69,20 +69,19 @@ public class Packets
         e.getPacket().getPlayerInfoDataLists().write(0, Collections.singletonList(newInfo));
     }
 
-
     public static JsonNode getSkin(String uuid)
     {
         try
         {
             HttpsURLConnection connection;
             connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
-            
+
             if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK)
             {
                 PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
                 return null;
             }
-            
+
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder builder = new StringBuilder();
             String readed = reader.readLine();

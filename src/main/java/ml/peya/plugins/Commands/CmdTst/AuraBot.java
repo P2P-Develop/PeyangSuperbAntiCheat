@@ -25,9 +25,9 @@ public class AuraBot implements CommandExecutor
             return true;
         }
 
-        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") "));
+        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") "));
 
-        if(PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
+        if (PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
         {
             sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
 
@@ -46,7 +46,6 @@ public class AuraBot implements CommandExecutor
 
             sender.sendMessage(MessageEngine.get("message.aura.summon", map));
         }
-
 
 
         DetectConnection.scan(player, DetectType.AURA_BOT, sender);

@@ -33,7 +33,7 @@ public class DetectingList
 
     public CheatDetectNowMeta getMetaByUUID(UUID uuid)
     {
-        for (CheatDetectNowMeta meta: this.meta)
+        for (CheatDetectNowMeta meta : this.meta)
         {
             if (meta.getUuids() == uuid)
                 return meta;
@@ -43,7 +43,7 @@ public class DetectingList
 
     public CheatDetectNowMeta getMetaByPlayerUUID(UUID uuid)
     {
-        for (CheatDetectNowMeta meta: this.meta)
+        for (CheatDetectNowMeta meta : this.meta)
         {
             if (meta.getTarget().getUniqueId() == uuid)
                 return meta;

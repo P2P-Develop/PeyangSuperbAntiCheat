@@ -20,13 +20,15 @@ public class BanAnalyzer
                      Statement statement = connection.createStatement())
                 {
                     ResultSet set = statement.executeQuery("SeLeCt * FrOm KiCk WhErE UUID='" + uuid.toString() + "'");
-                    while(set.next())
+                    while (set.next())
+                    {
                         abuses.add(new Bans(set.getLong("DATE"),
                                 set.getString("REASON"),
                                 set.getString("PLAYER"),
                                 set.getString("UUID"),
                                 set.getString("KICKID").replace("#", ""),
                                 Type.KICK));
+                    }
                 }
                 catch (Exception e)
                 {
@@ -40,10 +42,11 @@ public class BanAnalyzer
             default:
                 return abuses;
         }
-        
+
         // fuki
         return abuses;
     }
+
     public enum Type
     {
         ALL,

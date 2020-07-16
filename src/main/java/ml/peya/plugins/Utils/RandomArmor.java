@@ -76,7 +76,9 @@ public class RandomArmor
         swords.add(Material.STONE_AXE);
         swords.add(Material.WOOD_AXE);
         for (int i = 0; i < 5; i++)
+        {
             swords.add(Material.AIR);
+        }
 
         return getRandomItems(swords);
     }
@@ -99,7 +101,7 @@ public class RandomArmor
 
         ArrayList<Material> items = new ArrayList<>();
 
-        for (Material item: itemsArg)
+        for (Material item : itemsArg)
         {
             if (isGold(item))
                 items.add(item);

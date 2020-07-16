@@ -16,7 +16,7 @@ public class SeverityLevelUtils
 
     public static EnumSeverity getSeverity(int level)
     {
-        for (EnumSeverity severity: getAllSeverity())
+        for (EnumSeverity severity : getAllSeverity())
         {
             if (severity.getLevel() == level)
                 return severity;
@@ -47,12 +47,12 @@ public class SeverityLevelUtils
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");
-            if(result.next())
+            if (result.next())
                 return getSeverity(result.getInt("LEVEL"));
             else
                 return EnumSeverity.UNKNOWN;
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             e.printStackTrace();
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));

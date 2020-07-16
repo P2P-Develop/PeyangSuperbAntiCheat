@@ -13,7 +13,7 @@ public class ErrorMessageSender
         return true;
     }
 
-    public static boolean invalidLengthMessage(CommandSender sender,  String[] args, int min, int max)
+    public static boolean invalidLengthMessage(CommandSender sender, String[] args, int min, int max)
     {
         if (args.length < min || args.length > max)
         {

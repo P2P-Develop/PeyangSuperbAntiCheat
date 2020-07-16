@@ -45,8 +45,8 @@ public class CommandPull implements CommandExecutor
         return true;
     }
 
-
-    private void pull(Player player, Location pullLocation) {
+    private void pull(Player player, Location pullLocation)
+    {
         Location entityLoc = player.getLocation();
         entityLoc.setY(entityLoc.getY() + 0.5d);
         player.teleport(entityLoc);
@@ -62,7 +62,7 @@ public class CommandPull implements CommandExecutor
                 (pullLocation.getY() -
                         entityLoc.getY())) /
                 distance) -
-                ((0.5D * - 0.08D) *
+                ((0.5D * -0.08D) *
                         distance);
         Vector vector = player.getVelocity();
         vector.setX(x);

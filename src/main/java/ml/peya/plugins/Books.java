@@ -20,18 +20,20 @@ public class Books
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
         StringBuilder tmpReasonText = new StringBuilder();
-        for (EnumCheatType type: types)
-            tmpReasonText.append(type.isSelected() ? type.getSysName() + " ": "");
+        for (EnumCheatType type : types)
+        {
+            tmpReasonText.append(type.isSelected() ? type.getSysName() + " " : "");
+        }
         ComponentBuilder component = new ComponentBuilder(MessageEngine.get("reportbook.cheat"));
         component.append("\n");
 
-        for (EnumCheatType type: types)
+        for (EnumCheatType type : types)
         {
             String text = " ⦾ " + type.getText() + "\n";
             if (type.isSelected())
                 text = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + text;
             component.append(text)
-                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " +  player.getName() + " " + tmpReasonText + " " + type.getSysName() + " \\"));
+                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText + " " + type.getSysName() + " \\"));
         }
 
         component.append("\n\n");
@@ -64,16 +66,18 @@ public class Books
         ComponentBuilder unixTime = new ComponentBuilder(TextBuilder.getLine("UNIX秒", String.valueOf(dateInt)));
 
 
-        ComponentBuilder hover2 = new ComponentBuilder( MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", issueByUuid)));
+        ComponentBuilder hover2 = new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", issueByUuid)));
         HoverEvent hoverEvt2 = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover2.create());
 
         HoverEvent hoverEvt = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
 
         StringBuilder reason = new StringBuilder();
-        for(EnumCheatType type: types)
+        for (EnumCheatType type : types)
+        {
             reason.append("\n           ").append(ChatColor.BLUE).append(type.getText());
+        }
 
-        ComponentBuilder b = new ComponentBuilder( MessageEngine.get("book.text.report"));
+        ComponentBuilder b = new ComponentBuilder(MessageEngine.get("book.text.report"));
         b.append("\n");
         b.append(ChatColor.GRAY + formatter.format(date))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, unixTime.create()));
@@ -114,7 +118,7 @@ public class Books
 
         int count = 0;
 
-        for (String id: mods.keySet())
+        for (String id : mods.keySet())
         {
             String version = mods.get(id);
             builder.append(ChatColor.RED + id + ChatColor.GRAY + ": " + ChatColor.BLUE + version);

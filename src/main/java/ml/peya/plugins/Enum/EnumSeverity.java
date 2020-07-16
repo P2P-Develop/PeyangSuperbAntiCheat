@@ -8,7 +8,7 @@ public enum EnumSeverity
     FINER("Finer", ChatColor.BLUE, 2),
     NORMAL("Normal", ChatColor.BLUE, 3),
     FINE("Fine", ChatColor.DARK_GREEN, 4),
-    PRIORITY("Priority", ChatColor.YELLOW,5),
+    PRIORITY("Priority", ChatColor.YELLOW, 5),
     REQUIRE_FAST("REQUIRE FAST", ChatColor.LIGHT_PURPLE, 6),
     SEVERE("SEVERE", ChatColor.DARK_RED, 7),
     UNKNOWN("Unknown", ChatColor.GRAY, 0);
