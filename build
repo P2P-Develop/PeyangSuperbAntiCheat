@@ -31,10 +31,7 @@ else
 	exit 1
 fi
 
-if [ $(cd "$(pwd)/PSACBuild") -ne 0  ]; then
-	echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}$BUILDPATH not found${RESET}"
-	exit 1
-fi
+cd "$(pwd)/PSACBuild" || echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}$BUILDPATH not found${RESET}" || exit 1
 
 # Build
 
