@@ -38,6 +38,11 @@
            alt="CodeFactor Grade" 
            src="https://img.shields.io/codefactor/grade/github/peyang-celeron/peyangsuperbanticheat?style=flat-square"
   /></a>
+  <a href=""
+     ><img 
+           alt="GitHub Workflow Status" 
+           src="https://img.shields.io/github/workflow/status/peyang-Celeron/PeyangSuperbAntiCheat/Java%20CI%20with%20Maven?style=flat-square"
+  /></a>
 
 ---
 
