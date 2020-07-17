@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.properties.*;
 import net.md_5.bungee.api.chat.*;
 import net.minecraft.server.v1_12_R1.*;
+import org.apache.commons.lang.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
@@ -78,7 +79,10 @@ public class Events implements Listener
         builder.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()));
         builder.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
                 new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()));
-        builder.append(format);
+
+        BaseComponent[] component = builder.create();
+
+        BaseComponent[] baseComponent = (BaseComponent[]) ArrayUtils.addAll(component, new ComponentBuilder(format).create());
 
 
         for (Player receiver : e.getRecipients())
@@ -86,7 +90,7 @@ public class Events implements Listener
             if (!receiver.hasPermission("psac.chattarget") || (PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()) != null && PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()).containsKey("Lynx")))
                 receiver.sendMessage(format);
             else
-                receiver.spigot().sendMessage(builder.create());
+                receiver.spigot().sendMessage(baseComponent);
         }
         Bukkit.getConsoleSender().sendMessage(format);
     }
