@@ -111,7 +111,7 @@ command:
     "
 
     silentteleport: "\
-    %%aqua%%/stp %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>\n\
+    %%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>\n\
     %%green%%指定したプレイヤーにログを残さずにテレポートします。\n\
     %%green%%引数を2つつけると、引数1のプレイヤーが、引数2のプレイヤーにテレポートします。
     "

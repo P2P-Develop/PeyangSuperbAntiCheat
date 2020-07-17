@@ -50,8 +50,8 @@ commands:
     usage: /tracking <Player>
     description: "プレイヤーを追跡します。"
   silentteleport:
-    aliases: ["stp"]
-    usage: /stp [Player] <Player>
+    aliases: ["stp", "tpto"]
+    usage: /tpto [Player] <Player>
     description: "サイレントにテレポートします。"
 permissions:
   #Core

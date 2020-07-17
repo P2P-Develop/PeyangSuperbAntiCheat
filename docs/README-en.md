@@ -404,6 +404,7 @@ It also suppresses broadcast messages on servers that do not have Essentials ins
 ### Aliases
 
 - /stp
+- /tpto
 
 ### Description
 
@@ -411,11 +412,11 @@ Teleports to the player specified in the argument.
 
 ### Usages
 
-- /stp \[PlayerName\]
+- /tpto \[PlayerName\]
 
 Teleport to \[PlayerName\].
 
-- /stp \[PlayerName\] \[DestPlayerName\]
+- /tpto \[PlayerName\] \[DestPlayerName\]
 
 Teleport \[PlayerName\] to \[DestPlayerName\].
 
