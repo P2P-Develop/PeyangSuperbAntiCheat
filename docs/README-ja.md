@@ -15,30 +15,30 @@ Bukkit/Spigot/PaperMCのプラグインだった気がします。
 
 ↑ごめん＾＾；
 
-大手サーバ/運営が常に(ほぼ)いるサーバ向け。
+大手サーバー/運営が常にいるサーバー向け。
 ([ぺやんぐ研究員の研究メモ](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/memo/memo01.txt)参照。
 
 ### 注意
-__~~このプラグインはほぼネタプラグインd（殴~~__ **[削除済み]** **[削除済み]** **[削除済み]** **[権限なし]** **[編集済]**
+__~~このプラグインはほぼネタプラグインd（殴~~__ **[削除済]** **[削除済]** **[削除済]** **[編集済]**
 
 また、このプラグインでは自動BANを推奨していません。  
 そのためBAN関係のものは実装されていません。
 
 このプラグインでは、常時2個Detectopmで+4個タイマーが動いています（2015/10/21 16:29現在）※2020年です  
 NPCが出てくるたび12個くらいタイマーが増えます。  
-すぐ消えるけどね。JavaのVMによっては消えるのに時間かかる時もあるけど。  
+すぐ消えるけどね。JavaのVMによっては消えるのに時間がかかる時もあるけど。  
 詳しくは[こ↑こ↓](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt) 見て、どうぞ。  
-~~某有名系Googleブラウザー同様~~、メモリー、CPUともにフードファイターの100倍くらい大食いします。  
+~~某有名系Googleのブラウザー同様~~、メモリ、CPUともにフードファイターの**100倍**くらい大食いします。  
 余裕のあるサーバーで実行することを推奨します。
 
 このプラグインでは超原始的な本の実装方法を使用しています。ご了承しろやください。
 
 ### インストール方法
-* 適当にCloneします。
+* 適当にクローンします。
 * Mavenでビルドします。
 * [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) をpluginsフォルダーに入れます。
 * このプラグインをpluginsフォルダーに入れます。
-* 再起動して、適用してください。
+* 再起動して適用してください。
 
 
 ### コマンド
@@ -182,7 +182,7 @@ __このコマンドの事由には、エイリアスを使用できます。下
 
 ### 説明
 指定されたプレイヤーに、**見えない矢**をぶち込みます。  
-そのノックバックでAntiKBかどうか判定して、どうぞ。  
+そのノックバックでVelocityかどうか判定して、どうぞ。  
 判定できる...はず。
 
 ### 使用法
@@ -235,7 +235,7 @@ Mod IDの変換は実装しま~~す~~ん。
 ### 説明
 このコマンドを実行すると、いくつかのアイテムが手に入ります。  
 このアイテムをクリックすることにより、プレイヤーにNPCを出したり、  
-まぁ、色々できるマクロのようなもんだ。  
+まぁ、いろいろできるマクロのようなもんだ。  
 ドロップすると全部消えるよ！
 
 ### 使用法
@@ -333,8 +333,8 @@ Mod IDの変換は実装しま~~す~~ん。
 
 ### 権限について
 権限は最低限コマンドに1つ割り当てられています。  
-その他、細かく調整することができます。しらんけど。
-| 権限 | 割り当てられているコマンド/動作 | その他説明 | デフォルト | グループ |
+その他、細かく調整できます（しらんけど）
+| 権限 | 割り当てられているコマンド| その他説明 | デフォルト | グループ |
 |:-:|:-:|:-:|:-:|:-:|
 | psac.member | サーバーメンバー用の権限です。 | | true | |
 | psac.report | /wdr \(report\) | レポートができます。 | true | psac.member |
@@ -427,7 +427,7 @@ Mod IDの変換は実装しま~~す~~ん。
 このプラグインでは、開発名「クソ雑魚ナメクジゴミ人工知能」とよばれる、人工知能**もどき**があります。  
 実際のチートを用いて学習させることにより、キックの精度が向上する…（**と思って**作ったものです）  
 ~~まぁ平均の平均の平均…をとるだけの単純な機構なんですけどね。~~  
-BANされるべき人がBANされなくても~~上の通り~~しりません。勝手にforkしてアルゴリスム作り直せください。
+BANされるべき人がBANされなくても~~上の通り~~しりません。勝手にフォークしてアルゴリ**ス**ム作り直せください。
 
 ↑ハハッ ＾＾；
 
@@ -435,11 +435,11 @@ BANされるべき人がBANされなくても~~上の通り~~しりません。�
 PeyangSuperbAntiCheat.jarを`mvn package`でビルドすると、`mvn shade`が自動実行されます（たぶん）  
 その時、message.ymlとかもくっついてきます。  
 それがPeyangSuperbAntiCheat.jarのなかに同梱されています。  
-message.ymlをいじくり倒すことで、いろいろできますが、まぁ…うん。後はすべて察しろ。
+message.ymlをいじくり倒すことで、いろいろできますが、まぁ…うん。あとはすべて察しろ。
 
 ### ターゲットアイテムについて
 `/target`コマンドを実行すると、いくつかのアイテムが手に入ります。  
-このアイテムは、右クリックで実行でき、ドロップで削除されます。  
+このアイテムは右クリックで実行でき、ドロップで削除されます。  
 アイテムは以下の通りです。
 
 | アイテム | ID | その他説明  | 実行されるコマンド |
@@ -459,8 +459,8 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 | --------------- | -------------------- | ------------------------------------- | ------------------------ |
 | ブレイズロッド  | TARGET_STICK | 目の前のプレイヤを対象にします。  | /target <Player> |
 
-### バグ等
-バグ等は、[**こ↑こ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)にて受け付けております。  
+### Issue
+バグなどの報告は、[**こ↑こ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)にて受け付けております。  
 見つけたら報告お願い申し上げますだなも（？）
 
 ### [**こ↑こ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)場所の担当者
@@ -473,16 +473,17 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 [RandomApi/RandomUserGenerator](https://randomuser.me/)  
 [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)  
 [dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*)](https://dev.bukkit.org/projects/protocollib)  
-[jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
+[jedk1/BookUtil.java]
+https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  
 [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)  
 [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)  
 [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 [縺吶∋縺ｦ縺ｯ隕∫ｴ?↓驕弱℃縺ｾ縺帙ｓ縲ょ?縺ｦ縺ｯ?遨ｶ繝｡?縺ｫ譖ｸ縺?※縺ゅｊ縺ｾ縺吶?ゅ％縺薙ｒ繧ｯ繝ｪ繝?け縺励※隱ｭ繧?縺薙→縺後〒縺阪∪縺吶?](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/tree/master/docs/memo)
