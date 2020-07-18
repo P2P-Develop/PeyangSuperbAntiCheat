@@ -60,9 +60,9 @@ public class DetectConnection
                             try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
                                  Statement statement = connection.createStatement())
                             {
-                                statement.execute("UpDaTe wdlearn SeT standard = '" + 
+                                statement.execute("InSeRt Or RePlAcE iNtO wdlearn(standard) vAlUeS (" + 
                                                   PeyangSuperbAntiCheat.banLeft.toString() + 
-                                                  "';");
+                                                  ");");
                             }
                             catch (Exception e)
                             {
