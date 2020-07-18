@@ -12,7 +12,8 @@ public class Init
     {
         HikariConfig hConfig = new HikariConfig();
         File file = new File(path);
-        file.getParentFile().mkdirs();
+        if (!file.getParentFile().mkdirs())
+            throw new SecurityException();
 
         hConfig.setDriverClassName("org.sqlite.JDBC");
         hConfig.setJdbcUrl("jdbc:sqlite:" + path);
@@ -40,9 +41,6 @@ public class Init
                     "LEVEL int" +
                     ");");
 
-            statement.execute("CrEaTe TaBlE If NoT ExIsTs wdlearn(" +
-                    "DATA int" +
-                    ");");
         }
         catch (Exception e)
         {
@@ -62,6 +60,27 @@ public class Init
                     "REASON nchar," +
                     "STAFF int" +
                     ");");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            return false;
+        }
+
+        try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
+            Statement statement = connection.createStatement())
+        {
+            statement.execute("CrEaTe TaBlE If NoT ExIsTs wdlearn(" +
+                    "standard int," +
+                    "MNGID nchar," +
+                    "middleweight nchar" +
+                    ");");
+
+            statement.execute("Create table if not exists wdWeight(" +
+                    "MNGID nchar," +
+                    "inputweight nchar" +
+                    ");");
             return true;
         }
         catch (Exception e)
@@ -71,7 +90,7 @@ public class Init
             return false;
         }
     }
-
+    
     public static boolean initBypass()
     {
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();

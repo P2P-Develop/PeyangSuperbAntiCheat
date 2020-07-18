@@ -16,4 +16,8 @@ fi
 
 echo "${psacsrc} -> ${psacdist}"
 
-install -Dm755 ${psacsrc} ${psacdist} && echo "SUCCESS: PeyangSuperbAntiCheat Successfly Installed."
+if [ $(uname) = Darwin ]; then
+  install -m755 ${psacsrc} ${psacdist} && echo "SUCCESS: PeyangSuperbAntiCheat Successfly Installed."
+else
+  install -Dm755 ${psacsrc} ${psacdist} && echo "SUCCESS: PeyangSuperbAntiCheat Successfly Installed."
+fi

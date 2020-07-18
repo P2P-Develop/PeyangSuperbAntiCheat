@@ -13,6 +13,7 @@ import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Items.Main.*;
 import ml.peya.plugins.Gui.Items.Target.*;
 import ml.peya.plugins.Gui.Items.Target.Page2.*;
+import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Task.*;
 import ml.peya.plugins.Utils.*;
@@ -23,6 +24,8 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 import java.util.logging.*;
+import java.io.*;
+import java.sql.*;
 
 public class PeyangSuperbAntiCheat extends JavaPlugin
 {
@@ -32,6 +35,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
     public static String databasePath;
     public static String banKickPath;
+    public static String learnPath;
 
     public static DetectingList cheatMeta;
     public static KillCounting counting;
@@ -43,8 +47,11 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static long time = 0L;
     public static int banLeft;
 
+    public static NeuralNetwork network;
+
     public static HikariDataSource eye;
     public static HikariDataSource banKick;
+    public static HikariDataSource learn;
     public static boolean isAutoMessageEnabled;
     public static boolean isTrackEnabled;
     public static BukkitRunnable autoMessage;
@@ -72,10 +79,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         config = getConfig();
         databasePath = config.getString("database.path");
         banKickPath = config.getString("database.logPath");
+        learnPath = config.getString("database.learnPath");
 
+        network = new NeuralNetwork();
 
         eye = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
         banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
+        learn = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + learnPath));
 
         cheatMeta = new DetectingList();
         counting = new KillCounting();
@@ -120,6 +130,22 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         if (!(Init.createDefaultTables() && Init.initBypass()))
             Bukkit.getPluginManager().disablePlugin(this);
+
+        try (Connection connection = learn.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            ResultSet rs = statement.executeQuery("SeLeCt standard FrOm WdLeArN;");
+            
+            while (rs.next())
+            {
+                banLeft = rs.getInt("standard");
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+        }
 
         getCommand("report").setExecutor(new CommandReport());
         getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
@@ -197,6 +223,4 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         return plugin;
     }
-
-
 }
