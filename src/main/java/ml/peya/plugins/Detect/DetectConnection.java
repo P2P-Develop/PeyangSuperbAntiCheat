@@ -56,6 +56,19 @@ public class DetectConnection
                             network.learn(arr, 1000);
 
                             PeyangSuperbAntiCheat.banLeft = (int) Math.round(network.commit(Pair.of(vl, vl)));
+                            
+                            try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
+                                 Statement statement = connection.createStatement())
+                            {
+                                statement.execute("UpDaTe wdlearn SeT standard = '" + 
+                                                  PeyangSuperbAntiCheat.banLeft.toString() + 
+                                                  "';");
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                                ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                            }
                         }
                     };
 
