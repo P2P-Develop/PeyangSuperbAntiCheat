@@ -62,7 +62,8 @@ public class DetectConnection
                                  Statement statement = connection.createStatement())
                             {
                                 statement.execute("InSeRt Or RePlAcE iNtO wdlearn(standard) vAlUeS (" +
-                                        PeyangSuperbAntiCheat.banLeft +
+                                        PeyangSuperbAntiCheat.banLeft + ", " +
+                                        UUID.randomUUID().toString() + ", " +
                                         ");");
                             }
                             catch (Exception e)
