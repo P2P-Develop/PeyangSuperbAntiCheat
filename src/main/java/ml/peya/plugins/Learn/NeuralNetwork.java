@@ -20,7 +20,7 @@ public class NeuralNetwork
     final static double weightRange = 10.0;
     static double RandomWeight = (random.nextDouble() - 0.5) * weightRange;
 
-    double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight}, {RandomWeight, RandomWeight}, {RandomWeight, RandomWeight}};
+    double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
     double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
 
     public static double[] getColumn(double[][] array, int index)
