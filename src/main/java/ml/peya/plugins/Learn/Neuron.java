@@ -1,6 +1,6 @@
 package ml.peya.plugins.Learn;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Neuron
 {
@@ -8,19 +8,22 @@ public class Neuron
 
     private double value = 0.0;
 
-    public double getValue() {
+    public double getValue()
+    {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(double value)
+    {
         this.value = value;
     }
 
     void input(ArrayList<Input> value)
     {
-        for (Input input: value)
+        for (Input input : value)
             sum += input.getWeightingValue();
     }
+
     public void input(double value)
     {
         sum += value;

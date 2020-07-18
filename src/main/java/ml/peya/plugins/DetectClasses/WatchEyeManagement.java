@@ -17,14 +17,16 @@ public class WatchEyeManagement
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
         {
-            statement.execute(String.format("InSeRt InTo WaTcHeYe VaLuEs ('%s', '%s', %s, '%s', '%s', '%s', %s)",
+            statement.execute(String.format(
+                    "InSeRt InTo WaTcHeYe VaLuEs ('%s', '%s', %s, '%s', '%s', '%s', %s)",
                     target.getUniqueId().toString().replace("-", ""),
                     target.getName(),
                     new Date().getTime(),
                     FromName,
                     FromUUID,
                     manageId,
-                    level));
+                    level
+            ));
             statement.close();
             return manageId;
         }
@@ -44,10 +46,12 @@ public class WatchEyeManagement
             String reasonString = reason.getSysName();
             if (reasonString.endsWith(" "))
                 reasonString = reasonString.substring(0, reasonString.length() - 1);
-            statement.execute(String.format("InSeRt InTo WaTcHrEaSoN VaLuEs ('%s', '%s', %s)",
+            statement.execute(String.format(
+                    "InSeRt InTo WaTcHrEaSoN VaLuEs ('%s', '%s', %s)",
                     id,
                     reasonString,
-                    vl));
+                    vl
+            ));
             return true;
         }
         catch (Exception e)

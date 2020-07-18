@@ -28,6 +28,11 @@ public interface IItems
             this.name = name;
         }
 
+        public static Type toType(String type)
+        {
+            return Type.valueOf(type.toUpperCase());
+        }
+
         public String getName()
         {
             return name;
@@ -36,11 +41,6 @@ public interface IItems
         public String getRaw()
         {
             return name.toLowerCase();
-        }
-
-        public static Type toType(String type)
-        {
-            return Type.valueOf(type.toUpperCase());
         }
     }
 }

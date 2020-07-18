@@ -113,9 +113,11 @@ public class RandomArmor
         if (stack.getType() == Material.LEATHER_BOOTS || stack.getType() == Material.LEATHER_CHESTPLATE || stack.getType() == Material.LEATHER_HELMET || stack.getType() == Material.LEATHER_LEGGINGS)
         {
             LeatherArmorMeta meta = (LeatherArmorMeta) stack.getItemMeta();
-            meta.setColor(Color.fromRGB(random.nextInt(254),
+            meta.setColor(Color.fromRGB(
                     random.nextInt(254),
-                    random.nextInt(254)));
+                    random.nextInt(254),
+                    random.nextInt(254)
+            ));
             stack.setItemMeta(meta);
         }
 

@@ -10,9 +10,9 @@ public class CheatDetectNowMeta
     private final Player target;
     private final UUID uuids;
     private final int id;
+    private final DetectType type;
     private int VL;
     private boolean canTesting = false;
-    private final DetectType type;
 
     public CheatDetectNowMeta(Player target, UUID uuids, int id, DetectType type)
     {

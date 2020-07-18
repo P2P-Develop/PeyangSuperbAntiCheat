@@ -17,6 +17,24 @@ import java.util.*;
 public class AuraBot implements IItems
 {
 
+    private static <T> Field getField(Class<?> target, String name, Class<T> fieldType, int index)
+    {
+        for (final Field field : target.getDeclaredFields())
+        {
+            if ((name == null || field.getName().equals(name)) &&
+                    fieldType.isAssignableFrom(field.getType()) &&
+                    index-- <= 0)
+            {
+                field.setAccessible(true);
+                return field;
+            }
+        }
+
+        if (target.getSuperclass() != null)
+            return getField(target.getSuperclass(), name, fieldType, index);
+        throw new IllegalArgumentException("Cannot find field with type " + fieldType);
+    }
+
     @Override
     public void run(Player player, String target)
     {
@@ -66,24 +84,6 @@ public class AuraBot implements IItems
     public String getExecName()
     {
         return "AURA_BOT";
-    }
-
-    private static <T> Field getField(Class<?> target, String name, Class<T> fieldType, int index)
-    {
-        for (final Field field : target.getDeclaredFields())
-        {
-            if ((name == null || field.getName().equals(name)) &&
-                    fieldType.isAssignableFrom(field.getType()) &&
-                    index-- <= 0)
-            {
-                field.setAccessible(true);
-                return field;
-            }
-        }
-
-        if (target.getSuperclass() != null)
-            return getField(target.getSuperclass(), name, fieldType, index);
-        throw new IllegalArgumentException("Cannot find field with type " + fieldType);
     }
 
     @Override

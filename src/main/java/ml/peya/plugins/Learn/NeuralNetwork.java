@@ -9,17 +9,14 @@ import java.util.stream.*;
 
 public class NeuralNetwork
 {
-    double[] inputLayer;
-    Neuron[] middleLayer;
-    Neuron outputLayer;
-
-    final double inputLayerBias = 1.0;
-    final double middleLayerBias = 1.0;
-
     final static Random random = new Random();
     final static double weightRange = 10.0;
     static double RandomWeight = (random.nextDouble() - 0.5) * weightRange;
-
+    final double inputLayerBias = 1.0;
+    final double middleLayerBias = 1.0;
+    double[] inputLayer;
+    Neuron[] middleLayer;
+    Neuron outputLayer;
     double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
     double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
 
@@ -28,6 +25,19 @@ public class NeuralNetwork
         double[] column = new double[array[0].length];
         Arrays.setAll(column, i -> array[i][index]);
         return column;
+    }
+
+    static ArrayList<Input> toInputData(double[] inputLayer, double[] inputWeight)
+    {
+        ArrayList<Input> it = new ArrayList<>();
+        int count = 0;
+        for (double layer : inputLayer)
+        {
+            Input input = new Input(layer, inputWeight[count] - 1);
+            it.add(input);
+            count++;
+        }
+        return it;
     }
 
     public double commit(Pair<Double, Double> data)
@@ -81,18 +91,5 @@ public class NeuralNetwork
         // ここからデータベース更新処理
         // データベースに何もなかったら全ての重みを追加する
 
-    }
-
-    static ArrayList<Input> toInputData(double[] inputLayer, double[] inputWeight)
-    {
-        ArrayList<Input> it = new ArrayList<>();
-        int count = 0;
-        for (double layer : inputLayer)
-        {
-            Input input = new Input(layer, inputWeight[count] - 1);
-            it.add(input);
-            count++;
-        }
-        return it;
     }
 }
