@@ -1,0 +1,8 @@
+#!/bin/bash
+
+git remote add upstream git@github.com/peyang-Celeron/PeyangSuperbAntiCheat.git
+git fetch upstream
+git checkout master
+git merge upstream/master
+git checkout dev
+git merge upstream/dev
