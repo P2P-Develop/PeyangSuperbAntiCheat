@@ -32,8 +32,8 @@ public class RandomPlayer
         }
 
 
-        first = first.replaceAll("[^a-zA-Z0-9]", "");
-        last = last.replaceAll("[^a-zA-Z0-9]", "");
+        first = first.replaceAll("[^a-zA-Z0-9]", RandomStringUtils.randomAlphanumeric(0));
+        last = last.replaceAll("[^a-zA-Z0-9]", RandomStringUtils.randomAlphanumeric(0));
 
         Random random = new Random();
 
