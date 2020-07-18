@@ -138,7 +138,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             
             while (rs.next())
             {
-                banLeft = rs.getInt();
+                banLeft = rs.getInt("standard");
             }
         }
         catch (Exception e)
@@ -223,6 +223,4 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         return plugin;
     }
-
-
 }
