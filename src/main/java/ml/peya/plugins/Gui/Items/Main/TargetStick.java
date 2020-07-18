@@ -21,9 +21,7 @@ public class TargetStick implements IItems
         ArrayList<Location> sight = new ArrayList<>();
 
         for (Block block : sightBlock)
-        {
             sight.add(block.getLocation());
-        }
 
         for (Location location : sight)
         {

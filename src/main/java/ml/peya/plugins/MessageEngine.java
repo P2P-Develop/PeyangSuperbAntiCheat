@@ -45,14 +45,12 @@ public class MessageEngine
         HashMap<String, ChatColor> map = getColor();
 
         for (String key : map.keySet())
-        {
             text = text.replace(key, map.get(key).toString());
-        }
+
 
         for (String key : format.keySet())
-        {
             text = text.replace("%%" + key + "%%", String.valueOf(format.get(key)));
-        }
+
 
         return text;
     }

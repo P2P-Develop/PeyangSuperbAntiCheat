@@ -49,9 +49,8 @@ public class Metrics
             final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
             // We want to make sure nobody just copy & pastes the example and use the wrong package names
             if (Metrics.class.getPackage().getName().equals(defaultPackage) || Metrics.class.getPackage().getName().equals(examplePackage))
-            {
                 throw new IllegalStateException("bStats Metrics class has not been relocated correctly!");
-            }
+
         }
     }
 
@@ -76,9 +75,8 @@ public class Metrics
     public Metrics(Plugin plugin, int pluginId)
     {
         if (plugin == null)
-        {
             throw new IllegalArgumentException("Plugin cannot be null!");
-        }
+
         this.plugin = plugin;
         this.pluginId = pluginId;
 
@@ -161,17 +159,11 @@ public class Metrics
     private static void sendData(Plugin plugin, JsonObject data) throws Exception
     {
         if (data == null)
-        {
             throw new IllegalArgumentException("Data cannot be null!");
-        }
         if (Bukkit.isPrimaryThread())
-        {
             throw new IllegalAccessException("This method must not be called from the main thread!");
-        }
         if (logSentData)
-        {
             plugin.getLogger().info("Sending data to bStats: " + data);
-        }
         HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
 
         // Compress the data to save bandwidth
@@ -192,21 +184,16 @@ public class Metrics
         {
             outputStream.write(compressedData);
         }
-
         StringBuilder builder = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
         {
             String line;
             while ((line = bufferedReader.readLine()) != null)
-            {
                 builder.append(line);
-            }
         }
 
         if (logResponseStatusText)
-        {
             plugin.getLogger().info("Sent data to bStats and received response: " + builder);
-        }
     }
 
     /**
@@ -219,9 +206,7 @@ public class Metrics
     private static byte[] compress(final String str) throws IOException
     {
         if (str == null)
-        {
             return null;
-        }
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try (GZIPOutputStream gzip = new GZIPOutputStream(outputStream))
         {
@@ -248,9 +233,7 @@ public class Metrics
     public void addCustomChart(CustomChart chart)
     {
         if (chart == null)
-        {
             throw new IllegalArgumentException("Chart cannot be null!");
-        }
         charts.add(chart);
     }
 
@@ -384,9 +367,7 @@ public class Metrics
                     {
                         Object plugin = provider.getService().getMethod("getPluginData").invoke(provider.getProvider());
                         if (plugin instanceof JsonObject)
-                        {
                             pluginData.add((JsonObject) plugin);
-                        }
                         else
                         { // old bstats version compatibility
                             try
@@ -405,9 +386,7 @@ public class Metrics
                             {
                                 // minecraft version 1.14+
                                 if (logFailedRequests)
-                                {
                                     this.plugin.getLogger().log(Level.SEVERE, "Encountered unexpected exception", e);
-                                }
                             }
                         }
                     }
@@ -434,9 +413,7 @@ public class Metrics
             {
                 // Something went wrong! :(
                 if (logFailedRequests)
-                {
                     plugin.getLogger().log(Level.WARNING, "Could not submit plugin stats of " + plugin.getName(), e);
-                }
             }
         }).start();
     }
@@ -458,9 +435,7 @@ public class Metrics
         CustomChart(String chartId)
         {
             if (chartId == null || chartId.isEmpty())
-            {
                 throw new IllegalArgumentException("ChartId cannot be null or empty!");
-            }
             this.chartId = chartId;
         }
 

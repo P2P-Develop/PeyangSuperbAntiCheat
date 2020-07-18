@@ -33,9 +33,7 @@ public class StringUtil
 
             }
             else
-            {
                 PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
-            }
         }
         catch (Exception e)
         {
