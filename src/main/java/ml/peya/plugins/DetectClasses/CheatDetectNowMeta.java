@@ -7,12 +7,12 @@ import java.util.*;
 
 public class CheatDetectNowMeta
 {
-    private Player target;
-    private UUID uuids;
-    private int id;
+    private final Player target;
+    private final UUID uuids;
+    private final int id;
     private int VL;
     private boolean canTesting = false;
-    private DetectType type;
+    private final DetectType type;
 
     public CheatDetectNowMeta(Player target, UUID uuids, int id, DetectType type)
     {

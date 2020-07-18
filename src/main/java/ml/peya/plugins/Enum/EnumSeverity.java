@@ -13,9 +13,9 @@ public enum EnumSeverity
     SEVERE("SEVERE", ChatColor.DARK_RED, 7),
     UNKNOWN("Unknown", ChatColor.GRAY, 0);
 
-    private String text;
-    private net.md_5.bungee.api.ChatColor color;
-    private int level;
+    private final String text;
+    private final net.md_5.bungee.api.ChatColor color;
+    private final int level;
 
     EnumSeverity(String text, net.md_5.bungee.api.ChatColor color, int level)
     {

@@ -408,6 +408,7 @@ Mod IDの変換は実装しま~~す~~ん。
 |:-:|:-:|-|
 | database.path | ./eye.db | レポート情報などを保存する、SQLiteデータベースの置き場所です。 |
 | database.logPath | ./log.db | キック情報などを保存する、SQLiteデータベースの置き場所です。 |
+| database.learnPath | ./learn.db | 学習によって値が変更された「重み」を保存する、SQLiteデータベースの置き場所です。 |
 | npc.seconds | 4 | NPCがプレイヤーの周りを回る秒数です。 |
 | npc.time | 0.3 | NPCが回る速さです。感覚で調整してください。 |
 | npc.range | 2.1 | NPCが回る半径です。ロマンが全て。デフォルトが最高。 |

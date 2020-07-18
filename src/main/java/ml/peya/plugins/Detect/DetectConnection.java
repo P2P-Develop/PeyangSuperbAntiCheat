@@ -5,7 +5,9 @@ import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.Learn.*;
 import net.minecraft.server.v1_12_R1.*;
+import org.apache.commons.lang3.tuple.Triple;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -13,6 +15,8 @@ import org.bukkit.scheduler.*;
 
 import java.sql.*;
 import java.util.*;
+
+import static ml.peya.plugins.PeyangSuperbAntiCheat.network;
 
 public class DetectConnection
 {
@@ -43,6 +47,11 @@ public class DetectConnection
 
                 if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
                 {
+                    double vl = meta.getVL();
+                    ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
+                    arr.add(Triple.of(vl, vl, vl));
+                    network.learn(arr, 1000);
+
                     ArrayList<String> reason = new ArrayList<>();
                     try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
                          Statement statement = connection.createStatement();

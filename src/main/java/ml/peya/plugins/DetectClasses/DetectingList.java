@@ -7,7 +7,7 @@ import java.util.*;
 
 public class DetectingList
 {
-    private ArrayList<CheatDetectNowMeta> meta = new ArrayList<>();
+    private final ArrayList<CheatDetectNowMeta> meta = new ArrayList<>();
 
     public int getSize()
     {

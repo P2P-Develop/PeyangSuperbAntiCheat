@@ -10,7 +10,7 @@ public enum DetectType
 
     private int count;
     private CommandSender sender;
-    private String name;
+    private final String name;
 
     DetectType(String name)
     {

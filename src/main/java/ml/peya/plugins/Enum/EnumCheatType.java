@@ -11,11 +11,11 @@ public enum EnumCheatType
     ANTIKNOCKBACK("AntiKnockback", false, "antiknockback", "antikb", "akb", "velocity"),
     REACH("Reach", false, "reach"),
     DOLPHIN("Dolphin", false, "dolphin");
-    private String text;
+    private final String text;
     private boolean isSelected;
     private boolean isChecked;
-    private String sysName;
-    private ArrayList<String> alias;
+    private final String sysName;
+    private final ArrayList<String> alias;
 
     EnumCheatType(String text, boolean isSelected, String sysName, String... alias)
     {
