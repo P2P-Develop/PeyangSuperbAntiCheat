@@ -1,5 +1,7 @@
 # Security Policy
 
+もっとネタを求めたいかい？それじゃあ[こ↑こ↓](SECURITY.md)へ行くんだ。
+
 ## Supported Versions
 
 **The current latest version is not secure.**
