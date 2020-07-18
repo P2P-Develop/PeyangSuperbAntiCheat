@@ -61,7 +61,7 @@ public class DetectConnection
                                  Statement statement = connection.createStatement())
                             {
                                 statement.execute("InSeRt Or RePlAcE iNtO wdlearn(standard) vAlUeS (" + 
-                                                  PeyangSuperbAntiCheat.banLeft.toString() + 
+                                                  String.valueOf(PeyangSuperbAntiCheat.banLeft) + 
                                                   ");");
                             }
                             catch (Exception e)
