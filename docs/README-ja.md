@@ -4,6 +4,8 @@ PeyangSuperbAntiCheat
 2020/07/12 08:16  
 祝☆400コミット
 
+2020/07/19 00:26  
+祝☆500コミット
 Bukkit/Spigot/PaperMCのプラグインだったような気がしないような感じがします。  
 確信はございません。~~SUMANNA!~~
 
