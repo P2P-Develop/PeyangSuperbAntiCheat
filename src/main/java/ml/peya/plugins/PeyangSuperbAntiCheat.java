@@ -24,6 +24,8 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 import java.util.logging.*;
+import java.io.*;
+import java.sql.*;
 
 public class PeyangSuperbAntiCheat extends JavaPlugin
 {
