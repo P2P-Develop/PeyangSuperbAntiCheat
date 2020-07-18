@@ -145,3 +145,6 @@ modules.xml
 
 # Sonarlint plugin
 .idea/sonarlint
+
+# Floobits file
+.floo

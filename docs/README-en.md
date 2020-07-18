@@ -519,33 +519,36 @@ The NPC skin is displayed randomly by referring to the UUID skin settting.
 
 In this plugin, the following config is set by default.
   
-|     Setting name    | Default value | Description                                                                                                           |
-| :-----------------: | :-----------: | :-------------------------------------------------------------------------------------------------------------------- |
-|    database.path    |   ./eye.db    | Save report information by specifying location of SQLite database path.                                               |
-|   database.logPath  |   ./log.db    | Save kick infomation by specifying location of SQLite database path.                                                  |
-|     npc.seconds     |       4       | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                            |
-|       npc.time      |      0.3      | Specifies the value of [NPC](#aurabot) orbit speed.                                                                   |
-|      npc.range      |      2.1      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.               |
-|    npc.panicRange   |      1.5      | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                |
-|       npc.wave      |      true     | Whether the [NPC](#aurabot) spins like a wave.                                                                        |
-|     npc.waveMin     |      1.0      | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                       |
-|    npc.speed.wave   |     true      | Specify whether to make the orbital velocity of NPC variable.                                                         |
-| npc.speed.waveRange |     0.03      | Specify the speed change range.                                                                                       |
-|       npc.kill      |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                         |
-|      kick.delay     |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                       |
-|    kick.lightning   |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                 |
-|   kick.defaultKick  |      25       | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                |
-|     message.lynx    |     true      | Specifies whether Lynx Mod compatible.                                                                                |
-| autoMessage.enabled |     true      | Toggle the presence or absence of regular messages.                                                                   |
-|   autoMessage.time  |      15       | Specify a minuites for recurring messages.                                                                            |
-|        skins        |   \(UUID\)    | Specifies the skin to apply to the NPC.<br>You can specify multiple UUIDs and it will be selected from a random UUID. |
+|     Setting name    | Default value | Description                                                                                                                  |
+| :-----------------: | :-----------: | :--------------------------------------------------------------------------------------------------------------------------- |
+|    database.path    |   ./eye.db    | Save report information by specifying location of SQLite database path.                                                      |
+|   database.logPath  |   ./log.db    | Save kick infomation by specifying location of SQLite database path.                                                         |
+|  database.learnPath |  ./learn.db   | Specify the path to the database that stores the neural network weights from learning.                                       |
+|     npc.seconds     |       4       | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                                   |
+|       npc.time      |      0.3      | Specifies the value of [NPC](#aurabot) orbit speed.                                                                          |
+|      npc.range      |      2.1      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.                      |
+|    npc.panicRange   |      1.5      | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                       |
+|       npc.wave      |     true      | Whether the [NPC](#aurabot) spins like a wave.                                                                               |
+|     npc.waveMin     |      1.0      | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                              |
+|    npc.speed.wave   |     true      | Specify whether to make the orbital velocity of NPC variable.                                                                |
+| npc.speed.waveRange |     0.03      | Specify the speed change range.                                                                                              |
+|       npc.kill      |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                                |
+|      npc.learn      |      0.3      | Specify the learning coefficient of the learning function. The higher the value, the less processing, but the less accurate. |
+|      kick.delay     |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                              |
+|    kick.lightning   |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                        |
+|   kick.defaultKick  |      25       | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                       |
+|     message.lynx    |     true      | Specifies whether Lynx Mod compatible.                                                                                       |
+| autoMessage.enabled |     true      | Toggle the presence or absence of regular messages.                                                                          |
+|   autoMessage.time  |      15       | Specify a minuites for recurring messages.                                                                                   |
+|        skins        |   \(UUID\)    | Specifies the skin to apply to the NPC.<br>You can specify multiple UUIDs and it will be selected from a random UUID.        |
   
 ---
   
 ## What is learning function?
 
 This plugin has a learning function that automatically adjusts the parameters using the actual cheat material.  
-Learning cheat data can improve the accuracy of your decision to kick or not.  
+Learning cheat data can improve the accuracy of function decision to kick or not.  
+The learning function of this plugin uses machine learning using a neural network.  
 **This feature is under development. Please note that this function cannot learn completely.**  
 
 ### Learning mechanism

@@ -18,7 +18,7 @@ public class StringUtil
             connection = (HttpsURLConnection) new URL("https://randomuser.me/api/").openConnection();
             if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK)
             {
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8));)
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8)))
                 {
                     StringBuilder builder = new StringBuilder();
                     String readed = reader.readLine();
