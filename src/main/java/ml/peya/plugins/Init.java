@@ -90,36 +90,4 @@ public class Init
             return false;
         }
     }
-
-    // ここは使用しない
-    public static boolean initBypass()
-    {
-        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-             Statement statement = connection.createStatement())
-        {
-            long ctl = 0;
-            int cBypass = 1;
-            ResultSet resultSet = statement.executeQuery("SeLeCt * FrOm WdLeArN");
-            while (resultSet.next())
-            {
-                int cot = resultSet.getInt("DATA");
-
-                ctl += cot;
-
-                cBypass++;
-
-            }
-
-            if (cBypass - 1 != 0)
-                PeyangSuperbAntiCheat.banLeft = Math.toIntExact(ctl / cBypass);
-            else
-                PeyangSuperbAntiCheat.banLeft = PeyangSuperbAntiCheat.config.getInt("kick.defaultKick");
-            return true;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }
-    }
 }
