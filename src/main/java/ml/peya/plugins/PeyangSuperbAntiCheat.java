@@ -129,6 +129,22 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         if (!(Init.createDefaultTables() && Init.initBypass()))
             Bukkit.getPluginManager().disablePlugin(this);
 
+        try (Connection connection = learn.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            ResultSet rs = statement.executeQuery("SeLeCt standard FrOm WdLeArN;");
+            
+            while (rs.next())
+            {
+                banLeft = rs.getInt();
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+        }
+
         getCommand("report").setExecutor(new CommandReport());
         getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
         getCommand("aurabot").setExecutor(new AuraBot());
