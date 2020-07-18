@@ -12,8 +12,8 @@ public class Init
     {
         HikariConfig hConfig = new HikariConfig();
         File file = new File(path);
-        if (!file.getParentFile().mkdirs())
-            throw new SecurityException();
+        file.getParentFile().mkdirs();
+
 
         hConfig.setDriverClassName("org.sqlite.JDBC");
         hConfig.setJdbcUrl("jdbc:sqlite:" + path);
@@ -69,7 +69,7 @@ public class Init
         }
 
         try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
-            Statement statement = connection.createStatement())
+             Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs wdlearn(" +
                     "standard int," +
@@ -90,7 +90,7 @@ public class Init
             return false;
         }
     }
-    
+
     public static boolean initBypass()
     {
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
