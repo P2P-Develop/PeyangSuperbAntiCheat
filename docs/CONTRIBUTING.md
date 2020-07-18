@@ -1,6 +1,6 @@
 # PSAC contribution ルール
 
-For English-speaking users, click [here](docs/CONTRIBUTING-en.md).
+For English-speaking users, click [here](CONTRIBUTING-en.md).
 
 ## 概要
 
@@ -32,4 +32,4 @@ PSACにはPSACの貢献者として適切に貢献するために、少々のル
 
 ### 参照
 
-[こちら](docs/CODE_OF_CONDUCT.md)も見てね！
+[こちら](CODE_OF_CONDUCT.md)も見てね！
