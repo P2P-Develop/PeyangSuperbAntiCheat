@@ -71,8 +71,8 @@ public class Init
         try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
             Statement statement = connection.createStatement())
         {
-            // ↓のデータベース形式を変更する
             statement.execute("CrEaTe TaBlE If NoT ExIsTs wdlearn(" +
+                    "standard int," +
                     "MNGID nchar," +
                     "middleweight nchar" +
                     ");");
