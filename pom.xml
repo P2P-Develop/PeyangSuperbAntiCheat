@@ -123,7 +123,7 @@
         <dependency>
             <groupId>com.github.P2P-Develop</groupId>
             <artifactId>PeyangSuperLibrary</artifactId>
-            <version>11.4.5.1.4</version>
+            <version>11.4.5.14</version>
         </dependency>
 
         <dependency>

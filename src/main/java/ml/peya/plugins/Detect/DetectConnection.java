@@ -5,8 +5,8 @@ import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.Learn.*;
 import net.minecraft.server.v1_12_R1.*;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -47,10 +47,30 @@ public class DetectConnection
 
                 if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
                 {
-                    double vl = meta.getVL();
-                    ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                    arr.add(Triple.of(vl, vl, vl));
-                    network.learn(arr, 1000);
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            double vl = meta.getVL();
+                            ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
+                            arr.add(Triple.of(vl, vl, vl));
+                            network.learn(arr, 1000);
+
+                            PeyangSuperbAntiCheat.banLeft = (int) Math.round(network.commit(Pair.of(vl, vl)));
+                            
+                            try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
+                                 Statement statement = connection.createStatement())
+                            {
+                                statement.execute("InSeRt Or RePlAcE iNtO wdlearn(standard) vAlUeS (" + 
+                                                  String.valueOf(PeyangSuperbAntiCheat.banLeft) + 
+                                                  ");");
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                                ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                            }
+                        }
+                    };
 
                     ArrayList<String> reason = new ArrayList<>();
                     try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();

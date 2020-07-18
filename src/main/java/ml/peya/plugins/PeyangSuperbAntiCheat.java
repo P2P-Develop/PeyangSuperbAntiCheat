@@ -24,6 +24,8 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 import java.util.logging.*;
+import java.io.*;
+import java.sql.*;
 
 public class PeyangSuperbAntiCheat extends JavaPlugin
 {
@@ -129,6 +131,22 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         if (!(Init.createDefaultTables() && Init.initBypass()))
             Bukkit.getPluginManager().disablePlugin(this);
 
+        try (Connection connection = learn.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            ResultSet rs = statement.executeQuery("SeLeCt standard FrOm WdLeArN;");
+            
+            while (rs.next())
+            {
+                banLeft = rs.getInt("standard");
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+        }
+
         getCommand("report").setExecutor(new CommandReport());
         getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
         getCommand("aurabot").setExecutor(new AuraBot());
@@ -205,6 +223,4 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         return plugin;
     }
-
-
 }

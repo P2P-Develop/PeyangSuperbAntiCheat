@@ -21,7 +21,6 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
         commandList.add("view");
         commandList.add("show");
         commandList.add("drop");
-        commandList.add("learn");
         commandList.add("kick");
 
         if (commandList.contains(args[0]))
@@ -41,9 +40,6 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 break;
             case "drop":
                 Drop.run(sender, args);
-                break;
-            case "learn":
-                Learn.run(sender);
                 break;
             case "kick":
                 Kick.run(sender, args);
