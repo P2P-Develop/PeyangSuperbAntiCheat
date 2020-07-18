@@ -41,7 +41,7 @@ public class NeuralNetwork
             middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i)));
         }
 
-        outputLayer.input((ArrayList<Input>) Arrays.asList(new Input(middleLayer[0].getValue(), middleWeight[0]), new Input(middleLayer[1].getValue(), middleWeight[1]), new Input(middleLayerBias, middleWeight[2])));
+        outputLayer.input(new ArrayList<>(Arrays.asList(new Input(middleLayer[0].getValue(), middleWeight[0]), new Input(middleLayer[1].getValue(), middleWeight[1]), new Input(middleLayerBias, middleWeight[2]))));
 
         return outputLayer.getValue();
     }
