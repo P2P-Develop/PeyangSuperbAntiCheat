@@ -1,6 +1,6 @@
 # PSAC contribution rules
 
-まぁまぁ真面目な日本語が欲しいなら[ここ](docs/CONTRIBUTING.md)へ、どうぞ。
+まぁまぁ真面目な日本語が欲しいなら[ここ](CONTRIBUTING.md)へ、どうぞ。
 
 ## Overview
 
@@ -28,4 +28,4 @@ PSAC has established some rules to properly contribute as a PSAC contributor.
 
 ### See also
 
-[Code of Conduct](docs/CODE_OF_CONDUCT.md)
+[Code of Conduct](CODE_OF_CONDUCT.md)
