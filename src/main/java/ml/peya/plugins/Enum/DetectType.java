@@ -8,9 +8,9 @@ public enum DetectType
     AURA_PANIC("AuraPanic"),
     ANTI_KB("TestKB");
 
+    private final String name;
     private int count;
     private CommandSender sender;
-    private final String name;
 
     DetectType(String name)
     {
@@ -24,24 +24,24 @@ public enum DetectType
         return name;
     }
 
-    public void setPanicCount(int time)
-    {
-        this.count = time;
-    }
-
     public int getPanicCount()
     {
         return count;
     }
 
-    public void setSender(CommandSender sender)
+    public void setPanicCount(int time)
     {
-        this.sender = sender;
+        this.count = time;
     }
 
     public CommandSender getSender()
     {
         return sender;
+    }
+
+    public void setSender(CommandSender sender)
+    {
+        this.sender = sender;
     }
 
 }

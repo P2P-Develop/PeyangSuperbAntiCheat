@@ -12,10 +12,10 @@ public enum EnumCheatType
     REACH("Reach", false, "reach"),
     DOLPHIN("Dolphin", false, "dolphin");
     private final String text;
-    private boolean isSelected;
-    private boolean isChecked;
     private final String sysName;
     private final ArrayList<String> alias;
+    private boolean isSelected;
+    private boolean isChecked;
 
     EnumCheatType(String text, boolean isSelected, String sysName, String... alias)
     {

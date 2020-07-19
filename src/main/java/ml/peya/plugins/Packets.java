@@ -16,6 +16,38 @@ import java.util.*;
 
 public class Packets
 {
+    public static JsonNode getSkin(String uuid)
+    {
+        try
+        {
+            HttpsURLConnection connection;
+            connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
+
+            if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK)
+            {
+                PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
+                return null;
+            }
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String readed = reader.readLine();
+            while (readed != null)
+            {
+                builder.append(readed);
+                readed = reader.readLine();
+            }
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readTree(builder.toString());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            return null;
+        }
+    }
+
     public void useEntity(PacketEvent e)
     {
         try
@@ -55,50 +87,22 @@ public class Packets
         if (PeyangSuperbAntiCheat.cheatMeta.getMetaByUUID(infoData.getProfile().getUUID()) == null)
             return;
 
-        PlayerInfoData newInfo = new PlayerInfoData(infoData.getProfile().withName(ChatColor.RED + infoData.getProfile().getName()),
+        PlayerInfoData newInfo = new PlayerInfoData(
+                infoData.getProfile().withName(ChatColor.RED + infoData.getProfile().getName()),
                 0,
                 infoData.getGameMode(),
-                WrappedChatComponent.fromText(ChatColor.RED + infoData.getProfile().getName()));
+                WrappedChatComponent.fromText(ChatColor.RED + infoData.getProfile().getName())
+        );
         List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
         Random random = new Random(infoData.getProfile().getUUID().hashCode());
         JsonNode nodeb = getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
-        newInfo.getProfile().getProperties().put("textures", new WrappedSignedProperty("textures",
+        newInfo.getProfile().getProperties().put("textures", new WrappedSignedProperty(
+                "textures",
                 Objects.requireNonNull(nodeb).get("properties").get(0).get("value").asText(),
-                nodeb.get("properties").get(0).get("signature").asText()));
+                nodeb.get("properties").get(0).get("signature").asText()
+        ));
 
         e.getPacket().getPlayerInfoDataLists().write(0, Collections.singletonList(newInfo));
-    }
-
-    public static JsonNode getSkin(String uuid)
-    {
-        try
-        {
-            HttpsURLConnection connection;
-            connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
-
-            if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK)
-            {
-                PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
-                return null;
-            }
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder builder = new StringBuilder();
-            String readed = reader.readLine();
-            while (readed != null)
-            {
-                builder.append(readed);
-                readed = reader.readLine();
-            }
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.readTree(builder.toString());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-            return null;
-        }
     }
 
 }

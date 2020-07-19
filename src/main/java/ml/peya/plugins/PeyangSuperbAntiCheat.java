@@ -22,33 +22,27 @@ import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.*;
 import org.bukkit.scheduler.*;
 
+import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
-import java.io.*;
-import java.sql.*;
 
 public class PeyangSuperbAntiCheat extends JavaPlugin
 {
+    private static final int __BSTATS_PLUGIN_ID = 8084;
     public static Logger logger = Logger.getLogger("PeyangSuperbAntiCheat");
-
     public static FileConfiguration config;
-
     public static String databasePath;
     public static String banKickPath;
     public static String learnPath;
-
     public static DetectingList cheatMeta;
     public static KillCounting counting;
     public static ProtocolManager protocolManager;
     public static Item item;
     public static Tracker tracker;
     public static HashMap<UUID, HashMap<String, String>> mods;
-
     public static long time = 0L;
     public static int banLeft;
-
     public static NeuralNetwork network;
-
     public static HikariDataSource eye;
     public static HikariDataSource banKick;
     public static HikariDataSource learn;
@@ -56,10 +50,12 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static boolean isTrackEnabled;
     public static BukkitRunnable autoMessage;
     public static BukkitRunnable trackerTask;
-
     private static PeyangSuperbAntiCheat plugin;
 
-    private static final int __BSTATS_PLUGIN_ID = 8084;
+    public static PeyangSuperbAntiCheat getPlugin()
+    {
+        return plugin;
+    }
 
     @Override
     public void onEnable()
@@ -135,7 +131,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
              Statement statement = connection.createStatement())
         {
             ResultSet rs = statement.executeQuery("SeLeCt standard FrOm WdLeArN;");
-            
+
             while (rs.next())
             {
                 banLeft = rs.getInt("standard");
@@ -217,10 +213,5 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         }
 
         logger.info("PeyangSuperbAntiCheat has disabled!");
-    }
-
-    public static PeyangSuperbAntiCheat getPlugin()
-    {
-        return plugin;
     }
 }

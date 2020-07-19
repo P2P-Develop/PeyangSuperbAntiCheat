@@ -45,9 +45,7 @@ public final class ReflectionUtils
         for (Constructor<?> constructor : clazz.getConstructors())
         {
             if (!DataType.compare(DataType.getPrimitive(constructor.getParameterTypes()), primitiveTypes))
-            {
                 continue;
-            }
             return constructor;
         }
         throw new NoSuchMethodException("There is no such constructor in this class with the specified parameter types");
@@ -123,9 +121,7 @@ public final class ReflectionUtils
         for (Method method : clazz.getMethods())
         {
             if (!method.getName().equals(methodName) || !DataType.compare(DataType.getPrimitive(method.getParameterTypes()), primitiveTypes))
-            {
                 continue;
-            }
             return method;
         }
         throw new NoSuchMethodException("There is no such method in this class with the specified name and parameter types");
@@ -545,9 +541,7 @@ public final class ReflectionUtils
             int length = classes == null ? 0 : classes.length;
             Class<?>[] types = new Class<?>[length];
             for (int index = 0; index < length; index++)
-            {
                 types[index] = getPrimitive(classes[index]);
-            }
             return types;
         }
 
@@ -562,9 +556,7 @@ public final class ReflectionUtils
             int length = classes == null ? 0 : classes.length;
             Class<?>[] types = new Class<?>[length];
             for (int index = 0; index < length; index++)
-            {
                 types[index] = getReference(classes[index]);
-            }
             return types;
         }
 
@@ -579,9 +571,7 @@ public final class ReflectionUtils
             int length = objects == null ? 0 : objects.length;
             Class<?>[] types = new Class<?>[length];
             for (int index = 0; index < length; index++)
-            {
                 types[index] = getPrimitive(objects[index].getClass());
-            }
             return types;
         }
 
@@ -596,9 +586,7 @@ public final class ReflectionUtils
             int length = objects == null ? 0 : objects.length;
             Class<?>[] types = new Class<?>[length];
             for (int index = 0; index < length; index++)
-            {
                 types[index] = getReference(objects[index].getClass());
-            }
             return types;
         }
 
@@ -612,17 +600,13 @@ public final class ReflectionUtils
         public static boolean compare(Class<?>[] primary, Class<?>[] secondary)
         {
             if (primary == null || secondary == null || primary.length != secondary.length)
-            {
                 return false;
-            }
             for (int index = 0; index < primary.length; index++)
             {
                 Class<?> primaryClass = primary[index];
                 Class<?> secondaryClass = secondary[index];
                 if (primaryClass.equals(secondaryClass) || primaryClass.isAssignableFrom(secondaryClass))
-                {
                     continue;
-                }
                 return false;
             }
             return true;

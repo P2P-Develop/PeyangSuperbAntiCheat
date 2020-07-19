@@ -25,6 +25,19 @@ import java.util.zip.*;
 public class Metrics
 {
 
+    // The version of this bStats class
+    public static final int B_STATS_VERSION = 1;
+    // The url to which the data is sent
+    private static final String URL = "https://bStats.org/submitData/bukkit";
+    // Should failed requests be logged?
+    private static boolean logFailedRequests;
+    // Should the sent data be logged?
+    private static boolean logSentData;
+    // Should the response text be logged?
+    private static boolean logResponseStatusText;
+    // The uuid of the server
+    private static String serverUUID;
+
     static
     {
         // You can use the property to disable the check in your test environment
@@ -36,33 +49,13 @@ public class Metrics
             final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
             // We want to make sure nobody just copy & pastes the example and use the wrong package names
             if (Metrics.class.getPackage().getName().equals(defaultPackage) || Metrics.class.getPackage().getName().equals(examplePackage))
-            {
                 throw new IllegalStateException("bStats Metrics class has not been relocated correctly!");
-            }
+
         }
     }
 
-    // The version of this bStats class
-    public static final int B_STATS_VERSION = 1;
-
-    // The url to which the data is sent
-    private static final String URL = "https://bStats.org/submitData/bukkit";
-
     // Is bStats enabled on this server?
     private final boolean enabled;
-
-    // Should failed requests be logged?
-    private static boolean logFailedRequests;
-
-    // Should the sent data be logged?
-    private static boolean logSentData;
-
-    // Should the response text be logged?
-    private static boolean logResponseStatusText;
-
-    // The uuid of the server
-    private static String serverUUID;
-
     // The plugin
     private final Plugin plugin;
 
@@ -82,9 +75,8 @@ public class Metrics
     public Metrics(Plugin plugin, int pluginId)
     {
         if (plugin == null)
-        {
             throw new IllegalArgumentException("Plugin cannot be null!");
-        }
+
         this.plugin = plugin;
         this.pluginId = pluginId;
 
@@ -158,6 +150,72 @@ public class Metrics
     }
 
     /**
+     * Sends the data to the bStats server.
+     *
+     * @param plugin Any plugin. It's just used to get a logger instance.
+     * @param data   The data to send.
+     * @throws Exception If the request failed.
+     */
+    private static void sendData(Plugin plugin, JsonObject data) throws Exception
+    {
+        if (data == null)
+            throw new IllegalArgumentException("Data cannot be null!");
+        if (Bukkit.isPrimaryThread())
+            throw new IllegalAccessException("This method must not be called from the main thread!");
+        if (logSentData)
+            plugin.getLogger().info("Sending data to bStats: " + data);
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
+
+        // Compress the data to save bandwidth
+        byte[] compressedData = compress(data.toString());
+
+        // Add headers
+        connection.setRequestMethod("POST");
+        connection.addRequestProperty("Accept", "application/json");
+        connection.addRequestProperty("Connection", "close");
+        connection.addRequestProperty("Content-Encoding", "gzip"); // We gzip our request
+        connection.addRequestProperty("Content-Length", String.valueOf(compressedData.length));
+        connection.setRequestProperty("Content-Type", "application/json"); // We send our data in JSON format
+        connection.setRequestProperty("User-Agent", "MC-Server/" + B_STATS_VERSION);
+
+        // Send data
+        connection.setDoOutput(true);
+        try (DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream()))
+        {
+            outputStream.write(compressedData);
+        }
+        StringBuilder builder = new StringBuilder();
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
+        {
+            String line;
+            while ((line = bufferedReader.readLine()) != null)
+                builder.append(line);
+        }
+
+        if (logResponseStatusText)
+            plugin.getLogger().info("Sent data to bStats and received response: " + builder);
+    }
+
+    /**
+     * Gzips the given String.
+     *
+     * @param str The string to gzip.
+     * @return The gzipped String.
+     * @throws IOException If the compression failed.
+     */
+    private static byte[] compress(final String str) throws IOException
+    {
+        if (str == null)
+            return null;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try (GZIPOutputStream gzip = new GZIPOutputStream(outputStream))
+        {
+            gzip.write(str.getBytes(StandardCharsets.UTF_8));
+        }
+        return outputStream.toByteArray();
+    }
+
+    /**
      * Checks if bStats is enabled.
      *
      * @return Whether bStats is enabled or not.
@@ -175,9 +233,7 @@ public class Metrics
     public void addCustomChart(CustomChart chart)
     {
         if (chart == null)
-        {
             throw new IllegalArgumentException("Chart cannot be null!");
-        }
         charts.add(chart);
     }
 
@@ -311,9 +367,7 @@ public class Metrics
                     {
                         Object plugin = provider.getService().getMethod("getPluginData").invoke(provider.getProvider());
                         if (plugin instanceof JsonObject)
-                        {
                             pluginData.add((JsonObject) plugin);
-                        }
                         else
                         { // old bstats version compatibility
                             try
@@ -332,9 +386,7 @@ public class Metrics
                             {
                                 // minecraft version 1.14+
                                 if (logFailedRequests)
-                                {
                                     this.plugin.getLogger().log(Level.SEVERE, "Encountered unexpected exception", e);
-                                }
                             }
                         }
                     }
@@ -361,90 +413,9 @@ public class Metrics
             {
                 // Something went wrong! :(
                 if (logFailedRequests)
-                {
                     plugin.getLogger().log(Level.WARNING, "Could not submit plugin stats of " + plugin.getName(), e);
-                }
             }
         }).start();
-    }
-
-    /**
-     * Sends the data to the bStats server.
-     *
-     * @param plugin Any plugin. It's just used to get a logger instance.
-     * @param data   The data to send.
-     * @throws Exception If the request failed.
-     */
-    private static void sendData(Plugin plugin, JsonObject data) throws Exception
-    {
-        if (data == null)
-        {
-            throw new IllegalArgumentException("Data cannot be null!");
-        }
-        if (Bukkit.isPrimaryThread())
-        {
-            throw new IllegalAccessException("This method must not be called from the main thread!");
-        }
-        if (logSentData)
-        {
-            plugin.getLogger().info("Sending data to bStats: " + data);
-        }
-        HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
-
-        // Compress the data to save bandwidth
-        byte[] compressedData = compress(data.toString());
-
-        // Add headers
-        connection.setRequestMethod("POST");
-        connection.addRequestProperty("Accept", "application/json");
-        connection.addRequestProperty("Connection", "close");
-        connection.addRequestProperty("Content-Encoding", "gzip"); // We gzip our request
-        connection.addRequestProperty("Content-Length", String.valueOf(compressedData.length));
-        connection.setRequestProperty("Content-Type", "application/json"); // We send our data in JSON format
-        connection.setRequestProperty("User-Agent", "MC-Server/" + B_STATS_VERSION);
-
-        // Send data
-        connection.setDoOutput(true);
-        try (DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream()))
-        {
-            outputStream.write(compressedData);
-        }
-
-        StringBuilder builder = new StringBuilder();
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
-        {
-            String line;
-            while ((line = bufferedReader.readLine()) != null)
-            {
-                builder.append(line);
-            }
-        }
-
-        if (logResponseStatusText)
-        {
-            plugin.getLogger().info("Sent data to bStats and received response: " + builder);
-        }
-    }
-
-    /**
-     * Gzips the given String.
-     *
-     * @param str The string to gzip.
-     * @return The gzipped String.
-     * @throws IOException If the compression failed.
-     */
-    private static byte[] compress(final String str) throws IOException
-    {
-        if (str == null)
-        {
-            return null;
-        }
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try (GZIPOutputStream gzip = new GZIPOutputStream(outputStream))
-        {
-            gzip.write(str.getBytes(StandardCharsets.UTF_8));
-        }
-        return outputStream.toByteArray();
     }
 
     /**
@@ -464,9 +435,7 @@ public class Metrics
         CustomChart(String chartId)
         {
             if (chartId == null || chartId.isEmpty())
-            {
                 throw new IllegalArgumentException("ChartId cannot be null or empty!");
-            }
             this.chartId = chartId;
         }
 

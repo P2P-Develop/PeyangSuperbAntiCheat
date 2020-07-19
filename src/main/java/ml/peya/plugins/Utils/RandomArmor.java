@@ -76,9 +76,7 @@ public class RandomArmor
         swords.add(Material.STONE_AXE);
         swords.add(Material.WOOD_AXE);
         for (int i = 0; i < 5; i++)
-        {
             swords.add(Material.AIR);
-        }
 
         return getRandomItems(swords);
     }
@@ -113,9 +111,11 @@ public class RandomArmor
         if (stack.getType() == Material.LEATHER_BOOTS || stack.getType() == Material.LEATHER_CHESTPLATE || stack.getType() == Material.LEATHER_HELMET || stack.getType() == Material.LEATHER_LEGGINGS)
         {
             LeatherArmorMeta meta = (LeatherArmorMeta) stack.getItemMeta();
-            meta.setColor(Color.fromRGB(random.nextInt(254),
+            meta.setColor(Color.fromRGB(
                     random.nextInt(254),
-                    random.nextInt(254)));
+                    random.nextInt(254),
+                    random.nextInt(254)
+            ));
             stack.setItemMeta(meta);
         }
 

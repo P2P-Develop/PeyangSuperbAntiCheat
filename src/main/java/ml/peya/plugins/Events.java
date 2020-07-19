@@ -77,8 +77,10 @@ public class Events implements Listener
                 "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED +
                 "] ");
         builder.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()));
-        builder.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()));
+        builder.event(new HoverEvent(
+                HoverEvent.Action.SHOW_TEXT,
+                new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()
+        ));
 
         BaseComponent[] component = builder.create();
 
@@ -127,11 +129,14 @@ public class Events implements Listener
             {
                 JsonNode node = Packets.getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
 
-                tab.getProfile().getProperties().put("textures",
+                tab.getProfile().getProperties().put(
+                        "textures",
                         new Property(
                                 "textures",
                                 Objects.requireNonNull(node).get("properties").get(0).get("value").asText(),
-                                node.get("properties").get(0).get("signature").asText()));
+                                node.get("properties").get(0).get("signature").asText()
+                        )
+                );
 
                 connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, tab));
             }

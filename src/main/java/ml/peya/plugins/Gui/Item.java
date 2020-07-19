@@ -15,27 +15,6 @@ public class Item
         this.items = new ArrayList<>();
     }
 
-    public void register(IItems item)
-    {
-        for (IItems items : this.items)
-        {
-            if (items.getExecName().equals(item.getExecName()))
-                return;
-        }
-
-        items.add(item);
-    }
-
-    public void unRegister(IItems item)
-    {
-        this.items.removeIf(iItems -> iItems.getExecName().equals(item.getExecName()));
-    }
-
-    public ArrayList<IItems> getItems()
-    {
-        return items;
-    }
-
     public static boolean canGuiItem(ItemStack item)
     {
         if (item == null || item.getType() == Material.AIR || !item.hasItemMeta())
@@ -80,6 +59,27 @@ public class Item
         list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Type: " + item.getType());
 
         return list;
+    }
+
+    public void register(IItems item)
+    {
+        for (IItems items : this.items)
+        {
+            if (items.getExecName().equals(item.getExecName()))
+                return;
+        }
+
+        items.add(item);
+    }
+
+    public void unRegister(IItems item)
+    {
+        this.items.removeIf(iItems -> iItems.getExecName().equals(item.getExecName()));
+    }
+
+    public ArrayList<IItems> getItems()
+    {
+        return items;
     }
 
 }

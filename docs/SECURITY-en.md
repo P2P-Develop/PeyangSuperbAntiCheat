@@ -12,5 +12,5 @@
 
 ## Reporting a Vulnerability
 
-If you find a security vulnerability, issue with \[security\] label and report the [GitHub Issue](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues) .  
+If you find a security vulnerability, issue with \[security\] label and report the [GitHub Issues](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues).  
 If a vulnerability is proven, it will be added to [Vulnerabilities.md](Vulnerabilities.md).  

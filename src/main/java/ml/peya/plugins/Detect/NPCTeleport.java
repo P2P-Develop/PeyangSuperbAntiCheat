@@ -158,12 +158,14 @@ public class NPCTeleport
                         rangeTmp = wave.get(0.01, true);
 
                     Location center = player.getLocation();
-                    Location n = new Location(center.getWorld(),
+                    Location n = new Location(
+                            center.getWorld(),
                             auraBot_xPos(time[0], rangeTmp + speed) + center.getX(),
                             center.getY() + creator.get(0.01, count[0] < 20),
                             auraBot_zPos(time[0], rangeTmp + speed, yaw) + center.getZ(),
                             (float) ypp.getStatic(),
-                            (float) ypp.get(4.5, false));
+                            (float) ypp.get(4.5, false)
+                    );
 
                     NPC.setLocation(n, target);
                     connection.sendPacket(new PacketPlayOutEntityTeleport(target));
