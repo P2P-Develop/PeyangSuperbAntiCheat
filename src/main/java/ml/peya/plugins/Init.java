@@ -14,7 +14,6 @@ public class Init
         File file = new File(path);
         file.getParentFile().mkdirs();
 
-
         hConfig.setDriverClassName("org.sqlite.JDBC");
         hConfig.setJdbcUrl("jdbc:sqlite:" + path);
 
