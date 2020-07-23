@@ -39,7 +39,6 @@ public class Init
                     "MNGID nchar," +
                     "LEVEL int" +
                     ");");
-
         }
         catch (Exception e)
         {
