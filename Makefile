@@ -1,4 +1,3 @@
-EXCLUSIONS := .DS_Store .git .gitmodules
 PSACFILES  := $(shell ls src/main/java/ml/peya/plugins --color=auto)
 
 .DEFAULT_GOAL := help
