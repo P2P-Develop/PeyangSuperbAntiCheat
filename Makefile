@@ -28,8 +28,5 @@ help: ## Self-documented Makefile
 maven: ## Compile and Package to .jar file
   mvn package
 
-test: ## Test source with JUnit
-  mvn test
-
 install: ## Execute install command
   bash install
