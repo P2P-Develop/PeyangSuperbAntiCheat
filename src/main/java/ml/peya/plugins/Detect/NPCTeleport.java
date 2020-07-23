@@ -1,6 +1,7 @@
 package ml.peya.plugins.Detect;
 
 import develop.p2p.lib.*;
+import ml.peya.plugins.DetectClasses.CheatDetectNowMeta;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
@@ -14,14 +15,22 @@ import org.bukkit.util.Vector;
 
 import java.util.*;
 
+import static ml.peya.plugins.Utils.LookingUtils.isLooking;
+
 public class NPCTeleport
 {
     public static void teleport(Player player, EntityPlayer target, ItemStack[] arm, DetectType tpCase)
     {
-        if (tpCase == DetectType.AURA_BOT)
-            auraBot_teleport(player, target, arm);
-        else if (tpCase == DetectType.AURA_PANIC)
-            auraPanic_teleport(player, target, arm, tpCase.getPanicCount(), tpCase.getSender());
+        switch (tpCase) {
+            case AURA_BOT:
+                auraBot_teleport(player, target, arm);
+                break;
+            case AURA_PANIC:
+                auraPanic_teleport(player, target, arm, tpCase.getPanicCount(), tpCase.getSender());
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + tpCase);
+        }
     }
 
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender)
@@ -35,14 +44,12 @@ public class NPCTeleport
         int sec = PeyangSuperbAntiCheat.config.getInt("npc.seconds");
         double delay = (1.5 / count) * sec;
 
-
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
                 now[0]++;
-
 
                 PacketPlayOutAnimation animation = new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 1);
                 connection.sendPacket(animation);
@@ -63,7 +70,6 @@ public class NPCTeleport
             {
                 for (double i = 0; i < Math.PI * 2; i++)
                 {
-
                     Location center = player.getLocation();
 
                     if (center.getPitch() <= 0.0f || center.getPitch() > 15.0f)
@@ -94,16 +100,12 @@ public class NPCTeleport
                         @Override
                         public void run()
                         {
-                            for (Player p : Bukkit.getOnlinePlayers())
-                            {
-                                if (!p.hasPermission("psac.viewnpc"))
-                                    continue;
+                            Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("psac.viewnpc")).forEachOrdered(p -> {
                                 PlayerConnection c = ((CraftPlayer) p).getHandle().playerConnection;
                                 c.sendPacket(new PacketPlayOutEntityTeleport(target));
                                 connection.sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) finalHead));
-
                                 NPC.setArmor(p, target, arm);
-                            }
+                            });
                             this.cancel();
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
@@ -142,13 +144,9 @@ public class NPCTeleport
                 double speed = 0.0;
 
                 if (player.hasMetadata("speed"))
-                {
                     for (MetadataValue value : player.getMetadata("speed"))
-                    {
                         if (value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName()))
                             speed = value.asDouble() * 2.0;
-                    }
-                }
                 for (double i = 0; i < Math.PI * 2; i++)
                 {
 
@@ -162,7 +160,7 @@ public class NPCTeleport
                             center.getWorld(),
                             auraBot_xPos(time[0], rangeTmp + speed) + center.getX(),
                             center.getY() + creator.get(0.01, count[0] < 20),
-                            auraBot_zPos(time[0], rangeTmp + speed, yaw) + center.getZ(),
+                            auraBot_zPos(time[0], rangeTmp + speed) + center.getZ(),
                             (float) ypp.getStatic(),
                             (float) ypp.get(4.5, false)
                     );
@@ -188,6 +186,9 @@ public class NPCTeleport
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     count[0]++;
+                    CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
+                    if (meta == null) continue;
+                    meta.addSeconds(isLooking(player, n) || isLooking(player, n.add(0, 1, 0)) ? 0.01 : -0.01);
                 }
                 time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time") + (speedWaveFlag ? speedWave.get(0.001, true) : 0.0);
             }
@@ -206,9 +207,9 @@ public class NPCTeleport
 
     }
 
-    private static double auraBot_zPos(double time, double radius, double yaw)
+    private static double auraBot_zPos(double time, double radius)
     {
-        return Math.sin(time) * radius * Math.cos(Math.PI / 180 * yaw);
+        return Math.sin(time) * radius * Math.cos(Math.PI / 180 * 360.0);
     }
 
     private static double auraBot_xPos(double time, double radius)

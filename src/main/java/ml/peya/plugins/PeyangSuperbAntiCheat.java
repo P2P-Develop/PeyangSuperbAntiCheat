@@ -42,6 +42,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static HashMap<UUID, HashMap<String, String>> mods;
     public static long time = 0L;
     public static int banLeft;
+    public static int learnCountLimit;
+    public static int learnCount;
     public static NeuralNetwork network;
     public static HikariDataSource eye;
     public static HikariDataSource banKick;
@@ -161,6 +163,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         isAutoMessageEnabled = config.getBoolean("autoMessage.enabled");
         time = config.getLong("autoMessage.time");
+        learnCountLimit = config.getInt("npc.learncount");
 
         if (time == 0L)
             time = 1L;

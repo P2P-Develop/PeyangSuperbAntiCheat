@@ -38,6 +38,10 @@ npc:
   #Doubleのため小数第一位以降も設定可能です。
   learn: 0.3
 
+  #学習機能がこの回数以上学習した場合にkickの評価を学習機能に譲渡します。
+  #適切な値に変更してください。
+  learncount: 15
+
   speed:
     wave: true
     waveRange: 0.03

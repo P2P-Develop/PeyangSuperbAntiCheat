@@ -5,11 +5,6 @@ public class Input
     private double value;
     private double weight;
 
-    public Input()
-    {
-
-    }
-
     public Input(double value, double weight)
     {
         setValue(value);
