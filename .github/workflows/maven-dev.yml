@@ -25,8 +25,7 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Install
         run: |
-          mkdir -p ${GITHUB_WORKSPACE}/ins
-          bash ${GITHUB_WORKSPACE}/install ${GITHUB_WORKSPACE} ${GITHUB_WORKSPACE}/ins
+          mkdir -p ${GITHUB_WORKSPACE}/ins && make install ${GITHUB_WORKSPACE} ${GITHUB_WORKSPACE}/ins
 
   build-macos:
 
@@ -42,5 +41,4 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Install
         run: |
-          mkdir -p ${GITHUB_WORKSPACE}/ins
-          bash ${GITHUB_WORKSPACE}/install ${GITHUB_WORKSPACE} ${GITHUB_WORKSPACE}/ins
+          mkdir -p ${GITHUB_WORKSPACE}/ins && make install ${GITHUB_WORKSPACE} ${GITHUB_WORKSPACE}/ins
