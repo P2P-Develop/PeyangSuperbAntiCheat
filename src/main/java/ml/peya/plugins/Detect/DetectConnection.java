@@ -44,12 +44,16 @@ public class DetectConnection
             {
                 meta.setCanTesting(false);
 
+                String mng = UUID.randomUUID().toString();
+
                 try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
-                    Statement statement = connection.createStatement())
+                     Statement statement = connection.createStatement())
                 {
-                    statement.execute("InSeRt Or RePlAcE iNtO wdlearn(learncount) vAlUeS (" +
+                    statement.execute("InSeRt iNtO wdlearn vAlUeS (" +
                             PeyangSuperbAntiCheat.learnCountLimit +
-                            ");");
+                            ", 0, \"" +
+                            mng +
+                            "\", 0);");
 
                     ResultSet result = statement.executeQuery("SeLeCt * fRoM wDlEaRn");
                     while (result.next())
@@ -76,10 +80,9 @@ public class DetectConnection
                                 try (Connection connection2 = PeyangSuperbAntiCheat.learn.getConnection();
                                      Statement statement2 = connection2.createStatement())
                                 {
-                                    statement2.execute("InSeRt Or RePlAcE iNtO wdlearn(standard) vAlUeS (" +
-                                            PeyangSuperbAntiCheat.banLeft + ", " +
-                                            UUID.randomUUID().toString() + ", " +
-                                            ");");
+                                    statement2.execute("update wdlearn set " +
+                                            "learncount = " + PeyangSuperbAntiCheat.banLeft + " " +
+                                            "where MNGID = \"" + mng + "\"");
                                 }
                                 catch (Exception e)
                                 {
@@ -112,7 +115,7 @@ public class DetectConnection
 
                         ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
 
-                        KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura" : "Report: " + String.join(", ", realReason)), true, false);
+                        KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
 
                     }
                 }
@@ -128,7 +131,7 @@ public class DetectConnection
                     @Override
                     public void run()
                     {
-                        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") "));
+                        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") "));
 
                         switch (type)
                         {

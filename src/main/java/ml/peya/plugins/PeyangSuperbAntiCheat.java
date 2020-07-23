@@ -132,7 +132,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         try (Connection connection = learn.getConnection();
              Statement statement = connection.createStatement())
         {
-            ResultSet rs = statement.executeQuery("SeLeCt standard FrOm WdLeArN;");
+            ResultSet rs = statement.executeQuery("SeLeCt * FrOm wdlearn;");
 
             while (rs.next())
             {

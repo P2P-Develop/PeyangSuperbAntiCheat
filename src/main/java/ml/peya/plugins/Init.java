@@ -92,7 +92,7 @@ public class Init
 
     public static boolean initBypass()
     {
-        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+        /*try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
         {
             long ctl = 0;
@@ -117,6 +117,7 @@ public class Init
         {
             e.printStackTrace();
             return false;
-        }
+        }*/
+        return true;
     }
 }
