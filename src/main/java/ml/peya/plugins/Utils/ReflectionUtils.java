@@ -20,7 +20,7 @@ import java.util.stream.IntStream;
  * <i>It would be nice if you provide credit to me if you use this class in a published project</i>
  * <p>This class SUPER COMPRESSION patched by Potato1682.</p>
  *
- * @author Potato1682
+ * @author DarkBlade12
  * @version 1.1-ptt
  */
 public final class ReflectionUtils
