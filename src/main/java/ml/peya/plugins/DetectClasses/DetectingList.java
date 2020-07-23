@@ -28,32 +28,21 @@ public class DetectingList
 
     public void remove(UUID uuid)
     {
-        this.meta.removeIf(meta -> meta.getUuids() == uuid);
+        this.meta.removeIf(meta -> meta.getUUIDs() == uuid);
     }
 
     public CheatDetectNowMeta getMetaByUUID(UUID uuid)
     {
-        for (CheatDetectNowMeta meta : this.meta)
-        {
-            if (meta.getUuids() == uuid)
-                return meta;
-        }
-        return null;
+        return this.meta.stream().filter(meta -> meta.getUUIDs() == uuid).findFirst().orElse(null);
     }
 
     public CheatDetectNowMeta getMetaByPlayerUUID(UUID uuid)
     {
-        for (CheatDetectNowMeta meta : this.meta)
-        {
-            if (meta.getTarget().getUniqueId() == uuid)
-                return meta;
-        }
-        return null;
+        return this.meta.stream().filter(meta -> meta.getTarget().getUniqueId() == uuid).findFirst().orElse(null);
     }
 
     public boolean exists(UUID uuid)
     {
-        CheatDetectNowMeta meta = this.getMetaByPlayerUUID(uuid);
-        return meta != null;
+        return this.getMetaByPlayerUUID(uuid) != null;
     }
 }

@@ -37,6 +37,7 @@
                                     <include>com.fasterxml.jackson.core:*</include>
                                     <include>com.zaxxer:*</include>
                                     <include>com.github.P2P-Develop:*</include>
+                                    <indlude>org.nd4j:*</indlude>
                                 </includes>
                             </artifactSet>
                         </configuration>
@@ -130,6 +131,18 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.11</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-jblas</artifactId>
+            <version>0.4-rc3.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.nd4j</groupId>
+            <artifactId>nd4j-perf</artifactId>
+            <version>0.4-rc3.6</version>
         </dependency>
 
     </dependencies>

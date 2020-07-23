@@ -9,16 +9,14 @@ import java.util.stream.*;
 
 public class NeuralNetwork
 {
-    final static Random random = new Random();
-    final static double weightRange = 10.0;
-    static double RandomWeight = (random.nextDouble() - 0.5) * weightRange;
-    final double inputLayerBias = 1.0;
-    final double middleLayerBias = 1.0;
-    double[] inputLayer;
-    Neuron[] middleLayer;
-    Neuron outputLayer;
-    double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
-    double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
+    private final static Random random = new Random();
+    private final static double weightRange = 10.0;
+    private static final double RandomWeight = (random.nextDouble() - 0.5) * weightRange;
+    private final double middleLayerBias = 1.0;
+    private double[] inputLayer;
+    private Neuron[] middleLayer;
+    private final double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
+    private final double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
 
     public static double[] getColumn(double[][] array, int index)
     {
@@ -31,23 +29,18 @@ public class NeuralNetwork
     {
         ArrayList<Input> it = new ArrayList<>();
         int count = 0;
-        for (double layer : inputLayer)
-        {
-            Input input = new Input(layer, inputWeight[count] - 1);
-            it.add(input);
-            count++;
-        }
+        for (double layer : inputLayer) it.add(new Input(layer, inputWeight[count++] - 1));
         return it;
     }
 
     public double commit(Pair<Double, Double> data)
     {
+        double inputLayerBias = 1.0;
         inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
         middleLayer = new Neuron[]{new Neuron(), new Neuron()};
-        outputLayer = new Neuron();
+        Neuron outputLayer = new Neuron();
 
-        for (int i = 0; i < middleLayer.length; i++)
-            middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i)));
+        IntStream.range(0, middleLayer.length).forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
 
         outputLayer.input(new ArrayList<>(Arrays.asList(new Input(middleLayer[0].getValue(), middleWeight[0]), new Input(middleLayer[1].getValue(), middleWeight[1]), new Input(middleLayerBias, middleWeight[2]))));
 
@@ -56,7 +49,7 @@ public class NeuralNetwork
 
     public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int times)
     {
-        IntStream.range(0, times).<Consumer<? super Triple<Double, Double, Double>>>mapToObj(i -> this::learn).forEach(dataCollection::forEach);
+        IntStream.range(0, times).<Consumer<? super Triple<Double, Double, Double>>>mapToObj(i -> this::learn).forEachOrdered(dataCollection::forEach);
     }
 
     void learn(Triple<Double, Double, Double> data)
@@ -70,7 +63,8 @@ public class NeuralNetwork
         double deltaMO = (correctValue - outputData) * outputData * (1.0 - outputData);
         double[] oldMiddleWeight = middleWeight.clone();
 
-        IntStream.range(0, middleLayer.length).forEach(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
+        int bound = middleLayer.length;
+        IntStream.range(0, bound).forEachOrdered(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
 
         middleWeight[2] += middleLayerBias * deltaMO * learningRate;
 

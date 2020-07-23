@@ -10,6 +10,7 @@ public class CheatDetectNowMeta
     private final Player target;
     private final UUID uuids;
     private final int id;
+    private double seconds;
     private final DetectType type;
     private int VL;
     private boolean canTesting = false;
@@ -37,7 +38,7 @@ public class CheatDetectNowMeta
         return target;
     }
 
-    public UUID getUuids()
+    public UUID getUUIDs()
     {
         return uuids;
     }
@@ -67,5 +68,20 @@ public class CheatDetectNowMeta
     public DetectType getType()
     {
         return type;
+    }
+
+    public double getSeconds()
+    {
+        return seconds;
+    }
+
+    public void setSeconds(double seconds)
+    {
+        this.seconds = seconds;
+    }
+
+    public void addSeconds(double seconds)
+    {
+        this.seconds += seconds;
     }
 }

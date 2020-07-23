@@ -71,6 +71,7 @@ public class Init
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs wdlearn(" +
+                    "learncount int," +
                     "standard int," +
                     "MNGID nchar," +
                     "middleweight nchar" +
@@ -105,7 +106,6 @@ public class Init
                 ctl += cot;
 
                 cBypass++;
-
             }
 
             if (cBypass - 1 != 0)
