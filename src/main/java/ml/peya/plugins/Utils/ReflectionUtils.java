@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
  * </ul>
  * <p>
  * <i>It would be nice if you provide credit to me if you use this class in a published project</i>
- * <p>This class SUPER COMPRESSION patched by Potato1682.</p>
+ * <p>This class SUPER COMPRESSION patch applied by Potato1682.</p>
  *
  * @author DarkBlade12
  * @version 1.1-ptt
