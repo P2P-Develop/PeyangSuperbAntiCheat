@@ -77,6 +77,9 @@ public class DetectConnection
 
                                 PeyangSuperbAntiCheat.banLeft = (int) Math.round(network.commit(Pair.of(vl, vl)));
 
+                                if (WatchEyeManagement.isInjection(mng))
+                                    return;
+
                                 try (Connection connection2 = PeyangSuperbAntiCheat.learn.getConnection();
                                      Statement statement2 = connection2.createStatement())
                                 {
@@ -98,6 +101,8 @@ public class DetectConnection
                              Statement statement3 = connection3.createStatement();
                              Statement statement4 = connection3.createStatement())
                         {
+                            if (WatchEyeManagement.isInjection(player.getName()))
+                                return;
                             ResultSet rs = statement3.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
                             while (rs.next())
                             {

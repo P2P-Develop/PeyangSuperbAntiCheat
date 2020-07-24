@@ -84,6 +84,7 @@ permissions:
       psac.mods: true
       psac.tracking: true
       psac.silentteleport: true
+      psac.member: true
 
   psac.admin:
     description: このプラグインすべての権限を持ちます。

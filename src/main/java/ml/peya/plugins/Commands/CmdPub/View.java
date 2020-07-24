@@ -1,5 +1,6 @@
 package ml.peya.plugins.Commands.CmdPub;
 
+import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Moderate.*;
@@ -45,7 +46,10 @@ public class View
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
         {
-            String idReq = nameFlag ? String.format("WhErE id = '%s'", offName) : "";
+            String idReq = nameFlag ? String.format("WhErE id = '%s'", offName): "";
+
+            if (WatchEyeManagement.isInjection(idReq))
+                return;
             String query = "SeLeCt * FrOm WaTcHeYe " + idReq + " OrDer By LeVel DeSc LiMiT 5 OfFsEt " + start;
             ResultSet result = statement.executeQuery(query);
             while (result.next())
@@ -54,6 +58,8 @@ public class View
                 String id = result.getString("ID");
                 String issuebyid = result.getString("ISSUEBYID");
                 String mngid = result.getString("MNGID");
+                if (WatchEyeManagement.isInjection(mngid))
+                    return;
 
                 ResultSet reason = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
                 ArrayList<EnumCheatType> types = new ArrayList<>();

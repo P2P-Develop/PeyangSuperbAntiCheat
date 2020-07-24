@@ -29,6 +29,7 @@ public class Drop
             statement.execute("DeLeTe FrOm WaTcHrEaSon WHeRe MnGiD = '" + args[1] + "'");
             sender.sendMessage(MessageEngine.get("message.drop.success"));
 
+
         }
         catch (Exception e)
         {

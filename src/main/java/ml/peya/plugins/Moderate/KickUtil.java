@@ -1,5 +1,6 @@
 package ml.peya.plugins.Moderate;
 
+import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
@@ -106,10 +107,10 @@ public class KickUtil
             kickS.execute("InSeRt InTo KiCk VaLuEs(" +
                     "'" + player.getName().replace("'", "\\'") + "'," +
                     "'" + player.getUniqueId().toString().replace("'", "\\'") + "'," +
-                    "'" + id.toString() + "'," +
+                    "'" + id.toString().replace("'", "\\'") + "'," +
                     "" + new Date().getTime() + "," +
                     "'" + reason.replace("'", "\\'") + "', " +
-                    (opFlag ? 1 : 0) +
+                    (opFlag ? 1: 0) +
                     ");");
 
             ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "").replace("'", "\\'") + "'");
@@ -117,6 +118,8 @@ public class KickUtil
             while (eyeList.next())
             {
                 String MNGID = eyeList.getString("MNGID");
+                if (WatchEyeManagement.isInjection(MNGID))
+                    return;
                 eyeS2.execute("DeLeTe FrOm WaTcHrEaSoN WhErE MnGiD = '" + MNGID + "'");
                 eyeS3.execute("DeLeTe FrOm WaTchEyE WhErE MnGiD = '" + MNGID + "'");
             }

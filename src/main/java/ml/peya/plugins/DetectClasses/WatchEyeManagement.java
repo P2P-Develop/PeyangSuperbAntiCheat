@@ -13,6 +13,9 @@ public class WatchEyeManagement
 {
     public static String add(Player target, String FromName, String FromUUID, int level)
     {
+
+        if (isInjection(FromName) || isInjection(FromUUID))
+            return "";
         String manageId = UUID.randomUUID().toString().replace("-", "");
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
@@ -40,6 +43,9 @@ public class WatchEyeManagement
 
     public static boolean setReason(String id, EnumCheatType reason, int vl)
     {
+
+        if (isInjection(id))
+            return false;
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
         {
@@ -64,6 +70,8 @@ public class WatchEyeManagement
 
     public static boolean isExistsRecord(String targetUuid, String fromUuid)
     {
+        if (isInjection(targetUuid) || isInjection(fromUuid))
+            return false;
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
         {
@@ -80,6 +88,8 @@ public class WatchEyeManagement
 
     public static boolean isExistsRecord(String id)
     {
+        if (isInjection(id))
+            return false;
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
         {
