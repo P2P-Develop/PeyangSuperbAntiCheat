@@ -36,6 +36,7 @@ jobs:
   build-macos:
 
     runs-on: macos-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
