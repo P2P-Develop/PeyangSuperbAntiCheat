@@ -73,12 +73,7 @@ public class Init
                     "learncount int," +
                     "standard int," +
                     "MNGID nchar," +
-                    "middleweight nchar" +
-                    ");");
-
-            statement.execute("Create table if not exists wdWeight(" +
-                    "MNGID nchar," +
-                    "inputweight nchar" +
+                    "raw nchar" +
                     ");");
             return true;
         }
