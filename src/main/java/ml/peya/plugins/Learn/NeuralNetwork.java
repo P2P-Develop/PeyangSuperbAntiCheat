@@ -1,13 +1,10 @@
 package ml.peya.plugins.Learn;
 
-import com.fasterxml.jackson.databind.*;
-import ml.peya.plugins.Parser.*;
 import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
 import org.apache.commons.lang3.tuple.*;
 
-import java.sql.*;
 import java.util.*;
+import java.util.function.*;
 import java.util.stream.*;
 
 public class NeuralNetwork
@@ -50,14 +47,12 @@ public class NeuralNetwork
         return outputLayer.getValue();
     }
 
-    public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int times, UUID id)
+    public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int times)
     {
-        for (int i = 0; i < times; i++)
-            for (Triple<Double, Double, Double> doubleDoubleDoubleTriple : dataCollection)
-                this.learn(doubleDoubleDoubleTriple, id);
+        IntStream.range(0, times).<Consumer<? super Triple<Double, Double, Double>>>mapToObj(i -> this::learn).forEachOrdered(dataCollection::forEach);
     }
 
-    void learn(Triple<Double, Double, Double> data, UUID id)
+    void learn(Triple<Double, Double, Double> data)
     {
         double outputData = commit(Pair.of(data.getLeft(), data.getMiddle()));
         double correctValue = data.getRight();
@@ -85,23 +80,8 @@ public class NeuralNetwork
         inputWeight[2][0] += inputLayer[2] * deltaIM[0] * learningRate;
         inputWeight[2][1] += inputLayer[2] * deltaIM[1] * learningRate;
 
-
-        try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
-             Statement statement = connection.createStatement())
-        {
-            ObjectMapper mapper = new ObjectMapper();
-            LearnParser parser = new LearnParser(middleWeight, inputWeight);
-            statement.execute("InSeRt iNtO wdlearn vAlUeS (" +
-                    "-1, " +
-                    "'" + id + "'," +
-                    "'" + mapper.writeValueAsString(parser).replace("'", "\\'").replace("\"", "\\\"") + "'" +
-                    ");");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-        }
+        // ここからデータベース更新処理
+        // データベースに何もなかったら全ての重みを追加する
 
     }
 }

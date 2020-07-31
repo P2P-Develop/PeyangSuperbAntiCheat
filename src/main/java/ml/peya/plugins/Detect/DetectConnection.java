@@ -44,63 +44,90 @@ public class DetectConnection
             {
                 meta.setCanTesting(false);
 
-                if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
+                String mng = UUID.randomUUID().toString();
+
+                try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
+                     Statement statement = connection.createStatement())
                 {
-                    new BukkitRunnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            UUID mng = UUID.randomUUID();
-                            double vl = meta.getVL();
-                            ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                            arr.add(Triple.of(vl, vl, vl));
-                            network.learn(arr, 1, mng);
+                    statement.execute("InSeRt iNtO wdlearn vAlUeS (" +
+                            PeyangSuperbAntiCheat.learnCountLimit +
+                            ", 0, \"" +
+                            mng +
+                            "\", 0);");
 
-                            PeyangSuperbAntiCheat.banLeft = (int) Math.round(network.commit(Pair.of(vl, vl)));
-
-                            try (Connection connection2 = PeyangSuperbAntiCheat.learn.getConnection();
-                                 Statement statement2 = connection2.createStatement())
-                            {
-                                statement2.execute("update wdlearn set " +
-                                        "learncount = " + PeyangSuperbAntiCheat.banLeft + " " +
-                                        "where MNGID = \"" + mng + "\"");
-                            }
-                            catch (Exception e)
-                            {
-                                e.printStackTrace();
-                                ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-                            }
-                            this.cancel();
-                        }
-                    }.runTask(PeyangSuperbAntiCheat.getPlugin());
-
-                    ArrayList<String> reason = new ArrayList<>();
-                    try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-                         Statement statement = connection.createStatement();
-                         Statement statement2 = connection.createStatement())
+                    ResultSet result = statement.executeQuery("SeLeCt * fRoM wDlEaRn");
+                    while (result.next())
                     {
-                        ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
-                        while (rs.next())
-                        {
-                            ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
-                                    rs.getString("MNGID") + "'");
-                            while (set.next())
-                            {
-                                reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                        ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                        PeyangSuperbAntiCheat.learnCount = result.getInt("learncount");
                     }
 
-                    ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
+                    double vl = meta.getVL();
+                    double seconds = PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
 
-                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
+                    if ((PeyangSuperbAntiCheat.learnCount > PeyangSuperbAntiCheat.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.5) || (PeyangSuperbAntiCheat.learnCount < PeyangSuperbAntiCheat.learnCountLimit && PeyangSuperbAntiCheat.banLeft <= meta.getVL()))
+                    {
+                        new BukkitRunnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
+                                arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
+                                network.learn(arr, 1000);
 
+                                PeyangSuperbAntiCheat.banLeft = (int) Math.round(network.commit(Pair.of(vl, vl)));
+
+                                if (WatchEyeManagement.isInjection(mng))
+                                    return;
+
+                                try (Connection connection2 = PeyangSuperbAntiCheat.learn.getConnection();
+                                     Statement statement2 = connection2.createStatement())
+                                {
+                                    statement2.execute("update wdlearn set " +
+                                            "learncount = " + PeyangSuperbAntiCheat.banLeft + " " +
+                                            "where MNGID = \"" + mng + "\"");
+                                }
+                                catch (Exception e)
+                                {
+                                    e.printStackTrace();
+                                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                                }
+                                this.cancel();
+                            }
+                        }.runTask(PeyangSuperbAntiCheat.getPlugin());
+
+                        ArrayList<String> reason = new ArrayList<>();
+                        try (Connection connection3 = PeyangSuperbAntiCheat.eye.getConnection();
+                             Statement statement3 = connection3.createStatement();
+                             Statement statement4 = connection3.createStatement())
+                        {
+                            if (WatchEyeManagement.isInjection(player.getName()))
+                                return;
+                            ResultSet rs = statement3.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
+                            while (rs.next())
+                            {
+                                ResultSet set = statement4.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
+                                        rs.getString("MNGID") + "'");
+                                while (set.next())
+                                    reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                        }
+
+                        ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
+
+                        KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
+
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
                 }
 
 
