@@ -1,8 +1,11 @@
 package ml.peya.plugins.Learn;
 
+import com.fasterxml.jackson.databind.*;
 import ml.peya.plugins.*;
 import org.apache.commons.lang3.tuple.*;
 
+import java.io.*;
+import java.sql.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;
@@ -15,8 +18,9 @@ public class NeuralNetwork
     private final double middleLayerBias = 1.0;
     private double[] inputLayer;
     private Neuron[] middleLayer;
-    private final double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
-    private final double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
+
+    public double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
+    public double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
 
     public static double[] getColumn(double[][] array, int index)
     {
@@ -79,9 +83,5 @@ public class NeuralNetwork
         inputWeight[1][1] += inputLayer[1] * deltaIM[1] * learningRate;
         inputWeight[2][0] += inputLayer[2] * deltaIM[0] * learningRate;
         inputWeight[2][1] += inputLayer[2] * deltaIM[1] * learningRate;
-
-        // ここからデータベース更新処理
-        // データベースに何もなかったら全ての重みを追加する
-
     }
 }

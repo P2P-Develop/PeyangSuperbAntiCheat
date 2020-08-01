@@ -58,28 +58,6 @@ public class Init
                     "REASON nchar," +
                     "STAFF int" +
                     ");");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-            return false;
-        }
-
-        try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
-             Statement statement = connection.createStatement())
-        {
-            statement.execute("CrEaTe TaBlE If NoT ExIsTs wdlearn(" +
-                    "learncount int," +
-                    "standard int," +
-                    "MNGID nchar," +
-                    "middleweight nchar" +
-                    ");");
-
-            statement.execute("Create table if not exists wdWeight(" +
-                    "MNGID nchar," +
-                    "inputweight nchar" +
-                    ");");
             return true;
         }
         catch (Exception e)
@@ -88,36 +66,5 @@ public class Init
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
             return false;
         }
-    }
-
-    public static boolean initBypass()
-    {
-        /*try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-             Statement statement = connection.createStatement())
-        {
-            long ctl = 0;
-            int cBypass = 1;
-            ResultSet resultSet = statement.executeQuery("SeLeCt * FrOm WdLeArN");
-            while (resultSet.next())
-            {
-                int cot = resultSet.getInt("DATA");
-
-                ctl += cot;
-
-                cBypass++;
-            }
-
-            if (cBypass - 1 != 0)
-                PeyangSuperbAntiCheat.banLeft = Math.toIntExact(ctl / cBypass);
-            else
-                PeyangSuperbAntiCheat.banLeft = PeyangSuperbAntiCheat.config.getInt("kick.defaultKick");
-            return true;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            return false;
-        }*/
-        return true;
     }
 }

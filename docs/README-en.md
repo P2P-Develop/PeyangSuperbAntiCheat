@@ -1,5 +1,7 @@
 # PeyangSuperbAntiCheat(PSAC) English Documentation
 
+[Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [FAQ](#what-is-learning-function)
+
 **WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
 If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
 ***VERY WARNING***: **With this plugin, detectopm will run +4 timers at the same time.  
@@ -523,7 +525,7 @@ In this plugin, the following config is set by default.
 | :-----------------: | :-----------: | :--------------------------------------------------------------------------------------------------------------------------- |
 |    database.path    |   ./eye.db    | Save report information by specifying location of SQLite database path.                                                      |
 |   database.logPath  |   ./log.db    | Save kick infomation by specifying location of SQLite database path.                                                         |
-|  database.learnPath |  ./learn.db   | Specify the path to the database that stores the neural network weights from learning.                                       |
+|  database.learnPath |./learn.json | Specify the path to the JSON file that stores the neural network weights and learning count from learning.                     |
 |     npc.seconds     |       4       | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                                   |
 |       npc.time      |      0.3      | Specifies the value of [NPC](#aurabot) orbit speed.                                                                          |
 |      npc.range      |      2.1      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.                      |

@@ -3,7 +3,7 @@ PSAC plugin threads summary
 ###########################
 
 Idle: 4
-Learn: 1
+Learn: 2
 Target: 2
 
 ----------

@@ -1,9 +1,9 @@
 #データベースのパス
-#相対座標が利用できます。
+#相対パスが利用できます。
 database:
   path: "./eye.db"
   logPath: "./log.db"
-  learnPath: "./learn.db"
+  learnPath: "./learn.json"
 
 #npc関係のコンフィグです。
 npc:
