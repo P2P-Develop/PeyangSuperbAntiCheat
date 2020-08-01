@@ -536,6 +536,9 @@ In this plugin, the following config is set by default.
 | npc.speed.waveRange |     0.03      | Specify the speed change range.                                                                                              |
 |       npc.kill      |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                                |
 |      npc.learn      |      0.3      | Specify the learning coefficient of the learning function. The higher the value, the less processing, but the less accurate. |
+|     npc.vlLevel     |      17       | This value is used to evaluate the VL when the NPC has not learned beyond this npc.learnCount.                               |
+|    npc.learnCount   |      15       | If the learn function learns more than this number of times, the kick rating will be transferred to the learn function.      |
+|      npc.learn      |      0.3      | Specify the learning coefficient of the learning function. The higher the value, the less processing, but the less accurate. |
 |      kick.delay     |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                              |
 |    kick.lightning   |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                        |
 |   kick.defaultKick  |      25       | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                       |
