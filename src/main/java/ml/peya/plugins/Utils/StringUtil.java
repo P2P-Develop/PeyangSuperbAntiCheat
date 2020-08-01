@@ -16,7 +16,7 @@ public class StringUtil
         {
             HttpsURLConnection connection;
             connection = (HttpsURLConnection) new URL("https://randomuser.me/api/").openConnection();
-            connection.setReadTimeout(4);
+            connection.setReadTimeout(500);
             connection.connect();
             if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK)
             {

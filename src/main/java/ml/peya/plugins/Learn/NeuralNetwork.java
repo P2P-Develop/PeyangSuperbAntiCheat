@@ -1,11 +1,8 @@
 package ml.peya.plugins.Learn;
 
-import com.fasterxml.jackson.databind.*;
 import ml.peya.plugins.*;
 import org.apache.commons.lang3.tuple.*;
 
-import java.io.*;
-import java.sql.*;
 import java.util.*;
 import java.util.function.*;
 import java.util.stream.*;

@@ -60,8 +60,6 @@ public class DetectConnection
                             arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
                             network.learn(arr, 1000);
 
-                            if (WatchEyeManagement.isInjection(mng))
-                                return;
 
                             this.cancel();
                         }

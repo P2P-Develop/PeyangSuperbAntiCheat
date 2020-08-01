@@ -2,7 +2,6 @@ package ml.peya.plugins;
 
 import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
-import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.zaxxer.hikari.*;
 import ml.peya.plugins.Commands.CmdTst.AuraBot;
@@ -25,7 +24,6 @@ import org.bukkit.plugin.java.*;
 import org.bukkit.scheduler.*;
 
 import java.io.*;
-import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
 
@@ -172,7 +170,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         logger.info("Reading weights from learnPath...");
         try
         {
-            File file = new File(PeyangSuperbAntiCheat.config.getString("database.learnPath"));
+            File file = new File(getDataFolder().getAbsolutePath() + "/" + PeyangSuperbAntiCheat.config.getString("database.learnPath"));
+            file.createNewFile();
             if (file.exists() && file.length() >= 256)
             {
                 JsonNode node = new ObjectMapper().readTree(file);
@@ -193,9 +192,9 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             else
                 throw new FileNotFoundException();
         }
-        catch (Exception e)
+        catch (Exception ignored)
         {
-            e.printStackTrace();
+            logger.warning("Learn data not found.");
         }
 
         mods = new HashMap<>();
@@ -227,11 +226,17 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             trackerTask.cancel();
         }
 
-        try (FileWriter fw = new FileWriter(PeyangSuperbAntiCheat.config.getString("database.learnPath"));
+        try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + PeyangSuperbAntiCheat.config.getString("database.learnPath"));
              PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
         {
             logger.info("Saving learn weights...");
-            pw.print(new ObjectMapper().writeValueAsString(new Mapper(network.inputWeight, network.middleWeight, learnCount)));
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false); // Fu*K
+            Mapper mp = new Mapper();
+            mp.inputWeight = network.inputWeight;
+            mp.middleWeight = network.middleWeight;
+            mp.learnCount = learnCount;
+            pw.print(mapper.writeValueAsString(mp));
         }
         catch (Exception e)
         {
