@@ -44,8 +44,6 @@ public class DetectConnection
             {
                 meta.setCanTesting(false);
 
-                String mng = UUID.randomUUID().toString();
-
                 double vl = meta.getVL();
                 double seconds = PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
 

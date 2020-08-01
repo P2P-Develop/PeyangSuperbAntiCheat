@@ -15,6 +15,7 @@ public class NeuralNetwork
     private final double middleLayerBias = 1.0;
     private double[] inputLayer;
     private Neuron[] middleLayer;
+    private Neuron outputLayer;
 
     public double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
     public double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
@@ -39,7 +40,6 @@ public class NeuralNetwork
         double inputLayerBias = 1.0;
         inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
         middleLayer = new Neuron[]{new Neuron(), new Neuron()};
-        Neuron outputLayer = new Neuron();
 
         IntStream.range(0, middleLayer.length).forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
 
