@@ -1,7 +1,7 @@
 package ml.peya.plugins.Detect;
 
 import develop.p2p.lib.*;
-import ml.peya.plugins.DetectClasses.CheatDetectNowMeta;
+import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
@@ -21,7 +21,8 @@ public class NPCTeleport
 {
     public static void teleport(Player player, EntityPlayer target, ItemStack[] arm, DetectType tpCase)
     {
-        switch (tpCase) {
+        switch (tpCase)
+        {
             case AURA_BOT:
                 auraBot_teleport(player, target, arm);
                 break;
@@ -188,9 +189,9 @@ public class NPCTeleport
                     count[0]++;
                     CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
                     if (meta == null) continue;
-                    meta.addSeconds(isLooking(player, n) || isLooking(player, n.add(0, 1, 0)) ? 0.01 : -0.01);
+                    meta.addSeconds(((isLooking(player, n) || isLooking(player, n.clone().add(0, 1, 0))) ? (PeyangSuperbAntiCheat.config.getLong("npc.seconds") * 0.1 / 2): 0.0));
                 }
-                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time") + (speedWaveFlag ? speedWave.get(0.001, true) : 0.0);
+                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time") + (speedWaveFlag ? speedWave.get(0.001, true): 0.0);
             }
         };
         r.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);

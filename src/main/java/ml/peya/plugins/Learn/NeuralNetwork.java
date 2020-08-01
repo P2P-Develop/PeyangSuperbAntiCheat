@@ -40,6 +40,7 @@ public class NeuralNetwork
         double inputLayerBias = 1.0;
         inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
         middleLayer = new Neuron[]{new Neuron(), new Neuron()};
+        outputLayer = new Neuron();
 
         IntStream.range(0, middleLayer.length).forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
 

@@ -1,13 +1,12 @@
 package ml.peya.plugins.Utils;
 
-import org.bukkit.Location;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
+import org.bukkit.*;
+import org.bukkit.block.*;
+import org.bukkit.entity.*;
+import org.bukkit.util.*;
 
-import java.util.ArrayList;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.stream.*;
 
 public class LookingUtils
 {
@@ -20,17 +19,22 @@ public class LookingUtils
 
         for (Location location : sight)
             for (Entity entity : entities)
-                if (isLooking(entity, location) && entity.getType() == EntityType.PLAYER)
+                if (isLooking((Player) entity, location) && entity.getType() == EntityType.PLAYER)
                     return (Player) entity;
 
         return null;
     }
 
-    public static boolean isLooking(Entity entity, Location location)
+    public static boolean isLooking(Player player, Location location)
     {
-        if (Math.abs(entity.getLocation().getX() - location.getX()) < 1.3 && Math.abs(entity.getLocation().getY() - location.getY()) < 1.5)
-            return Math.abs(entity.getLocation().getZ() - location.getZ()) < 1.3;
+        BlockIterator it = new BlockIterator(player, 4);
 
+        while (it.hasNext())
+        {
+            Block block = it.next();
+            if (block.getX() == location.getBlockX() && block.getY() == location.getBlockY() && block.getZ() == location.getBlockZ())
+                return true;
+        }
         return false;
     }
 }
