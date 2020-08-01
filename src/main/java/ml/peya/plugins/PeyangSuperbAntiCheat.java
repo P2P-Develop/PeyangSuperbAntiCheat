@@ -78,6 +78,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         databasePath = config.getString("database.path");
         banKickPath = config.getString("database.logPath");
 
+        banLeft = config.getInt("npc.vlLevel");
+
         network = new NeuralNetwork();
 
         eye = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
@@ -171,7 +173,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         try
         {
             File file = new File(getDataFolder().getAbsolutePath() + "/" + PeyangSuperbAntiCheat.config.getString("database.learnPath"));
-            file.createNewFile();
             if (file.exists() && file.length() >= 256)
             {
                 JsonNode node = new ObjectMapper().readTree(file);
