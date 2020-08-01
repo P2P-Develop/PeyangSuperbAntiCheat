@@ -55,10 +55,3 @@ jobs:
         run: mvn -B package --file pom.xml
       - name: Install
         run: mkdir -p ${GITHUB_WORKSPACE}/ins && bash ${GITHUB_WORKSPACE}/install ${GITHUB_WORKSPACE} ${GITHUB_WORKSPACE}/ins
-      - name: Cache local Maven repository
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
