@@ -47,7 +47,7 @@ public class DetectConnection
                 double vl = meta.getVL();
                 double seconds = PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
 
-                if ((PeyangSuperbAntiCheat.learnCount > PeyangSuperbAntiCheat.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.5) || (PeyangSuperbAntiCheat.learnCount < PeyangSuperbAntiCheat.learnCountLimit && PeyangSuperbAntiCheat.banLeft <= meta.getVL()))
+                if ((PeyangSuperbAntiCheat.learnCount > PeyangSuperbAntiCheat.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.0) || (PeyangSuperbAntiCheat.learnCount < PeyangSuperbAntiCheat.learnCountLimit && PeyangSuperbAntiCheat.banLeft <= meta.getVL()))
                 {
                     new BukkitRunnable()
                     {
@@ -56,6 +56,7 @@ public class DetectConnection
                         {
                             ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
                             arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
+                            PeyangSuperbAntiCheat.learnCount++;
                             network.learn(arr, 1000);
 
 
