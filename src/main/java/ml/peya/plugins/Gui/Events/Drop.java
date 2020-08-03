@@ -9,29 +9,23 @@ import org.bukkit.event.player.*;
 import org.bukkit.inventory.*;
 import org.bukkit.scheduler.*;
 
+import java.util.*;
+
 public class Drop implements Listener
 {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDrop(PlayerDropItemEvent e)
     {
-        ItemStack item = e.getItemDrop().getItemStack();
-
-        if (!Item.canGuiItem(item))
+        if (Item.canGuiItem(e.getItemDrop().getItemStack()))
             return;
         e.setCancelled(true);
-
 
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                for (ItemStack stack : e.getPlayer().getInventory().getContents())
-                {
-                    if (!Item.canGuiItem(stack))
-                        continue;
-                    stack.setAmount(0);
-                }
+                Arrays.stream(e.getPlayer().getInventory().getContents()).filter(stack -> !Item.canGuiItem(stack)).forEachOrdered(stack -> stack.setAmount(0));
                 this.cancel();
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());

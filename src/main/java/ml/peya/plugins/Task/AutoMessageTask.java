@@ -59,14 +59,10 @@ public class AutoMessageTask extends BukkitRunnable
         map.put("count", String.valueOf(watchdog));
         map.put("staff_count", String.valueOf(staff));
 
-        for (Player player : Bukkit.getOnlinePlayers())
-        {
-            if (!player.hasPermission("psac.regular"))
-                continue;
-
+        Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("psac.regular")).forEachOrdered(player -> {
             player.sendMessage("");
             player.sendMessage(MessageEngine.get("autoMessage", map));
             player.sendMessage("");
-        }
+        });
     }
 }

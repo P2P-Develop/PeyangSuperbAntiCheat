@@ -57,17 +57,12 @@ public class Packets
             PacketPlayInUseEntity entity = (PacketPlayInUseEntity) packet.getHandle();
             Field field = entity.getClass().getDeclaredField("a");
             field.setAccessible(true);
-            int entityId = field.getInt(entity);
             if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK) return;
-            DetectingList metas = PeyangSuperbAntiCheat.cheatMeta;
-            for (CheatDetectNowMeta meta : metas.getMetas())
+            for (CheatDetectNowMeta meta : PeyangSuperbAntiCheat.cheatMeta.getMetas())
             {
-
-                if (meta.getId() != entityId)
+                if (meta.getId() != field.getInt(entity))
                     return;
-                if (meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId())
-                    System.out.println(meta.addVL());
-                if (Criticals.hasCritical(e.getPlayer()))
+                if (meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() || Criticals.hasCritical(e.getPlayer()))
                     System.out.println(meta.addVL());
             }
         }

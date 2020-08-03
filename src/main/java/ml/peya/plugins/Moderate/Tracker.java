@@ -58,34 +58,26 @@ public class Tracker
 
     public void tick()
     {
-        for (String playerName : tracker.keySet())
-        {
+        tracker.keySet().forEach(playerName -> {
             Player player = Bukkit.getPlayer(playerName);
             Player target = Bukkit.getPlayer(tracker.get(playerName));
-
             if (player == null)
             {
                 tracker.remove(playerName);
-                continue;
+                return;
             }
-
             if (target == null)
             {
                 tracker.remove(playerName);
-                continue;
+                return;
             }
-
             Location location = target.getLocation();
-
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", target.getName());
             map.put("world", location.getWorld().getName());
-
             map.put("x", scaleSet(location.getX(), 2));
             map.put("y", scaleSet(location.getY(), 2));
             map.put("z", scaleSet(location.getZ(), 2));
-
-
             map.put("distance", scaleSet(location.distance(player.getLocation()), 1));
             if (PeyangSuperbAntiCheat.cheatMeta.exists(target.getUniqueId()))
             {
@@ -100,31 +92,14 @@ public class Tracker
             }
             else
                 map.put("tests", "");
-
             if (target.hasMetadata("speed"))
-            {
-                for (MetadataValue value : target.getMetadata("speed"))
-                {
-                    if (value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName()))
-                        map.put("velocity", scaleSet((Double) value.value(), 2));
-                }
-            }
+                target.getMetadata("speed").stream().filter(value -> value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName())).forEachOrdered(value -> map.put("velocity", scaleSet((Double) value.value(), 2)));
             else
                 map.put("velocity", 0.0);
-
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.text", map)));
-
-            for (ItemStack itemStack : player.getInventory().getContents())
-            {
-                if (!Item.canGuiItem(itemStack))
-                    continue;
-                if (!Objects.equals(Item.getType(itemStack), "TRACKER"))
-                    continue;
-                player.setCompassTarget(location);
-            }
-
+            Arrays.stream(player.getInventory().getContents()).filter(itemStack -> !Item.canGuiItem(itemStack)).filter(itemStack -> Objects.equals(Item.getType(itemStack), "TRACKER")).map(itemStack -> location).forEachOrdered(player::setCompassTarget);
             target.removeMetadata("speed", PeyangSuperbAntiCheat.getPlugin());
-        }
+        });
     }
 
     private String scaleSet(double d, int scale)

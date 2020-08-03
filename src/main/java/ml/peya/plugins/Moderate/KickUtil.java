@@ -10,6 +10,7 @@ import org.bukkit.scheduler.*;
 import java.sql.*;
 import java.util.Date;
 import java.util.*;
+import java.util.stream.*;
 
 public class KickUtil
 {
@@ -33,13 +34,12 @@ public class KickUtil
     {
         if (wdFlag)
         {
-            for (Player player : Bukkit.getOnlinePlayers())
-            {
+            Bukkit.getOnlinePlayers().forEach(player -> {
                 if (player.hasPermission("psac.ntfadmin"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
                 else if (player.hasPermission("psac.notification"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
-            }
+            });
         }
 
         new BukkitRunnable()
@@ -60,20 +60,14 @@ public class KickUtil
 
         StringBuilder id = new StringBuilder();
         Random random = new Random();
-        for (int i = 0; i < 8; i++)
-        {
+        IntStream.range(0, 8).forEachOrdered(i -> {
             if (random.nextBoolean())
                 id.append(random.nextInt(9));
             else
                 id.append((char) (random.nextInt(5) + 'A'));
-        }
+        });
 
-        StringBuilder ggId = new StringBuilder();
-        for (int i = 0; i < 7; i++)
-        {
-            ggId.append(random.nextInt(9));
-        }
-
+        String ggId = IntStream.range(0, 7).mapToObj(i -> String.valueOf(random.nextInt(9))).collect(Collectors.joining());
 
         String reasonP;
 
@@ -87,7 +81,7 @@ public class KickUtil
         HashMap<String, Object> map = new HashMap<>();
 
         map.put("reason", reasonP);
-        map.put("ggid", ggId.toString());
+        map.put("ggid", ggId);
         map.put("id", id.toString());
 
         String message = MessageEngine.get("kick.reason", map);

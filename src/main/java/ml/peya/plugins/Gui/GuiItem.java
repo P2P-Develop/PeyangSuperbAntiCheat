@@ -5,6 +5,8 @@ import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 
+import java.util.*;
+
 public class GuiItem
 {
     public static void giveAllItems(Player player, IItems.Type type, String target)
@@ -13,16 +15,11 @@ public class GuiItem
 
         int i = 0;
 
-        for (ItemStack stack : player.getInventory().getContents())
-        {
-            if (stack == null || stack.getType() == Material.AIR)
-                continue;
-
-            if (!Item.canGuiItem(stack))
+        Arrays.stream(player.getInventory().getContents()).filter(stack -> stack != null && stack.getType() != Material.AIR).forEachOrdered(stack -> {
+            if (Item.canGuiItem(stack))
                 player.getWorld().dropItem(player.getEyeLocation(), stack);
-
             player.getInventory().remove(stack);
-        }
+        });
 
 
         for (IItems items : item.getItems())

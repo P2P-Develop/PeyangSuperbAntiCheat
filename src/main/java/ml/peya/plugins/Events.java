@@ -87,13 +87,12 @@ public class Events implements Listener
         BaseComponent[] baseComponent = (BaseComponent[]) ArrayUtils.addAll(component, new ComponentBuilder(format).create());
 
 
-        for (Player receiver : e.getRecipients())
-        {
+        e.getRecipients().forEach(receiver -> {
             if (!receiver.hasPermission("psac.chattarget") || (PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()) != null && PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()).containsKey("Lynx")))
                 receiver.sendMessage(format);
             else
                 receiver.spigot().sendMessage(baseComponent);
-        }
+        });
         Bukkit.getConsoleSender().sendMessage(format);
     }
 
@@ -119,7 +118,6 @@ public class Events implements Listener
         List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
 
         Random random = new Random();
-
 
         new BukkitRunnable()
         {

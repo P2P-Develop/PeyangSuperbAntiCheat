@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.*;
 import java.math.*;
 import java.text.*;
 import java.util.*;
+import java.util.stream.*;
 
 public class Books
 {
@@ -19,11 +20,7 @@ public class Books
     {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
-        StringBuilder tmpReasonText = new StringBuilder();
-        for (EnumCheatType type : types)
-        {
-            tmpReasonText.append(type.isSelected() ? type.getSysName() + " " : "");
-        }
+        String tmpReasonText = Arrays.stream(types).map(type -> type.isSelected() ? type.getSysName() + " ": "").collect(Collectors.joining());
         ComponentBuilder component = new ComponentBuilder(MessageEngine.get("reportbook.cheat"));
         component.append("\n");
 
@@ -72,11 +69,7 @@ public class Books
 
         HoverEvent hoverEvt = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
 
-        StringBuilder reason = new StringBuilder();
-        for (EnumCheatType type : types)
-        {
-            reason.append("\n           ").append(ChatColor.BLUE).append(type.getText());
-        }
+        String reason = types.stream().map(type -> "\n           " + ChatColor.BLUE + type.getText()).collect(Collectors.joining());
 
         ComponentBuilder b = new ComponentBuilder(MessageEngine.get("book.text.report"));
         b.append("\n");
@@ -100,7 +93,7 @@ public class Books
 
         b2.append(MessageEngine.get("book.text.severity", map));
         b2.append("\n");
-        b2.append(MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", reason.toString())));
+        b2.append(MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", reason)));
         b2.append("\n");
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
@@ -152,10 +145,7 @@ public class Books
             return false;
         BookMeta meta = (BookMeta) book.getItemMeta();
 
-        if (!meta.hasTitle() || !meta.getTitle().equals("-"))
-            return false;
-
-        if (!meta.hasAuthor() || !meta.getAuthor().equals("AntiCheat Dev"))
+        if (!meta.hasTitle() || !meta.getTitle().equals("-") || !meta.hasAuthor() || !meta.getAuthor().equals("AntiCheat Dev"))
             return false;
 
         return meta.hasLore() && meta.getLore().size() == 1 && meta.getLore().get(0).equals(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book");

@@ -60,16 +60,14 @@ public class CommandReport implements CommandExecutor
 
         ArrayList<String> reasons = new ArrayList<>();
 
-        for (String reason : reasonsV)
-        {
+        reasonsV.forEach(reason -> {
             if (reasons.contains(reason))
             {
                 reasons.remove(reason);
-                continue;
+                return;
             }
-
             reasons.add(reason);
-        }
+        });
 
         ArrayList<EnumCheatType> types = CheatTypeUtils.getCheatTypeArrayFromString(reasons.toArray(new String[0]));
 
@@ -119,9 +117,7 @@ public class CommandReport implements CommandExecutor
         String id = WatchEyeManagement.add(target, senderName, senderUUID, SeverityLevelUtils.getSeverity(types).getLevel());
         boolean successFlag = false;
         for (EnumCheatType type : types)
-        {
             successFlag = WatchEyeManagement.setReason(id, type, 0);
-        }
 
 
         if (successFlag)
@@ -134,14 +130,7 @@ public class CommandReport implements CommandExecutor
                 return;
             }
 
-            ArrayList<String> resStr = new ArrayList<>();
-
-            for (EnumCheatType type : types)
-            {
-                resStr.add(type.getText());
-            }
-
-            ReportUtils.adminNotification(target.getName(), id, resStr.toArray(new String[0]));
+            ReportUtils.adminNotification(target.getName(), id, types.stream().map(EnumCheatType::getText).toArray(String[]::new));
         }
         else
             sender.sendMessage(MessageEngine.get("error.unknownSQLError"));

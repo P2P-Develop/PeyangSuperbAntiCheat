@@ -280,16 +280,9 @@ public class Metrics
         data.addProperty("id", pluginId); // Append the id of the plugin
         data.addProperty("pluginVersion", pluginVersion); // Append the version of the plugin
         JsonArray customCharts = new JsonArray();
-        for (CustomChart customChart : charts)
-        {
-            // Add the data of the custom charts
-            JsonObject chart = customChart.getRequestJsonObject();
-            if (chart == null)
-            { // If the chart is null, we skip it
-                continue;
-            }
-            customCharts.add(chart);
-        }
+        // Add the data of the custom charts
+        // If the chart is null, we skip it
+        charts.stream().map(CustomChart::getRequestJsonObject).filter(Objects::nonNull).forEachOrdered(customCharts::add);
         data.add("customCharts", customCharts);
 
         return data;
@@ -355,14 +348,12 @@ public class Metrics
 
         JsonArray pluginData = new JsonArray();
         // Search for all other bStats Metrics classes to get their plugin data
-        for (Class<?> service : Bukkit.getServicesManager().getKnownServices())
-        {
+        Bukkit.getServicesManager().getKnownServices().forEach(service -> {
             try
             {
                 service.getField("B_STATS_VERSION"); // Our identifier :)
 
-                for (RegisteredServiceProvider<?> provider : Bukkit.getServicesManager().getRegistrations(service))
-                {
+                Bukkit.getServicesManager().getRegistrations(service).forEach(provider -> {
                     try
                     {
                         Object plugin = provider.getService().getMethod("getPluginData").invoke(provider.getProvider());
@@ -393,12 +384,12 @@ public class Metrics
                     catch (NullPointerException | NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored)
                     {
                     }
-                }
+                });
             }
             catch (NoSuchFieldException ignored)
             {
             }
-        }
+        });
 
         data.add("plugins", pluginData);
 
@@ -446,19 +437,15 @@ public class Metrics
             try
             {
                 JsonObject data = getChartData();
+                // If the data is null we don't send the chart.
                 if (data == null)
-                {
-                    // If the data is null we don't send the chart.
                     return null;
-                }
                 chart.add("data", data);
             }
             catch (Throwable t)
             {
                 if (logFailedRequests)
-                {
                     Bukkit.getLogger().log(Level.WARNING, "Failed to get data for custom chart with id " + chartId, t);
-                }
                 return null;
             }
             return chart;
@@ -493,11 +480,9 @@ public class Metrics
         {
             JsonObject data = new JsonObject();
             String value = callable.call();
+            // Null = skip the chart
             if (value == null || value.isEmpty())
-            {
-                // Null = skip the chart
                 return null;
-            }
             data.addProperty("value", value);
             return data;
         }
@@ -529,26 +514,20 @@ public class Metrics
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, Integer> map = callable.call();
+            // Null = skip the chart
             if (map == null || map.isEmpty())
-            {
-                // Null = skip the chart
                 return null;
-            }
             boolean allSkipped = true;
             for (Map.Entry<String, Integer> entry : map.entrySet())
             {
                 if (entry.getValue() == 0)
-                {
                     continue; // Skip this invalid
-                }
                 allSkipped = false;
                 values.addProperty(entry.getKey(), entry.getValue());
             }
+            // Null = skip the chart
             if (allSkipped)
-            {
-                // Null = skip the chart
                 return null;
-            }
             data.add("values", values);
             return data;
         }
@@ -580,11 +559,9 @@ public class Metrics
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, Map<String, Integer>> map = callable.call();
+            // Null = skip the chart
             if (map == null || map.isEmpty())
-            {
-                // Null = skip the chart
                 return null;
-            }
             boolean reallyAllSkipped = true;
             for (Map.Entry<String, Map<String, Integer>> entryValues : map.entrySet())
             {
@@ -601,11 +578,9 @@ public class Metrics
                     values.add(entryValues.getKey(), value);
                 }
             }
+            // Null = skip the chart
             if (reallyAllSkipped)
-            {
-                // Null = skip the chart
                 return null;
-            }
             data.add("values", values);
             return data;
         }
@@ -636,11 +611,9 @@ public class Metrics
         {
             JsonObject data = new JsonObject();
             int value = callable.call();
+            // Null = skip the chart
             if (value == 0)
-            {
-                // Null = skip the chart
                 return null;
-            }
             data.addProperty("value", value);
             return data;
         }
@@ -673,26 +646,20 @@ public class Metrics
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, Integer> map = callable.call();
+            // Null = skip the chart
             if (map == null || map.isEmpty())
-            {
-                // Null = skip the chart
                 return null;
-            }
             boolean allSkipped = true;
             for (Map.Entry<String, Integer> entry : map.entrySet())
             {
                 if (entry.getValue() == 0)
-                {
                     continue; // Skip this invalid
-                }
                 allSkipped = false;
                 values.addProperty(entry.getKey(), entry.getValue());
             }
+            // Null = skip the chart
             if (allSkipped)
-            {
-                // Null = skip the chart
                 return null;
-            }
             data.add("values", values);
             return data;
         }
@@ -725,17 +692,14 @@ public class Metrics
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, Integer> map = callable.call();
+            // Null = skip the chart
             if (map == null || map.isEmpty())
-            {
-                // Null = skip the chart
                 return null;
-            }
-            for (Map.Entry<String, Integer> entry : map.entrySet())
-            {
+            map.entrySet().forEach(entry -> {
                 JsonArray categoryValues = new JsonArray();
                 categoryValues.add(new JsonPrimitive(entry.getValue()));
                 values.add(entry.getKey(), categoryValues);
-            }
+            });
             data.add("values", values);
             return data;
         }
@@ -768,31 +732,22 @@ public class Metrics
             JsonObject data = new JsonObject();
             JsonObject values = new JsonObject();
             Map<String, int[]> map = callable.call();
+            // Null = skip the chart
             if (map == null || map.isEmpty())
-            {
-                // Null = skip the chart
                 return null;
-            }
             boolean allSkipped = true;
             for (Map.Entry<String, int[]> entry : map.entrySet())
             {
                 if (entry.getValue().length == 0)
-                {
                     continue; // Skip this invalid
-                }
                 allSkipped = false;
                 JsonArray categoryValues = new JsonArray();
-                for (int categoryValue : entry.getValue())
-                {
-                    categoryValues.add(new JsonPrimitive(categoryValue));
-                }
+                Arrays.stream(entry.getValue()).mapToObj(JsonPrimitive::new).forEachOrdered(categoryValues::add);
                 values.add(entry.getKey(), categoryValues);
             }
+            // Null = skip the chart
             if (allSkipped)
-            {
-                // Null = skip the chart
                 return null;
-            }
             data.add("values", values);
             return data;
         }

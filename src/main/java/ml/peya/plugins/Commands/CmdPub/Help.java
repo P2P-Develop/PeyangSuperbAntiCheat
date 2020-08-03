@@ -21,14 +21,10 @@ public class Help
             @Override
             public void run()
             {
-                for (String node : nodes)
-                {
-                    if (sender.hasPermission("psac." + node))
-                    {
-                        sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.hsh("label", label)));
-                        flag[0] = true; //ここFlagの都合で短縮不可
-                    }
-                }
+                nodes.stream().filter(node -> sender.hasPermission("psac." + node)).forEachOrdered(node -> {
+                    sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.hsh("label", label)));
+                    flag[0] = true; //ここFlagの都合で短縮不可
+                });
 
                 if ((sender.hasPermission("psac.drop") || sender.hasPermission("psac.show")) && sender instanceof Player)
                     sender.sendMessage(MessageEngine.get("command.help.mngIdWarning"));

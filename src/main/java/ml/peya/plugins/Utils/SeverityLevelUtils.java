@@ -16,13 +16,7 @@ public class SeverityLevelUtils
 
     public static EnumSeverity getSeverity(int level)
     {
-        for (EnumSeverity severity : getAllSeverity())
-        {
-            if (severity.getLevel() == level)
-                return severity;
-        }
-
-        return EnumSeverity.UNKNOWN;
+        return getAllSeverity().stream().filter(severity -> severity.getLevel() == level).findFirst().orElse(EnumSeverity.UNKNOWN);
     }
 
     public static ArrayList<EnumSeverity> getAllSeverity()

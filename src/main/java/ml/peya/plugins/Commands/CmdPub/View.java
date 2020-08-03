@@ -67,9 +67,8 @@ public class View
                 {
                     types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
                 }
-                ComponentBuilder line = TextBuilder.getLine(id, issuebyid, types, mngid, sender);
 
-                sender.spigot().sendMessage(line.create());
+                sender.spigot().sendMessage(TextBuilder.getLine(id, issuebyid, types, mngid, sender).create());
                 count++;
             }
         }

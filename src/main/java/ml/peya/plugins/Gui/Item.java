@@ -18,29 +18,29 @@ public class Item
     public static boolean canGuiItem(ItemStack item)
     {
         if (item == null || item.getType() == Material.AIR || !item.hasItemMeta())
-            return false;
+            return true;
 
         ItemMeta meta = item.getItemMeta();
 
         if (!meta.hasLore())
-            return false;
+            return true;
 
         if (meta.getLore().size() <= 1)
-            return false;
+            return true;
 
-        return meta.getLore().get(0).equals(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.");
+        return !meta.getLore().get(0).equals(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.");
     }
 
     public static String getType(ItemStack item)
     {
-        if (!canGuiItem(item))
+        if (canGuiItem(item))
             return null;
         return item.getItemMeta().getLore().get(1).replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: ", "");
     }
 
     public static String getTarget(ItemStack item)
     {
-        if (!canGuiItem(item))
+        if (canGuiItem(item))
             return null;
         return item.getItemMeta().getLore().get(2).replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: ", "");
 

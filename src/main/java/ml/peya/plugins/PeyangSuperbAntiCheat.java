@@ -195,7 +195,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         }
         catch (Exception ignored)
         {
-            logger.warning("Learn data not found.");
+            logger.warning("Learning data file not found.");
         }
 
         mods = new HashMap<>();
@@ -230,9 +230,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + PeyangSuperbAntiCheat.config.getString("database.learnPath"));
              PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
         {
-            logger.info("Saving learn weights...");
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false); // Fu*K
+            logger.info("Saving learn weights to learning data file...");
+            ObjectMapper mapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false); // bruh
             Mapper mp = new Mapper();
             mp.inputWeight = network.inputWeight;
             mp.middleWeight = network.middleWeight;

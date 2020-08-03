@@ -1,8 +1,8 @@
 package ml.peya.plugins.Learn;
 
-import develop.p2p.lib.LearnMath;
-
 import java.util.*;
+
+import static develop.p2p.lib.LearnMath.*;
 
 public class Neuron
 {
@@ -20,10 +20,10 @@ public class Neuron
         this.value = value;
     }
 
-    void input(ArrayList<Input> inputData)
+    public void input(ArrayList<Input> inputData)
     {
         inputData.forEach(input -> input(input.getWeightingValue()));
-        setValue(LearnMath.relu(sum));
+        setValue(relu(sum));
     }
 
     public void input(double value)

@@ -12,13 +12,8 @@ public class LookingUtils
 {
     public static Player getLookingEntity(Player player)
     {
-        ArrayList<Entity> entities = (ArrayList<Entity>) player.getNearbyEntities(3.5, 3.5, 3.5);
-        ArrayList<Block> sightBlock = (ArrayList<Block>) player.getLineOfSight(null, 4);
-
-        ArrayList<Location> sight = sightBlock.stream().map(Block::getLocation).collect(Collectors.toCollection(ArrayList::new));
-
-        for (Location location : sight)
-            for (Entity entity : entities)
+        for (Location location : player.getLineOfSight(null, 4).stream().map(Block::getLocation).collect(Collectors.toCollection(ArrayList::new)))
+            for (Entity entity : player.getNearbyEntities(3.5, 3.5, 3.5))
                 if (isLooking((Player) entity, location) && entity.getType() == EntityType.PLAYER)
                     return (Player) entity;
 

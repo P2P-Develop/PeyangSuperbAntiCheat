@@ -2,6 +2,8 @@ package ml.peya.plugins.Utils;
 
 import org.bukkit.*;
 
+import java.util.stream.*;
+
 public class OptGraphGenerator
 {
     private static int calcVLGraph(int VL, int max)
@@ -19,12 +21,14 @@ public class OptGraphGenerator
 
         StringBuilder builder = new StringBuilder("[");
 
-        for (int i = 1; i < 11; i++)
-        {
+        IntStream.range(1, 11).forEachOrdered(i -> {
             if (VL >= max && i == 10)
                 builder.append(ChatColor.WHITE).append("|");
             else if (VL == 0 && i == 1)
-                builder.append(ChatColor.WHITE).append("|");
+            {
+                builder.append(ChatColor.WHITE);
+                builder.append("|");
+            }
             if (i == genVL)
                 builder.append(ChatColor.WHITE).append("|");
             else if (i < 5)
@@ -33,7 +37,7 @@ public class OptGraphGenerator
                 builder.append(ChatColor.YELLOW).append("=");
             else
                 builder.append(ChatColor.RED).append("=");
-        }
+        });
 
         builder.append(ChatColor.WHITE).append("]");
         return builder.toString();

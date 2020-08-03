@@ -5,6 +5,7 @@ import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 public class RandomArmor
 {
@@ -75,8 +76,7 @@ public class RandomArmor
         swords.add(Material.IRON_AXE);
         swords.add(Material.STONE_AXE);
         swords.add(Material.WOOD_AXE);
-        for (int i = 0; i < 5; i++)
-            swords.add(Material.AIR);
+        IntStream.range(0, 5).mapToObj(i -> Material.AIR).forEachOrdered(swords::add);
 
         return getRandomItems(swords);
     }
@@ -99,12 +99,11 @@ public class RandomArmor
 
         ArrayList<Material> items = new ArrayList<>();
 
-        for (Material item : itemsArg)
-        {
+        itemsArg.forEach(item -> {
             if (isGold(item))
                 items.add(item);
             items.add(item);
-        }
+        });
 
         ItemStack stack = new ItemStack(items.get(random.nextInt(items.size() - 1)), 1);
 

@@ -76,9 +76,7 @@ public class NPCTeleport
                     if (center.getPitch() <= 0.0f || center.getPitch() > 15.0f)
                         center.setPitch(0.0f);
 
-                    Vector vec = center.getDirection().multiply(0 - range);
-
-                    Location n = center.add(vec);
+                    Location n = center.add(center.getDirection().multiply(0 - range));
 
                     n.setY(center.getY() + range);
 
@@ -92,7 +90,6 @@ public class NPCTeleport
                     NPC.setLocation(n, target);
                     connection.sendPacket(new PacketPlayOutEntityTeleport(target));
                     connection.sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) head));
-
 
                     NPC.setArmor(player, target, arm);
                     float finalHead = head;
@@ -175,14 +172,11 @@ public class NPCTeleport
                         @Override
                         public void run()
                         {
-                            for (Player p : Bukkit.getOnlinePlayers())
-                            {
-                                if (!p.hasPermission("psac.viewnpc"))
-                                    continue;
+                            Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("psac.viewnpc")).forEachOrdered(p -> {
                                 PlayerConnection c = ((CraftPlayer) p).getHandle().playerConnection;
                                 c.sendPacket(new PacketPlayOutEntityTeleport(target));
                                 NPC.setArmor(p, target, arm);
-                            }
+                            });
                             this.cancel();
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());

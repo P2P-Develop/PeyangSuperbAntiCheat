@@ -16,23 +16,10 @@ public class Run implements Listener
     {
         ItemStack itemStack = e.getItem();
 
-        if (e.getItem() == null || e.getItem().getType() == Material.AIR)
-            return;
-
-        Item item = PeyangSuperbAntiCheat.item;
-
-
-        if (!Item.canGuiItem(itemStack))
-            return;
-
+        if (e.getItem() == null || e.getItem().getType() == Material.AIR || Item.canGuiItem(itemStack)) return;
 
         e.setCancelled(true);
 
-        for (IItems items : item.getItems())
-        {
-            String type = items.getExecName();
-            if (Objects.equals(Item.getType(itemStack), type))
-                items.run(e.getPlayer(), Item.getTarget(itemStack));
-        }
+        PeyangSuperbAntiCheat.item.getItems().stream().filter(items -> Objects.equals(Item.getType(itemStack), items.getExecName())).forEachOrdered(items -> items.run(e.getPlayer(), Item.getTarget(itemStack)));
     }
 }

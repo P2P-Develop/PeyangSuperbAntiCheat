@@ -3,6 +3,7 @@ package ml.peya.plugins.Moderate;
 import ml.peya.plugins.Enum.*;
 
 import java.util.*;
+import java.util.function.*;
 
 public class CheatTypeUtils
 {
@@ -36,49 +37,28 @@ public class CheatTypeUtils
         types.add(EnumCheatType.ANTIKNOCKBACK);
         types.add(EnumCheatType.REACH);
         types.add(EnumCheatType.DOLPHIN);
-        for (EnumCheatType type : types)
-        {
-            type.setSelected(false);
-        }
+        types.forEach(type -> type.setSelected(false));
         return types;
     }
 
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
         ArrayList<EnumCheatType> types = getFullTypeArrayList();
-        for (String reason : values)
-        {
-            for (EnumCheatType type : types)
-            {
-                if (reason.toLowerCase().equals(type.getSysName()))
-                    type.setSelected(true);
-                else if (aliasEquals(type, reason.toLowerCase()))
-                    type.setSelected(true);
-            }
-        }
+        Arrays.stream(values).<Consumer<? super EnumCheatType>>map(reason -> type -> {
+            if (reason.toLowerCase().equals(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
+                type.setSelected(true);
+        }).forEachOrdered(types::forEach);
 
         return types;
     }
 
     public static EnumCheatType getCheatTypeFromString(String sysname)
     {
-        ArrayList<EnumCheatType> types = getFullTypeArrayList();
-        for (EnumCheatType type : types)
-        {
-            if (type.getSysName().equals(sysname))
-                return type;
-        }
-        return null;
+        return getFullTypeArrayList().stream().filter(type -> type.getSysName().equals(sysname)).findFirst().orElse(null);
     }
 
     public static boolean aliasEquals(EnumCheatType types, String name)
     {
-        for (String type : types.getAlias())
-        {
-            if (type.equals(name))
-                return true;
-        }
-
-        return false;
+        return types.getAlias().stream().anyMatch(type -> type.equals(name));
     }
 }
