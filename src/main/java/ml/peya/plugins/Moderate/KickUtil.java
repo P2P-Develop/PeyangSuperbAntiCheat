@@ -34,7 +34,7 @@ public class KickUtil
     {
         if (wdFlag)
         {
-            Bukkit.getOnlinePlayers().forEach(player -> {
+            Bukkit.getOnlinePlayers().parallelStream().forEachOrdered(player -> {
                 if (player.hasPermission("psac.ntfadmin"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
                 else if (player.hasPermission("psac.notification"))
@@ -60,14 +60,14 @@ public class KickUtil
 
         StringBuilder id = new StringBuilder();
         Random random = new Random();
-        IntStream.range(0, 8).forEachOrdered(i -> {
+        IntStream.range(0, 8).parallel().forEachOrdered(i -> {
             if (random.nextBoolean())
                 id.append(random.nextInt(9));
             else
                 id.append((char) (random.nextInt(5) + 'A'));
         });
 
-        String ggId = IntStream.range(0, 7).mapToObj(i -> String.valueOf(random.nextInt(9))).collect(Collectors.joining());
+        String ggId = IntStream.range(0, 7).parallel().mapToObj(i -> String.valueOf(random.nextInt(9))).collect(Collectors.joining());
 
         String reasonP;
 

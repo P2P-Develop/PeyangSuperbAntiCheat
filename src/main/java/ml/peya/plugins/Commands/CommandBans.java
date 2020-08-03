@@ -68,7 +68,7 @@ public class CommandBans implements CommandExecutor
         if (bans.size() == 0)
             sender.sendMessage(MessageEngine.get("error.bans.databaseInfoNotFound"));
 
-        IntStream.range(0, 5).forEachOrdered(ii -> sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(ii), bans.get(ii).getType()).create()));
+        IntStream.range(0, 5).parallel().forEachOrdered(ii -> sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(ii), bans.get(ii).getType()).create()));
 
         if (bans.size() <= 5)
             return true;

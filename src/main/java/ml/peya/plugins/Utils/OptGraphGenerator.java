@@ -21,7 +21,7 @@ public class OptGraphGenerator
 
         StringBuilder builder = new StringBuilder("[");
 
-        IntStream.range(1, 11).forEachOrdered(i -> {
+        IntStream.range(1, 11).parallel().forEachOrdered(i -> {
             if (VL >= max && i == 10)
                 builder.append(ChatColor.WHITE).append("|");
             else if (VL == 0 && i == 1)

@@ -25,7 +25,7 @@ public class Drop implements Listener
             @Override
             public void run()
             {
-                Arrays.stream(e.getPlayer().getInventory().getContents()).filter(stack -> !Item.canGuiItem(stack)).forEachOrdered(stack -> stack.setAmount(0));
+                Arrays.stream(e.getPlayer().getInventory().getContents()).parallel().filter(stack -> !Item.canGuiItem(stack)).forEachOrdered(stack -> stack.setAmount(0));
                 this.cancel();
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());

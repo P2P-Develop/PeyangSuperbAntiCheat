@@ -59,7 +59,6 @@ public class DetectConnection
                             PeyangSuperbAntiCheat.learnCount++;
                             network.learn(arr, 1000);
 
-
                             this.cancel();
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
@@ -103,14 +102,14 @@ public class DetectConnection
                         {
                             case AURA_BOT:
                                 if (sender == null)
-                                    Bukkit.getOnlinePlayers().stream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create()));
+                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
                                 break;
 
                             case AURA_PANIC:
                                 if (sender == null)
-                                    Bukkit.getOnlinePlayers().stream().filter(np -> np.hasPermission("psac.aurapanic")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create()));
+                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurapanic")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 break;

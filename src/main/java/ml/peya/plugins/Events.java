@@ -87,7 +87,7 @@ public class Events implements Listener
         BaseComponent[] baseComponent = (BaseComponent[]) ArrayUtils.addAll(component, new ComponentBuilder(format).create());
 
 
-        e.getRecipients().forEach(receiver -> {
+        e.getRecipients().parallelStream().forEach(receiver -> {
             if (!receiver.hasPermission("psac.chattarget") || (PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()) != null && PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()).containsKey("Lynx")))
                 receiver.sendMessage(format);
             else

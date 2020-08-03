@@ -60,7 +60,7 @@ public class CommandReport implements CommandExecutor
 
         ArrayList<String> reasons = new ArrayList<>();
 
-        reasonsV.forEach(reason -> {
+        reasonsV.parallelStream().forEach(reason -> {
             if (reasons.contains(reason))
             {
                 reasons.remove(reason);
@@ -130,7 +130,7 @@ public class CommandReport implements CommandExecutor
                 return;
             }
 
-            ReportUtils.adminNotification(target.getName(), id, types.stream().map(EnumCheatType::getText).toArray(String[]::new));
+            ReportUtils.adminNotification(target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
         }
         else
             sender.sendMessage(MessageEngine.get("error.unknownSQLError"));

@@ -9,7 +9,6 @@ import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
-import org.bukkit.util.*;
 
 public class NPC
 {
@@ -52,7 +51,7 @@ public class NPC
 
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
-                Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> {
+                Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> {
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
                     c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
                 });
@@ -61,7 +60,7 @@ public class NPC
 
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
-                Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
+                Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
 
                 new BukkitRunnable()
                 {
@@ -69,7 +68,7 @@ public class NPC
                     public void run()
                     {
                         connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
-                        Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId())));
+                        Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId())));
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
             }

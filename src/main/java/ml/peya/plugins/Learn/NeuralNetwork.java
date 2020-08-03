@@ -23,7 +23,7 @@ public class NeuralNetwork
     public static double[] getColumn(double[][] array, int index)
     {
         double[] column = new double[array[0].length];
-        Arrays.setAll(column, i -> array[i][index]);
+        Arrays.parallelSetAll(column, i -> array[i][index]);
         return column;
     }
 
@@ -42,7 +42,7 @@ public class NeuralNetwork
         middleLayer = new Neuron[]{new Neuron(), new Neuron()};
         outputLayer = new Neuron();
 
-        IntStream.range(0, middleLayer.length).forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
+        IntStream.range(0, middleLayer.length).parallel().forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
 
         outputLayer.input(new ArrayList<>(Arrays.asList(new Input(middleLayer[0].getValue(), middleWeight[0]), new Input(middleLayer[1].getValue(), middleWeight[1]), new Input(middleLayerBias, middleWeight[2]))));
 
@@ -51,7 +51,7 @@ public class NeuralNetwork
 
     public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int times)
     {
-        IntStream.range(0, times).<Consumer<? super Triple<Double, Double, Double>>>mapToObj(i -> this::learn).forEachOrdered(dataCollection::forEach);
+        IntStream.range(0, times).parallel().<Consumer<? super Triple<Double, Double, Double>>>mapToObj(i -> this::learn).forEachOrdered(dataCollection::forEach);
     }
 
     void learn(Triple<Double, Double, Double> data)
@@ -66,7 +66,7 @@ public class NeuralNetwork
         double[] oldMiddleWeight = middleWeight.clone();
 
         int bound = middleLayer.length;
-        IntStream.range(0, bound).forEachOrdered(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
+        IntStream.range(0, bound).parallel().forEachOrdered(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
 
         middleWeight[2] += middleLayerBias * deltaMO * learningRate;
 

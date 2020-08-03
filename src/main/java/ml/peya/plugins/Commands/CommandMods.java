@@ -35,7 +35,7 @@ public class CommandMods implements CommandExecutor
 
         if (sender instanceof ConsoleCommandSender)
         {
-            mods.keySet().forEach(id -> sender.sendMessage(ChatColor.RED + id + ChatColor.GREEN + ": " + ChatColor.BLUE + mods.get(id)));
+            mods.keySet().parallelStream().forEach(id -> sender.sendMessage(ChatColor.RED + id + ChatColor.GREEN + ": " + ChatColor.BLUE + mods.get(id)));
             return true;
         }
 

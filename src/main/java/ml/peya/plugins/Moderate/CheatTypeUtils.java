@@ -37,14 +37,14 @@ public class CheatTypeUtils
         types.add(EnumCheatType.ANTIKNOCKBACK);
         types.add(EnumCheatType.REACH);
         types.add(EnumCheatType.DOLPHIN);
-        types.forEach(type -> type.setSelected(false));
+        types.parallelStream().forEach(type -> type.setSelected(false));
         return types;
     }
 
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
         ArrayList<EnumCheatType> types = getFullTypeArrayList();
-        Arrays.stream(values).<Consumer<? super EnumCheatType>>map(reason -> type -> {
+        Arrays.stream(values).parallel().<Consumer<? super EnumCheatType>>map(reason -> type -> {
             if (reason.toLowerCase().equals(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
                 type.setSelected(true);
         }).forEachOrdered(types::forEach);
@@ -54,11 +54,11 @@ public class CheatTypeUtils
 
     public static EnumCheatType getCheatTypeFromString(String sysname)
     {
-        return getFullTypeArrayList().stream().filter(type -> type.getSysName().equals(sysname)).findFirst().orElse(null);
+        return getFullTypeArrayList().parallelStream().filter(type -> type.getSysName().equals(sysname)).findFirst().orElse(null);
     }
 
     public static boolean aliasEquals(EnumCheatType types, String name)
     {
-        return types.getAlias().stream().anyMatch(type -> type.equals(name));
+        return types.getAlias().parallelStream().anyMatch(type -> type.equals(name));
     }
 }

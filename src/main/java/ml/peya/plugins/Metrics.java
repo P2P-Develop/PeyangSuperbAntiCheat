@@ -282,7 +282,7 @@ public class Metrics
         JsonArray customCharts = new JsonArray();
         // Add the data of the custom charts
         // If the chart is null, we skip it
-        charts.stream().map(CustomChart::getRequestJsonObject).filter(Objects::nonNull).forEachOrdered(customCharts::add);
+        charts.parallelStream().map(CustomChart::getRequestJsonObject).filter(Objects::nonNull).forEachOrdered(customCharts::add);
         data.add("customCharts", customCharts);
 
         return data;
@@ -348,12 +348,12 @@ public class Metrics
 
         JsonArray pluginData = new JsonArray();
         // Search for all other bStats Metrics classes to get their plugin data
-        Bukkit.getServicesManager().getKnownServices().forEach(service -> {
+        Bukkit.getServicesManager().getKnownServices().parallelStream().forEachOrdered(service -> {
             try
             {
                 service.getField("B_STATS_VERSION"); // Our identifier :)
 
-                Bukkit.getServicesManager().getRegistrations(service).forEach(provider -> {
+                Bukkit.getServicesManager().getRegistrations(service).parallelStream().forEachOrdered(provider -> {
                     try
                     {
                         Object plugin = provider.getService().getMethod("getPluginData").invoke(provider.getProvider());
@@ -695,7 +695,7 @@ public class Metrics
             // Null = skip the chart
             if (map == null || map.isEmpty())
                 return null;
-            map.entrySet().forEach(entry -> {
+            map.entrySet().parallelStream().forEachOrdered(entry -> {
                 JsonArray categoryValues = new JsonArray();
                 categoryValues.add(new JsonPrimitive(entry.getValue()));
                 values.add(entry.getKey(), categoryValues);

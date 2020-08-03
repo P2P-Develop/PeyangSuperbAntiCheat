@@ -206,7 +206,7 @@ public class TextBuilder
         ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick" : "Ban"));
         builder.append(" - " + formatter.format(date));
         StringBuilder reasonSet = new StringBuilder();
-        Arrays.stream(ban.getReason().split(", ")).forEachOrdered(reason -> {
+        Arrays.stream(ban.getReason().split(", ")).parallel().forEachOrdered(reason -> {
             EnumCheatType tp = CheatTypeUtils.getCheatTypeFromString(reason);
             if (tp == null)
                 reasonSet.append(reason).append(", ");

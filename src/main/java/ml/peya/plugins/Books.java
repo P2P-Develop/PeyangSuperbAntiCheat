@@ -20,7 +20,7 @@ public class Books
     {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
-        String tmpReasonText = Arrays.stream(types).map(type -> type.isSelected() ? type.getSysName() + " ": "").collect(Collectors.joining());
+        String tmpReasonText = Arrays.stream(types).parallel().map(type -> type.isSelected() ? type.getSysName() + " ": "").collect(Collectors.joining());
         ComponentBuilder component = new ComponentBuilder(MessageEngine.get("reportbook.cheat"));
         component.append("\n");
 
@@ -34,7 +34,6 @@ public class Books
         }
 
         component.append("\n\n");
-
 
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
@@ -69,7 +68,7 @@ public class Books
 
         HoverEvent hoverEvt = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
 
-        String reason = types.stream().map(type -> "\n           " + ChatColor.BLUE + type.getText()).collect(Collectors.joining());
+        String reason = types.parallelStream().map(type -> "\n           " + ChatColor.BLUE + type.getText()).collect(Collectors.joining());
 
         ComponentBuilder b = new ComponentBuilder(MessageEngine.get("book.text.report"));
         b.append("\n");

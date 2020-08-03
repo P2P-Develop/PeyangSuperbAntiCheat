@@ -184,7 +184,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
                     i++;
                 }
 
-                Arrays.setAll(network.middleWeight, i2 -> node.get("middleWeight").get(i2).asDouble());
+                Arrays.parallelSetAll(network.middleWeight, i2 -> node.get("middleWeight").get(i2).asDouble());
 
                 learnCount = node.get("learnCount").asInt();
 

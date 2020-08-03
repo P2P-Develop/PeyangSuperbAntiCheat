@@ -98,7 +98,7 @@ public class NPCTeleport
                         @Override
                         public void run()
                         {
-                            Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("psac.viewnpc")).forEachOrdered(p -> {
+                            Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).forEachOrdered(p -> {
                                 PlayerConnection c = ((CraftPlayer) p).getHandle().playerConnection;
                                 c.sendPacket(new PacketPlayOutEntityTeleport(target));
                                 connection.sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) finalHead));
@@ -172,7 +172,7 @@ public class NPCTeleport
                         @Override
                         public void run()
                         {
-                            Bukkit.getOnlinePlayers().stream().filter(p -> p.hasPermission("psac.viewnpc")).forEachOrdered(p -> {
+                            Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).forEachOrdered(p -> {
                                 PlayerConnection c = ((CraftPlayer) p).getHandle().playerConnection;
                                 c.sendPacket(new PacketPlayOutEntityTeleport(target));
                                 NPC.setArmor(p, target, arm);

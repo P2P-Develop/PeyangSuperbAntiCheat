@@ -15,7 +15,7 @@ public class GuiItem
 
         int i = 0;
 
-        Arrays.stream(player.getInventory().getContents()).filter(stack -> stack != null && stack.getType() != Material.AIR).forEachOrdered(stack -> {
+        Arrays.stream(player.getInventory().getContents()).filter(stack -> stack != null && stack.getType() != Material.AIR).parallel().forEachOrdered(stack -> {
             if (Item.canGuiItem(stack))
                 player.getWorld().dropItem(player.getEyeLocation(), stack);
             player.getInventory().remove(stack);

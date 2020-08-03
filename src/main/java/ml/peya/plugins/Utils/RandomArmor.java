@@ -76,7 +76,7 @@ public class RandomArmor
         swords.add(Material.IRON_AXE);
         swords.add(Material.STONE_AXE);
         swords.add(Material.WOOD_AXE);
-        IntStream.range(0, 5).mapToObj(i -> Material.AIR).forEachOrdered(swords::add);
+        IntStream.range(0, 5).parallel().mapToObj(i -> Material.AIR).forEachOrdered(swords::add);
 
         return getRandomItems(swords);
     }
@@ -99,7 +99,7 @@ public class RandomArmor
 
         ArrayList<Material> items = new ArrayList<>();
 
-        itemsArg.forEach(item -> {
+        itemsArg.parallelStream().forEachOrdered(item -> {
             if (isGold(item))
                 items.add(item);
             items.add(item);

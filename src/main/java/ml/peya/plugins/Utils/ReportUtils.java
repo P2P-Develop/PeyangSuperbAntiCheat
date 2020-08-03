@@ -12,7 +12,7 @@ public class ReportUtils
 {
     public static void adminNotification(String id)
     {
-        Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("psac.reportntf")).forEachOrdered(player -> {
+        Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.hasPermission("psac.reportntf")).forEachOrdered(player -> {
             player.sendMessage(MessageEngine.get("report.submited"));
             ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
             hover.color(net.md_5.bungee.api.ChatColor.AQUA);
@@ -26,7 +26,7 @@ public class ReportUtils
 
     public static void adminNotification(String name, String id, String[] reasons)
     {
-        Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("psac.reportntf")).forEachOrdered(player -> {
+        Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.hasPermission("psac.reportntf")).forEachOrdered(player -> {
             ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
             hover.color(net.md_5.bungee.api.ChatColor.AQUA);
             HashMap<String, Object> map = new HashMap<>();
@@ -41,7 +41,7 @@ public class ReportUtils
 
     public static void errorNotification(String stacktrace)
     {
-        Bukkit.getOnlinePlayers().stream().filter(player -> player.hasPermission("psac.error")).forEachOrdered(player -> {
+        Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.hasPermission("psac.error")).forEachOrdered(player -> {
             player.sendMessage(ChatColor.GREEN + "[" +
                     ChatColor.BLUE + "PeyangSuperbAntiCheat" +
                     ChatColor.GREEN + "] " +

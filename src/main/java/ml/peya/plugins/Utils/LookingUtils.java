@@ -12,7 +12,7 @@ public class LookingUtils
 {
     public static Player getLookingEntity(Player player)
     {
-        for (Location location : player.getLineOfSight(null, 4).stream().map(Block::getLocation).collect(Collectors.toCollection(ArrayList::new)))
+        for (Location location : player.getLineOfSight(null, 4).parallelStream().map(Block::getLocation).collect(Collectors.toCollection(ArrayList::new)))
             for (Entity entity : player.getNearbyEntities(3.5, 3.5, 3.5))
                 if (isLooking((Player) entity, location) && entity.getType() == EntityType.PLAYER)
                     return (Player) entity;

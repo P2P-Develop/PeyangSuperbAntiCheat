@@ -58,15 +58,10 @@ public class Tracker
 
     public void tick()
     {
-        tracker.keySet().forEach(playerName -> {
+        tracker.keySet().parallelStream().forEachOrdered(playerName -> {
             Player player = Bukkit.getPlayer(playerName);
             Player target = Bukkit.getPlayer(tracker.get(playerName));
-            if (player == null)
-            {
-                tracker.remove(playerName);
-                return;
-            }
-            if (target == null)
+            if (player == null || target == null)
             {
                 tracker.remove(playerName);
                 return;
@@ -93,11 +88,11 @@ public class Tracker
             else
                 map.put("tests", "");
             if (target.hasMetadata("speed"))
-                target.getMetadata("speed").stream().filter(value -> value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName())).forEachOrdered(value -> map.put("velocity", scaleSet((Double) value.value(), 2)));
+                target.getMetadata("speed").parallelStream().filter(value -> value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName())).forEachOrdered(value -> map.put("velocity", scaleSet((Double) value.value(), 2)));
             else
                 map.put("velocity", 0.0);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.text", map)));
-            Arrays.stream(player.getInventory().getContents()).filter(itemStack -> !Item.canGuiItem(itemStack)).filter(itemStack -> Objects.equals(Item.getType(itemStack), "TRACKER")).map(itemStack -> location).forEachOrdered(player::setCompassTarget);
+            Arrays.stream(player.getInventory().getContents()).parallel().filter(itemStack -> !Item.canGuiItem(itemStack)).filter(itemStack -> Objects.equals(Item.getType(itemStack), "TRACKER")).map(itemStack -> location).forEachOrdered(player::setCompassTarget);
             target.removeMetadata("speed", PeyangSuperbAntiCheat.getPlugin());
         });
     }

@@ -21,7 +21,7 @@ public class Help
             @Override
             public void run()
             {
-                nodes.stream().filter(node -> sender.hasPermission("psac." + node)).forEachOrdered(node -> {
+                nodes.parallelStream().filter(node -> sender.hasPermission("psac." + node)).forEachOrdered(node -> {
                     sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.hsh("label", label)));
                     flag[0] = true; //ここFlagの都合で短縮不可
                 });

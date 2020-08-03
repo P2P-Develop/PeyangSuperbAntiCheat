@@ -22,7 +22,7 @@ public class Neuron
 
     public void input(ArrayList<Input> inputData)
     {
-        inputData.forEach(input -> input(input.getWeightingValue()));
+        inputData.parallelStream().forEachOrdered(input -> input(input.getWeightingValue()));
         setValue(relu(sum));
     }
 
