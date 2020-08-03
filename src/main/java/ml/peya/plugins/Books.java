@@ -55,33 +55,18 @@ public class Books
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
 
-        Date date = new Date(dateInt.longValue());
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-
-        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", uuid)));
-
-        ComponentBuilder unixTime = new ComponentBuilder(TextBuilder.getLine("UNIX秒", String.valueOf(dateInt)));
-
-
-        ComponentBuilder hover2 = new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", issueByUuid)));
-        HoverEvent hoverEvt2 = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover2.create());
-
-        HoverEvent hoverEvt = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
-
-        String reason = types.parallelStream().map(type -> "\n           " + ChatColor.BLUE + type.getText()).collect(Collectors.joining());
-
         ComponentBuilder b = new ComponentBuilder(MessageEngine.get("book.text.report"));
         b.append("\n");
-        b.append(ChatColor.GRAY + formatter.format(date))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, unixTime.create()));
+        b.append(ChatColor.GRAY + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(TextBuilder.getLine("UNIX秒", String.valueOf(dateInt))).create()));
         b.append("\n");
         b.append(MessageEngine.get("book.text.issueTo", MessageEngine.hsh("id", id)))
-                .event(hoverEvt);
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", uuid))).create()));
         b.append("\n");
         ComponentBuilder b1 = new ComponentBuilder(new TextComponent(b.create()));
 
         b1.append(MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)))
-                .event(hoverEvt2);
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", issueByUuid))).create()));
         b1.append("\n");
 
         ComponentBuilder b2 = new ComponentBuilder(new TextComponent(b1.create()));
@@ -92,7 +77,7 @@ public class Books
 
         b2.append(MessageEngine.get("book.text.severity", map));
         b2.append("\n");
-        b2.append(MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", reason)));
+        b2.append(MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", types.parallelStream().map(type -> "\n           " + ChatColor.BLUE + type.getText()).collect(Collectors.joining()))));
         b2.append("\n");
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
@@ -116,8 +101,7 @@ public class Books
 
         for (String id : mods.keySet())
         {
-            String version = mods.get(id);
-            builder.append(ChatColor.RED + id + ChatColor.GRAY + ": " + ChatColor.BLUE + version);
+            builder.append(ChatColor.RED + id + ChatColor.GRAY + ": " + ChatColor.BLUE + mods.get(id));
             builder.append("\n");
             count++;
             if (count < 10)
