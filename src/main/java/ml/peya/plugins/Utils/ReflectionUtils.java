@@ -479,8 +479,7 @@ public final class ReflectionUtils
             });
         }
 
-        private final Class<?> primitive;
-        private final Class<?> reference;
+        private final Class<?> primitive, reference;
 
         /**
          * Construct a new data type

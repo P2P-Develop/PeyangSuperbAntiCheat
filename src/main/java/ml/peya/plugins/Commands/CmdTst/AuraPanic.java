@@ -28,8 +28,6 @@ public class AuraPanic implements CommandExecutor
             return true;
         }
 
-        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") "));
-
         if (PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
         {
             sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
@@ -37,18 +35,17 @@ public class AuraPanic implements CommandExecutor
             return true;
         }
 
-        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            sender.sendMessage(MessageEngine.get("message.aura.lynx"));
-        else
+        if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
         {
             HashMap<String, Object> map = new HashMap<>();
-            map.put("name", name);
+            map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") ")));
             map.put("type", "AuraPanicBot");
             map.put("seconds", String.valueOf(PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
 
             sender.sendMessage(MessageEngine.get("message.aura.summon", map));
-
         }
+        else
+            sender.sendMessage(MessageEngine.get("message.aura.lynx"));
 
         if (args.length == 2)
         {
@@ -63,7 +60,6 @@ public class AuraPanic implements CommandExecutor
             }
 
         }
-
 
         DetectType type = DetectType.AURA_PANIC;
         type.setPanicCount(count);

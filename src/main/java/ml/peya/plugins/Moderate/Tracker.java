@@ -41,7 +41,6 @@ public class Tracker
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20L);
 
-
         this.target.remove(player);
         this.tracker.remove(player);
     }
@@ -76,13 +75,9 @@ public class Tracker
             map.put("distance", scaleSet(location.distance(player.getLocation()), 1));
             if (PeyangSuperbAntiCheat.cheatMeta.exists(target.getUniqueId()))
             {
-                String test = String.valueOf(PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType().getName());
                 HashMap<String, Object> repKey = new HashMap<>();
-                repKey.put("type", test);
-                if (PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType() == DetectType.ANTI_KB)
-                    repKey.put("vl", "N/A");
-                else
-                    repKey.put("vl", PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getVL());
+                repKey.put("type", String.valueOf(PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType().getName()));
+                repKey.put("vl", PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType() == DetectType.ANTI_KB ? "N/A": Integer.valueOf(PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getVL()));
                 map.put("tests", MessageEngine.get("item.tracking.testing", repKey));
             }
             else
@@ -99,9 +94,6 @@ public class Tracker
 
     private String scaleSet(double d, int scale)
     {
-        BigDecimal bigDecimal = BigDecimal.valueOf(d);
-
-        bigDecimal = bigDecimal.setScale(scale, RoundingMode.HALF_UP);
-        return bigDecimal.toPlainString();
+        return BigDecimal.valueOf(d).setScale(scale, RoundingMode.HALF_UP).toPlainString();
     }
 }

@@ -20,7 +20,6 @@ public class KillCounting
 
     public void kill(UUID killer)//killされたときに呼び出されるやつ(?)
     {
-        FileConfiguration config = PeyangSuperbAntiCheat.config;
         if (players.containsKey(killer))
         {
             players.put(killer, players.get(killer) + 1);
@@ -42,7 +41,7 @@ public class KillCounting
                 players.remove(killer);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * config.getInt("npc.seconds"));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
 
     }
 

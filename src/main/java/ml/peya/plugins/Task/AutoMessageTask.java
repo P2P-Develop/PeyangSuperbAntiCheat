@@ -35,9 +35,7 @@ public class AutoMessageTask extends BukkitRunnable
                     new Date().getTime() +
                     " AnD StAfF=0");
             while (result.next())
-            {
                 watchdog++;
-            }
 
             ResultSet result2 = statement2.executeQuery("SeLeCt * FrOm kIcK WhErE DaTe BeTwEeN " +
                     date.getTime() +
@@ -45,9 +43,7 @@ public class AutoMessageTask extends BukkitRunnable
                     new Date().getTime() +
                     " AnD StAfF=1");
             while (result2.next())
-            {
                 staff++;
-            }
         }
         catch (Exception e)
         {

@@ -22,16 +22,14 @@ public class PluginMessageListener implements org.bukkit.plugin.messaging.Plugin
 
         for (int i = 2; i < data.length; store = !store)
         {
-            int end = i + data[i] + 1;
-            byte[] range = Arrays.copyOfRange(data, i + 1, end);
-            String mod = new String(range);
+            String mod = new String(Arrays.copyOfRange(data, i + 1, i + data[i] + 1));
 
             if (store)
                 mods.put(tempName, mod);
             else
                 tempName = mod;
 
-            i = end;
+            i = i + data[i] + 1;
         }
 
         PeyangSuperbAntiCheat.mods.put(player.getUniqueId(), mods);

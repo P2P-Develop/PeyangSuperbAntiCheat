@@ -29,15 +29,7 @@ public class Events implements Listener
     @EventHandler(priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent e)
     {
-        if (!(e.getEntity() instanceof CraftPlayer))
-            return;
-        if (!(e.getDamager() instanceof CraftArrow))
-            return;
-
-        if (!PeyangSuperbAntiCheat.cheatMeta.exists(e.getEntity().getUniqueId()))
-            return;
-
-        if (!e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
+        if (!(e.getEntity() instanceof CraftPlayer) || !(e.getDamager() instanceof CraftArrow) || !PeyangSuperbAntiCheat.cheatMeta.exists(e.getEntity().getUniqueId()) || !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
             return;
 
         e.setDamage(0);
@@ -50,7 +42,7 @@ public class Events implements Listener
 
         PeyangSuperbAntiCheat.tracker.remove(player.getName());
 
-        PeyangSuperbAntiCheat.mods.remove(e.getPlayer().getUniqueId());
+        PeyangSuperbAntiCheat.mods.remove(player.getUniqueId());
     }
 
     @EventHandler
@@ -58,11 +50,7 @@ public class Events implements Listener
     {
         if (!PeyangSuperbAntiCheat.tracker.isTrackingByPlayer(e.getPlayer().getName()) && !PeyangSuperbAntiCheat.cheatMeta.exists(e.getPlayer().getUniqueId()))
             return;
-        Location from = e.getFrom();
-        Location to = e.getTo();
-        double distance = from.distance(to);
-        Player player = e.getPlayer();
-        player.setMetadata("speed", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), distance));
+        e.getPlayer().setMetadata("speed", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo())));
     }
 
     @EventHandler(priority = EventPriority.MONITOR)
@@ -82,16 +70,11 @@ public class Events implements Listener
                 new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()
         ));
 
-        BaseComponent[] component = builder.create();
-
-        BaseComponent[] baseComponent = (BaseComponent[]) ArrayUtils.addAll(component, new ComponentBuilder(format).create());
-
-
         e.getRecipients().parallelStream().forEach(receiver -> {
             if (!receiver.hasPermission("psac.chattarget") || (PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()) != null && PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()).containsKey("Lynx")))
                 receiver.sendMessage(format);
             else
-                receiver.spigot().sendMessage(baseComponent);
+                receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create()));
         });
         Bukkit.getConsoleSender().sendMessage(format);
     }

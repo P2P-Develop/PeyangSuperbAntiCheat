@@ -19,7 +19,7 @@ public class Show
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))
             return;
 
-        if (WatchEyeManagement.isInjection(args[1]) || !WatchEyeManagement.isExistsRecord(args[1]))
+        if (WatchEyeManagement.isInjection(args[1]) || WatchEyeManagement.isExistsRecord(args[1]))
         {
             sender.sendMessage(MessageEngine.get("error.showDrop.notFoundReport"));
 
@@ -43,10 +43,9 @@ public class Show
             ResultSet reason = statement.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
 
             ArrayList<EnumCheatType> types = new ArrayList<>();
+
             while (reason.next())
-            {
                 types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
-            }
 
             if (sender instanceof Player)
                 BookUtil.openBook(Books.getShowBook(id, uuid, issuebyid, issuebyuuid, issuedate, types), (Player) sender);

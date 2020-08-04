@@ -33,12 +33,12 @@ public class CommandTracking implements CommandExecutor
             ((Player) sender).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.noTarget")));
             return true;
         }
-        else if (args.length == 0)
+
+        if (args.length == 0)
         {
             sender.sendMessage(MessageEngine.get("error.invalidArgument"));
             return true;
         }
-
 
         if (Bukkit.getPlayer(args[0]) == null)
         {

@@ -23,12 +23,11 @@ public class Help
             {
                 nodes.parallelStream().filter(node -> sender.hasPermission("psac." + node)).forEachOrdered(node -> {
                     sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.hsh("label", label)));
-                    flag[0] = true; //ここFlagの都合で短縮不可
+                    flag[0] = true;
                 });
 
                 if ((sender.hasPermission("psac.drop") || sender.hasPermission("psac.show")) && sender instanceof Player)
                     sender.sendMessage(MessageEngine.get("command.help.mngIdWarning"));
-
 
                 if (!flag[0])
                     sender.sendMessage(MessageEngine.get("error.psac.notPage"));

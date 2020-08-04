@@ -18,18 +18,8 @@ public class CommandBans implements CommandExecutor
         if (ErrorMessageSender.unPermMessage(sender, "psac.bans") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
             return true;
 
-        String type;
-        String name;
-        if (args.length == 2)
-        {
-            type = args[0];
-            name = args[1];
-        }
-        else
-        {
-            type = "-a";
-            name = args[0];
-        }
+        String type = args.length == 2 ? args[0] : "-a";
+        String name = args.length == 2 ? args[1] : args[0];
 
         if (!type.equals("-a") && !type.toLowerCase().equals("ban") && !type.toLowerCase().equals("kick"))
         {
@@ -60,10 +50,7 @@ public class CommandBans implements CommandExecutor
 
         ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player, typeP);
 
-        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            sender.sendMessage(MessageEngine.get("message.bans.lynx", MessageEngine.hsh("name", name)));
-        else
-            sender.sendMessage(MessageEngine.get("message.bans.message", MessageEngine.hsh("name", name)));
+        sender.sendMessage(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? MessageEngine.get("message.bans.lynx", MessageEngine.hsh("name", name)): MessageEngine.get("message.bans.message", MessageEngine.hsh("name", name)));
 
         if (bans.size() == 0)
             sender.sendMessage(MessageEngine.get("error.bans.databaseInfoNotFound"));
@@ -74,10 +61,7 @@ public class CommandBans implements CommandExecutor
             return true;
 
         int count = bans.size() - 5;
-        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            sender.sendMessage(MessageEngine.get("message.bans.more.lynx", MessageEngine.hsh("count", count)));
-        else
-            sender.sendMessage(MessageEngine.get("message.bans.more.normal", MessageEngine.hsh("count", count)));
+        sender.sendMessage(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? MessageEngine.get("message.bans.more.lynx", MessageEngine.hsh("count", count)): MessageEngine.get("message.bans.more.normal", MessageEngine.hsh("count", count)));
 
         return true;
     }

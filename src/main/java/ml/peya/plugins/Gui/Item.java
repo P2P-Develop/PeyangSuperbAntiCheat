@@ -22,11 +22,7 @@ public class Item
 
         ItemMeta meta = item.getItemMeta();
 
-        if (!meta.hasLore())
-            return true;
-
-        if (meta.getLore().size() <= 1)
-            return true;
+        if (!meta.hasLore() || meta.getLore().size() <= 1) return true;
 
         return !meta.getLore().get(0).equals(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.");
     }
@@ -43,7 +39,6 @@ public class Item
         if (canGuiItem(item))
             return null;
         return item.getItemMeta().getLore().get(2).replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: ", "");
-
     }
 
     public static ArrayList<String> getLore(IItems item, String target)
@@ -81,5 +76,4 @@ public class Item
     {
         return items;
     }
-
 }

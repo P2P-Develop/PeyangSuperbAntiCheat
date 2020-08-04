@@ -45,11 +45,10 @@ public class ReportUtils
             player.sendMessage(ChatColor.GREEN + "[" +
                     ChatColor.BLUE + "PeyangSuperbAntiCheat" +
                     ChatColor.GREEN + "] " +
-                    ChatColor.RED + "プレイヤーレポートでエラーが発生しました！");
-            ComponentBuilder hover = new ComponentBuilder(stacktrace.replace("\r", "\n").replace("\t", "    "));
+                    ChatColor.RED + "プレイヤーレポートで予期しないエラーが発生しました！");
             ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + "カーソルを合わせて確認してください！");
             builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "カーソルを合わせる" + ChatColor.WHITE + "]")
-                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(stacktrace.replace("\r", "\n").replace("\t", "    ")).create()));
             player.spigot().sendMessage(builder.create());
         });
     }
@@ -61,6 +60,5 @@ public class ReportUtils
         e.printStackTrace(w);
         w.flush();
         return str.toString();
-
     }
 }

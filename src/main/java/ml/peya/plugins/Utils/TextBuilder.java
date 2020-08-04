@@ -11,6 +11,7 @@ import org.bukkit.entity.*;
 import java.math.*;
 import java.text.*;
 import java.util.*;
+import java.util.stream.*;
 
 public class TextBuilder
 {
@@ -20,9 +21,8 @@ public class TextBuilder
                 ChatColor.AQUA + button +
                 ChatColor.GREEN + ")");
         nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac view " + bind));
-        ComponentBuilder nextHover = new ComponentBuilder(MessageEngine.get("book.words.next"));
 
-        nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, nextHover.create()));
+        nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.words.next")).create()));
         return nextBtn;
     }
 
@@ -38,18 +38,7 @@ public class TextBuilder
 
     public static void showText(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
     {
-        Date date = new Date(dateInt.longValue());
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-
-
         ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.clickable"));
-
-        StringBuilder reasonText = new StringBuilder();
-
-        for (EnumCheatType type : types)
-        {
-            reasonText.append("        ").append(type.getText()).append("\n");
-        }
 
         ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)));
         b1.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
@@ -61,9 +50,9 @@ public class TextBuilder
         b2.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
         sender.spigot().sendMessage(b2.create());
 
-        sender.sendMessage("    " + MessageEngine.get("book.text.dateTime", MessageEngine.hsh("time", formatter.format(date))));
+        sender.sendMessage("    " + MessageEngine.get("book.text.dateTime", MessageEngine.hsh("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))));
 
-        sender.sendMessage("    " + MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", reasonText.toString())));
+        sender.sendMessage("    " + MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", types.parallelStream().map(type -> "        " + type.getText() + "\n").collect(Collectors.joining()))));
 
         HashMap<String, Object> serv = new HashMap<>();
         serv.put("color", SeverityLevelUtils.getSeverity(types).getColor());
@@ -73,10 +62,6 @@ public class TextBuilder
 
     public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid, CommandSender sender)
     {
-        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.click.openAbout"));
-
-        ComponentBuilder dropHover = new ComponentBuilder(MessageEngine.get("book.click.deleteReport"));
-
         EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
 
         ComponentBuilder b = new ComponentBuilder("");
@@ -90,14 +75,13 @@ public class TextBuilder
         b.append(severity.getText())
                 .color(severity.getColor())
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + mngid))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.click.openAbout")).create()));
         b.append("   ");
         if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
             b.append(MessageEngine.get("book.click.delete"))
                     .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac drop " + mngid))
-                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, dropHover.create()));
-
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.click.deleteReport")).create()));
         }
         else
             b.append(ChatColor.YELLOW + mngid);
@@ -158,9 +142,7 @@ public class TextBuilder
         map.put("name", player.getName());
         map.put("uuid", player.getUniqueId().toString());
 
-        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("kick.broadcastAdmin", map));
-        HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
-        component.event(event);
+        component.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("kick.broadcastAdmin", map)).create()));
         return component;
     }
 
@@ -180,9 +162,7 @@ public class TextBuilder
         builder.append(OptGraphGenerator.genGraph(VL, kickVL));
         builder.append("\n");
 
-        String result = VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick") : MessageEngine.get("message.auraCheck.result.words.ok");
-
-        builder.append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", result)));
+        builder.append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick") : MessageEngine.get("message.auraCheck.result.words.ok"))));
 
         return builder;
     }
@@ -201,10 +181,8 @@ public class TextBuilder
 
     public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
     {
-        Date date = new Date(ban.getDate());
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick" : "Ban"));
-        builder.append(" - " + formatter.format(date));
+        builder.append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())));
         StringBuilder reasonSet = new StringBuilder();
         Arrays.stream(ban.getReason().split(", ")).parallel().forEachOrdered(reason -> {
             EnumCheatType tp = CheatTypeUtils.getCheatTypeFromString(reason);

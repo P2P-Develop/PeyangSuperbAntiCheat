@@ -21,8 +21,7 @@ public class CommandPull implements CommandExecutor
             return true;
         }
 
-        String playerName = args[0];
-        Player player = Bukkit.getPlayer(playerName);
+        Player player = Bukkit.getPlayer(args[0]);
 
         if (player == null)
         {
@@ -37,10 +36,7 @@ public class CommandPull implements CommandExecutor
         else
             pull(player, playerSender.getLocation());
 
-        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            sender.sendMessage(MessageEngine.get("message.pull.lynx", MessageEngine.hsh("name", player.getName())));
-        else
-            sender.sendMessage(MessageEngine.get("message.pull.normal", MessageEngine.hsh("name", player.getName())));
+        sender.sendMessage(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? MessageEngine.get("message.pull.lynx", MessageEngine.hsh("name", player.getName())): MessageEngine.get("message.pull.normal", MessageEngine.hsh("name", player.getName())));
 
         return true;
     }

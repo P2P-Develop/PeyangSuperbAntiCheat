@@ -15,7 +15,7 @@ public class Drop
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))
             return;
 
-        if (WatchEyeManagement.isInjection(args[1]) || !WatchEyeManagement.isExistsRecord(args[1]))
+        if (WatchEyeManagement.isInjection(args[1]) || WatchEyeManagement.isExistsRecord(args[1]))
         {
             sender.sendMessage(MessageEngine.get("error.showDrop.notFoundReport"));
 
@@ -28,8 +28,6 @@ public class Drop
             statement.execute("DeLeTe FrOm WaTcHeYe WhErE mNGiD = '" + args[1] + "'");
             statement.execute("DeLeTe FrOm WaTcHrEaSon WHeRe MnGiD = '" + args[1] + "'");
             sender.sendMessage(MessageEngine.get("message.drop.success"));
-
-
         }
         catch (Exception e)
         {

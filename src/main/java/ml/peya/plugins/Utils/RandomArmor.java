@@ -20,7 +20,6 @@ public class RandomArmor
         helmets.add(Material.LEATHER_HELMET);
         helmets.add(Material.AIR);
 
-
         return getRandomItems(helmets);
     }
 

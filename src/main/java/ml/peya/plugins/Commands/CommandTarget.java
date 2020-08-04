@@ -19,9 +19,7 @@ public class CommandTarget implements CommandExecutor
             return true;
         }
 
-        if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
-            return true;
-        if (ErrorMessageSender.unPermMessage(sender, "psac.target"))
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2) || ErrorMessageSender.unPermMessage(sender, "psac.target"))
             return true;
 
         Player player = Bukkit.getPlayer(args[0]);

@@ -22,33 +22,23 @@ class TestKnockback
         Location location = player.getLocation();
         location.add(0, 1, 0);
         location.setPitch(0);
-        Vector loc = location.getDirection();
-        loc.multiply(-0.1f);
-        location.add(loc);
-
+        location.add(location.getDirection().multiply(-0.1f));
 
         Arrow arrow = (Arrow) player.getWorld().spawnEntity(location, EntityType.ARROW);
         PeyangSuperbAntiCheat.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), DetectType.ANTI_KB);
         arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), player.getUniqueId()));
         Bukkit.getOnlinePlayers().parallelStream().map(hide -> ((CraftPlayer) hide).getHandle().playerConnection).forEachOrdered(connection -> connection.sendPacket(new PacketPlayOutEntityDestroy(arrow.getEntityId())));
 
-        Vector speed = location.getDirection();
-        speed.multiply(32767f);
-        arrow.setVelocity(speed);
+        arrow.setVelocity(location.getDirection().multiply(32767f));
 
-        CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type);
-        meta.setCanTesting(true);
-
+        PeyangSuperbAntiCheat.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type).setCanTesting(true);
 
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                String path = "message.testkb.normal";
-                if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-                    path = "message.testkb.lynx";
-                sender.sendMessage(MessageEngine.get(path, MessageEngine.hsh("name", player.getName())));
+                sender.sendMessage(MessageEngine.get(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? "message.testkb.normal" : "message.textkb.lynx", MessageEngine.hsh("name", player.getName())));
                 arrow.remove();
                 PeyangSuperbAntiCheat.cheatMeta.remove(arrow.getUniqueId());
             }

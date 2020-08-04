@@ -19,7 +19,6 @@ public class NPC
 
     static EntityPlayer spawn(Player player, DetectType teleportCase)
     {
-
         EntityPlayer npc = RandomPlayer.getPlayer(player.getWorld());
 
         Location center = player.getLocation();
@@ -30,7 +29,6 @@ public class NPC
         setLocation(player.getLocation().add(0, 1, 0).add(center.getDirection().multiply(-3)), npc);
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
-
 
         ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
                 CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),

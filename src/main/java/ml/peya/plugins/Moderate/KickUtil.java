@@ -67,8 +67,6 @@ public class KickUtil
                 id.append((char) (random.nextInt(5) + 'A'));
         });
 
-        String ggId = IntStream.range(0, 7).parallel().mapToObj(i -> String.valueOf(random.nextInt(9))).collect(Collectors.joining());
-
         String reasonP;
 
         if (isTest)
@@ -81,7 +79,7 @@ public class KickUtil
         HashMap<String, Object> map = new HashMap<>();
 
         map.put("reason", reasonP);
-        map.put("ggid", ggId);
+        map.put("ggid", IntStream.range(0, 7).parallel().mapToObj(i -> String.valueOf(random.nextInt(9))).collect(Collectors.joining()));
         map.put("id", id.toString());
 
         String message = MessageEngine.get("kick.reason", map);

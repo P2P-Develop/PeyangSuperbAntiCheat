@@ -23,9 +23,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
         commandList.add("drop");
         commandList.add("kick");
 
-        if (commandList.contains(args[0]))
-            if (ErrorMessageSender.unPermMessage(sender, "psac." + args[0]))
-                return true;
+        if (commandList.contains(args[0]) && ErrorMessageSender.unPermMessage(sender, "psac." + args[0])) return true;
 
         switch (args[0].toLowerCase())
         {
@@ -49,6 +47,5 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
         }
 
         return true;
-
     }
 }

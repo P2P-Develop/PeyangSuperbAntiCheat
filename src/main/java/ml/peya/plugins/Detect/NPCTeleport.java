@@ -83,7 +83,7 @@ public class NPCTeleport
                     float head = ((CraftPlayer) player).getHandle().getHeadRotation() * 0.5f;
 
                     if (head < 0)
-                        head = head * 2;
+                        head *= 2;
 
                     NPC.setLocation(n, target);
                     connection.sendPacket(new PacketPlayOutEntityTeleport(target));

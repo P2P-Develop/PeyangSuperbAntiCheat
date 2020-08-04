@@ -14,7 +14,6 @@ public class Kick
     {
         if (args.length == 3 && args[2].equals("test"))
         {
-
             sender.sendMessage(MessageEngine.get("message.kick.test"));
 
             Player player = Bukkit.getPlayer(args[1]);
@@ -48,7 +47,6 @@ public class Kick
 
         argSet.remove(1);
         argSet.remove(0);
-
 
         KickUtil.kickPlayer(player, String.join(", ", argSet), false, false);
     }

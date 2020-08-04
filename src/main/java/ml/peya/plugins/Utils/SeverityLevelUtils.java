@@ -35,7 +35,7 @@ public class SeverityLevelUtils
 
     public static EnumSeverity getSeverityFromId(String id)
     {
-        if (!WatchEyeManagement.isExistsRecord(id))
+        if (WatchEyeManagement.isExistsRecord(id))
             return EnumSeverity.UNKNOWN;
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())

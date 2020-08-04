@@ -89,18 +89,18 @@ public class WatchEyeManagement
     public static boolean isExistsRecord(String id)
     {
         if (isInjection(id))
-            return false;
+            return true;
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");
-            return result.isBeforeFirst();
+            return !result.isBeforeFirst();
         }
         catch (Exception e)
         {
             e.printStackTrace();
             ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-            return false;
+            return true;
         }
     }
 

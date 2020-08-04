@@ -98,14 +98,12 @@ public class CommandReport implements CommandExecutor
             return true;
         }
 
-
         report(sender, types, target);
         return true;
     }
 
     private void report(CommandSender sender, ArrayList<EnumCheatType> types, Player target)
     {
-        String senderName = sender instanceof ConsoleCommandSender ? "[CONSOLE]" : sender.getName();
         String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]" : ((Player) sender).getUniqueId().toString().replace("-", "");
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
@@ -114,7 +112,7 @@ public class CommandReport implements CommandExecutor
             return;
         }
 
-        String id = WatchEyeManagement.add(target, senderName, senderUUID, SeverityLevelUtils.getSeverity(types).getLevel());
+        String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender ? "[CONSOLE]" : sender.getName(), senderUUID, SeverityLevelUtils.getSeverity(types).getLevel());
         boolean successFlag = false;
         for (EnumCheatType type : types)
             successFlag = WatchEyeManagement.setReason(id, type, 0);

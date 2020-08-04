@@ -742,7 +742,7 @@ public class Metrics
                     continue; // Skip this invalid
                 allSkipped = false;
                 JsonArray categoryValues = new JsonArray();
-                Arrays.stream(entry.getValue()).mapToObj(JsonPrimitive::new).forEachOrdered(categoryValues::add);
+                Arrays.stream(entry.getValue()).parallel().mapToObj(JsonPrimitive::new).forEachOrdered(categoryValues::add);
                 values.add(entry.getKey(), categoryValues);
             }
             // Null = skip the chart

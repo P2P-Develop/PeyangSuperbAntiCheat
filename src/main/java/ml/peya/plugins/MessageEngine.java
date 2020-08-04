@@ -24,14 +24,9 @@ public class MessageEngine
 
     public static String get(String key, HashMap<String, Object> format)
     {
-
         try
         {
-            InputStream in = PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
-
-            YamlConfiguration config = YamlConfiguration.loadConfiguration(reader);
-            return format((String) config.getValues(true).get(key), format);
+            return format((String) YamlConfiguration.loadConfiguration(new BufferedReader(new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))).getValues(true).get(key), format);
         }
         catch (Exception e)
         {
@@ -50,13 +45,11 @@ public class MessageEngine
         for (String key : format.keySet())
             text = text.replace("%%" + key + "%%", String.valueOf(format.get(key)));
 
-
         return text;
     }
 
     private static HashMap<String, ChatColor> getColor()
     {
-
         HashMap<String, ChatColor> map = new HashMap<>();
 
         map.put("%%black%%", ChatColor.BLACK);

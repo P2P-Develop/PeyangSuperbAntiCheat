@@ -19,10 +19,7 @@ public class CheatTypeUtils
         types.add(EnumCheatType.REACH);
         types.add(EnumCheatType.DOLPHIN);
 
-        for (EnumCheatType type : types)
-        {
-            type.setSelected(false);
-        }
+        types.parallelStream().forEachOrdered(type -> type.setSelected(false));
         return types.toArray(new EnumCheatType[0]);
     }
 
@@ -37,7 +34,7 @@ public class CheatTypeUtils
         types.add(EnumCheatType.ANTIKNOCKBACK);
         types.add(EnumCheatType.REACH);
         types.add(EnumCheatType.DOLPHIN);
-        types.parallelStream().forEach(type -> type.setSelected(false));
+        types.parallelStream().forEachOrdered(type -> type.setSelected(false));
         return types;
     }
 

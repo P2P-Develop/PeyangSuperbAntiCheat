@@ -39,8 +39,7 @@ public class CommandMods implements CommandExecutor
             return true;
         }
 
-        ItemStack book = Books.getModsBook(player, mods);
-        BookUtil.openBook(book, (Player) sender);
+        BookUtil.openBook(Books.getModsBook(player, mods), (Player) sender);
         return true;
     }
 }

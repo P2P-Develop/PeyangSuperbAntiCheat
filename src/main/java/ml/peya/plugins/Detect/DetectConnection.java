@@ -119,16 +119,16 @@ public class DetectConnection
     private static boolean kick(Player player)
     {
         ArrayList<String> reason = new ArrayList<>();
-        try (Connection connection3 = PeyangSuperbAntiCheat.eye.getConnection();
-             Statement statement3 = connection3.createStatement();
-             Statement statement4 = connection3.createStatement())
+        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+             Statement statement = connection.createStatement();
+             Statement statement1 = connection.createStatement())
         {
             if (WatchEyeManagement.isInjection(player.getName()))
                 return false;
-            ResultSet rs = statement3.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
+            ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
             while (rs.next())
             {
-                ResultSet set = statement4.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
+                ResultSet set = statement1.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
                         rs.getString("MNGID") + "'");
                 while (set.next())
                     reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
