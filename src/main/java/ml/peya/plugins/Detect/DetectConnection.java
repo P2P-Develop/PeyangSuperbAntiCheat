@@ -47,7 +47,7 @@ public class DetectConnection
                 double vl = meta.getVL();
                 double seconds = PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
 
-                if (PeyangSuperbAntiCheat.learnCount > PeyangSuperbAntiCheat.learnCountLimit && network.commit(Pair.of(vl, seconds)))
+                if (PeyangSuperbAntiCheat.learnCount > PeyangSuperbAntiCheat.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.0)
                 {
                     new BukkitRunnable()
                     {
@@ -62,35 +62,9 @@ public class DetectConnection
                             this.cancel();
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
-
-                    ArrayList<String> reason = new ArrayList<>();
-                    try (Connection connection3 = PeyangSuperbAntiCheat.eye.getConnection();
-                         Statement statement3 = connection3.createStatement();
-                         Statement statement4 = connection3.createStatement())
-                    {
-                        if (WatchEyeManagement.isInjection(player.getName()))
-                            return;
-                        ResultSet rs = statement3.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
-                        while (rs.next())
-                        {
-                            ResultSet set = statement4.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
-                                    rs.getString("MNGID") + "'");
-                            while (set.next())
-                                reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                        ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-                    }
-
-                    ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
-
-                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
-
+                    if (kick(player)) return;
                 }
-                else if (PeyangSuperbAntiCheat.learnCount < PeyangSuperbAntiCheat.learnCountLimit && PeyangSuperbAntiCheat.banLeft <= meta.getVL())
+                if (PeyangSuperbAntiCheat.learnCount < PeyangSuperbAntiCheat.learnCountLimit && PeyangSuperbAntiCheat.banLeft <= meta.getVL())
                 {
                     new BukkitRunnable()
                     {
@@ -106,32 +80,7 @@ public class DetectConnection
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
 
-                    ArrayList<String> reason = new ArrayList<>();
-                    try (Connection connection3 = PeyangSuperbAntiCheat.eye.getConnection();
-                         Statement statement3 = connection3.createStatement();
-                         Statement statement4 = connection3.createStatement())
-                    {
-                        if (WatchEyeManagement.isInjection(player.getName()))
-                            return;
-                        ResultSet rs = statement3.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
-                        while (rs.next())
-                        {
-                            ResultSet set = statement4.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
-                                    rs.getString("MNGID") + "'");
-                            while (set.next())
-                                reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                        ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-                    }
-
-                    ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
-
-                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
-
+                    if (kick(player)) return;
                 }
 
                 new BukkitRunnable()
@@ -165,5 +114,35 @@ public class DetectConnection
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
+    }
+
+    private static boolean kick(Player player)
+    {
+        ArrayList<String> reason = new ArrayList<>();
+        try (Connection connection3 = PeyangSuperbAntiCheat.eye.getConnection();
+             Statement statement3 = connection3.createStatement();
+             Statement statement4 = connection3.createStatement())
+        {
+            if (WatchEyeManagement.isInjection(player.getName()))
+                return false;
+            ResultSet rs = statement3.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
+            while (rs.next())
+            {
+                ResultSet set = statement4.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
+                        rs.getString("MNGID") + "'");
+                while (set.next())
+                    reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+        }
+
+        ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
+
+        KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
+        return true;
     }
 }
