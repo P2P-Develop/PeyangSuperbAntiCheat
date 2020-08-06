@@ -17,8 +17,8 @@ public class RandomPlayer
     {
         JsonNode node = StringUtil.getRandomUser();
 
-        String first = node == null ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1) : node.get("results").get(0).get("name").get("first").asText();
-        String last = node == null ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1) : node.get("results").get(0).get("name").get("last").asText();
+        String first = node == null ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): node.get("results").get(0).get("name").get("first").asText();
+        String last = node == null ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): node.get("results").get(0).get("name").get("last").asText();
 
         Random random = new Random();
 
@@ -30,9 +30,9 @@ public class RandomPlayer
             last = develop.p2p.lib.LeetConverter.convert(last);
         }
 
-        String name = first + (random.nextBoolean() ? "_" : "") + last + (random.nextBoolean() ? "19" + random.nextInt(120) : "");
+        String name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ? "19" + random.nextInt(120): "");
         if (name.length() > 14)
-            name = random.nextBoolean() ? first : last;
+            name = random.nextBoolean() ? first: last;
 
         return new EntityPlayer(((CraftServer) Bukkit.getServer()).getServer(), ((CraftWorld) world).getHandle(), new GameProfile(node != null ? UUID.fromString(node.get("results").get(0).get("login").get("uuid").asText()): UUID.randomUUID(), name), new PlayerInteractManager(((CraftWorld) world).getHandle()));
     }

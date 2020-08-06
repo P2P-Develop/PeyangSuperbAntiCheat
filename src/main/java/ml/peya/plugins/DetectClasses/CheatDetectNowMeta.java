@@ -10,8 +10,8 @@ public class CheatDetectNowMeta
     private final Player target;
     private final UUID uuids;
     private final int id;
-    private double seconds;
     private final DetectType type;
+    private double seconds;
     private int VL;
     private boolean canTesting = false;
 

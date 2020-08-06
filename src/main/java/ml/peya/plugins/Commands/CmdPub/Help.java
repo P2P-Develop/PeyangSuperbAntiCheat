@@ -11,10 +11,10 @@ public class Help
 {
     public static void run(CommandSender sender, String label)
     {
-        final boolean[] flag = {false};
+        final boolean[] flag = { false };
         sender.sendMessage(MessageEngine.get("base.prefix"));
 
-        ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes() : getNodes();
+        ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes(): getNodes();
 
         new BukkitRunnable()
         {

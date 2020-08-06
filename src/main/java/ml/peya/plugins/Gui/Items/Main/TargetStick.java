@@ -4,13 +4,9 @@ import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.*;
 import org.bukkit.*;
-import org.bukkit.block.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 import static ml.peya.plugins.Utils.LookingUtils.getLookingEntity;
 

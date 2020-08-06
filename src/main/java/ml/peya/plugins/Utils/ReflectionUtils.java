@@ -4,7 +4,7 @@ import org.bukkit.*;
 
 import java.lang.reflect.*;
 import java.util.*;
-import java.util.stream.IntStream;
+import java.util.stream.*;
 
 /**
  * <b>ReflectionUtils</b>
@@ -35,7 +35,9 @@ public final class ReflectionUtils
      *
      * @param clazz          Target class
      * @param parameterTypes Parameter types of the desired constructor
+     *
      * @return The constructor of the target class with the specified parameter types
+     *
      * @throws NoSuchMethodException If the desired constructor with the specified parameter types cannot be found
      * @see DataType
      * @see DataType#getPrimitive(Class[])
@@ -58,7 +60,9 @@ public final class ReflectionUtils
      * @param className      Name of the desired target class
      * @param packageType    Package where the desired target class is located
      * @param parameterTypes Parameter types of the desired constructor
+     *
      * @return The constructor of the desired target class with the specified parameter types
+     *
      * @throws NoSuchMethodException  If the desired constructor with the specified parameter types cannot be found
      * @throws ClassNotFoundException ClassNotFoundException If the desired target class with the specified name and package cannot be found
      * @see #getConstructor(Class, Class...)
@@ -73,7 +77,9 @@ public final class ReflectionUtils
      *
      * @param clazz     Target class
      * @param arguments Arguments which are used to construct an object of the target class
+     *
      * @return The instance of the target class with the specified arguments
+     *
      * @throws InstantiationException    If you cannot create an instance of the target class due to certain circumstances
      * @throws IllegalAccessException    If the desired constructor cannot be accessed due to certain circumstances
      * @throws IllegalArgumentException  If the types of the arguments do not match the parameter types of the constructor (this should not occur since it searches for a constructor with the types of the arguments)
@@ -91,7 +97,9 @@ public final class ReflectionUtils
      * @param className   Name of the desired target class
      * @param packageType Package where the desired target class is located
      * @param arguments   Arguments which are used to construct an object of the desired target class
+     *
      * @return The instance of the desired target class with the specified arguments
+     *
      * @throws InstantiationException    If you cannot create an instance of the desired target class due to certain circumstances
      * @throws IllegalAccessException    If the desired constructor cannot be accessed due to certain circumstances
      * @throws IllegalArgumentException  If the types of the arguments do not match the parameter types of the constructor (this should not occur since it searches for a constructor with the types of the arguments)
@@ -111,7 +119,9 @@ public final class ReflectionUtils
      * @param clazz          Target class
      * @param methodName     Name of the desired method
      * @param parameterTypes Parameter types of the desired method
+     *
      * @return The method of the target class with the specified name and parameter types
+     *
      * @throws NoSuchMethodException If the desired method of the target class with the specified name and parameter types cannot be found
      * @see DataType#getPrimitive(Class[])
      * @see DataType#compare(Class[], Class[])
@@ -134,7 +144,9 @@ public final class ReflectionUtils
      * @param packageType    Package where the desired target class is located
      * @param methodName     Name of the desired method
      * @param parameterTypes Parameter types of the desired method
+     *
      * @return The method of the desired target class with the specified name and parameter types
+     *
      * @throws NoSuchMethodException  If the desired method of the desired target class with the specified name and parameter types cannot be found
      * @throws ClassNotFoundException If the desired target class with the specified name and package cannot be found
      * @see #getMethod(Class, String, Class...)
@@ -150,7 +162,9 @@ public final class ReflectionUtils
      * @param instance   Target object
      * @param methodName Name of the desired method
      * @param arguments  Arguments which are used to invoke the desired method
+     *
      * @return The result of invoking the desired method on the target object
+     *
      * @throws IllegalAccessException    If the desired method cannot be accessed due to certain circumstances
      * @throws IllegalArgumentException  If the types of the arguments do not match the parameter types of the method (this should not occur since it searches for a method with the types of the arguments)
      * @throws InvocationTargetException If the desired method cannot be invoked on the target object
@@ -170,7 +184,9 @@ public final class ReflectionUtils
      * @param clazz      Target class
      * @param methodName Name of the desired method
      * @param arguments  Arguments which are used to invoke the desired method
+     *
      * @return The result of invoking the desired method on the target object
+     *
      * @throws IllegalAccessException    If the desired method cannot be accessed due to certain circumstances
      * @throws IllegalArgumentException  If the types of the arguments do not match the parameter types of the method (this should not occur since it searches for a method with the types of the arguments)
      * @throws InvocationTargetException If the desired method cannot be invoked on the target object
@@ -191,7 +207,9 @@ public final class ReflectionUtils
      * @param packageType Package where the desired target class is located
      * @param methodName  Name of the desired method
      * @param arguments   Arguments which are used to invoke the desired method
+     *
      * @return The result of invoking the desired method on the target object
+     *
      * @throws IllegalAccessException    If the desired method cannot be accessed due to certain circumstances
      * @throws IllegalArgumentException  If the types of the arguments do not match the parameter types of the method (this should not occur since it searches for a method with the types of the arguments)
      * @throws InvocationTargetException If the desired method cannot be invoked on the target object
@@ -210,13 +228,15 @@ public final class ReflectionUtils
      * @param clazz     Target class
      * @param declared  Whether the desired field is declared or not
      * @param fieldName Name of the desired field
+     *
      * @return The field of the target class with the specified name
+     *
      * @throws NoSuchFieldException If the desired field of the given class cannot be found
      * @throws SecurityException    If the desired field cannot be made accessible
      */
     public static Field getField(Class<?> clazz, boolean declared, String fieldName) throws NoSuchFieldException, SecurityException
     {
-        Field field = declared ? clazz.getDeclaredField(fieldName) : clazz.getField(fieldName);
+        Field field = declared ? clazz.getDeclaredField(fieldName): clazz.getField(fieldName);
         field.setAccessible(true);
         return field;
     }
@@ -228,7 +248,9 @@ public final class ReflectionUtils
      * @param packageType Package where the desired target class is located
      * @param declared    Whether the desired field is declared or not
      * @param fieldName   Name of the desired field
+     *
      * @return The field of the desired target class with the specified name
+     *
      * @throws NoSuchFieldException   If the desired field of the desired class cannot be found
      * @throws SecurityException      If the desired field cannot be made accessible
      * @throws ClassNotFoundException If the desired target class with the specified name and package cannot be found
@@ -246,7 +268,9 @@ public final class ReflectionUtils
      * @param clazz     Target class
      * @param declared  Whether the desired field is declared or not
      * @param fieldName Name of the desired field
+     *
      * @return The value of field of the target object
+     *
      * @throws IllegalArgumentException If the target object does not feature the desired field
      * @throws IllegalAccessException   If the desired field cannot be accessed
      * @throws NoSuchFieldException     If the desired field of the target class cannot be found
@@ -266,7 +290,9 @@ public final class ReflectionUtils
      * @param packageType Package where the desired target class is located
      * @param declared    Whether the desired field is declared or not
      * @param fieldName   Name of the desired field
+     *
      * @return The value of field of the target object
+     *
      * @throws IllegalArgumentException If the target object does not feature the desired field
      * @throws IllegalAccessException   If the desired field cannot be accessed
      * @throws NoSuchFieldException     If the desired field of the desired class cannot be found
@@ -285,7 +311,9 @@ public final class ReflectionUtils
      * @param instance  Target object
      * @param declared  Whether the desired field is declared or not
      * @param fieldName Name of the desired field
+     *
      * @return The value of field of the target object
+     *
      * @throws IllegalArgumentException If the target object does not feature the desired field (should not occur since it searches for a field with the given name in the class of the object)
      * @throws IllegalAccessException   If the desired field cannot be accessed
      * @throws NoSuchFieldException     If the desired field of the target object cannot be found
@@ -305,6 +333,7 @@ public final class ReflectionUtils
      * @param declared  Whether the desired field is declared or not
      * @param fieldName Name of the desired field
      * @param value     New value
+     *
      * @throws IllegalArgumentException If the type of the value does not match the type of the desired field
      * @throws IllegalAccessException   If the desired field cannot be accessed
      * @throws NoSuchFieldException     If the desired field of the target class cannot be found
@@ -325,6 +354,7 @@ public final class ReflectionUtils
      * @param declared    Whether the desired field is declared or not
      * @param fieldName   Name of the desired field
      * @param value       New value
+     *
      * @throws IllegalArgumentException If the type of the value does not match the type of the desired field
      * @throws IllegalAccessException   If the desired field cannot be accessed
      * @throws NoSuchFieldException     If the desired field of the desired class cannot be found
@@ -344,6 +374,7 @@ public final class ReflectionUtils
      * @param declared  Whether the desired field is declared or not
      * @param fieldName Name of the desired field
      * @param value     New value
+     *
      * @throws IllegalArgumentException If the type of the value does not match the type of the desired field
      * @throws IllegalAccessException   If the desired field cannot be accessed
      * @throws NoSuchFieldException     If the desired field of the target object cannot be found
@@ -433,7 +464,9 @@ public final class ReflectionUtils
          * Returns the class with the given name
          *
          * @param className Name of the desired class
+         *
          * @return The class with the specified name
+         *
          * @throws ClassNotFoundException If the desired class with the specified name and package cannot be found
          */
         public Class<?> getClass(String className) throws ClassNotFoundException
@@ -497,6 +530,7 @@ public final class ReflectionUtils
          * Returns the data type with the given primitive/reference class
          *
          * @param clazz Primitive/Reference class of the data type
+         *
          * @return The data type
          */
         public static DataType fromClass(Class<?> clazz)
@@ -508,66 +542,72 @@ public final class ReflectionUtils
          * Returns the primitive class of the data type with the given reference class
          *
          * @param clazz Reference class of the data type
+         *
          * @return The primitive class
          */
         public static Class<?> getPrimitive(Class<?> clazz)
         {
-            return fromClass(clazz) == null ? clazz : fromClass(clazz).getPrimitive();
+            return fromClass(clazz) == null ? clazz: fromClass(clazz).getPrimitive();
         }
 
         /**
          * Returns the reference class of the data type with the given primitive class
          *
          * @param clazz Primitive class of the data type
+         *
          * @return The reference class
          */
         public static Class<?> getReference(Class<?> clazz)
         {
-            return fromClass(clazz) == null ? clazz : fromClass(clazz).getReference();
+            return fromClass(clazz) == null ? clazz: fromClass(clazz).getReference();
         }
 
         /**
          * Returns the primitive class array of the given class array
          *
          * @param classes Given class array
+         *
          * @return The primitive class array
          */
         public static Class<?>[] getPrimitive(Class<?>[] classes)
         {
-            return IntStream.range(0, classes == null ? 0 : classes.length).parallel().mapToObj(index -> getPrimitive(Objects.requireNonNull(classes)[index])).toArray(Class<?>[]::new);
+            return IntStream.range(0, classes == null ? 0: classes.length).parallel().mapToObj(index -> getPrimitive(Objects.requireNonNull(classes)[index])).toArray(Class<?>[]::new);
         }
 
         /**
          * Returns the reference class array of the given class array
          *
          * @param classes Given class array
+         *
          * @return The reference class array
          */
         public static Class<?>[] getReference(Class<?>[] classes)
         {
-            return IntStream.range(0, classes == null ? 0 : classes.length).parallel().mapToObj(index -> getReference(Objects.requireNonNull(classes)[index])).toArray(Class<?>[]::new);
+            return IntStream.range(0, classes == null ? 0: classes.length).parallel().mapToObj(index -> getReference(Objects.requireNonNull(classes)[index])).toArray(Class<?>[]::new);
         }
 
         /**
          * Returns the primitive class array of the given object array
          *
          * @param objects Given object array
+         *
          * @return The primitive class array
          */
         public static Class<?>[] getPrimitive(Object[] objects)
         {
-            return IntStream.range(0, objects == null ? 0 : objects.length).parallel().mapToObj(index -> getPrimitive(Objects.requireNonNull(objects)[index].getClass())).toArray(Class<?>[]::new);
+            return IntStream.range(0, objects == null ? 0: objects.length).parallel().mapToObj(index -> getPrimitive(Objects.requireNonNull(objects)[index].getClass())).toArray(Class<?>[]::new);
         }
 
         /**
          * Returns the reference class array of the given object array
          *
          * @param objects Given object array
+         *
          * @return The reference class array
          */
         public static Class<?>[] getReference(Object[] objects)
         {
-            return IntStream.range(0, objects == null ? 0 : objects.length).parallel().mapToObj(index -> getReference(Objects.requireNonNull(objects)[index].getClass())).toArray(Class<?>[]::new);
+            return IntStream.range(0, objects == null ? 0: objects.length).parallel().mapToObj(index -> getReference(Objects.requireNonNull(objects)[index].getClass())).toArray(Class<?>[]::new);
         }
 
         /**
@@ -575,6 +615,7 @@ public final class ReflectionUtils
          *
          * @param primary   Primary class array
          * @param secondary Class array which is compared to the primary array
+         *
          * @return Whether these arrays are equal or not
          */
         public static boolean compare(Class<?>[] primary, Class<?>[] secondary)

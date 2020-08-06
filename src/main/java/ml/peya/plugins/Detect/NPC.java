@@ -30,11 +30,11 @@ public class NPC
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
-        ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
+        ItemStack[] arm = { CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
                 CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
                 CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
                 CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
-                CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
+                CraftItemStack.asNMSCopy(RandomArmor.getSwords()) };
 
         new BukkitRunnable()
         {

@@ -6,7 +6,6 @@ import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
 
 import java.util.*;
 

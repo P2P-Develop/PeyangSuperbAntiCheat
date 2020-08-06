@@ -7,8 +7,6 @@ import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
-import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
 import java.math.*;

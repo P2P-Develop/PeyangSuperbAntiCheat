@@ -3,7 +3,6 @@ package ml.peya.plugins.Task;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
-import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
 
 import java.sql.*;

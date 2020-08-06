@@ -11,7 +11,6 @@ import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
-import org.bukkit.util.Vector;
 
 import java.util.*;
 
@@ -37,8 +36,8 @@ public class NPCTeleport
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender)
     {
         final double range = PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
-        final double[] clt = {0.0};
-        final int[] now = {0};
+        final double[] clt = { 0.0 };
+        final int[] now = { 0 };
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
@@ -116,7 +115,7 @@ public class NPCTeleport
 
     private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm)
     {
-        final double[] time = {0.0};
+        final double[] time = { 0.0 };
         final double radius = PeyangSuperbAntiCheat.config.getDouble("npc.range");
 
         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);

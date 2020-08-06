@@ -122,10 +122,10 @@ public class TextBuilder
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        ComponentBuilder builder = new ComponentBuilder(prevFlag ? prev : uBar);
+        ComponentBuilder builder = new ComponentBuilder(prevFlag ? prev: uBar);
         builder.append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA);
-        builder.append(nextFlag ? next : uBar);
+        builder.append(nextFlag ? next: uBar);
         return builder;
     }
 
@@ -162,7 +162,7 @@ public class TextBuilder
         builder.append(OptGraphGenerator.genGraph(VL, kickVL));
         builder.append("\n");
 
-        builder.append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick") : MessageEngine.get("message.auraCheck.result.words.ok"))));
+        builder.append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok"))));
 
         return builder;
     }
@@ -181,7 +181,7 @@ public class TextBuilder
 
     public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
     {
-        ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick" : "Ban"));
+        ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"));
         builder.append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())));
         StringBuilder reasonSet = new StringBuilder();
         Arrays.stream(ban.getReason().split(", ")).parallel().forEachOrdered(reason -> {

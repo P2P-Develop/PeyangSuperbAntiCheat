@@ -6,7 +6,6 @@ import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.event.*;
 import org.bukkit.event.player.*;
-import org.bukkit.inventory.*;
 import org.bukkit.scheduler.*;
 
 import java.util.*;

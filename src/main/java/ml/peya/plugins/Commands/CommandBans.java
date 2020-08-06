@@ -18,8 +18,8 @@ public class CommandBans implements CommandExecutor
         if (ErrorMessageSender.unPermMessage(sender, "psac.bans") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
             return true;
 
-        String type = args.length == 2 ? args[0] : "-a";
-        String name = args.length == 2 ? args[1] : args[0];
+        String type = args.length == 2 ? args[0]: "-a";
+        String name = args.length == 2 ? args[1]: args[0];
 
         if (!type.equals("-a") && !type.toLowerCase().equals("ban") && !type.toLowerCase().equals("kick"))
         {

@@ -89,8 +89,8 @@ public class Events implements Listener
             @Override
             public void run()
             {
-                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[]{-2, 0});
-                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[]{0, 2, 0, 0, 0, 0});
+                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[] { -2, 0 });
+                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[] { 0, 2, 0, 0, 0, 0 });
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 5);
 

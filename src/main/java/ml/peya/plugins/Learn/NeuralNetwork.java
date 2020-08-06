@@ -13,12 +13,11 @@ public class NeuralNetwork
     private final static double weightRange = 10.0;
     private static final double RandomWeight = (random.nextDouble() - 0.5) * weightRange;
     private final double middleLayerBias = 1.0;
+    public double[][] inputWeight = new double[][] { { RandomWeight, RandomWeight, RandomWeight }, { RandomWeight, RandomWeight, RandomWeight }, { RandomWeight, RandomWeight, RandomWeight } };
+    public double[] middleWeight = new double[] { RandomWeight, RandomWeight, RandomWeight };
     private double[] inputLayer;
     private Neuron[] middleLayer;
     private Neuron outputLayer;
-
-    public double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
-    public double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
 
     public static double[] getColumn(double[][] array, int index)
     {
@@ -38,8 +37,8 @@ public class NeuralNetwork
     public double commit(Pair<Double, Double> data)
     {
         double inputLayerBias = 1.0;
-        inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
-        middleLayer = new Neuron[]{new Neuron(), new Neuron()};
+        inputLayer = new double[] { data.getLeft(), data.getRight(), inputLayerBias };
+        middleLayer = new Neuron[] { new Neuron(), new Neuron() };
         outputLayer = new Neuron();
 
         IntStream.range(0, middleLayer.length).parallel().forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
@@ -70,7 +69,7 @@ public class NeuralNetwork
 
         middleWeight[2] += middleLayerBias * deltaMO * learningRate;
 
-        double[] deltaIM = new double[]{
+        double[] deltaIM = new double[] {
                 deltaMO * oldMiddleWeight[0] * middleLayer[0].getValue() * (1.0 - middleLayer[0].getValue()),
                 deltaMO * oldMiddleWeight[1] * middleLayer[1].getValue() * (1.0 - middleLayer[1].getValue())
         };

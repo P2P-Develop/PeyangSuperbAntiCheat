@@ -38,7 +38,7 @@ public class AuraPanic implements CommandExecutor
         if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
         {
             HashMap<String, Object> map = new HashMap<>();
-            map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") ")));
+            map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") ")));
             map.put("type", "AuraPanicBot");
             map.put("seconds", String.valueOf(PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
 

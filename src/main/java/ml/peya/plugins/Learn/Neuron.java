@@ -2,7 +2,7 @@ package ml.peya.plugins.Learn;
 
 import java.util.*;
 
-import static develop.p2p.lib.LearnMath.*;
+import static develop.p2p.lib.LearnMath.relu;
 
 public class Neuron
 {

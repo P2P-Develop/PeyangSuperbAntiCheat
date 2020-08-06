@@ -1,6 +1,5 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
@@ -10,7 +9,6 @@ import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
-import org.bukkit.util.*;
 
 class TestKnockback
 {
@@ -38,7 +36,7 @@ class TestKnockback
             @Override
             public void run()
             {
-                sender.sendMessage(MessageEngine.get(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? "message.testkb.normal" : "message.textkb.lynx", MessageEngine.hsh("name", player.getName())));
+                sender.sendMessage(MessageEngine.get(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? "message.testkb.normal": "message.textkb.lynx", MessageEngine.hsh("name", player.getName())));
                 arrow.remove();
                 PeyangSuperbAntiCheat.cheatMeta.remove(arrow.getUniqueId());
             }
