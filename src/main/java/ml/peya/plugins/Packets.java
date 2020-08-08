@@ -14,8 +14,17 @@ import java.lang.reflect.*;
 import java.net.*;
 import java.util.*;
 
+/**
+ * サーバーとプラグイン間とのパケットを管理します。
+ * たまに編集します。
+ */
 public class Packets
 {
+    /** 指定されたUUIDのプレイヤーのスキンをパパラッチします。
+     * @param uuid 指定するUUID。
+     *
+     * @return パパラッチしたスキンをJsonNodeに変換したやつ。
+     */
     public static JsonNode getSkin(String uuid)
     {
         try
@@ -48,6 +57,9 @@ public class Packets
         }
     }
 
+    /** パケットイベント処理を餌食に、主にVL評価に使います。
+     * @param e 餌食にするパケットイベント。
+     */
     public static void useEntity(PacketEvent e)
     {
         try
@@ -72,6 +84,9 @@ public class Packets
         }
     }
 
+    /** プレイヤー情報をパケットに乗せて送るそうです。
+     * @param e 乗車()するパケットイベント。
+     */
     public static void playerInfo(PacketEvent e)
     {
         if (e.getPacket().getPlayerInfoAction().read(0) != EnumWrappers.PlayerInfoAction.ADD_PLAYER)

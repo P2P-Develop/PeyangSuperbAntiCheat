@@ -25,17 +25,29 @@ import java.util.zip.*;
 public class Metrics
 {
 
-    // The version of this bStats class
+    /**
+     * The version of this bStats class
+     */
     public static final int B_STATS_VERSION = 1;
-    // The url to which the data is sent
+    /**
+     * The url to which the data is sent
+     */
     private static final String URL = "https://bStats.org/submitData/bukkit";
-    // Should failed requests be logged?
+    /**
+     * Should failed requests be logged?
+     */
     private static boolean logFailedRequests;
-    // Should the sent data be logged?
+    /**
+     * Should the sent data be logged?
+     */
     private static boolean logSentData;
-    // Should the response text be logged?
+    /**
+     *  Should the response text be logged?
+     */
     private static boolean logResponseStatusText;
-    // The uuid of the server
+    /**
+     *  The uuid of the server
+     */
     private static String serverUUID;
 
     static
@@ -54,16 +66,24 @@ public class Metrics
         }
     }
 
-    // Is bStats enabled on this server?
+    /**
+     *  Is bStats enabled on this server?
+     */
     private final boolean enabled;
-    // The plugin
+    /**
+     * The plugin
+     */
     private final Plugin plugin;
 
-    // The plugin id
+    /**
+     * The plugin id
+     */
     private final int pluginId;
 
-    // A list with all custom charts
-    private final List<CustomChart> charts = new ArrayList<>();
+    /**
+     *  A list with all custom charts
+     */
+    private final List<CustomChart> charts;
 
     /**
      * Class constructor.
@@ -147,6 +167,7 @@ public class Metrics
                 startSubmitting();
             }
         }
+        charts = new ArrayList<>();
     }
 
     /**
@@ -418,7 +439,9 @@ public class Metrics
     public static abstract class CustomChart
     {
 
-        // The id of the chart
+        /**
+         * The id of the chart
+         */
         final String chartId;
 
         /**
@@ -433,6 +456,9 @@ public class Metrics
             this.chartId = chartId;
         }
 
+        /** Get the requested json object data.
+         * @return The requested Json object data.
+         */
         private JsonObject getRequestJsonObject()
         {
             JsonObject chart = new JsonObject();
@@ -454,6 +480,11 @@ public class Metrics
             return chart;
         }
 
+        /** Abstract method of getChartData().
+         * @return Chart Data Object.
+         *
+         * @throws Exception Throw all.
+         */
         protected abstract JsonObject getChartData() throws Exception;
 
     }
@@ -478,6 +509,11 @@ public class Metrics
             this.callable = callable;
         }
 
+        /** Override of getChartData().
+         * @return Chart Data Object.
+         *
+         * @throws Exception Throw all.
+         */
         @Override
         protected JsonObject getChartData() throws Exception
         {
@@ -511,6 +547,11 @@ public class Metrics
             this.callable = callable;
         }
 
+        /** Override of getChartData().
+         * @return Chart Data Object.
+         *
+         * @throws Exception Throw all.
+         */
         @Override
         protected JsonObject getChartData() throws Exception
         {
@@ -556,6 +597,11 @@ public class Metrics
             this.callable = callable;
         }
 
+        /** Override of getChartData().
+         * @return Chart Data Object.
+         *
+         * @throws Exception Throw all.
+         */
         @Override
         public JsonObject getChartData() throws Exception
         {
@@ -609,6 +655,11 @@ public class Metrics
             this.callable = callable;
         }
 
+        /** Override of getChartData().
+         * @return Chart Data Object.
+         *
+         * @throws Exception Throw all.
+         */
         @Override
         protected JsonObject getChartData() throws Exception
         {
@@ -643,6 +694,11 @@ public class Metrics
             this.callable = callable;
         }
 
+        /** Override of getChartData().
+         * @return Chart Data Object.
+         *
+         * @throws Exception Throw all.
+         */
         @Override
         protected JsonObject getChartData() throws Exception
         {
@@ -689,6 +745,11 @@ public class Metrics
             this.callable = callable;
         }
 
+        /** Override of getChartData().
+         * @return Chart Data Object.
+         *
+         * @throws Exception Throw all.
+         */
         @Override
         protected JsonObject getChartData() throws Exception
         {
@@ -729,6 +790,11 @@ public class Metrics
             this.callable = callable;
         }
 
+        /** Override of getChartData().
+         * @return Chart Data Object.
+         *
+         * @throws Exception Throw all.
+         */
         @Override
         protected JsonObject getChartData() throws Exception
         {

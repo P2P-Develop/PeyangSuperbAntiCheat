@@ -4,8 +4,17 @@ import org.bukkit.entity.*;
 
 import java.util.*;
 
+/**
+ * プラグインメッセージのオーバーライドを実装します。
+ * イベントを改変してます。
+ */
 public class PluginMessageListener implements org.bukkit.plugin.messaging.PluginMessageListener
 {
+    /** プラグインのメッセージを取得した際のイベントをオーバーライドします。
+     * @param channel どのコンソール・ウィンドウ・ダイアログで取得したか。
+     * @param player 誰が発信したのか。
+     * @param data バイト配列の本文データ。
+     */
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] data)
     {

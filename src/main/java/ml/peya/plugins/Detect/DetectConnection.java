@@ -17,8 +17,18 @@ import java.util.*;
 
 import static ml.peya.plugins.PeyangSuperbAntiCheat.network;
 
+/**
+ * キック時の処理などを管理する。
+ */
 public class DetectConnection
 {
+    /** アーマー付きでスポーンさせる。
+     * @param player プレイヤー。
+     * @param type 罪状。
+     * @param reachMode リーチモードかどうか。
+     *
+     * @return 万能クラス。
+     */
     public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type, boolean reachMode)
     {
         EntityPlayer uuid = NPC.spawn(player, type, reachMode);
@@ -27,6 +37,12 @@ public class DetectConnection
         return meta;
     }
 
+    /** AntiKB用。
+     * @param player プレイヤー。
+     * @param type 罪状。
+     * @param sender イベントsender。
+     * @param reachMode リーチモードかどうか。
+     */
     public static void scan(Player player, DetectType type, CommandSender sender, boolean reachMode)
     {
         if (type == DetectType.ANTI_KB)
@@ -110,6 +126,11 @@ public class DetectConnection
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
     }
 
+    /** キック動作の開始DA!
+     * @param player プレイヤー０。
+     *
+     * @return 処理が正常に終了したかどうか。
+     */
     private static boolean kick(Player player)
     {
         ArrayList<String> reason = new ArrayList<>();

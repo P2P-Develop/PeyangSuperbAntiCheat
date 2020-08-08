@@ -7,8 +7,14 @@ import org.bukkit.inventory.meta.*;
 import java.util.*;
 import java.util.stream.*;
 
+/**
+ * 防具をランダムにNPCに着せるクラス。
+ */
 public class RandomArmor
 {
+    /** こいつらぶっこんでから関数でランダムに取得してる。
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getHelmet()
     {
         ArrayList<Material> helmets = new ArrayList<>();
@@ -23,6 +29,9 @@ public class RandomArmor
         return getRandomItems(helmets);
     }
 
+    /** 同上
+     * @return 同上
+     */
     public static ItemStack getChestPlate()
     {
         ArrayList<Material> chestPlates = new ArrayList<>();
@@ -36,6 +45,9 @@ public class RandomArmor
         return getRandomItems(chestPlates);
     }
 
+    /** 同上
+     * @return 同上
+     */
     public static ItemStack getLeggings()
     {
         ArrayList<Material> leggings = new ArrayList<>();
@@ -49,6 +61,9 @@ public class RandomArmor
         return getRandomItems(leggings);
     }
 
+    /** 同上
+     * @return 同上
+     */
     public static ItemStack getBoots()
     {
         ArrayList<Material> boots = new ArrayList<>();
@@ -62,6 +77,9 @@ public class RandomArmor
         return getRandomItems(boots);
     }
 
+    /** 同上
+     * @return 同上
+     */
     public static ItemStack getSwords()
     {
         ArrayList<Material> swords = new ArrayList<>();
@@ -80,6 +98,11 @@ public class RandomArmor
         return getRandomItems(swords);
     }
 
+    /** 金ってだけでなんかするらしい。運イベかな？
+     * @param item あいてむ！
+     *
+     * @return ゴールド全面でござったらtrue。
+     */
     private static boolean isGold(Material item)
     {
         ArrayList<Material> items = new ArrayList<>();
@@ -92,6 +115,11 @@ public class RandomArmor
         return items.contains(item);
     }
 
+    /** ランダムにえりすぐる。
+     * @param itemsArg あいてむ！なArrayList。
+     *
+     * @return えりすぐったアイテム。
+     */
     public static ItemStack getRandomItems(ArrayList<Material> itemsArg)
     {
         Random random = new Random();
@@ -119,5 +147,4 @@ public class RandomArmor
 
         return stack;
     }
-
 }

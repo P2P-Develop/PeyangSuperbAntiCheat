@@ -10,8 +10,16 @@ import org.bukkit.entity.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
+/**
+ * ノックバックを確認するクラス。
+ */
 public class TestKnockback
 {
+    /** 透明な矢をplayerに対して発射する。
+     * @param player プレイヤー。
+     * @param type 罪状(不使用)。
+     * @param sender イベントsender。
+     */
     public static void scan(Player player, DetectType type, CommandSender sender)
     {
         if (type == DetectType.AURA_BOT || type == DetectType.AURA_PANIC)
@@ -34,6 +42,11 @@ public class TestKnockback
         scanFinally(player, sender, arrow);
     }
 
+    /** 後始末をする。
+     * @param player プレイヤー。
+     * @param sender イベントsender。
+     * @param arrow 矢。
+     */
     private static void scanFinally(Player player, CommandSender sender, Arrow arrow)
     {
         new BukkitRunnable()

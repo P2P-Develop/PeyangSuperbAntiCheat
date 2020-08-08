@@ -7,8 +7,19 @@ import org.bukkit.command.*;
 
 import java.util.*;
 
+/**
+ * PSACコマンド系クラス。
+ */
 public class CommandPeyangSuperbAntiCheat implements CommandExecutor
 {
+    /** コマンド動作のオーバーライド。
+     * @param sender イベントsender。
+     * @param command コマンド。
+     * @param label ラベル。
+     * @param args 引数。
+     *
+     * @return 処理を終わらせるだけ。Always true。
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {

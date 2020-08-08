@@ -12,8 +12,19 @@ import org.bukkit.inventory.*;
 
 import java.util.*;
 
+/**
+ * 報告コマンド系クラス。
+ */
 public class CommandReport implements CommandExecutor
 {
+    /** コマンド動作。
+     * @param sender イベントsender。
+     * @param command コマンド。
+     * @param label ラベル。
+     * @param args 引数。
+     *
+     * @return 処理を終わらせるだけ。Always true。
+     */
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if (ErrorMessageSender.unPermMessage(sender, "psac.report"))
@@ -101,6 +112,11 @@ public class CommandReport implements CommandExecutor
         return true;
     }
 
+    /** 思いっきり通報する。
+     * @param sender イベントsender。
+     * @param types 罪状。
+     * @param target ターゲット。
+     */
     private void report(CommandSender sender, ArrayList<EnumCheatType> types, Player target)
     {
         String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]": ((Player) sender).getUniqueId().toString().replace("-", "");

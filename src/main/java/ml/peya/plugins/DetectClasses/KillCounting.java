@@ -8,15 +8,27 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 
+/**
+ * キル回数の計測をする。
+ */
 public class KillCounting
 {
+    /**
+     * プレイヤー。
+     */
     private final HashMap<UUID, Integer> players;
 
+    /**
+     * コンストラクター。
+     */
     public KillCounting()
     {
         players = new HashMap<>();
     }
 
+    /** 引数付きの関数を呼び出してもらうようにする。
+     * @param killer キルしたプレイヤーのUUID。
+     */
     public void kill(UUID killer)
     {
         if (players.containsKey(killer))
@@ -44,6 +56,9 @@ public class KillCounting
 
     }
 
+    /** プレイヤーのゲッター。
+     * @return プレイヤー。
+     */
     public HashMap<UUID, Integer> getPlayers()
     {
         return players;

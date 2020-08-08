@@ -9,8 +9,14 @@ import org.bukkit.inventory.*;
 
 import java.util.*;
 
+/**
+ * イベントの根本的なやつ。
+ */
 public class Run implements Listener
 {
+    /** Interactイベント...らしい。
+     * @param e なんか使ったときに発令するイベント。
+     */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInteract(PlayerInteractEvent e)
     {

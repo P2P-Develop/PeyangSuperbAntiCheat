@@ -8,8 +8,19 @@ import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
+/**
+ * Test Knockbackコマンド系クラス。
+ */
 public class TestKnockback implements CommandExecutor
 {
+    /** コマンド動作のオーバーライド。
+     * @param sender イベントsender。
+     * @param cmd コマンド。
+     * @param label ラベル。
+     * @param args 引数。
+     *
+     * @return 処理を終わらせるだけ。Always true。
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {

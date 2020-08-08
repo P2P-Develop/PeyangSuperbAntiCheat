@@ -13,9 +13,17 @@ import java.text.*;
 import java.util.*;
 import java.util.stream.*;
 
+/**
+ * 本を本するんだよ。簡単だろ？本なんだよ。
+ */
 public class Books
 {
-
+    /** 報告用の本を生成します。
+     * @param player ぶち込む報告対象プレイヤー。
+     * @param types 罪状。
+     *
+     * @return アイテム自体を返すのであとはgiveします。
+     */
     public static ItemStack getReportBook(Player player, EnumCheatType... types)
     {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
@@ -44,11 +52,21 @@ public class Books
                 .append(MessageEngine.get("reportbook.cancel"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report $$cancel$$"));
 
-        meta.spigot().addPage(component.create());
+        meta.addPage(Arrays.toString(component.create()));
         book.setItemMeta(meta);
         return book;
     }
 
+    /** /psac showした時のいろいろをなんかやってくれます。
+     * @param id 管理ID。
+     * @param uuid プレイヤー UUID。
+     * @param issueById なんこれ
+     * @param issueByUuid なんこれ2nd
+     * @param dateInt UNIX時間。
+     * @param types 罪状。
+     *
+     * @return /psac showした時の詳細を書いた本。
+     */
     public static ItemStack getShowBook(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types)
     {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
@@ -62,12 +80,12 @@ public class Books
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", uuid))).create()))
                 .append("\n");
 
-        ComponentBuilder b1 = new ComponentBuilder(new TextComponent(b.create()))
+        ComponentBuilder b1 = new ComponentBuilder(String.valueOf(new TextComponent(b.create())))
                 .append(MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.hsh("uuid", issueByUuid))).create()))
                 .append("\n");
 
-        ComponentBuilder b2 = new ComponentBuilder(new TextComponent(b1.create()));
+        ComponentBuilder b2 = new ComponentBuilder(String.valueOf(new TextComponent(b1.create())));
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("color", SeverityLevelUtils.getSeverity(types).getColor());
@@ -77,11 +95,17 @@ public class Books
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
         meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
-        meta.spigot().addPage(b2.create());
+        meta.addPage(Arrays.toString(b2.create()));
         book.setItemMeta(meta);
         return book;
     }
 
+    /** Modリストの本をぶん投げてくれます。
+     * @param player Mod何入れてるんこの人？？ねぇ？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+     * @param mods 検査済みじゃないと駄目ですよぉ！
+     *
+     * @return 本に変換した後のアイテム。
+     */
     public static ItemStack getModsBook(Player player, HashMap<String, String> mods)
     {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
@@ -103,11 +127,11 @@ public class Books
                 continue;
 
             count = 0;
-            meta.spigot().addPage(builder.create());
+            meta.addPage(Arrays.toString(builder.create()));
             builder = new ComponentBuilder("");
         }
 
-        meta.spigot().addPage(builder.create());
+        meta.addPage(Arrays.toString(builder.create()));
 
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
@@ -117,6 +141,11 @@ public class Books
         return book;
     }
 
+    /** Q. これは PSAC の 本 です か？
+     * @param book 本。
+     *
+     * @return A. ちがかったらfalseします。
+     */
     public static boolean hasPSACBook(ItemStack book)
     {
         BookMeta meta = (BookMeta) book.getItemMeta();

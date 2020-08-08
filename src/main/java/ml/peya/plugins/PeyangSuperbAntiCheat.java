@@ -27,40 +27,129 @@ import java.io.*;
 import java.util.*;
 import java.util.logging.*;
 
+/**
+ * このプラグインの中枢です。必ずここからスタートします。
+ * 全体で使用する値などはここで初期化します。
+ * また、リソースの破棄もここで行います。
+ */
 public class PeyangSuperbAntiCheat extends JavaPlugin
 {
+    /**
+     * プラグインIDですねわかります。
+     */
     private static final int __BSTATS_PLUGIN_ID = 8084;
+    /**
+     * ログを出力する対象をloggerとして格納します。
+     */
     public static Logger logger = Logger.getLogger("PeyangSuperbAntiCheat");
+    /**
+     * ...おん？まぁファイルの設定いじるんじゃね？しらんけど。
+     */
     public static FileConfiguration config;
+    /**
+     * Watcheyeのデータベースの置き場所が入ります。
+     */
     public static String databasePath;
+    /**
+     * Bankickのデータベースの置き場所が入ります。
+     */
     public static String banKickPath;
+    /**
+     * Trustのデータベースの置き場所が入ります。
+     */
     public static String trustPath;
+    /**
+     * いろいろ値を入手するのに使います。
+     * 地味に便利。
+     */
     public static DetectingList cheatMeta;
+    /**
+     * キル回数をグローバルに格納するらしいです。意味わからんけど。
+     */
     public static KillCounting counting;
+    /**
+     * ProtocolLibでNetな対策をばっちり行います。
+     */
     public static ProtocolManager protocolManager;
+    /**
+     * ヘルプの表示とかに使います。
+     * 後で色々追加されるヤツ。
+     */
     public static Item item;
+    /**
+     * {@code CommandTracking}で追跡が入った時にこの値に動きがあるそうです。
+     */
     public static Tracker tracker;
+    /**
+     * {@code CommandMods}に関与するクラスの関数とかで出てきたmodsをここに格納するそうです。
+     */
     public static HashMap<UUID, HashMap<String, String>> mods;
+    /**
+     * 定期メッセージに使います。なんかあったのか初期化されてる。
+     */
     public static long time = 0L;
+    /**
+     * まだ学習しきれていないひよっこAIの代わりにVLリミットとして登場します。
+     */
     public static int banLeft;
+    /**
+     * この数を超えたらムキムキAIが代わりにキック評価をしてくれるようになります。
+     */
     public static int learnCountLimit;
+    /**
+     * 学習回数がここに格納されるそうです。
+     */
     public static int learnCount;
+    /**
+     * AIの脳ですね(パワーワード)。
+     * ここにlearn()関数などをぶち込みます。
+     */
     public static NeuralNetwork network;
+    /**
+     * Watcheyeデータベースをデシリアライズしてあげます。
+     */
     public static HikariDataSource eye;
+    /**
+     * Bankickデータベースをデシリアライズしてやります。
+     */
     public static HikariDataSource banKick;
+    /**
+     * Trustデータベースをデシリアライズしときます。
+     */
     public static HikariDataSource trust;
-    public static String[] trustUID;
+    /**
+     * 定期メッセージが有効になっているかどうか。
+     */
     public static boolean isAutoMessageEnabled;
+    /**
+     * Trackingが有効だったまま投げ出していたかどうか。
+     */
     public static boolean isTrackEnabled;
+    /**
+     * どういう定期メッセージを行うのかのアクション。
+     */
     public static BukkitRunnable autoMessage;
+    /**
+     * Tracking時にやること。
+     */
     public static BukkitRunnable trackerTask;
+    /**
+     * this.
+     */
     private static PeyangSuperbAntiCheat plugin;
 
+    /** this入手。
+     * @return こいつ。
+     */
     public static PeyangSuperbAntiCheat getPlugin()
     {
         return plugin;
     }
 
+    /**
+     * プラグインがスタートした時に行う処理をします。
+     * 大体初期化とか。
+     */
     @Override
     public void onEnable()
     {
@@ -211,6 +300,10 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }
 
+    /**
+     * プラグインが停止するときの処理をします。
+     * リソース捨てないといけないやつのcloseとか保存とか。
+     */
     @Override
     public void onDisable()
     {

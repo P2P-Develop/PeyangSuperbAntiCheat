@@ -8,8 +8,16 @@ import org.bukkit.util.*;
 import java.util.*;
 import java.util.stream.*;
 
+/**
+ * メンチ切ってるのわかっちゃうクラス。
+ */
 public class LookingUtils
 {
+    /** 誰が見てるのかわかるやつ。
+     * @param player 見られてるプレイヤー。
+     *
+     * @return 見てるプレイヤー。
+     */
     public static Player getLookingEntity(Player player)
     {
         for (Location location : player.getLineOfSight(null, 4).parallelStream().map(Block::getLocation).collect(Collectors.toCollection(ArrayList::new)))
@@ -20,6 +28,12 @@ public class LookingUtils
         return null;
     }
 
+    /** 今見てるかわかるやつ。
+     * @param player 見られてるプレイヤー。
+     * @param location あと場所。
+     *
+     * @return 見られてたらtrue。
+     */
     public static boolean isLooking(Player player, Location location)
     {
         BlockIterator it = new BlockIterator(player, 4);

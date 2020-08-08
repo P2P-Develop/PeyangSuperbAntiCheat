@@ -11,8 +11,17 @@ import org.bukkit.craftbukkit.v1_12_R1.*;
 
 import java.util.*;
 
+/**
+ * プレイヤーをランダムに取得する関数が突っ込まれています。
+ * プレイヤー誰かが餌食になります。
+ */
 public class RandomPlayer
 {
+    /** ワールド内にいるプレイヤーどなたかを餌食にして{@code EntityPlayer}として返します。
+     * @param world
+     * ワールドのハンドルを取得するための引数。
+     * @return 餌食になったプレイヤー。
+     */
     public static EntityPlayer getPlayer(World world)
     {
         JsonNode node = StringUtil.getRandomUser();

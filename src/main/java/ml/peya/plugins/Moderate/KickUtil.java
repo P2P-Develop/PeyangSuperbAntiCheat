@@ -12,8 +12,17 @@ import java.util.Date;
 import java.util.*;
 import java.util.stream.*;
 
+/**
+ * プレイヤーのキックと共にいろいろやってくれるやつ。
+ */
 public class KickUtil
 {
+    /** Bukkit的キックをかます。
+     * @param player 対象プレイヤー。
+     * @param reason 罪状。
+     * @param wdFlag 報告してるか...どうか？
+     * @param isTest テストで捕まったか...どうか？
+     */
     public static void kickPlayer(Player player, String reason, boolean wdFlag, boolean isTest)
     {
         broadCast(wdFlag, player);
@@ -26,10 +35,12 @@ public class KickUtil
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("kick.delay"));
-
-
     }
 
+    /** 全員にメッセージ送りつけるやつ。
+     * @param wdFlag 報告してるか...どうか？
+     * @param target 対象プレイヤー。
+     */
     private static void broadCast(boolean wdFlag, Player target)
     {
         if (wdFlag)
@@ -53,6 +64,12 @@ public class KickUtil
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
     }
 
+    /** 色々やってから結局蹴るやつ。
+     * @param player 対象プレイヤー。
+     * @param reason 罪状。
+     * @param isTest テストで捕まったか...どうか？
+     * @param opFlag OPが入ってたか......どうか？
+     */
     private static void kick(Player player, String reason, boolean isTest, boolean opFlag)
     {
         if (PeyangSuperbAntiCheat.config.getBoolean("kick.lightning"))

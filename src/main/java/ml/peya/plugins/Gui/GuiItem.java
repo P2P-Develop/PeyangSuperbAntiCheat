@@ -6,8 +6,16 @@ import org.bukkit.entity.*;
 
 import java.util.*;
 
+/**
+ * AIRとか表示できるわけがない意味わからんアイテム以外の事を指す。
+ */
 public class GuiItem
 {
+    /** trackした時のいろいろアイテムをくれるやつ。
+     * @param player 対象プレイヤー。
+     * @param type Type!
+     * @param target ターゲット。
+     */
     public static void giveAllItems(Player player, IItems.Type type, String target)
     {
         int i = 0;

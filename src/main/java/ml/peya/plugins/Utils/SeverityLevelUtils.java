@@ -7,18 +7,34 @@ import ml.peya.plugins.*;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * いやなんこれマジで
+ */
 public class SeverityLevelUtils
 {
+    /** タイプそのまんま通過する奴
+     * @param types タイプ
+     *
+     * @return 通過
+     */
     public static EnumSeverity getSeverity(ArrayList<EnumCheatType> types)
     {
         return getSeverity(types.size());
     }
 
+    /** intでも突っ込めるようにしたやつ。基準かなこれ
+     * @param level Stream APIの餌食となる引数
+     *
+     * @return 変換後？
+     */
     public static EnumSeverity getSeverity(int level)
     {
         return getAllSeverity().parallelStream().filter(severity -> severity.getLevel() == level).findFirst().orElse(EnumSeverity.UNKNOWN);
     }
 
+    /** ArrayListとして全部かき集めたやつを返す。
+     * @return かき集めたやつ。
+     */
     public static ArrayList<EnumSeverity> getAllSeverity()
     {
         ArrayList<EnumSeverity> severities = new ArrayList<>();
@@ -33,6 +49,11 @@ public class SeverityLevelUtils
         return severities;
     }
 
+    /** IDからレベル取得する。
+     * @param id ID。
+     *
+     * @return 取得できたやつ。
+     */
     public static EnumSeverity getSeverityFromId(String id)
     {
         if (WatchEyeManagement.isExistsRecord(id))
@@ -43,8 +64,7 @@ public class SeverityLevelUtils
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");
             if (result.next())
                 return getSeverity(result.getInt("LEVEL"));
-            else
-                return EnumSeverity.UNKNOWN;
+            return EnumSeverity.UNKNOWN;
         }
         catch (Exception e)
         {

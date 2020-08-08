@@ -7,8 +7,17 @@ import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
 
+/**
+ * Minecraft上に出てくるメッセージのテンプレートを管理します。
+ */
 public class MessageEngine
 {
+    /** なんこのメソッド名...意味わからん
+     * @param path 参照が必要なアレを参照するパス。
+     * @param obj 参照が必要なアレに突っ込むやつ。
+     *
+     * @return それらをくっつけただけのはっしゅまっぷ。
+     */
     public static HashMap<String, Object> hsh(String path, Object obj)
     {
         HashMap<String, Object> map = new HashMap<>();
@@ -17,11 +26,22 @@ public class MessageEngine
         return map;
     }
 
+    /** ちゃんと処理すると見せかけて下のメソッドに丸投げするメソッド。
+     * @param key 参照するメッセージテンプレート。
+     *
+     * @return 参照できたやつ。
+     */
     public static String get(String key)
     {
         return get(key, new HashMap<>());
     }
 
+    /** メッセージテンプレートのキーに対してテンプレートを返すメソッド。こいつとhshを共用する。
+     * @param key 参照するメッセージテンプレート。
+     * @param format hsh()するやつ。
+     *
+     * @return 参照できたやつ。
+     */
     public static String get(String key, HashMap<String, Object> format)
     {
         try
@@ -35,6 +55,12 @@ public class MessageEngine
         return null;
     }
 
+    /** フォーマット直したいよぉふえぇっていう時にうってつけ
+     * @param text Before
+     * @param format フォーマット規則
+     *
+     * @return AFTER
+     */
     public static String format(String text, HashMap<String, Object> format)
     {
         HashMap<String, ChatColor> map = getColor();
@@ -48,6 +74,9 @@ public class MessageEngine
         return text;
     }
 
+    /** いい感じにEnumのChatColorに変更してくれるやつ。マジでハイなピクセルに寄せてくるな。
+     * @return 変換した後のはっしゅまっぷ。
+     */
     private static HashMap<String, ChatColor> getColor()
     {
         HashMap<String, ChatColor> map = new HashMap<>();

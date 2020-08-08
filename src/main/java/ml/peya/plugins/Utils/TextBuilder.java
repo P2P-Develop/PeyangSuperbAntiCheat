@@ -13,8 +13,17 @@ import java.text.*;
 import java.util.*;
 import java.util.stream.*;
 
+/**
+ * チャット送信とかに使用するやつを組み立てます。MessageEngineのフロントエンドみたいな。
+ */
 public class TextBuilder
 {
+    /** ボタン類をなんとなく組み立ててくれます。
+     * @param bind なんこれ
+     * @param button ボタン...?
+     *
+     * @return 完成後
+     */
     private static TextComponent getPrevNextButton(int bind, String button)
     {
         TextComponent nextBtn = new TextComponent(ChatColor.GREEN + "(" +
@@ -26,16 +35,35 @@ public class TextBuilder
         return nextBtn;
     }
 
+    /** 上のメソッドを分けたやつ。
+     * @param next ボタン
+     *
+     * @return 完成後
+     */
     public static TextComponent getNextButton(int next)
     {
         return getPrevNextButton(next, "=>");
     }
 
+    /** 上のメソッドを分けたやつ2nd。
+     * @param previous ボタン
+     *
+     * @return 完成後
+     */
     public static TextComponent getPrevButton(int previous)
     {
         return getPrevNextButton(previous, "<=");
     }
 
+    /** 多すぎだろJavadoc書く人の気持ちにもなれよごｒｒｒ(ry
+     * @param id 管理ID。
+     * @param uuid プレイヤーUUID。
+     * @param issueById 報告した人管理ID。
+     * @param issueByUuid 報告した人のUUID。
+     * @param dateInt UNIX時間。
+     * @param types 罪状。
+     * @param sender イベントsender。
+     */
     public static void showText(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
     {
         ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.clickable"));
@@ -59,6 +87,15 @@ public class TextBuilder
         sender.sendMessage(MessageEngine.get("book.text.severity", serv));
     }
 
+    /** showとかに使うんじゃね？しらんけど。
+     * @param id 管理ID。
+     * @param issueById 報告した人管理ID。
+     * @param types 罪状。
+     * @param mngid 管理ID2nd。
+     * @param sender イベントsender。
+     *
+     * @return 完成後。
+     */
     public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid, CommandSender sender)
     {
         EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
@@ -85,11 +122,22 @@ public class TextBuilder
         return b;
     }
 
+    /** 謎にオーバーロード。
+     * @param prefix [PSAC]ってやつ。
+     * @param value 値...?
+     *
+     * @return かーんせーい！
+     */
     public static String getLine(String prefix, String value)
     {
         return ChatColor.AQUA + prefix + ChatColor.WHITE + "：" + ChatColor.GREEN + value;
     }
 
+    /** レベル返す。
+     * @param severity レベル。
+     *
+     * @return レベル返す。
+     */
     public static String getSeverityLevel(EnumSeverity severity)
     {
         String prefix = ChatColor.YELLOW + "Level " + severity.getColor();
@@ -114,21 +162,37 @@ public class TextBuilder
         }
     }
 
+    /** ボタンゲットする。
+     * @param prev 前に戻るボタン
+     * @param next 次に進むボタン
+     * @param prevFlag ボタン使える？
+     * @param nextFlag ボタン使える2nd？
+     *
+     * @return 完成後。
+     */
     public static ComponentBuilder getNextPrevButtonText(TextComponent prev, TextComponent next, boolean prevFlag, boolean nextFlag)
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        return new ComponentBuilder(prevFlag ? prev: uBar)
+        return new ComponentBuilder(String.valueOf(prevFlag ? prev: uBar))
                 .append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA)
-                .append(nextFlag ? next: uBar);
+                .append(String.valueOf(nextFlag ? next: uBar));
     }
 
+    /** メッセージ変換する。
+     * @return 変換後。
+     */
     public static ComponentBuilder getBroadCastWdDetectionText()
     {
         return new ComponentBuilder(MessageEngine.get("kick.broadcastWd"));
     }
 
+    /** 上のオーバーロード。
+     * @param player 罪を犯しかけたプレイヤー。
+     *
+     * @return メッセージを結果として組み立てたやつ。
+     */
     public static ComponentBuilder getBroadCastWdDetectionText(Player player)
     {
         HashMap<String, Object> map = new HashMap<>();
@@ -157,6 +221,12 @@ public class TextBuilder
                 .append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok"))));
     }
 
+    /** なんこれ
+     * @param name PlayerName
+     * @param vl そのまんま
+     *
+     * @return 完成後。
+     */
     public static ComponentBuilder textPanicRep(String name, int vl)
     {
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
@@ -168,6 +238,12 @@ public class TextBuilder
                 .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(vl))));
     }
 
+    /** いやなにこれ
+     * @param ban Bansらしい
+     * @param type 罪状？
+     *
+     * @return 完成後。
+     */
     public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
     {
         StringBuilder reasonSet = new StringBuilder();

@@ -8,8 +8,15 @@ import org.bukkit.command.*;
 
 import java.sql.*;
 
+/**
+ * /psac dropで動くクラス。
+ */
 public class Drop
 {
+    /** 関数を稼働させる。
+     * @param sender イベントsender。
+     * @param args 引数。
+     */
     public static void run(CommandSender sender, String[] args)
     {
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))

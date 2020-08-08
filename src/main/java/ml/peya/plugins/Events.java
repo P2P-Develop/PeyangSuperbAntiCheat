@@ -16,8 +16,15 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 
+/**
+ * イベントハンドラをめちゃくちゃ管理します。
+ * 使ってなさそうなやつもある。
+ */
 public class Events implements Listener
 {
+    /** キルされたときにカウントを増やします。
+     * @param e キャー！どっかのプレイヤーが死んだー！っていうのを表すイベントハンドラ。
+     */
     @EventHandler
     public void onKill(PlayerDeathEvent e)
     {
@@ -26,6 +33,9 @@ public class Events implements Listener
         PeyangSuperbAntiCheat.counting.kill(e.getEntity().getKiller().getUniqueId());
     }
 
+    /** 痛いっ！の時のダメージをたまに無効化します。
+     * @param e 痛かったよぉ...
+     */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent e)
     {
@@ -35,6 +45,9 @@ public class Events implements Listener
         e.setDamage(0);
     }
 
+    /** プレイヤーが立ち去ったらこれやってくれます。
+     * @param e プレイヤーが立ち去ったぞおおおおお！っていう時のイベントハンドラ。
+     */
     @EventHandler
     public void onLeave(PlayerQuitEvent e)
     {
@@ -45,6 +58,9 @@ public class Events implements Listener
         PeyangSuperbAntiCheat.mods.remove(player.getUniqueId());
     }
 
+    /** プレイヤーが動いたらこれやってくれます。動くだけってかなり世紀末だよね。
+     * @param e 動いたときに発行されるイベントハンドラ。これ毎回発行してんのか...
+     */
     @EventHandler
     public void onMove(PlayerMoveEvent e)
     {
@@ -53,6 +69,9 @@ public class Events implements Listener
         e.getPlayer().setMetadata("speed", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo())));
     }
 
+    /** 誰かさんがお話したがってるときに動くイベントハンドラ。
+     * @param e 非同期でチャットイベントを送ってくれます。こういうところやさしい。
+     */
     @EventHandler(priority = EventPriority.MONITOR)
     public void onChat(AsyncPlayerChatEvent e)
     {
@@ -77,6 +96,9 @@ public class Events implements Listener
         Bukkit.getConsoleSender().sendMessage(format);
     }
 
+    /** プレイヤーが参上した時に処理が行われるやつ。
+     * @param e 三条市田尾(誰)
+     */
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e)
     {
@@ -129,6 +151,9 @@ public class Events implements Listener
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 3);
     }
 
+    /** アイテム落とした時のイベント。
+     * @param e ドロップゥ！
+     */
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDrop(PlayerDropItemEvent e)
     {

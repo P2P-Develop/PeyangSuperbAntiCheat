@@ -5,8 +5,14 @@ import ml.peya.plugins.Enum.*;
 import java.util.*;
 import java.util.function.*;
 
+/**
+ * 罪状管理するやつ。
+ */
 public class CheatTypeUtils
 {
+    /** 種類確認するみたいなノリで全部タイプ返してくれるクラス。
+     * @return 全部返してくれる。
+     */
     public static EnumCheatType[] getFullType()
     {
         ArrayList<EnumCheatType> types = new ArrayList<>();
@@ -23,6 +29,9 @@ public class CheatTypeUtils
         return types.toArray(new EnumCheatType[0]);
     }
 
+    /** 上のメソッドのArrayList版。
+     * @return 全部！
+     */
     public static ArrayList<EnumCheatType> getFullTypeArrayList()
     {
         ArrayList<EnumCheatType> types = new ArrayList<>();
@@ -38,6 +47,11 @@ public class CheatTypeUtils
         return types;
     }
 
+    /** まぁこれも。
+     * @param values Stringから変換する奴。
+     *
+     * @return 変換後。
+     */
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
         ArrayList<EnumCheatType> types = getFullTypeArrayList();
@@ -49,11 +63,22 @@ public class CheatTypeUtils
         return types;
     }
 
+    /** まぁ同じくらい。
+     * @param sysname Stringから普通に変換する奴。
+     *
+     * @return 変換後。
+     */
     public static EnumCheatType getCheatTypeFromString(String sysname)
     {
         return getFullTypeArrayList().parallelStream().filter(type -> type.getSysName().equals(sysname)).findFirst().orElse(null);
     }
 
+    /** エイリアスOK?
+     * @param types 罪状。
+     * @param name なまえ
+     *
+     * @return OK=true
+     */
     public static boolean aliasEquals(EnumCheatType types, String name)
     {
         return types.getAlias().parallelStream().anyMatch(type -> type.equals(name));

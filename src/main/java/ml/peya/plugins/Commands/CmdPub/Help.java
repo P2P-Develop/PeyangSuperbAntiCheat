@@ -7,8 +7,14 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 
+/**
+ * /psac helpで動くクラス。
+ */
 public class Help
 {
+    /** 関数を稼働させる。
+     * @param sender イベントsender。
+     */
     public static void run(CommandSender sender, String label)
     {
         final boolean[] flag = { false };

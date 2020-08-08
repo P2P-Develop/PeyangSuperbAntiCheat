@@ -8,8 +8,15 @@ import org.bukkit.entity.*;
 
 import java.util.*;
 
+/**
+ * /psac kickで動くクラス。
+ */
 public class Kick
 {
+    /** 関数を稼働させる。
+     * @param sender イベントsender。
+     * @param args 引数。
+     */
     public static void run(CommandSender sender, String[] args)
     {
         if (args.length == 3 && args[2].equals("test"))

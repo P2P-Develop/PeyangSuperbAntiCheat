@@ -12,8 +12,15 @@ import java.math.*;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * /psac showで動くクラス。
+ */
 public class Show
 {
+    /** 関数を稼働させる。
+     * @param sender イベントsender。
+     * @param args 引数。
+     */
     public static void run(CommandSender sender, String[] args)
     {
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))

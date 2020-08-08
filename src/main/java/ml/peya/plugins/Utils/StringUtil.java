@@ -8,8 +8,14 @@ import java.io.*;
 import java.net.*;
 import java.nio.charset.*;
 
+/**
+ * Stringいじるよ！
+ */
 public class StringUtil
 {
+    /** プレイヤーをランダムに架空で作るよ！
+     * @return jsonNodeをレスポンスのまんま返すよ！
+     */
     public static JsonNode getRandomUser()
     {
         try

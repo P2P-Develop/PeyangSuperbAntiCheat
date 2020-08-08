@@ -12,11 +12,24 @@ import org.bukkit.scheduler.*;
 import java.math.*;
 import java.util.*;
 
+/**
+ * トラッキングに使うクラス。いろいろコントロールしてくれる。
+ */
 public class Tracker
 {
+    /**
+     * トラッカーの中枢...?
+     */
     private final HashMap<String, String> tracker = new HashMap<>();
+    /**
+     * お前とお前の位置。
+     */
     private final HashMap<String, Location> target = new HashMap<>();
 
+    /** 指定したプレイヤーをトラッキングするやつ。
+     * @param player プレイヤー。
+     * @param target なんこれ
+     */
     public void add(String player, String target)
     {
         this.tracker.put(player, target);
@@ -26,6 +39,9 @@ public class Tracker
         this.target.put(player, p.getCompassTarget());
     }
 
+    /** 指定したプレイヤーをトラッキング解除するやつ。
+     * @param player プレイヤー。
+     */
     public void remove(String player)
     {
         new BukkitRunnable()
@@ -43,16 +59,29 @@ public class Tracker
         this.tracker.remove(player);
     }
 
+    /** トラッキングしてるかどうか調べるやつ。
+     * @param player プレイヤー。
+     *
+     * @return トラッキングしてたらtrue。
+     */
     public boolean isTracking(String player)
     {
         return tracker.containsKey(player);
     }
 
+    /** なんか別の方法でトラッキングしてるかどうか調べるやつ。
+     * @param player プレイヤー。
+     *
+     * @return トラッキングしてたらtrue。
+     */
     public boolean isTrackingByPlayer(String player)
     {
         return tracker.containsValue(player);
     }
 
+    /**
+     * 時間経過で更新する奴。
+     */
     public void tick()
     {
         tracker.keySet().parallelStream().forEachOrdered(playerName -> {
@@ -90,6 +119,12 @@ public class Tracker
         });
     }
 
+    /** スケールちょうせい......?
+     * @param d だぶる！
+     * @param scale すけーる！
+     *
+     * @return なんか！
+     */
     private String scaleSet(double d, int scale)
     {
         return BigDecimal.valueOf(d).setScale(scale, RoundingMode.HALF_UP).toPlainString();

@@ -8,8 +8,15 @@ import org.bukkit.scheduler.*;
 
 import java.sql.*;
 
+/**
+ * 信用プレイヤーを管理する。
+ */
 public class TrustModifier
 {
+    /** addって書いてるけどほんとはtoggleなやつ。なかったらaddするしあったらremoveする。
+     * @param player 切り替えするプレイヤー。
+     * @param sender イベントsender。
+     */
     public static void addTrustPlayer(Player player, CommandSender sender)
     {
         try (Connection connection = PeyangSuperbAntiCheat.trust.getConnection();
@@ -34,6 +41,11 @@ public class TrustModifier
         }
     }
 
+    /** プレイヤーが信用されてるか調べる。
+     * @param player 信用されてる気がするプレイヤー。
+     *
+     * @return 信用されてたらtrue。
+     */
     public static boolean isTrusted(Player player)
     {
         final boolean[] result = { true };

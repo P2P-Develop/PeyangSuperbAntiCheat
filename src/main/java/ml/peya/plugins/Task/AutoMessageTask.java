@@ -9,8 +9,14 @@ import java.sql.*;
 import java.util.Date;
 import java.util.*;
 
+/**
+ * 定期メッセージを発行するタスク。
+ */
 public class AutoMessageTask extends BukkitRunnable
 {
+    /**
+     * タスクの処理を書く。
+     */
     @Override
     public void run()
     {

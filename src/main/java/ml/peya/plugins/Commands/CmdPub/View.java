@@ -10,8 +10,15 @@ import org.bukkit.command.*;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * /psac viewで動くクラス。
+ */
 public class View
 {
+    /** 関数を稼働させる。
+     * @param sender イベントsender。
+     * @param args 引数。
+     */
     public static void run(CommandSender sender, String[] args)
     {
         sender.sendMessage(MessageEngine.get("base.prefix"));

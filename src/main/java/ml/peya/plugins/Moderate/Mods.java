@@ -5,8 +5,16 @@ import org.bukkit.entity.*;
 
 import java.util.*;
 
+/**
+ * 何のMod入れてるか調べるやつ。
+ */
 public class Mods
 {
+    /** 本番。
+     * @param player 調べる対象。
+     *
+     * @return 調べ終わったやつ。
+     */
     public static HashMap<String, String> getMods(Player player)
     {
         UUID uuid = player.getUniqueId();

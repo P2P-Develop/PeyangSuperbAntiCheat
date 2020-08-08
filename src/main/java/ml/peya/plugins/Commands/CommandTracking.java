@@ -5,11 +5,23 @@ import ml.peya.plugins.Moderate.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
+/**
+ * トラッキングコマンド系クラス。
+ */
 public class CommandTracking implements CommandExecutor
 {
+    /** コマンド動作のオーバーライド。
+     * @param sender イベントsender。
+     * @param command コマンド。
+     * @param label ラベル。
+     * @param args 引数。
+     *
+     * @return 処理を終わらせるだけ。Always true。
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {

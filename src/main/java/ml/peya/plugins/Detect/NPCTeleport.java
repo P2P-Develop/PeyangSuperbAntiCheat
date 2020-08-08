@@ -16,8 +16,18 @@ import java.util.*;
 
 import static ml.peya.plugins.Utils.LookingUtils.isLooking;
 
+/**
+ * NPCのTeleportを管理する。
+ */
 public class NPCTeleport
 {
+    /** テレポートォ！
+     * @param player プレイヤー。
+     * @param target ターゲット。
+     * @param arm 腕？
+     * @param tpCase 罪状。
+     * @param reachMode リーチモードかどうか。
+     */
     public static void teleport(Player player, EntityPlayer target, ItemStack[] arm, DetectType tpCase, boolean reachMode)
     {
         switch (tpCase)
@@ -33,6 +43,14 @@ public class NPCTeleport
         }
     }
 
+    /** Aurapanicのテレポート。
+     * @param player プレイヤー。
+     * @param target ターゲット。
+     * @param arm 腕？？
+     * @param count 回数。
+     * @param sender イベントsender。
+     * @param reachMode リーチモードかどうか。
+     */
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender, boolean reachMode)
     {
         final double range = reachMode ? PeyangSuperbAntiCheat.config.getDouble("npc.reachPanicRange") : PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
@@ -113,6 +131,12 @@ public class NPCTeleport
 
     }
 
+    /** AuraBotのテレポート。
+     * @param player プレイヤー。
+     * @param target ターゲット。
+     * @param arm 腕？？？
+     * @param reachMode リーチモードかどうか。
+     */
     private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
     {
         final double[] time = { 0.0 };
@@ -187,11 +211,23 @@ public class NPCTeleport
 
     }
 
+    /** Aurabotのz位置を確認する。
+     * @param time 時間。
+     * @param radius 半径。
+     *
+     * @return 位置。
+     */
     private static double auraBot_zPos(double time, double radius)
     {
         return Math.sin(time) * radius * Math.cos(Math.PI / 180 * 360.0);
     }
 
+    /** Aurabotのx位置を確認する。
+     * @param time 時間。
+     * @param radius 半径。
+     *
+     * @return 位置。
+     */
     private static double auraBot_xPos(double time, double radius)
     {
         return Math.cos(time) * radius;

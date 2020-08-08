@@ -12,13 +12,27 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 
+/**
+ * NPC自体である。
+ */
 public class NPC
 {
+    /** 場所を設定する。
+     * @param location 場所。
+     * @param player プレイヤー・
+     */
     public static void setLocation(Location location, EntityPlayer player)
     {
         player.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
 
+    /** スポーンさせる。
+     * @param player プレイヤー。
+     * @param teleportCase 罪状。
+     * @param reachMode リーチモードかどうか。
+     *
+     * @return スポーンするNPCを返す。
+     */
     public static EntityPlayer spawn(Player player, DetectType teleportCase, boolean reachMode)
     {
         EntityPlayer npc = RandomPlayer.getPlayer(player.getWorld());
@@ -49,7 +63,7 @@ public class NPC
 
                 connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
 
-                player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
+                player.hidePlayer(npc.getBukkitEntity());
 
                 Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> {
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
@@ -58,7 +72,7 @@ public class NPC
 
                 NPCTeleport.teleport(player, npc, arm, teleportCase, reachMode);
 
-                player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
+                player.hidePlayer(npc.getBukkitEntity());
 
                 Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
 
@@ -77,6 +91,11 @@ public class NPC
         return npc;
     }
 
+    /** ことごとくランダムアーマーを着せる。
+     * @param target ターゲット。
+     * @param player プレイヤー。
+     * @param arm 腕？？？？
+     */
     public static void setArmor(Player target, EntityPlayer player, ItemStack[] arm)
     {
         Arrays.asList(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.HEAD, arm[0]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.CHEST, arm[1]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.LEGS, arm[2]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4])).parallelStream().forEachOrdered(((CraftPlayer) target).getHandle().playerConnection::sendPacket);

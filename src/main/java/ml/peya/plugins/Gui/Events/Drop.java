@@ -10,8 +10,14 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 
+/**
+ * おもっくそプレイヤーのドロップに関わりそうなイベント。
+ */
 public class Drop implements Listener
 {
+    /** ドロップした時に処理する...らしい。
+     * @param e ドロップした時に発令するイベント。
+     */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDrop(PlayerDropItemEvent e)
     {
