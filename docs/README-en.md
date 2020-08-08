@@ -57,7 +57,7 @@ This block of code represents a permission.
 
 for bash command:
 ```bash
-$ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/download/0.1a/PSAC.jar" -o (Your plugins dir)
+$ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/download/0.3a/PSAC.jar" -o (Your plugins dir)
 ```
 
 ### Auto Build (Linux only)
