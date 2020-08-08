@@ -33,3 +33,13 @@ maven: ## Compile and Package to .jar file
 
 install: ## Execute install command
   bash install
+
+ant: ## Build as ant
+  mvn ant:ant
+  ant compile
+
+eclipse: ## Generate eclipse projects
+  mvn eclipse:eclipse
+
+idea: ## Generate IntelliJ IDEA workspace
+  mvn idea:idea
