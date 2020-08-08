@@ -43,3 +43,12 @@ eclipse: ## Generate eclipse projects
 
 idea: ## Generate IntelliJ IDEA workspace
   mvn idea:idea
+
+javadoc: ## Generate java document files
+  mvn javadoc:javadoc
+
+refresh: ## Refresh project files
+  make ant
+  make eclipse
+  make idea
+  make javadoc
