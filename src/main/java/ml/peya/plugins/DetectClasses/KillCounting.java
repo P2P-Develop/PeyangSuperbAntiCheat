@@ -17,7 +17,7 @@ public class KillCounting
         players = new HashMap<>();
     }
 
-    public void kill(UUID killer)//killされたときに呼び出されるやつ(?)
+    public void kill(UUID killer)
     {
         if (players.containsKey(killer))
         {

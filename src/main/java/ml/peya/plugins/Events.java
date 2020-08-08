@@ -61,9 +61,7 @@ public class Events implements Listener
 
         ComponentBuilder builder = new ComponentBuilder("");
 
-        builder.append(ChatColor.RED +
-                "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED +
-                "] ");
+        builder.append(ChatColor.RED + "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED + "] ");
         builder.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()));
         builder.event(new HoverEvent(
                 HoverEvent.Action.SHOW_TEXT,
@@ -100,15 +98,13 @@ public class Events implements Listener
 
         List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
 
-        Random random = new Random();
-
         new BukkitRunnable()
         {
 
             @Override
             public void run()
             {
-                JsonNode node = Packets.getSkin(uuids.get(random.nextInt(uuids.size() - 1)));
+                JsonNode node = Packets.getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
 
                 tab.getProfile().getProperties().put(
                         "textures",

@@ -112,7 +112,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             @Override
             public void onPacketReceiving(PacketEvent event)
             {
-                new Packets().useEntity(event);
+                Packets.useEntity(event);
             }
         });
 
@@ -121,7 +121,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             @Override
             public void onPacketSending(PacketEvent event)
             {
-                new Packets().playerInfo(event);
+                Packets.playerInfo(event);
             }
         });
 
@@ -231,12 +231,11 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
              PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
         {
             logger.info("Saving learn weights to learning data file...");
-            ObjectMapper mapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false); // bruh
             Mapper mp = new Mapper();
             mp.inputWeight = network.inputWeight;
             mp.middleWeight = network.middleWeight;
             mp.learnCount = learnCount;
-            pw.print(mapper.writeValueAsString(mp));
+            pw.print(new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).writeValueAsString(mp));
         }
         catch (Exception e)
         {

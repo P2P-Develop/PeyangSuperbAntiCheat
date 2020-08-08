@@ -125,7 +125,6 @@ public class NPCTeleport
         {
             public void run()
             {
-
                 double speed = 0.0;
 
                 if (player.hasMetadata("speed"))

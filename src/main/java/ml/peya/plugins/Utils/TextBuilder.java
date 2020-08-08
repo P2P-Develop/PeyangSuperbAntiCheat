@@ -40,14 +40,13 @@ public class TextBuilder
     {
         ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.clickable"));
 
-        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)));
-        b1.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
-        b1.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
+        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
         sender.spigot().sendMessage(b1.create());
 
-        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueTo", MessageEngine.hsh("id", id)));
-        b2.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
-        b2.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
+        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueTo", MessageEngine.hsh("id", id)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create())).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
         sender.spigot().sendMessage(b2.create());
 
         sender.sendMessage("    " + MessageEngine.get("book.text.dateTime", MessageEngine.hsh("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))));
@@ -64,19 +63,16 @@ public class TextBuilder
     {
         EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
 
-        ComponentBuilder b = new ComponentBuilder("");
-
-        b.append(ChatColor.GREEN + id);
-        b.append("   ");
-
-        b.append(ChatColor.BLUE + issueById);
-        b.append("   ");
-
-        b.append(severity.getText())
+        ComponentBuilder b = new ComponentBuilder("")
+                .append(ChatColor.GREEN + id)
+                .append("   ")
+                .append(ChatColor.BLUE + issueById)
+                .append("   ")
+                .append(severity.getText())
                 .color(severity.getColor())
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + mngid))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.click.openAbout")).create()));
-        b.append("   ");
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.click.openAbout")).create()))
+                .append("   ");
         if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
             b.append(MessageEngine.get("book.click.delete"))
@@ -122,11 +118,10 @@ public class TextBuilder
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        ComponentBuilder builder = new ComponentBuilder(prevFlag ? prev: uBar);
-        builder.append("------------------------")
-                .color(net.md_5.bungee.api.ChatColor.AQUA);
-        builder.append(nextFlag ? next: uBar);
-        return builder;
+        return new ComponentBuilder(prevFlag ? prev: uBar)
+                .append("------------------------")
+                .color(net.md_5.bungee.api.ChatColor.AQUA)
+                .append(nextFlag ? next: uBar);
     }
 
     public static ComponentBuilder getBroadCastWdDetectionText()
@@ -136,12 +131,11 @@ public class TextBuilder
 
     public static ComponentBuilder getBroadCastWdDetectionText(Player player)
     {
-        ComponentBuilder component = getBroadCastWdDetectionText();
-
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", player.getName());
         map.put("uuid", player.getUniqueId().toString());
 
+        ComponentBuilder component = getBroadCastWdDetectionText();
         component.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("kick.broadcastAdmin", map)).create()));
         return component;
     }
@@ -151,39 +145,35 @@ public class TextBuilder
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
             return new ComponentBuilder(MessageEngine.get("message.auraCheck.bot.lynx", MessageEngine.hsh("hit", VL)));
 
-        ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("base.prefix") + "\n");
-
-        builder.append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)));
-        builder.append("\n");
-        builder.append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(VL))));
-        builder.append("\n");
-        builder.append(MessageEngine.get("message.auraCheck.result.vlGraph"));
-        builder.append("\n");
-        builder.append(OptGraphGenerator.genGraph(VL, kickVL));
-        builder.append("\n");
-
-        builder.append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok"))));
-
-        return builder;
+        return new ComponentBuilder(MessageEngine.get("base.prefix") + "\n")
+                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(VL))))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.vlGraph"))
+                .append("\n")
+                .append(OptGraphGenerator.genGraph(VL, kickVL))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok"))));
     }
 
     public static ComponentBuilder textPanicRep(String name, int vl)
     {
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
             return new ComponentBuilder("");
-        ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("base.prefix"));
-        builder.append("\n");
-        builder.append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)));
-        builder.append("\n");
-        builder.append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(vl))));
-        return builder;
+        return new ComponentBuilder(MessageEngine.get("base.prefix"))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(vl))));
     }
 
     public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
     {
-        ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"));
-        builder.append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())));
         StringBuilder reasonSet = new StringBuilder();
+        ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"))
+                .append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())))
+                .append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
         Arrays.stream(ban.getReason().split(", ")).parallel().forEachOrdered(reason -> {
             EnumCheatType tp = CheatTypeUtils.getCheatTypeFromString(reason);
             if (tp == null)
@@ -194,8 +184,6 @@ public class TextBuilder
 
         if (reasonSet.toString().endsWith(", "))
             reasonSet.setLength(reasonSet.length() - 2);
-
-        builder.append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
 
         return builder;
     }

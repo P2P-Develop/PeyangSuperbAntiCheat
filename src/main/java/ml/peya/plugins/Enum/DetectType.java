@@ -31,7 +31,7 @@ public enum DetectType
 
     public void setPanicCount(int time)
     {
-        this.count = time;
+        count = time;
     }
 
     public CommandSender getSender()

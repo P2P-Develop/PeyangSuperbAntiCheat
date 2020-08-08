@@ -75,8 +75,7 @@ public class WatchEyeManagement
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
         {
-            ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UUID = '" + targetUuid + "' AND ISSUEBYUUID = '" + fromUuid + "'");
-            return result.isBeforeFirst();
+            return statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UUID = '" + targetUuid + "' AND ISSUEBYUUID = '" + fromUuid + "'").isBeforeFirst();
         }
         catch (Exception e)
         {
@@ -93,8 +92,7 @@ public class WatchEyeManagement
         try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
              Statement statement = connection.createStatement())
         {
-            ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");
-            return !result.isBeforeFirst();
+            return !statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'").isBeforeFirst();
         }
         catch (Exception e)
         {

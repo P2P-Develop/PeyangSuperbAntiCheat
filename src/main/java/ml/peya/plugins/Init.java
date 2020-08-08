@@ -11,8 +11,7 @@ public class Init
     public static HikariConfig initMngDatabase(String path)
     {
         HikariConfig hConfig = new HikariConfig();
-        File file = new File(path);
-        file.getParentFile().mkdirs();
+        new File(path).getParentFile().mkdirs();
 
         hConfig.setDriverClassName("org.sqlite.JDBC");
         hConfig.setJdbcUrl("jdbc:sqlite:" + path);

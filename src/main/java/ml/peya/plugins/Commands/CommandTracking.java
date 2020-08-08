@@ -13,7 +13,7 @@ public class CommandTracking implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.invalidLengthMessage(sender, args, 0, 1))
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 0, 1) || ErrorMessageSender.unPermMessage(sender, "psac.tracking"))
             return true;
 
         if (!(sender instanceof Player))
@@ -21,9 +21,6 @@ public class CommandTracking implements CommandExecutor
             sender.sendMessage(MessageEngine.get("error.requirePlayer"));
             return true;
         }
-
-        if (ErrorMessageSender.unPermMessage(sender, "psac.tracking"))
-            return true;
 
 
         if (PeyangSuperbAntiCheat.tracker.isTracking(sender.getName()) && args.length == 0)

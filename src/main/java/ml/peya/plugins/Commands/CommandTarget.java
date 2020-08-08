@@ -33,12 +33,18 @@ public class CommandTarget implements CommandExecutor
 
         if (args.length >= 2)
         {
-            if (args[1].equals("1"))
-                GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());
-            else if (args[1].equals("2"))
-                GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET_2, player.getName());
-            else
-                ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1);
+            switch (args[1])
+            {
+                case "1":
+                    GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());
+                    break;
+                case "2":
+                    GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET_2, player.getName());
+                    break;
+                default:
+                    ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1);
+                    break;
+            }
             return true;
         }
 

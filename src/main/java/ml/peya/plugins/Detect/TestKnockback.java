@@ -31,6 +31,11 @@ class TestKnockback
 
         PeyangSuperbAntiCheat.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type).setCanTesting(true);
 
+        scanFinally(player, sender, arrow);
+    }
+
+    private static void scanFinally(Player player, CommandSender sender, Arrow arrow)
+    {
         new BukkitRunnable()
         {
             @Override
@@ -41,6 +46,5 @@ class TestKnockback
                 PeyangSuperbAntiCheat.cheatMeta.remove(arrow.getUniqueId());
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20);
-
     }
 }

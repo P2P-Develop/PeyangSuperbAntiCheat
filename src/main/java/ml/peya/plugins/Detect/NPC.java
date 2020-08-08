@@ -10,14 +10,16 @@ import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
 
+import java.util.*;
+
 public class NPC
 {
-    static void setLocation(Location location, EntityPlayer player)
+    public static void setLocation(Location location, EntityPlayer player)
     {
         player.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
 
-    static EntityPlayer spawn(Player player, DetectType teleportCase)
+    public static EntityPlayer spawn(Player player, DetectType teleportCase)
     {
         EntityPlayer npc = RandomPlayer.getPlayer(player.getWorld());
 
@@ -77,13 +79,7 @@ public class NPC
 
     public static void setArmor(Player target, EntityPlayer player, ItemStack[] arm)
     {
-
-        PlayerConnection connection = ((CraftPlayer) target).getHandle().playerConnection;
-        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.HEAD, arm[0]));
-        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.CHEST, arm[1]));
-        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.LEGS, arm[2]));
-        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]));
-        connection.sendPacket(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4]));
+        Arrays.asList(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.HEAD, arm[0]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.CHEST, arm[1]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.LEGS, arm[2]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4])).parallelStream().forEachOrdered(((CraftPlayer) target).getHandle().playerConnection::sendPacket);
     }
 }
 

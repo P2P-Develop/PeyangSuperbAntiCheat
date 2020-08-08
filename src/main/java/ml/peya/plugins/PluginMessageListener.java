@@ -6,7 +6,6 @@ import java.util.*;
 
 public class PluginMessageListener implements org.bukkit.plugin.messaging.PluginMessageListener
 {
-
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] data)
     {
@@ -17,19 +16,17 @@ public class PluginMessageListener implements org.bukkit.plugin.messaging.Plugin
             return;
 
         HashMap<String, String> mods = new HashMap<>();
+
         boolean store = false;
         String tempName = null;
-
         for (int i = 2; i < data.length; store = !store)
         {
-            String mod = new String(Arrays.copyOfRange(data, i + 1, i + data[i] + 1));
-
             if (store)
-                mods.put(tempName, mod);
+                mods.put(tempName, new String(Arrays.copyOfRange(data, i + 1, i + data[i] + 1)));
             else
-                tempName = mod;
+                tempName = new String(Arrays.copyOfRange(data, i + 1, i + data[i] + 1));
 
-            i = i + data[i] + 1;
+            i += data[i] + 1;
         }
 
         PeyangSuperbAntiCheat.mods.put(player.getUniqueId(), mods);

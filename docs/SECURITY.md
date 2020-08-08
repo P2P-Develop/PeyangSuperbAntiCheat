@@ -12,8 +12,8 @@ For English-speaking users, click [here](SECURITY-en.md).
 
 ## 報告方法
 
-脆弱性を見つけたら、[security]ラベルを付けて[こ↑こ↓](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)まで報告してきてね♡
+脆弱性を見つけたら、\[security\]ラベルを付けて[こ↑こ↓](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)まで報告してきてね♡
 心優しいコラボレーター達や開発者が
-> (°)ミ(°) \<これやったらおもっくそ権限無視できるやん...!  
+> これやったらおもっくそ権限無視できるじゃないですかやだー  
   
 と言ったら[こ→こ←](Vulnerabilities.md)(時空間異常)に追加されるぽん。

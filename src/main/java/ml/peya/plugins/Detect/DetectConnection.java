@@ -49,36 +49,13 @@ public class DetectConnection
 
                 if (PeyangSuperbAntiCheat.learnCount > PeyangSuperbAntiCheat.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.0)
                 {
-                    new BukkitRunnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                            arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
-                            PeyangSuperbAntiCheat.learnCount++;
-                            network.learn(arr, 1000);
+                    learn(vl, seconds);
 
-                            this.cancel();
-                        }
-                    }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     if (kick(player)) return;
                 }
                 if (PeyangSuperbAntiCheat.learnCount < PeyangSuperbAntiCheat.learnCountLimit && PeyangSuperbAntiCheat.banLeft <= meta.getVL())
                 {
-                    new BukkitRunnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                            arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
-                            PeyangSuperbAntiCheat.learnCount++;
-                            network.learn(arr, 1000);
-
-                            this.cancel();
-                        }
-                    }.runTask(PeyangSuperbAntiCheat.getPlugin());
+                    learn(vl, seconds);
 
                     if (kick(player)) return;
                 }
@@ -112,6 +89,23 @@ public class DetectConnection
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
                 this.cancel();
+            }
+
+            private void learn(double vl, double seconds)
+            {
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
+                        arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
+                        PeyangSuperbAntiCheat.learnCount++;
+                        network.learn(arr, 1000);
+
+                        this.cancel();
+                    }
+                }.runTask(PeyangSuperbAntiCheat.getPlugin());
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
     }

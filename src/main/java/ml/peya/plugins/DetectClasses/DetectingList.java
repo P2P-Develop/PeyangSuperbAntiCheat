@@ -23,7 +23,7 @@ public class DetectingList
 
     public ArrayList<CheatDetectNowMeta> getMetas()
     {
-        return this.meta;
+        return meta;
     }
 
     public void remove(UUID uuid)
@@ -33,12 +33,12 @@ public class DetectingList
 
     public CheatDetectNowMeta getMetaByUUID(UUID uuid)
     {
-        return this.meta.parallelStream().filter(meta -> meta.getUUIDs() == uuid).findFirst().orElse(null);
+        return meta.parallelStream().filter(meta -> meta.getUUIDs() == uuid).findFirst().orElse(null);
     }
 
     public CheatDetectNowMeta getMetaByPlayerUUID(UUID uuid)
     {
-        return this.meta.parallelStream().filter(meta -> meta.getTarget().getUniqueId() == uuid).findFirst().orElse(null);
+        return meta.parallelStream().filter(meta -> meta.getTarget().getUniqueId() == uuid).findFirst().orElse(null);
     }
 
     public boolean exists(UUID uuid)

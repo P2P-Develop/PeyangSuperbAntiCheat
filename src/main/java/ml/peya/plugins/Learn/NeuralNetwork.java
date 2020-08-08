@@ -55,21 +55,20 @@ public class NeuralNetwork
 
     void learn(Triple<Double, Double, Double> data)
     {
-        double outputData = commit(Pair.of(data.getLeft(), data.getMiddle()));
-        double correctValue = data.getRight();
+        final double outputData = commit(Pair.of(data.getLeft(), data.getMiddle()));
+        final double correctValue = data.getRight();
 
-        // 学習係数
         final double learningRate = PeyangSuperbAntiCheat.config.getDouble("npc.learn");
 
-        double deltaMO = (correctValue - outputData) * outputData * (1.0 - outputData);
-        double[] oldMiddleWeight = middleWeight.clone();
+        final double deltaMO = (correctValue - outputData) * outputData * (1.0 - outputData);
+        final double[] oldMiddleWeight = middleWeight.clone();
 
         int bound = middleLayer.length;
         IntStream.range(0, bound).parallel().forEachOrdered(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
 
         middleWeight[2] += middleLayerBias * deltaMO * learningRate;
 
-        double[] deltaIM = new double[] {
+        final double[] deltaIM = new double[] {
                 deltaMO * oldMiddleWeight[0] * middleLayer[0].getValue() * (1.0 - middleLayer[0].getValue()),
                 deltaMO * oldMiddleWeight[1] * middleLayer[1].getValue() * (1.0 - middleLayer[1].getValue())
         };
