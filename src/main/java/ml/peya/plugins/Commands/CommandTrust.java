@@ -26,13 +26,21 @@ public class CommandTrust implements CommandExecutor
             return true;
         }
 
-        if (Bukkit.getPlayer(args[0]) == null)
+        Player player = Bukkit.getPlayer(args[0]);
+
+        if (player == null)
         {
             sender.sendMessage(MessageEngine.get("error.playerNotFound"));
             return true;
         }
 
-        TrustModifier.addTrustPlayer(Bukkit.getPlayer(args[0]), sender);
+        if (!player.hasPermission("psac.trust"))
+        {
+            sender.sendMessage(MessageEngine.get("error.notHavePermission"));
+            return true;
+        }
+
+        TrustModifier.addTrustPlayer(player, sender);
 
         return true;
     }
