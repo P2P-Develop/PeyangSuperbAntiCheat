@@ -18,24 +18,24 @@ import static ml.peya.plugins.Utils.LookingUtils.isLooking;
 
 public class NPCTeleport
 {
-    public static void teleport(Player player, EntityPlayer target, ItemStack[] arm, DetectType tpCase)
+    public static void teleport(Player player, EntityPlayer target, ItemStack[] arm, DetectType tpCase, boolean reachMode)
     {
         switch (tpCase)
         {
             case AURA_BOT:
-                auraBot_teleport(player, target, arm);
+                auraBot_teleport(player, target, arm, reachMode);
                 break;
             case AURA_PANIC:
-                auraPanic_teleport(player, target, arm, tpCase.getPanicCount(), tpCase.getSender());
+                auraPanic_teleport(player, target, arm, tpCase.getPanicCount(), tpCase.getSender(), reachMode);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + tpCase);
         }
     }
 
-    private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender)
+    private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender, boolean reachMode)
     {
-        final double range = PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
+        final double range = reachMode ? PeyangSuperbAntiCheat.config.getDouble("npc.reachPanicRange") : PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
         final double[] clt = { 0.0 };
         final int[] now = { 0 };
 
@@ -113,10 +113,10 @@ public class NPCTeleport
 
     }
 
-    private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm)
+    private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
     {
         final double[] time = { 0.0 };
-        final double radius = PeyangSuperbAntiCheat.config.getDouble("npc.range");
+        final double radius = reachMode ? PeyangSuperbAntiCheat.config.getDouble("npc.reachRange") : PeyangSuperbAntiCheat.config.getDouble("npc.range");
 
         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
 

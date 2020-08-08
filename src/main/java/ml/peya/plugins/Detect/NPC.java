@@ -19,7 +19,7 @@ public class NPC
         player.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
 
-    public static EntityPlayer spawn(Player player, DetectType teleportCase)
+    public static EntityPlayer spawn(Player player, DetectType teleportCase, boolean reachMode)
     {
         EntityPlayer npc = RandomPlayer.getPlayer(player.getWorld());
 
@@ -56,7 +56,7 @@ public class NPC
                     c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
                 });
 
-                NPCTeleport.teleport(player, npc, arm, teleportCase);
+                NPCTeleport.teleport(player, npc, arm, teleportCase, reachMode);
 
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 

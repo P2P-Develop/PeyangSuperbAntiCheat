@@ -19,27 +19,39 @@ public class CommandTracking implements CommandExecutor
         if (!(sender instanceof Player))
         {
             sender.sendMessage(MessageEngine.get("error.requirePlayer"));
+
             return true;
         }
-
 
         if (PeyangSuperbAntiCheat.tracker.isTracking(sender.getName()) && args.length == 0)
         {
             PeyangSuperbAntiCheat.tracker.remove(sender.getName());
             sender.sendMessage(MessageEngine.get("item.stopTarget"));
             ((Player) sender).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.noTarget")));
+
             return true;
         }
 
         if (args.length == 0)
         {
             sender.sendMessage(MessageEngine.get("error.invalidArgument"));
+
             return true;
         }
 
-        if (Bukkit.getPlayer(args[0]) == null)
+        Player player = Bukkit.getPlayer(args[0]);
+
+        if (player == null)
         {
             sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+
+            return true;
+        }
+
+        if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
+        {
+            sender.sendMessage(MessageEngine.get("error.trusted"));
+
             return true;
         }
 

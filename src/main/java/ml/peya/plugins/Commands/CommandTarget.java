@@ -27,13 +27,20 @@ public class CommandTarget implements CommandExecutor
         if (player == null)
         {
             sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+
             return true;
         }
 
+        if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
+        {
+            sender.sendMessage(MessageEngine.get("error.trusted"));
+
+            return true;
+        }
 
         if (args.length >= 2)
         {
-            switch (args[1])
+            switch (args[2])
             {
                 case "1":
                     GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());

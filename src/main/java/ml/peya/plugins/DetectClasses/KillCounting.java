@@ -25,7 +25,7 @@ public class KillCounting
             if (players.get(killer) >= PeyangSuperbAntiCheat.config.getInt("npc.kill"))
             {//カウント
                 if (!PeyangSuperbAntiCheat.cheatMeta.exists(killer))
-                    DetectConnection.scan(Bukkit.getPlayer(killer), DetectType.AURA_BOT, null);
+                    DetectConnection.scan(Bukkit.getPlayer(killer), DetectType.AURA_BOT, null, true);
                 players.remove(killer);
             }//検証用
             return;

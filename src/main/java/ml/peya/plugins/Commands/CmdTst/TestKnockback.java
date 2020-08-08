@@ -27,6 +27,13 @@ public class TestKnockback implements CommandExecutor
             return true;
         }
 
+        if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
+        {
+            sender.sendMessage(MessageEngine.get("error.trusted"));
+
+            return true;
+        }
+
         if (PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
         {
             sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
@@ -34,7 +41,7 @@ public class TestKnockback implements CommandExecutor
             return true;
         }
 
-        DetectConnection.scan(player, DetectType.ANTI_KB, sender);
+        DetectConnection.scan(player, DetectType.ANTI_KB, sender, false);
         return true;
     }
 }

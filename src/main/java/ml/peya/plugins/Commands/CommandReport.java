@@ -54,7 +54,6 @@ public class CommandReport implements CommandExecutor
             return true;
         }
 
-
         ArrayList<String> reasonsV = new ArrayList<>(Arrays.asList(args));
         reasonsV.remove(0);
 

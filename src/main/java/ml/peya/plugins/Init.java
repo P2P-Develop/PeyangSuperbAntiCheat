@@ -57,6 +57,20 @@ public class Init
                     "REASON nchar," +
                     "STAFF int" +
                     ");");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            return false;
+        }
+
+        try (Connection connection = PeyangSuperbAntiCheat.trust.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            statement.execute("CrEaTe TaBlE If NoT ExIsTs trust(" +
+                    "PLAYER nchar" +
+                    ");");
             return true;
         }
         catch (Exception e)

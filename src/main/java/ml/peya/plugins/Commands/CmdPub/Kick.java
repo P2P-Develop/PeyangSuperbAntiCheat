@@ -24,6 +24,13 @@ public class Kick
                 return;
             }
 
+            if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
+            {
+                sender.sendMessage(MessageEngine.get("error.trusted"));
+
+                return;
+            }
+
             KickUtil.kickPlayer(player, args[2], true, true);
             return;
         }

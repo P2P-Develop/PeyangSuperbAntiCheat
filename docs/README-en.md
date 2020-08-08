@@ -142,6 +142,7 @@ Other settings can be done using permissions.
 |   **psac.admin**    |                 group                | This permission can use all commands of the plugin.                                                                                       |      false    |       none       |
 |     `psac.drop`     |       [/psac drop](#arguments)       | This permission can delete submitted report.                                                                                              |      false    |    psac.admin    |
 |     `psac.error`    |                 none                 | This permission can get error information when the plugin encountered an internal error.                                                  |      false    |    psac.admin    |
+|     `psac.trust`    |           [/trust](#trust)           | This permission can add and execute scan/kick/test                  with trusted players.                                                 |      false    |    psac.admin    |
   
 ---
   
@@ -157,6 +158,7 @@ This section are describe plugin commands.
 - /pcr
 - /rep
 - /wdr
+- /watchdogreport
 
 ### Description
 
@@ -224,12 +226,17 @@ The books are sorted in the order they are displayed.
 ### Description
 
 Executing this command will summon an NPC that spins around the player at a constant speed.  
-When an NPC is attacked a certain number of times, it kicks that player.  
+When an NPC is attacked a certain number of times, it kicks that player.
+Also, to use the reach mode, add the "-r" argument to the first or second argument.
+Reach mode can scan the radius and check the reach.
 
 ### Usage
 
 - /aurabot \<PlayerName\>
-  Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.  
+  Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
+
+- /aurabot \<PlayerName\> \[-r\]
+  Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
 
 ### Permission
 
@@ -249,12 +256,16 @@ Players with this permission can summon Watchdogs.
 ### Description
 
 This command always summons the NPC that is trying to move behind the player.  
-When an NPC is attacked a certain number of times, it kicks that player.  
+When an NPC is attacked a certain number of times, it kicks that player.
+Also, to use the reach mode, add the "-r" argument to the first or second argument.
 
 ### Usage
 
 - /acpanic \<PlayerName\>
-  Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.  
+  Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
+
+- /acpanic \<PlayerName\> \[-r\]
+  Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
 
 ### Permission
 
@@ -397,6 +408,33 @@ Stop track if tracking.
 
 - `psac.tracking`
   
+## /trust
+
+Trust specified player.
+
+## Alias
+
+- /noscan
+- /trustplayer
+
+### Description
+
+Adds the specified player as a "trusted player".  
+If already trusted, can remove player from "trusted player".  
+Players without the `psac.trust` cannot run the following commands on trusted players.  
+
+- [/aurabot](#aurabot)
+- [/acpanic](#acpanic)
+- [/testkb](#testkb)
+- [/pull](#pull)
+- [/target](#target)
+- [/track](#tracking)
+- [/psac kick](#arguments)
+
+### Permission
+
+- `psac.trust`
+  
 ## /silentteleport
 
 Causes the specified player to teleport you or the specified player.  
@@ -414,11 +452,11 @@ Teleports to the player specified in the argument.
 
 ### Usages
 
-- /tpto \[PlayerName\]
+- /stp \[PlayerName\]
 
 Teleport to \[PlayerName\].
 
-- /tpto \[PlayerName\] \[DestPlayerName\]
+- /stp \[PlayerName\] \[DestPlayerName\]
 
 Teleport \[PlayerName\] to \[DestPlayerName\].
 

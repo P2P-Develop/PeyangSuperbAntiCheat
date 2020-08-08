@@ -10,7 +10,7 @@ import org.bukkit.entity.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
-class TestKnockback
+public class TestKnockback
 {
     public static void scan(Player player, DetectType type, CommandSender sender)
     {

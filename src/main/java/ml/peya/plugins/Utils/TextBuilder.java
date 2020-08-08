@@ -171,9 +171,6 @@ public class TextBuilder
     public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
     {
         StringBuilder reasonSet = new StringBuilder();
-        ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"))
-                .append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())))
-                .append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
         Arrays.stream(ban.getReason().split(", ")).parallel().forEachOrdered(reason -> {
             EnumCheatType tp = CheatTypeUtils.getCheatTypeFromString(reason);
             if (tp == null)
@@ -185,7 +182,9 @@ public class TextBuilder
         if (reasonSet.toString().endsWith(", "))
             reasonSet.setLength(reasonSet.length() - 2);
 
-        return builder;
+        return new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"))
+                .append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())))
+                .append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
     }
 
 }

@@ -19,15 +19,15 @@ import static ml.peya.plugins.PeyangSuperbAntiCheat.network;
 
 public class DetectConnection
 {
-    public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type)
+    public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type, boolean reachMode)
     {
-        EntityPlayer uuid = NPC.spawn(player, type);
+        EntityPlayer uuid = NPC.spawn(player, type, reachMode);
         CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
         meta.setCanTesting(true);
         return meta;
     }
 
-    public static void scan(Player player, DetectType type, CommandSender sender)
+    public static void scan(Player player, DetectType type, CommandSender sender, boolean reachMode)
     {
         if (type == DetectType.ANTI_KB)
         {
@@ -35,7 +35,7 @@ public class DetectConnection
             return;
         }
 
-        CheatDetectNowMeta meta = spawnWithArmor(player, type);
+        CheatDetectNowMeta meta = spawnWithArmor(player, type, reachMode);
 
         new BukkitRunnable()
         {

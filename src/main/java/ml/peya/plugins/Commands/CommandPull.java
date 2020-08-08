@@ -26,6 +26,14 @@ public class CommandPull implements CommandExecutor
         if (player == null)
         {
             sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+
+            return true;
+        }
+
+        if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
+        {
+            sender.sendMessage(MessageEngine.get("error.trusted"));
+
             return true;
         }
 

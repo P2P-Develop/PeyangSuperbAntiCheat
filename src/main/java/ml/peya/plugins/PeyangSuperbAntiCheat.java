@@ -34,7 +34,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static FileConfiguration config;
     public static String databasePath;
     public static String banKickPath;
-    public static String learnPath;
+    public static String trustPath;
     public static DetectingList cheatMeta;
     public static KillCounting counting;
     public static ProtocolManager protocolManager;
@@ -48,6 +48,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static NeuralNetwork network;
     public static HikariDataSource eye;
     public static HikariDataSource banKick;
+    public static HikariDataSource trust;
+    public static String[] trustUID;
     public static boolean isAutoMessageEnabled;
     public static boolean isTrackEnabled;
     public static BukkitRunnable autoMessage;
@@ -77,6 +79,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         config = getConfig();
         databasePath = config.getString("database.path");
         banKickPath = config.getString("database.logPath");
+        trustPath = config.getString("database.trustPath");
 
         banLeft = config.getInt("npc.vlLevel");
 
@@ -84,6 +87,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         eye = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
         banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
+        trust = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + trustPath));
 
         cheatMeta = new DetectingList();
         counting = new KillCounting();
@@ -139,6 +143,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("target").setExecutor(new CommandTarget());
         getCommand("mods").setExecutor(new CommandMods());
         getCommand("tracking").setExecutor(new CommandTracking());
+        getCommand("trust").setExecutor(new CommandTrust());
         getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
@@ -213,8 +218,10 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             eye.close();
         if (banKick != null)
             banKick.close();
+        trust.close();
         eye = null;
         banKick = null;
+        trust = null;
         if (autoMessage != null && RunnableUtil.isStarted(autoMessage))
         {
             logger.info("Stopping Auto-Message Task...");

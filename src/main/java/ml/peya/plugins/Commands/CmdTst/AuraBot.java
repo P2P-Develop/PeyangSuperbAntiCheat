@@ -18,9 +18,22 @@ public class AuraBot implements CommandExecutor
         if (ErrorMessageSender.unPermMessage(sender, "psac.aurabot") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
             return true;
         Player player = Bukkit.getPlayer(args[0]);
+        boolean reachModeEnabled = false;
+        if (args.length == 2 && args[0].equals("-r"))
+        {
+            player = Bukkit.getPlayer(args[1]);
+            reachModeEnabled = true;
+        }
         if (player == null)
         {
             sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+
+            return true;
+        }
+
+        if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
+        {
+            sender.sendMessage(MessageEngine.get("error.trusted"));
 
             return true;
         }
@@ -47,7 +60,7 @@ public class AuraBot implements CommandExecutor
             sender.sendMessage(MessageEngine.get("message.aura.lynx"));
         }
 
-        DetectConnection.scan(player, DetectType.AURA_BOT, sender);
+        DetectConnection.scan(player, DetectType.AURA_BOT, sender, reachModeEnabled);
         return true;
     }
 }

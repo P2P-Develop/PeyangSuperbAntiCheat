@@ -21,10 +21,22 @@ public class AuraPanic implements CommandExecutor
         int count = 5;
 
         Player player = Bukkit.getPlayer(args[0]);
+        boolean reachModeEnabled = false;
+        if (args.length == 2 && args[0].equals("-r"))
+        {
+            player = Bukkit.getPlayer(args[1]);
+            reachModeEnabled = true;
+        }
         if (player == null)
         {
             sender.sendMessage(MessageEngine.get("error.playerNotFound"));
 
+            return true;
+        }
+
+        if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
+        {
+            sender.sendMessage(MessageEngine.get("error.trusted"));
             return true;
         }
 
@@ -65,7 +77,7 @@ public class AuraPanic implements CommandExecutor
         type.setPanicCount(count);
         type.setSender(sender);
 
-        DetectConnection.scan(player, type, sender);
+        DetectConnection.scan(player, type, sender, reachModeEnabled);
         return true;
     }
 }
