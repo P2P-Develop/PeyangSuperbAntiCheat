@@ -448,12 +448,15 @@ Mod IDの変換は実装しま~~す~~ん。
 | database.path | ./eye.db | レポート情報などを保存する、SQLiteデータベースの置き場所です。 |
 | database.logPath | ./log.db | キック情報などを保存する、SQLiteデータベースの置き場所です。 |
 | database.learnPath | ./learn.json | 学習によって値が変更された「重み」と学習回数を保存する、JSONファイルの置き場所です。 |
+| database.learnPath | ./trust.db | 信用したプレイヤーを保存する、SQLiteデータベースの置き場所です。つまりこれ消せば信用データ消えます。やっぱ鯖を操る人最強。 |
 | npc.seconds | 4 | NPCがプレイヤーの周りを回る秒数です。 |
 | npc.time | 0.3 | NPCが回る速さです。感覚で調整してください。 |
-| npc.range | 2.1 | NPCが回る半径です。ロマンが全て。デフォルトが最高。 |
+| npc.range | 2.1 | NPCが回る半径です。ロマンが全て。デフォルトが最高。これがPSACｸｵﾘﾃｨ。 |
+| npc.reachRange | 4.6 | NPCがリーチモードとしてぶん回る半径です。-rオプションがつくとこの値が使用されます。精度？なんそれおいしいの？ |
 | npc.wave | true | NPCが波を描くようにして回るかどうかです。 |
 | npc.waveMin | 1.0 | NPCが波を描くようにして回る最低ラインです。 |
 | npc.panicRange | 1.5 | Panic NPCがプレイヤーの背後をへばりつく相対的な高さでえす。 |
+| npc.panicReachRange | 4.6 | Panic NPCがプレイヤーの背後をリーチモードとしてへばりつく相対的な高さですよん。-rオｐ(ry。精ｄ(ry |
 | npc.speed.wave | true | NPCのスピードをWaveで変更するかどうかです。 |
 | npc.speed.waveRange | 0.03 | Waveで変更する範囲です。 |
 | npc.learn | 0.3 | NPCの学習機能の学習係数を指定します。値が大きいほど処理は少なくなりますが精度が下がります。 |
@@ -477,7 +480,7 @@ BANされるべき人がBANされなくても~~上の通り~~しりません。�
 ↑ハハッ ＾＾；
 
 ### message.ymlについて
-PeyangSuperbAntiCheat.jarを`mvn package`でビルドすると、`mvn shade`が自動実行されます（たぶん）  
+PeyangSuperbAntiCheat.jarを`mvn package`でビルドすると、`mvn shade`が自動実行されます（たぶん）←ちゃんと実行されます  
 その時、message.ymlとかもくっついてきます。  
 それがPeyangSuperbAntiCheat.jarのなかに同梱されています。  
 message.ymlをいじくり倒すことで、いろいろできますが、まぁ…うん。後はすべて察しろ。
