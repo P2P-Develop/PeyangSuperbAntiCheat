@@ -12,7 +12,8 @@ DetectConnection: 2
 NPC: 3
 NPCTeleport: 5
 KillCounting: 2
-->12 Threads
+Stream API parallel functions: Max Threads
+->12 Threads + Max Threads
 
 ----------
 
