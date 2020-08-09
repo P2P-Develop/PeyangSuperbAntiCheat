@@ -17,6 +17,7 @@ public class Help
      * 関数を稼働させる。
      *
      * @param sender イベントsender。
+     * @param label 参照するコマンドラベル。
      */
     public static void run(CommandSender sender, String label)
     {

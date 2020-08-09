@@ -7,6 +7,9 @@ import ml.peya.plugins.*;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * レベルのいろいろな取得方法まとめたクラス！！
+ */
 public class SeverityLevels
 {
     /**

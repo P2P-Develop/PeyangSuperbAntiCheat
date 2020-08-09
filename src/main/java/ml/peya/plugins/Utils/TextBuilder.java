@@ -216,6 +216,13 @@ public class TextBuilder
         return component;
     }
 
+    /** 通常テスト時の最終結果を組み立てる。
+     * @param name プレイヤー名。
+     * @param VL 算出されたVL。
+     * @param kickVL VLキック基準値。
+     *
+     * @return 組み立てたやつ。
+     */
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
     {
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
@@ -234,7 +241,7 @@ public class TextBuilder
     }
 
     /**
-     * なんこれ
+     * AuraPanicBotの結果を組み立てる。
      *
      * @param name PlayerName
      * @param vl   そのまんま
@@ -252,7 +259,7 @@ public class TextBuilder
     }
 
     /**
-     * いやなにこれ
+     * BanまたはKickのデータ入手やフォーマットに使用する。
      *
      * @param ban  Bansらしい
      * @param type 罪状？

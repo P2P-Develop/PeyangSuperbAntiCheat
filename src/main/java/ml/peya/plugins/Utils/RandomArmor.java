@@ -9,6 +9,7 @@ import java.util.stream.*;
 
 /**
  * 防具をランダムにNPCに着せるクラス。
+ * 革装備はあるけど色はつきません。
  */
 public class RandomArmor
 {
@@ -31,6 +32,9 @@ public class RandomArmor
         return getRandomItems(helmets);
     }
 
+    /** ランダムなチェストプレートを入手する。
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getChestPlate()
     {
         ArrayList<Material> chestPlates = new ArrayList<>();
@@ -44,6 +48,9 @@ public class RandomArmor
         return getRandomItems(chestPlates);
     }
 
+    /** ランダムなレギンスを入手する。
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getLeggings()
     {
         ArrayList<Material> leggings = new ArrayList<>();
@@ -57,6 +64,9 @@ public class RandomArmor
         return getRandomItems(leggings);
     }
 
+    /** ランダムなブーツを入手する。
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getBoots()
     {
         ArrayList<Material> boots = new ArrayList<>();
@@ -70,6 +80,9 @@ public class RandomArmor
         return getRandomItems(boots);
     }
 
+    /** ランダムな剣を入手する。
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getSwords()
     {
         ArrayList<Material> swords = new ArrayList<>();

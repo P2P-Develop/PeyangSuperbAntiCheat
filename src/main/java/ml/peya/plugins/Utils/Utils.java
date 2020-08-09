@@ -11,6 +11,9 @@ import java.net.*;
 import java.nio.charset.*;
 import java.util.*;
 
+/**
+ * PSAC内でのみ使用するユーティリティ関数を集めたクラス。ほぼstatic。
+ */
 public class Utils
 {
     /**
@@ -22,8 +25,7 @@ public class Utils
     {
         try
         {
-            HttpsURLConnection connection;
-            connection = (HttpsURLConnection) new URL("https://randomuser.me/api/").openConnection();
+            HttpsURLConnection connection = (HttpsURLConnection) new URL("https://randomuser.me/api/").openConnection();
             connection.setReadTimeout(500);
             connection.connect();
             if (connection.getResponseCode() == HttpsURLConnection.HTTP_OK)
@@ -40,7 +42,6 @@ public class Utils
                     ObjectMapper mapper = new ObjectMapper();
                     return mapper.readTree(builder.toString());
                 }
-
             }
             else
                 PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
