@@ -4,7 +4,8 @@ import org.bukkit.entity.*;
 import org.bukkit.potion.*;
 
 /**
- * ...これ何のために使うん？
+ * Q. これ何のために使うん？
+ * A. しらんがな
  */
 public class Criticals
 {
