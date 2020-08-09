@@ -114,7 +114,7 @@ command:
 
     trust: "\
     %%aqua%%/trust %%dark_aqua%%<PlayerName>\n\
-    %%green%%指定されたプレイヤーを、信用します。\n\
+    %%green%%指定されたプレイヤーを信用します。\n\
     %%green%%信用されたプレイヤーは、psac.admin権限を持つプレイヤー以外が実行したスキャンを通り抜けることができます。
     "
 
@@ -144,8 +144,8 @@ message:
     "
     lynx: "%%yellow%%Testing, please wait…"
   trust:
-    add: "%%green%%成功：プレイヤー %%name%% を信用しました！"
-    remote: "%%green%%成功：プレイヤー %%name%% の信用を解除しました！"
+    add: "%%green%%プレイヤー %%name%% を信用しました！"
+    remote: "%%red%%プレイヤー %%name%% の信用を解除しました。"
 
   auraCheck:
     result:
