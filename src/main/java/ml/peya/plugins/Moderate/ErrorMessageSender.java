@@ -1,6 +1,6 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.command.*;
 
 /**

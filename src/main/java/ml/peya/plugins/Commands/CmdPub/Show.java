@@ -1,9 +1,9 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -66,7 +66,7 @@ public class Show
             e.printStackTrace();
             sender.sendMessage(MessageEngine.get("error.unknownSQLError"));
 
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
     }
 }

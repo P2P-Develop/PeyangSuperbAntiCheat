@@ -34,7 +34,7 @@ public class BookUtil
         catch (ReflectiveOperationException e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
             Bukkit.getServer().getLogger().warning("Cannot force open book!");
             initialised = false;
         }
@@ -68,7 +68,7 @@ public class BookUtil
                 catch (ReflectiveOperationException e)
                 {
                     e.printStackTrace();
-                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                    Utils.errorNotification(Utils.getStackTrace(e));
                 }
                 this.cancel();
             }
@@ -101,7 +101,7 @@ public class BookUtil
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
         return null;
     }
@@ -124,7 +124,7 @@ public class BookUtil
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
     }
 }

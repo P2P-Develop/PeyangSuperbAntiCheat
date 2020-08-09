@@ -45,7 +45,7 @@ public class BanAnalyzer
                 catch (Exception e)
                 {
                     e.printStackTrace();
-                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                    Utils.errorNotification(Utils.getStackTrace(e));
                 }
                 if (type == Type.KICK)
                     break;

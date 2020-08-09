@@ -1,9 +1,9 @@
-package ml.peya.plugins;
+package ml.peya.plugins.DetectClasses;
 
 import com.comphenix.protocol.events.*;
 import com.comphenix.protocol.wrappers.*;
 import com.fasterxml.jackson.databind.*;
-import ml.peya.plugins.DetectClasses.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
@@ -53,7 +53,7 @@ public class Packets
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
             return null;
         }
     }

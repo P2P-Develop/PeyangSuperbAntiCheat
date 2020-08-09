@@ -1,9 +1,9 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -130,7 +130,7 @@ public class CommandReport implements CommandExecutor
             return;
         }
 
-        String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender ? "[CONSOLE]": sender.getName(), senderUUID, SeverityLevelUtils.getSeverity(types).getLevel());
+        String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender ? "[CONSOLE]": sender.getName(), senderUUID, SeverityLevels.getSeverity(types).getLevel());
         boolean successFlag = false;
         for (EnumCheatType type : types)
             successFlag = WatchEyeManagement.setReason(id, type, 0);
@@ -142,11 +142,11 @@ public class CommandReport implements CommandExecutor
 
             if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
             {
-                ReportUtils.adminNotification(id);
+                Utils.adminNotification(id);
                 return;
             }
 
-            ReportUtils.adminNotification(target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
+            Utils.adminNotification(target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
         }
         else
             sender.sendMessage(MessageEngine.get("error.unknownSQLError"));

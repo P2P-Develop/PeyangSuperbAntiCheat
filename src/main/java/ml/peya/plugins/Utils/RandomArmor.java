@@ -31,11 +31,6 @@ public class RandomArmor
         return getRandomItems(helmets);
     }
 
-    /**
-     * 同上
-     *
-     * @return 同上
-     */
     public static ItemStack getChestPlate()
     {
         ArrayList<Material> chestPlates = new ArrayList<>();
@@ -49,11 +44,6 @@ public class RandomArmor
         return getRandomItems(chestPlates);
     }
 
-    /**
-     * 同上
-     *
-     * @return 同上
-     */
     public static ItemStack getLeggings()
     {
         ArrayList<Material> leggings = new ArrayList<>();
@@ -67,11 +57,6 @@ public class RandomArmor
         return getRandomItems(leggings);
     }
 
-    /**
-     * 同上
-     *
-     * @return 同上
-     */
     public static ItemStack getBoots()
     {
         ArrayList<Material> boots = new ArrayList<>();
@@ -85,11 +70,6 @@ public class RandomArmor
         return getRandomItems(boots);
     }
 
-    /**
-     * 同上
-     *
-     * @return 同上
-     */
     public static ItemStack getSwords()
     {
         ArrayList<Material> swords = new ArrayList<>();

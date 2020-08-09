@@ -1,8 +1,7 @@
-package ml.peya.plugins;
+package ml.peya.plugins.Utils;
 
 import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.*;
-import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang.*;
 import org.bukkit.World;
@@ -25,7 +24,7 @@ public class RandomPlayer
      */
     public static EntityPlayer getPlayer(World world)
     {
-        JsonNode node = StringUtil.getRandomUser();
+        JsonNode node = Utils.getRandomUser();
 
         String first = node == null ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): node.get("results").get(0).get("name").get("first").asText();
         String last = node == null ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): node.get("results").get(0).get("name").get("last").asText();

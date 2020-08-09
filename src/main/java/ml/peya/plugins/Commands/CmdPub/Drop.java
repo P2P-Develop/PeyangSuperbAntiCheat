@@ -1,8 +1,8 @@
 package ml.peya.plugins.Commands.CmdPub;
 
 import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.command.*;
 
@@ -43,7 +43,7 @@ public class Drop
             e.printStackTrace();
             sender.sendMessage(MessageEngine.get("error.unknownSQLError"));
 
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
     }
 }

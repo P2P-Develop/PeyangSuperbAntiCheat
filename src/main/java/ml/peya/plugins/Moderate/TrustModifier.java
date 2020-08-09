@@ -45,7 +45,7 @@ public class TrustModifier
                 catch (Exception e)
                 {
                     e.printStackTrace();
-                    ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+                    Utils.errorNotification(Utils.getStackTrace(e));
                 }
                 this.cancel();
             }
@@ -72,7 +72,7 @@ public class TrustModifier
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
 
 

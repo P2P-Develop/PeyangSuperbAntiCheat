@@ -48,7 +48,7 @@ public class WatchEyeManagement
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
             return "";
         }
     }
@@ -83,7 +83,7 @@ public class WatchEyeManagement
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
             return false;
         }
     }
@@ -107,7 +107,7 @@ public class WatchEyeManagement
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
             return false;
         }
     }
@@ -130,7 +130,7 @@ public class WatchEyeManagement
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
             return true;
         }
     }

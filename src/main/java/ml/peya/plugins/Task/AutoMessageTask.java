@@ -53,7 +53,7 @@ public class AutoMessageTask extends BukkitRunnable
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
 
         HashMap<String, Object> map = new HashMap<>();

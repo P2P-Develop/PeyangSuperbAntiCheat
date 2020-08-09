@@ -156,7 +156,7 @@ public class DetectConnection
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
 
         ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));

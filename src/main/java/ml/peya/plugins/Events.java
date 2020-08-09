@@ -2,6 +2,8 @@ package ml.peya.plugins;
 
 import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.properties.*;
+import ml.peya.plugins.DetectClasses.*;
+import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.chat.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang.*;

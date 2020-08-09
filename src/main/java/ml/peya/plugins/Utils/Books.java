@@ -1,7 +1,6 @@
-package ml.peya.plugins;
+package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -90,8 +89,8 @@ public class Books
         ComponentBuilder b2 = new ComponentBuilder(String.valueOf(new TextComponent(b1.create())));
 
         HashMap<String, Object> map = new HashMap<>();
-        map.put("color", SeverityLevelUtils.getSeverity(types).getColor());
-        map.put("level", SeverityLevelUtils.getSeverity(types).getText());
+        map.put("color", SeverityLevels.getSeverity(types).getColor());
+        map.put("level", SeverityLevels.getSeverity(types).getText());
 
         Arrays.asList(MessageEngine.get("book.text.severity", map), "\n", MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", types.parallelStream().map(type -> "\n           " + ChatColor.BLUE + type.getText()).collect(Collectors.joining()))), "\n").parallelStream().forEachOrdered(b2::append);
         meta.setTitle("-");

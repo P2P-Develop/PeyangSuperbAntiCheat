@@ -4,7 +4,6 @@ import com.mojang.authlib.*;
 import com.mojang.authlib.properties.*;
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -67,7 +66,7 @@ public class AuraBot implements IItems
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
 
         stack.setItemMeta(meta);

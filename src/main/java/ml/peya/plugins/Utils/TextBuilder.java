@@ -1,8 +1,8 @@
 package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -87,8 +87,8 @@ public class TextBuilder
         sender.sendMessage("    " + MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", types.parallelStream().map(type -> "        " + type.getText() + "\n").collect(Collectors.joining()))));
 
         HashMap<String, Object> serv = new HashMap<>();
-        serv.put("color", SeverityLevelUtils.getSeverity(types).getColor());
-        serv.put("level", SeverityLevelUtils.getSeverity(types).getText());
+        serv.put("color", SeverityLevels.getSeverity(types).getColor());
+        serv.put("level", SeverityLevels.getSeverity(types).getText());
         sender.sendMessage(MessageEngine.get("book.text.severity", serv));
     }
 
@@ -104,7 +104,7 @@ public class TextBuilder
      */
     public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid, CommandSender sender)
     {
-        EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
+        EnumSeverity severity = SeverityLevels.getSeverity(types);
 
         ComponentBuilder b = new ComponentBuilder("")
                 .append(ChatColor.GREEN + id)

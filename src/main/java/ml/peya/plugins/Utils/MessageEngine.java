@@ -1,5 +1,6 @@
-package ml.peya.plugins;
+package ml.peya.plugins.Utils;
 
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
 

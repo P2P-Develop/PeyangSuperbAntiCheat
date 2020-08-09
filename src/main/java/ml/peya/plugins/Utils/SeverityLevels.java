@@ -7,10 +7,7 @@ import ml.peya.plugins.*;
 import java.sql.*;
 import java.util.*;
 
-/**
- * いやなんこれマジで
- */
-public class SeverityLevelUtils
+public class SeverityLevels
 {
     /**
      * タイプそのまんま通過する奴
@@ -74,7 +71,7 @@ public class SeverityLevelUtils
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
             return EnumSeverity.UNKNOWN;
         }
     }

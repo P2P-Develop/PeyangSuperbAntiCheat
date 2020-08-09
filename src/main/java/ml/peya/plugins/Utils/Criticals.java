@@ -1,4 +1,4 @@
-package ml.peya.plugins;
+package ml.peya.plugins.Utils;
 
 import org.bukkit.entity.*;
 import org.bukkit.potion.*;

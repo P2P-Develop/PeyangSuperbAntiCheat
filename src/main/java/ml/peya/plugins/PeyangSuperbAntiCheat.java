@@ -8,6 +8,7 @@ import ml.peya.plugins.Commands.CmdTst.AuraBot;
 import ml.peya.plugins.Commands.CmdTst.AuraPanic;
 import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Commands.*;
+import ml.peya.plugins.DetectClasses.Packets;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Gui.*;
@@ -17,7 +18,6 @@ import ml.peya.plugins.Gui.Items.Target.Page2.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Task.*;
-import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.*;
@@ -240,13 +240,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         eye = null;
         banKick = null;
         trust = null;
-        if (autoMessage != null && RunnableUtil.isStarted(autoMessage))
+        if (autoMessage != null)
         {
             logger.info("Stopping Auto-Message Task...");
             autoMessage.cancel();
         }
 
-        if (trackerTask != null && RunnableUtil.isStarted(trackerTask))
+        if (trackerTask != null)
         {
             logger.info("Stopping Tracker Task...");
             trackerTask.cancel();
