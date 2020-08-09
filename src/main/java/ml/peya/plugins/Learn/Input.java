@@ -5,17 +5,14 @@ package ml.peya.plugins.Learn;
  */
 public class Input
 {
-    /**
-     * ...なんこれ
-     */
+
     private double value;
-    /**
-     * 重み(シナプス間結合強度)。
-     */
     private double weight;
 
-    /** コンストラクター。
-     * @param value ...なんこれ
+    /**
+     * コンストラクター。
+     *
+     * @param value  ...なんこれ
      * @param weight 重み(シナプス間結合強度)。
      */
     public Input(double value, double weight)
@@ -24,7 +21,9 @@ public class Input
         setWeight(weight);
     }
 
-    /** ゲッター。
+    /**
+     * ゲッター。
+     *
      * @return valueを参照。
      */
     public double getValue()
@@ -32,7 +31,9 @@ public class Input
         return value;
     }
 
-    /** セッター。
+    /**
+     * セッター。
+     *
      * @param value valueを参照。
      */
     public void setValue(double value)
@@ -40,7 +41,9 @@ public class Input
         this.value = value;
     }
 
-    /** 重みのゲッター。
+    /**
+     * 重みのゲッター。
+     *
      * @return 重み。
      */
     public double getWeight()
@@ -48,7 +51,9 @@ public class Input
         return weight;
     }
 
-    /** 重みのセッター。
+    /**
+     * 重みのセッター。
+     *
      * @param weight 重み。
      */
     public void setWeight(double weight)
@@ -56,7 +61,9 @@ public class Input
         this.weight = weight;
     }
 
-    /** 重みとvalueをかける。
+    /**
+     * 重みとvalueをかける。
+     *
      * @return 重みとvalueかけたやつ。
      */
     public double getWeightingValue()

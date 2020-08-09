@@ -12,12 +12,13 @@ import org.bukkit.util.*;
  */
 public class CommandPull implements CommandExecutor
 {
-    /** コマンド動作のオーバーライド。
-     * @param sender イベントsender。
-     * @param command コマンド。
-     * @param label ラベル。
-     * @param args 引数。
+    /**
+     * コマンド動作のオーバーライド。
      *
+     * @param sender  イベントsender。
+     * @param command コマンド。
+     * @param label   ラベル。
+     * @param args    引数。
      * @return 処理を終わらせるだけ。Always true。
      */
     @Override
@@ -60,8 +61,10 @@ public class CommandPull implements CommandExecutor
         return true;
     }
 
-    /** 思いっきりプレイヤーを引き寄せる。
-     * @param player プレイヤー。
+    /**
+     * 思いっきりプレイヤーを引き寄せる。
+     *
+     * @param player       プレイヤー。
      * @param pullLocation 引き寄せ先。
      */
     private void pull(Player player, Location pullLocation)

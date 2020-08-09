@@ -11,9 +11,11 @@ import java.util.*;
  */
 public class GuiItem
 {
-    /** trackした時のいろいろアイテムをくれるやつ。
+    /**
+     * trackした時のいろいろアイテムをくれるやつ。
+     *
      * @param player 対象プレイヤー。
-     * @param type Type!
+     * @param type   Type!
      * @param target ターゲット。
      */
     public static void giveAllItems(Player player, IItems.Type type, String target)

@@ -8,30 +8,39 @@ import org.bukkit.inventory.*;
  */
 public interface IItems
 {
-    /** 処理を突っ込む。
+    /**
+     * 処理を突っ込む。
+     *
      * @param player プレイヤー。
      * @param target ターゲット。
      */
     void run(Player player, String target);
 
-    /** itemsのゲッター。
-     * @param target ターゲット。
+    /**
+     * itemsのゲッター。
      *
+     * @param target ターゲット。
      * @return アイテム。
      */
     ItemStack getItem(String target);
 
-    /** スペースができるか...?
+    /**
+     * スペースができるか...?
+     *
      * @return わからん！
      */
     boolean canSpace();
 
-    /** ExecuteNameを取得する...らしい。
-     * @return ExecuteName(??)
+    /**
+     * ExecuteNameを取得する...らしい。
+     *
+     * @return ExecuteName(? ?)
      */
     String getExecName();
 
-    /** Typeのゲッター。
+    /**
+     * Typeのゲッター。
+     *
      * @return Type。
      */
     Type getType();
@@ -41,28 +50,17 @@ public interface IItems
      */
     enum Type
     {
-        /**
-         * メイン。
-         */
+
         MAIN("MAIN"),
-        /**
-         * ターゲット。
-         */
         TARGET("TARGET"),
-        /**
-         * サブターゲット。
-         */
         TARGET_2("TARGET_2"),
-        /**
-         * 全て。
-         */
         ALL("ALL");
-        /**
-         * 名前。
-         */
+
         String name;
 
-        /** コンストラクター。
+        /**
+         * コンストラクター。
+         *
          * @param name 名前。
          */
         Type(String name)
@@ -70,9 +68,10 @@ public interface IItems
             this.name = name;
         }
 
-        /** Type変換。
-         * @param type stringのType。
+        /**
+         * Type変換。
          *
+         * @param type stringのType。
          * @return 変換後。
          */
         public static Type toType(String type)
@@ -80,7 +79,9 @@ public interface IItems
             return Type.valueOf(type.toUpperCase());
         }
 
-        /** 名前のゲッター。
+        /**
+         * 名前のゲッター。
+         *
          * @return 名前。
          */
         public String getName()
@@ -88,7 +89,9 @@ public interface IItems
             return name;
         }
 
-        /** 名前(小文字)のゲッター。
+        /**
+         * 名前(小文字)のゲッター。
+         *
          * @return 名前(小文字)。
          */
         public String getRaw()

@@ -17,12 +17,13 @@ import java.util.*;
  */
 public class CommandReport implements CommandExecutor
 {
-    /** コマンド動作。
-     * @param sender イベントsender。
-     * @param command コマンド。
-     * @param label ラベル。
-     * @param args 引数。
+    /**
+     * コマンド動作。
      *
+     * @param sender  イベントsender。
+     * @param command コマンド。
+     * @param label   ラベル。
+     * @param args    引数。
      * @return 処理を終わらせるだけ。Always true。
      */
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
@@ -112,9 +113,11 @@ public class CommandReport implements CommandExecutor
         return true;
     }
 
-    /** 思いっきり通報する。
+    /**
+     * 思いっきり通報する。
+     *
      * @param sender イベントsender。
-     * @param types 罪状。
+     * @param types  罪状。
      * @param target ターゲット。
      */
     private void report(CommandSender sender, ArrayList<EnumCheatType> types, Player target)

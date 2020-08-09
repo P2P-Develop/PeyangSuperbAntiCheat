@@ -7,9 +7,10 @@ import org.bukkit.scheduler.*;
  */
 public class RunnableUtil
 {
-    /** もうタスク始まってるかどうか。
-     * @param runnable こいつしか出来ないんかい
+    /**
+     * もうタスク始まってるかどうか。
      *
+     * @param runnable こいつしか出来ないんかい
      * @return はじまってたらtrueを返します。
      */
     public static boolean isStarted(BukkitRunnable runnable)

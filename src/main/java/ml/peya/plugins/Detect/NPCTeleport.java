@@ -21,11 +21,13 @@ import static ml.peya.plugins.Utils.LookingUtils.isLooking;
  */
 public class NPCTeleport
 {
-    /** テレポートォ！
-     * @param player プレイヤー。
-     * @param target ターゲット。
-     * @param arm 腕？
-     * @param tpCase 罪状。
+    /**
+     * テレポートォ！
+     *
+     * @param player    プレイヤー。
+     * @param target    ターゲット。
+     * @param arm       腕？
+     * @param tpCase    罪状。
      * @param reachMode リーチモードかどうか。
      */
     public static void teleport(Player player, EntityPlayer target, ItemStack[] arm, DetectType tpCase, boolean reachMode)
@@ -43,19 +45,21 @@ public class NPCTeleport
         }
     }
 
-    /** Aurapanicのテレポート。
-     * @param player プレイヤー。
-     * @param target ターゲット。
-     * @param arm 腕？？
-     * @param count 回数。
-     * @param sender イベントsender。
+    /**
+     * Aurapanicのテレポート。
+     *
+     * @param player    プレイヤー。
+     * @param target    ターゲット。
+     * @param arm       腕？？
+     * @param count     回数。
+     * @param sender    イベントsender。
      * @param reachMode リーチモードかどうか。
      */
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender, boolean reachMode)
     {
-        final double range = reachMode ? PeyangSuperbAntiCheat.config.getDouble("npc.reachPanicRange") : PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
-        final double[] clt = { 0.0 };
-        final int[] now = { 0 };
+        final double range = reachMode ? PeyangSuperbAntiCheat.config.getDouble("npc.reachPanicRange"): PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
+        final double[] clt = {0.0};
+        final int[] now = {0};
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
@@ -131,20 +135,22 @@ public class NPCTeleport
 
     }
 
-    /** AuraBotのテレポート。
-     * @param player プレイヤー。
-     * @param target ターゲット。
-     * @param arm 腕？？？
+    /**
+     * AuraBotのテレポート。
+     *
+     * @param player    プレイヤー。
+     * @param target    ターゲット。
+     * @param arm       腕？？？
      * @param reachMode リーチモードかどうか。
      */
     private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
     {
-        final double[] time = { 0.0 };
-        final double radius = reachMode ? PeyangSuperbAntiCheat.config.getDouble("npc.reachRange") : PeyangSuperbAntiCheat.config.getDouble("npc.range");
+        final double[] time = {0.0};
+        final double radius = reachMode ? PeyangSuperbAntiCheat.config.getDouble("npc.reachRange"): PeyangSuperbAntiCheat.config.getDouble("npc.range");
 
         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
 
-        final int[] count = { 0 };
+        final int[] count = {0};
         BukkitRunnable r = new BukkitRunnable()
         {
             public void run()
@@ -211,10 +217,11 @@ public class NPCTeleport
 
     }
 
-    /** Aurabotのz位置を確認する。
-     * @param time 時間。
-     * @param radius 半径。
+    /**
+     * Aurabotのz位置を確認する。
      *
+     * @param time   時間。
+     * @param radius 半径。
      * @return 位置。
      */
     private static double auraBot_zPos(double time, double radius)
@@ -222,10 +229,11 @@ public class NPCTeleport
         return Math.sin(time) * radius * Math.cos(Math.PI / 180 * 360.0);
     }
 
-    /** Aurabotのx位置を確認する。
-     * @param time 時間。
-     * @param radius 半径。
+    /**
+     * Aurabotのx位置を確認する。
      *
+     * @param time   時間。
+     * @param radius 半径。
      * @return 位置。
      */
     private static double auraBot_xPos(double time, double radius)

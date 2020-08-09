@@ -8,9 +8,10 @@ import org.bukkit.potion.*;
  */
 public class Criticals
 {
-    /** めっちゃクリティカルされたよぉふえええええぇぇぇっていうの確認するやつ
-     * @param player クリティカルゥ！プレイヤー。
+    /**
+     * めっちゃクリティカルされたよぉふえええええぇぇぇっていうの確認するやつ
      *
+     * @param player クリティカルゥ！プレイヤー。
      * @return クリティカル警察が反応したらtrueを返してくれます。
      */
     public static boolean hasCritical(Player player)

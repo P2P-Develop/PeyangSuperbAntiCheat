@@ -15,8 +15,10 @@ import java.util.*;
  */
 public class Drop implements Listener
 {
-    /** ドロップした時に処理する...らしい。
-     * @param e ドロップした時に発令するイベント。
+    /**
+     * ドロップした時に処理する...らしい。
+     *
+     * @param e ドロップした時に発火するイベント。
      */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onDrop(PlayerDropItemEvent e)

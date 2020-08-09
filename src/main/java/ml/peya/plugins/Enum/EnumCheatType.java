@@ -56,11 +56,13 @@ public enum EnumCheatType
      */
     private boolean isChecked;
 
-    /** コンストラクター。
-     * @param text テキスト。
+    /**
+     * コンストラクター。
+     *
+     * @param text       テキスト。
      * @param isSelected 選択されているかどうか。
-     * @param sysName 名前。
-     * @param alias エイリアス。
+     * @param sysName    名前。
+     * @param alias      エイリアス。
      */
     EnumCheatType(String text, boolean isSelected, String sysName, String... alias)
     {
@@ -70,7 +72,9 @@ public enum EnumCheatType
         this.alias = new ArrayList<>(Arrays.asList(alias));
     }
 
-    /** テキストのゲッター。
+    /**
+     * テキストのゲッター。
+     *
      * @return テキスト。
      */
     public String getText()
@@ -78,7 +82,9 @@ public enum EnumCheatType
         return text;
     }
 
-    /** 選択されているかどうかのゲッター。
+    /**
+     * 選択されているかどうかのゲッター。
+     *
      * @return 選択されているかどうか。
      */
     public boolean isSelected()
@@ -86,7 +92,9 @@ public enum EnumCheatType
         return isSelected;
     }
 
-    /** 選択されているかどうかのセッター。
+    /**
+     * 選択されているかどうかのセッター。
+     *
      * @param selected 選択されているかどうか。
      */
     public void setSelected(boolean selected)
@@ -94,7 +102,9 @@ public enum EnumCheatType
         isSelected = selected;
     }
 
-    /** チェックされているかどうかのゲッター。
+    /**
+     * チェックされているかどうかのゲッター。
+     *
      * @return チェックされているかどうか。
      */
     public boolean isChecked()
@@ -102,7 +112,9 @@ public enum EnumCheatType
         return isChecked;
     }
 
-    /** チェックされているかどうかのセッター。
+    /**
+     * チェックされているかどうかのセッター。
+     *
      * @param checked チェックされているかどうか。
      */
     public void setChecked(boolean checked)
@@ -110,7 +122,9 @@ public enum EnumCheatType
         isChecked = checked;
     }
 
-    /** 名前のゲッター。
+    /**
+     * 名前のゲッター。
+     *
      * @return 名前。
      */
     public String getSysName()
@@ -118,7 +132,9 @@ public enum EnumCheatType
         return sysName;
     }
 
-    /** エイリアスのゲッター。
+    /**
+     * エイリアスのゲッター。
+     *
      * @return エイリアス。
      */
     public ArrayList<String> getAlias()

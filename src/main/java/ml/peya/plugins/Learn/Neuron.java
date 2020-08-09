@@ -19,7 +19,9 @@ public class Neuron
      */
     private double value = 0.0;
 
-    /** ゲッター。
+    /**
+     * ゲッター。
+     *
      * @return value参照。
      */
     public double getValue()
@@ -27,7 +29,9 @@ public class Neuron
         return value;
     }
 
-    /** セッター。
+    /**
+     * セッター。
+     *
      * @param value value参照。
      */
     public void setValue(double value)
@@ -35,7 +39,9 @@ public class Neuron
         this.value = value;
     }
 
-    /** ReLU関数で値を強めて出力系に入れる。
+    /**
+     * ReLU関数で値を強めて出力系に入れる。
+     *
      * @param inputData InputクラスのArrayListデータ。
      */
     public void input(ArrayList<Input> inputData)
@@ -44,7 +50,9 @@ public class Neuron
         setValue(relu(sum));
     }
 
-    /** input(ArrayList)のオーバーロード。
+    /**
+     * input(ArrayList)のオーバーロード。
+     *
      * @param value sumに加算する値。
      */
     public void input(double value)

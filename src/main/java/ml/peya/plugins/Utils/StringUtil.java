@@ -13,7 +13,9 @@ import java.nio.charset.*;
  */
 public class StringUtil
 {
-    /** プレイヤーをランダムに架空で作るよ！
+    /**
+     * プレイヤーをランダムに架空で作るよ！
+     *
      * @return jsonNodeをレスポンスのまんま返すよ！
      */
     public static JsonNode getRandomUser()

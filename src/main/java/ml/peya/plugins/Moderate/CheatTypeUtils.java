@@ -10,7 +10,9 @@ import java.util.function.*;
  */
 public class CheatTypeUtils
 {
-    /** 種類確認するみたいなノリで全部タイプ返してくれるクラス。
+    /**
+     * 種類確認するみたいなノリで全部タイプ返してくれるクラス。
+     *
      * @return 全部返してくれる。
      */
     public static EnumCheatType[] getFullType()
@@ -29,7 +31,9 @@ public class CheatTypeUtils
         return types.toArray(new EnumCheatType[0]);
     }
 
-    /** 上のメソッドのArrayList版。
+    /**
+     * 上のメソッドのArrayList版。
+     *
      * @return 全部！
      */
     public static ArrayList<EnumCheatType> getFullTypeArrayList()
@@ -47,9 +51,10 @@ public class CheatTypeUtils
         return types;
     }
 
-    /** まぁこれも。
-     * @param values Stringから変換する奴。
+    /**
+     * まぁこれも。
      *
+     * @param values Stringから変換する奴。
      * @return 変換後。
      */
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
@@ -63,9 +68,10 @@ public class CheatTypeUtils
         return types;
     }
 
-    /** まぁ同じくらい。
-     * @param sysname Stringから普通に変換する奴。
+    /**
+     * まぁ同じくらい。
      *
+     * @param sysname Stringから普通に変換する奴。
      * @return 変換後。
      */
     public static EnumCheatType getCheatTypeFromString(String sysname)
@@ -73,10 +79,11 @@ public class CheatTypeUtils
         return getFullTypeArrayList().parallelStream().filter(type -> type.getSysName().equals(sysname)).findFirst().orElse(null);
     }
 
-    /** エイリアスOK?
-     * @param types 罪状。
-     * @param name なまえ
+    /**
+     * エイリアスOK?
      *
+     * @param types 罪状。
+     * @param name  なまえ
      * @return OK=true
      */
     public static boolean aliasEquals(EnumCheatType types, String name)

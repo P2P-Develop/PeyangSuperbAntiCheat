@@ -12,7 +12,9 @@ import java.util.*;
  */
 public class ReportUtils
 {
-    /** 権限持ってるやつが通知できる奴。
+    /**
+     * 権限持ってるやつが通知できる奴。
+     *
      * @param id ID。
      */
     public static void adminNotification(String id)
@@ -29,9 +31,11 @@ public class ReportUtils
         });
     }
 
-    /** 上のオーバーロード。
-     * @param name PlayerName。
-     * @param id ID。
+    /**
+     * 上のオーバーロード。
+     *
+     * @param name    PlayerName。
+     * @param id      ID。
      * @param reasons 事由。
      */
     public static void adminNotification(String name, String id, String[] reasons)
@@ -49,7 +53,9 @@ public class ReportUtils
         });
     }
 
-    /** エラー起こっちゃったふえええぇぇっていう時の通知。adminにしか届かん。
+    /**
+     * エラー起こっちゃったふえええぇぇっていう時の通知。adminにしか届かん。
+     *
      * @param stacktrace 送り付けるスタックトレース。
      */
     public static void errorNotification(String stacktrace)
@@ -66,10 +72,11 @@ public class ReportUtils
         });
     }
 
-    /** スタックトレースを...入手する？
-     * @param e スタックトレース...らしい。
-     * @param <T> ジェネリクスわーい
+    /**
+     * スタックトレースを...入手する？
      *
+     * @param e   スタックトレース...らしい。
+     * @param <T> ジェネリクスわーい
      * @return InnerExceptionみたいなの返すらしーよ！
      */
     public static <T extends Exception> String getStackTrace(T e)

@@ -13,12 +13,13 @@ import org.bukkit.entity.*;
  */
 public class TestKnockback implements CommandExecutor
 {
-    /** コマンド動作のオーバーライド。
-     * @param sender イベントsender。
-     * @param cmd コマンド。
-     * @param label ラベル。
-     * @param args 引数。
+    /**
+     * コマンド動作のオーバーライド。
      *
+     * @param sender イベントsender。
+     * @param cmd    コマンド。
+     * @param label  ラベル。
+     * @param args   引数。
      * @return 処理を終わらせるだけ。Always true。
      */
     @Override

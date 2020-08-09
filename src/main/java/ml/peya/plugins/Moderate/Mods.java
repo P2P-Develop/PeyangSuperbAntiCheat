@@ -10,9 +10,10 @@ import java.util.*;
  */
 public class Mods
 {
-    /** 本番。
-     * @param player 調べる対象。
+    /**
+     * 本番。
      *
+     * @param player 調べる対象。
      * @return 調べ終わったやつ。
      */
     public static HashMap<String, String> getMods(Player player)

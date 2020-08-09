@@ -14,12 +14,13 @@ import java.util.*;
  */
 public class WatchEyeManagement
 {
-    /** WatchEyeにカラムに入れるべきもの含めて追加する。
-     * @param target ターゲット。
+    /**
+     * WatchEyeにカラムに入れるべきもの含めて追加する。
+     *
+     * @param target   ターゲット。
      * @param FromName 名前。
      * @param FromUUID UUID。
-     * @param level レベル。
-     *
+     * @param level    レベル。
      * @return 管理ID。エラーが発生したら空白。
      */
     public static String add(Player target, String FromName, String FromUUID, int level)
@@ -52,11 +53,12 @@ public class WatchEyeManagement
         }
     }
 
-    /** 事由を設定する。
-     * @param id 管理ID。
-     * @param reason 事由。
-     * @param vl VL。
+    /**
+     * 事由を設定する。
      *
+     * @param id     管理ID。
+     * @param reason 事由。
+     * @param vl     VL。
      * @return 設定が成功したかどうか。
      */
     public static boolean setReason(String id, EnumCheatType reason, int vl)
@@ -86,10 +88,11 @@ public class WatchEyeManagement
         }
     }
 
-    /** 同じレコードであるか確認する。
-     * @param targetUuid ターゲットのUUID。
-     * @param fromUuid 普通のUUID。
+    /**
+     * 同じレコードであるか確認する。
      *
+     * @param targetUuid ターゲットのUUID。
+     * @param fromUuid   普通のUUID。
      * @return 同じレコードであるかどうか。
      */
     public static boolean isExistsRecord(String targetUuid, String fromUuid)
@@ -109,9 +112,10 @@ public class WatchEyeManagement
         }
     }
 
-    /** 同じレコードであるか確認する。
-     * @param id 管理ID。
+    /**
+     * 同じレコードであるか確認する。
      *
+     * @param id 管理ID。
      * @return 同じレコードであるかどうか。
      */
     public static boolean isExistsRecord(String id)
@@ -131,9 +135,10 @@ public class WatchEyeManagement
         }
     }
 
-    /** SQLインジェクションを防止する。
-     * @param sql インジェクションと見られるSQL。
+    /**
+     * SQLインジェクションを防止する。
      *
+     * @param sql インジェクションと見られるSQL。
      * @return インジェクションだった場合はtrue。
      */
     public static boolean isInjection(String sql)

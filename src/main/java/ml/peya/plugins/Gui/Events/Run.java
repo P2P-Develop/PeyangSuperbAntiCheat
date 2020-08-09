@@ -14,7 +14,9 @@ import java.util.*;
  */
 public class Run implements Listener
 {
-    /** Interactイベント...らしい。
+    /**
+     * Interactイベント...らしい。
+     *
      * @param e なんか使ったときに発令するイベント。
      */
     @EventHandler(priority = EventPriority.HIGHEST)

@@ -17,9 +17,11 @@ import java.util.*;
  */
 public class Show
 {
-    /** 関数を稼働させる。
+    /**
+     * 関数を稼働させる。
+     *
      * @param sender イベントsender。
-     * @param args 引数。
+     * @param args   引数。
      */
     public static void run(CommandSender sender, String[] args)
     {

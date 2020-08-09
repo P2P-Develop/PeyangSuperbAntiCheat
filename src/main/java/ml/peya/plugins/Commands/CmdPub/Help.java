@@ -12,12 +12,14 @@ import java.util.*;
  */
 public class Help
 {
-    /** 関数を稼働させる。
+    /**
+     * 関数を稼働させる。
+     *
      * @param sender イベントsender。
      */
     public static void run(CommandSender sender, String label)
     {
-        final boolean[] flag = { false };
+        final boolean[] flag = {false};
         sender.sendMessage(MessageEngine.get("base.prefix"));
 
         ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes(): getNodes();

@@ -12,9 +12,10 @@ import java.util.*;
  */
 public class SeverityLevelUtils
 {
-    /** タイプそのまんま通過する奴
-     * @param types タイプ
+    /**
+     * タイプそのまんま通過する奴
      *
+     * @param types タイプ
      * @return 通過
      */
     public static EnumSeverity getSeverity(ArrayList<EnumCheatType> types)
@@ -22,9 +23,10 @@ public class SeverityLevelUtils
         return getSeverity(types.size());
     }
 
-    /** intでも突っ込めるようにしたやつ。基準かなこれ
-     * @param level Stream APIの餌食となる引数
+    /**
+     * intでも突っ込めるようにしたやつ。基準かなこれ
      *
+     * @param level Stream APIの餌食となる引数
      * @return 変換後？
      */
     public static EnumSeverity getSeverity(int level)
@@ -32,7 +34,9 @@ public class SeverityLevelUtils
         return getAllSeverity().parallelStream().filter(severity -> severity.getLevel() == level).findFirst().orElse(EnumSeverity.UNKNOWN);
     }
 
-    /** ArrayListとして全部かき集めたやつを返す。
+    /**
+     * ArrayListとして全部かき集めたやつを返す。
+     *
      * @return かき集めたやつ。
      */
     public static ArrayList<EnumSeverity> getAllSeverity()
@@ -49,9 +53,10 @@ public class SeverityLevelUtils
         return severities;
     }
 
-    /** IDからレベル取得する。
-     * @param id ID。
+    /**
+     * IDからレベル取得する。
      *
+     * @param id ID。
      * @return 取得できたやつ。
      */
     public static EnumSeverity getSeverityFromId(String id)

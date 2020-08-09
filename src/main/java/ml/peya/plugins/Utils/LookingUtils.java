@@ -13,9 +13,10 @@ import java.util.stream.*;
  */
 public class LookingUtils
 {
-    /** 誰が見てるのかわかるやつ。
-     * @param player 見られてるプレイヤー。
+    /**
+     * 誰が見てるのかわかるやつ。
      *
+     * @param player 見られてるプレイヤー。
      * @return 見てるプレイヤー。
      */
     public static Player getLookingEntity(Player player)
@@ -28,10 +29,11 @@ public class LookingUtils
         return null;
     }
 
-    /** 今見てるかわかるやつ。
-     * @param player 見られてるプレイヤー。
-     * @param location あと場所。
+    /**
+     * 今見てるかわかるやつ。
      *
+     * @param player   見られてるプレイヤー。
+     * @param location あと場所。
      * @return 見られてたらtrue。
      */
     public static boolean isLooking(Player player, Location location)

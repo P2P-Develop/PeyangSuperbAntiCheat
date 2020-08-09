@@ -17,7 +17,9 @@ import java.util.stream.*;
  */
 public class KickUtil
 {
-    /** Bukkit的キックをかます。
+    /**
+     * Bukkit的キックをかます。
+     *
      * @param player 対象プレイヤー。
      * @param reason 罪状。
      * @param wdFlag 報告してるか...どうか？
@@ -37,7 +39,9 @@ public class KickUtil
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("kick.delay"));
     }
 
-    /** 全員にメッセージ送りつけるやつ。
+    /**
+     * 全員にメッセージ送りつけるやつ。
+     *
      * @param wdFlag 報告してるか...どうか？
      * @param target 対象プレイヤー。
      */
@@ -64,7 +68,9 @@ public class KickUtil
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
     }
 
-    /** 色々やってから結局蹴るやつ。
+    /**
+     * 色々やってから結局蹴るやつ。
+     *
      * @param player 対象プレイヤー。
      * @param reason 罪状。
      * @param isTest テストで捕まったか...どうか？

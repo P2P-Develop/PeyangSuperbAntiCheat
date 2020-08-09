@@ -33,7 +33,9 @@ public enum DetectType
      */
     private CommandSender sender;
 
-    /** コンストラクター。
+    /**
+     * コンストラクター。
+     *
      * @param name 名前。
      */
     DetectType(String name)
@@ -43,7 +45,9 @@ public enum DetectType
         this.name = name;
     }
 
-    /** 名前のゲッター。
+    /**
+     * 名前のゲッター。
+     *
      * @return 名前。
      */
     public String getName()
@@ -51,7 +55,9 @@ public enum DetectType
         return name;
     }
 
-    /** 回数のゲッター。
+    /**
+     * 回数のゲッター。
+     *
      * @return 回数。
      */
     public int getPanicCount()
@@ -59,7 +65,9 @@ public enum DetectType
         return count;
     }
 
-    /** 回数のセッター。
+    /**
+     * 回数のセッター。
+     *
      * @param time 時間(?)。
      */
     public void setPanicCount(int time)
@@ -67,7 +75,9 @@ public enum DetectType
         count = time;
     }
 
-    /** イベントsenderのゲッター。
+    /**
+     * イベントsenderのゲッター。
+     *
      * @return イベントsender。
      */
     public CommandSender getSender()
@@ -75,7 +85,9 @@ public enum DetectType
         return sender;
     }
 
-    /** イベントsenderのセッター。
+    /**
+     * イベントsenderのセッター。
+     *
      * @param sender イベントsender。
      */
     public void setSender(CommandSender sender)

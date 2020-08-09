@@ -9,10 +9,11 @@ import java.util.stream.*;
  */
 public class OptGraphGenerator
 {
-    /** p2pなんちゃらと同じなんですが！？！？！？！？
-     * @param VL VL。
-     * @param max 最大。
+    /**
+     * p2pなんちゃらと同じなんですが！？！？！？！？
      *
+     * @param VL  VL。
+     * @param max 最大。
      * @return グラフのやつ。
      */
     private static int calcVLGraph(int VL, int max)
@@ -24,10 +25,11 @@ public class OptGraphGenerator
         return Math.toIntExact(Math.round(VlMeta));
     }
 
-    /** 生成するみたい。
-     * @param VL VL。
-     * @param max 最大。
+    /**
+     * 生成するみたい。
      *
+     * @param VL  VL。
+     * @param max 最大。
      * @return 生成するらしい。
      */
     static String genGraph(int VL, int max)

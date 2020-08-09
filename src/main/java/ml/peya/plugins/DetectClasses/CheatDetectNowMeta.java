@@ -10,40 +10,22 @@ import java.util.*;
  */
 public class CheatDetectNowMeta
 {
-    /**
-     * ターゲット。
-     */
+
     private final Player target;
-    /**
-     * UUID。
-     */
     private final UUID uuids;
-    /**
-     * 管理ID。
-     */
     private final int id;
-    /**
-     * 罪状。
-     */
     private final DetectType type;
-    /**
-     * 秒数。
-     */
     private double seconds;
-    /**
-     * VL。
-     */
     private int VL;
-    /**
-     * テスト可能かどうか。
-     */
     private boolean canTesting = false;
 
-    /** コンストラクター。
+    /**
+     * コンストラクター。
+     *
      * @param target ターゲット。
-     * @param uuids UUID。
-     * @param id 管理ID。
-     * @param type 罪状。
+     * @param uuids  UUID。
+     * @param id     管理ID。
+     * @param type   罪状。
      */
     public CheatDetectNowMeta(Player target, UUID uuids, int id, DetectType type)
     {
@@ -53,7 +35,9 @@ public class CheatDetectNowMeta
         this.type = type;
     }
 
-    /** テスト可能かどうかのゲッター。
+    /**
+     * テスト可能かどうかのゲッター。
+     *
      * @return テスト可能かどうか。
      */
     public boolean isCanTesting()
@@ -61,7 +45,9 @@ public class CheatDetectNowMeta
         return canTesting;
     }
 
-    /** テスト可能かどうかのセッター。
+    /**
+     * テスト可能かどうかのセッター。
+     *
      * @param canTesting テスト可能かどうか。
      */
     public void setCanTesting(boolean canTesting)
@@ -69,7 +55,9 @@ public class CheatDetectNowMeta
         this.canTesting = canTesting;
     }
 
-    /** ターゲットのゲッター。
+    /**
+     * ターゲットのゲッター。
+     *
      * @return ターゲット。
      */
     public Player getTarget()
@@ -77,7 +65,9 @@ public class CheatDetectNowMeta
         return target;
     }
 
-    /** UUIDのゲッター。
+    /**
+     * UUIDのゲッター。
+     *
      * @return UUID。
      */
     public UUID getUUIDs()
@@ -85,7 +75,9 @@ public class CheatDetectNowMeta
         return uuids;
     }
 
-    /** VLをそのまんま追加する。
+    /**
+     * VLをそのまんま追加する。
+     *
      * @return 追加したVL。
      */
     public int addVL()
@@ -93,7 +85,9 @@ public class CheatDetectNowMeta
         return ++VL;
     }
 
-    /** VLをそのまんま減らす。
+    /**
+     * VLをそのまんま減らす。
+     *
      * @return 減らしたVL。
      */
     public int removeVL()
@@ -101,7 +95,9 @@ public class CheatDetectNowMeta
         return --VL;
     }
 
-    /** VLのゲッター。
+    /**
+     * VLのゲッター。
+     *
      * @return VL。
      */
     public int getVL()
@@ -109,7 +105,9 @@ public class CheatDetectNowMeta
         return VL;
     }
 
-    /** 管理IDのゲッター。
+    /**
+     * 管理IDのゲッター。
+     *
      * @return 管理ID。
      */
     public int getId()
@@ -117,7 +115,9 @@ public class CheatDetectNowMeta
         return id;
     }
 
-    /** 罪状のゲッター。
+    /**
+     * 罪状のゲッター。
+     *
      * @return 罪状。
      */
     public DetectType getType()
@@ -125,7 +125,9 @@ public class CheatDetectNowMeta
         return type;
     }
 
-    /** 秒数のゲッター。
+    /**
+     * 秒数のゲッター。
+     *
      * @return 秒数。
      */
     public double getSeconds()
@@ -133,7 +135,9 @@ public class CheatDetectNowMeta
         return seconds;
     }
 
-    /** 秒数のセッター。
+    /**
+     * 秒数のセッター。
+     *
      * @param seconds 秒数。
      */
     public void setSeconds(double seconds)
@@ -141,7 +145,9 @@ public class CheatDetectNowMeta
         this.seconds = seconds;
     }
 
-    /** 秒数の追加。
+    /**
+     * 秒数の追加。
+     *
      * @param seconds 追加した秒数。
      */
     public void addSeconds(double seconds)

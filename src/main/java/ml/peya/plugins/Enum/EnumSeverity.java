@@ -53,8 +53,10 @@ public enum EnumSeverity
      */
     private final int level;
 
-    /** コンストラクター。
-     * @param text テキスト。
+    /**
+     * コンストラクター。
+     *
+     * @param text  テキスト。
      * @param color いろ。
      * @param level レベル。
      */
@@ -65,7 +67,9 @@ public enum EnumSeverity
         this.level = level;
     }
 
-    /** テキストのゲッター。
+    /**
+     * テキストのゲッター。
+     *
      * @return テキスト。
      */
     public String getText()
@@ -73,7 +77,9 @@ public enum EnumSeverity
         return text;
     }
 
-    /** いろのゲッター。
+    /**
+     * いろのゲッター。
+     *
      * @return いろ。
      */
     public net.md_5.bungee.api.ChatColor getColor()
@@ -81,7 +87,9 @@ public enum EnumSeverity
         return color;
     }
 
-    /** レベルのゲッター。
+    /**
+     * レベルのゲッター。
+     *
      * @return レベル。
      */
     public int getLevel()

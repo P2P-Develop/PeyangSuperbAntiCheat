@@ -13,20 +13,17 @@ import java.util.*;
  */
 public class KillCounting
 {
-    /**
-     * プレイヤー。
-     */
+
     private final HashMap<UUID, Integer> players;
 
-    /**
-     * コンストラクター。
-     */
     public KillCounting()
     {
         players = new HashMap<>();
     }
 
-    /** 引数付きの関数を呼び出してもらうようにする。
+    /**
+     * 引数付きの関数を呼び出してもらうようにする。
+     *
      * @param killer キルしたプレイヤーのUUID。
      */
     public void kill(UUID killer)
@@ -56,7 +53,9 @@ public class KillCounting
 
     }
 
-    /** プレイヤーのゲッター。
+    /**
+     * プレイヤーのゲッター。
+     *
      * @return プレイヤー。
      */
     public HashMap<UUID, Integer> getPlayers()

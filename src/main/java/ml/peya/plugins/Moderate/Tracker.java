@@ -26,7 +26,9 @@ public class Tracker
      */
     private final HashMap<String, Location> target = new HashMap<>();
 
-    /** 指定したプレイヤーをトラッキングするやつ。
+    /**
+     * 指定したプレイヤーをトラッキングするやつ。
+     *
      * @param player プレイヤー。
      * @param target なんこれ
      */
@@ -39,7 +41,9 @@ public class Tracker
         this.target.put(player, p.getCompassTarget());
     }
 
-    /** 指定したプレイヤーをトラッキング解除するやつ。
+    /**
+     * 指定したプレイヤーをトラッキング解除するやつ。
+     *
      * @param player プレイヤー。
      */
     public void remove(String player)
@@ -59,9 +63,10 @@ public class Tracker
         this.tracker.remove(player);
     }
 
-    /** トラッキングしてるかどうか調べるやつ。
-     * @param player プレイヤー。
+    /**
+     * トラッキングしてるかどうか調べるやつ。
      *
+     * @param player プレイヤー。
      * @return トラッキングしてたらtrue。
      */
     public boolean isTracking(String player)
@@ -69,9 +74,10 @@ public class Tracker
         return tracker.containsKey(player);
     }
 
-    /** なんか別の方法でトラッキングしてるかどうか調べるやつ。
-     * @param player プレイヤー。
+    /**
+     * なんか別の方法でトラッキングしてるかどうか調べるやつ。
      *
+     * @param player プレイヤー。
      * @return トラッキングしてたらtrue。
      */
     public boolean isTrackingByPlayer(String player)
@@ -119,10 +125,11 @@ public class Tracker
         });
     }
 
-    /** スケールちょうせい......?
-     * @param d だぶる！
-     * @param scale すけーる！
+    /**
+     * スケールちょうせい......?
      *
+     * @param d     だぶる！
+     * @param scale すけーる！
      * @return なんか！
      */
     private String scaleSet(double d, int scale)

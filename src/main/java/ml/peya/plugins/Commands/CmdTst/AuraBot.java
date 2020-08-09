@@ -15,12 +15,13 @@ import java.util.*;
  */
 public class AuraBot implements CommandExecutor
 {
-    /** コマンド動作のオーバーライド。
-     * @param sender イベントsender。
-     * @param command コマンド。
-     * @param label ラベル。
-     * @param args 引数。
+    /**
+     * コマンド動作のオーバーライド。
      *
+     * @param sender  イベントsender。
+     * @param command コマンド。
+     * @param label   ラベル。
+     * @param args    引数。
      * @return 処理を終わらせるだけ。Always true。
      */
     @Override

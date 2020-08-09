@@ -11,10 +11,11 @@ import java.util.*;
  */
 public class BanAnalyzer
 {
-    /** なんか大文字で表示されるやつ返す。
+    /**
+     * なんか大文字で表示されるやつ返す。
+     *
      * @param uuid UUID。
      * @param type 罪状。
-     *
      * @return 大文字のアレ。
      */
     public static ArrayList<Bans> getAbuse(UUID uuid, Type type)
@@ -62,22 +63,14 @@ public class BanAnalyzer
      */
     public enum Type
     {
-        /**
-         * 全部。
-         */
         ALL,
-        /**
-         * キックのみ。
-         */
         KICK,
-        /**
-         * BANのみ。
-         */
         BAN;
 
-        /** StringをTypeに変換する。
-         * @param name before
+        /**
+         * StringをTypeに変換する。
          *
+         * @param name before
          * @return AFTER
          */
         public static Type toType(String name)
@@ -100,38 +93,22 @@ public class BanAnalyzer
      */
     public static class Bans
     {
-        /**
-         * UNIX時間。
-         */
         private final long date;
-        /**
-         * 罪状。
-         */
         private final String reason;
-        /**
-         * 管理ID？
-         */
         private final String playerId;
-        /**
-         * UUID。
-         */
         private final String uuId;
-        /**
-         * 管理ID。
-         */
         private final String id;
-        /**
-         * 処罰方法。
-         */
         private final Type type;
 
-        /** コンストラクタで組み立てる。
-         * @param date UNIX時間。
-         * @param reason 罪状。
+        /**
+         * コンストラクタで組み立てる。
+         *
+         * @param date     UNIX時間。
+         * @param reason   罪状。
          * @param playerId 管理ID？
-         * @param uuId UUID。
-         * @param id 管理ID。
-         * @param type 処罰方法。
+         * @param uuId     UUID。
+         * @param id       管理ID。
+         * @param type     処罰方法。
          */
         public Bans(long date, String reason, String playerId, String uuId, String id, Type type)
         {
@@ -143,7 +120,9 @@ public class BanAnalyzer
             this.type = type;
         }
 
-        /** UNIX時間のゲッター。
+        /**
+         * UNIX時間のゲッター。
+         *
          * @return UNIX時間。
          */
         public long getDate()
@@ -151,7 +130,9 @@ public class BanAnalyzer
             return date;
         }
 
-        /** 罪状のゲッター。
+        /**
+         * 罪状のゲッター。
+         *
          * @return 罪状。
          */
         public String getReason()
@@ -159,7 +140,9 @@ public class BanAnalyzer
             return reason;
         }
 
-        /** 管理IDのゲッター。
+        /**
+         * 管理IDのゲッター。
+         *
          * @return 管理ID。
          */
         public String getId()
@@ -167,7 +150,9 @@ public class BanAnalyzer
             return id;
         }
 
-        /** 管理ID？のゲッター。
+        /**
+         * 管理ID？のゲッター。
+         *
          * @return 管理ID？
          */
         public String getPlayerId()
@@ -175,7 +160,9 @@ public class BanAnalyzer
             return playerId;
         }
 
-        /** UUIDのゲッター。
+        /**
+         * UUIDのゲッター。
+         *
          * @return UUID。
          */
         public String getUuId()
@@ -183,7 +170,9 @@ public class BanAnalyzer
             return uuId;
         }
 
-        /** 処罰方法のゲッター。
+        /**
+         * 処罰方法のゲッター。
+         *
          * @return 処罰方法。
          */
         public Type getType()

@@ -18,10 +18,11 @@ import java.util.stream.*;
  */
 public class Books
 {
-    /** 報告用の本を生成します。
-     * @param player ぶち込む報告対象プレイヤー。
-     * @param types 罪状。
+    /**
+     * 報告用の本を生成します。
      *
+     * @param player ぶち込む報告対象プレイヤー。
+     * @param types  罪状。
      * @return アイテム自体を返すのであとはgiveします。
      */
     public static ItemStack getReportBook(Player player, EnumCheatType... types)
@@ -57,14 +58,15 @@ public class Books
         return book;
     }
 
-    /** /psac showした時のいろいろをなんかやってくれます。
-     * @param id 管理ID。
-     * @param uuid プレイヤー UUID。
-     * @param issueById なんこれ
-     * @param issueByUuid なんこれ2nd
-     * @param dateInt UNIX時間。
-     * @param types 罪状。
+    /**
+     * /psac showした時のいろいろをなんかやってくれます。
      *
+     * @param id          管理ID。
+     * @param uuid        プレイヤー UUID。
+     * @param issueById   なんこれ
+     * @param issueByUuid なんこれ2nd
+     * @param dateInt     UNIX時間。
+     * @param types       罪状。
      * @return /psac showした時の詳細を書いた本。
      */
     public static ItemStack getShowBook(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types)
@@ -100,10 +102,11 @@ public class Books
         return book;
     }
 
-    /** Modリストの本をぶん投げてくれます。
-     * @param player Mod何入れてるんこの人？？ねぇ？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
-     * @param mods 検査済みじゃないと駄目ですよぉ！
+    /**
+     * Modリストの本をぶん投げてくれます。
      *
+     * @param player Mod何入れてるんこの人？？ねぇ？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
+     * @param mods   検査済みじゃないと駄目ですよぉ！
      * @return 本に変換した後のアイテム。
      */
     public static ItemStack getModsBook(Player player, HashMap<String, String> mods)
@@ -141,9 +144,10 @@ public class Books
         return book;
     }
 
-    /** Q. これは PSAC の 本 です か？
-     * @param book 本。
+    /**
+     * Q. これは PSAC の 本 です か？
      *
+     * @param book 本。
      * @return A. ちがかったらfalseします。
      */
     public static boolean hasPSACBook(ItemStack book)

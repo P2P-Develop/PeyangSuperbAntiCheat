@@ -11,9 +11,10 @@ import java.sql.*;
  */
 public class Init
 {
-    /** データベースの.dbファイルをめっちゃ作成する。
-     * @param path 相対パスでいいお。
+    /**
+     * データベースの.dbファイルをめっちゃ作成する。
      *
+     * @param path 相対パスでいいお。
      * @return こいつをHikariDataSourceに突っ込むといい感じになります。
      */
     public static HikariConfig initMngDatabase(String path)
@@ -27,7 +28,9 @@ public class Init
         return hConfig;
     }
 
-    /** なかったらテーブル作る。あったらそのまま。
+    /**
+     * なかったらテーブル作る。あったらそのまま。
+     *
      * @return 処理が正常に終わればtrueを返してくれます。
      */
     public static boolean createDefaultTables()

@@ -12,48 +12,25 @@ import java.util.stream.*;
  */
 public class NeuralNetwork
 {
-    /**
-     * RandomWeight取得に使用。
-     */
+
     private final static Random random = new Random();
-    /**
-     * 重みのふり幅。
-     */
     private final static double weightRange = 10.0;
-    /**
-     * こいつだ。randomに使うやつ。
-     */
     private static final double RandomWeight = (random.nextDouble() - 0.5) * weightRange;
-    /**
-     * 中層のバイアス。
-     */
     private final double middleLayerBias = 1.0;
-    /**
-     * 前層の重み。
-     */
-    public double[][] inputWeight = new double[][] { { RandomWeight, RandomWeight, RandomWeight }, { RandomWeight, RandomWeight, RandomWeight }, { RandomWeight, RandomWeight, RandomWeight } };
-    /**
-     * 中層の重み。
-     */
-    public double[] middleWeight = new double[] { RandomWeight, RandomWeight, RandomWeight };
-    /**
-     * 前層自体の表現。
-     */
+
+    public double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
+    public double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
+
     private double[] inputLayer;
-    /**
-     * 中層自体の表現。
-     */
     private Neuron[] middleLayer;
-    /**
-     * 出力層。
-     * ローカル変数問題は気にしない。
-     */
+
     private Neuron outputLayer;
 
-    /** 二次元配列のカラムを取得するそれっぽい関数。
+    /**
+     * 二次元配列のカラムを取得するそれっぽい関数。
+     *
      * @param array 二次元配列。
      * @param index 第一配列のインデックス。
-     *
      * @return カラムを表すdouble一次元配列。
      */
     public static double[] getColumn(double[][] array, int index)
@@ -63,10 +40,11 @@ public class NeuralNetwork
         return column;
     }
 
-    /** ArrayListに変換してくれる。便利。
-     * @param inputLayer 入力自体の表現
-     * @param inputWeight 入力の重み
+    /**
+     * ArrayListに変換してくれる。便利。
      *
+     * @param inputLayer  入力自体の表現
+     * @param inputWeight 入力の重み
      * @return 変換後
      */
     static ArrayList<Input> toInputData(double[] inputLayer, double[] inputWeight)
@@ -77,16 +55,17 @@ public class NeuralNetwork
         return it;
     }
 
-    /** 出力結果を算出する。
-     * @param data 計算させるデータ。
+    /**
+     * 出力結果を算出する。
      *
+     * @param data 計算させるデータ。
      * @return 0.0~1.0までの出力結果。
      */
     public double commit(Pair<Double, Double> data)
     {
         double inputLayerBias = 1.0;
-        inputLayer = new double[] { data.getLeft(), data.getRight(), inputLayerBias };
-        middleLayer = new Neuron[] { new Neuron(), new Neuron() };
+        inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
+        middleLayer = new Neuron[]{new Neuron(), new Neuron()};
         outputLayer = new Neuron();
 
         IntStream.range(0, middleLayer.length).parallel().forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
@@ -96,16 +75,20 @@ public class NeuralNetwork
         return outputLayer.getValue();
     }
 
-    /** 学習。
+    /**
+     * 学習。
+     *
      * @param dataCollection データ。
-     * @param times ディレイ。
+     * @param times          ディレイ。
      */
     public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int times)
     {
         IntStream.range(0, times).parallel().<Consumer<? super Triple<Double, Double, Double>>>mapToObj(i -> this::learn).forEachOrdered(dataCollection::forEach);
     }
 
-    /** さらに深い学習。
+    /**
+     * さらに深い学習。
+     *
      * @param data データ。
      */
     private void learn(Triple<Double, Double, Double> data)
@@ -123,7 +106,7 @@ public class NeuralNetwork
 
         middleWeight[2] += middleLayerBias * deltaMO * learningRate;
 
-        final double[] deltaIM = new double[] {
+        final double[] deltaIM = new double[]{
                 deltaMO * oldMiddleWeight[0] * middleLayer[0].getValue() * (1.0 - middleLayer[0].getValue()),
                 deltaMO * oldMiddleWeight[1] * middleLayer[1].getValue() * (1.0 - middleLayer[1].getValue())
         };

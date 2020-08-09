@@ -12,7 +12,9 @@ import java.util.stream.*;
  */
 public class RandomArmor
 {
-    /** こいつらぶっこんでから関数でランダムに取得してる。
+    /**
+     * こいつらぶっこんでから関数でランダムに取得してる。
+     *
      * @return アイテムどもから選んだやつ。
      */
     public static ItemStack getHelmet()
@@ -29,7 +31,9 @@ public class RandomArmor
         return getRandomItems(helmets);
     }
 
-    /** 同上
+    /**
+     * 同上
+     *
      * @return 同上
      */
     public static ItemStack getChestPlate()
@@ -45,7 +49,9 @@ public class RandomArmor
         return getRandomItems(chestPlates);
     }
 
-    /** 同上
+    /**
+     * 同上
+     *
      * @return 同上
      */
     public static ItemStack getLeggings()
@@ -61,7 +67,9 @@ public class RandomArmor
         return getRandomItems(leggings);
     }
 
-    /** 同上
+    /**
+     * 同上
+     *
      * @return 同上
      */
     public static ItemStack getBoots()
@@ -77,7 +85,9 @@ public class RandomArmor
         return getRandomItems(boots);
     }
 
-    /** 同上
+    /**
+     * 同上
+     *
      * @return 同上
      */
     public static ItemStack getSwords()
@@ -98,9 +108,10 @@ public class RandomArmor
         return getRandomItems(swords);
     }
 
-    /** 金ってだけでなんかするらしい。運イベかな？
-     * @param item あいてむ！
+    /**
+     * 金ってだけでなんかするらしい。運イベかな？
      *
+     * @param item あいてむ！
      * @return ゴールド全面でござったらtrue。
      */
     private static boolean isGold(Material item)
@@ -115,9 +126,10 @@ public class RandomArmor
         return items.contains(item);
     }
 
-    /** ランダムにえりすぐる。
-     * @param itemsArg あいてむ！なArrayList。
+    /**
+     * ランダムにえりすぐる。
      *
+     * @param itemsArg あいてむ！なArrayList。
      * @return えりすぐったアイテム。
      */
     public static ItemStack getRandomItems(ArrayList<Material> itemsArg)

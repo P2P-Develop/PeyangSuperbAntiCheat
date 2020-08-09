@@ -17,20 +17,23 @@ import java.util.*;
  */
 public class NPC
 {
-    /** 場所を設定する。
+    /**
+     * 場所を設定する。
+     *
      * @param location 場所。
-     * @param player プレイヤー・
+     * @param player   プレイヤー・
      */
     public static void setLocation(Location location, EntityPlayer player)
     {
         player.setLocation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
     }
 
-    /** スポーンさせる。
-     * @param player プレイヤー。
-     * @param teleportCase 罪状。
-     * @param reachMode リーチモードかどうか。
+    /**
+     * スポーンさせる。
      *
+     * @param player       プレイヤー。
+     * @param teleportCase 罪状。
+     * @param reachMode    リーチモードかどうか。
      * @return スポーンするNPCを返す。
      */
     public static EntityPlayer spawn(Player player, DetectType teleportCase, boolean reachMode)
@@ -46,11 +49,11 @@ public class NPC
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
-        ItemStack[] arm = { CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
+        ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
                 CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
                 CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
                 CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
-                CraftItemStack.asNMSCopy(RandomArmor.getSwords()) };
+                CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
 
         new BukkitRunnable()
         {
@@ -91,10 +94,12 @@ public class NPC
         return npc;
     }
 
-    /** ことごとくランダムアーマーを着せる。
+    /**
+     * ことごとくランダムアーマーを着せる。
+     *
      * @param target ターゲット。
      * @param player プレイヤー。
-     * @param arm 腕？？？？
+     * @param arm    腕？？？？
      */
     public static void setArmor(Player target, EntityPlayer player, ItemStack[] arm)
     {

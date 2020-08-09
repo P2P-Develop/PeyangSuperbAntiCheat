@@ -15,9 +15,11 @@ import org.bukkit.scheduler.*;
  */
 public class TestKnockback
 {
-    /** 透明な矢をplayerに対して発射する。
+    /**
+     * 透明な矢をplayerに対して発射する。
+     *
      * @param player プレイヤー。
-     * @param type 罪状(不使用)。
+     * @param type   罪状(不使用)。
      * @param sender イベントsender。
      */
     public static void scan(Player player, DetectType type, CommandSender sender)
@@ -42,10 +44,12 @@ public class TestKnockback
         scanFinally(player, sender, arrow);
     }
 
-    /** 後始末をする。
+    /**
+     * 後始末をする。
+     *
      * @param player プレイヤー。
      * @param sender イベントsender。
-     * @param arrow 矢。
+     * @param arrow  矢。
      */
     private static void scanFinally(Player player, CommandSender sender, Arrow arrow)
     {
