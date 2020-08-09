@@ -606,7 +606,7 @@ In this plugin, the following config is set by default.
 
 ---
 
-### What is this NPC\(WatchDog\)?
+## What is this NPC\(WatchDog\)?
 
 The Watchdog calls the NPC with a random username using the API "[RandomUserGenerator](https://randomuser.me/)" by [@randomapi](https://twitter.com/randomapi).    
 The NPC skin is displayed randomly by referring to the UUID skin settting.  
