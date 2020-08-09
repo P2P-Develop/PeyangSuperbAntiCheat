@@ -569,11 +569,6 @@ This message is displayed when a staff member issues a [kick command](#psac-kick
 
 A test message for this plugin. Please use it for testing.
 
-### What is this NPC\(WatchDog\)
-
-The Watchdog calls the NPC with a random username using the API "[RandomUserGenerator](https://randomuser.me/)" by [@randomapi](https://twitter.com/randomapi).    
-The NPC skin is displayed randomly by referring to the UUID skin settting.  
-
 ---
 
 ## Config settings
@@ -610,6 +605,11 @@ In this plugin, the following config is set by default.
 | skins               | \(UUID\)      | Specifies the skin to apply to the NPC.<br>You can specify multiple UUIDs and it will be selected from a random UUID.        |
 
 ---
+
+### What is this NPC\(WatchDog\)?
+
+The Watchdog calls the NPC with a random username using the API "[RandomUserGenerator](https://randomuser.me/)" by [@randomapi](https://twitter.com/randomapi).    
+The NPC skin is displayed randomly by referring to the UUID skin settting.  
 
 ## What is learning function?
 
@@ -664,6 +664,11 @@ Player can get the following utility items by executing [/target](#target).
 |   Book    |       MOD_LIST       | Gets the list of mods introduced by the target. |            [/mods](#mods) \<Target            |
 | Blaze Rod |     TARGET_STICK     | Target the player you are looking at.           |     [/target](#target) \<Looking Player\>     |
 
+## What library does this plugin use?
+
+See *[pom.xml](../pom.xml)* for more information.  
+It also describes the Source codes / Libraries / APIs used in [Thanks](#thanks).
+
 ## Did you find any bugs or errors?
 
 We accept bugs and errors related to [GitHub issues](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues).  
@@ -680,7 +685,7 @@ Depending on the language of the problem, the following persons are responsible 
 
 ## Thanks
 
-This plugin uses the following libraries/APIs:  
+This plugin uses the following Libraries / APIs / Source codes:  
 
 - [RandomApi/RandomUserGenerator](https://randomuser.me)
 - [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
