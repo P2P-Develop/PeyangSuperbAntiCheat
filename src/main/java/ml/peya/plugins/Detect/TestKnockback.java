@@ -59,7 +59,7 @@ public class TestKnockback
             @Override
             public void run()
             {
-                sender.sendMessage(MessageEngine.get(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? "message.testkb.normal": "message.textkb.lynx", MessageEngine.hsh("name", player.getName())));
+                sender.sendMessage(MessageEngine.get(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? "message.testkb.normal": "message.textkb.lynx", MessageEngine.pair("name", player.getName())));
                 arrow.remove();
                 PeyangSuperbAntiCheat.cheatMeta.remove(arrow.getUniqueId());
             }

@@ -11,9 +11,6 @@ import java.util.*;
  */
 public class Item
 {
-    /**
-     * アイテム群だぁ！
-     */
     private final ArrayList<IItems> items;
 
     public Item()

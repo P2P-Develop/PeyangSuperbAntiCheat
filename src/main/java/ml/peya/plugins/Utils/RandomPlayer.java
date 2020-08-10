@@ -2,12 +2,17 @@ package ml.peya.plugins.Utils;
 
 import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.*;
+import com.mojang.authlib.properties.*;
+import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang.*;
 import org.bukkit.World;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.*;
 
+import javax.net.ssl.*;
+import java.io.*;
+import java.net.*;
 import java.util.*;
 
 /**
@@ -43,7 +48,59 @@ public class RandomPlayer
         if (name.length() > 14)
             name = random.nextBoolean() ? first: last;
 
-        return new EntityPlayer(((CraftServer) Bukkit.getServer()).getServer(), ((CraftWorld) world).getHandle(), new GameProfile(node != null ? UUID.fromString(node.get("results").get(0).get("login").get("uuid").asText()): UUID.randomUUID(), name), new PlayerInteractManager(((CraftWorld) world).getHandle()));
+        MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
+        WorldServer worldServer = ((CraftWorld) world).getHandle();
+        PlayerInteractManager manager = new PlayerInteractManager(worldServer);
+
+        List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
+        JsonNode skinNode = getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
+
+
+        GameProfile profile = new GameProfile(node != null ? UUID.fromString(node.get("results").get(0).get("login").get("uuid").asText()): UUID.randomUUID(), name);
+
+        if (skinNode != null)
+            profile.getProperties().put("textures", new Property("textures", skinNode.get("properties").get(0).get("value").asText(),
+                    skinNode.get("properties").get(0).get("signature").asText()
+            ));
+
+        return new EntityPlayer(server, worldServer, profile, manager);
     }
 
+    /**
+     * 指定されたUUIDのプレイヤーのスキンをパパラッチします。
+     *
+     * @param uuid 指定するUUID。
+     * @return パパラッチしたスキンをJsonNodeに変換したやつ。
+     */
+    public static JsonNode getSkin(String uuid)
+    {
+        try
+        {
+            HttpsURLConnection connection;
+            connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
+
+            connection.setReadTimeout(1000);
+
+            if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK)
+            {
+                PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
+                return null;
+            }
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder builder = new StringBuilder();
+            String readed = reader.readLine();
+            while (readed != null)
+            {
+                builder.append(readed);
+                readed = reader.readLine();
+            }
+            ObjectMapper mapper = new ObjectMapper();
+            return mapper.readTree(builder.toString());
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
 }

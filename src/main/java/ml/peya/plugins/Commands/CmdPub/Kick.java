@@ -46,7 +46,7 @@ public class Kick
 
         if (args.length < 3)
         {
-            sender.sendMessage(MessageEngine.get("error.minArgs", MessageEngine.hsh("label", "psr")));
+            sender.sendMessage(MessageEngine.get("error.minArgs", MessageEngine.pair("label", "psr")));
 
             return;
         }

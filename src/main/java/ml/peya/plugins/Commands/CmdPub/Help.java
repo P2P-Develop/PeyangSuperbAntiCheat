@@ -17,7 +17,7 @@ public class Help
      * 関数を稼働させる。
      *
      * @param sender イベントsender。
-     * @param label 参照するコマンドラベル。
+     * @param label  参照するコマンドラベル。
      */
     public static void run(CommandSender sender, String label)
     {
@@ -32,7 +32,7 @@ public class Help
             public void run()
             {
                 nodes.parallelStream().filter(node -> sender.hasPermission("psac." + node)).forEachOrdered(node -> {
-                    sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.hsh("label", label)));
+                    sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.pair("label", label)));
                     flag[0] = true;
                 });
 

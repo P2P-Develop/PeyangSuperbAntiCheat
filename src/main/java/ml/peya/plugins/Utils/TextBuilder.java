@@ -73,18 +73,18 @@ public class TextBuilder
     {
         ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.clickable"));
 
-        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)))
+        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.pair("id", issueById)))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
         sender.spigot().sendMessage(b1.create());
 
-        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueTo", MessageEngine.hsh("id", id)))
+        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueTo", MessageEngine.pair("id", id)))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create())).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
         sender.spigot().sendMessage(b2.create());
 
-        sender.sendMessage("    " + MessageEngine.get("book.text.dateTime", MessageEngine.hsh("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))));
+        sender.sendMessage("    " + MessageEngine.get("book.text.dateTime", MessageEngine.pair("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))));
 
-        sender.sendMessage("    " + MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", types.parallelStream().map(type -> "        " + type.getText() + "\n").collect(Collectors.joining()))));
+        sender.sendMessage("    " + MessageEngine.get("book.text.reason", MessageEngine.pair("reason", types.parallelStream().map(type -> "        " + type.getText() + "\n").collect(Collectors.joining()))));
 
         HashMap<String, Object> serv = new HashMap<>();
         serv.put("color", SeverityLevels.getSeverity(types).getColor());
@@ -216,28 +216,29 @@ public class TextBuilder
         return component;
     }
 
-    /** 通常テスト時の最終結果を組み立てる。
-     * @param name プレイヤー名。
-     * @param VL 算出されたVL。
-     * @param kickVL VLキック基準値。
+    /**
+     * 通常テスト時の最終結果を組み立てる。
      *
+     * @param name   プレイヤー名。
+     * @param VL     算出されたVL。
+     * @param kickVL VLキック基準値。
      * @return 組み立てたやつ。
      */
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
     {
         if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            return new ComponentBuilder(MessageEngine.get("message.auraCheck.bot.lynx", MessageEngine.hsh("hit", VL)));
+            return new ComponentBuilder(MessageEngine.get("message.auraCheck.bot.lynx", MessageEngine.pair("hit", VL)));
 
         return new ComponentBuilder(MessageEngine.get("base.prefix") + "\n")
-                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)))
+                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.pair("name", name)))
                 .append("\n")
-                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(VL))))
+                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.pair("vl", String.valueOf(VL))))
                 .append("\n")
                 .append(MessageEngine.get("message.auraCheck.result.vlGraph"))
                 .append("\n")
                 .append(OptGraphGenerator.genGraph(VL, kickVL))
                 .append("\n")
-                .append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok"))));
+                .append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.pair("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok"))));
     }
 
     /**
@@ -253,9 +254,9 @@ public class TextBuilder
             return new ComponentBuilder("");
         return new ComponentBuilder(MessageEngine.get("base.prefix"))
                 .append("\n")
-                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)))
+                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.pair("name", name)))
                 .append("\n")
-                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(vl))));
+                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.pair("vl", String.valueOf(vl))));
     }
 
     /**

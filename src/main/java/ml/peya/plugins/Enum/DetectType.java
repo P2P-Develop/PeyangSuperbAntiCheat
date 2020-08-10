@@ -7,30 +7,12 @@ import org.bukkit.command.*;
  */
 public enum DetectType
 {
-    /**
-     * AuraBot。
-     */
     AURA_BOT("AuraBot"),
-    /**
-     * AuraPanicBot。
-     */
     AURA_PANIC("AuraPanic"),
-    /**
-     * AntiKnockback。
-     */
     ANTI_KB("TestKB");
 
-    /**
-     * 名前。
-     */
     private final String name;
-    /**
-     * 回数。
-     */
     private int count;
-    /**
-     * イベントsender。
-     */
     private CommandSender sender;
 
     /**

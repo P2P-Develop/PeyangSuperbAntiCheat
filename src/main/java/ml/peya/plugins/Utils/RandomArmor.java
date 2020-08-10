@@ -32,7 +32,9 @@ public class RandomArmor
         return getRandomItems(helmets);
     }
 
-    /** ランダムなチェストプレートを入手する。
+    /**
+     * ランダムなチェストプレートを入手する。
+     *
      * @return アイテムどもから選んだやつ。
      */
     public static ItemStack getChestPlate()
@@ -48,7 +50,9 @@ public class RandomArmor
         return getRandomItems(chestPlates);
     }
 
-    /** ランダムなレギンスを入手する。
+    /**
+     * ランダムなレギンスを入手する。
+     *
      * @return アイテムどもから選んだやつ。
      */
     public static ItemStack getLeggings()
@@ -64,7 +68,9 @@ public class RandomArmor
         return getRandomItems(leggings);
     }
 
-    /** ランダムなブーツを入手する。
+    /**
+     * ランダムなブーツを入手する。
+     *
      * @return アイテムどもから選んだやつ。
      */
     public static ItemStack getBoots()
@@ -80,7 +86,9 @@ public class RandomArmor
         return getRandomItems(boots);
     }
 
-    /** ランダムな剣を入手する。
+    /**
+     * ランダムな剣を入手する。
+     *
      * @return アイテムどもから選んだやつ。
      */
     public static ItemStack getSwords()

@@ -33,13 +33,13 @@ public class TrustModifier
                     ResultSet rs = statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
                     if (rs.next())
                     {
-                        statement.executeQuery("DeLeTe FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
-                        sender.sendMessage(MessageEngine.get("message.trust.remove", MessageEngine.hsh("player", player.getName())));
+                        statement.execute("DeLeTe FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
+                        sender.sendMessage(MessageEngine.get("message.trust.remove", MessageEngine.pair("name", player.getName())));
                     }
                     else
                     {
-                        statement.executeQuery("InSeRt InTo TrUsT vAlUe ('" + player.getName() + "');");
-                        sender.sendMessage(MessageEngine.get("message.trust.add", MessageEngine.hsh("player", player.getName())));
+                        statement.execute("InSeRt InTo TrUsT vAlUeS ('" + player.getName() + "');");
+                        sender.sendMessage(MessageEngine.get("message.trust.add", MessageEngine.pair("name", player.getName())));
                     }
                 }
                 catch (Exception e)

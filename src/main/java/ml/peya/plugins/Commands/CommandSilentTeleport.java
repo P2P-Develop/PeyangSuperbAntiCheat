@@ -49,7 +49,7 @@ public class CommandSilentTeleport implements CommandExecutor
         }
 
         player.teleport(target.getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
-        player.sendMessage(MessageEngine.get("message.teleport.teleport", MessageEngine.hsh("player", target.getName())));
+        player.sendMessage(MessageEngine.get("message.teleport.teleport", MessageEngine.pair("player", target.getName())));
         return true;
     }
 }

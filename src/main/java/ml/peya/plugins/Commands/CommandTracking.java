@@ -70,7 +70,7 @@ public class CommandTracking implements CommandExecutor
         }
 
         PeyangSuperbAntiCheat.tracker.add(sender.getName(), args[0]);
-        sender.sendMessage(MessageEngine.get("message.tracking.track", MessageEngine.hsh("player", args[0])));
+        sender.sendMessage(MessageEngine.get("message.tracking.track", MessageEngine.pair("player", args[0])));
 
         return true;
     }

@@ -134,7 +134,7 @@ message:
     thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの懸念を理解しており、できるだけ早急に審査いたします。"
     cancel: "%%red%%報告を閉じました！"
   drop:
-    success: "%%green%%成功：報告の削除に成功しました！"
+    success: "%%green%%報告の削除に成功しました。"
   kick:
     test: "%%green%%テストモード%%red%%%%bold%%で、プレイヤーをキックします。"
   aura:
@@ -144,8 +144,8 @@ message:
     "
     lynx: "%%yellow%%Testing, please wait…"
   trust:
-    add: "%%green%%プレイヤー %%name%% を信用しました！"
-    remote: "%%red%%プレイヤー %%name%% の信用を解除しました。"
+    add: "%%green%%プレイヤー %%name%% を信用リストに追加しました！"
+    remove: "%%red%%プレイヤー %%name%% を信用リストから削除しました。"
 
   auraCheck:
     result:

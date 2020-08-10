@@ -2,11 +2,11 @@ package ml.peya.plugins;
 
 import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.properties.*;
-import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.chat.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang.*;
+import org.bukkit.Material;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
@@ -140,7 +140,7 @@ public class Events implements Listener
             @Override
             public void run()
             {
-                JsonNode node = Packets.getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
+                JsonNode node = RandomPlayer.getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
 
                 tab.getProfile().getProperties().put(
                         "textures",
@@ -173,7 +173,7 @@ public class Events implements Listener
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDrop(PlayerDropItemEvent e)
     {
-        if (Books.hasPSACBook(e.getItemDrop().getItemStack()))
+        if (e.getItemDrop().getItemStack().getType() == Material.WRITTEN_BOOK && Books.hasPSACBook(e.getItemDrop().getItemStack()))
             e.setCancelled(true);
     }
 }

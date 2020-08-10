@@ -28,6 +28,13 @@ public class Run implements Listener
 
         e.setCancelled(true);
 
-        PeyangSuperbAntiCheat.item.getItems().parallelStream().filter(items -> Objects.equals(Item.getType(itemStack), items.getExecName())).forEachOrdered(items -> items.run(e.getPlayer(), Item.getTarget(itemStack)));
+        Item item = PeyangSuperbAntiCheat.item;
+
+        for (IItems items : item.getItems())
+        {
+            String type = items.getExecName();
+            if (Objects.equals(Item.getType(itemStack), type))
+                items.run(e.getPlayer(), Item.getTarget(itemStack));
+        }
     }
 }

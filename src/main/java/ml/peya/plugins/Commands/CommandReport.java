@@ -33,7 +33,7 @@ public class CommandReport implements CommandExecutor
 
         if (args.length == 0)
         {
-            sender.sendMessage(MessageEngine.get("error.minArgs", MessageEngine.hsh("label", label)));
+            sender.sendMessage(MessageEngine.get("error.minArgs", MessageEngine.pair("label", label)));
             return true;
         }
         else if (args.length == 1)
@@ -41,7 +41,7 @@ public class CommandReport implements CommandExecutor
             if (args[0].equals("help"))
             {
                 sender.sendMessage(MessageEngine.get("base.prefix"));
-                sender.sendMessage(MessageEngine.get("command.report.help", MessageEngine.hsh("label", label)));
+                sender.sendMessage(MessageEngine.get("command.report.help", MessageEngine.pair("label", label)));
                 return true;
             }
 

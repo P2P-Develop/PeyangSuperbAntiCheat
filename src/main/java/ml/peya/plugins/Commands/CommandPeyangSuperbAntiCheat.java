@@ -55,7 +55,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 Kick.run(sender, args);
                 break;
             default:
-                sender.sendMessage(MessageEngine.get("error.main.notFoundCommand", MessageEngine.hsh("label", label)));
+                sender.sendMessage(MessageEngine.get("error.main.notFoundCommand", MessageEngine.pair("label", label)));
         }
 
         return true;
