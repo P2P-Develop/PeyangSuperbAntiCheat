@@ -56,11 +56,11 @@ public class MessageEngine
     }
 
     /**
-     * フォーマット直したいよぉふえぇっていう時にうってつけ
+     * フォーマットしたいよぉふえぇっていう時にうってつけ
      *
      * @param text   Before
-     * @param format フォーマット規則
-     * @return AFTER
+     * @param format After
+     * @return AFTER^2
      */
     public static String format(String text, HashMap<String, Object> format)
     {
