@@ -43,7 +43,8 @@ Argument enclosed in <>, it represents the necessary command, Enclosed in \[\] i
 - `fooperm.bar`
 
 This block of code represents a permission.  
-**WARNING: No authority group is described. Before referring to permissions, make sure you understand it.**  
+  
+> **NOTE: No permission group is described. Before referring to permissions, make sure you understand it.**  
 
 ---
 
@@ -330,7 +331,7 @@ It cannot be run from console.
 
 ### Usage
 
-- /pull \<PlayerName\>
+- /pull \<PlayerName\>  
   Pull \<PlayerName\> to the executed player.
 
 ### Permission
