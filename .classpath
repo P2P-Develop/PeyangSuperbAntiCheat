@@ -9,7 +9,7 @@
   <classpathentry kind="var" path="M2_REPO/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.10/junit-4.10.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/21.0/guava-21.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/20.0/guava-20.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/md-5/bungeecord-chat/1.12-SNAPSHOT/bungeecord-chat-1.12-SNAPSHOT.jar"/>
@@ -42,5 +42,4 @@
   <classpathentry kind="var" path="M2_REPO/io/netty/netty-common/4.1.25.Final/netty-common-4.1.25.Final.jar"/>
   <classpathentry kind="var" path="M2_REPO/io/netty/netty-resolver/4.1.25.Final/netty-resolver-4.1.25.Final.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/sf/trove4j/trove4j/3.0.3/trove4j-3.0.3.jar"/>
-  <classpathentry kind="var" path="M2_REPO/net/md-5/bungeecord-api/1.12-SNAPSHOT/bungeecord-api-1.12-SNAPSHOT-javadoc.jar"/>
 </classpath>
