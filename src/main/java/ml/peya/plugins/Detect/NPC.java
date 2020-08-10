@@ -7,6 +7,7 @@ import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
+import org.bukkit.craftbukkit.v1_12_R1.scoreboard.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
 
@@ -64,6 +65,14 @@ public class NPC
                 connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
 
                 connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+
+                ScoreboardTeam team = new ScoreboardTeam((((CraftScoreboard) Bukkit.getScoreboardManager().getMainScoreboard()).getHandle()), player.getName());
+
+                team.setPrefix(EnumChatFormat.RED.toString());
+
+                connection.sendPacket(new PacketPlayOutScoreboardTeam(team, 1));
+                connection.sendPacket(new PacketPlayOutScoreboardTeam(team, 0));
+                connection.sendPacket(new PacketPlayOutScoreboardTeam(team, Collections.singleton(npc.getName()), 3));
 
                 connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
 
