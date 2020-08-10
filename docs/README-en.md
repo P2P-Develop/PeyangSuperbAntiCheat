@@ -1,49 +1,49 @@
 # PeyangSuperbAntiCheat(PSAC) English Documentation
-
+  
 [Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [FAQ](#what-is-learning-function)
-
-**WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).
-If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**
-***VERY WARNING***: **With this plugin, detectopm will run +4 timers at the same time.
-In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**
+  
+**WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
+If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
+***VERY WARNING***: **With this plugin, detectopm will run +4 timers at the same time.  
+In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**  
 For more information on the number of threads, see [Plugin Threads Summary](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt).
 
 ## Overview
 
-Anti Cheat plugin for Bukkit / Spigot / PaperMC based server.
-It has been confirmed to work with version 1.12.2.
-
-This plugin is a **Cheat Report Management** / **Cheat Detection Test** plugin.
-
-In the description of **hack**, the meaning of hacking (cracking) of the server itself is ambiguous, so it is written as **cheat**.
+Anti Cheat plugin for Bukkit / Spigot / PaperMC based server.  
+It has been confirmed to work with version 1.12.2.  
+  
+This plugin is a **Cheat Report Management** / **Cheat Detection Test** plugin.  
+  
+In the description of **hack**, the meaning of hacking (cracking) of the server itself is ambiguous, so it is written as **cheat**.  
 
 ### Markdown formatting (This area is not so important)
 
-This document defines a simple markdown grammar to make it easy for users to understand.
+This document defines a simple markdown grammar to make it easy for users to understand.  
+  
+> **WARNING: foo is __not__ bar, please understand.**  
 
-**WARNING: foo is __not__ bar, please understand.**
-
-**This represents information that all users should know.**
-
+**This represents information that all users should know.**  
+  
 ```tst
 This is message[CLICK]
 ```
 
-This means that the messages within the code block will send to the Minecraft chat area.
+This means that the messages within the code block will send to the Minecraft chat area.  
+  
+> **NOTE: foo and bar.**  
 
-**IMPORTANT: foo and bar.**
-
-This means important items that the user should read.
-
+This means important items that the user should read.  
+  
 - /foo \<bar\> \[player\]
 
-This list a represents command and argmuents.
-Argument enclosed in <>, it represents the necessary command, Enclosed in \[\] indicates an arbitrary command.
-
+This list a represents command and argmuents.  
+Argument enclosed in <>, it represents the necessary command, Enclosed in \[\] indicates an arbitrary command.  
+  
 - `fooperm.bar`
 
-This block of code represents a permission.
-**WARNING: No authority group is described. Before referring to permissions, make sure you understand it.**
+This block of code represents a permission.  
+**WARNING: No authority group is described. Before referring to permissions, make sure you understand it.**  
 
 ---
 
@@ -135,7 +135,7 @@ $ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/dow
 
 ## Permissions
 
-Commands are always assigned one or more premissions.
+Commands are always assigned one or more premissions.  
 Other settings can be done using permissions.
 
 |      Permission     |     Assigned Command     | Description                                                                                                                               | Default Value | Permission Group |
@@ -182,38 +182,39 @@ This section are describe plugin commands.
 
 ### Description
 
-Send the content of the report selected and submitted by the player to the staff.
-**WARNING: It is not a command to automatically summon NPC.**
-The staff can see if the player is doing the same as the report.
-User can also set the format for the report.
-
+Send the content of the report selected and submitted by the player to the staff.  
+**WARNING: It is not a command to automatically summon NPC.**  
+The staff can see if the player is doing the same as the report.  
+User can also set the format for the report.  
+  
 ```tst
 [PeyangSuperbAntiCheat] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ [CLICK]
 ```
 
-Staff can check the contents of the report with the `[CLICK]` button.
-
+Staff can check the contents of the report with the `[CLICK]` button.  
+  
 ```tst
 [STAFF] [ADMIN] Fishy: Report of <PlayerName> <Reason1>, [Reason2]...
 ```
 
-This report format is lets them know who reported who and why.
-**WARNING: This report format is compatible with the Hypixel Lynx Mod (Keep leaking users down).
-This mod may be Bannable on Hypixel server, so never use this on Hypixel server.
-[Developer](https://github.com/peyang-Celeron) does not take any responsibility.**
+This report format is lets them know who reported who and why.  
+  
+> **WARNING: This report format is compatible with the Hypixel Lynx Mod (Keep leaking users down).  
+> This mod may be Bannable on Hypixel server, so never use this on Hypixel server.  
+> [Developer](https://github.com/peyang-Celeron) does not take any responsibility.**
 
 ### Usages
 
-- /report \<PlayerName\>
-  Player can execute this command with this argument to open a book where you can select the reason for the report.
+- /report \<PlayerName\>  
+  Player can execute this command with this argument to open a book where you can select the reason for the report.  
   If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.
 
 - ![#008000](https://via.placeholder.com/15/008000/000000?text=+) Click to send report in "レポートを送信" , or
 
 - ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Click the "レポートをキャンセル" to discard.
 
-- /report \<PlayerName\> \<Reason1\> \[Reason2\]...
-  Player can execute this command with this argument to report directly in chat/console without using a book.
+- /report \<PlayerName\> \<Reason1\> \[Reason2\]...  
+  Player can execute this command with this argument to report directly in chat/console without using a book.  
   **Can use an alias for this reason. Please read below.**
 
 ### Reasons
@@ -246,24 +247,24 @@ The books are sorted in the order they are displayed.
 
 ### Description
 
-Executing this command will summon an NPC that spins around the player at a constant speed.
-When an NPC is attacked a certain number of times, it kicks that player.
-Also, to use the reach mode, add the "-r" argument to the first or second argument.
+Executing this command will summon an NPC that spins around the player at a constant speed.  
+When an NPC is attacked a certain number of times, it kicks that player.  
+Also, to use the reach mode, add the "-r" argument to the first or second argument.  
 Reach mode can scan the radius and check the reach.
 
 ### Usage
 
-- /aurabot \<PlayerName\>
+- /aurabot \<PlayerName\>  
   Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
 
-- /aurabot \<PlayerName\> \[-r\]
+- /aurabot \<PlayerName\> \[-r\]  
   Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
 
 ### Permission
 
 - `psac.aurabot`
 
-Manages the permission to execute the summon commands of Aurabot and Watchdog.
+Manages the permission to execute the summon command of Aurabot.  
 Players with this permission can summon Watchdogs.
 
 ## /acpanic
@@ -276,16 +277,16 @@ Players with this permission can summon Watchdogs.
 
 ### Description
 
-This command always summons the NPC that is trying to move behind the player.
-When an NPC is attacked a certain number of times, it kicks that player.
+This command always summons the NPC that is trying to move behind the player.  
+When an NPC is attacked a certain number of times, it kicks that player.  
 Also, to use the reach mode, add the "-r" argument to the first or second argument.
 
 ### Usage
 
-- /acpanic \<PlayerName\>
+- /acpanic \<PlayerName\>  
   Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
 
-- /acpanic \<PlayerName\> \[-r\]
+- /acpanic \<PlayerName\> \[-r\]  
   Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
 
 ### Permission
@@ -302,14 +303,13 @@ Also, to use the reach mode, add the "-r" argument to the first or second argume
 
 ### Description
 
-Fire a **invisible arrow** at the specified player.
+Fire a **invisible arrow** at the specified player.  
 This allows you to see if the player is knocking back.
 
 ### Usage
 
-- /testkb \<PlayerName\>
-
-Fire invisible arrow at \<PlayerName\>.
+- /testkb \<PlayerName\>  
+  Fire invisible arrow at \<PlayerName\>.
 
 ### Permission
 
@@ -325,12 +325,13 @@ Pull the specified player.
 
 ### Description
 
-Pull the specified player to the executed player.
+Pull the specified player to the executed player.  
 It cannot be run from console.
 
 ### Usage
 
 - /pull \<PlayerName\>
+  Pull \<PlayerName\> to the executed player.
 
 ### Permission
 
@@ -350,10 +351,9 @@ Displays the player's kick (BAN) history **remaining in this plugin**.
 
 ### Usage
 
-- /bans \[\-a | ban | kick\] \<PlayerName\>
-
-Displays the BAN history of player specified by \<PlayerName\>.
-Add \-a to show all bans and kicks.
+- /bans \[\-a | ban | kick\] \<PlayerName\>  
+  Displays the BAN history of player specified by \<PlayerName\>.  
+  Add \-a to show all bans and kicks.
 
 ### Permission
 
@@ -365,20 +365,19 @@ Displays the mods installed by the specified player.
 
 ### Description
 
-If the mod loader is Forge, can view the mods installed by the player.
+If the mod loader is Forge, can view the mods installed by the player.  
 The response is returned as the Mod ID.
 
 ### Usage
 
-- /mods \<PlayerName\>
-
-Displays the mods of the player specified by \<PlayerName\>.
+- /mods \<PlayerName\>  
+  Displays the mods of the player specified by \<PlayerName\>.
 
 ### Permission
 
-- `psac.mods`
-
-**WARNING: This command use `psac.mods` permission. Not `psac.mod` permission.**
+- `psac.mods`  
+  
+> **WARNING: This command use `psac.mods` permission. Not `psac.mod` permission.**
 
 ## /target
 
@@ -386,15 +385,14 @@ Tracks the specified player as a target.
 
 ### Description
 
-Executing this command gives utility items.
-These items allow you to execute useful commands with a click.
+Executing this command gives utility items.  
+These items allow you to execute useful commands with a click.  
 Dropping a gived item, clears all items.
 
 ### Usage
 
-- /target \<PlayerName\>
-
-Start tracking \<PlayerName\>.
+- /target \<PlayerName\>  
+  Start tracking \<PlayerName\> with utility items.
 
 ### Permission
 
@@ -402,9 +400,9 @@ Start tracking \<PlayerName\>.
 
 ## /tracking
 
-Tracks the specified player as a target without utility items.
-
-**IMPORTANT: /target give utility items, but /track does not.**
+Tracks the specified player as a target without utility items.  
+  
+> **NOTE: /target give utility items, but /track does not.**
 
 ### Alias
 
@@ -412,18 +410,16 @@ Tracks the specified player as a target without utility items.
 
 ### Description
 
-Tracks the specified player.
+Tracks the specified player.  
 If tracking is currently started and no argument is specified, tracking will be stopped.
 
 ### Usages
 
-- /tracking \[PlayerName\]
+- /tracking \[PlayerName\]  
+  Start tracking \[PlayerName\].
 
-Start \[PlayerName\].
-
-- /tracking
-
-Stop track if tracking.
+- /tracking  
+  Stop track if tracking.
 
 ### Permission
 
@@ -440,8 +436,8 @@ Trust specified player.
 
 ### Description
 
-Adds the specified player as a "trusted player".
-If already trusted, can remove player from "trusted player".
+Adds the specified player as a "trusted player".  
+If already trusted, can remove player from "trusted player".  
 Players without the `psac.trust` cannot run the following commands on trusted players.
 
 - [/aurabot](#aurabot)
@@ -452,14 +448,19 @@ Players without the `psac.trust` cannot run the following commands on trusted pl
 - [/track](#tracking)
 - [/psac kick](#arguments)
 
+### Usage
+
+- /trust \<PlayerName\>  
+  Add / Remove \<PlayerName\> into "trusted player".
+
 ### Permission
 
 - `psac.trust`
 
 ## /silentteleport
 
-Causes the specified player to teleport you or the specified player.
-Used for utility item internal commands in the [/target](#target).
+Causes the specified player to teleport you or the specified player.  
+Used for utility item internal commands in the [/target](#target).  
 It also suppresses broadcast messages on servers that do not have Essentials installed.
 
 ### Aliases
@@ -473,13 +474,11 @@ Teleports to the player specified in the argument.
 
 ### Usages
 
-- /stp \[PlayerName\]
+- /stp \[PlayerName\]  
+  Teleport to \[PlayerName\].
 
-Teleport to \[PlayerName\].
-
-- /stp \[PlayerName\] \[DestPlayerName\]
-
-Teleport \[PlayerName\] to \[DestPlayerName\].
+- /stp \[PlayerName\] \[DestPlayerName\]  
+  Teleport \[PlayerName\] to \[DestPlayerName\].
 
 ### Permission
 
@@ -502,55 +501,45 @@ The main command of this plugin. It works by adding an argument.
 
 #### /psac help
 
-Displays help for this plugin command.
-**Commands related to management ID can be used in `psac.mod`, but they are not shown in help.**
+Displays help for this plugin command.  
+**Commands related to management ID can be used in `psac.mod`, but they are not shown in help.**  
 Players with `psac.mod` or `psac.admin` permissions will also see the following help:
 
 #### /psac view \[Pages\]
 
-See the report submitted by player.
+See the report submitted by player.  
 The reports are sorted by highest risk, five at a time.
 
 #### /psac show \<ManagementID\>
 
-View details of the report sent by player.
-You can run this command from the player to view the report details by book.
+View details of the report sent by player.  
+You can run this command from the player to view the report details by book.  
 If you run it from the console, it will appear as a log in the console.
 
 #### /psac drop \<ManagementID\>
 
-**Completely** discards the reports sent by the player, except the command execution log.
-**The log of the deletion itself is not displayed. Be careful when discarding.**
+**Completely** discards the reports sent by the player, except the command execution log.  
+  
+> **NOTE: The log of the deletion itself is not displayed. Be careful when discarding.**
 
 #### /psac kick \<PlayerName\> \[test\]
 
-Kick player specified by \<PlayerName\>.
+Kick player specified by \<PlayerName\>.  
 Specifying \[test\] as the second argument kick player in test mode.
-
-### What is \<ManagementID\>
-
-\<ManagementID\> is a 32-character alphanumeric string that is automatically assigned when the player submits the report.
-This ID is displayed when you run `/psac view` from console.
-Also, can execute commands related to the \<ManagementID\> from the player.
-
-### Why not execute BAN command in this plugin
-
-The plugin is concerned about falsely banning players due to false Watchdog detection.
-Therefore, the plugin does not ban players _automatically_.
 
 ### Bloadcast Messages
 
-**The following broadcast message will be played when the player is kicked.**
+**The following broadcast message will be played when the player is kicked.**  
 
 ```tst
 [PEYANG CHEAT DETECTION] ハッキング、または不適切な発言によってゲームからプレイヤーが削除されました。
 ```
-
+  
 ```tst
 違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！
 ```
 
-This message is sent when the watchdog automatically detects a cheat.
+This message is sent when the watchdog automatically detects a cheat.  
 For staff kicks, you will only broadcast secondary message.
 
 ### Kick reasons
@@ -607,14 +596,26 @@ In this plugin, the following config is set by default.
 
 ## What is this NPC\(WatchDog\)?
 
-The Watchdog calls the NPC with a random username using the API "[RandomUserGenerator](https://randomuser.me/)" by [@randomapi](https://twitter.com/randomapi).
+The Watchdog calls the NPC with a random username using the API "[RandomUserGenerator](https://randomuser.me/)" by [@randomapi](https://twitter.com/randomapi).  
 The NPC skin is displayed randomly by referring to the UUID skin settting.
+
+### What is \<ManagementID\>?
+
+\<ManagementID\> is a 32-character alphanumeric string that is automatically assigned when the player submits the report.  
+This ID is displayed when you run `/psac view` from console.  
+Also, can execute commands related to the \<ManagementID\> from the player.
+
+### Why not execute BAN command in this plugin?
+
+The plugin is concerned about falsely banning players due to false Watchdog detection.  
+Therefore, the plugin does not ban players **automatically**.
+
 
 ## What is learning function?
 
-This plugin has a learning function that automatically adjusts the parameters using the actual cheat material.
-Learning cheat data can improve the accuracy of function decision to kick or not.
-The learning function of this plugin uses machine learning using a neural network.
+This plugin has a learning function that automatically adjusts the parameters using the actual cheat material.  
+Learning cheat data can improve the accuracy of function decision to kick or not.  
+The learning function of this plugin uses machine learning using a neural network.  
 **This feature is under development. Please note that this function cannot learn completely.**
 
 ### Learning mechanism
@@ -623,27 +624,24 @@ The learning feature of this plugin adjusts key parameters by iteratively calcul
 
 ## What is *[YAML resources file](../src/main/resources)*?
 
-When you build PeyangSuperbAntiCheat.jar with `mvn package`, `mvn shade` is automatically executed.
+When you build PeyangSuperbAntiCheat.jar with `mvn package`, `mvn shade` is automatically executed.  
 You can edit this file to change the plugin resources before building.
+  
+***[message.yml](../src/main/resources/message.yml)***  
 
-***[message.yml](../src/main/resources/message.yml)***
-
-*[message.yml](../src/main/resources/message.yml)* is **automatically included jar resource** and **used to change the PSAC message**.
-
+*[message.yml](../src/main/resources/message.yml)* is **automatically included jar resource** and **used to change the PSAC message**.  
 Programmatically, YAML is referenced as a node tree and anything related to **dynamic references such as "%%name%%" cannot be changed**.
+  
+***[config.yml](../src/main/resources/config.yml)***  
 
-***[config.yml](../src/main/resources/config.yml)***
-
-*[config.yml](../src/main/resources/config.yml)* is **automatically included jar resource** and **the plugin references the pre-build configuration dataset**.
-
+*[config.yml](../src/main/resources/config.yml)* is **automatically included jar resource** and **the plugin references the pre-build configuration dataset**.  
 See [here](#config-settings) for configulation settings.
+  
+> **WARNING: Configulation settings will not change unless you change them before building.**
+  
+***[plugin.yml](../src/main/resources/plugin.yml)***  
 
-**WARNING: Configulation settings will not change unless you change them before building.**
-
-***[plugin.yml](../src/main/resources/plugin.yml)***
-
-*[plugin.yml](../src/main/resources/plugin.yml)* contains assembly information, commands, and permission settings for the plugin itself.
-
+*[plugin.yml](../src/main/resources/plugin.yml)* contains assembly information, commands, and permission settings for the plugin itself.  
 **Therefore, do not change much.**
 
 ## What utility items for [/target](#target)?
@@ -665,18 +663,18 @@ Player can get the following utility items by executing [/target](#target).
 
 ## What library does this plugin use?
 
-See *[pom.xml](../pom.xml)* for more information.
+See *[pom.xml](../pom.xml)* for more information.  
 It also describes the Source codes / Libraries / APIs used in [Thanks](#thanks).
 
 ## Did you find any bugs or errors?
 
-We accept bugs and errors related to [GitHub issues](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues).
+We accept bugs and errors related to [GitHub issues](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues).  
 I think that it will be handled by about two people, so please feel free to post.
 
 #### Assignees
 
 Depending on the language of the problem, the following persons are responsible for resolution:
-
+  
 - Japanese issue assignee: [@peyang-Celeron](https://github.com/peyang-Celeron) (and [@Lemonade19x](https://github.com/Lemonade19x)?)
 - English issue assignee: [@Potato1682](https://github.com/Potato1682)
 
@@ -694,13 +692,15 @@ This plugin uses the following Libraries / APIs / Source codes:
 - [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
 - [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/tree/master/docs/memo">)̶̡̢̡̧̡̧̢̢̡̡̨̨̡̢̧̨̞̘͖̦͈͎̰͔̯͉̻͍͎̻̙̝͖̤̤̠͎̜̗̜̞̪̞̳̳̫͇̜̜̭̣̥͍̲̝͚̟̠̺͎͍̠̩͕͉͇͔͚̙̭̱̺͚̭̣̥͕̙̪̣̰͙̲͚̙̟̲̩̗̯͇̫̬͈̜̣̝͈̗̮͕̝͈̟̬͍͚̜̗͖̭̗͍̰̫̟͎̠͇͚̫͖̹̲͔̝̱̝̜̮̲̥̼͍̯̪͙̬̩̠̦͎̫̖̰̞͇͖̘̱͍̥̟͕͔͍͉̳̤͎̠͍͖̩̼̫̞̫͎͖̟͕̻̟̬̗̰̲̦͖̬̫͍̮̟̖͚̤̝̖̥́̃͊̄̓̊̀̐́͂̌̌̽̈́͒́̍͆̀̇͊̏́͛͛̀̊̊̏̈̓́̈́̔̃̃̃͗͊̒̿̓̚͘̕̕̕̕͜͜͜͝ͅͅͅͅ.̵̡̧̡̨̢̨̡̨̨̡̢̨̧̡̨̧̧̢̨̨̡̧̡̡̧̨̡̡̛̛̛̛̛̛̛̜͓̭͕̗͍̱̼͔̦̹̼͉͔̜͎̩͖̤̮͎͙̙̹̗͙͇͓̱̱̝̣̭̟̭̙̻̝͚̖̻͙̫̠̰̠͖̮̞̱̱̗̺̺̗̞̝̦̖̮͉͇̱̗͎̪̫͎͔͔̝͖̮̤̖͚͔̜̞̝͕̬̱͈̱̦̩̙̱̗̦̼̺͇̭̤͈̞̳͍̤̭̟̫͙̞̰̹̪̱͈̱̺̣̫͇͔̙͕̹̱͉̝̙̙͙̹͉̥̺̜̲̮̳̯̯̖͈͓̰̥̙̻̹̳̘͈̗̺͖̬͍̘̘̦͕̫͉͚̹̲͖̫̯̙̠͉͍̰̫͎̼̫̻͖̖̺̰̥͖͎̦͓͇̮͚͖̳̻̻̭̻̜̥̥͈̤̥͇̺̙̬̜̞̖̗̻̺͓̺̙̯̯̰̯̱͇̰̤̌̓̉̊͛̾͐͊͐͛̃̾̾͋̓̒̋̓̒̂̓̐̆̑̎̂̆͂͌̅͛̊͒̾́̑̒́̅̑̍͐̓̾͐̐̾̌̒̀́̔̑͐͌̈́͐̑̑̓̓̐̆̀͒̍̐̎̈̈͌͂͂́̀̓̊͌̅̊̏̓͌͊̐̊̌̇̑̈́̀͗͌̿̃̊͐̓̊̏̇͆́̽̂̃̅͑̌̾̔̋́́̂͑̂̓̅̍̀̋̾̑̀͊̑̓͆̓̇̅̀̂̉̈́̄͒̓́̂͂̽̃̈́͆̓̃̀̈́̅̎̓̄͋̽͗̋̏̊͐̉̀̑͑̍͋̓͂̾̅̄̊͑̄́̆̓̅́̀͑̉̋̈́͛̈́͒̽͋̄̉̉̈́̔̽̽̓́̑̂͐͌̑̌̆̎͌̄̌͒̿͋̆͒͗̔̓̅̇̏͂̆̓̇͒̈́̐́̆͂͛́͂̽̊͗̇̽̓͊̄̆̋̉̎̔̂́̑̂͗̔̉̂̈́̕̚̚͘͘͘̚͘̚̚̕͘̕͘̚͘̚̚̕͜͜͜͜͜͜͠͠͝͝͝͝͠͝͝͝͠͝͝͝͠͝ͅͅͅ/̷̧̡̡̢̡̢̢̧̨̧̡̧̧̢̡̢̧̨̧̢̡̧̧̛̛̛͈̫̳̮̩̱͈̮͚̯͖̞͕͇͇̜̠̟͉̗̘̥̪͉̠͉͖̻̰̹̯͔̘̝̻̜͙̬̪̲̭̙̮̻͚̝̹͎̥͈͍̣͎̻̘͙̜͍̻̞̺͎͍̰̙̦̞͉̠̦̞͕̩̱͉͚̭̩̝͍̠̼̳͈̰̫̫͔̯̝̲̘͉̤͙͚̙̯͉̠͎̠͉̺͈͎͕̝̟̹͇͎̘̰̤̺̘̙̖͕̫͓̳͎̪̞̼͚̭̥̘͙̭͇͔̹̯͙̝͈͇̯̲̹̬͙̰͈̣̻͔̭̦͇̙̻͇͙̖̫̹̤̘̺̤̩̜̲̰̳̞̦̹̱́̾͆͒̈́̊̽̎̒͊͌̂̏́̐̿̅́̈͛̂̈̓̍̽̑͒̀͒͒͑̆̽̎͛́͐̒́̄̒̈́̃̌̐̅̃̅͂̌̃͂̽̾̐̒͛̄̀͒̍̄͆͌̿̂͊͛̏͑̇̇͐̈́̂̉̌́͊͋̿͑̒̂͂̔̈́́͆̀̓̓̇̊̄͊̊͊̉͂̀͊̄̃̓͊̾̅̅̂̑̃̎͐̃̍͂́̈̃̌̔̽̓͊̓͋̿̈́̿̏͗̌̽̔̃͗̍̊̈́̋͐̐̄̈́̐̈́̿̋̅̓̀̍̐̈́̉̃̑̈̓̐̆̇͐̆̽̔̎̒́̽́́̌͗͛̓̂́͋͂͌͆̽̈́̿̅̑̄̉̏̈̚͘̕͘͘͘̚̚̕͜͜͜͠͝͠͝͝͝͝͠͠͝͠͠͝͝͝͠͠͝ͅͅͅͅͅͅ:̷̢̡̡̡̡̧̧̩̥͚̣̹̥͉̱̩̘̲̮̠̺̦̘̭̟̭̮͎̭̖̝͈͔̟̬̩̯͔͎̣̼̫̞͕͍̗̮̼͉̮̞̟̻͖̼̦̜̙̭̪̳̖̘̥̈͜͝ͅͅ$̶̡̢̧̡̧̧̢̨̢̢̢̨̨̢̡̡̡̡̧̨̢̢̡̡̢̢̨̢̧̡̛̛̛̛̛̛̱̬̻̮̩̪͎͇̞̰͉̦̥̖̬͎̥̹͎̰͎̤̤̺̯̺̻̖̩̪͎͇̪̬̝̯͚͇͈͔͚̯͕̹̣̳͚̫͓̩̳̦̪̝̪̗̯͎̤̪̜̞̯͈̺̜͚̲̭̜̭̤̠͇̯̪̞͔̤̝̤̖̼̟̜̺̣̦̰̮̟̼̣̤̦̻̖͍͔̰̭̖̤̺̣̤̞̖̱̣̱͕̫͉͓͔̜̟̻̪͈̰̠̞͙̗̗̼͖̫̹͈͕̠͕͉̯̰̖̭̫̤̳͎̜̙͍͚̣̖̙͚̖̠͙̰̩͚̮̼͔͓̼̹͖͖̮̟̲͎̜̫͉̖̭̞̳̥͓͖̬̞̳̩̱͔̭̭͈͕̯̝͍̼̮̝̥̹͔̱̰̬̦̥̖̩͓̘̭̘͍͕͔̯̮̻̘͔̞͇̞̪̲̝͉͓̰̳̣̺̪͈̣̮̱͖̦̹͎̟͎̖̱̥͙̪͇̘̘̝͐̆͗̒̿̈̌͆͋̒̑́̍̓́͆͒̍̒̀̑̾̄́̔̍̇̔̈́̾͛͆̑̂̄͛̒͌̈́͑͆͛̎̊̈͛̏̽͊̋̌̋̄̄̂͂̀̽̈́̌͌̎͑͊̑̀͐͗̓̾̂̎̅̓́͗̀̓͆̾̇͒̈́̃͆͂̅͛̊̍̽̃̏̀͗̃̾̌̈́̆͛̏̉́̅́̔͒̐̇̂̏̌͒̄̋̓̔͑͂̑̈̑̊͑̇̌͒̔̔͆̔̇̑̓̔́̑͒́̈͋͊̓̑̾͗͛͐̿̊̇͛̆͆̂̾̔͗̐̑̂̈͋͗͘̕̕͘͘̚͘̚̚̕̚̕͜͜͜͜͜͜͜͜͝͝͝͠͠͠͝͠͝ͅͅͅͅͅͅͅ"̵̡̧̡̡̢̡̡̧̨̢̢̨̛̜̙͖͓̯̘̼͈͉͖͎͕̪̫̭͙̼̗̺̥̫̖̫̖̠͕͎̳̳̭̫̫̝̤̞̞̰͙̯̳͙͖̩̬̰̤̯̯͍̻͇͎͈̪̳̼̫̰͎͇͇̳̙̘̜͎͚̦̞̬̜̙͇͙̤̖̮̰̘̫͉̞̩̯͈͎̞͙̣̰͇̹͕̮̥̭̻̳͎͈̖̝̲̳̭̤͇̥̘͖͉̥̦̝̞̞͚̰̻͇͂͌͌̈́͑̋̀̑̆͑͛͌͌̈́̿̋́̈́̀̓̾͐͑̂̇̈͋̀̓̐́͒̎̍̈̅͊͋́̅̂̌͊̔͂̌̾̅̈́̒͂̍̾͗̇̋̽̊͌͐́̄́͑̀͐̇͒̓̈́̂̈́̉͗̏̒̄͑̓̈́̎́̒̓̈̍͒͐͌̽͂̓͋̓͘͘̚̚̚͜͝͝͝͝͠͝͠͝ͅͅͅͅͅ1̸̨̧̨̡̛̠̞̭͖̮͍̺͔̠͕͖̪̘̫̭̩̳̻̳̠͖̪̫͉̜̜̟̯̥̲̜̥̪̹͇͔̘͍̣͇̪̰͇͕͚̭̥͙͎̹̮͚͕̲̪̲̀̿̑̋͊̓̎̓̇̌̒̇̅̓͋̈́̈́̈͆̉̓̐̄̊͗͗͐̕͘͜͜͜͜͝͠͝͝͝ͅͅ$̴̨̡̧̧̡̢̢̢̡̡̢̨̧̡̡̢̢̧̡̨̨̡̢̨̡̛̛̛̗͍̝̺̟͚͚͓͓͓͙͖̙̮͈͉̰͚̲͔̭̘̳͉̫̪̫̱͔̫̜̞̻͕̟̬̗̲͔͖̦͓̘̗͍̙̥͓̗͍͈̝̥̭̳̯̱̠͍͚͈̘͉̗̞̟͖͉͎̦̹̼̳͕͖͙͓̣͖̣͙̟̝̦͓͉̪̬͍̝̥̘͇͙̻̰͉͓̰̗̟͇̼̯̪̟̖̫̩͎͍͖̺̫̰̭͙͈͔̗̲͇̞̻̖̣͎͚̜̪̟̗̤͈͈̲̹͖͇̬̹͈͈͔͎͍̳̥̻̰̭̹̞͓͉̘̺̫̞̺͔̪̭̮̰̤̪̞̰̹̰̼̗̦̦̻̠̳͈̲̱̰̗̦̺̩̗̝̯̯̥̩̦̝̣̳̟̘̩͖̦̪̘̘̣̹̗̙̤͉̟͙̘̣̫̥̗̗͉͔̮̈̿̃͊̇̀͒̀͐͆́̀͛͆̑͆̈͐̅̏̓͆̈́̓̐͌͗̔̔̓̓̂̊̈̾́̑́͆̃̇͒̀͋̑͌́̀̅͂́̅͑́͑͊̀̈́̐́͛́̓̐̄̈́̄̉̔̆̀̾́̽͗͐̋̉́̐̀̊̀̈́͑̾̉͌̒̍̅̈́͑́͌̏̊̉̎̓̋͗̌̏̔͘͘͘͘͘͘̚̚͜͜͜͜͜͜͜͜͠͠͠͝͠͝͝͝͠ͅͅͅͅ'̶̡̨̡̢̡̧̢̢̡̧̧̡̨̢̡̧̧̢̨̨̨̢̡̧̧̛̼̳̲̝͕̱̺̱̤̙̮̲̫̰̮̱̙̪̰̫͎̝̱̘͓̤̜̜̘̱̻̦̠͓͎̘̭̤̝̳̹̯̲̘̳̠͇͈̭̯̲̙̪̠̰̰͎̯͓̙̟̭̞̣̱̩̖̙̩͍̥̫͇͉̭̘̺̠̪̼̹͕̫̦̼̗͚͎̟̫̦͈̻̘͍͇̥̰̻͕̥̞͎͖͈̼͉̖̪̻̥̬͈͙̼͓̩͍̝̜̫̘͎͉̘͓̟͕̥̻̟̫͎͉͚̳̱̮̬͈̠̪̗̟̱̬̙̞̫̯͖͚̫̖̺̝͈̺͔̬̫͍̮̗̺̼̤̝̠̬͍͙̦͍͍͚̦̩͕̻̬̮̫͍͚̣̙̞̩̫̝̠͈̘̙̞̥̱̥̣͈̖̭͉̻̬̩͉͍̮̪̙̲̯̟̥̤̺̤̰͍͖̬͔̬̣̳͍̤̠̤̝̫͍͕̠̣͆̊͗̑̄̓̆̐̀̓́̇͜͜͜͜͜͜͜͜͠͠ͅͅͅͅͅͅ^̷̛̛̛̛̛̛̛̥̮̱͉͇̝̼̝͑̊̅̈̇͐̔̎̌͊̋̀̊̈̂͒̍̈́̆̈̑̈́̑́̐͑̿̐̒̎̈́͊̏͛̒̎͌́̈͗̊̊̈́͑͒̊̃̈́́̾̿̏̃͌͋̈́̃́͗͊̄̈́̅̒͗̽͗̉̈̐̇͛̊̽̍̿̄̔̎͂̊͌͗͋͂̇̄̽̈́̽̌͒͊̾̊̾̐̀̎͂̂̾͒̓̔͊͆̈́̒͆̽̆́̂̎͗͆̊͒̅̈́̒̋̿̈́͗̅́͂͂͐͛̎̇̃͆̀̆̈͐͊̒́́̑̐̓̈́͋͂͛͆̐͛̈́̈̀̒̔̎͗̓̓͗̃̆͑͋͑̈́̊̃͂̀̐͋͆̄̌͊͋̏̃͐̉̓̓͂̈́̓͌̈́̒̈́̐́̿̂̿̐̀̿͒̈́͆̎̈́̌̏̏͋̉͋̌̀̾͛̽̈́̄̄̊̃͋́̾̎̐̑͊̆́͐͗̄͊̈́͗̄̾͑̿̀̓́̍̏̒̄͘̚̚͘͘̕̕̕̕͘̕͘͘͘͘̕̕͠͠͠͝͠͝͝͠͝͝͝͝͠͠͝\̸̧̢̧̨̨̢̡̡̧̡̢̨̢̨̡̡̧̨̨̡̛͚͕̠̰͔̹̳̞̹̖̟̠̮͇̞̩̯͇̫̺̪͖̭̩͓̝͕͎͓̮̥͓̩͍̗̻̞͇̠͙͚̖̫̖̬̜̩̪̳͔̪̳̻̦̙̬̟̩̦̮̺̯̞̼͔̯̹͙͚͕͔̮̻̞̰̠̻̙̺̲͓̟͖̳̟̝͚̭̼̞͖͈͖̖͉̟͓̙͇̥̗̥̗̗̯͓̘̙̤͚͎̯̜̪̣̦̠̗̜̹̼̣͉̦̦̞̹͍̘͈̰͉̖͓̯̖̬̖͙͇̜̥͙͔̥̘̩̹͔̲̻̭̺̫͕̭̞̖̹̗̤͍̳̻̰̮̭̞̯̖̞̰̬̘͉̫͚̥͇̥͓̫͍͙̤͙̱̳͔̫̖͔̺̥͚̙͎̗̦̮̲͍͓̺͉̲͓̊̾̔̐͂͋͗̆̀͂̅̊̂͑̎́̆̂͗̕̚͘͜͜͜͜͜͜͜͝͝ͅͅͅͅͅͅͅͅͅ-̵̢̢̧̡̧̧̢̡̢̢̧̢̢̧̢̢̡̨̨̛̛̛̛̝̖̳̗̩̝̱̗͉̟͖̜͙̹̩͖͓̘̞͇̙̬̩̮̮̯̜̦̻̤̫̗̘̖̱͔͖͇̥͓̰̞͉̯͉͕̟̳̹̹̫͚͙̺̜̗̯̪͉̥̭̼̱̺̱̬͚̮̞̤̬̗͎̯̘͔̝̪̺̪̮̩̙̦̫̲̹̤͉͍̘̠͍̟͕̫͙̫̣̤͍̰̰̬̻͉̮̦̼̦̞̹̣̥͙͕̯̦͕̙̥͕̰̱͍͕̪̯̬̝̟̻̰̹̼͇̺̦̘̮͓̰̹̥̪̟̲̠̞͎̫̯̹̫̲̪̯͚̭͈͎͖͖̼̙̥̹̬̖͍͕̙̤̩̻̦̮͔͚̱̳̜̻̝̼͓̹̬̝͚͖̰͈̤͈̫͚͉̳͙̠̟͚͛̆̽͑̒̓̀̏̌́̒̎͛̉̅̈̏̓̈́̒̔̈́̂̽̅͛̔̆̓̑̾̅̏̄̋͑̽͐̈̏̎͐̋̂̇͒͛̃̄͛͛̑̑̉̾͛͑̉́͆̑̐̾̈́͗̅̽̅̂̀̓̏͐͂̉̽̑͂͆͌̎̈́͌̒͆̍̌̎̊̄̋͑̓̎̽̂̂̓̀͛̆͗̀͋̉͋̓̉͛͒̊́̅̆́̎̆̑͊̀̈́͊̈́̆̆̀͆͛͗̐͛̉́͊̉̏͛̂̑̃̀̋͆̃̔̀̃̾͂͆͂̈́̔̔͐͗̂̒̑͛̐͋͐̈́̇̓̀̊̑͋̏̈́̂̽̋̽̉͗̈͐͆̈́͋̄̾̐̕̕̕͘͘̕̕̕̚̚̕͘̕̚͜͜͜͜͜͜͠͝͝͠͝͠͝͝͝͝͝͝͠ͅͅͅͅ=̶̨̛̛̛̛̯̪̘̜̰̱̖̯̳̻̣͖̅̏̾̓̏̓̈́̈́̿̑̄͋̈́̅̅̏͌͌̿͊̽͌̉̔͋͋̔̌̓̆͆͛̽͛̓̑̍͋́̀̏̐̋͒̄́̋̅̀̃̒̎̀̾̌̓̅͗̆́̏̑̋̈̒̆͐̎̎̌̎̓́̒͑̔̀̍̆̈́͌̿̇̅̈̆̅̀͆̋͒͛̂̑̐̈́͆̅͗̋̓̌̂̀͛̿̀̾̓̒́̅͑̌͗̎̀̏͊̌́̎͛͛̾͋̅̓̇̂̓̂͂͐̈̅̊̔͑̅͗̇̅̌͂̈́͗̀͗̑̏͒̎̾̕͘̕̕̕̕̕͘̚͘̚̕͘̚͘͝͠͠͝͝͝͠͠͝͠͝͠͝_̷̢̨̧̨̢̡̧̨̛̛̛̛̠̖̖̘̖̼͎̗̺̥͈̣̥̬̦̙̹̻̬͚̳̟̞̣̖̜͎͉̯̘̺̬͖̮̫̘̰̪̩͔̮̫̲̬̹͓̜̺͈͚̲͙͍̦͕̲̳̝̦̪͗̀͂̔̍̏̀̉̓͋̄̀̿̔͑̀̾̓̓̊̿̾͋͌̉̈́͛̍̋̎͂̍͂̑̈́̂̓̎͂̓̂́͂̌̓̈́̅̅́̌͒̃̊̎̐̈̄̈́͒͌̓̌͋̈́̂̐́̽̽̉̔̄͌͋̽̈́̇̄͂͌͑̀̋͊͋̊͊̓̈́̑̈̏̊̈́̀̅̆̐̅̊͂̑̇͆̀̃̈́͑̌͒̈́͌͒͋́̓̋͐̾̽̂̉̈́͆̆̂̉̔̆̑̇̈̐̅̄̅̎̔͊̊̍͑͐̈́͐͋̽̅́̈́͛͂́̈́͌̾̏̄͊͋̐̏́͆̑̏̍̂̕͘̚͘͘̚̕̚̕̕̕͘̚͜͜͜͝͝͝͠͝͝͠͝͝͠͝͠ͅͅͅ/̸̭̏̾̌̍̽̊͌̎̓͐͊͐̽̅̾̅͊͂̈́̔̕̕͠͝͝\̵̦͋̍͐̎̔̍́̒͒̅͆̆̋̏͆̾̈́̋́̏̋̓̎͐͛̈́̆͌͒̊̂̅̓̐̃͊̄̌͗̂̆͛̈́͌̓̈̌͂́̌̍̈́́̒̌̈́̂͌̿͛͂̂͆͐͘͘̚͘̚͘̕͝͝͠͠}̸̡̢̧̡̡̡̨̢̢̧̧̡̧̨̧̢̧̨̢̨̨̨̨̛̛̛̛͕̙͙͙̫̝͓̮͚̠̺͔̻͔̳̬̤̫̞̼̱̮̼̥̤̬̻͙̳͔͙̘̱̟̣̜̟͚͇̝͙͔͈̟̘̦̫̥̫̯̲̖̻̬̞̭̣͖̘͉͈̖̺̞͍̻̥͈͍͕͚̫̘̙̞̣̲̱͍̹̰͖͓͓͍̟̜͎͙͙̳̬̤͓̲̫͇̠̝̯̜̞̭̮̟̬̤̝̤͓̤͉͙̻̟̜̝̬͍̭͕͙͕̪͓̥̰̺͇̥̬̳̹̪̩̰̪͚̤̫̠͉̩͓͉͙̭̭̦̝͇̯͍͍̪̫̩̦̙͚̤̭̮̹̘̮̤̱͔̹̗̟̪̞̯͚̻͍̫̝͙̙̘͙̞̫͚̹̣̝̩̮̲͉͖̟̺͔̞͖͙̬̪͇̬̑̌̈́͗̽͑̿̎̍̈́̈́͂̂͌̀̄̈́̀̍̈́̎̐̓̋̏̀̉̇̓͋̉̃͂̐͗̂̋͂̅̔̉̍̇́̓̿̃́͋͆͌̀͂̃̄͒̽̾̌̂͋̀̊̀̄̑̋̽̇́̾̈̂̍͗̇̉̏̂̌̿̃̍͌͒̏̈͊̏͆͗͊̐͗̀͋̀͌̌͒̔̓͂̄̐͒͑̿̒̏͛͂̎̈́̉̅́̒͛͂̾̅̎͆̈́͑͌͂́͒̒͊̿͋͑͒͆̈́̓͛̃́̀́̉͑̽͊̈́̆̊͑̐̓͋̃̓̆̑͑́̊̐̆͗̔̑̾͒̿̍́̌̈́͛̊̐̇̈́͐̎̽̒̄̇͋̇́͌͒͆͒̉̎̑̓̃̉͆̈́̄̆͊̍͑͂̿̈́̎̆̈́̓̃͒̂͋̏͌̊̐͂͆̋̎̀͐̚̚̚̕͘͘̕̚̚͘͘͜͜͜͜͜͜͜͝͝͝͝͝͠͠͝͝͝͝͝͝͝͝͝͝͝͝ͅͅͅͅͅ{̴̨̢̧̡̧̢̧̢̡̢̨̨̨̢̢̧̧̢̨̨̢̧̡̡̧̨̡̧̧̨̨̨̧̧̛̛̛̛̛̛̛͓͖̥̰͖͉̠͖̣̣̲͚͔̻̭͍̝̣͓͎̱̠̘͖̯̻̘̘͉̪̺̰̲̺̳̤̤̻͙̤̯̮̲͈̜͉̲̙̺̠̖͚̖̥̗̰̹͖͈̱̲̤̘͈̭̘̬̰̳̦̝͕̼͚̘̝̠̹̥̯̱͖̥̺̟͙̯̖̣͓̤̗͚̳̥̰̗̲̫̝̲͎̩͓͚̘͖͓͎̜̥̟̗͙̘̞͙͉̱̭̜̤͎̙̳͖͉̮͉̰̮̝̙̩͓͎̦̟̰̼̥͎̩͓̠̦̩̻̖͚̻̤̼̥͖̠̹̜̻̪̞̜̞̺̫̗̮͓͍̟̻̙̣̯͈̤͖͖̣̗̯̦̞̝̺̣͉̳̮͖̦̦̞̫͎͇̪͔͔̻͙͕̭͖͕̲̳͓̝̺̝͍̣͍̤̩̜̭̲̲̼̪̖̬̬̗̝̳̑̔̈͊͊̾̈́̈́̐̀̈́̾̅̒̒͌̉͑́̒̑̊̀̅̌̊̎̃̏̆̄̂̇̀̈̂̿͑͛͌̈́̏̇͗̒͆̓̓͆̌̉̓̔̈́̾͒̉̍̿̀͗̌͒̓̏͒̂͆͆̈́͗͂͛͒̒̀͂̇̍́̅̉̿̑̃́͑̐̿́͒͂͊̄̈́̍̊͑̋̿̔̅͛̽͆̈́̆́̈̀̏̈́̓̈́̈̃̃͊́̈́͂͆̂̔͒́̀̉̒̈́̌̉̋̓̉̑̃̿̒̊́̓͂̍́͊̈́̔͛̆̌̽̄̐̂̌͐͌̇͋͋̆̑͐͂̾͗̽̌̅́̅̌̄̇̿̑̅͗̈̂͐͗̒͐̾͐̇̊̍̋̉̐͆̀̌͋̂͐͒̈́̇̾̊͌͊̐̇̊̈̔̅̃͑͑͂́͑̍͆̒̇̕͘͘̚̚̕̕͘͘̕̕͘̚͘͘̚͘͘͜͜͜͝͝͠͝͠͝͝͝͝͝͠͝͠͝͝͝ͅͅͅͅͅͅͅ@̸̨̢̧̢̡̢̡̢̧̡̛̛̛̛̼̞͚̞͙̪̹̫̥̙̻̘̳̮̩̠͇̙͓͕͉͍̖̝͕̥̺͖͔͙̪̱͔̳̗͓̤̳̬͉͎͇͎͔̬̱̱̹͚͍̹͙͕͔̙͍̮̘̜̖͙͉͈͙͚̯̱̰̬̺̘̳̱͚̙̲͙̹̟͈̰͕͕̗̮͍̻͇̟͈̳̼̭̹̜͚͕͉̬̏̓̋̈́̃̿̌̈́̇̔̎̒̈͐̍̎̇̀̈̐̓͛̌͒̄͛̎͋̓̈́́͑̿̈̀̑͂̏̓̀̂̄̆̋̇̒́̉͌̉͊͐̈́̋̿̈́̉͊̇̾͂͗͊͑̾̓̌̄͒͌̍̾̿͛̈́̿́̄̿̀̅͑̆̓̓̌̍́̆̇̓̈́̀͗̉͗̓̍̆̿̔͛̂̀͊̅̓̏̿̆̈̐̀̈́̑̊̿͊͂̒̀͐͌̂̽̎́͛͂͌͗̏̍̾͑̎̈́̈́̎͆͌͋̾̽͑͂̓̌̂́͗͊̑̽̿̐̋̐̔̓͂͘̕͘̕̚͘͘̚̕̕͘̕͜͜͜͜͠͝͠͝͝͝͝͠͝͠͠͝͠ͅͅͅ:̵̡̡̼̻͙͚̱̥̰͚͓̙̲̝̝̱̱̲͓͙̭̮͚̙̝̤͕̣̘̟̪̣̌̏̀͊͛̈́̅̂̂̔́̃̇͆̂̾̒͋͝ͅͅ;̸̡̢̡̨̧̧̨̧̧̢̡̧̛̛̛̛͓̦̻̮̘̪͇̙̝͍̺̦͈͎̫͍̦̳̬͓̭͈̫͙̟̬͖̫̼̮͖̙̰͚̥̹͇̠̦̥̠̦̣͖̱͉̻̤̜̦̭̰̺̮͖͎̩̥͕̭̳̝̟̺̖̥͙̬̟̪̝̺̻͎̞̗͙͍̤̥̬̻̦͎͇̯͐̀̓̇͋̈́̽͊̔͂̑̎́̀̅̀̀͒͋̋̆̒̂͐̀̎̾̆̇̏͗̎̓̊̿͌̐̽̀͋̊͒͌͛̄̎͋̏̈̂͆̄̋̔͆̅͐̑̔͋̾̉̒͛̾̀͗̓̂̋̎̿̍̈́̇̔̈́̐̍̑͒̌̈̃͗̀̋̀̍̐́͑͛̀͂̈́̊͗̎͗̀͌̿͊̂̅̇̌͆̈́̉̽̄̉͌̋͑͑̈́͒̉̒́̀̈́̅̔̊̍̂̀̾̂̓̎͛́́͂̂̿̈̃̀̌̕͘̚͘͘̚̕͜͜͝͠͝͝͠͠͠͠͝͝͠͝͝ͅ</a>
