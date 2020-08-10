@@ -27,7 +27,14 @@ public class Run implements Listener
         if (e.getItem() == null || e.getItem().getType() == Material.AIR || Item.canGuiItem(itemStack)) return;
 
         e.setCancelled(true);
+        
+        Item item = PeyangSuperbAntiCheat.item;
 
-        PeyangSuperbAntiCheat.item.getItems().parallelStream().filter(items -> Objects.equals(Item.getType(itemStack), items.getExecName())).forEachOrdered(items -> items.run(e.getPlayer(), Item.getTarget(itemStack)));
+        for (IItems items : item.getItems())
+        {
+            String type = items.getExecName();
+            if (Objects.equals(Item.getType(itemStack), type))
+                items.run(e.getPlayer(), Item.getTarget(itemStack));
+        }
     }
 }

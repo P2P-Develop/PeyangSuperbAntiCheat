@@ -38,7 +38,7 @@ public class TrustModifier
                     }
                     else
                     {
-                        statement.executeQuery("InSeRt InTo TrUsT vAlUe ('" + player.getName() + "');");
+                        statement.executeQuery("InSeRt InTo TrUsT vAlUeS ('" + player.getName() + "');");
                         sender.sendMessage(MessageEngine.get("message.trust.add", MessageEngine.hsh("player", player.getName())));
                     }
                 }
