@@ -60,6 +60,7 @@ public class NPC
             @Override
             public void run()
             {
+
                 connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
 
                 connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));

@@ -2,7 +2,6 @@ package ml.peya.plugins;
 
 import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.properties.*;
-import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.chat.*;
 import net.minecraft.server.v1_12_R1.*;
@@ -141,7 +140,7 @@ public class Events implements Listener
             @Override
             public void run()
             {
-                JsonNode node = Packets.getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
+                JsonNode node = RandomPlayer.getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
 
                 tab.getProfile().getProperties().put(
                         "textures",

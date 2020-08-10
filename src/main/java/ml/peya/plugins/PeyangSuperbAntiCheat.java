@@ -134,15 +134,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             }
         });
 
-        protocolManager.addPacketListener(new PacketAdapter(this, PacketType.Play.Server.PLAYER_INFO)
-        {
-            @Override
-            public void onPacketSending(PacketEvent event)
-            {
-                Packets.playerInfo(event);
-            }
-        });
-
 
         if (!Init.createDefaultTables())
             Bukkit.getPluginManager().disablePlugin(this);
