@@ -21,7 +21,6 @@
   <!-- Build environment properties                                           -->
   <!-- ====================================================================== -->
 
-  <property file="${user.home}/.m2/maven.properties"/>
   <property file="maven-build.properties"/>
 
   <property name="maven.build.finalName" value="PeyangSuperbAntiCheat-0.3"/>
@@ -186,13 +185,11 @@
     <condition property="junit.missing">
       <and>
         <isfalse value="${junit.present}"/>
-        <isfalse value="${maven.test.skip}"/>
       </and>
     </condition>
     <condition property="junit.skipped">
       <or>
         <isfalse value="${junit.present}"/>
-        <istrue value="${maven.test.skip}"/>
       </or>
     </condition>
   </target>
