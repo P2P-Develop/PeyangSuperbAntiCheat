@@ -1,6 +1,6 @@
 # PeyangSuperbAntiCheat(PSAC) English Documentation
   
-[Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [FAQ](#what-is-learning-function)
+[Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [FAQ](#what-is-this-npcwatchdog)
   
 **WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
 If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
