@@ -151,7 +151,10 @@ public class Books
      */
     public static boolean hasPSACBook(ItemStack book)
     {
+        if (book.getType() != Material.WRITTEN_BOOK)
+            return false; //Exception回避
+
         BookMeta meta = (BookMeta) book.getItemMeta();
-        return book.getType() == Material.WRITTEN_BOOK && meta.hasTitle() && meta.getTitle().equals("-") && meta.hasAuthor() && meta.getAuthor().equals("AntiCheat Dev") && meta.hasLore() && meta.getLore().size() == 1 && meta.getLore().get(0).equals(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book");
+        return meta.hasTitle() && meta.getTitle().equals("-") && meta.hasAuthor() && meta.getAuthor().equals("AntiCheat Dev") && meta.hasLore() && meta.getLore().size() == 1 && meta.getLore().get(0).equals(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book");
     }
 }
