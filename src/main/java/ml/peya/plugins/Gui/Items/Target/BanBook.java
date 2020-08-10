@@ -21,7 +21,7 @@ public class BanBook implements IItems
     {
         ItemStack stack = new ItemStack(Material.PAPER);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(MessageEngine.get("item.banBook.title", MessageEngine.hsh("name", target)));
+        meta.setDisplayName(MessageEngine.get("item.banBook.title", MessageEngine.pair("name", target)));
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);
         return stack;

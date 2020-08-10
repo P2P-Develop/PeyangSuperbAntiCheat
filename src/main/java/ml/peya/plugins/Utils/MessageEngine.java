@@ -14,13 +14,15 @@ import java.util.*;
  */
 public class MessageEngine
 {
-    /** %%name%%などカラーコード以外に関係する動的な参照データをハッシュマップとして結びつける。
+    /**
+     * %%name%%などカラーコード以外に関係する動的な参照データをハッシュマップとして結びつける。
+     *
      * @param path 動的データタイプ。
-     * @param obj 結びつけるオブジェクト。
-     * get(String, HashMap)との併用で使用する。
+     * @param obj  結びつけるオブジェクト。
+     *             get(String, HashMap)との併用で使用する。
      * @return 結びつけたハッシュマップ。
      */
-    public static HashMap<String, Object> hsh(String path, Object obj)
+    public static HashMap<String, Object> pair(String path, Object obj)
     {
         HashMap<String, Object> map = new HashMap<>();
 

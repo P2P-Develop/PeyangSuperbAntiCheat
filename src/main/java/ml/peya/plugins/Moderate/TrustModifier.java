@@ -34,12 +34,12 @@ public class TrustModifier
                     if (rs.next())
                     {
                         statement.execute("DeLeTe FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
-                        sender.sendMessage(MessageEngine.get("message.trust.remove", MessageEngine.hsh("player", player.getName())));
+                        sender.sendMessage(MessageEngine.get("message.trust.remove", MessageEngine.pair("name", player.getName())));
                     }
                     else
                     {
                         statement.execute("InSeRt InTo TrUsT vAlUeS ('" + player.getName() + "');");
-                        sender.sendMessage(MessageEngine.get("message.trust.add", MessageEngine.hsh("player", player.getName())));
+                        sender.sendMessage(MessageEngine.get("message.trust.add", MessageEngine.pair("name", player.getName())));
                     }
                 }
                 catch (Exception e)
