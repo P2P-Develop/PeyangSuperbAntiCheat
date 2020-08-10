@@ -76,7 +76,7 @@ public class Packets
             for (CheatDetectNowMeta meta : PeyangSuperbAntiCheat.cheatMeta.getMetas())
             {
                 if (meta.getId() != field.getInt(entity))
-                    return;
+                    continue;
                 if (meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() || Criticals.hasCritical(e.getPlayer()))
                     System.out.println(meta.addVL());
             }
