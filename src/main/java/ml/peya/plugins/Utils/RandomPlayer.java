@@ -54,7 +54,7 @@ public class RandomPlayer
 
         List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
         JsonNode skinNode = getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
-        
+
 
         GameProfile profile = new GameProfile(node != null ? UUID.fromString(node.get("results").get(0).get("login").get("uuid").asText()): UUID.randomUUID(), name);
 
