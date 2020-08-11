@@ -11,6 +11,9 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * 戻るボタン
+ */
 public class BackButton implements IItems
 {
     @Override

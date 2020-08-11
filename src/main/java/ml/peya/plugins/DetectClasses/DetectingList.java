@@ -6,7 +6,7 @@ import org.bukkit.entity.*;
 import java.util.*;
 
 /**
- * 検出リスト(?)を管理する。
+ * チート判定管理クラス
  */
 public class DetectingList
 {

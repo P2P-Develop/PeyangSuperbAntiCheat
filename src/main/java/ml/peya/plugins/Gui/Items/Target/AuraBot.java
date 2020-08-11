@@ -13,6 +13,9 @@ import org.bukkit.inventory.meta.*;
 import java.lang.reflect.*;
 import java.util.*;
 
+/**
+ * 回るBot
+ */
 public class AuraBot implements IItems
 {
 

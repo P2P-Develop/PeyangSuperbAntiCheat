@@ -8,6 +8,9 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * ページ2に行くやつ
+ */
 public class ToPage2 implements IItems
 {
     @Override

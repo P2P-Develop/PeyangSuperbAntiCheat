@@ -16,7 +16,7 @@ import java.util.*;
 public class View
 {
     /**
-     * 関数を稼働させる。
+     * コマンド
      *
      * @param sender イベントsender。
      * @param args   引数。

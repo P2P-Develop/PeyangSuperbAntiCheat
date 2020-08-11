@@ -20,7 +20,6 @@ import java.util.*;
 
 /**
  * イベントハンドラをめちゃくちゃ管理します。
- * 使ってなさそうなやつもある。
  */
 public class Events implements Listener
 {

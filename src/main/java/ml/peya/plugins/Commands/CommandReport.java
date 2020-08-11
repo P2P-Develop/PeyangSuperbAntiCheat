@@ -24,7 +24,7 @@ public class CommandReport implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
-     * @return 処理を終わらせるだけ。Always true。
+     * @return 正常に終わったかどうか。
      */
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {

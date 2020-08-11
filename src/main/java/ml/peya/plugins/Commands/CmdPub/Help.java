@@ -14,7 +14,7 @@ import java.util.*;
 public class Help
 {
     /**
-     * 関数を稼働させる。
+     * コマンド
      *
      * @param sender イベントsender。
      * @param label  参照するコマンドラベル。

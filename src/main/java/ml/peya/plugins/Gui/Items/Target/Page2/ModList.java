@@ -8,6 +8,9 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * Mod一覧
+ */
 public class ModList implements IItems
 {
     @Override

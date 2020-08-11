@@ -8,6 +8,9 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * BanList
+ */
 public class BanBook implements IItems
 {
     @Override

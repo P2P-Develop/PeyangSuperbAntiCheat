@@ -4,7 +4,7 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 
 /**
- * アイテムたちの実装を支援するインターフェース。
+ * アイテムたちの実装を強制するインターフェース。
  */
 public interface IItems
 {

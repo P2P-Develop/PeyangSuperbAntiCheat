@@ -5,7 +5,7 @@ import org.bukkit.*;
 import java.util.stream.*;
 
 /**
- * Duplicateなんですがそれは
+ * グラフじぇねれーと
  */
 public class OptGraphGenerator
 {

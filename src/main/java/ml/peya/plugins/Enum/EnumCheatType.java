@@ -8,11 +8,11 @@ import java.util.*;
 public enum EnumCheatType
 {
     /**
-     * Fly, Flying
+     * Fly
      */
     FLY("Fly", false, "fly", "flight"),
     /**
-     * KillAura, ka
+     * KillAura
      */
     KILLAURA("KillAura", false, "killaura", "aura", "ka"),
     /**
@@ -20,7 +20,7 @@ public enum EnumCheatType
      */
     AUTOCLICKER("AutoClicker", false, "autoclicker", "ac", "autoclick"),
     /**
-     * Speed, timer
+     * Speed, Timer, BHop
      */
     SPEED("Speed", false, "speed", "bhop", "timer"),
     /**
@@ -28,11 +28,11 @@ public enum EnumCheatType
      */
     ANTIKNOCKBACK("AntiKnockback", false, "antiknockback", "antikb", "akb", "velocity"),
     /**
-     * Reach, Reaching
+     * Reach
      */
     REACH("Reach", false, "reach"),
     /**
-     * Dolphin, bhop
+     * Dolphin
      */
     DOLPHIN("Dolphin", false, "dolphin");
     /**

@@ -3,7 +3,7 @@ package ml.peya.plugins.Enum;
 import net.md_5.bungee.api.*;
 
 /**
- * Docめんｄ
+ * 重大度
  */
 public enum EnumSeverity
 {

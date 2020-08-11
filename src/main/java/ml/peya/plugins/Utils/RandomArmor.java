@@ -9,7 +9,7 @@ import java.util.stream.*;
 
 /**
  * 防具をランダムにNPCに着せるクラス。
- * 革装備はあるけど色はつきません。
+ * 革装備はランダムな色を付与
  */
 public class RandomArmor
 {

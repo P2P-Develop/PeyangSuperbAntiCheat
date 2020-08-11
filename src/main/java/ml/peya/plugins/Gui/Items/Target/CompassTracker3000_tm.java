@@ -14,6 +14,9 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * コンパストラッカー
+ */
 public class CompassTracker3000_tm implements IItems
 {
     @Override

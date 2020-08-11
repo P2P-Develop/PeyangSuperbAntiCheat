@@ -3,7 +3,7 @@ package ml.peya.plugins.Enum;
 import org.bukkit.command.*;
 
 /**
- * Doc(ry
+ * 検出タイプ
  */
 public enum DetectType
 {

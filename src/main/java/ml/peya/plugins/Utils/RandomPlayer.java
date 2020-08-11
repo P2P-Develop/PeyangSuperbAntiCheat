@@ -17,7 +17,6 @@ import java.util.*;
 
 /**
  * プレイヤーをランダムに取得する関数が突っ込まれています。
- * プレイヤー誰かが餌食になります。
  */
 public class RandomPlayer
 {

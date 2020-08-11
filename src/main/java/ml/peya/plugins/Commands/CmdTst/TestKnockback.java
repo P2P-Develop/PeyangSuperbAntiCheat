@@ -21,7 +21,7 @@ public class TestKnockback implements CommandExecutor
      * @param cmd    コマンド。
      * @param label  ラベル。
      * @param args   引数。
-     * @return 処理を終わらせるだけ。Always true。
+     * @return 正常に終わったかどうか。
      */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)

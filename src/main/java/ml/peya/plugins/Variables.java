@@ -12,6 +12,9 @@ import org.bukkit.scheduler.*;
 import java.util.*;
 import java.util.logging.*;
 
+/**
+ * 変数群
+ */
 public class Variables
 {
     static final int __BSTATS_PLUGIN_ID = 8084;

@@ -7,6 +7,9 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * 背後に張り付くBOT
+ */
 public class AuraPanic implements IItems
 {
     @Override

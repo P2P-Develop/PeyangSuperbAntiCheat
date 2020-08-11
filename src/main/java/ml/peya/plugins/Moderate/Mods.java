@@ -6,7 +6,7 @@ import org.bukkit.entity.*;
 import java.util.*;
 
 /**
- * 何のMod入れてるか調べるやつ。
+ * 何のMod入れてるか取得するやつ
  */
 public class Mods
 {

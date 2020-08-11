@@ -8,6 +8,9 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * TestKB
+ */
 public class TestKnockBack implements IItems
 {
     @Override

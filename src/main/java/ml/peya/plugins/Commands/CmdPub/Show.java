@@ -18,7 +18,7 @@ import java.util.*;
 public class Show
 {
     /**
-     * 関数を稼働させる。
+     * コマンド
      *
      * @param sender イベントsender。
      * @param args   引数。

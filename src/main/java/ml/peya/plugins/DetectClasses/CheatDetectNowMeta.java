@@ -36,7 +36,7 @@ public class CheatDetectNowMeta
     }
 
     /**
-     * テスト可能かどうかのゲッター。
+     * テスト中かどうかのゲッター。
      *
      * @return テスト可能かどうか。
      */
@@ -46,7 +46,7 @@ public class CheatDetectNowMeta
     }
 
     /**
-     * テスト可能かどうかのセッター。
+     * テスト中かどうかのセッター。
      *
      * @param canTesting テスト可能かどうか。
      */

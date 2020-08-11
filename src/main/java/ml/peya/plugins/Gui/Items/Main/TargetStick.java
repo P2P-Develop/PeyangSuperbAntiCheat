@@ -10,6 +10,9 @@ import org.bukkit.inventory.meta.*;
 
 import static ml.peya.plugins.Utils.LookingUtils.getLookingEntity;
 
+/**
+ * ターゲット棒
+ */
 public class TargetStick implements IItems
 {
     @Override

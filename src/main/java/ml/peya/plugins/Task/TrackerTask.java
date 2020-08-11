@@ -4,7 +4,7 @@ import ml.peya.plugins.*;
 import org.bukkit.scheduler.*;
 
 /**
- * トラッキングの更新する定期タスク。
+ * トラッキングの情報を更新する定期タスク。
  */
 public class TrackerTask extends BukkitRunnable
 {

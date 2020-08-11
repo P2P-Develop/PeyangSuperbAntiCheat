@@ -7,7 +7,7 @@ import org.bukkit.entity.*;
 import java.util.*;
 
 /**
- * AIRとか表示できるわけがない意味わからんアイテム以外の事を指す。
+ * GUI用のアイテム
  */
 public class GuiItem
 {
