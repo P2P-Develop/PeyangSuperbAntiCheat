@@ -13,9 +13,14 @@ import java.util.*;
  */
 public class KillCounting
 {
-
+    /**
+     * プレイヤー。
+     */
     private final HashMap<UUID, Integer> players;
 
+    /**
+     * コンストラクターでplayersのインスタンスを生成する。
+     */
     public KillCounting()
     {
         players = new HashMap<>();
