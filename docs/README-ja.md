@@ -505,7 +505,7 @@ Mod IDの変換は実装しま~~す~~ん。
 
 ### NPC について
 
-現NPCは、[@randomapi](https://twitter.com/randomapi)によるAPI「[RandomUserGenerator](https://randomuser.me/)」を使用して、  
+現NPCは、同梱された英単語リストを使用して、  
 ランダムなユーザー名を持つプレイヤーを召喚しています。  
 スキンはランダムですが、現段階では、コンフィグに登録されUUIDのスキンを参照して、ランダム表示されます。
 
@@ -593,7 +593,6 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 ### 謝辞
 
 このプラグインは、以下のライブラリ / API を使用しています。  
-[RandomApi/RandomUserGenerator](https://randomuser.me/)  
 [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)  
 [dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*)](https://dev.bukkit.org/projects/protocollib)  
 [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)  

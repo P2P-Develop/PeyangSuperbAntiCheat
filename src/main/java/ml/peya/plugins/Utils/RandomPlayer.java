@@ -29,15 +29,10 @@ public class RandomPlayer
      */
     public static EntityPlayer getPlayer(World world)
     {
-        JsonNode node = Utils.getRandomUser();
-
-        String first = node == null ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): node.get("results").get(0).get("name").get("first").asText();
-        String last = node == null ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): node.get("results").get(0).get("name").get("last").asText();
-
         Random random = new Random();
+        String first = random.nextBoolean() ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): RandomWordUtils.getRandomWord();
+        String last = random.nextBoolean() ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): RandomWordUtils.getRandomWord();
 
-        first = first.replaceAll("[^a-zA-Z0-9]", RandomStringUtils.randomAlphanumeric(0));
-        last = last.replaceAll("[^a-zA-Z0-9]", RandomStringUtils.randomAlphanumeric(0));
         if (random.nextBoolean())
         {
             first = develop.p2p.lib.LeetConverter.convert(first);
@@ -45,7 +40,7 @@ public class RandomPlayer
         }
 
         String name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ? "19" + random.nextInt(120): "");
-        if (name.length() > 14)
+        if (name.length() > 16)
             name = random.nextBoolean() ? first: last;
 
         MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
@@ -56,7 +51,7 @@ public class RandomPlayer
         JsonNode skinNode = getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
 
 
-        GameProfile profile = new GameProfile(node != null ? UUID.fromString(node.get("results").get(0).get("login").get("uuid").asText()): UUID.randomUUID(), name);
+        GameProfile profile = new GameProfile(UUID.randomUUID(), name);
 
         if (skinNode != null)
             profile.getProperties().put("textures", new Property("textures", skinNode.get("properties").get(0).get("value").asText(),
@@ -79,7 +74,7 @@ public class RandomPlayer
             HttpsURLConnection connection;
             connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
 
-            connection.setReadTimeout(1000);
+            connection.setReadTimeout(1500);
 
             if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK)
             {
