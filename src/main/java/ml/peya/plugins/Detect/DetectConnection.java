@@ -6,7 +6,6 @@ import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
-import org.apache.commons.lang3.tuple.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;

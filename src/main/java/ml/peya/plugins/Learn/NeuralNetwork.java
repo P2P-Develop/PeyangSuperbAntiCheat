@@ -1,7 +1,7 @@
 package ml.peya.plugins.Learn;
 
 import ml.peya.plugins.*;
-import ml.peya.Utils.*
+import ml.peya.plugins.Utils.*;
 
 import java.util.*;
 import java.util.function.*;
