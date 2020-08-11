@@ -10,10 +10,13 @@ import java.util.*;
  */
 public class DetectingList
 {
+    /**
+     * 検出をまとめたメタをまとめるArrayListを定義する。
+     */
     private final ArrayList<CheatDetectNowMeta> meta = new ArrayList<>();
 
     /**
-     * サイズを取得する
+     * サイズを取得する。
      *
      * @return サイズ。
      */
