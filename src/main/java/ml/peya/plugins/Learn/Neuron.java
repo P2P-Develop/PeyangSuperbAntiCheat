@@ -15,7 +15,7 @@ public class Neuron
     private double sum;
 
     /**
-     * ...なんだったっけこれ
+     * 入力用値。
      */
     private double value = 0.0;
 
