@@ -1,7 +1,8 @@
+
 package ml.peya.plugins.Learn;
 
 import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
+import org.apache.commons.lang3.tuple.*;
 
 import java.util.*;
 import java.util.function.*;
@@ -64,7 +65,7 @@ public class NeuralNetwork
     public double commit(Pair<Double, Double> data)
     {
         double inputLayerBias = 1.0;
-        inputLayer = new double[]{data.getValue1(), data.getValue2(), inputLayerBias};
+        inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
         middleLayer = new Neuron[]{new Neuron(), new Neuron()};
         outputLayer = new Neuron();
 
@@ -93,8 +94,8 @@ public class NeuralNetwork
      */
     private void learn(Triple<Double, Double, Double> data)
     {
-        final double outputData = commit(Pair.of(data.getValue1(), data.getValue2()));
-        final double correctValue = data.getValue3();
+        final double outputData = commit(Pair.of(data.getLeft(), data.getMiddle()));
+        final double correctValue = data.getRight();
 
         final double learningRate = PeyangSuperbAntiCheat.config.getDouble("npc.learn");
 
