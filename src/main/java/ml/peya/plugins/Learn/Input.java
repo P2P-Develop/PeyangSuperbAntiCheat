@@ -5,14 +5,19 @@ package ml.peya.plugins.Learn;
  */
 public class Input
 {
-
+    /**
+     * 入力用値。
+     */
     private double value;
+    /**
+     * 重み(シナプス間結合強度)。
+     */
     private double weight;
 
     /**
      * コンストラクター。
      *
-     * @param value  ...なんこれ
+     * @param value  入力用値引数。
      * @param weight 重み(シナプス間結合強度)。
      */
     public Input(double value, double weight)
@@ -22,9 +27,9 @@ public class Input
     }
 
     /**
-     * ゲッター。
+     * 入力用値のゲッター。
      *
-     * @return valueを参照。
+     * @return 入力用値引数。
      */
     public double getValue()
     {
@@ -32,9 +37,9 @@ public class Input
     }
 
     /**
-     * セッター。
+     * 入力用値のセッター。
      *
-     * @param value valueを参照。
+     * @param value 入力用値引数。
      */
     public void setValue(double value)
     {
