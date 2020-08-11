@@ -33,7 +33,7 @@ public class NPC
      * スポーンさせる。
      *
      * @param player       プレイヤー。
-     * @param teleportCase 罪状。
+     * @param teleportCase 判定タイプ。
      * @param reachMode    リーチモードかどうか。
      * @return スポーンするNPCを返す。
      */

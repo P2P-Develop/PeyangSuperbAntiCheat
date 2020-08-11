@@ -26,7 +26,7 @@ public class DetectConnection
      * アーマー付きでスポーンさせる。
      *
      * @param player    プレイヤー。
-     * @param type      罪状。
+     * @param type      判定タイプ。
      * @param reachMode リーチモードかどうか。
      * @return 万能クラス。
      */
@@ -42,7 +42,7 @@ public class DetectConnection
      * AntiKB用。
      *
      * @param player    プレイヤー。
-     * @param type      罪状。
+     * @param type      判定タイプ。
      * @param sender    イベントsender。
      * @param reachMode リーチモードかどうか。
      */

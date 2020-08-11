@@ -20,7 +20,7 @@ public class TestKnockback
      * 透明な矢をplayerに対して発射する。
      *
      * @param player プレイヤー。
-     * @param type   罪状(不使用)。
+     * @param type   判定タイプ(不使用)。
      * @param sender イベントsender。
      */
     public static void scan(Player player, DetectType type, CommandSender sender)

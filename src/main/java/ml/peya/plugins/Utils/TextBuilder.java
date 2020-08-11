@@ -66,7 +66,7 @@ public class TextBuilder
      * @param issueById   報告した人管理ID。
      * @param issueByUuid 報告した人のUUID。
      * @param dateInt     UNIX時間。
-     * @param types       罪状。
+     * @param types       判定タイプ。
      * @param sender      イベントsender。
      */
     public static void showText(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
@@ -97,7 +97,7 @@ public class TextBuilder
      *
      * @param id        管理ID。
      * @param issueById 報告した人管理ID。
-     * @param types     罪状。
+     * @param types     判定タイプ。
      * @param mngid     管理ID2nd。
      * @param sender    イベントsender。
      * @return 完成後。
@@ -263,7 +263,7 @@ public class TextBuilder
      * BanまたはKickのデータ入手やフォーマットに使用する。
      *
      * @param ban  Bansらしい
-     * @param type 罪状？
+     * @param type 判定タイプ？
      * @return 完成後。
      */
     public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)

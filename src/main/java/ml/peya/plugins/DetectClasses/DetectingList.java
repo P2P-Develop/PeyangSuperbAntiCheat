@@ -31,7 +31,7 @@ public class DetectingList
      * @param target ターゲット。
      * @param npc    NPCのUUID。
      * @param id     管理ID。
-     * @param type   罪状。
+     * @param type   判定タイプ。
      * @return 順次メソッド...に見える時代もありました。
      */
     public CheatDetectNowMeta add(Player target, UUID npc, int id, DetectType type)

@@ -117,7 +117,7 @@ public class CommandReport implements CommandExecutor
      * 思いっきり通報する。
      *
      * @param sender イベントsender。
-     * @param types  罪状。
+     * @param types  判定タイプ。
      * @param target ターゲット。
      */
     private void report(CommandSender sender, ArrayList<EnumCheatType> types, Player target)

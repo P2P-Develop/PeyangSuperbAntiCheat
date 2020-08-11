@@ -21,7 +21,7 @@ public class Books
      * 報告用の本を生成します。
      *
      * @param player ぶち込む報告対象プレイヤー。
-     * @param types  罪状。
+     * @param types  判定タイプ。
      * @return アイテム自体を返すのであとはgiveします。
      */
     public static ItemStack getReportBook(Player player, EnumCheatType... types)
@@ -65,7 +65,7 @@ public class Books
      * @param issueById   なんこれ
      * @param issueByUuid なんこれ2nd
      * @param dateInt     UNIX時間。
-     * @param types       罪状。
+     * @param types       判定タイプ。
      * @return /psac showした時の詳細を書いた本。
      */
     public static ItemStack getShowBook(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types)

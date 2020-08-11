@@ -21,7 +21,7 @@ public class KickUtil
      * Bukkit的キックをかます。
      *
      * @param player 対象プレイヤー。
-     * @param reason 罪状。
+     * @param reason 判定タイプ。
      * @param wdFlag 報告してるか...どうか？
      * @param isTest テストで捕まったか...どうか？
      */
@@ -72,7 +72,7 @@ public class KickUtil
      * 色々やってから結局蹴るやつ。
      *
      * @param player 対象プレイヤー。
-     * @param reason 罪状。
+     * @param reason 判定タイプ。
      * @param isTest テストで捕まったか...どうか？
      * @param opFlag OPが入ってたか......どうか？
      */

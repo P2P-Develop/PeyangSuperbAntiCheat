@@ -6,7 +6,7 @@ import org.bukkit.entity.*;
 import java.util.*;
 
 /**
- * 万能クラス。
+ * テスト状態管理
  */
 public class CheatDetectNowMeta
 {
@@ -23,7 +23,7 @@ public class CheatDetectNowMeta
      */
     private final int id;
     /**
-     * 罪状。
+     * 判定タイプ。
      */
     private final DetectType type;
     /**
@@ -35,17 +35,18 @@ public class CheatDetectNowMeta
      */
     private int VL;
     /**
-     * テスト可能かどうか。
+     * テスト中かどうか。
      */
 
     private boolean canTesting = false;
+
     /**
      * コンストラクター。
      *
      * @param target ターゲット。
      * @param uuids  UUID。
      * @param id     管理ID。
-     * @param type   罪状。
+     * @param type   判定タイプ。
      */
     public CheatDetectNowMeta(Player target, UUID uuids, int id, DetectType type)
     {
@@ -136,9 +137,9 @@ public class CheatDetectNowMeta
     }
 
     /**
-     * 罪状のゲッター。
+     * 判定タイプのゲッター。
      *
-     * @return 罪状。
+     * @return 判定タイプ。
      */
     public DetectType getType()
     {

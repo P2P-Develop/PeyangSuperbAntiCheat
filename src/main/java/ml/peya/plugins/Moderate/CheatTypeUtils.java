@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.function.*;
 
 /**
- * 罪状管理するやつ。
+ * 判定タイプ管理するやつ。
  */
 public class CheatTypeUtils
 {
@@ -82,7 +82,7 @@ public class CheatTypeUtils
     /**
      * エイリアスOK?
      *
-     * @param types 罪状。
+     * @param types 判定タイプ。
      * @param name  なまえ
      * @return OK=true
      */

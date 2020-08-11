@@ -15,7 +15,7 @@ public class BanAnalyzer
      * なんか大文字で表示されるやつ返す。
      *
      * @param uuid UUID。
-     * @param type 罪状。
+     * @param type 判定タイプ。
      * @return 大文字のアレ。
      */
     public static ArrayList<Bans> getAbuse(UUID uuid, Type type)
@@ -104,7 +104,7 @@ public class BanAnalyzer
          * コンストラクタで組み立てる。
          *
          * @param date     UNIX時間。
-         * @param reason   罪状。
+         * @param reason   判定タイプ。
          * @param playerId 管理ID？
          * @param uuId     UUID。
          * @param id       管理ID。
@@ -131,9 +131,9 @@ public class BanAnalyzer
         }
 
         /**
-         * 罪状のゲッター。
+         * 判定タイプのゲッター。
          *
-         * @return 罪状。
+         * @return 判定タイプ。
          */
         public String getReason()
         {
