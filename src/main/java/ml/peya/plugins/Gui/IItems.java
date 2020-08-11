@@ -50,12 +50,25 @@ public interface IItems
      */
     enum Type
     {
-
+        /**
+         * メイン。
+         */
         MAIN("MAIN"),
+        /**
+         * ターゲット。
+         */
         TARGET("TARGET"),
+        /**
+         * サブターゲット。
+         */
         TARGET_2("TARGET_2"),
+        /**
+         * 全て。
+         */
         ALL("ALL");
-
+        /**
+         * 名前。
+         */
         String name;
 
         /**
