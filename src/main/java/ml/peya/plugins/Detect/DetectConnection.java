@@ -66,7 +66,7 @@ public class DetectConnection
                 double vl = meta.getVL();
                 double seconds = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
 
-                if (Variables.learnCount > Variables.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.0)
+                if (Variables.learnCount > Variables.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.01)
                 {
                     learn(vl, seconds);
 
