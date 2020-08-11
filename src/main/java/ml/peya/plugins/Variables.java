@@ -13,7 +13,8 @@ import java.util.*;
 import java.util.logging.*;
 
 /**
- * 変数群
+ * PSAC全体で使用する変数群を管理します。
+ * インスタンス生成はされません。
  */
 public class Variables
 {
