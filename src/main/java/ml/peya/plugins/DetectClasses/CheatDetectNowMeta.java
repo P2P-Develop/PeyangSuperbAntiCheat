@@ -10,15 +10,35 @@ import java.util.*;
  */
 public class CheatDetectNowMeta
 {
-
+    /**
+     * ターゲット。
+     */
     private final Player target;
+    /**
+     * UUID。
+     */
     private final UUID uuids;
+    /**
+     * 管理ID。
+     */
     private final int id;
+    /**
+     * 罪状。
+     */
     private final DetectType type;
+    /**
+     * 秒数。
+     */
     private double seconds;
+    /**
+     * VL。
+     */
     private int VL;
-    private boolean canTesting = false;
+    /**
+     * テスト可能かどうか。
+     */
 
+    private boolean canTesting = false;
     /**
      * コンストラクター。
      *
