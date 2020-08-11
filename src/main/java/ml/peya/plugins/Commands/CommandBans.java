@@ -1,8 +1,8 @@
 package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -62,7 +62,7 @@ public class CommandBans implements CommandExecutor
 
         ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player, typeP);
 
-        sender.sendMessage(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? MessageEngine.get("message.bans.lynx", MessageEngine.pair("name", name)): MessageEngine.get("message.bans.message", MessageEngine.pair("name", name)));
+        sender.sendMessage(Variables.config.getBoolean("message.lynx") ? MessageEngine.get("message.bans.lynx", MessageEngine.pair("name", name)): MessageEngine.get("message.bans.message", MessageEngine.pair("name", name)));
 
         if (bans.size() == 0)
             sender.sendMessage(MessageEngine.get("error.bans.databaseInfoNotFound"));
@@ -73,7 +73,7 @@ public class CommandBans implements CommandExecutor
             return true;
 
         int count = bans.size() - 5;
-        sender.sendMessage(PeyangSuperbAntiCheat.config.getBoolean("message.lynx") ? MessageEngine.get("message.bans.more.lynx", MessageEngine.pair("count", count)): MessageEngine.get("message.bans.more.normal", MessageEngine.pair("count", count)));
+        sender.sendMessage(Variables.config.getBoolean("message.lynx") ? MessageEngine.get("message.bans.more.lynx", MessageEngine.pair("count", count)): MessageEngine.get("message.bans.more.normal", MessageEngine.pair("count", count)));
 
         return true;
     }

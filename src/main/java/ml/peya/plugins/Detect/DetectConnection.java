@@ -15,7 +15,7 @@ import org.bukkit.scheduler.*;
 import java.sql.*;
 import java.util.*;
 
-import static ml.peya.plugins.PeyangSuperbAntiCheat.network;
+import static ml.peya.plugins.Variables.network;
 
 /**
  * キック時の処理などを管理する。
@@ -33,7 +33,7 @@ public class DetectConnection
     public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type, boolean reachMode)
     {
         EntityPlayer uuid = NPC.spawn(player, type, reachMode);
-        CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
+        CheatDetectNowMeta meta = Variables.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
         meta.setCanTesting(true);
         return meta;
     }
@@ -64,15 +64,15 @@ public class DetectConnection
                 meta.setCanTesting(false);
 
                 double vl = meta.getVL();
-                double seconds = PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
+                double seconds = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
 
-                if (PeyangSuperbAntiCheat.learnCount > PeyangSuperbAntiCheat.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.0)
+                if (Variables.learnCount > Variables.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.0)
                 {
                     learn(vl, seconds);
 
                     if (kick(player)) return;
                 }
-                if (PeyangSuperbAntiCheat.learnCount < PeyangSuperbAntiCheat.learnCountLimit && PeyangSuperbAntiCheat.banLeft <= meta.getVL())
+                if (Variables.learnCount < Variables.learnCountLimit && Variables.banLeft <= meta.getVL())
                 {
                     learn(vl, seconds);
 
@@ -90,9 +90,9 @@ public class DetectConnection
                         {
                             case AURA_BOT:
                                 if (sender == null)
-                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create()));
+                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), Variables.banLeft).create()));
                                 else
-                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
+                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), Variables.banLeft).create());
                                 break;
 
                             case AURA_PANIC:
@@ -103,7 +103,7 @@ public class DetectConnection
                                 break;
                         }
 
-                        PeyangSuperbAntiCheat.cheatMeta.remove(meta.getUUIDs());
+                        Variables.cheatMeta.remove(meta.getUUIDs());
                         this.cancel();
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
@@ -119,14 +119,14 @@ public class DetectConnection
                     {
                         ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
                         arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
-                        PeyangSuperbAntiCheat.learnCount++;
+                        Variables.learnCount++;
                         network.learn(arr, 1000);
 
                         this.cancel();
                     }
                 }.runTask(PeyangSuperbAntiCheat.getPlugin());
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * Variables.config.getInt("npc.seconds"));
     }
 
     /**
@@ -138,7 +138,7 @@ public class DetectConnection
     private static boolean kick(Player player)
     {
         ArrayList<String> reason = new ArrayList<>();
-        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+        try (Connection connection = Variables.eye.getConnection();
              Statement statement = connection.createStatement();
              Statement statement1 = connection.createStatement())
         {

@@ -31,9 +31,9 @@ public class KillCounting
         if (players.containsKey(killer))
         {
             players.put(killer, players.get(killer) + 1);
-            if (players.get(killer) >= PeyangSuperbAntiCheat.config.getInt("npc.kill"))
+            if (players.get(killer) >= Variables.config.getInt("npc.kill"))
             {//カウント
-                if (!PeyangSuperbAntiCheat.cheatMeta.exists(killer))
+                if (!Variables.cheatMeta.exists(killer))
                     DetectConnection.scan(Bukkit.getPlayer(killer), DetectType.AURA_BOT, null, true);
                 players.remove(killer);
             }//検証用
@@ -49,7 +49,7 @@ public class KillCounting
                 players.remove(killer);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * Variables.config.getInt("npc.seconds"));
 
     }
 

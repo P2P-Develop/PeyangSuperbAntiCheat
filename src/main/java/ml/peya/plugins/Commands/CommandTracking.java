@@ -1,8 +1,8 @@
 package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
@@ -37,9 +37,9 @@ public class CommandTracking implements CommandExecutor
             return true;
         }
 
-        if (PeyangSuperbAntiCheat.tracker.isTracking(sender.getName()) && args.length == 0)
+        if (Variables.tracker.isTracking(sender.getName()) && args.length == 0)
         {
-            PeyangSuperbAntiCheat.tracker.remove(sender.getName());
+            Variables.tracker.remove(sender.getName());
             sender.sendMessage(MessageEngine.get("item.stopTarget"));
             ((Player) sender).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.noTarget")));
 
@@ -69,7 +69,7 @@ public class CommandTracking implements CommandExecutor
             return true;
         }
 
-        PeyangSuperbAntiCheat.tracker.add(sender.getName(), args[0]);
+        Variables.tracker.add(sender.getName(), args[0]);
         sender.sendMessage(MessageEngine.get("message.tracking.track", MessageEngine.pair("player", args[0])));
 
         return true;

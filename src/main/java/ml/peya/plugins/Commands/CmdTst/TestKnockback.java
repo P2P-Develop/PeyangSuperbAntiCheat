@@ -3,8 +3,8 @@ package ml.peya.plugins.Commands.CmdTst;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -47,7 +47,7 @@ public class TestKnockback implements CommandExecutor
             return true;
         }
 
-        if (PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
+        if (Variables.cheatMeta.exists(player.getUniqueId()))
         {
             sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
 

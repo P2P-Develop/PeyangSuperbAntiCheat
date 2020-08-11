@@ -79,7 +79,7 @@ public class CommandTarget implements CommandExecutor
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15L);
 
-        PeyangSuperbAntiCheat.tracker.add(sender.getName(), args[0]);
+        Variables.tracker.add(sender.getName(), args[0]);
 
         GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());
 

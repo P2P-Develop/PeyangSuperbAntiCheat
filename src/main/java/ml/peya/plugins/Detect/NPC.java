@@ -97,7 +97,7 @@ public class NPC
                         connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
                         Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId())));
                     }
-                }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds")));
+                }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (20 * Variables.config.getInt("npc.seconds")));
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());
 

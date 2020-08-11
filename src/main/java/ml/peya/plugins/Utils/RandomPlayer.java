@@ -47,7 +47,7 @@ public class RandomPlayer
         WorldServer worldServer = ((CraftWorld) world).getHandle();
         PlayerInteractManager manager = new PlayerInteractManager(worldServer);
 
-        List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
+        List<String> uuids = Variables.config.getStringList("skins");
         JsonNode skinNode = getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
 
 
@@ -78,7 +78,7 @@ public class RandomPlayer
 
             if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK)
             {
-                PeyangSuperbAntiCheat.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
+                Variables.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
                 return null;
             }
 

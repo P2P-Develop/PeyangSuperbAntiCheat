@@ -36,7 +36,7 @@ public class KickUtil
                 kick(player, reason, isTest, !wdFlag);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("kick.delay"));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * Variables.config.getInt("kick.delay"));
     }
 
     /**
@@ -78,7 +78,7 @@ public class KickUtil
      */
     private static void kick(Player player, String reason, boolean isTest, boolean opFlag)
     {
-        if (PeyangSuperbAntiCheat.config.getBoolean("kick.lightning"))
+        if (Variables.config.getBoolean("kick.lightning"))
             player.getWorld().strikeLightningEffect(player.getLocation());
 
         StringBuilder id = new StringBuilder();
@@ -112,8 +112,8 @@ public class KickUtil
             player.kickPlayer(message);
             return;
         }
-        try (Connection kickC = PeyangSuperbAntiCheat.banKick.getConnection();
-             Connection eyeC = PeyangSuperbAntiCheat.eye.getConnection();
+        try (Connection kickC = Variables.banKick.getConnection();
+             Connection eyeC = Variables.eye.getConnection();
              Statement kickS = kickC.createStatement();
              Statement eyeS = eyeC.createStatement();
              Statement eyeS2 = eyeC.createStatement();

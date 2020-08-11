@@ -107,11 +107,11 @@ public class Tracker
             map.put("y", scaleSet(location.getY(), 2));
             map.put("z", scaleSet(location.getZ(), 2));
             map.put("distance", scaleSet(location.distance(player.getLocation()), 1));
-            if (PeyangSuperbAntiCheat.cheatMeta.exists(target.getUniqueId()))
+            if (Variables.cheatMeta.exists(target.getUniqueId()))
             {
                 HashMap<String, Object> repKey = new HashMap<>();
-                repKey.put("type", String.valueOf(PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType().getName()));
-                repKey.put("vl", PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType() == DetectType.ANTI_KB ? "N/A": Integer.valueOf(PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getVL()));
+                repKey.put("type", String.valueOf(Variables.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType().getName()));
+                repKey.put("vl", Variables.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType() == DetectType.ANTI_KB ? "N/A": Integer.valueOf(Variables.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getVL()));
                 map.put("tests", MessageEngine.get("item.tracking.testing", repKey));
             }
             else

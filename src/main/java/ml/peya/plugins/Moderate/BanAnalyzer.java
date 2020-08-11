@@ -1,7 +1,7 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 
 import java.sql.*;
 import java.util.*;
@@ -26,7 +26,7 @@ public class BanAnalyzer
         {
             case ALL:
             case KICK:
-                try (Connection connection = PeyangSuperbAntiCheat.banKick.getConnection();
+                try (Connection connection = Variables.banKick.getConnection();
                      Statement statement = connection.createStatement())
                 {
                     ResultSet set = statement.executeQuery("SeLeCt * FrOm KiCk WhErE UUID='" + uuid.toString() + "'");

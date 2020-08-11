@@ -2,8 +2,8 @@ package ml.peya.plugins.Commands.CmdPub;
 
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.command.*;
 
 import java.sql.*;
@@ -31,7 +31,7 @@ public class Drop
             return;
         }
 
-        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+        try (Connection connection = Variables.eye.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("DeLeTe FrOm WaTcHeYe WhErE mNGiD = '" + args[1] + "'");

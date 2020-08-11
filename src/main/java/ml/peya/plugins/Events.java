@@ -34,7 +34,7 @@ public class Events implements Listener
     {
         if (e.getEntity().getKiller() == null)
             return;
-        PeyangSuperbAntiCheat.counting.kill(e.getEntity().getKiller().getUniqueId());
+        Variables.counting.kill(e.getEntity().getKiller().getUniqueId());
     }
 
     /**
@@ -45,7 +45,7 @@ public class Events implements Listener
     @EventHandler(priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent e)
     {
-        if (!(e.getEntity() instanceof CraftPlayer) || !(e.getDamager() instanceof CraftArrow) || !PeyangSuperbAntiCheat.cheatMeta.exists(e.getEntity().getUniqueId()) || !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
+        if (!(e.getEntity() instanceof CraftPlayer) || !(e.getDamager() instanceof CraftArrow) || !Variables.cheatMeta.exists(e.getEntity().getUniqueId()) || !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
             return;
 
         e.setDamage(0);
@@ -61,9 +61,9 @@ public class Events implements Listener
     {
         Player player = e.getPlayer();
 
-        PeyangSuperbAntiCheat.tracker.remove(player.getName());
+        Variables.tracker.remove(player.getName());
 
-        PeyangSuperbAntiCheat.mods.remove(player.getUniqueId());
+        Variables.mods.remove(player.getUniqueId());
     }
 
     /**
@@ -74,7 +74,7 @@ public class Events implements Listener
     @EventHandler
     public void onMove(PlayerMoveEvent e)
     {
-        if (!PeyangSuperbAntiCheat.tracker.isTrackingByPlayer(e.getPlayer().getName()) && !PeyangSuperbAntiCheat.cheatMeta.exists(e.getPlayer().getUniqueId()))
+        if (!Variables.tracker.isTrackingByPlayer(e.getPlayer().getName()) && !Variables.cheatMeta.exists(e.getPlayer().getUniqueId()))
             return;
         e.getPlayer().setMetadata("speed", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo())));
     }
@@ -100,7 +100,7 @@ public class Events implements Listener
         ));
 
         e.getRecipients().parallelStream().forEach(receiver -> {
-            if (!receiver.hasPermission("psac.chattarget") || (PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()) != null && PeyangSuperbAntiCheat.mods.get(receiver.getUniqueId()).containsKey("Lynx")))
+            if (!receiver.hasPermission("psac.chattarget") || (Variables.mods.get(receiver.getUniqueId()) != null && Variables.mods.get(receiver.getUniqueId()).containsKey("Lynx")))
                 receiver.sendMessage(format);
             else
                 receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create()));
@@ -132,7 +132,7 @@ public class Events implements Listener
         tab.getBukkitEntity().setPlayerListName(ChatColor.RED + tab.getName());
         PlayerConnection connection = ((CraftPlayer) e.getPlayer()).getHandle().playerConnection;
 
-        List<String> uuids = PeyangSuperbAntiCheat.config.getStringList("skins");
+        List<String> uuids = Variables.config.getStringList("skins");
 
         new BukkitRunnable()
         {

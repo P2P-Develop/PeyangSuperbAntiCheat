@@ -226,7 +226,7 @@ public class TextBuilder
      */
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
     {
-        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+        if (Variables.config.getBoolean("message.lynx"))
             return new ComponentBuilder(MessageEngine.get("message.auraCheck.bot.lynx", MessageEngine.pair("hit", VL)));
 
         return new ComponentBuilder(MessageEngine.get("base.prefix") + "\n")
@@ -250,7 +250,7 @@ public class TextBuilder
      */
     public static ComponentBuilder textPanicRep(String name, int vl)
     {
-        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+        if (Variables.config.getBoolean("message.lynx"))
             return new ComponentBuilder("");
         return new ComponentBuilder(MessageEngine.get("base.prefix"))
                 .append("\n")

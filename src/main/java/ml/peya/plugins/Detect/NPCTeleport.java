@@ -58,13 +58,13 @@ public class NPCTeleport
      */
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender, boolean reachMode)
     {
-        final double range = reachMode ? PeyangSuperbAntiCheat.config.getDouble("npc.reachPanicRange"): PeyangSuperbAntiCheat.config.getDouble("npc.panicRange");
+        final double range = reachMode ? Variables.config.getDouble("npc.reachPanicRange"): Variables.config.getDouble("npc.panicRange");
         final double[] clt = {0.0};
         final int[] now = {0};
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
-        int sec = PeyangSuperbAntiCheat.config.getInt("npc.seconds");
+        int sec = Variables.config.getInt("npc.seconds");
 
         new BukkitRunnable()
         {
@@ -147,7 +147,7 @@ public class NPCTeleport
     private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
     {
         final double[] time = {0.0};
-        final double radius = reachMode ? PeyangSuperbAntiCheat.config.getDouble("npc.reachRange"): PeyangSuperbAntiCheat.config.getDouble("npc.range");
+        final double radius = reachMode ? Variables.config.getDouble("npc.reachRange"): Variables.config.getDouble("npc.range");
 
         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
 
@@ -166,8 +166,8 @@ public class NPCTeleport
                 {
                     double rangeTmp = radius;
 
-                    if (PeyangSuperbAntiCheat.config.getBoolean("npc.wave"))
-                        rangeTmp = new WaveCreator(radius - 0.1, radius, PeyangSuperbAntiCheat.config.getDouble("npc.waveMin")).get(0.01, true);
+                    if (Variables.config.getBoolean("npc.wave"))
+                        rangeTmp = new WaveCreator(radius - 0.1, radius, Variables.config.getDouble("npc.waveMin")).get(0.01, true);
 
                     Location center = player.getLocation();
                     Location n = new Location(
@@ -197,11 +197,11 @@ public class NPCTeleport
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     count[0]++;
-                    CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
+                    CheatDetectNowMeta meta = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
                     if (meta == null) continue;
-                    meta.addSeconds(((isLooking(player, n) || isLooking(player, n.clone().add(0, 1, 0))) ? (PeyangSuperbAntiCheat.config.getLong("npc.seconds") * 0.1 / 2): 0.0));
+                    meta.addSeconds(((isLooking(player, n) || isLooking(player, n.clone().add(0, 1, 0))) ? (Variables.config.getLong("npc.seconds") * 0.1 / 2): 0.0));
                 }
-                time[0] += PeyangSuperbAntiCheat.config.getDouble("npc.time") + (PeyangSuperbAntiCheat.config.getBoolean("npc.speed.wave") ? new WaveCreator(0.0, PeyangSuperbAntiCheat.config.getDouble("npc.speed.waveRange"), 0 - PeyangSuperbAntiCheat.config.getDouble("npc.speed.waveRange")).get(0.001, true): 0.0);
+                time[0] += Variables.config.getDouble("npc.time") + (Variables.config.getBoolean("npc.speed.wave") ? new WaveCreator(0.0, Variables.config.getDouble("npc.speed.waveRange"), 0 - Variables.config.getDouble("npc.speed.waveRange")).get(0.001, true): 0.0);
             }
         };
         r.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
@@ -214,7 +214,7 @@ public class NPCTeleport
                 r.cancel();
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * (PeyangSuperbAntiCheat.config.getLong("npc.seconds")));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * (Variables.config.getLong("npc.seconds")));
 
     }
 

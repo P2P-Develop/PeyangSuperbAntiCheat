@@ -2,8 +2,8 @@ package ml.peya.plugins.DetectClasses;
 
 import com.comphenix.protocol.events.*;
 import com.comphenix.protocol.wrappers.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
 
 import java.lang.reflect.*;
@@ -30,7 +30,7 @@ public class Packets
             Field field = entity.getClass().getDeclaredField("a");
             field.setAccessible(true);
             if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK) return;
-            for (CheatDetectNowMeta meta : PeyangSuperbAntiCheat.cheatMeta.getMetas())
+            for (CheatDetectNowMeta meta : Variables.cheatMeta.getMetas())
             {
                 if (meta.getId() != field.getInt(entity))
                     continue;

@@ -35,7 +35,7 @@ public class Init
      */
     public static boolean createDefaultTables()
     {
-        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+        try (Connection connection = Variables.eye.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs watchreason(" +
@@ -60,7 +60,7 @@ public class Init
             return false;
         }
 
-        try (Connection connection = PeyangSuperbAntiCheat.banKick.getConnection();
+        try (Connection connection = Variables.banKick.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs kick(" +
@@ -79,7 +79,7 @@ public class Init
             return false;
         }
 
-        try (Connection connection = PeyangSuperbAntiCheat.trust.getConnection();
+        try (Connection connection = Variables.trust.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs trust(" +

@@ -2,8 +2,8 @@ package ml.peya.plugins.Gui.Items.Target;
 
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
@@ -16,7 +16,7 @@ public class BackButton implements IItems
     @Override
     public void run(Player player, String target)
     {
-        PeyangSuperbAntiCheat.tracker.remove(player.getName());
+        Variables.tracker.remove(player.getName());
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.noTarget")));
         player.sendMessage(MessageEngine.get("item.stopTarget"));
         GuiItem.giveAllItems(player, Type.MAIN, target);

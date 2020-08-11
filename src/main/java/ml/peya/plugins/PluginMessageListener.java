@@ -40,6 +40,6 @@ public class PluginMessageListener implements org.bukkit.plugin.messaging.Plugin
             i += data[i] + 1;
         }
 
-        PeyangSuperbAntiCheat.mods.put(player.getUniqueId(), mods);
+        Variables.mods.put(player.getUniqueId(), mods);
     }
 }

@@ -63,7 +63,7 @@ public class SeverityLevels
     {
         if (WatchEyeManagement.isExistsRecord(id))
             return EnumSeverity.UNKNOWN;
-        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+        try (Connection connection = Variables.eye.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");

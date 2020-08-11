@@ -27,7 +27,7 @@ public class TrustModifier
             @Override
             public void run()
             {
-                try (Connection connection = PeyangSuperbAntiCheat.trust.getConnection();
+                try (Connection connection = Variables.trust.getConnection();
                      Statement statement = connection.createStatement())
                 {
                     ResultSet rs = statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
@@ -63,7 +63,7 @@ public class TrustModifier
     {
         boolean result = false;
 
-        try (Connection connection = PeyangSuperbAntiCheat.trust.getConnection();
+        try (Connection connection = Variables.trust.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet rs = statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");

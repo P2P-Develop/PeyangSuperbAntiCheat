@@ -3,8 +3,8 @@ package ml.peya.plugins.Commands.CmdTst;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -51,7 +51,7 @@ public class AuraBot implements CommandExecutor
             return true;
         }
 
-        if (PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
+        if (Variables.cheatMeta.exists(player.getUniqueId()))
         {
             sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
 
@@ -59,12 +59,12 @@ public class AuraBot implements CommandExecutor
         }
 
 
-        if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+        if (!Variables.config.getBoolean("message.lynx"))
         {
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") ")));
             map.put("type", "AuraBot");
-            map.put("seconds", PeyangSuperbAntiCheat.config.getString("npc.seconds"));
+            map.put("seconds", Variables.config.getString("npc.seconds"));
 
             sender.sendMessage(MessageEngine.get("message.aura.summon", map));
         }

@@ -3,8 +3,8 @@ package ml.peya.plugins.Commands;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -140,7 +140,7 @@ public class CommandReport implements CommandExecutor
         {
             sender.sendMessage(MessageEngine.get("message.report.thanks"));
 
-            if (!PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+            if (!Variables.config.getBoolean("message.lynx"))
             {
                 Utils.adminNotification(id);
                 return;

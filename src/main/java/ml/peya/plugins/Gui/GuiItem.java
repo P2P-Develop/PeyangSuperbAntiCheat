@@ -28,7 +28,7 @@ public class GuiItem
             player.getInventory().remove(stack);
         });
 
-        for (IItems items : PeyangSuperbAntiCheat.item.getItems())
+        for (IItems items : Variables.item.getItems())
         {
             if (items.getType() != type && type != IItems.Type.ALL)
                 continue;

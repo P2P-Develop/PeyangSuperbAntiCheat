@@ -20,9 +20,9 @@ public class Mods
     {
         UUID uuid = player.getUniqueId();
 
-        if (!PeyangSuperbAntiCheat.mods.containsKey(uuid))
+        if (!Variables.mods.containsKey(uuid))
             return null;
 
-        return PeyangSuperbAntiCheat.mods.get(uuid);
+        return Variables.mods.get(uuid);
     }
 }

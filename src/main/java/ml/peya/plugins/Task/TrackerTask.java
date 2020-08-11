@@ -14,6 +14,6 @@ public class TrackerTask extends BukkitRunnable
     @Override
     public void run()
     {
-        PeyangSuperbAntiCheat.tracker.tick();
+        Variables.tracker.tick();
     }
 }

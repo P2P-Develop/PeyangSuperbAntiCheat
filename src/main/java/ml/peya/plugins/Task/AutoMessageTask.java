@@ -1,7 +1,7 @@
 package ml.peya.plugins.Task;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.scheduler.*;
 
@@ -30,7 +30,7 @@ public class AutoMessageTask extends BukkitRunnable
         int watchdog = 0;
         int staff = 0;
 
-        try (Connection connection = PeyangSuperbAntiCheat.banKick.getConnection();
+        try (Connection connection = Variables.banKick.getConnection();
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
         {

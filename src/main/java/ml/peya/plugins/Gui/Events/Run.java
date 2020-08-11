@@ -28,7 +28,7 @@ public class Run implements Listener
 
         e.setCancelled(true);
 
-        Item item = PeyangSuperbAntiCheat.item;
+        Item item = Variables.item;
 
         for (IItems items : item.getItems())
         {
