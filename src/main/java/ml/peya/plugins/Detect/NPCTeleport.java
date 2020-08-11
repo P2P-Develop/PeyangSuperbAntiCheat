@@ -27,8 +27,8 @@ public class NPCTeleport
      *
      * @param player    プレイヤー。
      * @param target    ターゲット。
-     * @param arm       腕？
-     * @param tpCase    罪状。
+     * @param arm       防具。
+     * @param tpCase    テレポートケース。
      * @param reachMode リーチモードかどうか。
      */
     public static void teleport(Player player, EntityPlayer target, ItemStack[] arm, DetectType tpCase, boolean reachMode)

@@ -46,7 +46,7 @@ public interface IItems
     Type getType();
 
     /**
-     * わーEnumだーD(ry
+     * メニューのタイプ
      */
     enum Type
     {

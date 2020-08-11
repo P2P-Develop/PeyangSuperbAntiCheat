@@ -81,21 +81,23 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         Variables.protocolManager = ProtocolLibrary.getProtocolManager();
 
-        Variables.item = new Item();
+        Item item = new Item();
 
-        Variables.item.register(new ml.peya.plugins.Gui.Items.Target.AuraBot());  //====Page1
-        Variables.item.register(new ml.peya.plugins.Gui.Items.Target.AuraPanic());
-        Variables.item.register(new TestKnockBack());
-        Variables.item.register(new CompassTracker3000_tm());
-        Variables.item.register(new BanBook());
-        Variables.item.register(new ToPage2());                                   //
-        Variables.item.register(new BackButton());
+        item.register(new ml.peya.plugins.Gui.Items.Target.AuraBot());  //====Page1
+        item.register(new ml.peya.plugins.Gui.Items.Target.AuraPanic());
+        item.register(new TestKnockBack());
+        item.register(new CompassTracker3000_tm());
+        item.register(new BanBook());
+        item.register(new ToPage2());                                   //
+        item.register(new BackButton());
 
-        Variables.item.register(new BackToPage1());                              //====Page2
-        Variables.item.register(new Lead());
-        Variables.item.register(new ModList());
+        item.register(new BackToPage1());                              //====Page2
+        item.register(new Lead());
+        item.register(new ModList());
 
-        Variables.item.register(new TargetStick());                              //====Main
+        item.register(new TargetStick());                              //====Main
+
+        Variables.item = item;
 
         Variables.protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
         {
