@@ -22,10 +22,10 @@ import java.util.*;
 public class RandomPlayer
 {
     /**
-     * ワールド内にいるプレイヤーどなたかを餌食にして{@code EntityPlayer}として返します。
+     * ワールド内に新しいプレイヤーを捏造して、{@code EntityPlayer}として返します。
      *
      * @param world ワールドのハンドルを取得するための引数。
-     * @return 餌食になったプレイヤー。
+     * @return 創造されたプレイヤー。
      */
     public static EntityPlayer getPlayer(World world)
     {
