@@ -38,7 +38,7 @@ public class CheatDetectNowMeta
      * テスト中かどうか。
      */
 
-    private boolean canTesting = false;
+    private boolean isTesting = false;
 
     /**
      * コンストラクター。
@@ -61,19 +61,19 @@ public class CheatDetectNowMeta
      *
      * @return テスト可能かどうか。
      */
-    public boolean isCanTesting()
+    public boolean isTesting()
     {
-        return canTesting;
+        return isTesting;
     }
 
     /**
      * テスト中かどうかのセッター。
      *
-     * @param canTesting テスト可能かどうか。
+     * @param isTesting テスト中かどうか。
      */
-    public void setCanTesting(boolean canTesting)
+    public void setTesting(boolean isTesting)
     {
-        this.canTesting = canTesting;
+        this.isTesting = isTesting;
     }
 
     /**

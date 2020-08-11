@@ -34,7 +34,7 @@ public class DetectConnection
     {
         EntityPlayer uuid = NPC.spawn(player, type, reachMode);
         CheatDetectNowMeta meta = Variables.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
-        meta.setCanTesting(true);
+        meta.setTesting(true);
         return meta;
     }
 
@@ -61,7 +61,7 @@ public class DetectConnection
             @Override
             public void run()
             {
-                meta.setCanTesting(false);
+                meta.setTesting(false);
 
                 double vl = meta.getVL();
                 double seconds = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();

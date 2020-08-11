@@ -40,7 +40,7 @@ public class TestKnockback
 
         arrow.setVelocity(location.getDirection().multiply(32767f));
 
-        Variables.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type).setCanTesting(true);
+        Variables.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type).setTesting(true);
 
         scanFinally(player, sender, arrow);
     }
