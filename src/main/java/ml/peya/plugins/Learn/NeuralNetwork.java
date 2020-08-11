@@ -1,4 +1,3 @@
-
 package ml.peya.plugins.Learn;
 
 import ml.peya.plugins.*;
@@ -13,18 +12,42 @@ import java.util.stream.*;
  */
 public class NeuralNetwork
 {
-
+    /**
+     * RandomWeight取得に使用。
+     */
     private final static Random random = new Random();
+    /**
+     * 重みのふり幅。
+     */
     private final static double weightRange = 10.0;
+    /**
+     * こいつだ。randomに使うやつ。
+     */
     private static final double RandomWeight = (random.nextDouble() - 0.5) * weightRange;
+    /**
+     * 中層のバイアス。
+     */
     private final double middleLayerBias = 1.0;
-
-    public double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
-    public double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
-
+    /**
+     * 前層の重み。
+     */
+    public double[][] inputWeight = new double[][] { { RandomWeight, RandomWeight, RandomWeight }, { RandomWeight, RandomWeight, RandomWeight }, { RandomWeight, RandomWeight, RandomWeight } };
+    /**
+     * 中層の重み。
+     */
+    public double[] middleWeight = new double[] { RandomWeight, RandomWeight, RandomWeight };
+    /**
+     * 前層自体の表現。
+     */
     private double[] inputLayer;
+    /**
+     * 中層自体の表現。
+     */
     private Neuron[] middleLayer;
-
+    /**
+     * 出力層。
+     * ローカル変数問題は気にしない。
+     */
     private Neuron outputLayer;
 
     /**
