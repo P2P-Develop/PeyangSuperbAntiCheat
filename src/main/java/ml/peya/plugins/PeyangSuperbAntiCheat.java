@@ -34,13 +34,23 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 {
 
     /**
+     * プラグインIDですねわかります。
+     */
+    private static final int __BSTATS_PLUGIN_ID = 8084;
+
+    /**
+     * this.
+     */
+    private static PeyangSuperbAntiCheat plugin;
+
+    /**
      * this入手。
      *
      * @return こいつ。
      */
     public static PeyangSuperbAntiCheat getPlugin()
     {
-        return Variables.plugin;
+        return plugin;
     }
 
     /**
@@ -50,7 +60,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     @Override
     public void onEnable()
     {
-        new Metrics(this, Variables.__BSTATS_PLUGIN_ID);
+        new Metrics(this, __BSTATS_PLUGIN_ID);
 
         if (getServer().getPluginManager().getPlugin("ProtocolLib") == null || !getServer().getPluginManager().getPlugin("ProtocolLib").isEnabled())
         {
@@ -61,7 +71,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         saveDefaultConfig();
 
-        Variables.plugin = this;
+        plugin = this;
         Variables.config = getConfig();
         Variables.databasePath = Variables.config.getString("database.path");
         Variables.banKickPath = Variables.config.getString("database.logPath");
