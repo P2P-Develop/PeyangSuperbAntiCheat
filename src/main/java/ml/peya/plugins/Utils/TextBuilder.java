@@ -187,10 +187,10 @@ public class TextBuilder
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        return new ComponentBuilder(String.valueOf(prevFlag ? prev: uBar))
+        return new ComponentBuilder(prevFlag ? prev: uBar)
                 .append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA)
-                .append(String.valueOf(nextFlag ? next: uBar));
+                .append(nextFlag ? next: uBar);
     }
 
     /**
