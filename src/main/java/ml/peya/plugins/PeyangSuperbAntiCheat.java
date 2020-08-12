@@ -31,7 +31,6 @@ import java.util.logging.*;
  */
 public class PeyangSuperbAntiCheat extends JavaPlugin
 {
-
     /**
      * プラグインIDですねわかります。
      */

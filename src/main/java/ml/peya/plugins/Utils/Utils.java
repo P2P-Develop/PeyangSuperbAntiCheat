@@ -5,6 +5,8 @@ import org.bukkit.*;
 
 import java.io.*;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.stream.IntStream;
 
 /**
  * PSAC内でのみ使用するユーティリティ関数を集めたクラス。ほぼstatic。
@@ -86,5 +88,10 @@ public class Utils
         e.printStackTrace(w);
         w.flush();
         return str.toString();
+    }
+
+    public static void times(int count, Consumer action, Object ignored)
+    {
+        IntStream.range(0, count).parallel().mapToObj(time -> ignored).forEachOrdered(action::accept);
     }
 }

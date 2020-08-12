@@ -7,7 +7,7 @@ import java.nio.charset.*;
 import java.util.*;
 
 /**
- * ランダムな語に関するやつ
+ * ランダムな単語を生成するクラス。
  */
 public class RandomWordUtils
 {
@@ -16,9 +16,9 @@ public class RandomWordUtils
     private static final int __MaxLine = 1384;
 
     /**
-     * ファイルからランダムな語を取得する
+     * ファイルからランダムな単語を取得します。
      *
-     * @return 語
+     * @return 生成した単語。
      */
     public static String getRandomWord()
     {
@@ -27,10 +27,10 @@ public class RandomWordUtils
     }
 
     /**
-     * ファイルからランダムな語を取得する
+     * ファイルからランダムな単語を取得します。
      *
-     * @param bound ランダムシード値
-     * @return 語
+     * @param bound ランダムなシード値。ランダム性を強化します。
+     * @return 生成した単語。
      */
     public static String getRandomWord(int bound)
     {

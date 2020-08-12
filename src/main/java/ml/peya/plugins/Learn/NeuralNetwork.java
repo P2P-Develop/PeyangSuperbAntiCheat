@@ -4,8 +4,9 @@ import ml.peya.plugins.*;
 import org.apache.commons.lang3.tuple.*;
 
 import java.util.*;
-import java.util.function.*;
 import java.util.stream.*;
+
+import static ml.peya.plugins.Utils.Utils.times;
 
 /**
  * The・AI中枢
@@ -13,29 +14,36 @@ import java.util.stream.*;
 public class NeuralNetwork
 {
     /**
-     * RandomWeight取得に使用。
+     * RandomWeight()取得に使用。
      */
     private final static Random random = new Random();
     /**
      * 重みのふり幅。
      */
-    private final static double weightRange = 10.0;
+    private static final double weightRange = 10.0;
     /**
-     * こいつだ。randomに使うやつ。
+     * ランダムに重みを設定する関数。
      */
-    private static final double RandomWeight = (random.nextDouble() - 0.5) * weightRange;
+    private static final double RandomWeight()
+    {
+        return (random.nextDouble() - 0.5) * weightRange;
+    }
+    /**
+     * 前層のバイアス。
+     */
+    private static final double inputLayerBias = 1.0;
     /**
      * 中層のバイアス。
      */
-    private final double middleLayerBias = 1.0;
+    private static final double middleLayerBias = 1.0;
     /**
      * 前層の重み。
      */
-    public double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
+    public double[][] inputWeight = new double[][]{{RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}};
     /**
      * 中層の重み。
      */
-    public double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
+    public double[] middleWeight = new double[]{RandomWeight(), RandomWeight(), RandomWeight()};
     /**
      * 前層自体の表現。
      */
@@ -87,7 +95,6 @@ public class NeuralNetwork
      */
     public double commit(Pair<Double, Double> data)
     {
-        double inputLayerBias = 1.0;
         inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
         middleLayer = new Neuron[]{new Neuron(), new Neuron()};
         outputLayer = new Neuron();
@@ -103,11 +110,11 @@ public class NeuralNetwork
      * 学習。
      *
      * @param dataCollection データ。
-     * @param times          ディレイ。
+     * @param count          学習回数。
      */
-    public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int times)
+    public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int count)
     {
-        IntStream.range(0, times).parallel().<Consumer<? super Triple<Double, Double, Double>>>mapToObj(i -> this::learn).forEachOrdered(dataCollection::forEach);
+        times(count, (data) -> dataCollection.parallelStream().forEachOrdered(this::learn), null);
     }
 
     /**

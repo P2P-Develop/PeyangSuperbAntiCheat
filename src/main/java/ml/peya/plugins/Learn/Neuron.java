@@ -2,7 +2,7 @@ package ml.peya.plugins.Learn;
 
 import java.util.*;
 
-import static develop.p2p.lib.LearnMath.relu;
+import static develop.p2p.lib.LearnMath.sigmoid;
 
 /**
  * 重みを突っ込む器。
@@ -47,7 +47,7 @@ public class Neuron
     public void input(ArrayList<Input> inputData)
     {
         inputData.parallelStream().forEachOrdered(input -> input(input.getWeightingValue()));
-        setValue(relu(sum));
+        setValue(sigmoid(sum));
     }
 
     /**
