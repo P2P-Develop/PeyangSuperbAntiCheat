@@ -37,7 +37,7 @@ public class TargetStick implements IItems
      * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
      *
      * @param target ターゲットが誰であるか。
-     * @returns 関数内の処理によって設定されたアイテム。
+     * @return 関数内の処理によって設定されたアイテム。
      */
     @Override
     public ItemStack getItem(String target)
@@ -57,7 +57,7 @@ public class TargetStick implements IItems
     /**
      * インベントリに空きスペースがあるかどうかを確認する関数のオーバーライド。この関数は使わないため実装は不要。
      *
-     * @returns 実装は不要なためfalse。
+     * @return 実装は不要なためfalse。
      */
     @Override
     public boolean canSpace()
@@ -68,7 +68,7 @@ public class TargetStick implements IItems
     /**
      * どのようなIDであるか取得する。詳細はPSACドキュメントを参照。
      *
-     * @returns このアイテムの実行ID。
+     * @return このアイテムの実行ID。
      */
     @Override
     public String getExecName()
@@ -79,7 +79,7 @@ public class TargetStick implements IItems
     /**
      * どのようなタイプであるか取得する。
      *
-     * @returns ほぼMAIN。大体MAIN。
+     * @return ほぼMAIN。大体MAIN。
      */
     @Override
     public Type getType()
