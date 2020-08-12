@@ -13,7 +13,7 @@ loadbefore: ["ProtocolLib"]
 
 commands:
   report:
-    aliases: ["peyangreport", "pcr", "rep", "report", "wdr"]
+    aliases: ["peyangreport", "pcr", "rep", "report", "wdr", "watchdogreport"]
     usage: /report <PlayerName> [type]
     description: "プレイヤーをレポートします。"
   peyangsuperbanticheat:
@@ -49,6 +49,10 @@ commands:
     aliases: ["track"]
     usage: /tracking <Player>
     description: "プレイヤーを追跡します。"
+  trust:
+    aliases: ["noscan", "trustplayer"]
+    usage: /trust <Player>
+    description: "プレイヤーを信用し、psac.trust権限を持っているプレイヤーしか解除・テストできないようにします。"
   silentteleport:
     aliases: ["stp", "tpto"]
     usage: /tpto [Player] <Player>
@@ -84,6 +88,7 @@ permissions:
       psac.mods: true
       psac.tracking: true
       psac.silentteleport: true
+      psac.member: true
 
   psac.admin:
     description: このプラグインすべての権限を持ちます。
@@ -92,6 +97,7 @@ permissions:
       psac.drop: true
       psac.mod: true
       psac.error: true
+      psac.trust: true
 
 
   #Member
@@ -167,6 +173,9 @@ permissions:
     default: false
   psac.error:
     description: エラーが発生した際、通知されます。
+    default: false
+  psac.trust:
+    description: 信用リストを管理できます。
     default: false
 
   #lock

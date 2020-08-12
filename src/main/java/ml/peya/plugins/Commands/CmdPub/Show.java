@@ -1,10 +1,10 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
@@ -12,14 +12,23 @@ import java.math.*;
 import java.sql.*;
 import java.util.*;
 
+/**
+ * /psac showで動くクラス。
+ */
 public class Show
 {
+    /**
+     * コマンド
+     *
+     * @param sender イベントsender。
+     * @param args   引数。
+     */
     public static void run(CommandSender sender, String[] args)
     {
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))
             return;
 
-        if (WatchEyeManagement.isInjection(args[1]) || !WatchEyeManagement.isExistsRecord(args[1]))
+        if (WatchEyeManagement.isInjection(args[1]) || WatchEyeManagement.isExistsRecord(args[1]))
         {
             sender.sendMessage(MessageEngine.get("error.showDrop.notFoundReport"));
 
@@ -28,7 +37,7 @@ public class Show
 
         String mngid = args[1];
 
-        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+        try (Connection connection = Variables.eye.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD='" + mngid + "'");
@@ -43,10 +52,9 @@ public class Show
             ResultSet reason = statement.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
 
             ArrayList<EnumCheatType> types = new ArrayList<>();
+
             while (reason.next())
-            {
                 types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
-            }
 
             if (sender instanceof Player)
                 BookUtil.openBook(Books.getShowBook(id, uuid, issuebyid, issuebyuuid, issuedate, types), (Player) sender);
@@ -58,7 +66,7 @@ public class Show
             e.printStackTrace();
             sender.sendMessage(MessageEngine.get("error.unknownSQLError"));
 
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
     }
 }

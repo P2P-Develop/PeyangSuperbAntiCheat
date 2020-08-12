@@ -1,17 +1,22 @@
 package ml.peya.plugins.Task;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
-import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
 
 import java.sql.*;
 import java.util.Date;
 import java.util.*;
 
+/**
+ * 定期メッセージを発行するタスク。
+ */
 public class AutoMessageTask extends BukkitRunnable
 {
+    /**
+     * タスクの処理を書く。
+     */
     @Override
     public void run()
     {
@@ -25,7 +30,7 @@ public class AutoMessageTask extends BukkitRunnable
         int watchdog = 0;
         int staff = 0;
 
-        try (Connection connection = PeyangSuperbAntiCheat.banKick.getConnection();
+        try (Connection connection = Variables.banKick.getConnection();
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
         {
@@ -35,9 +40,7 @@ public class AutoMessageTask extends BukkitRunnable
                     new Date().getTime() +
                     " AnD StAfF=0");
             while (result.next())
-            {
                 watchdog++;
-            }
 
             ResultSet result2 = statement2.executeQuery("SeLeCt * FrOm kIcK WhErE DaTe BeTwEeN " +
                     date.getTime() +
@@ -45,28 +48,22 @@ public class AutoMessageTask extends BukkitRunnable
                     new Date().getTime() +
                     " AnD StAfF=1");
             while (result2.next())
-            {
                 staff++;
-            }
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
         }
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("count", String.valueOf(watchdog));
         map.put("staff_count", String.valueOf(staff));
 
-        for (Player player : Bukkit.getOnlinePlayers())
-        {
-            if (!player.hasPermission("psac.regular"))
-                continue;
-
+        Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.hasPermission("psac.regular")).forEachOrdered(player -> {
             player.sendMessage("");
             player.sendMessage(MessageEngine.get("autoMessage", map));
             player.sendMessage("");
-        }
+        });
     }
 }

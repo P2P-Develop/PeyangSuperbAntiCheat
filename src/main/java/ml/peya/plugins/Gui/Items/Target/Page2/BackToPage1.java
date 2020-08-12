@@ -8,6 +8,9 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * ページ1に戻るやつ
+ */
 public class BackToPage1 implements IItems
 {
     @Override

@@ -2,11 +2,11 @@ package ml.peya.plugins;
 
 import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
+import com.fasterxml.jackson.databind.*;
 import com.zaxxer.hikari.*;
-import ml.peya.plugins.Commands.CmdTst.AuraBot;
-import ml.peya.plugins.Commands.CmdTst.AuraPanic;
 import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Commands.*;
+import ml.peya.plugins.DetectClasses.Packets;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Gui.*;
@@ -16,47 +16,45 @@ import ml.peya.plugins.Gui.Items.Target.Page2.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Task.*;
-import ml.peya.plugins.Utils.*;
+import org.apache.commons.io.*;
 import org.bukkit.*;
-import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.*;
-import org.bukkit.scheduler.*;
 
-import java.sql.*;
+import java.io.*;
 import java.util.*;
 import java.util.logging.*;
 
+/**
+ * このプラグインの中枢です。必ずここからスタートします。
+ * 全体で使用する値などはここで初期化します。
+ * また、リソースの破棄もここで行います。
+ */
 public class PeyangSuperbAntiCheat extends JavaPlugin
 {
+    /**
+     * プラグインIDですねわかります。
+     */
     private static final int __BSTATS_PLUGIN_ID = 8084;
-    public static Logger logger = Logger.getLogger("PeyangSuperbAntiCheat");
-    public static FileConfiguration config;
-    public static String databasePath;
-    public static String banKickPath;
-    public static String learnPath;
-    public static DetectingList cheatMeta;
-    public static KillCounting counting;
-    public static ProtocolManager protocolManager;
-    public static Item item;
-    public static Tracker tracker;
-    public static HashMap<UUID, HashMap<String, String>> mods;
-    public static long time = 0L;
-    public static int banLeft;
-    public static NeuralNetwork network;
-    public static HikariDataSource eye;
-    public static HikariDataSource banKick;
-    public static HikariDataSource learn;
-    public static boolean isAutoMessageEnabled;
-    public static boolean isTrackEnabled;
-    public static BukkitRunnable autoMessage;
-    public static BukkitRunnable trackerTask;
+
+    /**
+     * this.
+     */
     private static PeyangSuperbAntiCheat plugin;
 
+    /**
+     * this入手。
+     *
+     * @return こいつ。
+     */
     public static PeyangSuperbAntiCheat getPlugin()
     {
         return plugin;
     }
 
+    /**
+     * プラグインがスタートした時に行う処理をします。
+     * 大体初期化とか。
+     */
     @Override
     public void onEnable()
     {
@@ -64,7 +62,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         if (getServer().getPluginManager().getPlugin("ProtocolLib") == null || !getServer().getPluginManager().getPlugin("ProtocolLib").isEnabled())
         {
-            logger.log(Level.SEVERE, "This plugin requires ProtocolLib!");
+            Variables.logger.log(Level.SEVERE, "This plugin requires ProtocolLib!");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -72,76 +70,68 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         saveDefaultConfig();
 
         plugin = this;
-        config = getConfig();
-        databasePath = config.getString("database.path");
-        banKickPath = config.getString("database.logPath");
-        learnPath = config.getString("database.learnPath");
+        Variables.config = getConfig();
+        Variables.databasePath = Variables.config.getString("database.path");
+        Variables.banKickPath = Variables.config.getString("database.logPath");
+        Variables.trustPath = Variables.config.getString("database.trustPath");
 
-        network = new NeuralNetwork();
+        Variables.banLeft = Variables.config.getInt("npc.vlLevel");
 
-        eye = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
-        banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
-        learn = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + learnPath));
+        Variables.network = new NeuralNetwork();
 
-        cheatMeta = new DetectingList();
-        counting = new KillCounting();
-        tracker = new Tracker();
+        Variables.eye = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + Variables.databasePath));
+        Variables.banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + Variables.banKickPath));
+        Variables.trust = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + Variables.trustPath));
 
-        protocolManager = ProtocolLibrary.getProtocolManager();
-
-        item = new Item();
-
-        item.register(new ml.peya.plugins.Gui.Items.Target.AuraBot());  //====Page1
-        item.register(new ml.peya.plugins.Gui.Items.Target.AuraPanic());
-        item.register(new TestKnockBack());
-        item.register(new CompassTracker3000_tm());
-        item.register(new BanBook());
-        item.register(new ToPage2());                                   //
-        item.register(new BackButton());
-
-        item.register(new BackToPage1());                              //====Page2
-        item.register(new Lead());
-        item.register(new ModList());
-
-        item.register(new TargetStick());                              //====Main
-
-        protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
+        try
         {
-            @Override
-            public void onPacketReceiving(PacketEvent event)
-            {
-                new Packets().useEntity(event);
-            }
-        });
-
-        protocolManager.addPacketListener(new PacketAdapter(this, PacketType.Play.Server.PLAYER_INFO)
-        {
-            @Override
-            public void onPacketSending(PacketEvent event)
-            {
-                new Packets().playerInfo(event);
-            }
-        });
-
-
-        if (!(Init.createDefaultTables() && Init.initBypass()))
-            Bukkit.getPluginManager().disablePlugin(this);
-
-        try (Connection connection = learn.getConnection();
-             Statement statement = connection.createStatement())
-        {
-            ResultSet rs = statement.executeQuery("SeLeCt standard FrOm WdLeArN;");
-
-            while (rs.next())
-            {
-                banLeft = rs.getInt("standard");
-            }
+            FileUtils.copyInputStreamToFile(this.getResource("skin.db"), new File(getDataFolder().getAbsolutePath() + "/skin.db"));
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
         }
+        Variables.skin = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/skin.db"));
+
+        if (!isEnabled())
+            return;
+        
+        Variables.item = new Item();
+
+        Variables.item.register(new AuraBotItem());  //====Page1
+        Variables.item.register(new AuraPanicItem());
+        Variables.item.register(new TestKnockBack());
+        Variables.item.register(new CompassTracker3000_tm());
+        Variables.item.register(new BanBook());
+        Variables.item.register(new ToPage2());                                   //
+        Variables.item.register(new BackButton());
+
+        Variables.item.register(new BackToPage1());                              //====Page2
+        Variables.item.register(new Lead());
+        Variables.item.register(new ModList());
+
+        Variables.item.register(new TargetStick());                              //====Main
+
+        Variables.cheatMeta = new DetectingList();
+        Variables.counting = new KillCounting();
+        Variables.tracker = new Tracker();
+
+        Variables.protocolManager = ProtocolLibrary.getProtocolManager();
+
+        Variables.protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
+        {
+            @Override
+            public void onPacketReceiving(PacketEvent event)
+            {
+                Packets.useEntity(event);
+            }
+        });
+
+
+        if (!Init.createDefaultTables())
+            Bukkit.getPluginManager().disablePlugin(this);
 
         getCommand("report").setExecutor(new CommandReport());
         getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
@@ -153,65 +143,120 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("target").setExecutor(new CommandTarget());
         getCommand("mods").setExecutor(new CommandMods());
         getCommand("tracking").setExecutor(new CommandTracking());
+        getCommand("trust").setExecutor(new CommandTrust());
         getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new Run(), this);
         getServer().getPluginManager().registerEvents(new Drop(), this);
 
-        isAutoMessageEnabled = config.getBoolean("autoMessage.enabled");
-        time = config.getLong("autoMessage.time");
+        Variables.isAutoMessageEnabled = Variables.config.getBoolean("autoMessage.enabled");
+        Variables.time = Variables.config.getLong("autoMessage.time");
+        Variables.learnCountLimit = Variables.config.getInt("npc.learncount");
 
-        if (time == 0L)
-            time = 1L;
+        if (Variables.time == 0L)
+            Variables.time = 1L;
 
-        autoMessage = new AutoMessageTask();
-        trackerTask = new TrackerTask();
+        Variables.autoMessage = new AutoMessageTask();
+        Variables.trackerTask = new TrackerTask();
 
-        isTrackEnabled = config.getBoolean("mod.tracking.enabled");
+        Variables.isTrackEnabled = Variables.config.getBoolean("mod.tracking.enabled");
 
-        if (isTrackEnabled)
+        if (Variables.isTrackEnabled)
         {
-            logger.info("Starting Tracker Task...");
-            trackerTask.runTaskTimer(this, 0, config.getInt("mod.tracking.trackTicks"));
+            Variables.logger.info("Starting Tracker Task...");
+            Variables.trackerTask.runTaskTimer(this, 0, Variables.config.getInt("mod.tracking.trackTicks"));
         }
 
-        if (isAutoMessageEnabled)
+        if (Variables.isAutoMessageEnabled)
         {
-            logger.info("Starting Auto-Message Task...");
-            autoMessage.runTaskTimer(this, 0, 20 * (time * 60));
+            Variables.logger.info("Starting Auto-Message Task...");
+            Variables.autoMessage.runTaskTimer(this, 0, 20 * (Variables.time * 60));
         }
 
-        mods = new HashMap<>();
+        Variables.logger.info("Reading weights from learnPath...");
+        try
+        {
+            File file = new File(getDataFolder().getAbsolutePath() + "/" + Variables.config.getString("database.learnPath"));
+            if (file.exists() && file.length() >= 256)
+            {
+                JsonNode node = new ObjectMapper().readTree(file);
+                int i = 0;
+                for (double[] aIW : Variables.network.inputWeight)
+                {
+                    for (int i1 = 0; i1 < aIW.length; i1++)
+                        Variables.network.inputWeight[i][i1] = node.get("inputWeight").get(i).get(i1).asDouble();
+                    i++;
+                }
+
+                Arrays.parallelSetAll(Variables.network.middleWeight, i2 -> node.get("middleWeight").get(i2).asDouble());
+
+                Variables.learnCount = node.get("learnCount").asInt();
+
+                Variables.logger.info("Weights setting completed successfully!");
+            }
+            else
+                throw new FileNotFoundException();
+        }
+        catch (Exception ignored)
+        {
+            Variables.logger.warning("Learning data file not found.");
+        }
+
+        Variables.mods = new HashMap<>();
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "FML|HS");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new PluginMessageListener());
 
 
-        logger.info("PeyangSuperbAntiCheat has been activated!");
+        Variables.logger.info("PeyangSuperbAntiCheat has been activated!");
     }
 
+    /**
+     * プラグインが停止するときの処理をします。
+     * リソース捨てないといけないやつのcloseとか保存とか。
+     */
     @Override
     public void onDisable()
     {
-        if (eye != null)
-            eye.close();
-        if (banKick != null)
-            banKick.close();
-        eye = null;
-        banKick = null;
-        if (autoMessage != null && RunnableUtil.isStarted(autoMessage))
+        if (Variables.eye != null)
+            Variables.eye.close();
+        if (Variables.banKick != null)
+            Variables.banKick.close();
+        if (Variables.skin != null)
+            Variables.skin.close();
+        Variables.trust.close();
+        Variables.eye = null;
+        Variables.banKick = null;
+        Variables.trust = null;
+        Variables.skin = null;
+        if (Variables.autoMessage != null)
         {
-            logger.info("Stopping Auto-Message Task...");
-            autoMessage.cancel();
+            Variables.logger.info("Stopping Auto-Message Task...");
+            Variables.autoMessage.cancel();
         }
 
-        if (trackerTask != null && RunnableUtil.isStarted(trackerTask))
+        if (Variables.trackerTask != null)
         {
-            logger.info("Stopping Tracker Task...");
-            trackerTask.cancel();
+            Variables.logger.info("Stopping Tracker Task...");
+            Variables.trackerTask.cancel();
         }
 
-        logger.info("PeyangSuperbAntiCheat has disabled!");
+        try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + Variables.config.getString("database.learnPath"));
+             PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
+        {
+            Variables.logger.info("Saving learn weights to learning data file...");
+            Mapper mp = new Mapper();
+            mp.inputWeight = Variables.network.inputWeight;
+            mp.middleWeight = Variables.network.middleWeight;
+            mp.learnCount = Variables.learnCount;
+            pw.print(new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).writeValueAsString(mp));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        Variables.logger.info("PeyangSuperbAntiCheat has disabled!");
     }
 }

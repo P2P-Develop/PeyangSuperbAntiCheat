@@ -1,14 +1,27 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.util.*;
 
+/**
+ * 引き寄せコマンド系クラス。
+ */
 public class CommandPull implements CommandExecutor
 {
+    /**
+     * コマンド動作のオーバーライド。
+     *
+     * @param sender  イベントsender。
+     * @param command コマンド。
+     * @param label   ラベル。
+     * @param args    引数。
+     * @return 正常に終わったかどうか。
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -21,12 +34,19 @@ public class CommandPull implements CommandExecutor
             return true;
         }
 
-        String playerName = args[0];
-        Player player = Bukkit.getPlayer(playerName);
+        Player player = Bukkit.getPlayer(args[0]);
 
         if (player == null)
         {
             sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+
+            return true;
+        }
+
+        if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
+        {
+            sender.sendMessage(MessageEngine.get("error.trusted"));
+
             return true;
         }
 
@@ -37,14 +57,17 @@ public class CommandPull implements CommandExecutor
         else
             pull(player, playerSender.getLocation());
 
-        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            sender.sendMessage(MessageEngine.get("message.pull.lynx", MessageEngine.hsh("name", player.getName())));
-        else
-            sender.sendMessage(MessageEngine.get("message.pull.normal", MessageEngine.hsh("name", player.getName())));
+        sender.sendMessage(Variables.config.getBoolean("message.lynx") ? MessageEngine.get("message.pull.lynx", MessageEngine.pair("name", player.getName())): MessageEngine.get("message.pull.normal", MessageEngine.pair("name", player.getName())));
 
         return true;
     }
 
+    /**
+     * 思いっきりプレイヤーを引き寄せる。
+     *
+     * @param player       プレイヤー。
+     * @param pullLocation 引き寄せ先。
+     */
     private void pull(Player player, Location pullLocation)
     {
         Location entityLoc = player.getLocation();

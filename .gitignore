@@ -10,6 +10,10 @@
 # Backup files
 *.bak
 
+# Temporaly created files/directories
+tmp/
+*.tmp
+
 # BlueJ files
 *.ctxt
 
@@ -32,6 +36,7 @@
 
 ### Maven ###
 target/
+!target/classes
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -56,9 +61,8 @@ buildNumber.properties
 .history
 
 # General built files
-out
-bin
-build
+out/
+bin/
 
 # OS
 Thumbs.db
@@ -146,5 +150,64 @@ modules.xml
 # Sonarlint plugin
 .idea/sonarlint
 
-# Floobits file
+### Floobits ###
 .floo
+
+### Eclipse ###
+.metadata
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Annotation Processing
+.apt_generated/
+.apt_generated_test/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+.project
+
+### Eclipse Patch ###
+# Spring Boot Tooling
+.sts4-cache/

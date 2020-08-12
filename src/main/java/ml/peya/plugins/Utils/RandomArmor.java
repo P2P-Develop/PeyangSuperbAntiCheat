@@ -5,9 +5,19 @@ import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
 import java.util.*;
+import java.util.stream.*;
 
+/**
+ * 防具をランダムにNPCに着せるクラス。
+ * 革装備はランダムな色を付与
+ */
 public class RandomArmor
 {
+    /**
+     * こいつらぶっこんでから関数でランダムに取得してる。
+     *
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getHelmet()
     {
         ArrayList<Material> helmets = new ArrayList<>();
@@ -19,10 +29,14 @@ public class RandomArmor
         helmets.add(Material.LEATHER_HELMET);
         helmets.add(Material.AIR);
 
-
         return getRandomItems(helmets);
     }
 
+    /**
+     * ランダムなチェストプレートを入手する。
+     *
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getChestPlate()
     {
         ArrayList<Material> chestPlates = new ArrayList<>();
@@ -36,6 +50,11 @@ public class RandomArmor
         return getRandomItems(chestPlates);
     }
 
+    /**
+     * ランダムなレギンスを入手する。
+     *
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getLeggings()
     {
         ArrayList<Material> leggings = new ArrayList<>();
@@ -49,6 +68,11 @@ public class RandomArmor
         return getRandomItems(leggings);
     }
 
+    /**
+     * ランダムなブーツを入手する。
+     *
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getBoots()
     {
         ArrayList<Material> boots = new ArrayList<>();
@@ -62,6 +86,11 @@ public class RandomArmor
         return getRandomItems(boots);
     }
 
+    /**
+     * ランダムな剣を入手する。
+     *
+     * @return アイテムどもから選んだやつ。
+     */
     public static ItemStack getSwords()
     {
         ArrayList<Material> swords = new ArrayList<>();
@@ -75,12 +104,17 @@ public class RandomArmor
         swords.add(Material.IRON_AXE);
         swords.add(Material.STONE_AXE);
         swords.add(Material.WOOD_AXE);
-        for (int i = 0; i < 5; i++)
-            swords.add(Material.AIR);
+        IntStream.range(0, 5).parallel().mapToObj(i -> Material.AIR).forEachOrdered(swords::add);
 
         return getRandomItems(swords);
     }
 
+    /**
+     * 金ってだけでなんかするらしい。運イベかな？
+     *
+     * @param item あいてむ！
+     * @return ゴールド全面でござったらtrue。
+     */
     private static boolean isGold(Material item)
     {
         ArrayList<Material> items = new ArrayList<>();
@@ -93,18 +127,23 @@ public class RandomArmor
         return items.contains(item);
     }
 
+    /**
+     * ランダムにえりすぐる。
+     *
+     * @param itemsArg あいてむ！なArrayList。
+     * @return えりすぐったアイテム。
+     */
     public static ItemStack getRandomItems(ArrayList<Material> itemsArg)
     {
         Random random = new Random();
 
         ArrayList<Material> items = new ArrayList<>();
 
-        for (Material item : itemsArg)
-        {
+        itemsArg.parallelStream().forEachOrdered(item -> {
             if (isGold(item))
                 items.add(item);
             items.add(item);
-        }
+        });
 
         ItemStack stack = new ItemStack(items.get(random.nextInt(items.size() - 1)), 1);
 
@@ -121,5 +160,4 @@ public class RandomArmor
 
         return stack;
     }
-
 }

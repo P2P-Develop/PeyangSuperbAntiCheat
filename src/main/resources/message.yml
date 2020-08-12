@@ -14,6 +14,7 @@ error:
   invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
   requirePlayer: "%%red%%%%bold%%エラー：プレイヤーから実行してください。"
   notPlayerFoundInRange: "%%red%%%%bold%%エラー：範囲内にプレイヤーが見つかりませんでした。"
+  trusted: "%%red%%%bold%%エラー：対象プレイヤーは信用されています！それでも実行するにはpsac.trust権限を持っているプレイヤーが実行してください！"
   report:
     invalidReason: "%%red%%%%bold%%エラー：理由が正しくありません！"
     reasonNotSelected: "%%red%%%%bold%%エラー：理由が選択されていません！"
@@ -30,7 +31,6 @@ error:
 
   showDrop:
     notFoundReport: "%%red%%%%bold%%エラー：IDに合致するレポートが見つかりませんでした！"
-
 
   aura:
     testingNow: "%%red%%%%bold%%エラー：対象プレイヤーは、現在テスト中です。"
@@ -62,13 +62,15 @@ command:
 
 
     aurapanic: "\
-    %%aqua%%/acpanic %%dark_aqua%%<PlayerName>\n\
-    %%green%%指定したプレイヤーの背後に、NPCを召喚します。
+    %%aqua%%/acpanic %%dark_aqua%%<PlayerName>%%dark_purple%% [-rf]\n\
+    %%green%%指定したプレイヤーの背後に、NPCを召喚します。\n\
+    %%gray%%%%italic%%Tips：第2引数に、-rをセットすると、リーチモードとして召喚されます。
     "
     aurabot: "\
-    %%aqua%%/aurabot%%dark_aqua%% <PlayerName>\n\
+    %%aqua%%/aurabot%%dark_aqua%% <PlayerName>%%dark_purple%% [-r]\n\
     %%green%%指定したプレイヤーを中心に\n\
-    %%green%%回るNPCを召喚します。
+    %%green%%回るNPCを召喚します。\n\
+    %%gray%%%%italic%%Tips：第2引数に、-rをセットすると、リーチモードとして召喚されます。
     "
     show: "\
     %%aqua%%/%%label%% show %%dark_aqua%%<管理iD>\n\
@@ -110,6 +112,12 @@ command:
     %%green%%引数を付けずに実行すると、追跡モードを終了します。
     "
 
+    trust: "\
+    %%aqua%%/trust %%dark_aqua%%<PlayerName>\n\
+    %%green%%指定されたプレイヤーを信用します。\n\
+    %%green%%信用されたプレイヤーは、psac.admin権限を持つプレイヤー以外が実行したスキャンを通り抜けることができます。
+    "
+
     silentteleport: "\
     %%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>\n\
     %%green%%指定したプレイヤーにログを残さずにテレポートします。\n\
@@ -126,7 +134,7 @@ message:
     thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの懸念を理解しており、できるだけ早急に審査いたします。"
     cancel: "%%red%%報告を閉じました！"
   drop:
-    success: "%%green%%成功：報告の削除に成功しました！"
+    success: "%%green%%報告の削除に成功しました。"
   kick:
     test: "%%green%%テストモード%%red%%%%bold%%で、プレイヤーをキックします。"
   aura:
@@ -135,6 +143,9 @@ message:
     %%green%%%%seconds%%秒間お待ちください。
     "
     lynx: "%%yellow%%Testing, please wait…"
+  trust:
+    add: "%%green%%プレイヤー %%name%% を信用リストに追加しました！"
+    remove: "%%red%%プレイヤー %%name%% を信用リストから削除しました。"
 
   auraCheck:
     result:

@@ -2,14 +2,27 @@ package ml.peya.plugins.Commands.CmdTst;
 
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
+/**
+ * Test Knockbackコマンド系クラス。
+ */
 public class TestKnockback implements CommandExecutor
 {
+    /**
+     * コマンド動作のオーバーライド。
+     *
+     * @param sender イベントsender。
+     * @param cmd    コマンド。
+     * @param label  ラベル。
+     * @param args   引数。
+     * @return 正常に終わったかどうか。
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
@@ -27,14 +40,21 @@ public class TestKnockback implements CommandExecutor
             return true;
         }
 
-        if (PeyangSuperbAntiCheat.cheatMeta.exists(player.getUniqueId()))
+        if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
+        {
+            sender.sendMessage(MessageEngine.get("error.trusted"));
+
+            return true;
+        }
+
+        if (Variables.cheatMeta.exists(player.getUniqueId()))
         {
             sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
 
             return true;
         }
 
-        DetectConnection.scan(player, DetectType.ANTI_KB, sender);
+        DetectConnection.scan(player, DetectType.ANTI_KB, sender, false);
         return true;
     }
 }

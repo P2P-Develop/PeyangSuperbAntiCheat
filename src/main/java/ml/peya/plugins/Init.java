@@ -6,13 +6,21 @@ import ml.peya.plugins.Utils.*;
 import java.io.*;
 import java.sql.*;
 
+/**
+ * プラグイン自体ではおさまらない初期化とかするとこ。
+ */
 public class Init
 {
+    /**
+     * データベースの.dbファイルをめっちゃ作成する。
+     *
+     * @param path 相対パスでいいお。
+     * @return こいつをHikariDataSourceに突っ込むといい感じになります。
+     */
     public static HikariConfig initMngDatabase(String path)
     {
         HikariConfig hConfig = new HikariConfig();
-        File file = new File(path);
-        file.getParentFile().mkdirs();
+        new File(path).getParentFile().mkdirs();
 
         hConfig.setDriverClassName("org.sqlite.JDBC");
         hConfig.setJdbcUrl("jdbc:sqlite:" + path);
@@ -20,9 +28,14 @@ public class Init
         return hConfig;
     }
 
+    /**
+     * なかったらテーブル作る。あったらそのまま。
+     *
+     * @return 処理が正常に終わればtrueを返してくれます。
+     */
     public static boolean createDefaultTables()
     {
-        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
+        try (Connection connection = Variables.eye.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs watchreason(" +
@@ -39,16 +52,15 @@ public class Init
                     "MNGID nchar," +
                     "LEVEL int" +
                     ");");
-
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
             return false;
         }
 
-        try (Connection connection = PeyangSuperbAntiCheat.banKick.getConnection();
+        try (Connection connection = Variables.banKick.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs kick(" +
@@ -63,60 +75,22 @@ public class Init
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
+            Utils.errorNotification(Utils.getStackTrace(e));
             return false;
         }
 
-        try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
+        try (Connection connection = Variables.trust.getConnection();
              Statement statement = connection.createStatement())
         {
-            statement.execute("CrEaTe TaBlE If NoT ExIsTs wdlearn(" +
-                    "standard int," +
-                    "MNGID nchar," +
-                    "middleweight nchar" +
-                    ");");
-
-            statement.execute("Create table if not exists wdWeight(" +
-                    "MNGID nchar," +
-                    "inputweight nchar" +
+            statement.execute("CrEaTe TaBlE If NoT ExIsTs trust(" +
+                    "PLAYER nchar" +
                     ");");
             return true;
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-            return false;
-        }
-    }
-
-    public static boolean initBypass()
-    {
-        try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-             Statement statement = connection.createStatement())
-        {
-            long ctl = 0;
-            int cBypass = 1;
-            ResultSet resultSet = statement.executeQuery("SeLeCt * FrOm WdLeArN");
-            while (resultSet.next())
-            {
-                int cot = resultSet.getInt("DATA");
-
-                ctl += cot;
-
-                cBypass++;
-
-            }
-
-            if (cBypass - 1 != 0)
-                PeyangSuperbAntiCheat.banLeft = Math.toIntExact(ctl / cBypass);
-            else
-                PeyangSuperbAntiCheat.banLeft = PeyangSuperbAntiCheat.config.getInt("kick.defaultKick");
-            return true;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+            Utils.errorNotification(Utils.getStackTrace(e));
             return false;
         }
     }

@@ -15,19 +15,38 @@ import org.bukkit.scheduler.*;
 import java.sql.*;
 import java.util.*;
 
-import static ml.peya.plugins.PeyangSuperbAntiCheat.network;
+import static ml.peya.plugins.Variables.network;
 
+/**
+ * キック時の処理などを管理する。
+ */
 public class DetectConnection
 {
-    public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type)
+    /**
+     * アーマー付きでスポーンさせる。
+     *
+     * @param player    プレイヤー。
+     * @param type      判定タイプ。
+     * @param reachMode リーチモードかどうか。
+     * @return 万能クラス。
+     */
+    public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type, boolean reachMode)
     {
-        EntityPlayer uuid = NPC.spawn(player, type);
-        CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
-        meta.setCanTesting(true);
+        EntityPlayer uuid = NPC.spawn(player, type, reachMode);
+        CheatDetectNowMeta meta = Variables.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
+        meta.setTesting(true);
         return meta;
     }
 
-    public static void scan(Player player, DetectType type, CommandSender sender)
+    /**
+     * AntiKB用。
+     *
+     * @param player    プレイヤー。
+     * @param type      判定タイプ。
+     * @param sender    イベントsender。
+     * @param reachMode リーチモードかどうか。
+     */
+    public static void scan(Player player, DetectType type, CommandSender sender, boolean reachMode)
     {
         if (type == DetectType.ANTI_KB)
         {
@@ -35,119 +54,114 @@ public class DetectConnection
             return;
         }
 
-        CheatDetectNowMeta meta = spawnWithArmor(player, type);
+        CheatDetectNowMeta meta = spawnWithArmor(player, type, reachMode);
 
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                meta.setCanTesting(false);
+                meta.setTesting(false);
 
-                if (PeyangSuperbAntiCheat.banLeft <= meta.getVL())
+                double vl = meta.getVL();
+                double seconds = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
+
+                if (Variables.learnCount > Variables.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.01)
                 {
-                    new BukkitRunnable()
-                    {
-                        @Override
-                        public void run()
-                        {
-                            double vl = meta.getVL();
-                            ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                            arr.add(Triple.of(vl, vl, vl));
-                            network.learn(arr, 1000);
+                    learn(vl, seconds);
 
-                            PeyangSuperbAntiCheat.banLeft = (int) Math.round(network.commit(Pair.of(vl, vl)));
-
-                            try (Connection connection = PeyangSuperbAntiCheat.learn.getConnection();
-                                 Statement statement = connection.createStatement())
-                            {
-                                statement.execute("InSeRt Or RePlAcE iNtO wdlearn(standard) vAlUeS (" +
-                                        PeyangSuperbAntiCheat.banLeft + ", " +
-                                        UUID.randomUUID().toString() + ", " +
-                                        ");");
-                            }
-                            catch (Exception e)
-                            {
-                                e.printStackTrace();
-                                ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-                            }
-                            this.cancel();
-                        }
-                    }.runTask(PeyangSuperbAntiCheat.getPlugin());
-
-                    ArrayList<String> reason = new ArrayList<>();
-                    try (Connection connection = PeyangSuperbAntiCheat.eye.getConnection();
-                         Statement statement = connection.createStatement();
-                         Statement statement2 = connection.createStatement())
-                    {
-                        ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
-                        while (rs.next())
-                        {
-                            ResultSet set = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
-                                    rs.getString("MNGID") + "'");
-                            while (set.next())
-                            {
-                                reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
-                            }
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                        ReportUtils.errorNotification(ReportUtils.getStackTrace(e));
-                    }
-
-                    ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
-
-                    KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura" : "Report: " + String.join(", ", realReason)), true, false);
-
+                    if (kick(player)) return;
                 }
+                if (Variables.learnCount < Variables.learnCountLimit && Variables.banLeft <= meta.getVL())
+                {
+                    learn(vl, seconds);
 
+                    if (kick(player)) return;
+                }
 
                 new BukkitRunnable()
                 {
                     @Override
                     public void run()
                     {
-                        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "" : (" (" + player.getName() + ") "));
+                        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") "));
 
                         switch (type)
                         {
                             case AURA_BOT:
                                 if (sender == null)
-                                {
-                                    for (Player np : Bukkit.getOnlinePlayers())
-                                    {
-                                        if (!np.hasPermission("psac.aurabot"))
-                                            continue;
-                                        np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
-                                    }
-                                }
+                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), Variables.banLeft).create()));
                                 else
-                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), PeyangSuperbAntiCheat.banLeft).create());
+                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), Variables.banLeft).create());
                                 break;
 
                             case AURA_PANIC:
                                 if (sender == null)
-                                {
-                                    for (Player np : Bukkit.getOnlinePlayers())
-                                    {
-                                        if (!np.hasPermission("psac.aurapanic"))
-                                            continue;
-                                        np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
-                                    }
-                                }
+                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurapanic")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 break;
                         }
 
-                        PeyangSuperbAntiCheat.cheatMeta.remove(meta.getUuids());
+                        Variables.cheatMeta.remove(meta.getUUIDs());
                         this.cancel();
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * PeyangSuperbAntiCheat.config.getInt("npc.seconds"));
+
+            private void learn(double vl, double seconds)
+            {
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
+                        arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
+                        Variables.learnCount++;
+                        network.learn(arr, 1000);
+
+                        this.cancel();
+                    }
+                }.runTask(PeyangSuperbAntiCheat.getPlugin());
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * Variables.config.getInt("npc.seconds"));
+    }
+
+    /**
+     * キック動作の開始DA!
+     *
+     * @param player プレイヤー０。
+     * @return 処理が正常に終了したかどうか。
+     */
+    private static boolean kick(Player player)
+    {
+        ArrayList<String> reason = new ArrayList<>();
+        try (Connection connection = Variables.eye.getConnection();
+             Statement statement = connection.createStatement();
+             Statement statement1 = connection.createStatement())
+        {
+            if (WatchEyeManagement.isInjection(player.getName()))
+                return false;
+            ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
+            while (rs.next())
+            {
+                ResultSet set = statement1.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
+                        rs.getString("MNGID") + "'");
+                while (set.next())
+                    reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            Utils.errorNotification(Utils.getStackTrace(e));
+        }
+
+        ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
+
+        KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
+        return true;
     }
 }

@@ -1,8 +1,8 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -10,10 +10,19 @@ import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
-import org.bukkit.util.*;
 
-class TestKnockback
+/**
+ * ノックバックを確認するクラス。
+ */
+public class TestKnockback
 {
+    /**
+     * 透明な矢をplayerに対して発射する。
+     *
+     * @param player プレイヤー。
+     * @param type   判定タイプ(不使用)。
+     * @param sender イベントsender。
+     */
     public static void scan(Player player, DetectType type, CommandSender sender)
     {
         if (type == DetectType.AURA_BOT || type == DetectType.AURA_PANIC)
@@ -22,42 +31,38 @@ class TestKnockback
         Location location = player.getLocation();
         location.add(0, 1, 0);
         location.setPitch(0);
-        Vector loc = location.getDirection();
-        loc.multiply(-0.1f);
-        location.add(loc);
-
+        location.add(location.getDirection().multiply(-0.1f));
 
         Arrow arrow = (Arrow) player.getWorld().spawnEntity(location, EntityType.ARROW);
-        PeyangSuperbAntiCheat.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), DetectType.ANTI_KB);
+        Variables.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), DetectType.ANTI_KB);
         arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), player.getUniqueId()));
-        for (Player hide : Bukkit.getOnlinePlayers())
-        {
-            PlayerConnection connection = ((CraftPlayer) hide).getHandle().playerConnection;
+        Bukkit.getOnlinePlayers().parallelStream().map(hide -> ((CraftPlayer) hide).getHandle().playerConnection).forEachOrdered(connection -> connection.sendPacket(new PacketPlayOutEntityDestroy(arrow.getEntityId())));
 
-            connection.sendPacket(new PacketPlayOutEntityDestroy(arrow.getEntityId()));
-        }
+        arrow.setVelocity(location.getDirection().multiply(32767f));
 
-        Vector speed = location.getDirection();
-        speed.multiply(32767f);
-        arrow.setVelocity(speed);
+        Variables.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type).setTesting(true);
 
-        CheatDetectNowMeta meta = PeyangSuperbAntiCheat.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type);
-        meta.setCanTesting(true);
+        scanFinally(player, sender, arrow);
+    }
 
-
+    /**
+     * 後始末をする。
+     *
+     * @param player プレイヤー。
+     * @param sender イベントsender。
+     * @param arrow  矢。
+     */
+    private static void scanFinally(Player player, CommandSender sender, Arrow arrow)
+    {
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                String path = "message.testkb.normal";
-                if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-                    path = "message.testkb.lynx";
-                sender.sendMessage(MessageEngine.get(path, MessageEngine.hsh("name", player.getName())));
+                sender.sendMessage(MessageEngine.get(Variables.config.getBoolean("message.lynx") ? "message.testkb.normal": "message.textkb.lynx", MessageEngine.pair("name", player.getName())));
                 arrow.remove();
-                PeyangSuperbAntiCheat.cheatMeta.remove(arrow.getUniqueId());
+                Variables.cheatMeta.remove(arrow.getUniqueId());
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20);
-
     }
 }

@@ -2,12 +2,15 @@ package ml.peya.plugins.Gui.Items.Target;
 
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * TestKB
+ */
 public class TestKnockBack implements IItems
 {
     @Override
@@ -23,7 +26,7 @@ public class TestKnockBack implements IItems
 
         ItemMeta meta = stack.getItemMeta();
 
-        meta.setDisplayName(MessageEngine.get("item.execute", MessageEngine.hsh("command", "TestKnockBack")));
+        meta.setDisplayName(MessageEngine.get("item.execute", MessageEngine.pair("command", "TestKnockBack")));
 
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);

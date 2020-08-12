@@ -1,17 +1,27 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
 
 import java.util.*;
 
+/**
+ * Mod参照コマンド系クラス。
+ */
 public class CommandMods implements CommandExecutor
 {
+    /**
+     * コマンド動作のオーバーライド。
+     *
+     * @param sender  イベントsender。
+     * @param command コマンド。
+     * @param label   ラベル。
+     * @param args    引数。
+     * @return 正常に終わったかどうか。
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -35,16 +45,11 @@ public class CommandMods implements CommandExecutor
 
         if (sender instanceof ConsoleCommandSender)
         {
-            for (String id : mods.keySet())
-            {
-                String version = mods.get(id);
-                sender.sendMessage(ChatColor.RED + id + ChatColor.GREEN + ": " + ChatColor.BLUE + version);
-            }
+            mods.keySet().parallelStream().forEach(id -> sender.sendMessage(ChatColor.RED + id + ChatColor.GREEN + ": " + ChatColor.BLUE + mods.get(id)));
             return true;
         }
 
-        ItemStack book = Books.getModsBook(player, mods);
-        BookUtil.openBook(book, (Player) sender);
+        BookUtil.openBook(Books.getModsBook(player, mods), (Player) sender);
         return true;
     }
 }

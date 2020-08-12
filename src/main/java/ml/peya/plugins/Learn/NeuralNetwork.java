@@ -4,77 +4,140 @@ import ml.peya.plugins.*;
 import org.apache.commons.lang3.tuple.*;
 
 import java.util.*;
-import java.util.function.*;
 import java.util.stream.*;
 
+import static ml.peya.plugins.Utils.Utils.times;
+
+/**
+ * The・AI中枢
+ */
 public class NeuralNetwork
 {
-    final static Random random = new Random();
-    final static double weightRange = 10.0;
-    static double RandomWeight = (random.nextDouble() - 0.5) * weightRange;
-    final double inputLayerBias = 1.0;
-    final double middleLayerBias = 1.0;
-    double[] inputLayer;
-    Neuron[] middleLayer;
-    Neuron outputLayer;
-    double[][] inputWeight = new double[][]{{RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}, {RandomWeight, RandomWeight, RandomWeight}};
-    double[] middleWeight = new double[]{RandomWeight, RandomWeight, RandomWeight};
+    /**
+     * RandomWeight()取得に使用。
+     */
+    private final static Random random = new Random();
+    /**
+     * 重みのふり幅。
+     */
+    private static final double weightRange = 10.0;
+    /**
+     * ランダムに重みを設定する関数。
+     */
+    private static final double RandomWeight()
+    {
+        return (random.nextDouble() - 0.5) * weightRange;
+    }
+    /**
+     * 前層のバイアス。
+     */
+    private static final double inputLayerBias = 1.0;
+    /**
+     * 中層のバイアス。
+     */
+    private static final double middleLayerBias = 1.0;
+    /**
+     * 前層の重み。
+     */
+    public double[][] inputWeight = new double[][]{{RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}};
+    /**
+     * 中層の重み。
+     */
+    public double[] middleWeight = new double[]{RandomWeight(), RandomWeight(), RandomWeight()};
+    /**
+     * 前層自体の表現。
+     */
+    private double[] inputLayer;
+    /**
+     * 中層自体の表現。
+     */
+    private Neuron[] middleLayer;
+    /**
+     * 出力層。
+     * ローカル変数問題は気にしない。
+     */
+    private Neuron outputLayer;
 
+    /**
+     * 二次元配列のカラムを取得するそれっぽい関数。
+     *
+     * @param array 二次元配列。
+     * @param index 第一配列のインデックス。
+     * @return カラムを表すdouble一次元配列。
+     */
     public static double[] getColumn(double[][] array, int index)
     {
         double[] column = new double[array[0].length];
-        Arrays.setAll(column, i -> array[i][index]);
+        Arrays.parallelSetAll(column, i -> array[i][index]);
         return column;
     }
 
+    /**
+     * ArrayListに変換してくれる。便利。
+     *
+     * @param inputLayer  入力自体の表現
+     * @param inputWeight 入力の重み
+     * @return 変換後
+     */
     static ArrayList<Input> toInputData(double[] inputLayer, double[] inputWeight)
     {
         ArrayList<Input> it = new ArrayList<>();
         int count = 0;
-        for (double layer : inputLayer)
-        {
-            Input input = new Input(layer, inputWeight[count] - 1);
-            it.add(input);
-            count++;
-        }
+        for (double layer : inputLayer) it.add(new Input(layer, inputWeight[count++] - 1));
         return it;
     }
 
+    /**
+     * 出力結果を算出する。
+     *
+     * @param data 計算させるデータ。
+     * @return 0.0~1.0までの出力結果。
+     */
     public double commit(Pair<Double, Double> data)
     {
         inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
         middleLayer = new Neuron[]{new Neuron(), new Neuron()};
         outputLayer = new Neuron();
 
-        for (int i = 0; i < middleLayer.length; i++)
-            middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i)));
+        IntStream.range(0, middleLayer.length).parallel().forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
 
         outputLayer.input(new ArrayList<>(Arrays.asList(new Input(middleLayer[0].getValue(), middleWeight[0]), new Input(middleLayer[1].getValue(), middleWeight[1]), new Input(middleLayerBias, middleWeight[2]))));
 
         return outputLayer.getValue();
     }
 
-    public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int times)
+    /**
+     * 学習。
+     *
+     * @param dataCollection データ。
+     * @param count          学習回数。
+     */
+    public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int count)
     {
-        IntStream.range(0, times).<Consumer<? super Triple<Double, Double, Double>>>mapToObj(i -> this::learn).forEach(dataCollection::forEach);
+        times(count, (data) -> dataCollection.parallelStream().forEachOrdered(this::learn), null);
     }
 
-    void learn(Triple<Double, Double, Double> data)
+    /**
+     * さらに深い学習。
+     *
+     * @param data データ。
+     */
+    private void learn(Triple<Double, Double, Double> data)
     {
-        double outputData = commit(Pair.of(data.getLeft(), data.getMiddle()));
-        double correctValue = data.getRight();
+        final double outputData = commit(Pair.of(data.getLeft(), data.getMiddle()));
+        final double correctValue = data.getRight();
 
-        // 学習係数
-        final double learningRate = PeyangSuperbAntiCheat.config.getDouble("npc.learn");
+        final double learningRate = Variables.config.getDouble("npc.learn");
 
-        double deltaMO = (correctValue - outputData) * outputData * (1.0 - outputData);
-        double[] oldMiddleWeight = middleWeight.clone();
+        final double deltaMO = (correctValue - outputData) * outputData * (1.0 - outputData);
+        final double[] oldMiddleWeight = middleWeight.clone();
 
-        IntStream.range(0, middleLayer.length).forEach(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
+        int bound = middleLayer.length;
+        IntStream.range(0, bound).parallel().forEachOrdered(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
 
         middleWeight[2] += middleLayerBias * deltaMO * learningRate;
 
-        double[] deltaIM = new double[]{
+        final double[] deltaIM = new double[]{
                 deltaMO * oldMiddleWeight[0] * middleLayer[0].getValue() * (1.0 - middleLayer[0].getValue()),
                 deltaMO * oldMiddleWeight[1] * middleLayer[1].getValue() * (1.0 - middleLayer[1].getValue())
         };
@@ -85,9 +148,5 @@ public class NeuralNetwork
         inputWeight[1][1] += inputLayer[1] * deltaIM[1] * learningRate;
         inputWeight[2][0] += inputLayer[2] * deltaIM[0] * learningRate;
         inputWeight[2][1] += inputLayer[2] * deltaIM[1] * learningRate;
-
-        // ここからデータベース更新処理
-        // データベースに何もなかったら全ての重みを追加する
-
     }
 }

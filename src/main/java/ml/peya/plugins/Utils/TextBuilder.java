@@ -1,8 +1,8 @@
 package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -11,93 +11,116 @@ import org.bukkit.entity.*;
 import java.math.*;
 import java.text.*;
 import java.util.*;
+import java.util.stream.*;
 
+/**
+ * チャット送信とかに使用するやつを組み立てます。MessageEngineのフロントエンドみたいな。
+ */
 public class TextBuilder
 {
+    /**
+     * ボタン類をなんとなく組み立ててくれます。
+     *
+     * @param bind   なんこれ
+     * @param button ボタン...?
+     * @return 完成後
+     */
     private static TextComponent getPrevNextButton(int bind, String button)
     {
         TextComponent nextBtn = new TextComponent(ChatColor.GREEN + "(" +
                 ChatColor.AQUA + button +
                 ChatColor.GREEN + ")");
         nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac view " + bind));
-        ComponentBuilder nextHover = new ComponentBuilder(MessageEngine.get("book.words.next"));
 
-        nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, nextHover.create()));
+        nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.words.next")).create()));
         return nextBtn;
     }
 
+    /**
+     * 上のメソッドを分けたやつ。
+     *
+     * @param next ボタン
+     * @return 完成後
+     */
     public static TextComponent getNextButton(int next)
     {
         return getPrevNextButton(next, "=>");
     }
 
+    /**
+     * 上のメソッドを分けたやつ2nd。
+     *
+     * @param previous ボタン
+     * @return 完成後
+     */
     public static TextComponent getPrevButton(int previous)
     {
         return getPrevNextButton(previous, "<=");
     }
 
+    /**
+     * 多すぎだろJavadoc書く人の気持ちにもなれよごｒｒｒ(ry
+     *
+     * @param id          管理ID。
+     * @param uuid        プレイヤーUUID。
+     * @param issueById   報告した人管理ID。
+     * @param issueByUuid 報告した人のUUID。
+     * @param dateInt     UNIX時間。
+     * @param types       判定タイプ。
+     * @param sender      イベントsender。
+     */
     public static void showText(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
     {
-        Date date = new Date(dateInt.longValue());
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-
-
         ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.clickable"));
 
-        StringBuilder reasonText = new StringBuilder();
-
-        for (EnumCheatType type : types)
-        {
-            reasonText.append("        ").append(type.getText()).append("\n");
-        }
-
-        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.hsh("id", issueById)));
-        b1.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
-        b1.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
+        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.pair("id", issueById)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
         sender.spigot().sendMessage(b1.create());
 
-        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueTo", MessageEngine.hsh("id", id)));
-        b2.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
-        b2.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
+        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueTo", MessageEngine.pair("id", id)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create())).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
         sender.spigot().sendMessage(b2.create());
 
-        sender.sendMessage("    " + MessageEngine.get("book.text.dateTime", MessageEngine.hsh("time", formatter.format(date))));
+        sender.sendMessage("    " + MessageEngine.get("book.text.dateTime", MessageEngine.pair("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))));
 
-        sender.sendMessage("    " + MessageEngine.get("book.text.reason", MessageEngine.hsh("reason", reasonText.toString())));
+        sender.sendMessage("    " + MessageEngine.get("book.text.reason", MessageEngine.pair("reason", types.parallelStream().map(type -> "        " + type.getText() + "\n").collect(Collectors.joining()))));
 
         HashMap<String, Object> serv = new HashMap<>();
-        serv.put("color", SeverityLevelUtils.getSeverity(types).getColor());
-        serv.put("level", SeverityLevelUtils.getSeverity(types).getText());
+        serv.put("color", SeverityLevels.getSeverity(types).getColor());
+        serv.put("level", SeverityLevels.getSeverity(types).getText());
         sender.sendMessage(MessageEngine.get("book.text.severity", serv));
     }
 
+    /**
+     * showとかに使うんじゃね？しらんけど。
+     *
+     * @param id        管理ID。
+     * @param issueById 報告した人管理ID。
+     * @param types     判定タイプ。
+     * @param mngid     管理ID2nd。
+     * @param sender    イベントsender。
+     * @return 完成後。
+     */
     public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid, CommandSender sender)
     {
-        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.click.openAbout"));
+        EnumSeverity severity = SeverityLevels.getSeverity(types);
 
-        ComponentBuilder dropHover = new ComponentBuilder(MessageEngine.get("book.click.deleteReport"));
-
-        EnumSeverity severity = SeverityLevelUtils.getSeverity(types);
-
-        ComponentBuilder b = new ComponentBuilder("");
-
-        b.append(ChatColor.GREEN + id);
-        b.append("   ");
-
-        b.append(ChatColor.BLUE + issueById);
-        b.append("   ");
-
-        b.append(severity.getText())
+        ComponentBuilder b = new ComponentBuilder("")
+                .append(ChatColor.GREEN + id)
+                .append("   ")
+                .append(ChatColor.BLUE + issueById)
+                .append("   ")
+                .append(severity.getText())
                 .color(severity.getColor())
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + mngid))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
-        b.append("   ");
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.click.openAbout")).create()))
+                .append("   ");
         if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
             b.append(MessageEngine.get("book.click.delete"))
                     .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac drop " + mngid))
-                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, dropHover.create()));
-
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.click.deleteReport")).create()));
         }
         else
             b.append(ChatColor.YELLOW + mngid);
@@ -105,11 +128,24 @@ public class TextBuilder
         return b;
     }
 
+    /**
+     * 謎にオーバーロード。
+     *
+     * @param prefix [PSAC]ってやつ。
+     * @param value  値...?
+     * @return かーんせーい！
+     */
     public static String getLine(String prefix, String value)
     {
         return ChatColor.AQUA + prefix + ChatColor.WHITE + "：" + ChatColor.GREEN + value;
     }
 
+    /**
+     * レベル返す。
+     *
+     * @param severity レベル。
+     * @return レベル返す。
+     */
     public static String getSeverityLevel(EnumSeverity severity)
     {
         String prefix = ChatColor.YELLOW + "Level " + severity.getColor();
@@ -134,93 +170,119 @@ public class TextBuilder
         }
     }
 
+    /**
+     * ボタンゲットする。
+     *
+     * @param prev     前に戻るボタン
+     * @param next     次に進むボタン
+     * @param prevFlag ボタン使える？
+     * @param nextFlag ボタン使える2nd？
+     * @return 完成後。
+     */
     public static ComponentBuilder getNextPrevButtonText(TextComponent prev, TextComponent next, boolean prevFlag, boolean nextFlag)
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        ComponentBuilder builder = new ComponentBuilder(prevFlag ? prev : uBar);
-        builder.append("------------------------")
-                .color(net.md_5.bungee.api.ChatColor.AQUA);
-        builder.append(nextFlag ? next : uBar);
-        return builder;
+        return new ComponentBuilder(prevFlag ? prev: uBar)
+                .append("------------------------")
+                .color(net.md_5.bungee.api.ChatColor.AQUA)
+                .append(nextFlag ? next: uBar);
     }
 
+    /**
+     * メッセージ変換する。
+     *
+     * @return 変換後。
+     */
     public static ComponentBuilder getBroadCastWdDetectionText()
     {
         return new ComponentBuilder(MessageEngine.get("kick.broadcastWd"));
     }
 
+    /**
+     * 上のオーバーロード。
+     *
+     * @param player 罪を犯しかけたプレイヤー。
+     * @return メッセージを結果として組み立てたやつ。
+     */
     public static ComponentBuilder getBroadCastWdDetectionText(Player player)
     {
-        ComponentBuilder component = getBroadCastWdDetectionText();
-
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", player.getName());
         map.put("uuid", player.getUniqueId().toString());
 
-        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("kick.broadcastAdmin", map));
-        HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create());
-        component.event(event);
+        ComponentBuilder component = getBroadCastWdDetectionText();
+        component.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("kick.broadcastAdmin", map)).create()));
         return component;
     }
 
+    /**
+     * 通常テスト時の最終結果を組み立てる。
+     *
+     * @param name   プレイヤー名。
+     * @param VL     算出されたVL。
+     * @param kickVL VLキック基準値。
+     * @return 組み立てたやつ。
+     */
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
     {
-        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
-            return new ComponentBuilder(MessageEngine.get("message.auraCheck.bot.lynx", MessageEngine.hsh("hit", VL)));
+        if (Variables.config.getBoolean("message.lynx"))
+            return new ComponentBuilder(MessageEngine.get("message.auraCheck.bot.lynx", MessageEngine.pair("hit", VL)));
 
-        ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("base.prefix") + "\n");
-
-        builder.append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)));
-        builder.append("\n");
-        builder.append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(VL))));
-        builder.append("\n");
-        builder.append(MessageEngine.get("message.auraCheck.result.vlGraph"));
-        builder.append("\n");
-        builder.append(OptGraphGenerator.genGraph(VL, kickVL));
-        builder.append("\n");
-
-        String result = VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick") : MessageEngine.get("message.auraCheck.result.words.ok");
-
-        builder.append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.hsh("result", result)));
-
-        return builder;
+        return new ComponentBuilder(MessageEngine.get("base.prefix") + "\n")
+                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.pair("name", name)))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.pair("vl", String.valueOf(VL))))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.vlGraph"))
+                .append("\n")
+                .append(OptGraphGenerator.genGraph(VL, kickVL))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.pair("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok"))));
     }
 
+    /**
+     * AuraPanicBotの結果を組み立てる。
+     *
+     * @param name PlayerName
+     * @param vl   そのまんま
+     * @return 完成後。
+     */
     public static ComponentBuilder textPanicRep(String name, int vl)
     {
-        if (PeyangSuperbAntiCheat.config.getBoolean("message.lynx"))
+        if (Variables.config.getBoolean("message.lynx"))
             return new ComponentBuilder("");
-        ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("base.prefix"));
-        builder.append("\n");
-        builder.append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.hsh("name", name)));
-        builder.append("\n");
-        builder.append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.hsh("vl", String.valueOf(vl))));
-        return builder;
+        return new ComponentBuilder(MessageEngine.get("base.prefix"))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.pair("name", name)))
+                .append("\n")
+                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.pair("vl", String.valueOf(vl))));
     }
 
+    /**
+     * BanまたはKickのデータ入手やフォーマットに使用する。
+     *
+     * @param ban  Bansらしい
+     * @param type 判定タイプ？
+     * @return 完成後。
+     */
     public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
     {
-        Date date = new Date(ban.getDate());
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
-        ComponentBuilder builder = new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick" : "Ban"));
-        builder.append(" - " + formatter.format(date));
         StringBuilder reasonSet = new StringBuilder();
-        for (String reason : ban.getReason().split(", "))
-        {
+        Arrays.stream(ban.getReason().split(", ")).parallel().forEachOrdered(reason -> {
             EnumCheatType tp = CheatTypeUtils.getCheatTypeFromString(reason);
             if (tp == null)
                 reasonSet.append(reason).append(", ");
             else
                 reasonSet.append(tp.getText());
-        }
+        });
 
         if (reasonSet.toString().endsWith(", "))
             reasonSet.setLength(reasonSet.length() - 2);
 
-        builder.append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
-
-        return builder;
+        return new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"))
+                .append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())))
+                .append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
     }
 
 }

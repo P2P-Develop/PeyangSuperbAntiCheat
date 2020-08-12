@@ -4,30 +4,42 @@ import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import org.bukkit.*;
-import org.bukkit.configuration.file.*;
 import org.bukkit.scheduler.*;
 
 import java.util.*;
 
+/**
+ * キル回数の計測をする。
+ */
 public class KillCounting
 {
+    /**
+     * プレイヤー。
+     */
     private final HashMap<UUID, Integer> players;
 
+    /**
+     * コンストラクターでplayersのインスタンスを生成する。
+     */
     public KillCounting()
     {
         players = new HashMap<>();
     }
 
-    public void kill(UUID killer)//killされたときに呼び出されるやつ(?)
+    /**
+     * 引数付きの関数を呼び出してもらうようにする。
+     *
+     * @param killer キルしたプレイヤーのUUID。
+     */
+    public void kill(UUID killer)
     {
-        FileConfiguration config = PeyangSuperbAntiCheat.config;
         if (players.containsKey(killer))
         {
             players.put(killer, players.get(killer) + 1);
-            if (players.get(killer) >= PeyangSuperbAntiCheat.config.getInt("npc.kill"))
+            if (players.get(killer) >= Variables.config.getInt("npc.kill"))
             {//カウント
-                if (!PeyangSuperbAntiCheat.cheatMeta.exists(killer))
-                    DetectConnection.scan(Bukkit.getPlayer(killer), DetectType.AURA_BOT, null);
+                if (!Variables.cheatMeta.exists(killer))
+                    DetectConnection.scan(Bukkit.getPlayer(killer), DetectType.AURA_BOT, null, true);
                 players.remove(killer);
             }//検証用
             return;
@@ -42,10 +54,15 @@ public class KillCounting
                 players.remove(killer);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * config.getInt("npc.seconds"));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * Variables.config.getInt("npc.seconds"));
 
     }
 
+    /**
+     * プレイヤーのゲッター。
+     *
+     * @return プレイヤー。
+     */
     public HashMap<UUID, Integer> getPlayers()
     {
         return players;

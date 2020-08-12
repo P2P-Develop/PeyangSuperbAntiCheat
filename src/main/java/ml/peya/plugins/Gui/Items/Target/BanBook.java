@@ -2,12 +2,15 @@ package ml.peya.plugins.Gui.Items.Target;
 
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
+/**
+ * BanList
+ */
 public class BanBook implements IItems
 {
     @Override
@@ -21,7 +24,7 @@ public class BanBook implements IItems
     {
         ItemStack stack = new ItemStack(Material.PAPER);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(MessageEngine.get("item.banBook.title", MessageEngine.hsh("name", target)));
+        meta.setDisplayName(MessageEngine.get("item.banBook.title", MessageEngine.pair("name", target)));
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);
         return stack;

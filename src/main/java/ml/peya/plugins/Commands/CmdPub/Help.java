@@ -1,38 +1,43 @@
 package ml.peya.plugins.Commands.CmdPub;
 
 import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
 
 import java.util.*;
 
+/**
+ * /psac helpで動くクラス。
+ */
 public class Help
 {
+    /**
+     * コマンド
+     *
+     * @param sender イベントsender。
+     * @param label  参照するコマンドラベル。
+     */
     public static void run(CommandSender sender, String label)
     {
         final boolean[] flag = {false};
         sender.sendMessage(MessageEngine.get("base.prefix"));
 
-        ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes() : getNodes();
+        ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes(): getNodes();
 
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                for (String node : nodes)
-                {
-                    if (sender.hasPermission("psac." + node))
-                    {
-                        sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.hsh("label", label)));
-                        flag[0] = true; //ここFlagの都合で短縮不可
-                    }
-                }
+                nodes.parallelStream().filter(node -> sender.hasPermission("psac." + node)).forEachOrdered(node -> {
+                    sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.pair("label", label)));
+                    flag[0] = true;
+                });
 
                 if ((sender.hasPermission("psac.drop") || sender.hasPermission("psac.show")) && sender instanceof Player)
                     sender.sendMessage(MessageEngine.get("command.help.mngIdWarning"));
-
 
                 if (!flag[0])
                     sender.sendMessage(MessageEngine.get("error.psac.notPage"));

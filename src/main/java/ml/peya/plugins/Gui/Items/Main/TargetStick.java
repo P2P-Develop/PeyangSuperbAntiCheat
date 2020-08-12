@@ -2,50 +2,25 @@ package ml.peya.plugins.Gui.Items.Main;
 
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
-import org.bukkit.block.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
-import java.util.*;
+import static ml.peya.plugins.Utils.LookingUtils.getLookingEntity;
 
+/**
+ * ターゲットを再設定するユーティリティアイテム(ブレイズロッド)を管理します。
+ */
 public class TargetStick implements IItems
 {
-    private static Player getLookingEntity(Player player)
-    {
-        ArrayList<Entity> entities = (ArrayList<Entity>) player.getNearbyEntities(3.5, 3.5, 3.5);
-        ArrayList<Block> sightBlock = (ArrayList<Block>) player.getLineOfSight(null, 4);
-
-        ArrayList<Location> sight = new ArrayList<>();
-
-        for (Block block : sightBlock)
-            sight.add(block.getLocation());
-
-        for (Location location : sight)
-        {
-            for (Entity entity : entities)
-            {
-                if (isLooking(entity, location) && entity.getType() == EntityType.PLAYER)
-                    return (Player) entity;
-            }
-        }
-
-        return null;
-    }
-
-    private static boolean isLooking(Entity entity, Location location)
-    {
-        if (Math.abs(entity.getLocation().getX() - location.getX()) < 1.3)
-        {
-            if (Math.abs(entity.getLocation().getY() - location.getY()) < 1.5)
-                return Math.abs(entity.getLocation().getZ() - location.getZ()) < 1.3;
-        }
-
-        return false;
-    }
-
+    /**
+     * イベント発動時の処理をオーバーライドします。
+     *
+     * @param player メンチを切る側のプレイヤー。
+     * @param target オーバーライドのために必要だと思われる。実際は必要ない。
+     */
     @Override
     public void run(Player player, String target)
     {
@@ -58,6 +33,12 @@ public class TargetStick implements IItems
         player.performCommand("target " + lookingPlayer.getName());
     }
 
+    /**
+     * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
+     *
+     * @param target ターゲットが誰であるか。
+     * @return 関数内の処理によって設定されたアイテム。
+     */
     @Override
     public ItemStack getItem(String target)
     {
@@ -73,18 +54,33 @@ public class TargetStick implements IItems
         return stack;
     }
 
+    /**
+     * インベントリに空きスペースがあるかどうかを確認する関数のオーバーライド。この関数は使わないため実装は不要。
+     *
+     * @return 実装は不要なためfalse。
+     */
     @Override
     public boolean canSpace()
     {
         return false;
     }
 
+    /**
+     * どのようなIDであるか取得する。詳細はPSACドキュメントを参照。
+     *
+     * @return このアイテムの実行ID。
+     */
     @Override
     public String getExecName()
     {
         return "TARGET_STICK";
     }
 
+    /**
+     * どのようなタイプであるか取得する。
+     *
+     * @return ほぼMAIN。大体MAIN。
+     */
     @Override
     public Type getType()
     {

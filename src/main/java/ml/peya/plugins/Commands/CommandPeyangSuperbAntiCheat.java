@@ -1,14 +1,26 @@
 package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Commands.CmdPub.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.command.*;
 
 import java.util.*;
 
+/**
+ * PSACコマンド系クラス。
+ */
 public class CommandPeyangSuperbAntiCheat implements CommandExecutor
 {
+    /**
+     * コマンド動作のオーバーライド。
+     *
+     * @param sender  イベントsender。
+     * @param command コマンド。
+     * @param label   ラベル。
+     * @param args    引数。
+     * @return 正常に終わったかどうか。
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
@@ -23,9 +35,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
         commandList.add("drop");
         commandList.add("kick");
 
-        if (commandList.contains(args[0]))
-            if (ErrorMessageSender.unPermMessage(sender, "psac." + args[0]))
-                return true;
+        if (commandList.contains(args[0]) && ErrorMessageSender.unPermMessage(sender, "psac." + args[0])) return true;
 
         switch (args[0].toLowerCase())
         {
@@ -45,10 +55,9 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 Kick.run(sender, args);
                 break;
             default:
-                sender.sendMessage(MessageEngine.get("error.main.notFoundCommand", MessageEngine.hsh("label", label)));
+                sender.sendMessage(MessageEngine.get("error.main.notFoundCommand", MessageEngine.pair("label", label)));
         }
 
         return true;
-
     }
 }

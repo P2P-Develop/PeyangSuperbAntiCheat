@@ -1,21 +1,30 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
 
+/**
+ * STPコマンド系プラグイン。
+ */
 public class CommandSilentTeleport implements CommandExecutor
 {
+    /**
+     * コマンド動作のオーバーライド。
+     *
+     * @param sender  イベントsender。
+     * @param command コマンド。
+     * @param label   ラベル。
+     * @param args    引数。
+     * @return 正常に終わったかどうか。
+     */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.invalidLengthMessage(sender, args, 0, 2))
-            return true;
-
-        if (ErrorMessageSender.unPermMessage(sender, "psac.silentteleport"))
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 0, 2) || ErrorMessageSender.unPermMessage(sender, "psac.silentteleport"))
             return true;
 
         if (!(sender instanceof Player))
@@ -40,7 +49,7 @@ public class CommandSilentTeleport implements CommandExecutor
         }
 
         player.teleport(target.getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
-        player.sendMessage(MessageEngine.get("message.teleport.teleport", MessageEngine.hsh("player", target.getName())));
+        player.sendMessage(MessageEngine.get("message.teleport.teleport", MessageEngine.pair("player", target.getName())));
         return true;
     }
 }

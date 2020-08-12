@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+  <classpathentry kind="var" path="M2_REPO/org/spigotmc/spigot-api/1.12.2-R0.1-SNAPSHOT/spigot-api-1.12.2-R0.1-SNAPSHOT.jar" sourcepath="M2_REPO/org/spigotmc/spigot-api/1.12.2-R0.1-SNAPSHOT/spigot-api-1.12.2-R0.1-SNAPSHOT-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-lang/commons-lang/2.6/commons-lang-2.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.10/junit-4.10.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/20.0/guava-20.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/yaml/snakeyaml/1.19/snakeyaml-1.19.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/md-5/bungeecord-chat/1.12-SNAPSHOT/bungeecord-chat-1.12-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/spigotmc/spigot/1.12.2-R0.1-SNAPSHOT/spigot-1.12.2-R0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/bukkit/bukkit/1.12.2-R0.1-SNAPSHOT/bukkit-1.12.2-R0.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/zaxxer/HikariCP/3.4.5/HikariCP-3.4.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-jdk14/1.7.30/slf4j-jdk14-1.7.30.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/mojang/authlib/1.5.21/authlib-1.5.21.jar" sourcepath="M2_REPO/com/mojang/authlib/1.5.21/authlib-1.5.21-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.11/commons-lang3-3.11.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-core/2.0-beta9/log4j-core-2.0-beta9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/logging/log4j/log4j-api/2.0-beta9/log4j-api-2.0-beta9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.9/commons-codec-1.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/jsr305/2.0.1/jsr305-2.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-io/commons-io/2.4/commons-io-2.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/comphenix/protocol/ProtocolLib/4.5.1/ProtocolLib-4.5.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/cglib/cglib-nodep/3.2.5/cglib-nodep-3.2.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/comphenix/executors/BukkitExecutors/1.1-SNAPSHOT/BukkitExecutors-1.1-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.11.1/jackson-databind-2.11.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.11.1/jackson-annotations-2.11.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.11.1/jackson-core-2.11.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/github/P2P-Develop/PeyangSuperLibrary/11.4.514/PeyangSuperLibrary-11.4.514.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/md-5/bungeecord-api/1.12-SNAPSHOT/bungeecord-api-1.12-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/md-5/bungeecord-config/1.12-SNAPSHOT/bungeecord-config-1.12-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/md-5/bungeecord-event/1.12-SNAPSHOT/bungeecord-event-1.12-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/md-5/bungeecord-protocol/1.12-SNAPSHOT/bungeecord-protocol-1.12-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-codec/4.1.25.Final/netty-codec-4.1.25.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-transport/4.1.25.Final/netty-transport-4.1.25.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-buffer/4.1.25.Final/netty-buffer-4.1.25.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-common/4.1.25.Final/netty-common-4.1.25.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-resolver/4.1.25.Final/netty-resolver-4.1.25.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sf/trove4j/trove4j/3.0.3/trove4j-3.0.3.jar"/>
+</classpath>

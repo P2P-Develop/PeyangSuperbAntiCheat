@@ -3,9 +3,18 @@ package ml.peya.plugins.Moderate;
 import ml.peya.plugins.Enum.*;
 
 import java.util.*;
+import java.util.function.*;
 
+/**
+ * 判定タイプ管理するやつ。
+ */
 public class CheatTypeUtils
 {
+    /**
+     * 種類確認するみたいなノリで全部タイプ返してくれるクラス。
+     *
+     * @return 全部返してくれる。
+     */
     public static EnumCheatType[] getFullType()
     {
         ArrayList<EnumCheatType> types = new ArrayList<>();
@@ -18,13 +27,15 @@ public class CheatTypeUtils
         types.add(EnumCheatType.REACH);
         types.add(EnumCheatType.DOLPHIN);
 
-        for (EnumCheatType type : types)
-        {
-            type.setSelected(false);
-        }
+        types.parallelStream().forEachOrdered(type -> type.setSelected(false));
         return types.toArray(new EnumCheatType[0]);
     }
 
+    /**
+     * 上のメソッドのArrayList版。
+     *
+     * @return 全部！
+     */
     public static ArrayList<EnumCheatType> getFullTypeArrayList()
     {
         ArrayList<EnumCheatType> types = new ArrayList<>();
@@ -36,49 +47,47 @@ public class CheatTypeUtils
         types.add(EnumCheatType.ANTIKNOCKBACK);
         types.add(EnumCheatType.REACH);
         types.add(EnumCheatType.DOLPHIN);
-        for (EnumCheatType type : types)
-        {
-            type.setSelected(false);
-        }
+        types.parallelStream().forEachOrdered(type -> type.setSelected(false));
         return types;
     }
 
+    /**
+     * まぁこれも。
+     *
+     * @param values Stringから変換する奴。
+     * @return 変換後。
+     */
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
         ArrayList<EnumCheatType> types = getFullTypeArrayList();
-        for (String reason : values)
-        {
-            for (EnumCheatType type : types)
-            {
-                if (reason.toLowerCase().equals(type.getSysName()))
-                    type.setSelected(true);
-                else if (aliasEquals(type, reason.toLowerCase()))
-                    type.setSelected(true);
-            }
-        }
+        Arrays.stream(values).parallel().<Consumer<? super EnumCheatType>>map(reason -> type -> {
+            if (reason.toLowerCase().equals(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
+                type.setSelected(true);
+        }).forEachOrdered(types::forEach);
 
         return types;
     }
 
+    /**
+     * まぁ同じくらい。
+     *
+     * @param sysname Stringから普通に変換する奴。
+     * @return 変換後。
+     */
     public static EnumCheatType getCheatTypeFromString(String sysname)
     {
-        ArrayList<EnumCheatType> types = getFullTypeArrayList();
-        for (EnumCheatType type : types)
-        {
-            if (type.getSysName().equals(sysname))
-                return type;
-        }
-        return null;
+        return getFullTypeArrayList().parallelStream().filter(type -> type.getSysName().equals(sysname)).findFirst().orElse(null);
     }
 
+    /**
+     * エイリアスOK?
+     *
+     * @param types 判定タイプ。
+     * @param name  なまえ
+     * @return OK=true
+     */
     public static boolean aliasEquals(EnumCheatType types, String name)
     {
-        for (String type : types.getAlias())
-        {
-            if (type.equals(name))
-                return true;
-        }
-
-        return false;
+        return types.getAlias().parallelStream().anyMatch(type -> type.equals(name));
     }
 }

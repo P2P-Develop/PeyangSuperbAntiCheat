@@ -31,15 +31,17 @@ else
 	exit 1
 fi
 
-cd "$(pwd)/PSACBuild" || echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}$BUILDPATH not found${RESET}" || exit 1
+cd "$(pwd)/PSACBuild" || echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}$BUILDPATH not found${RESET}" && exit 1
 
 # Build
 
-if type "mvn" > /dev/null 2>&1; then
-  mvn package && \
+if type "mvn" > /dev/null 2>&1 && type "make" > /dev/null 2>&1; then
+  make maven && \
   echo "${GREEN}${BOLD}SUCCESS${RESET}: PeyangSuperbAntiCheat build completed successfly." && \
   exit 0
   echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}Unknown error occured"
 else
-  echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}maven${RESET} required"
+  echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}maven${RESET} and ${BOLD}make${RESET} required"
 fi
+
+read -n1 -p "Do you want to install PSAC?? (y/N): " yn; [[ $yn =~ y|Y|\n ]] && make install || exit 0
