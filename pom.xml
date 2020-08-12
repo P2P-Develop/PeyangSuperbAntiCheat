@@ -25,6 +25,8 @@
                 <version>3.2.0</version>
                 <configuration>
                     <author>true</author>
+                    <outputDirectory>${project.basedir}/docs/javadoc</outputDirectory>
+                    <bottom>(c) 2020 Peyang.</bottom>
                     <source>1.8</source>
                     <show>private</show>
                     <encoding>UTF-8</encoding>
