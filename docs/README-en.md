@@ -2,11 +2,12 @@
   
 [Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [FAQ](#what-is-this-npcwatchdog)
   
-**WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
-If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
-***VERY WARNING***: **With this plugin, detectopm will run +4 timers at the same time.  
-In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**  
-For more information on the number of threads, see [Plugin Threads Summary](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt).
+> **WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
+> If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
+  
+> ***VERY WARNING***: **With this plugin, detectopm will run +4 timers at the same time.  
+> In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**  
+> For more information on the number of threads, see [Plugin Threads Summary](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt).
 
 ## Overview
 
@@ -598,7 +599,7 @@ In this plugin, the following config is set by default.
 ## What is this NPC\(WatchDog\)?
 
 The Watchdog calls the NPC with a random username using the [words file](../src/main/resources/wordsx256.txt).  
-The NPC skin is displayed randomly by referring to the UUID skin settting.
+The NPC skin is displayed randomly by included 1400 skin sets.
 
 ### What is \<ManagementID\>?
 
