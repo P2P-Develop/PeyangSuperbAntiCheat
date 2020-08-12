@@ -54,8 +54,7 @@ public class KillCounting
                 players.remove(killer);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * Variables.config.getInt("npc.seconds"));
-
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("npc.seconds"), 20));
     }
 
     /**

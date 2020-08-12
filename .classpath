@@ -28,9 +28,9 @@
   <classpathentry kind="var" path="M2_REPO/com/comphenix/protocol/ProtocolLib/4.5.1/ProtocolLib-4.5.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/cglib/cglib-nodep/3.2.5/cglib-nodep-3.2.5.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/comphenix/executors/BukkitExecutors/1.1-SNAPSHOT/BukkitExecutors-1.1-SNAPSHOT.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.11.1/jackson-databind-2.11.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.11.1/jackson-annotations-2.11.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.11.1/jackson-core-2.11.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.11.2/jackson-databind-2.11.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.11.2/jackson-annotations-2.11.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.11.2/jackson-core-2.11.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/github/P2P-Develop/PeyangSuperLibrary/11.4.514/PeyangSuperLibrary-11.4.514.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/md-5/bungeecord-api/1.12-SNAPSHOT/bungeecord-api-1.12-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/net/md-5/bungeecord-config/1.12-SNAPSHOT/bungeecord-config-1.12-SNAPSHOT.jar"/>

@@ -40,7 +40,7 @@ public class Kick
                 return;
             }
 
-            KickUtil.kickPlayer(player, args[2], true, true);
+            KickManager.kickPlayer(player, args[2], true, true);
             return;
         }
 
@@ -64,6 +64,6 @@ public class Kick
         argSet.remove(1);
         argSet.remove(0);
 
-        KickUtil.kickPlayer(player, String.join(", ", argSet), false, false);
+        KickManager.kickPlayer(player, String.join(", ", argSet), false, false);
     }
 }

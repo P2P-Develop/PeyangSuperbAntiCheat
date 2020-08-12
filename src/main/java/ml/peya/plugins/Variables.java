@@ -23,7 +23,7 @@ public class Variables
      */
     public static Logger logger = Logger.getLogger("PeyangSuperbAntiCheat");
     /**
-     * ...おん？まぁファイルの設定いじるんじゃね？しらんけど。
+     * プラグインのコンフィグを変更する入れ子。getConfig()により静的化します。
      */
     public static FileConfiguration config;
     /**

@@ -44,9 +44,9 @@ public class MessageEngine
      */
     public static String get(String key, HashMap<String, Object> format)
     {
-        try
+        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
         {
-            return format((String) YamlConfiguration.loadConfiguration(new BufferedReader(new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))).getValues(true).get(key), format);
+            return format((String) YamlConfiguration.loadConfiguration(new BufferedReader(reader)).getValues(true).get(key), format);
         }
         catch (Exception e)
         {
