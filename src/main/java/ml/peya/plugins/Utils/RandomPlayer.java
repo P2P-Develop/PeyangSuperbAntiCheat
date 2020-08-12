@@ -1,18 +1,16 @@
 package ml.peya.plugins.Utils;
 
-import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.*;
 import com.mojang.authlib.properties.*;
 import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang.*;
+import org.apache.commons.lang3.tuple.*;
 import org.bukkit.World;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.*;
 
-import javax.net.ssl.*;
-import java.io.*;
-import java.net.*;
+import java.sql.*;
 import java.util.*;
 
 /**
@@ -46,55 +44,37 @@ public class RandomPlayer
         WorldServer worldServer = ((CraftWorld) world).getHandle();
         PlayerInteractManager manager = new PlayerInteractManager(worldServer);
 
-        List<String> uuids = Variables.config.getStringList("skins");
-        JsonNode skinNode = getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
-
+        Pair<String, String> skin = getSkin();
 
         GameProfile profile = new GameProfile(UUID.randomUUID(), name);
 
-        if (skinNode != null)
-            profile.getProperties().put("textures", new Property("textures", skinNode.get("properties").get(0).get("value").asText(),
-                    skinNode.get("properties").get(0).get("signature").asText()
-            ));
+        profile.getProperties().put("textures", new Property("textures", skin.getKey(),
+                skin.getValue()
+        ));
 
         return new EntityPlayer(server, worldServer, profile, manager);
     }
 
     /**
-     * 指定されたUUIDのプレイヤーのスキンをパパラッチします。
+     * ランダムスキンをパパラッチします。
      *
-     * @param uuid 指定するUUID。
-     * @return パパラッチしたスキンをJsonNodeに変換したやつ。
+     * @return すきん
      */
-    public static JsonNode getSkin(String uuid)
+    public static Pair<String, String> getSkin()
     {
-        try
+        try (Connection connection = Variables.skin.getConnection();
+             Statement statement = connection.createStatement())
         {
-            HttpsURLConnection connection;
-            connection = (HttpsURLConnection) new URL(String.format("https://sessionserver.mojang.com/session/minecraft/profile/%s?unsigned=false", uuid)).openConnection();
-
-            connection.setReadTimeout(1500);
-
-            if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK)
-            {
-                Variables.logger.info("Connection could not be opened (Response code " + connection.getResponseCode() + ", " + connection.getResponseMessage() + ")");
-                return null;
-            }
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            StringBuilder builder = new StringBuilder();
-            String readed = reader.readLine();
-            while (readed != null)
-            {
-                builder.append(readed);
-                readed = reader.readLine();
-            }
-            ObjectMapper mapper = new ObjectMapper();
-            return mapper.readTree(builder.toString());
+            ResultSet result = statement.executeQuery("SELECT * FROM Skin ORDER BY RANDOM() LIMIT 1");
+            if (!result.next())
+                return Pair.of("", "");
+            return Pair.of(result.getString("Texture"), result.getString("Signature"));
         }
         catch (Exception e)
         {
-            return null;
+            e.printStackTrace();
+            Utils.errorNotification(Utils.getStackTrace(e));
+            return Pair.of("", "");
         }
     }
 }

@@ -98,6 +98,10 @@ public class Variables
      */
     public static HikariDataSource trust;
     /**
+     * Skinデータベースをデシリアライズしときます。
+     */
+    public static HikariDataSource skin;
+    /**
      * 定期メッセージが有効になっているかどうか。
      */
     public static boolean isAutoMessageEnabled;

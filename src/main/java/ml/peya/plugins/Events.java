@@ -1,11 +1,11 @@
 package ml.peya.plugins;
 
-import com.fasterxml.jackson.databind.*;
 import com.mojang.authlib.properties.*;
 import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.chat.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang.*;
+import org.apache.commons.lang3.tuple.*;
 import org.bukkit.Material;
 import org.bukkit.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
@@ -15,8 +15,6 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
-
-import java.util.*;
 
 /**
  * イベントハンドラをめちゃくちゃ管理します。
@@ -131,22 +129,21 @@ public class Events implements Listener
         tab.getBukkitEntity().setPlayerListName(ChatColor.RED + tab.getName());
         PlayerConnection connection = ((CraftPlayer) e.getPlayer()).getHandle().playerConnection;
 
-        List<String> uuids = Variables.config.getStringList("skins");
-
         new BukkitRunnable()
         {
 
             @Override
             public void run()
             {
-                JsonNode node = RandomPlayer.getSkin(uuids.get(new Random().nextInt(uuids.size() - 1)));
+
+                Pair<String, String> skin = RandomPlayer.getSkin();
 
                 tab.getProfile().getProperties().put(
                         "textures",
                         new Property(
                                 "textures",
-                                Objects.requireNonNull(node).get("properties").get(0).get("value").asText(),
-                                node.get("properties").get(0).get("signature").asText()
+                                skin.getKey(),
+                                skin.getValue()
                         )
                 );
 

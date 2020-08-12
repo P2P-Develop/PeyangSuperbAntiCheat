@@ -4,8 +4,6 @@ import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
 import com.fasterxml.jackson.databind.*;
 import com.zaxxer.hikari.*;
-import ml.peya.plugins.Commands.CmdTst.AuraBot;
-import ml.peya.plugins.Commands.CmdTst.AuraPanic;
 import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Commands.*;
 import ml.peya.plugins.DetectClasses.Packets;
@@ -18,6 +16,7 @@ import ml.peya.plugins.Gui.Items.Target.Page2.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Task.*;
+import org.apache.commons.io.*;
 import org.bukkit.*;
 import org.bukkit.plugin.java.*;
 
@@ -85,29 +84,42 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         Variables.banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + Variables.banKickPath));
         Variables.trust = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + Variables.trustPath));
 
+        try
+        {
+            FileUtils.copyInputStreamToFile(this.getResource("skin.db"), new File(getDataFolder().getAbsolutePath() + "/skin.db"));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+        Variables.skin = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/skin.db"));
+
+        if (!isEnabled())
+            return;
+        
+        Variables.item = new Item();
+
+        Variables.item.register(new AuraBotItem());  //====Page1
+        Variables.item.register(new AuraPanicItem());
+        Variables.item.register(new TestKnockBack());
+        Variables.item.register(new CompassTracker3000_tm());
+        Variables.item.register(new BanBook());
+        Variables.item.register(new ToPage2());                                   //
+        Variables.item.register(new BackButton());
+
+        Variables.item.register(new BackToPage1());                              //====Page2
+        Variables.item.register(new Lead());
+        Variables.item.register(new ModList());
+
+        Variables.item.register(new TargetStick());                              //====Main
+
         Variables.cheatMeta = new DetectingList();
         Variables.counting = new KillCounting();
         Variables.tracker = new Tracker();
 
         Variables.protocolManager = ProtocolLibrary.getProtocolManager();
-
-        Item item = new Item();
-
-        item.register(new ml.peya.plugins.Gui.Items.Target.AuraBot());  //====Page1
-        item.register(new ml.peya.plugins.Gui.Items.Target.AuraPanic());
-        item.register(new TestKnockBack());
-        item.register(new CompassTracker3000_tm());
-        item.register(new BanBook());
-        item.register(new ToPage2());                                   //
-        item.register(new BackButton());
-
-        item.register(new BackToPage1());                              //====Page2
-        item.register(new Lead());
-        item.register(new ModList());
-
-        item.register(new TargetStick());                              //====Main
-
-        Variables.item = item;
 
         Variables.protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
         {
@@ -197,6 +209,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "FML|HS");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new PluginMessageListener());
 
+
         Variables.logger.info("PeyangSuperbAntiCheat has been activated!");
     }
 
@@ -211,10 +224,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             Variables.eye.close();
         if (Variables.banKick != null)
             Variables.banKick.close();
+        if (Variables.skin != null)
+            Variables.skin.close();
         Variables.trust.close();
         Variables.eye = null;
         Variables.banKick = null;
         Variables.trust = null;
+        Variables.skin = null;
         if (Variables.autoMessage != null)
         {
             Variables.logger.info("Stopping Auto-Message Task...");
