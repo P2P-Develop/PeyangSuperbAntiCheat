@@ -53,6 +53,11 @@
            alt="GitHub Workflow Status (development)"
            src="https://img.shields.io/github/workflow/status/peyang-Celeron/PeyangSuperbAntiCheat/Java%20CI%20with%20Maven%20(development)/master?label=build%20%28dev%29&style=flat-square"
   ></a>
+  <a href="https://snyk.io/test/github/peyang-Celeron/PeyangSuperbAntiCheat"
+     ><img 
+           alt="Snyk Vulnerabilities for GitHub Repo" 
+           src="https://img.shields.io/snyk/vulnerabilities/github/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
+  ></a>
 
 ---
 
