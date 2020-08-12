@@ -48,9 +48,7 @@ public class RandomPlayer
 
         GameProfile profile = new GameProfile(UUID.randomUUID(), name);
 
-        profile.getProperties().put("textures", new Property("textures", skin.getKey(),
-                skin.getValue()
-        ));
+        profile.getProperties().put("textures", new Property("textures", skin.getLeft(), skin.getRight()));
 
         return new EntityPlayer(server, worldServer, profile, manager);
     }

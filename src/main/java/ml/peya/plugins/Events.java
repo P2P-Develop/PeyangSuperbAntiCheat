@@ -142,8 +142,8 @@ public class Events implements Listener
                         "textures",
                         new Property(
                                 "textures",
-                                skin.getKey(),
-                                skin.getValue()
+                                skin.getLeft(),
+                                skin.getRight()
                         )
                 );
 
