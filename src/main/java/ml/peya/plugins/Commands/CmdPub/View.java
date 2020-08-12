@@ -5,6 +5,7 @@ import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Utils.*;
 import ml.peya.plugins.*;
+import net.md_5.bungee.api.chat.*;
 import org.bukkit.command.*;
 
 import java.sql.*;
@@ -26,6 +27,8 @@ public class View
         sender.sendMessage(MessageEngine.get("base.prefix"));
 
         int start = 0;
+        int next;
+        int previous;
         boolean nameFlag = false;
         String offName = "";
         try
@@ -39,7 +42,14 @@ public class View
             offName = args[1];
         }
 
+        next = start + 5;
+        previous = start - 5;
+
+        TextComponent nextBtn = TextBuilder.getNextButton(next);
+        TextComponent prevBtn = TextBuilder.getPrevButton(previous);
+
         int count = 0;
+
 
         try (Connection connection = Variables.eye.getConnection();
              Statement statement = connection.createStatement();
@@ -53,17 +63,22 @@ public class View
             ResultSet result = statement.executeQuery(query);
             while (result.next())
             {
+
+                String id = result.getString("ID");
+                String issuebyid = result.getString("ISSUEBYID");
                 String mngid = result.getString("MNGID");
                 if (WatchEyeManagement.isInjection(mngid))
                     return;
 
                 ResultSet reason = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
                 ArrayList<EnumCheatType> types = new ArrayList<>();
-
                 while (reason.next())
+                {
                     types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
+                }
+                ComponentBuilder line = TextBuilder.getLine(id, issuebyid, types, mngid, sender);
 
-                sender.spigot().sendMessage(TextBuilder.getLine(result.getString("ID"), result.getString("ISSUEBYID"), types, mngid, sender).create());
+                sender.spigot().sendMessage(line.create());
                 count++;
             }
         }
@@ -79,6 +94,7 @@ public class View
 
             return;
         }
-        sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(TextBuilder.getPrevButton(start - 5), TextBuilder.getNextButton(start + 5), !(start - 5 < 0), !(count < 5)).create());
+        sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(prevBtn, nextBtn, !(previous < 0), !(count < 5)).create());
     }
+
 }

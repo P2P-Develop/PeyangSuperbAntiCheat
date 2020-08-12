@@ -52,7 +52,7 @@ public class Books
                 .append(MessageEngine.get("reportbook.cancel"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report $$cancel$$"));
 
-        meta.addPage(Arrays.toString(component.create()));
+        meta.spigot().addPage(component.create());
         book.setItemMeta(meta);
         return book;
     }
@@ -96,7 +96,7 @@ public class Books
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
         meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
-        meta.addPage(Arrays.toString(b2.create()));
+        meta.spigot().addPage(b2.create());
         book.setItemMeta(meta);
         return book;
     }
@@ -129,11 +129,11 @@ public class Books
                 continue;
 
             count = 0;
-            meta.addPage(Arrays.toString(builder.create()));
+            meta.spigot().addPage(builder.create());
             builder = new ComponentBuilder("");
         }
 
-        meta.addPage(Arrays.toString(builder.create()));
+        meta.spigot().addPage(builder.create());
 
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
