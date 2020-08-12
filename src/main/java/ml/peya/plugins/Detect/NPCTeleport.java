@@ -83,7 +83,7 @@ public class NPCTeleport
                 if (now[0] >= count)
                     this.cancel();
             }
-        }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, (long) (15 * ((1.5 / count) * sec)));
+        }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, (long) (10 * ((1.5 / count) * sec)));
 
         new BukkitRunnable()
         {
