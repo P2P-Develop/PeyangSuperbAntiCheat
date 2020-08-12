@@ -126,7 +126,7 @@ public class DetectConnection
                     }
                 }.runTask(PeyangSuperbAntiCheat.getPlugin());
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * Variables.config.getInt("npc.seconds"));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("npc.seconds"), 20));
     }
 
     /**
@@ -161,7 +161,7 @@ public class DetectConnection
 
         ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
 
-        KickUtil.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
+        KickManager.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
         return true;
     }
 }

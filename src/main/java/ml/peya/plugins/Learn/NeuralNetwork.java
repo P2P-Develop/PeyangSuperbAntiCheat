@@ -23,8 +23,10 @@ public class NeuralNetwork
     private static final double weightRange = 10.0;
     /**
      * ランダムに重みを設定する関数。
+     *
+     * @return ランダムなdoubleから適切な値を引いた数とふり幅をかけてふり幅を最大として値を落とします。
      */
-    private static final double RandomWeight()
+    private static double RandomWeight()
     {
         return (random.nextDouble() - 0.5) * weightRange;
     }
