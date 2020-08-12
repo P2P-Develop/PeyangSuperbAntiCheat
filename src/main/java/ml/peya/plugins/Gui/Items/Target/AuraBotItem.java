@@ -18,7 +18,17 @@ import java.util.*;
  */
 public class AuraBotItem implements IItems
 {
-
+    /**
+     * このクラスのフィールドを取得します。
+     *
+     * @param target    this.
+     * @param name      名前。
+     * @param fieldType フィールドの種類。
+     * @param index     インデックス。
+     * @param <T>       どんな型も入るよ！
+     *
+     * @return 取得できたフィールド。
+     */
     private static <T> Field getField(Class<?> target, String name, Class<T> fieldType, int index)
     {
         for (final Field field : target.getDeclaredFields())
@@ -37,12 +47,25 @@ public class AuraBotItem implements IItems
         throw new IllegalArgumentException("Cannot find field with type " + fieldType);
     }
 
+    /**
+     * イベント発動時の処理をオーバーライドします。
+     *
+     * @param player 実行しているプレイヤー。
+     * @param target ターゲット。
+     */
     @Override
     public void run(Player player, String target)
     {
         player.performCommand("aurabot " + target);
     }
 
+    /**
+     * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
+     *
+     * @param target ターゲットが誰であるか。
+     *
+     * @return 関数内の処理によって設定されたアイテム。
+     */
     @Override
     public ItemStack getItem(String target)
     {
@@ -76,18 +99,33 @@ public class AuraBotItem implements IItems
         return stack;
     }
 
+    /**
+     * インベントリに空きスペースがあるかどうかを確認する関数のオーバーライド。この関数は使わないため実装は不要。
+     *
+     * @return 実装は不要なためfalse。
+     */
     @Override
     public boolean canSpace()
     {
         return false;
     }
 
+    /**
+     * どのようなIDであるか取得する。詳細はPSACドキュメントを参照。
+     *
+     * @return このアイテムの実行ID。
+     */
     @Override
     public String getExecName()
     {
         return "AURA_BOT";
     }
 
+    /**
+     * どのようなタイプであるか取得する。
+     *
+     * @return 実はTARGETだった。
+     */
     @Override
     public Type getType()
     {

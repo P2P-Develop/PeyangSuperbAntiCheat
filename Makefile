@@ -52,3 +52,4 @@ refresh: ## Refresh project files
 	make eclipse
 	make idea
 	make javadoc
+	mv target/site/apidocs docs/javadoc
