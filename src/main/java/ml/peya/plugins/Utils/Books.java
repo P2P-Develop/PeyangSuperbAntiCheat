@@ -81,12 +81,12 @@ public class Books
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.pair("uuid", uuid))).create()))
                 .append("\n");
 
-        ComponentBuilder b1 = new ComponentBuilder(String.valueOf(new TextComponent(b.create())))
+        ComponentBuilder b1 = new ComponentBuilder(new TextComponent(b.create()))
                 .append(MessageEngine.get("book.text.issueBy", MessageEngine.pair("id", issueById)))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.pair("uuid", issueByUuid))).create()))
                 .append("\n");
 
-        ComponentBuilder b2 = new ComponentBuilder(String.valueOf(new TextComponent(b1.create())));
+        ComponentBuilder b2 = new ComponentBuilder(new TextComponent(b1.create()));
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("color", SeverityLevels.getSeverity(types).getColor());
