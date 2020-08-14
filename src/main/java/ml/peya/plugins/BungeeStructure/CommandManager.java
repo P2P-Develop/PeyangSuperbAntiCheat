@@ -6,7 +6,7 @@ import java.util.*;
 
 public class CommandManager
 {
-    private ArrayList<Class<? extends CommandExecutor>> commands;
+    private final ArrayList<Class<? extends CommandExecutor>> commands;
 
     public CommandManager()
     {
@@ -19,6 +19,11 @@ public class CommandManager
     }
 
     public void runCommand(String command)
+    {
+        runCommand(command, "");
+    }
+
+    public void runCommand(String command, String server)
     {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split(" ")));
         if (commands.size() == 0)
@@ -37,6 +42,12 @@ public class CommandManager
             public String[] getArgs()
             {
                 return args;
+            }
+
+            @Override
+            public String getServer()
+            {
+                return server;
             }
         };
 

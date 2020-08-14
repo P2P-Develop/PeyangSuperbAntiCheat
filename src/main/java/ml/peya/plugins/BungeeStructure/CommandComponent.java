@@ -6,4 +6,5 @@ public interface CommandComponent
 
     String[] getArgs();
 
+    String getServer();
 }

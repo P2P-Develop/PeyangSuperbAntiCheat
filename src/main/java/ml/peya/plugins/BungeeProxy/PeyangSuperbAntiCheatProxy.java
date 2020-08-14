@@ -31,6 +31,8 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
 
         getProxy().registerChannel(Variables.bungeeChannel);
 
+        getProxy().getPluginManager().registerListener(this, new Events());
+
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
         out.writeUTF("ping");
