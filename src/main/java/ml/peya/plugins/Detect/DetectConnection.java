@@ -109,24 +109,30 @@ public class DetectConnection
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
                 this.cancel();
             }
-
-            private void learn(double vl, double seconds)
-            {
-                new BukkitRunnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                        arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
-                        Variables.learnCount++;
-                        network.learn(arr, 1000);
-
-                        this.cancel();
-                    }
-                }.runTask(PeyangSuperbAntiCheat.getPlugin());
-            }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("npc.seconds"), 20));
+    }
+
+    /**
+     * 学習回数を増やしAIを学習させる。
+     *
+     * @param vl 評価したVL。
+     * @param seconds NPCに対しメンチ切った秒数。
+     */
+    private void learn(double vl, double seconds)
+    {
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
+                arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
+                Variables.learnCount++;
+                network.learn(arr, 1000);
+
+                this.cancel();
+            }
+        }.runTask(PeyangSuperbAntiCheat.getPlugin());
     }
 
     /**
