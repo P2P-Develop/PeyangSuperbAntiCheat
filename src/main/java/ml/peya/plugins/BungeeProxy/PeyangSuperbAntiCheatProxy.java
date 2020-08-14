@@ -34,12 +34,8 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
 
         out.writeUTF("ping");
-
-        for (String server : getProxy().getServers().keySet())
-        {
-            getProxy().getServerInfo(server).sendData(Variables.bungeeChannel, out.toByteArray());
-        }
-
+        
+        getProxy().getServers().values().forEach(info -> info.sendData(Variables.bungeeChannel, out.toByteArray()));
 
         getLogger().info("PeyangSuperbAntiCheat has been activated!");
     }
