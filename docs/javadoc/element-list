@@ -1,16 +1,16 @@
 ml.peya.plugins
-ml.peya.plugins.Commands
-ml.peya.plugins.Commands.CmdPub
-ml.peya.plugins.Commands.CmdTst
-ml.peya.plugins.Detect
-ml.peya.plugins.DetectClasses
-ml.peya.plugins.Enum
-ml.peya.plugins.Gui
-ml.peya.plugins.Gui.Events
-ml.peya.plugins.Gui.Items.Main
-ml.peya.plugins.Gui.Items.Target
-ml.peya.plugins.Gui.Items.Target.Page2
-ml.peya.plugins.Learn
-ml.peya.plugins.Moderate
-ml.peya.plugins.Task
-ml.peya.plugins.Utils
+package ml.peya.plugins.Bukkit.Commands
+package ml.peya.plugins.Bukkit.Commands.CmdPub
+package ml.peya.plugins.Bukkit.Commands.CmdTst
+ml.peya.plugins.Bukkit.Detect
+ml.peya.plugins.Bukkit.DetectClasses
+ml.peya.plugins.Bukkit.Enum
+ml.peya.plugins.Bukkit.Gui
+ml.peya.plugins.Bukkit.Gui.Events
+ml.peya.plugins.Bukkit.Gui.Items.Main
+ml.peya.plugins.Bukkit.Gui.Items.Target
+ml.peya.plugins.Bukkit.Gui.Items.Target.Page2
+ml.peya.plugins.Bukkit.Learn
+ml.peya.plugins.Bukkit.Moderate
+ml.peya.plugins.Bukkit.Task
+ml.peya.plugins.Bukkit.Utils

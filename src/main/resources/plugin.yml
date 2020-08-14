@@ -1,5 +1,5 @@
 name: PeyangSuperbAntiCheat
-main: ml.peya.plugins.PeyangSuperbAntiCheat
+main: ml.peya.plugins.Bukkit.PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PeyangSuperbAntiCheat
 load: STARTUP
