@@ -118,7 +118,7 @@ public class DetectConnection
      * @param vl 評価したVL。
      * @param seconds NPCに対しメンチ切った秒数。
      */
-    private void learn(double vl, double seconds)
+    private static void learn(double vl, double seconds)
     {
         new BukkitRunnable()
         {
