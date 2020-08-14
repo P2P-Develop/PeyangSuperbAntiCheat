@@ -126,7 +126,7 @@ public class DetectConnection
             public void run()
             {
                 ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
+                arr.add(Triple.of(vl, seconds, seconds / vl));
                 Variables.learnCount++;
                 network.learn(arr, 1000);
 
