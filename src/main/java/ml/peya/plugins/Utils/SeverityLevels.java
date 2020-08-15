@@ -2,10 +2,11 @@ package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
 
 import java.sql.*;
 import java.util.*;
+
+import static ml.peya.plugins.Variables.eye;
 
 /**
  * レベルのいろいろな取得方法まとめたクラス！！
@@ -63,7 +64,7 @@ public class SeverityLevels
     {
         if (WatchEyeManagement.isExistsRecord(id))
             return EnumSeverity.UNKNOWN;
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");

@@ -3,7 +3,6 @@ package ml.peya.plugins.Moderate;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
@@ -12,6 +11,9 @@ import org.bukkit.scheduler.*;
 
 import java.math.*;
 import java.util.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Variables.cheatMeta;
 
 /**
  * トラッキングに使うクラス。いろいろコントロールしてくれる。
@@ -107,12 +109,12 @@ public class Tracker
             map.put("y", scaleSet(location.getY(), 2));
             map.put("z", scaleSet(location.getZ(), 2));
             map.put("distance", scaleSet(location.distance(player.getLocation()), 1));
-            if (Variables.cheatMeta.exists(target.getUniqueId()))
+            if (cheatMeta.exists(target.getUniqueId()))
             {
                 HashMap<String, Object> repKey = new HashMap<>();
-                repKey.put("type", String.valueOf(Variables.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType().getName()));
-                repKey.put("vl", Variables.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType() == DetectType.ANTI_KB ? "N/A": Integer.valueOf(Variables.cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getVL()));
-                map.put("tests", MessageEngine.get("item.tracking.testing", repKey));
+                repKey.put("type", String.valueOf(cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType().getName()));
+                repKey.put("vl", cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType() == DetectType.ANTI_KB ? "N/A": Integer.valueOf(cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getVL()));
+                map.put("tests", get("item.tracking.testing", repKey));
             }
             else
                 map.put("tests", "");
@@ -120,7 +122,7 @@ public class Tracker
                 target.getMetadata("speed").parallelStream().filter(value -> value.getOwningPlugin().getName().equals(PeyangSuperbAntiCheat.getPlugin().getName())).forEachOrdered(value -> map.put("velocity", scaleSet((Double) value.value(), 2)));
             else
                 map.put("velocity", 0.0);
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.text", map)));
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.text", map)));
             Arrays.stream(player.getInventory().getContents()).parallel().filter(itemStack -> !Item.canGuiItem(itemStack)).filter(itemStack -> Objects.equals(Item.getType(itemStack), "TRACKER")).map(itemStack -> location).forEachOrdered(player::setCompassTarget);
             target.removeMetadata("speed", PeyangSuperbAntiCheat.getPlugin());
         });

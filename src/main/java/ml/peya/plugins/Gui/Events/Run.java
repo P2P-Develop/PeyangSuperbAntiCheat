@@ -1,13 +1,14 @@
 package ml.peya.plugins.Gui.Events;
 
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.event.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.*;
 
 import java.util.*;
+
+import static ml.peya.plugins.Variables.item;
 
 /**
  * イベントの根本的なやつ。
@@ -28,9 +29,9 @@ public class Run implements Listener
 
         e.setCancelled(true);
 
-        Item item = Variables.item;
+        Item itemList = item;
 
-        for (IItems items : item.getItems())
+        for (IItems items : itemList.getItems())
         {
             String type = items.getExecName();
             if (Objects.equals(Item.getType(itemStack), type))

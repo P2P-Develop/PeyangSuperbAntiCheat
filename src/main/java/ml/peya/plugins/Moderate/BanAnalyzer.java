@@ -1,10 +1,11 @@
 package ml.peya.plugins.Moderate;
 
 import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.*;
 
 import java.sql.*;
 import java.util.*;
+
+import static ml.peya.plugins.Variables.banKick;
 
 /**
  * Bansのメソッド群。
@@ -26,7 +27,7 @@ public class BanAnalyzer
         {
             case ALL:
             case KICK:
-                try (Connection connection = Variables.banKick.getConnection();
+                try (Connection connection = banKick.getConnection();
                      Statement statement = connection.createStatement())
                 {
                     ResultSet set = statement.executeQuery("SeLeCt * FrOm KiCk WhErE UUID='" + uuid.toString() + "'");

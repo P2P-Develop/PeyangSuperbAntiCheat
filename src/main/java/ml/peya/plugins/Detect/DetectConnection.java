@@ -15,6 +15,8 @@ import org.bukkit.scheduler.*;
 import java.sql.*;
 import java.util.*;
 
+import static ml.peya.plugins.Variables.*;
+
 /**
  * キック時の処理などを管理する。
  */
@@ -31,7 +33,7 @@ public class DetectConnection
     public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type, boolean reachMode)
     {
         EntityPlayer uuid = NPC.spawn(player, type, reachMode);
-        CheatDetectNowMeta meta = Variables.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
+        CheatDetectNowMeta meta = cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
         meta.setTesting(true);
         return meta;
     }
@@ -62,18 +64,18 @@ public class DetectConnection
                 meta.setTesting(false);
 
                 final double vl = meta.getVL();
-                final double seconds = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
+                final double seconds = cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
 
-                if (Variables.learnCount > Variables.learnCountLimit)
+                if (learnCount > learnCountLimit)
                 {
-                    if (Variables.network.commit(Pair.of(vl, seconds)) > 0.01)
+                    if (network.commit(Pair.of(vl, seconds)) > 0.01)
                     {
                         learn(vl, seconds);
 
                         if (kick(player)) return;
                     }
                 }
-                else if (Variables.banLeft <= vl)
+                else if (banLeft <= vl)
                 {
                     learn(vl, seconds);
 
@@ -91,9 +93,9 @@ public class DetectConnection
                         {
                             case AURA_BOT:
                                 if (sender == null)
-                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), Variables.banLeft).create()));
+                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create()));
                                 else
-                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), Variables.banLeft).create());
+                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create());
                                 break;
 
                             case AURA_PANIC:
@@ -104,13 +106,13 @@ public class DetectConnection
                                 break;
                         }
 
-                        Variables.cheatMeta.remove(meta.getUUIDs());
+                        cheatMeta.remove(meta.getUUIDs());
                         this.cancel();
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("npc.seconds"), 20));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(config.getInt("npc.seconds"), 20));
     }
 
     /**
@@ -128,8 +130,8 @@ public class DetectConnection
             {
                 ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
                 arr.add(Triple.of(vl, seconds, seconds / vl));
-                Variables.learnCount++;
-                Variables.network.learn(arr, 1000);
+                learnCount++;
+                network.learn(arr, 1000);
 
                 this.cancel();
             }
@@ -145,7 +147,7 @@ public class DetectConnection
     private static boolean kick(Player player)
     {
         ArrayList<String> reason = new ArrayList<>();
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement();
              Statement statement1 = connection.createStatement())
         {

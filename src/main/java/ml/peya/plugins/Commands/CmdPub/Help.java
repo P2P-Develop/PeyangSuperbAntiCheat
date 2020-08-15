@@ -1,12 +1,14 @@
 package ml.peya.plugins.Commands.CmdPub;
 
 import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
 
 import java.util.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
 
 /**
  * /psac helpで動くクラス。
@@ -22,7 +24,7 @@ public class Help
     public static void run(CommandSender sender, String label)
     {
         final boolean[] flag = {false};
-        sender.sendMessage(MessageEngine.get("base.prefix"));
+        sender.sendMessage(get("base.prefix"));
 
         ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes(): getNodes();
 
@@ -32,15 +34,15 @@ public class Help
             public void run()
             {
                 nodes.parallelStream().filter(node -> sender.hasPermission("psac." + node)).forEachOrdered(node -> {
-                    sender.sendMessage(MessageEngine.get("command.help." + node, MessageEngine.pair("label", label)));
+                    sender.sendMessage(get("command.help." + node, pair("label", label)));
                     flag[0] = true;
                 });
 
                 if ((sender.hasPermission("psac.drop") || sender.hasPermission("psac.show")) && sender instanceof Player)
-                    sender.sendMessage(MessageEngine.get("command.help.mngIdWarning"));
+                    sender.sendMessage(get("command.help.mngIdWarning"));
 
                 if (!flag[0])
-                    sender.sendMessage(MessageEngine.get("error.psac.notPage"));
+                    sender.sendMessage(get("error.psac.notPage"));
             }
         }.runTaskAsynchronously(PeyangSuperbAntiCheat.getPlugin());
 

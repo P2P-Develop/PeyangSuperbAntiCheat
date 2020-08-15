@@ -6,6 +6,8 @@ import ml.peya.plugins.Utils.*;
 import java.io.*;
 import java.sql.*;
 
+import static ml.peya.plugins.Variables.*;
+
 /**
  * プラグイン自体ではおさまらない初期化とかするとこ。
  */
@@ -35,7 +37,7 @@ public class Init
      */
     public static boolean createDefaultTables()
     {
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs watchreason(" +
@@ -60,7 +62,7 @@ public class Init
             return false;
         }
 
-        try (Connection connection = Variables.banKick.getConnection();
+        try (Connection connection = banKick.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs kick(" +
@@ -79,7 +81,7 @@ public class Init
             return false;
         }
 
-        try (Connection connection = Variables.trust.getConnection();
+        try (Connection connection = trust.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs trust(" +

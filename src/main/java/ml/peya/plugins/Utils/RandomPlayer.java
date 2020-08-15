@@ -2,7 +2,6 @@ package ml.peya.plugins.Utils;
 
 import com.mojang.authlib.*;
 import com.mojang.authlib.properties.*;
-import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang.*;
 import org.apache.commons.lang3.tuple.*;
@@ -12,6 +11,8 @@ import org.bukkit.craftbukkit.v1_12_R1.*;
 
 import java.sql.*;
 import java.util.*;
+
+import static ml.peya.plugins.Variables.skin;
 
 /**
  * プレイヤーをランダムに取得する関数が突っ込まれています。
@@ -60,7 +61,7 @@ public class RandomPlayer
      */
     public static Pair<String, String> getSkin()
     {
-        try (Connection connection = Variables.skin.getConnection();
+        try (Connection connection = skin.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SELECT * FROM Skin ORDER BY RANDOM() LIMIT 1");

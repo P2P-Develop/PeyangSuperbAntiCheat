@@ -2,7 +2,6 @@ package ml.peya.plugins.Gui.Events;
 
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.event.*;
@@ -10,6 +9,9 @@ import org.bukkit.event.player.*;
 import org.bukkit.scheduler.*;
 
 import java.util.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Variables.tracker;
 
 /**
  * おもっくそプレイヤーのドロップに関わりそうなイベント。
@@ -37,8 +39,8 @@ public class Drop implements Listener
                 this.cancel();
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());
-        Variables.tracker.remove(e.getPlayer().getName());
-        e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.noTarget")));
-        e.getPlayer().sendMessage(MessageEngine.get("item.stopTarget"));
+        tracker.remove(e.getPlayer().getName());
+        e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.noTarget")));
+        e.getPlayer().sendMessage(get("item.stopTarget"));
     }
 }

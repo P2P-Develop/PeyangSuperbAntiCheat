@@ -12,6 +12,9 @@ import java.util.Date;
 import java.util.*;
 import java.util.stream.*;
 
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Variables.*;
+
 /**
  * プレイヤーのキックと共にいろいろやってくれるやつ。
  */
@@ -36,7 +39,7 @@ public class KickManager
                 kick(player, reason, isTest, !wdFlag);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(config.getInt("kick.delay"), 20));
     }
 
     /**
@@ -62,7 +65,7 @@ public class KickManager
             @Override
             public void run()
             {
-                Bukkit.broadcast(MessageEngine.get("kick.broadcast"), "psac.notification");
+                Bukkit.broadcast(get("kick.broadcast"), "psac.notification");
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
@@ -78,7 +81,7 @@ public class KickManager
      */
     private static void kick(Player player, String reason, boolean isTest, boolean opFlag)
     {
-        if (Variables.config.getBoolean("kick.lightning"))
+        if (config.getBoolean("kick.lightning"))
             player.getWorld().strikeLightningEffect(player.getLocation());
 
         StringBuilder id = new StringBuilder();
@@ -105,15 +108,15 @@ public class KickManager
         map.put("ggid", IntStream.range(0, 7).parallel().mapToObj(i -> String.valueOf(random.nextInt(9))).collect(Collectors.joining()));
         map.put("id", id.toString());
 
-        String message = MessageEngine.get("kick.reason", map);
+        String message = get("kick.reason", map);
 
         if (isTest)
         {
             player.kickPlayer(message);
             return;
         }
-        try (Connection kickC = Variables.banKick.getConnection();
-             Connection eyeC = Variables.eye.getConnection();
+        try (Connection kickC = banKick.getConnection();
+             Connection eyeC = eye.getConnection();
              Statement kickS = kickC.createStatement();
              Statement eyeS = eyeC.createStatement();
              Statement eyeS2 = eyeC.createStatement();

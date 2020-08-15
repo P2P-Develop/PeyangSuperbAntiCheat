@@ -16,6 +16,8 @@ import org.bukkit.event.player.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
+import static ml.peya.plugins.Variables.*;
+
 /**
  * イベントハンドラをめちゃくちゃ管理します。
  */
@@ -31,7 +33,7 @@ public class Events implements Listener
     {
         if (e.getEntity().getKiller() == null)
             return;
-        Variables.counting.kill(e.getEntity().getKiller().getUniqueId());
+        counting.kill(e.getEntity().getKiller().getUniqueId());
     }
 
     /**
@@ -42,7 +44,7 @@ public class Events implements Listener
     @EventHandler(priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent e)
     {
-        if (!(e.getEntity() instanceof CraftPlayer) || !(e.getDamager() instanceof CraftArrow) || !Variables.cheatMeta.exists(e.getEntity().getUniqueId()) || !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
+        if (!(e.getEntity() instanceof CraftPlayer) || !(e.getDamager() instanceof CraftArrow) || !cheatMeta.exists(e.getEntity().getUniqueId()) || !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
             return;
 
         e.setDamage(0);
@@ -58,9 +60,9 @@ public class Events implements Listener
     {
         Player player = e.getPlayer();
 
-        Variables.tracker.remove(player.getName());
+        tracker.remove(player.getName());
 
-        Variables.mods.remove(player.getUniqueId());
+        mods.remove(player.getUniqueId());
     }
 
     /**
@@ -71,7 +73,7 @@ public class Events implements Listener
     @EventHandler
     public void onMove(PlayerMoveEvent e)
     {
-        if (!Variables.tracker.isTrackingByPlayer(e.getPlayer().getName()) && !Variables.cheatMeta.exists(e.getPlayer().getUniqueId()))
+        if (!tracker.isTrackingByPlayer(e.getPlayer().getName()) && !cheatMeta.exists(e.getPlayer().getUniqueId()))
             return;
         e.getPlayer().setMetadata("speed", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo())));
     }
@@ -97,7 +99,7 @@ public class Events implements Listener
         ));
 
         e.getRecipients().parallelStream().forEach(receiver -> {
-            if (!receiver.hasPermission("psac.chattarget") || (Variables.mods.get(receiver.getUniqueId()) != null && Variables.mods.get(receiver.getUniqueId()).containsKey("Lynx")))
+            if (!receiver.hasPermission("psac.chattarget") || (mods.get(receiver.getUniqueId()) != null && mods.get(receiver.getUniqueId()).containsKey("Lynx")))
                 receiver.sendMessage(format);
             else
                 receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create()));

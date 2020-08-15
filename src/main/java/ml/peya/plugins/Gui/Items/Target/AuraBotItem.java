@@ -13,6 +13,9 @@ import org.bukkit.inventory.meta.*;
 import java.lang.reflect.*;
 import java.util.*;
 
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
+
 /**
  * 回るBot
  */
@@ -72,7 +75,7 @@ public class AuraBotItem implements IItems
 
         ItemStack stack = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(MessageEngine.get("item.execute", MessageEngine.pair("command", "AuraBot")));
+        meta.setDisplayName(get("item.execute", pair("command", "AuraBot")));
 
         GameProfile profile = new GameProfile(UUID.randomUUID(), "AURA_BOT");
 

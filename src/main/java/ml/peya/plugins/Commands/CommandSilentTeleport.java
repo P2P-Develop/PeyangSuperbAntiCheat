@@ -1,11 +1,13 @@
 package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.player.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
 
 /**
  * STPコマンド系プラグイン。
@@ -29,7 +31,7 @@ public class CommandSilentTeleport implements CommandExecutor
 
         if (!(sender instanceof Player))
         {
-            sender.sendMessage(MessageEngine.get("error.requirePlayer"));
+            sender.sendMessage(get("error.requirePlayer"));
             return true;
         }
 
@@ -44,12 +46,12 @@ public class CommandSilentTeleport implements CommandExecutor
 
         if (target == null || player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
             return true;
         }
 
         player.teleport(target.getLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
-        player.sendMessage(MessageEngine.get("message.teleport.teleport", MessageEngine.pair("player", target.getName())));
+        player.sendMessage(get("message.teleport.teleport", pair("player", target.getName())));
         return true;
     }
 }
