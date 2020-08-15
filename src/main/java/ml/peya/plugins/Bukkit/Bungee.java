@@ -7,13 +7,15 @@ import org.bukkit.plugin.messaging.*;
 
 import java.io.*;
 
+import static ml.peya.plugins.Bukkit.Variables.*;
+
 public class Bungee implements PluginMessageListener
 {
     public static void sendMessage(String message)
     {
         ByteArrayDataOutput output = ByteStreams.newDataOutput();
         output.writeUTF("BungeeCord");
-        output.writeUTF(Variables.bungeeChannel);
+        output.writeUTF(bungeeChannel);
         output.writeUTF(message);
         Bukkit.getServer().sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "BungeeCord", output.toByteArray());
     }
@@ -27,7 +29,7 @@ public class Bungee implements PluginMessageListener
         String message;
         try
         {
-            if (!input.readUTF().equals(Variables.bungeeChannel))
+            if (!input.readUTF().equals(bungeeChannel))
                 return;
             message = input.readUTF();
         }
@@ -37,7 +39,7 @@ public class Bungee implements PluginMessageListener
             return;
         }
 
-        Variables.bungeeCommand.runCommand(message);
+        bungeeCommand.runCommand(message);
 
     }
 }

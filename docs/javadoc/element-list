@@ -1,7 +1,7 @@
-ml.peya.plugins
-package ml.peya.plugins.Bukkit.Commands
-package ml.peya.plugins.Bukkit.Commands.CmdPub
-package ml.peya.plugins.Bukkit.Commands.CmdTst
+ml.peya.plugins.Bukkit
+ml.peya.plugins.Bukkit.Commands
+ml.peya.plugins.Bukkit.Commands.CmdPub
+ml.peya.plugins.Bukkit.Commands.CmdTst
 ml.peya.plugins.Bukkit.Detect
 ml.peya.plugins.Bukkit.DetectClasses
 ml.peya.plugins.Bukkit.Enum
@@ -14,3 +14,5 @@ ml.peya.plugins.Bukkit.Learn
 ml.peya.plugins.Bukkit.Moderate
 ml.peya.plugins.Bukkit.Task
 ml.peya.plugins.Bukkit.Utils
+ml.peya.plugins.BungeeProxy
+ml.peya.plugins.BungeeStructure
