@@ -28,7 +28,6 @@ public class CommandManager
         if (commands.size() == 0)
             return;
         String label = commands.remove(0);
-        String[] args = commands.toArray(new String[0]);
         CommandComponent commandComponent = new CommandComponent()
         {
             @Override
@@ -40,7 +39,7 @@ public class CommandManager
             @Override
             public String[] getArgs()
             {
-                return args;
+                return commands.toArray(new String[0]);
             }
 
             @Override
@@ -50,8 +49,7 @@ public class CommandManager
             }
         };
 
-        for (Class<? extends CommandExecutor> cls : this.commands)
-        {
+        this.commands.parallelStream().forEachOrdered(cls -> {
             try
             {
                 for (Method method : cls.getMethods())
@@ -64,6 +62,6 @@ public class CommandManager
             {
                 e.printStackTrace();
             }
-        }
+        });
     }
 }
