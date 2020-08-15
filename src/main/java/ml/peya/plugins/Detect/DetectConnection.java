@@ -15,8 +15,6 @@ import org.bukkit.scheduler.*;
 import java.sql.*;
 import java.util.*;
 
-import static ml.peya.plugins.Variables.network;
-
 /**
  * キック時の処理などを管理する。
  */
@@ -63,16 +61,19 @@ public class DetectConnection
             {
                 meta.setTesting(false);
 
-                double vl = meta.getVL();
-                double seconds = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
+                final double vl = meta.getVL();
+                final double seconds = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
 
-                if (Variables.learnCount > Variables.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.01)
+                if (Variables.learnCount > Variables.learnCountLimit)
                 {
-                    learn(vl, seconds);
+                    if (Variables.network.commit(Pair.of(vl, seconds)) > 0.01)
+                    {
+                        learn(vl, seconds);
 
-                    if (kick(player)) return;
+                        if (kick(player)) return;
+                    }
                 }
-                if (Variables.learnCount < Variables.learnCountLimit && Variables.banLeft <= meta.getVL())
+                else if (Variables.banLeft <= vl)
                 {
                     learn(vl, seconds);
 
@@ -128,7 +129,7 @@ public class DetectConnection
                 ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
                 arr.add(Triple.of(vl, seconds, seconds / vl));
                 Variables.learnCount++;
-                network.learn(arr, 1000);
+                Variables.network.learn(arr, 1000);
 
                 this.cancel();
             }
