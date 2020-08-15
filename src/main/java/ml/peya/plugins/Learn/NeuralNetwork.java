@@ -1,12 +1,12 @@
 package ml.peya.plugins.Learn;
 
-import ml.peya.plugins.*;
 import org.apache.commons.lang3.tuple.*;
 
 import java.util.*;
 import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.Utils.times;
+import static ml.peya.plugins.Variables.config;
 
 /**
  * The・AI中枢
@@ -129,7 +129,7 @@ public class NeuralNetwork
         final double outputData = commit(Pair.of(data.getLeft(), data.getMiddle()));
         final double correctValue = data.getRight();
 
-        final double learningRate = Variables.config.getDouble("npc.learn");
+        final double learningRate = config.getDouble("npc.learn");
 
         final double deltaMO = (correctValue - outputData) * outputData * (1.0 - outputData);
         final double[] oldMiddleWeight = middleWeight.clone();

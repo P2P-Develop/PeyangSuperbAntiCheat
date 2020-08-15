@@ -2,11 +2,13 @@ package ml.peya.plugins.Gui.Items.Target;
 
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
 
 /**
  * BanList
@@ -37,7 +39,7 @@ public class BanBook implements IItems
     {
         ItemStack stack = new ItemStack(Material.PAPER);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(MessageEngine.get("item.banBook.title", MessageEngine.pair("name", target)));
+        meta.setDisplayName(get("item.banBook.title", pair("name", target)));
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);
         return stack;

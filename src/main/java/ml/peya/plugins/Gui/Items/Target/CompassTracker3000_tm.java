@@ -8,11 +8,12 @@ package ml.peya.plugins.Gui.Items.Target;
 
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
 
 /**
  * コンパストラッカー
@@ -43,7 +44,7 @@ public class CompassTracker3000_tm implements IItems
     {
         ItemStack item = new ItemStack(Material.COMPASS);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(MessageEngine.get("item.compass"));
+        meta.setDisplayName(get("item.compass"));
 
         meta.setLore(Item.getLore(this, target));
 

@@ -8,7 +8,7 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
-import static ml.peya.plugins.Utils.LookingUtils.getLookingEntity;
+import static ml.peya.plugins.Utils.MessageEngine.get;
 
 /**
  * ターゲットを再設定するユーティリティアイテム(ブレイズロッド)を管理します。
@@ -24,10 +24,10 @@ public class TargetStick implements IItems
     @Override
     public void run(Player player, String target)
     {
-        Player lookingPlayer = getLookingEntity(player);
+        Player lookingPlayer = LookingUtils.getLookingEntity(player);
         if (lookingPlayer == null)
         {
-            player.sendMessage(MessageEngine.get("error.notPlayerFoundInRange"));
+            player.sendMessage(get("error.notPlayerFoundInRange"));
             return;
         }
         player.performCommand("target " + lookingPlayer.getName());
@@ -48,7 +48,7 @@ public class TargetStick implements IItems
 
         meta.setLore(Item.getLore(this, target));
 
-        meta.setDisplayName(MessageEngine.get("item.targetStick"));
+        meta.setDisplayName(get("item.targetStick"));
 
         stack.setItemMeta(meta);
         return stack;

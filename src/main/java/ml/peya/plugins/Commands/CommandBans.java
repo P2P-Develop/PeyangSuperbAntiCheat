@@ -2,13 +2,16 @@ package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
 import java.util.stream.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
+import static ml.peya.plugins.Variables.config;
 
 /**
  * Banリスト表示コマンド系クラス。
@@ -35,7 +38,7 @@ public class CommandBans implements CommandExecutor
 
         if (!type.equals("-a") && !type.toLowerCase().equals("ban") && !type.toLowerCase().equals("kick"))
         {
-            sender.sendMessage(MessageEngine.get("error.bans.unknownSearchType"));
+            sender.sendMessage(get("error.bans.unknownSearchType"));
 
             return true;
         }
@@ -56,16 +59,16 @@ public class CommandBans implements CommandExecutor
 
         if (player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
             return true;
         }
 
         ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player, typeP);
 
-        sender.sendMessage(Variables.config.getBoolean("message.lynx") ? MessageEngine.get("message.bans.lynx", MessageEngine.pair("name", name)): MessageEngine.get("message.bans.message", MessageEngine.pair("name", name)));
+        sender.sendMessage(config.getBoolean("message.lynx") ? get("message.bans.lynx", pair("name", name)): get("message.bans.message", pair("name", name)));
 
         if (bans.size() == 0)
-            sender.sendMessage(MessageEngine.get("error.bans.databaseInfoNotFound"));
+            sender.sendMessage(get("error.bans.databaseInfoNotFound"));
 
         IntStream.range(0, 5).parallel().forEachOrdered(ii -> sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(ii), bans.get(ii).getType()).create()));
 
@@ -73,7 +76,7 @@ public class CommandBans implements CommandExecutor
             return true;
 
         int count = bans.size() - 5;
-        sender.sendMessage(Variables.config.getBoolean("message.lynx") ? MessageEngine.get("message.bans.more.lynx", MessageEngine.pair("count", count)): MessageEngine.get("message.bans.more.normal", MessageEngine.pair("count", count)));
+        sender.sendMessage(config.getBoolean("message.lynx") ? get("message.bans.more.lynx", pair("count", count)): get("message.bans.more.normal", pair("count", count)));
 
         return true;
     }

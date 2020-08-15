@@ -2,7 +2,6 @@ package ml.peya.plugins.Detect;
 
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -10,6 +9,11 @@ import org.bukkit.craftbukkit.v1_12_R1.entity.*;
 import org.bukkit.entity.*;
 import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
+import static ml.peya.plugins.Variables.cheatMeta;
+import static ml.peya.plugins.Variables.config;
 
 /**
  * ノックバックを確認するクラス。
@@ -34,13 +38,13 @@ public class TestKnockback
         location.add(location.getDirection().multiply(-0.1f));
 
         Arrow arrow = (Arrow) player.getWorld().spawnEntity(location, EntityType.ARROW);
-        Variables.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), DetectType.ANTI_KB);
+        cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), DetectType.ANTI_KB);
         arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), player.getUniqueId()));
         Bukkit.getOnlinePlayers().parallelStream().map(hide -> ((CraftPlayer) hide).getHandle().playerConnection).forEachOrdered(connection -> connection.sendPacket(new PacketPlayOutEntityDestroy(arrow.getEntityId())));
 
         arrow.setVelocity(location.getDirection().multiply(32767f));
 
-        Variables.cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type).setTesting(true);
+        cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), type).setTesting(true);
 
         scanFinally(player, sender, arrow);
     }
@@ -59,9 +63,9 @@ public class TestKnockback
             @Override
             public void run()
             {
-                sender.sendMessage(MessageEngine.get(Variables.config.getBoolean("message.lynx") ? "message.testkb.normal": "message.textkb.lynx", MessageEngine.pair("name", player.getName())));
+                sender.sendMessage(get(config.getBoolean("message.lynx") ? "message.testkb.normal": "message.textkb.lynx", pair("name", player.getName())));
                 arrow.remove();
-                Variables.cheatMeta.remove(arrow.getUniqueId());
+                cheatMeta.remove(arrow.getUniqueId());
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20);
     }

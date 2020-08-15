@@ -4,13 +4,15 @@ import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.math.*;
 import java.sql.*;
 import java.util.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Variables.eye;
 
 /**
  * /psac showで動くクラス。
@@ -30,14 +32,14 @@ public class Show
 
         if (WatchEyeManagement.isInjection(args[1]) || WatchEyeManagement.isExistsRecord(args[1]))
         {
-            sender.sendMessage(MessageEngine.get("error.showDrop.notFoundReport"));
+            sender.sendMessage(get("error.showDrop.notFoundReport"));
 
             return;
         }
 
         String mngid = args[1];
 
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD='" + mngid + "'");
@@ -64,7 +66,7 @@ public class Show
         catch (Exception e)
         {
             e.printStackTrace();
-            sender.sendMessage(MessageEngine.get("error.unknownSQLError"));
+            sender.sendMessage(get("error.unknownSQLError"));
 
             Utils.errorNotification(Utils.getStackTrace(e));
         }

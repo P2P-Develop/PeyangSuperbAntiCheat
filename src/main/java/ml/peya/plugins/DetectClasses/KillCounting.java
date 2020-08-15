@@ -8,6 +8,9 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 
+import static ml.peya.plugins.Variables.cheatMeta;
+import static ml.peya.plugins.Variables.config;
+
 /**
  * キル回数の計測をする。
  */
@@ -36,9 +39,9 @@ public class KillCounting
         if (players.containsKey(killer))
         {
             players.put(killer, players.get(killer) + 1);
-            if (players.get(killer) >= Variables.config.getInt("npc.kill"))
+            if (players.get(killer) >= config.getInt("npc.kill"))
             {//カウント
-                if (!Variables.cheatMeta.exists(killer))
+                if (!cheatMeta.exists(killer))
                     DetectConnection.scan(Bukkit.getPlayer(killer), DetectType.AURA_BOT, null, true);
                 players.remove(killer);
             }//検証用
@@ -54,7 +57,7 @@ public class KillCounting
                 players.remove(killer);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("npc.seconds"), 20));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(config.getInt("npc.seconds"), 20));
     }
 
     /**
