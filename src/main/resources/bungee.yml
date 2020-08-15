@@ -1,4 +1,5 @@
-name: PeyangSuperbAntiCheat
+name: PeyangSuperbAntiCheatProxy
 main: ml.peya.plugins.BungeeProxy.PeyangSuperbAntiCheatProxy
 version: 1.0.0
-prefix: PeyangSuperbAntiCheat
+prefix: PeyangSuperbAntiCheatProxy
+author: Peyang

@@ -1,4 +1,4 @@
-package ml.peya.plugins;
+package ml.peya.plugins.Bukkit;
 
 import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
@@ -16,6 +16,7 @@ import ml.peya.plugins.Bukkit.Gui.Items.Target.Page2.*;
 import ml.peya.plugins.Bukkit.Learn.*;
 import ml.peya.plugins.Bukkit.Moderate.*;
 import ml.peya.plugins.Bukkit.Task.*;
+import ml.peya.plugins.BungeeStructure.*;
 import org.apache.commons.io.*;
 import org.bukkit.*;
 import org.bukkit.plugin.java.*;
@@ -99,6 +100,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
         trust = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + trustPath));
 
+        bungeeChannel = "PSACProxy";
+
         try
         {
             FileUtils.copyInputStreamToFile(this.getResource("skin.db"), new File(getDataFolder().getAbsolutePath() + "/skin.db"));
@@ -161,6 +164,11 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("tracking").setExecutor(new CommandTracking());
         getCommand("trust").setExecutor(new CommandTrust());
         getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
+
+        CommandManager manager = new CommandManager();
+        manager.registerCommand(new BungeeCommands());
+
+        bungeeCommand = manager;
 
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new Run(), this);
@@ -226,8 +234,12 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         mods = new HashMap<>();
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "FML|HS");
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new PluginMessageListener());
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new ClientModGetter());
 
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, bungeeChannel);
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, bungeeChannel, new Bungee());
+
+        Bungee.sendMessage("ping");
 
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }

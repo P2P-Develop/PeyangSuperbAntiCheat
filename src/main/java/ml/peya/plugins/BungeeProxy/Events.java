@@ -12,8 +12,13 @@ public class Events implements Listener
     @EventHandler
     public void onPluginMessage(PluginMessageEvent e)
     {
-        if (!e.getTag().equals(e.getTag()))
+        if (!e.getTag().equals(Variables.bungeeChannel))
             return;
+
+
+        if (!(e.getSender() instanceof Server))
+            return;
+
 
         byte[] data = e.getData();
 
@@ -21,11 +26,15 @@ public class Events implements Listener
 
         String message = input.readUTF();
 
-        if (!(e.getSender() instanceof Server))
-            return;
-
         Server sender = (Server) e.getSender();
 
         Variables.bungeeCommand.runCommand(message, sender.getInfo().getName());
     }
+
+    /*@EventHandler
+    public void onServerDisconnect(ServerDisconnectEvent e)
+    {
+        PeyangSuperbAntiCheatProxy.servers.remove(e.getTarget().getName());
+        Variables.logger.info("<-> " + e.getTarget().getName() + " has disconnected");
+    }*/
 }

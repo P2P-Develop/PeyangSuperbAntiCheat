@@ -19,4 +19,11 @@ public class Commands implements CommandExecutor
 
         server.sendData(Variables.bungeeChannel, output.toByteArray());
     }
+
+    @Command(label = "pong")
+    public void pong(CommandComponent cmd)
+    {
+        PeyangSuperbAntiCheatProxy.servers.add(cmd.getServer());
+        Variables.logger.info("<-> " + cmd + " has connected");
+    }
 }

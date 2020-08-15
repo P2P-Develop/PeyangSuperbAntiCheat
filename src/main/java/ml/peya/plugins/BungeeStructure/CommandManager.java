@@ -1,6 +1,5 @@
 package ml.peya.plugins.BungeeStructure;
 
-import java.lang.annotation.*;
 import java.lang.reflect.*;
 import java.util.*;
 
@@ -55,18 +54,10 @@ public class CommandManager
         {
             try
             {
-                for (Method method : cls.getDeclaredMethods())
+                for (Method method : cls.getMethods())
                 {
-                    method.setAccessible(true);
-                    for (Annotation annotation : method.getAnnotations())
-                    {
-                        if (annotation.annotationType() == Command.class)
-                        {
-                            Command commandAnt = (Command) annotation;
-                            if (commandAnt.label().equals(label))
-                                method.invoke(cls, commandComponent);
-                        }
-                    }
+                    if (method.getAnnotation(Command.class).label().equals(label))
+                        method.invoke(cls, commandComponent);
                 }
             }
             catch (Exception e)
