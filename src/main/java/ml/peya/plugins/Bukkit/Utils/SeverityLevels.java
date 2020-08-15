@@ -1,11 +1,12 @@
 package ml.peya.plugins.Bukkit.Utils;
 
-import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.DetectClasses.*;
 import ml.peya.plugins.Bukkit.Enum.*;
 
 import java.sql.*;
 import java.util.*;
+
+import static ml.peya.plugins.Bukkit.Variables.eye;
 
 /**
  * レベルのいろいろな取得方法まとめたクラス！！
@@ -63,7 +64,7 @@ public class SeverityLevels
     {
         if (WatchEyeManagement.isExistsRecord(id))
             return EnumSeverity.UNKNOWN;
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");

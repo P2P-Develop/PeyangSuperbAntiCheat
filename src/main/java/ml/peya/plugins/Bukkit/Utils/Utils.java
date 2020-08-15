@@ -5,8 +5,10 @@ import org.bukkit.*;
 
 import java.io.*;
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.stream.IntStream;
+import java.util.function.*;
+import java.util.stream.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
 
 /**
  * PSAC内でのみ使用するユーティリティ関数を集めたクラス。ほぼstatic。
@@ -22,10 +24,10 @@ public class Utils
     public static void adminNotification(String id)
     {
         Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.hasPermission("psac.reportntf")).forEachOrdered(player -> {
-            player.sendMessage(MessageEngine.get("report.submited"));
+            player.sendMessage(get("report.submited"));
             ComponentBuilder hover = new ComponentBuilder("/psac show " + id);
             hover.color(net.md_5.bungee.api.ChatColor.AQUA);
-            ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("report.click"));
+            ComponentBuilder builder = new ComponentBuilder(get("report.click"));
             builder.append("[" + ChatColor.YELLOW + ChatColor.BOLD + "CLICK" + ChatColor.WHITE + "]")
                     .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
                     .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
@@ -48,7 +50,7 @@ public class Utils
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", name);
             map.put("reason", String.join(", ", reasons));
-            TextComponent builder = new TextComponent(MessageEngine.get("report.lynx.submited", map));
+            TextComponent builder = new TextComponent(get("report.lynx.submited", map));
             builder.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
             builder.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
             player.spigot().sendMessage(builder);

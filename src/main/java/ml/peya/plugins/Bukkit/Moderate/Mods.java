@@ -1,9 +1,10 @@
 package ml.peya.plugins.Bukkit.Moderate;
 
-import ml.peya.plugins.Bukkit.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
+
+import static ml.peya.plugins.Bukkit.Variables.mods;
 
 /**
  * 何のMod入れてるか取得するやつ
@@ -20,9 +21,9 @@ public class Mods
     {
         UUID uuid = player.getUniqueId();
 
-        if (!Variables.mods.containsKey(uuid))
+        if (!mods.containsKey(uuid))
             return null;
 
-        return Variables.mods.get(uuid);
+        return mods.get(uuid);
     }
 }

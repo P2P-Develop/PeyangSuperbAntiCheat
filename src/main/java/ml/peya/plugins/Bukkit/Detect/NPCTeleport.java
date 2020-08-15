@@ -1,9 +1,9 @@
 package ml.peya.plugins.Bukkit.Detect;
 
 import develop.p2p.lib.*;
-import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.DetectClasses.*;
 import ml.peya.plugins.Bukkit.Enum.*;
+import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
@@ -15,7 +15,9 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 
-import static ml.peya.plugins.Bukkit.Utils.LookingUtils.isLooking;
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Variables.cheatMeta;
+import static ml.peya.plugins.Bukkit.Variables.config;
 
 /**
  * NPCのTeleportを管理する。
@@ -58,13 +60,13 @@ public class NPCTeleport
      */
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender, boolean reachMode)
     {
-        final double range = reachMode ? Variables.config.getDouble("npc.reachPanicRange"): Variables.config.getDouble("npc.panicRange");
+        final double range = reachMode ? config.getDouble("npc.reachPanicRange"): config.getDouble("npc.panicRange");
         final double[] clt = {0.0};
         final int[] now = {0};
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
-        int sec = Variables.config.getInt("npc.seconds");
+        int sec = config.getInt("npc.seconds");
 
         new BukkitRunnable()
         {
@@ -79,7 +81,7 @@ public class NPCTeleport
                 map.put("hit", now[0]);
                 map.put("max", count);
 
-                sender.sendMessage(MessageEngine.get("message.auraCheck.panic.lynx", map));
+                sender.sendMessage(get("message.auraCheck.panic.lynx", map));
                 if (now[0] >= count)
                     this.cancel();
             }
@@ -147,7 +149,7 @@ public class NPCTeleport
     private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
     {
         final double[] time = {0.0};
-        final double radius = reachMode ? Variables.config.getDouble("npc.reachRange"): Variables.config.getDouble("npc.range");
+        final double radius = reachMode ? config.getDouble("npc.reachRange"): config.getDouble("npc.range");
 
         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
 
@@ -166,8 +168,8 @@ public class NPCTeleport
                 {
                     double rangeTmp = radius;
 
-                    if (Variables.config.getBoolean("npc.wave"))
-                        rangeTmp = new WaveCreator(radius - 0.1, radius, Variables.config.getDouble("npc.waveMin")).get(0.01, true);
+                    if (config.getBoolean("npc.wave"))
+                        rangeTmp = new WaveCreator(radius - 0.1, radius, config.getDouble("npc.waveMin")).get(0.01, true);
 
                     Location center = player.getLocation();
                     Location n = new Location(
@@ -197,11 +199,11 @@ public class NPCTeleport
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     count[0]++;
-                    CheatDetectNowMeta meta = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
+                    CheatDetectNowMeta meta = cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
                     if (meta == null) continue;
-                    meta.addSeconds(((isLooking(player, n) || isLooking(player, n.clone().add(0, 1, 0))) ? (Variables.config.getLong("npc.seconds") * 0.1 / 2): 0.0));
+                    meta.addSeconds(((LookingUtils.isLooking(player, n) || LookingUtils.isLooking(player, n.clone().add(0, 1, 0))) ? (config.getLong("npc.seconds") * 0.1 / 2): 0.0));
                 }
-                time[0] += Variables.config.getDouble("npc.time") + (Variables.config.getBoolean("npc.speed.wave") ? new WaveCreator(0.0, Variables.config.getDouble("npc.speed.waveRange"), 0 - Variables.config.getDouble("npc.speed.waveRange")).get(0.001, true): 0.0);
+                time[0] += config.getDouble("npc.time") + (config.getBoolean("npc.speed.wave") ? new WaveCreator(0.0, config.getDouble("npc.speed.waveRange"), 0 - config.getDouble("npc.speed.waveRange")).get(0.001, true): 0.0);
             }
         };
         r.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
@@ -214,7 +216,7 @@ public class NPCTeleport
                 r.cancel();
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * (Variables.config.getLong("npc.seconds")));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * (config.getLong("npc.seconds")));
 
     }
 

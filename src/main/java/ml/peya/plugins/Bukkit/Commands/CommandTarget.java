@@ -3,11 +3,13 @@ package ml.peya.plugins.Bukkit.Commands;
 import ml.peya.plugins.Bukkit.Gui.*;
 import ml.peya.plugins.Bukkit.Moderate.*;
 import ml.peya.plugins.Bukkit.*;
-import ml.peya.plugins.Bukkit.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Variables.tracker;
 
 /**
  * ターゲティングコマンド系クラス。
@@ -28,7 +30,7 @@ public class CommandTarget implements CommandExecutor
     {
         if (!(sender instanceof Player))
         {
-            sender.sendMessage(MessageEngine.get("error.requirePlayer"));
+            sender.sendMessage(get("error.requirePlayer"));
             return true;
         }
 
@@ -39,14 +41,14 @@ public class CommandTarget implements CommandExecutor
 
         if (player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
 
             return true;
         }
 
         if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
         {
-            sender.sendMessage(MessageEngine.get("error.trusted"));
+            sender.sendMessage(get("error.trusted"));
 
             return true;
         }
@@ -79,7 +81,7 @@ public class CommandTarget implements CommandExecutor
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15L);
 
-        Variables.tracker.add(sender.getName(), args[0]);
+        tracker.add(sender.getName(), args[0]);
 
         GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());
 

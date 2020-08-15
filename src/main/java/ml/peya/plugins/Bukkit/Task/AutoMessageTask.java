@@ -1,6 +1,5 @@
 package ml.peya.plugins.Bukkit.Task;
 
-import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.Utils.*;
 import org.bukkit.*;
 import org.bukkit.scheduler.*;
@@ -8,6 +7,9 @@ import org.bukkit.scheduler.*;
 import java.sql.*;
 import java.util.Date;
 import java.util.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Variables.banKick;
 
 /**
  * 定期メッセージを発行するタスク。
@@ -30,7 +32,7 @@ public class AutoMessageTask extends BukkitRunnable
         int watchdog = 0;
         int staff = 0;
 
-        try (Connection connection = Variables.banKick.getConnection();
+        try (Connection connection = banKick.getConnection();
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
         {
@@ -62,7 +64,7 @@ public class AutoMessageTask extends BukkitRunnable
 
         Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.hasPermission("psac.regular")).forEachOrdered(player -> {
             player.sendMessage("");
-            player.sendMessage(MessageEngine.get("autoMessage", map));
+            player.sendMessage(get("autoMessage", map));
             player.sendMessage("");
         });
     }

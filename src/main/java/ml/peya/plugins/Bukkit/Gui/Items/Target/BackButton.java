@@ -1,54 +1,54 @@
-package ml.peya.plugins.Bukkit.Gui.Items.Main;
+package ml.peya.plugins.Bukkit.Gui.Items.Target;
 
 import ml.peya.plugins.Bukkit.Gui.Item;
 import ml.peya.plugins.Bukkit.Gui.*;
-import ml.peya.plugins.Bukkit.Utils.*;
+import net.md_5.bungee.api.*;
+import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
 import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Variables.tracker;
 
 /**
- * ターゲットを再設定するユーティリティアイテム(ブレイズロッド)を管理します。
+ * 戻るボタン
  */
-public class TargetStick implements IItems
+public class BackButton implements IItems
 {
     /**
      * イベント発動時の処理をオーバーライドします。
      *
-     * @param player メンチを切る側のプレイヤー。
-     * @param target オーバーライドのために必要だと思われる。実際は必要ない。
+     * @param player 実行しているプレイヤー。
+     * @param target ターゲット。
      */
     @Override
     public void run(Player player, String target)
     {
-        Player lookingPlayer = LookingUtils.getLookingEntity(player);
-        if (lookingPlayer == null)
-        {
-            player.sendMessage(get("error.notPlayerFoundInRange"));
-            return;
-        }
-        player.performCommand("target " + lookingPlayer.getName());
+        tracker.remove(player.getName());
+        player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.noTarget")));
+        player.sendMessage(get("item.stopTarget"));
+        GuiItem.giveAllItems(player, Type.MAIN, target);
     }
 
     /**
      * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
      *
      * @param target ターゲットが誰であるか。
+     *
      * @return 関数内の処理によって設定されたアイテム。
      */
     @Override
     public ItemStack getItem(String target)
     {
-        ItemStack stack = new ItemStack(Material.BLAZE_ROD);
+        ItemStack stack = new ItemStack(Material.WATCH);
 
         ItemMeta meta = stack.getItemMeta();
 
-        meta.setLore(Item.getLore(this, target));
+        meta.setDisplayName(get("book.words.back"));
 
-        meta.setDisplayName(get("item.targetStick"));
+        meta.setLore(Item.getLore(this, target));
 
         stack.setItemMeta(meta);
         return stack;
@@ -73,18 +73,17 @@ public class TargetStick implements IItems
     @Override
     public String getExecName()
     {
-        return "TARGET_STICK";
+        return "BACK";
     }
 
     /**
      * どのようなタイプであるか取得する。
      *
-     * @return ほぼMAIN。大体MAIN。
+     * @return 実はTARGETだった。
      */
     @Override
     public Type getType()
     {
-        return Type.MAIN;
+        return Type.TARGET;
     }
-
 }
