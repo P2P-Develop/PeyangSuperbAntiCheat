@@ -1,0 +1,81 @@
+package ml.peya.plugins.Bukkit.Gui.Items.Target.Page2;
+
+import ml.peya.plugins.Bukkit.Gui.Item;
+import ml.peya.plugins.Bukkit.Gui.*;
+import org.bukkit.*;
+import org.bukkit.entity.*;
+import org.bukkit.inventory.*;
+import org.bukkit.inventory.meta.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+
+/**
+ * Mod一覧
+ */
+public class ModList implements IItems
+{
+    /**
+     * イベント発動時の処理をオーバーライドします。
+     *
+     * @param player 実行しているプレイヤー。
+     * @param target ターゲット。
+     */
+    @Override
+    public void run(Player player, String target)
+    {
+        player.performCommand("mods " + target);
+    }
+
+    /**
+     * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
+     *
+     * @param target ターゲットが誰であるか。
+     *
+     * @return 関数内の処理によって設定されたアイテム。
+     */
+    @Override
+    public ItemStack getItem(String target)
+    {
+        ItemStack stack = new ItemStack(Material.TNT);
+
+        ItemMeta meta = stack.getItemMeta();
+        meta.setLore(Item.getLore(this, target));
+        meta.setDisplayName(get("item.mods"));
+        stack.setItemMeta(meta);
+        return stack;
+
+    }
+
+    /**
+     * インベントリに空きスペースがあるかどうかを確認する関数のオーバーライド。この関数は使わないため実装は不要。
+     *
+     * @return 実装は不要なためfalse。
+     */
+    @Override
+    public boolean canSpace()
+    {
+        return false;
+    }
+
+    /**
+     * どのようなIDであるか取得する。詳細はPSACドキュメントを参照。
+     *
+     * @return このアイテムの実行ID。
+     */
+    @Override
+    public String getExecName()
+    {
+        return "MOD_LIST";
+    }
+
+    /**
+     * どのようなタイプであるか取得する。
+     *
+     * @return ほんとはTARGET_2だった。二ページ目なだけでTARGETとは変わらない。
+     */
+    @Override
+    public Type getType()
+    {
+        return Type.TARGET_2;
+    }
+}
