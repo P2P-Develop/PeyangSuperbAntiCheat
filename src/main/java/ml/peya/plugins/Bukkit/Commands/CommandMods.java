@@ -8,6 +8,8 @@ import org.bukkit.entity.*;
 
 import java.util.*;
 
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+
 /**
  * Mod参照コマンド系クラス。
  */
@@ -31,7 +33,7 @@ public class CommandMods implements CommandExecutor
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
             return true;
         }
 
@@ -39,7 +41,7 @@ public class CommandMods implements CommandExecutor
 
         if (mods == null)
         {
-            sender.sendMessage(MessageEngine.get("error.mods.noDataFound"));
+            sender.sendMessage(get("error.mods.noDataFound"));
             return true;
         }
 

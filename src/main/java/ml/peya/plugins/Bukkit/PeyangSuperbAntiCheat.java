@@ -1,4 +1,4 @@
-package ml.peya.plugins.Bukkit;
+package ml.peya.plugins;
 
 import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
@@ -16,7 +16,6 @@ import ml.peya.plugins.Bukkit.Gui.Items.Target.Page2.*;
 import ml.peya.plugins.Bukkit.Learn.*;
 import ml.peya.plugins.Bukkit.Moderate.*;
 import ml.peya.plugins.Bukkit.Task.*;
-import ml.peya.plugins.BungeeStructure.*;
 import org.apache.commons.io.*;
 import org.bukkit.*;
 import org.bukkit.plugin.java.*;
@@ -78,12 +77,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         {
             try
             {
-                if (config.getInt(path) > 0)
+                if (config.getInt(path) < 0)
                     throw new ArithmeticException();
             }
             catch (Exception ignored)
             {
-
+                logger.log(Level.WARNING, path + " is minus value! set value to 0");
+                config.set(path, 0);
             }
         }
 
@@ -98,8 +98,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         eye = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
         banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
         trust = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + trustPath));
-
-        bungeeChannel = "PSACProxy";
 
         try
         {
@@ -164,11 +162,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("trust").setExecutor(new CommandTrust());
         getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
 
-        CommandManager manager = new CommandManager();
-        manager.registerCommand(new BungeeCommands());
-
-        bungeeCommand = manager;
-
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new Run(), this);
         getServer().getPluginManager().registerEvents(new Drop(), this);
@@ -201,7 +194,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         try
         {
             File file = new File(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
-            if (file.exists() && file.length() >= 256)
+            if (file.exists() && file.length() >= 16)
             {
                 JsonNode node = new ObjectMapper().readTree(file);
                 int i = 0;
@@ -221,20 +214,20 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             else
                 throw new FileNotFoundException();
         }
-        catch (Exception ignored)
+        catch (FileNotFoundException ignored)
         {
             logger.warning("Learning data file not found.");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
 
         mods = new HashMap<>();
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "FML|HS");
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new ClientModGetter());
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new PluginMessageListener());
 
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, bungeeChannel);
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, bungeeChannel, new Bungee());
-
-        Bungee.sendMessage("ping");
 
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }

@@ -2,11 +2,13 @@ package ml.peya.plugins.Bukkit.Gui.Items.Target;
 
 import ml.peya.plugins.Bukkit.Gui.Item;
 import ml.peya.plugins.Bukkit.Gui.*;
-import ml.peya.plugins.Bukkit.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.pair;
 
 /**
  * BanList
@@ -29,6 +31,7 @@ public class BanBook implements IItems
      * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
      *
      * @param target ターゲットが誰であるか。
+     *
      * @return 関数内の処理によって設定されたアイテム。
      */
     @Override
@@ -36,7 +39,7 @@ public class BanBook implements IItems
     {
         ItemStack stack = new ItemStack(Material.PAPER);
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(MessageEngine.get("item.banBook.title", MessageEngine.pair("name", target)));
+        meta.setDisplayName(get("item.banBook.title", pair("name", target)));
         meta.setLore(Item.getLore(this, target));
         stack.setItemMeta(meta);
         return stack;

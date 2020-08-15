@@ -1,12 +1,14 @@
 package ml.peya.plugins.Bukkit.Commands;
 
 import ml.peya.plugins.Bukkit.Moderate.*;
-import ml.peya.plugins.Bukkit.Utils.*;
-import ml.peya.plugins.Bukkit.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.util.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.pair;
+import static ml.peya.plugins.Bukkit.Variables.config;
 
 /**
  * 引き寄せコマンド系クラス。
@@ -30,7 +32,7 @@ public class CommandPull implements CommandExecutor
 
         if (!(sender instanceof Player))
         {
-            sender.sendMessage(MessageEngine.get("error.requirePlayer"));
+            sender.sendMessage(get("error.requirePlayer"));
             return true;
         }
 
@@ -38,14 +40,14 @@ public class CommandPull implements CommandExecutor
 
         if (player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
 
             return true;
         }
 
         if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
         {
-            sender.sendMessage(MessageEngine.get("error.trusted"));
+            sender.sendMessage(get("error.trusted"));
 
             return true;
         }
@@ -57,7 +59,7 @@ public class CommandPull implements CommandExecutor
         else
             pull(player, playerSender.getLocation());
 
-        sender.sendMessage(Variables.config.getBoolean("message.lynx") ? MessageEngine.get("message.pull.lynx", MessageEngine.pair("name", player.getName())): MessageEngine.get("message.pull.normal", MessageEngine.pair("name", player.getName())));
+        sender.sendMessage(config.getBoolean("message.lynx") ? get("message.pull.lynx", pair("name", player.getName())): get("message.pull.normal", pair("name", player.getName())));
 
         return true;
     }

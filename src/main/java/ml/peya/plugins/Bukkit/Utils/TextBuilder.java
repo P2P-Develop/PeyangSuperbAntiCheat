@@ -1,6 +1,5 @@
 package ml.peya.plugins.Bukkit.Utils;
 
-import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.Enum.*;
 import ml.peya.plugins.Bukkit.Moderate.*;
 import net.md_5.bungee.api.chat.*;
@@ -12,6 +11,10 @@ import java.math.*;
 import java.text.*;
 import java.util.*;
 import java.util.stream.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.pair;
+import static ml.peya.plugins.Bukkit.Variables.config;
 
 /**
  * チャット送信とかに使用するやつを組み立てます。MessageEngineのフロントエンドみたいな。
@@ -32,7 +35,7 @@ public class TextBuilder
                 ChatColor.GREEN + ")");
         nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac view " + bind));
 
-        nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.words.next")).create()));
+        nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.words.next")).create()));
         return nextBtn;
     }
 
@@ -71,25 +74,25 @@ public class TextBuilder
      */
     public static void showText(String id, String uuid, String issueById, String issueByUuid, BigDecimal dateInt, ArrayList<EnumCheatType> types, CommandSender sender)
     {
-        ComponentBuilder hover = new ComponentBuilder(MessageEngine.get("book.clickable"));
+        ComponentBuilder hover = new ComponentBuilder(get("book.clickable"));
 
-        ComponentBuilder b1 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueBy", MessageEngine.pair("id", issueById)))
+        ComponentBuilder b1 = new ComponentBuilder("    " + get("book.text.issueBy", pair("id", issueById)))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
         sender.spigot().sendMessage(b1.create());
 
-        ComponentBuilder b2 = new ComponentBuilder("    " + MessageEngine.get("book.text.issueTo", MessageEngine.pair("id", id)))
+        ComponentBuilder b2 = new ComponentBuilder("    " + get("book.text.issueTo", pair("id", id)))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create())).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
         sender.spigot().sendMessage(b2.create());
 
-        sender.sendMessage("    " + MessageEngine.get("book.text.dateTime", MessageEngine.pair("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))));
+        sender.sendMessage("    " + get("book.text.dateTime", pair("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))));
 
-        sender.sendMessage("    " + MessageEngine.get("book.text.reason", MessageEngine.pair("reason", types.parallelStream().map(type -> "        " + type.getText() + "\n").collect(Collectors.joining()))));
+        sender.sendMessage("    " + get("book.text.reason", pair("reason", types.parallelStream().map(type -> "        " + type.getText() + "\n").collect(Collectors.joining()))));
 
         HashMap<String, Object> serv = new HashMap<>();
         serv.put("color", SeverityLevels.getSeverity(types).getColor());
         serv.put("level", SeverityLevels.getSeverity(types).getText());
-        sender.sendMessage(MessageEngine.get("book.text.severity", serv));
+        sender.sendMessage(get("book.text.severity", serv));
     }
 
     /**
@@ -114,13 +117,13 @@ public class TextBuilder
                 .append(severity.getText())
                 .color(severity.getColor())
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + mngid))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.click.openAbout")).create()))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.click.openAbout")).create()))
                 .append("   ");
         if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
-            b.append(MessageEngine.get("book.click.delete"))
+            b.append(get("book.click.delete"))
                     .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac drop " + mngid))
-                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.click.deleteReport")).create()));
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.click.deleteReport")).create()));
         }
         else
             b.append(ChatColor.YELLOW + mngid);
@@ -183,10 +186,10 @@ public class TextBuilder
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        return new ComponentBuilder(prevFlag ? prev: uBar)
+        return new ComponentBuilder(String.valueOf(prevFlag ? prev: uBar))
                 .append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA)
-                .append(nextFlag ? next: uBar);
+                .append(String.valueOf(nextFlag ? next: uBar));
     }
 
     /**
@@ -196,7 +199,7 @@ public class TextBuilder
      */
     public static ComponentBuilder getBroadCastWdDetectionText()
     {
-        return new ComponentBuilder(MessageEngine.get("kick.broadcastWd"));
+        return new ComponentBuilder(get("kick.broadcastWd"));
     }
 
     /**
@@ -212,7 +215,7 @@ public class TextBuilder
         map.put("uuid", player.getUniqueId().toString());
 
         ComponentBuilder component = getBroadCastWdDetectionText();
-        component.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("kick.broadcastAdmin", map)).create()));
+        component.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("kick.broadcastAdmin", map)).create()));
         return component;
     }
 
@@ -226,19 +229,19 @@ public class TextBuilder
      */
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
     {
-        if (Variables.config.getBoolean("message.lynx"))
-            return new ComponentBuilder(MessageEngine.get("message.auraCheck.bot.lynx", MessageEngine.pair("hit", VL)));
+        if (config.getBoolean("message.lynx"))
+            return new ComponentBuilder(get("message.auraCheck.bot.lynx", pair("hit", VL)));
 
-        return new ComponentBuilder(MessageEngine.get("base.prefix") + "\n")
-                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.pair("name", name)))
+        return new ComponentBuilder(get("base.prefix") + "\n")
+                .append(get("message.auraCheck.result.prefix", pair("name", name)))
                 .append("\n")
-                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.pair("vl", String.valueOf(VL))))
+                .append(get("message.auraCheck.result.vl", pair("vl", String.valueOf(VL))))
                 .append("\n")
-                .append(MessageEngine.get("message.auraCheck.result.vlGraph"))
+                .append(get("message.auraCheck.result.vlGraph"))
                 .append("\n")
                 .append(OptGraphGenerator.genGraph(VL, kickVL))
                 .append("\n")
-                .append(MessageEngine.get("message.auraCheck.result.result", MessageEngine.pair("result", VL >= kickVL ? MessageEngine.get("message.auraCheck.result.words.kick"): MessageEngine.get("message.auraCheck.result.words.ok"))));
+                .append(get("message.auraCheck.result.result", pair("result", VL >= kickVL ? get("message.auraCheck.result.words.kick"): get("message.auraCheck.result.words.ok"))));
     }
 
     /**
@@ -250,13 +253,13 @@ public class TextBuilder
      */
     public static ComponentBuilder textPanicRep(String name, int vl)
     {
-        if (Variables.config.getBoolean("message.lynx"))
+        if (config.getBoolean("message.lynx"))
             return new ComponentBuilder("");
-        return new ComponentBuilder(MessageEngine.get("base.prefix"))
+        return new ComponentBuilder(get("base.prefix"))
                 .append("\n")
-                .append(MessageEngine.get("message.auraCheck.result.prefix", MessageEngine.pair("name", name)))
+                .append(get("message.auraCheck.result.prefix", pair("name", name)))
                 .append("\n")
-                .append(MessageEngine.get("message.auraCheck.result.vl", MessageEngine.pair("vl", String.valueOf(vl))));
+                .append(get("message.auraCheck.result.vl", pair("vl", String.valueOf(vl))));
     }
 
     /**

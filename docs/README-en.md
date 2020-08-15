@@ -185,8 +185,10 @@ This section are describe plugin commands.
 ### Description
 
 Send the content of the report selected and submitted by the player to the staff.  
-**WARNING: It is not a command to automatically summon NPC.**  
-The staff can see if the player is doing the same as the report.  
+
+> **WARNING: It is not a command to automatically summon NPC.**
+
+The staff can see if the player is doing the same as the report.
 User can also set the format for the report.  
   
 ```tst

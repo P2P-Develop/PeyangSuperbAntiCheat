@@ -3,13 +3,15 @@ package ml.peya.plugins.Bukkit.Commands.CmdTst;
 import ml.peya.plugins.Bukkit.Detect.*;
 import ml.peya.plugins.Bukkit.Enum.*;
 import ml.peya.plugins.Bukkit.Moderate.*;
-import ml.peya.plugins.Bukkit.Utils.*;
-import ml.peya.plugins.Bukkit.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Variables.cheatMeta;
+import static ml.peya.plugins.Bukkit.Variables.config;
 
 /**
  * AuraPanic NPCコマンド系クラス。
@@ -42,35 +44,35 @@ public class AuraPanic implements CommandExecutor
         }
         if (player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
 
             return true;
         }
 
         if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
         {
-            sender.sendMessage(MessageEngine.get("error.trusted"));
+            sender.sendMessage(get("error.trusted"));
             return true;
         }
 
-        if (Variables.cheatMeta.exists(player.getUniqueId()))
+        if (cheatMeta.exists(player.getUniqueId()))
         {
-            sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
+            sender.sendMessage(get("error.aura.testingNow"));
 
             return true;
         }
 
-        if (!Variables.config.getBoolean("message.lynx"))
+        if (!config.getBoolean("message.lynx"))
         {
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") ")));
             map.put("type", "AuraPanicBot");
-            map.put("seconds", String.valueOf(Variables.config.getInt("npc.seconds")));
+            map.put("seconds", String.valueOf(config.getInt("npc.seconds")));
 
-            sender.sendMessage(MessageEngine.get("message.aura.summon", map));
+            sender.sendMessage(get("message.aura.summon", map));
         }
         else
-            sender.sendMessage(MessageEngine.get("message.aura.lynx"));
+            sender.sendMessage(get("message.aura.lynx"));
 
         if (args.length == 2)
         {
@@ -80,7 +82,7 @@ public class AuraPanic implements CommandExecutor
             }
             catch (Exception e)
             {
-                sender.sendMessage(MessageEngine.get("error.invalidArgument"));
+                sender.sendMessage(get("error.invalidArgument"));
                 return true;
             }
 

@@ -1,9 +1,9 @@
 package ml.peya.plugins.Bukkit.Detect;
 
-import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.DetectClasses.*;
 import ml.peya.plugins.Bukkit.Enum.*;
 import ml.peya.plugins.Bukkit.Moderate.*;
+import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang3.tuple.*;
@@ -15,7 +15,7 @@ import org.bukkit.scheduler.*;
 import java.sql.*;
 import java.util.*;
 
-import static ml.peya.plugins.Bukkit.Variables.network;
+import static ml.peya.plugins.Bukkit.Variables.*;
 
 /**
  * キック時の処理などを管理する。
@@ -33,7 +33,7 @@ public class DetectConnection
     public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type, boolean reachMode)
     {
         EntityPlayer uuid = NPC.spawn(player, type, reachMode);
-        CheatDetectNowMeta meta = Variables.cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
+        CheatDetectNowMeta meta = cheatMeta.add(player, uuid.getUniqueID(), uuid.getId(), type);
         meta.setTesting(true);
         return meta;
     }
@@ -63,16 +63,19 @@ public class DetectConnection
             {
                 meta.setTesting(false);
 
-                double vl = meta.getVL();
-                double seconds = Variables.cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
+                final double vl = meta.getVL();
+                final double seconds = cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
 
-                if (Variables.learnCount > Variables.learnCountLimit && network.commit(Pair.of(vl, seconds)) > 0.01)
+                if (learnCount > learnCountLimit)
                 {
-                    learn(vl, seconds);
+                    if (network.commit(Pair.of(vl, seconds)) > 0.01)
+                    {
+                        learn(vl, seconds);
 
-                    if (kick(player)) return;
+                        if (kick(player)) return;
+                    }
                 }
-                if (Variables.learnCount < Variables.learnCountLimit && Variables.banLeft <= meta.getVL())
+                else if (banLeft <= vl)
                 {
                     learn(vl, seconds);
 
@@ -90,9 +93,9 @@ public class DetectConnection
                         {
                             case AURA_BOT:
                                 if (sender == null)
-                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), Variables.banLeft).create()));
+                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create()));
                                 else
-                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), Variables.banLeft).create());
+                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create());
                                 break;
 
                             case AURA_PANIC:
@@ -103,30 +106,36 @@ public class DetectConnection
                                 break;
                         }
 
-                        Variables.cheatMeta.remove(meta.getUUIDs());
+                        cheatMeta.remove(meta.getUUIDs());
                         this.cancel();
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
                 this.cancel();
             }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(config.getInt("npc.seconds"), 20));
+    }
 
-            private void learn(double vl, double seconds)
+    /**
+     * 学習回数を増やしAIを学習させる。
+     *
+     * @param vl 評価したVL。
+     * @param seconds NPCに対しメンチ切った秒数。
+     */
+    private static void learn(double vl, double seconds)
+    {
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
             {
-                new BukkitRunnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                        arr.add(Triple.of(vl, seconds, seconds / meta.getVL()));
-                        Variables.learnCount++;
-                        network.learn(arr, 1000);
+                ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
+                arr.add(Triple.of(vl, seconds, seconds / vl));
+                learnCount++;
+                network.learn(arr, 1000);
 
-                        this.cancel();
-                    }
-                }.runTask(PeyangSuperbAntiCheat.getPlugin());
+                this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("npc.seconds"), 20));
+        }.runTask(PeyangSuperbAntiCheat.getPlugin());
     }
 
     /**
@@ -138,7 +147,7 @@ public class DetectConnection
     private static boolean kick(Player player)
     {
         ArrayList<String> reason = new ArrayList<>();
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement();
              Statement statement1 = connection.createStatement())
         {

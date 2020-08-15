@@ -2,11 +2,12 @@ package ml.peya.plugins.Bukkit.Gui.Items.Target.Page2;
 
 import ml.peya.plugins.Bukkit.Gui.Item;
 import ml.peya.plugins.Bukkit.Gui.*;
-import ml.peya.plugins.Bukkit.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
 
 /**
  * Mod一覧
@@ -29,6 +30,7 @@ public class ModList implements IItems
      * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
      *
      * @param target ターゲットが誰であるか。
+     *
      * @return 関数内の処理によって設定されたアイテム。
      */
     @Override
@@ -38,7 +40,7 @@ public class ModList implements IItems
 
         ItemMeta meta = stack.getItemMeta();
         meta.setLore(Item.getLore(this, target));
-        meta.setDisplayName(MessageEngine.get("item.mods"));
+        meta.setDisplayName(get("item.mods"));
         stack.setItemMeta(meta);
         return stack;
 

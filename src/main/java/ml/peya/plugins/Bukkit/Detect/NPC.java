@@ -1,7 +1,7 @@
 package ml.peya.plugins.Bukkit.Detect;
 
-import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.Enum.*;
+import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
@@ -12,6 +12,8 @@ import org.bukkit.entity.*;
 import org.bukkit.scheduler.*;
 
 import java.util.*;
+
+import static ml.peya.plugins.Bukkit.Variables.config;
 
 /**
  * NPC自体である。
@@ -76,7 +78,7 @@ public class NPC
 
                 connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
 
-                player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
+                player.hidePlayer(npc.getBukkitEntity());
 
                 Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> {
                     c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
@@ -85,7 +87,7 @@ public class NPC
 
                 NPCTeleport.teleport(player, npc, arm, teleportCase, reachMode);
 
-                player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
+                player.hidePlayer(npc.getBukkitEntity());
 
                 Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
 
@@ -97,7 +99,7 @@ public class NPC
                         connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
                         Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId())));
                     }
-                }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), (Math.multiplyExact(Variables.config.getInt("npc.seconds"), 20)));
+                }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(config.getInt("npc.seconds"), 20));
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());
 

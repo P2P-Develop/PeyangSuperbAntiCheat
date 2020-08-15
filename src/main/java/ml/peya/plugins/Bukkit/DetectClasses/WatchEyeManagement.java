@@ -1,6 +1,5 @@
 package ml.peya.plugins.Bukkit.DetectClasses;
 
-import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.Enum.*;
 import ml.peya.plugins.Bukkit.Utils.*;
 import org.bukkit.entity.*;
@@ -8,6 +7,8 @@ import org.bukkit.entity.*;
 import java.sql.*;
 import java.util.Date;
 import java.util.*;
+
+import static ml.peya.plugins.Bukkit.Variables.eye;
 
 /**
  * WatchEyeの管理をするクラス。
@@ -29,7 +30,7 @@ public class WatchEyeManagement
         if (isInjection(FromName) || isInjection(FromUUID))
             return "";
         String manageId = UUID.randomUUID().toString().replace("-", "");
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute(String.format(
@@ -66,7 +67,7 @@ public class WatchEyeManagement
 
         if (isInjection(id))
             return false;
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
             String reasonString = reason.getSysName();
@@ -99,7 +100,7 @@ public class WatchEyeManagement
     {
         if (isInjection(targetUuid) || isInjection(fromUuid))
             return false;
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
             return statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UUID = '" + targetUuid + "' AND ISSUEBYUUID = '" + fromUuid + "'").isBeforeFirst();
@@ -122,7 +123,7 @@ public class WatchEyeManagement
     {
         if (isInjection(id))
             return true;
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
             return !statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'").isBeforeFirst();

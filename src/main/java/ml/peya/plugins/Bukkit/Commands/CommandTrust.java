@@ -1,10 +1,11 @@
 package ml.peya.plugins.Bukkit.Commands;
 
 import ml.peya.plugins.Bukkit.Moderate.*;
-import ml.peya.plugins.Bukkit.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
 
 /**
  * 信用コマンドのクラス。
@@ -28,13 +29,13 @@ public class CommandTrust implements CommandExecutor
 
         if (!(sender instanceof Player))
         {
-            sender.sendMessage(MessageEngine.get("error.requirePlayer"));
+            sender.sendMessage(get("error.requirePlayer"));
             return true;
         }
 
         if (args.length == 0)
         {
-            sender.sendMessage(MessageEngine.get("error.invalidArgument"));
+            sender.sendMessage(get("error.invalidArgument"));
             return true;
         }
 
@@ -42,7 +43,7 @@ public class CommandTrust implements CommandExecutor
 
         if (player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
             return true;
         }
 

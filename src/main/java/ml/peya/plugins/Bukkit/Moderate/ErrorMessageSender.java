@@ -1,7 +1,8 @@
 package ml.peya.plugins.Bukkit.Moderate;
 
-import ml.peya.plugins.Bukkit.Utils.*;
 import org.bukkit.command.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
 
 /**
  * エラーメッセージ送り付けるやつ。
@@ -19,7 +20,7 @@ public class ErrorMessageSender
     {
         if (sender.hasPermission(perm))
             return false;
-        sender.sendMessage(MessageEngine.get("error.notHavePermission"));
+        sender.sendMessage(get("error.notHavePermission"));
         return true;
     }
 
@@ -36,7 +37,7 @@ public class ErrorMessageSender
     {
         if (args.length < min || args.length > max)
         {
-            sender.sendMessage(MessageEngine.get("error.invalidArgument"));
+            sender.sendMessage(get("error.invalidArgument"));
             return true;
         }
 

@@ -8,11 +8,12 @@ package ml.peya.plugins.Bukkit.Gui.Items.Target;
 
 import ml.peya.plugins.Bukkit.Gui.Item;
 import ml.peya.plugins.Bukkit.Gui.*;
-import ml.peya.plugins.Bukkit.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
 
 /**
  * コンパストラッカー
@@ -35,6 +36,7 @@ public class CompassTracker3000_tm implements IItems
      * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
      *
      * @param target ターゲットが誰であるか。
+     *
      * @return 関数内の処理によって設定されたアイテム。
      */
     @Override
@@ -42,7 +44,7 @@ public class CompassTracker3000_tm implements IItems
     {
         ItemStack item = new ItemStack(Material.COMPASS);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(MessageEngine.get("item.compass"));
+        meta.setDisplayName(get("item.compass"));
 
         meta.setLore(Item.getLore(this, target));
 

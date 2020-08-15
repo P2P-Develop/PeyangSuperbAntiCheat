@@ -4,12 +4,14 @@ import ml.peya.plugins.Bukkit.DetectClasses.*;
 import ml.peya.plugins.Bukkit.Enum.*;
 import ml.peya.plugins.Bukkit.Moderate.*;
 import ml.peya.plugins.Bukkit.Utils.*;
-import ml.peya.plugins.Bukkit.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.command.*;
 
 import java.sql.*;
 import java.util.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Variables.eye;
 
 /**
  * /psac viewで動くクラス。
@@ -24,7 +26,7 @@ public class View
      */
     public static void run(CommandSender sender, String[] args)
     {
-        sender.sendMessage(MessageEngine.get("base.prefix"));
+        sender.sendMessage(get("base.prefix"));
 
         int start = 0;
         int next;
@@ -51,7 +53,7 @@ public class View
         int count = 0;
 
 
-        try (Connection connection = Variables.eye.getConnection();
+        try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
         {
@@ -90,7 +92,7 @@ public class View
 
         if (count == 0)
         {
-            sender.sendMessage(MessageEngine.get("error.view.notFoundReport"));
+            sender.sendMessage(get("error.view.notFoundReport"));
 
             return;
         }

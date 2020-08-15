@@ -2,10 +2,12 @@ package ml.peya.plugins.Bukkit.Commands;
 
 import ml.peya.plugins.Bukkit.Commands.CmdPub.*;
 import ml.peya.plugins.Bukkit.Moderate.*;
-import ml.peya.plugins.Bukkit.Utils.*;
 import org.bukkit.command.*;
 
 import java.util.*;
+
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.get;
+import static ml.peya.plugins.Bukkit.Utils.MessageEngine.pair;
 
 /**
  * PSACコマンド系クラス。
@@ -55,7 +57,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 Kick.run(sender, args);
                 break;
             default:
-                sender.sendMessage(MessageEngine.get("error.main.notFoundCommand", MessageEngine.pair("label", label)));
+                sender.sendMessage(get("error.main.notFoundCommand", pair("label", label)));
         }
 
         return true;
