@@ -34,7 +34,7 @@ public class Packets
             {
                 if (meta.getId() != field.getInt(entity))
                     continue;
-                if (meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() || Criticals.hasCritical(e.getPlayer()))
+                if (meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() || PlayerUtils.hasCritical(e.getPlayer()))
                     System.out.println(meta.addVL());
             }
         }

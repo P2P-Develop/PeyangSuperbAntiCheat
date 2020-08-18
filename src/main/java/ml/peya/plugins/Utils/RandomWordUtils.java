@@ -13,6 +13,10 @@ public class RandomWordUtils
 {
 
     private static final String __FilePath = "/wordsx256.txt";
+    /**
+     * ランダムスキン数です。
+     * *.増やしたら増やしただけ記述してください
+     */
     private static final int __MaxLine = 1384;
 
     /**

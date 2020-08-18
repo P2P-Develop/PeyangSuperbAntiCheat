@@ -125,7 +125,7 @@ public class Events implements Listener
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 5);
 
-        EntityPlayer tab = RandomPlayer.getPlayer(e.getPlayer().getWorld());
+        EntityPlayer tab = PlayerUtils.getRandomPlayer(e.getPlayer().getWorld());
         tab.getBukkitEntity().setPlayerListName(ChatColor.RED + tab.getName());
         PlayerConnection connection = ((CraftPlayer) e.getPlayer()).getHandle().playerConnection;
 
@@ -136,7 +136,7 @@ public class Events implements Listener
             public void run()
             {
 
-                Pair<String, String> skin = RandomPlayer.getSkin();
+                Pair<String, String> skin = PlayerUtils.getRandomSkin();
 
                 tab.getProfile().getProperties().put(
                         "textures",

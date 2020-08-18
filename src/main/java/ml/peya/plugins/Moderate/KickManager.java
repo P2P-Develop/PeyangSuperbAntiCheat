@@ -5,6 +5,7 @@ import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
+import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
 import java.sql.*;
@@ -56,16 +57,6 @@ public class KickManager
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
             });
         }
-
-        new BukkitRunnable()
-        {
-            @Override
-            public void run()
-            {
-                Bukkit.broadcast(MessageEngine.get("kick.broadcast"), "psac.notification");
-                this.cancel();
-            }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
     }
 
     /**
@@ -145,6 +136,8 @@ public class KickManager
             e.printStackTrace();
             Utils.errorNotification(Utils.getStackTrace(e));
         }
+
+        player.setMetadata("psac-kick", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), true));
         player.kickPlayer(message);
     }
 }

@@ -15,7 +15,7 @@ import org.bukkit.scheduler.*;
 
 import java.util.*;
 
-import static ml.peya.plugins.Utils.LookingUtils.isLooking;
+import static ml.peya.plugins.Utils.PlayerUtils.isLooking;
 
 /**
  * NPCのTeleportを管理する。

@@ -8,7 +8,7 @@ import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
-import static ml.peya.plugins.Utils.LookingUtils.getLookingEntity;
+import static ml.peya.plugins.Utils.PlayerUtils.getLookingEntity;
 
 /**
  * ターゲットを再設定するユーティリティアイテム(ブレイズロッド)を管理します。

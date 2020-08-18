@@ -39,7 +39,7 @@ public class NPC
      */
     public static EntityPlayer spawn(Player player, DetectType teleportCase, boolean reachMode)
     {
-        EntityPlayer npc = RandomPlayer.getPlayer(player.getWorld());
+        EntityPlayer npc = PlayerUtils.getRandomPlayer(player.getWorld());
 
         Location center = player.getLocation();
 
