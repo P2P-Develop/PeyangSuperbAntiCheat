@@ -172,4 +172,21 @@ public class Events implements Listener
         if (e.getItemDrop().getItemStack().getType() == Material.WRITTEN_BOOK && Books.hasPSACBook(e.getItemDrop().getItemStack()))
             e.setCancelled(true);
     }
+
+    /**
+     * プレイヤーが蹴られるときのやつ
+     *
+     * @param e キックゥ！
+     */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onKick(PlayerKickEvent e)
+    {
+        if (e.getPlayer().hasMetadata("psac-kick"))
+        {
+            e.getPlayer().removeMetadata("psac-kick", PeyangSuperbAntiCheat.getPlugin());
+
+            e.setLeaveMessage(MessageEngine.get("kick.broadcast"));
+        }
+    }
 }
+
