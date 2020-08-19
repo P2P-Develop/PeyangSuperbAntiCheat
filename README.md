@@ -42,6 +42,9 @@
      ><img
            alt="CodeFactor Grade (development)"
            src="https://img.shields.io/codefactor/grade/github/peyang-Celeron/PeyangSuperbAntiCheat/dev?label=code%20quality%20%28development%29&style=flat-square"
+  ></a>
+  <a href="https://codeclimate.com/github/peyang-Celeron/PeyangSuperbAntiCheat"
+     ><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/peyang-Celeron/PeyangSuperbAntiCheat?label=CodeClimate%28dev%29&style=flat-square"
   ></a><br>
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/actions?query=workflow%3A%22Java+CI+with+Maven+%28stable%29%22"
      ><img
