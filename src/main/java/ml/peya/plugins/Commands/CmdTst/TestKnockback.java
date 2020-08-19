@@ -3,11 +3,12 @@ package ml.peya.plugins.Commands.CmdTst;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Variables.cheatMeta;
 
 /**
  * Test Knockbackコマンド系クラス。
@@ -35,21 +36,21 @@ public class TestKnockback implements CommandExecutor
         Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
 
             return true;
         }
 
         if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
         {
-            sender.sendMessage(MessageEngine.get("error.trusted"));
+            sender.sendMessage(get("error.trusted"));
 
             return true;
         }
 
-        if (Variables.cheatMeta.exists(player.getUniqueId()))
+        if (cheatMeta.exists(player.getUniqueId()))
         {
-            sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
+            sender.sendMessage(get("error.aura.testingNow"));
 
             return true;
         }

@@ -1,14 +1,16 @@
 package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
+import static ml.peya.plugins.Variables.tracker;
 
 /**
  * トラッキングコマンド系クラス。
@@ -32,23 +34,23 @@ public class CommandTracking implements CommandExecutor
 
         if (!(sender instanceof Player))
         {
-            sender.sendMessage(MessageEngine.get("error.requirePlayer"));
+            sender.sendMessage(get("error.requirePlayer"));
 
             return true;
         }
 
-        if (Variables.tracker.isTracking(sender.getName()) && args.length == 0)
+        if (tracker.isTracking(sender.getName()) && args.length == 0)
         {
-            Variables.tracker.remove(sender.getName());
-            sender.sendMessage(MessageEngine.get("item.stopTarget"));
-            ((Player) sender).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(MessageEngine.get("item.tracking.noTarget")));
+            tracker.remove(sender.getName());
+            sender.sendMessage(get("item.stopTarget"));
+            ((Player) sender).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.noTarget")));
 
             return true;
         }
 
         if (args.length == 0)
         {
-            sender.sendMessage(MessageEngine.get("error.invalidArgument"));
+            sender.sendMessage(get("error.invalidArgument"));
 
             return true;
         }
@@ -57,20 +59,20 @@ public class CommandTracking implements CommandExecutor
 
         if (player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
 
             return true;
         }
 
         if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
         {
-            sender.sendMessage(MessageEngine.get("error.trusted"));
+            sender.sendMessage(get("error.trusted"));
 
             return true;
         }
 
-        Variables.tracker.add(sender.getName(), args[0]);
-        sender.sendMessage(MessageEngine.get("message.tracking.track", MessageEngine.pair("player", args[0])));
+        tracker.add(sender.getName(), args[0]);
+        sender.sendMessage(get("message.tracking.track", pair("player", args[0])));
 
         return true;
     }

@@ -1,7 +1,8 @@
 package ml.peya.plugins.Task;
 
-import ml.peya.plugins.*;
 import org.bukkit.scheduler.*;
+
+import static ml.peya.plugins.Variables.tracker;
 
 /**
  * トラッキングの情報を更新する定期タスク。
@@ -14,6 +15,6 @@ public class TrackerTask extends BukkitRunnable
     @Override
     public void run()
     {
-        Variables.tracker.tick();
+        tracker.tick();
     }
 }

@@ -4,13 +4,16 @@ import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 
 import java.util.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
+import static ml.peya.plugins.Variables.config;
 
 /**
  * 報告コマンド系クラス。
@@ -33,31 +36,31 @@ public class CommandReport implements CommandExecutor
 
         if (args.length == 0)
         {
-            sender.sendMessage(MessageEngine.get("error.minArgs", MessageEngine.pair("label", label)));
+            sender.sendMessage(get("error.minArgs", pair("label", label)));
             return true;
         }
         else if (args.length == 1)
         {
             if (args[0].equals("help"))
             {
-                sender.sendMessage(MessageEngine.get("base.prefix"));
-                sender.sendMessage(MessageEngine.get("command.report.help", MessageEngine.pair("label", label)));
+                sender.sendMessage(get("base.prefix"));
+                sender.sendMessage(get("command.report.help", pair("label", label)));
                 return true;
             }
 
             if (args[0].equals("$$cancel$$"))
             {
-                sender.sendMessage(MessageEngine.get("message.report.cancel"));
+                sender.sendMessage(get("message.report.cancel"));
                 return true;
             }
             else if (Bukkit.getPlayer(args[0]) == null)
             {
-                sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+                sender.sendMessage(get("error.playerNotFound"));
                 return true;
             }
             else if (sender instanceof ConsoleCommandSender)
             {
-                sender.sendMessage(MessageEngine.get("error.requirePlayer"));
+                sender.sendMessage(get("error.requirePlayer"));
                 return true;
             }
             Player target = Bukkit.getPlayer(args[0]);
@@ -84,7 +87,7 @@ public class CommandReport implements CommandExecutor
 
         if (Bukkit.getPlayer(args[0]) == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
             return true;
         }
 
@@ -102,9 +105,9 @@ public class CommandReport implements CommandExecutor
         if (types.size() == 0)
         {
             if (!reasons.contains("$__BOOKS__;"))
-                sender.sendMessage(MessageEngine.get("error.report.invalidReason"));
+                sender.sendMessage(get("error.report.invalidReason"));
             else if (args.length == 2 && reasons.contains("$__BOOKS__;"))
-                sender.sendMessage(MessageEngine.get("error.report.reasonNotSelected"));
+                sender.sendMessage(get("error.report.reasonNotSelected"));
 
             return true;
         }
@@ -126,7 +129,7 @@ public class CommandReport implements CommandExecutor
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
         {
-            sender.sendMessage(MessageEngine.get("error.report.alreadyReported"));
+            sender.sendMessage(get("error.report.alreadyReported"));
             return;
         }
 
@@ -138,9 +141,9 @@ public class CommandReport implements CommandExecutor
 
         if (successFlag)
         {
-            sender.sendMessage(MessageEngine.get("message.report.thanks"));
+            sender.sendMessage(get("message.report.thanks"));
 
-            if (!Variables.config.getBoolean("message.lynx"))
+            if (!config.getBoolean("message.lynx"))
             {
                 Utils.adminNotification(id);
                 return;
@@ -149,6 +152,6 @@ public class CommandReport implements CommandExecutor
             Utils.adminNotification(target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
         }
         else
-            sender.sendMessage(MessageEngine.get("error.unknownSQLError"));
+            sender.sendMessage(get("error.unknownSQLError"));
     }
 }

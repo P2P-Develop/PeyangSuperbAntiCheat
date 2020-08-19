@@ -3,13 +3,15 @@ package ml.peya.plugins.Commands.CmdTst;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Variables.cheatMeta;
+import static ml.peya.plugins.Variables.config;
 
 /**
  * Aurabot NPCコマンド系クラス。
@@ -39,38 +41,38 @@ public class AuraBot implements CommandExecutor
         }
         if (player == null)
         {
-            sender.sendMessage(MessageEngine.get("error.playerNotFound"));
+            sender.sendMessage(get("error.playerNotFound"));
 
             return true;
         }
 
         if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
         {
-            sender.sendMessage(MessageEngine.get("error.trusted"));
+            sender.sendMessage(get("error.trusted"));
 
             return true;
         }
 
-        if (Variables.cheatMeta.exists(player.getUniqueId()))
+        if (cheatMeta.exists(player.getUniqueId()))
         {
-            sender.sendMessage(MessageEngine.get("error.aura.testingNow"));
+            sender.sendMessage(get("error.aura.testingNow"));
 
             return true;
         }
 
 
-        if (!Variables.config.getBoolean("message.lynx"))
+        if (!config.getBoolean("message.lynx"))
         {
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") ")));
             map.put("type", "AuraBot");
-            map.put("seconds", Variables.config.getString("npc.seconds"));
+            map.put("seconds", config.getString("npc.seconds"));
 
-            sender.sendMessage(MessageEngine.get("message.aura.summon", map));
+            sender.sendMessage(get("message.aura.summon", map));
         }
         else
         {
-            sender.sendMessage(MessageEngine.get("message.aura.lynx"));
+            sender.sendMessage(get("message.aura.lynx"));
         }
 
         DetectConnection.scan(player, DetectType.AURA_BOT, sender, reachModeEnabled);

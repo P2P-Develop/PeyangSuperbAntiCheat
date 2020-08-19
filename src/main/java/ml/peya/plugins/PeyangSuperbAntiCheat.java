@@ -77,12 +77,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         {
             try
             {
-                if (config.getInt(path) > 0)
+                if (config.getInt(path) < 0)
                     throw new ArithmeticException();
             }
             catch (Exception ignored)
             {
-
+                logger.log(Level.WARNING, path + " is minus value! set value to 0");
+                config.set(path, 0);
             }
         }
 
@@ -193,7 +194,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         try
         {
             File file = new File(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
-            if (file.exists() && file.length() >= 256)
+            if (file.exists() && file.length() >= 16)
             {
                 JsonNode node = new ObjectMapper().readTree(file);
                 int i = 0;
@@ -213,9 +214,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             else
                 throw new FileNotFoundException();
         }
-        catch (Exception ignored)
+        catch (FileNotFoundException ignored)
         {
             logger.warning("Learning data file not found.");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
 
         mods = new HashMap<>();

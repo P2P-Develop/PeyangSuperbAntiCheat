@@ -8,6 +8,10 @@ import org.bukkit.scheduler.*;
 
 import java.sql.*;
 
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
+import static ml.peya.plugins.Variables.trust;
+
 /**
  * 信用プレイヤーを管理する。
  */
@@ -27,19 +31,19 @@ public class TrustModifier
             @Override
             public void run()
             {
-                try (Connection connection = Variables.trust.getConnection();
+                try (Connection connection = trust.getConnection();
                      Statement statement = connection.createStatement())
                 {
                     ResultSet rs = statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
                     if (rs.next())
                     {
                         statement.execute("DeLeTe FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
-                        sender.sendMessage(MessageEngine.get("message.trust.remove", MessageEngine.pair("name", player.getName())));
+                        sender.sendMessage(get("message.trust.remove", pair("name", player.getName())));
                     }
                     else
                     {
                         statement.execute("InSeRt InTo TrUsT vAlUeS ('" + player.getName() + "');");
-                        sender.sendMessage(MessageEngine.get("message.trust.add", MessageEngine.pair("name", player.getName())));
+                        sender.sendMessage(get("message.trust.add", pair("name", player.getName())));
                     }
                 }
                 catch (Exception e)
@@ -63,7 +67,7 @@ public class TrustModifier
     {
         boolean result = false;
 
-        try (Connection connection = Variables.trust.getConnection();
+        try (Connection connection = trust.getConnection();
              Statement statement = connection.createStatement())
         {
             ResultSet rs = statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");

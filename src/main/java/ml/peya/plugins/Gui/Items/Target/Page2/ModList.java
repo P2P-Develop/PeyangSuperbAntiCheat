@@ -2,11 +2,12 @@ package ml.peya.plugins.Gui.Items.Target.Page2;
 
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
+
+import static ml.peya.plugins.Utils.MessageEngine.get;
 
 /**
  * Mod一覧
@@ -39,7 +40,7 @@ public class ModList implements IItems
 
         ItemMeta meta = stack.getItemMeta();
         meta.setLore(Item.getLore(this, target));
-        meta.setDisplayName(MessageEngine.get("item.mods"));
+        meta.setDisplayName(get("item.mods"));
         stack.setItemMeta(meta);
         return stack;
 

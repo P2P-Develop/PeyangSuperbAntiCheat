@@ -12,6 +12,9 @@ import java.text.*;
 import java.util.*;
 import java.util.stream.*;
 
+import static ml.peya.plugins.Utils.MessageEngine.get;
+import static ml.peya.plugins.Utils.MessageEngine.pair;
+
 /**
  * 本を本するんだよ。簡単だろ？本なんだよ。
  */
@@ -29,7 +32,7 @@ public class Books
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
         String tmpReasonText = Arrays.stream(types).parallel().map(type -> type.isSelected() ? type.getSysName() + " ": "").collect(Collectors.joining());
-        ComponentBuilder component = new ComponentBuilder(MessageEngine.get("reportbook.cheat"));
+        ComponentBuilder component = new ComponentBuilder(get("reportbook.cheat"));
         component.append("\n");
 
         for (EnumCheatType type : types)
@@ -47,9 +50,9 @@ public class Books
         meta.setAuthor("AntiCheat Dev");
         meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
 
-        component.append(MessageEngine.get("reportbook.submit"))
+        component.append(get("reportbook.submit"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player.getName() + " " + tmpReasonText + " $__BOOKS__;"))
-                .append(MessageEngine.get("reportbook.cancel"))
+                .append(get("reportbook.cancel"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report $$cancel$$"));
 
         meta.spigot().addPage(component.create());
@@ -73,17 +76,17 @@ public class Books
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
 
-        ComponentBuilder b = new ComponentBuilder(MessageEngine.get("book.text.report"))
+        ComponentBuilder b = new ComponentBuilder(get("book.text.report"))
                 .append("\n")
                 .append(ChatColor.GRAY + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(TextBuilder.getLine("UNIX秒", String.valueOf(dateInt))).create())).append("\n")
-                .append(MessageEngine.get("book.text.issueTo", MessageEngine.pair("id", id)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.pair("uuid", uuid))).create()))
+                .append(get("book.text.issueTo", pair("id", id)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.text.uuid", pair("uuid", uuid))).create()))
                 .append("\n");
 
         ComponentBuilder b1 = new ComponentBuilder(new TextComponent(b.create()))
-                .append(MessageEngine.get("book.text.issueBy", MessageEngine.pair("id", issueById)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(MessageEngine.get("book.text.uuid", MessageEngine.pair("uuid", issueByUuid))).create()))
+                .append(get("book.text.issueBy", pair("id", issueById)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.text.uuid", pair("uuid", issueByUuid))).create()))
                 .append("\n");
 
         ComponentBuilder b2 = new ComponentBuilder(new TextComponent(b1.create()));
@@ -92,7 +95,7 @@ public class Books
         map.put("color", SeverityLevels.getSeverity(types).getColor());
         map.put("level", SeverityLevels.getSeverity(types).getText());
 
-        Arrays.asList(MessageEngine.get("book.text.severity", map), "\n", MessageEngine.get("book.text.reason", MessageEngine.pair("reason", types.parallelStream().map(type -> "\n           " + ChatColor.BLUE + type.getText()).collect(Collectors.joining()))), "\n").parallelStream().forEachOrdered(b2::append);
+        Arrays.asList(get("book.text.severity", map), "\n", get("book.text.reason", pair("reason", types.parallelStream().map(type -> "\n           " + ChatColor.BLUE + type.getText()).collect(Collectors.joining()))), "\n").parallelStream().forEachOrdered(b2::append);
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
         meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
@@ -113,7 +116,7 @@ public class Books
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
 
-        ComponentBuilder builder = new ComponentBuilder(MessageEngine.get("message.mods.title", MessageEngine.pair("name", player.getName())));
+        ComponentBuilder builder = new ComponentBuilder(get("message.mods.title", pair("name", player.getName())));
 
         builder.append("\n")
                 .append("\n");
