@@ -28,7 +28,10 @@ public class KickManager
      */
     public static void kickPlayer(Player player, String reason, boolean wdFlag, boolean isTest) throws ArithmeticException
     {
+        player.setMetadata("psac-kick", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), true));
+
         broadCast(wdFlag, player);
+        decoration(player);
         new BukkitRunnable()
         {
             @Override
@@ -57,6 +60,29 @@ public class KickManager
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
             });
         }
+
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                Bukkit.broadcast(MessageEngine.get("kick.broadcast"), "psac.notification");
+                this.cancel();
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
+    }
+
+    /**
+     * デコ要素すべて展開するやつ
+     *
+     * @param player 被験者
+     */
+    public static void decoration(Player player)
+    {
+        if (Variables.config.getBoolean("decoration.flame"))
+            Decorations.flame(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+        if (Variables.config.getBoolean("decoration.circle"))
+            Decorations.magic(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
     }
 
     /**
@@ -69,9 +95,8 @@ public class KickManager
      */
     private static void kick(Player player, String reason, boolean isTest, boolean opFlag)
     {
-        if (Variables.config.getBoolean("kick.lightning"))
-            player.getWorld().strikeLightningEffect(player.getLocation());
-
+        if (Variables.config.getBoolean("decoration.lightning"))
+            Decorations.lighting(player);
         StringBuilder id = new StringBuilder();
         Random random = new Random();
         IntStream.range(0, 8).parallel().forEachOrdered(i -> {
@@ -136,8 +161,6 @@ public class KickManager
             e.printStackTrace();
             Utils.errorNotification(Utils.getStackTrace(e));
         }
-
-        player.setMetadata("psac-kick", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), true));
         player.kickPlayer(message);
     }
 }

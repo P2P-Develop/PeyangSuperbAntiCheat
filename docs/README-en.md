@@ -587,8 +587,8 @@ In this plugin, the following config is set by default.
 |     npc.vlLevel       |       17        | This value is used to evaluate the VL when the NPC has not learned beyond this npc.learnCount.                                |
 |    npc.learnCount     |       15        | If the learn function learns more than this number of times, the kick rating will be transferred to the learn function.       |
 |     kick.delay        |        2        | Specifies the delay between sending a broadcast message and kicking the player.                                               |
-|    kick.lightning     |      true       | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                         |
 |   kick.defaultKick    |       25        | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                        |
+| decoration.lightning  |      true       | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                         |
 |     message.lynx      |      true       | Specifies whether Lynx Mod compatible.                                                                                        |
 |  autoMessage.enabled  |      true       | Toggle the presence or absence of regular messages.                                                                           |
 |   autoMessage.time    |       15        | Specify a minuites for recurring messages.                                                                                    |

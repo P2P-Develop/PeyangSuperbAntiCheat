@@ -185,7 +185,7 @@ public class Events implements Listener
         {
             e.getPlayer().removeMetadata("psac-kick", PeyangSuperbAntiCheat.getPlugin());
 
-            e.setLeaveMessage(MessageEngine.get("kick.broadcast"));
+            e.setLeaveMessage("");
         }
     }
 }

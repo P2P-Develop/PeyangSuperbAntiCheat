@@ -96,7 +96,7 @@ public class NPCTeleport
                     if (center.getPitch() <= 0.0f || center.getPitch() > 15.0f)
                         center.setPitch(0.0f);
 
-                    Location n = center.add(center.getDirection().multiply(0 - range));
+                    Location n = center.clone().add(center.getDirection().multiply(0 - range));
 
                     n.setY(center.getY() + range);
 
@@ -151,6 +151,8 @@ public class NPCTeleport
 
         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
 
+        WaveCreator y = new WaveCreator(1.0, 2.0, 0.0);
+
         final int[] count = {0};
         BukkitRunnable r = new BukkitRunnable()
         {
@@ -173,7 +175,7 @@ public class NPCTeleport
                     Location n = new Location(
                             center.getWorld(),
                             auraBot_xPos(time[0], rangeTmp + speed) + center.getX(),
-                            center.getY() + new WaveCreator(1.0, 2.0, 0.0).get(0.01, count[0] < 20),
+                            center.getY() + y.get(0.01, count[0] < 20),
                             auraBot_zPos(time[0], rangeTmp + speed) + center.getZ(),
                             (float) ypp.getStatic(),
                             (float) ypp.get(4.5, false)

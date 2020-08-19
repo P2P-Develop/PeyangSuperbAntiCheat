@@ -14,6 +14,7 @@ error:
   invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
   requirePlayer: "%%red%%%%bold%%エラー：プレイヤーから実行してください。"
   notPlayerFoundInRange: "%%red%%%%bold%%エラー：範囲内にプレイヤーが見つかりませんでした。"
+  processing: "%%red%%%%bold%%エラー：現在処理中です。"
   trusted: "%%red%%%bold%%エラー：対象プレイヤーは信用されています！それでも実行するにはpsac.trust権限を持っているプレイヤーが実行してください！"
   report:
     invalidReason: "%%red%%%%bold%%エラー：理由が正しくありません！"
