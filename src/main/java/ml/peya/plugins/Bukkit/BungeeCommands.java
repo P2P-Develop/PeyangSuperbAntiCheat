@@ -10,4 +10,10 @@ public class BungeeCommands implements CommandExecutor
         Bungee.sendMessage("pong");
         Variables.bungeeCord = true;
     }
+
+    @Command(label = "pong")
+    public static void pong(CommandComponent command)
+    {
+        Variables.bungeeCord = true;
+    }
 }

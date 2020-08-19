@@ -1,10 +1,8 @@
 package ml.peya.plugins.BungeeProxy;
 
-import com.google.common.io.*;
 import ml.peya.plugins.BungeeStructure.*;
 import net.md_5.bungee.api.*;
 
-import static ml.peya.plugins.Bukkit.Variables.bungeeChannel;
 import static ml.peya.plugins.Bukkit.Variables.logger;
 
 public class Commands implements CommandExecutor
@@ -12,11 +10,8 @@ public class Commands implements CommandExecutor
     @Command(label = "ping")
     public void ping(CommandComponent cmd)
     {
-        ByteArrayDataOutput output = ByteStreams.newDataOutput();
-
-        output.writeUTF("pong");
-
-        ProxyServer.getInstance().getServerInfo(cmd.getServer()).sendData(bungeeChannel, output.toByteArray());
+        logger.info("<-> Pinged from Server [" + cmd.getServer() + "]");
+        PeyangSuperbAntiCheatProxy.sendData(ProxyServer.getInstance().getServerInfo(cmd.getServer()), "pong");
     }
 
     @Command(label = "pong")

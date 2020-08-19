@@ -1,6 +1,8 @@
 package ml.peya.plugins.BungeeProxy;
 
+import com.google.common.io.*;
 import ml.peya.plugins.BungeeStructure.*;
+import net.md_5.bungee.api.config.*;
 import net.md_5.bungee.api.plugin.*;
 
 import java.util.*;
@@ -39,5 +41,16 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
         getProxy().getPluginManager().registerListener(this, new Events());
 
         getLogger().info("PeyangSuperbAntiCheatProxy has been activated!");
+    }
+
+    public static void sendData(ServerInfo info, String str)
+    {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+
+        out.writeUTF(bungeeChannel);
+
+        out.writeUTF(str);
+
+        info.sendData(bungeeChannel, out.toByteArray());
     }
 }

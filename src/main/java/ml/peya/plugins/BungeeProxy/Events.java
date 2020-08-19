@@ -40,15 +40,9 @@ public class Events implements Listener
     @EventHandler
     public void onServerConnecteD(ServerConnectedEvent e)
     {
-        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-
-        out.writeUTF(bungeeChannel);
-
-        out.writeUTF("ping");
-
         ServerInfo info = e.getServer().getInfo();
-        logger.info("<-> " + info.getName() + " pinging...");
-        info.sendData(bungeeChannel, out.toByteArray());
+        logger.info("<-> Server [" + info.getName() + "] pinging...");
+        PeyangSuperbAntiCheatProxy.sendData(info, "ping");
 
     }
 }
