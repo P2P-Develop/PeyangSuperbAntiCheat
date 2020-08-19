@@ -118,7 +118,7 @@ public class DetectConnection
     /**
      * 学習回数を増やしAIを学習させる。
      *
-     * @param vl 評価したVL。
+     * @param vl      評価したVL。
      * @param seconds NPCに対しメンチ切った秒数。
      */
     private static void learn(double vl, double seconds)

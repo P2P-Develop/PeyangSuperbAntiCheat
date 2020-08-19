@@ -65,7 +65,7 @@ public class Kick
         if (player.hasMetadata("psac-kick"))
         {
 
-            sender.sendMessage(MessageEngine.get("error.processing"));
+            sender.sendMessage(get("error.processing"));
             return;
         }
 

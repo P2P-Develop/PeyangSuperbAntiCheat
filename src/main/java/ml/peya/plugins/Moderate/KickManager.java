@@ -5,7 +5,6 @@ import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
 import java.sql.*;
@@ -14,7 +13,7 @@ import java.util.*;
 import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.config;
 
 /**
  * プレイヤーのキックと共にいろいろやってくれるやつ。

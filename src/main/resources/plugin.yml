@@ -4,39 +4,39 @@ version: 1.0.0
 prefix: PeyangSuperbAntiCheat
 load: STARTUP
 author: Peyang_JP
-authors: ["Lemonade19x", "Potato1682"]
+authors: [ "Lemonade19x", "Potato1682" ]
 api-version: 1.12.2
 website: "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat"
 
-depend: ["ProtocolLib"]
-loadbefore: ["ProtocolLib"]
+depend: [ "ProtocolLib" ]
+loadbefore: [ "ProtocolLib" ]
 
 commands:
   report:
-    aliases: ["peyangreport", "pcr", "rep", "report", "wdr", "watchdogreport"]
+    aliases: [ "peyangreport", "pcr", "rep", "report", "wdr", "watchdogreport" ]
     usage: /report <PlayerName> [type]
     description: "プレイヤーをレポートします。"
   peyangsuperbanticheat:
-    aliases: ["psac", "anticheat", "wdadmin", "psr", "antihack"]
+    aliases: [ "psac", "anticheat", "wdadmin", "psr", "antihack" ]
     description: "PeyangSuperbAntiCheatのメインコマンドです。"
   aurabot:
-    aliases: ["testaura", "auratest", "killauratest"]
+    aliases: [ "testaura", "auratest", "killauratest" ]
     usage: /aurabot <PlayerName>
     description: "プレイヤーに回るNPCを召喚します。。"
   acpanic:
-    aliases: ["testpanic", "panictest", "aurapanictest", "aurapanic"]
+    aliases: [ "testpanic", "panictest", "aurapanictest", "aurapanic" ]
     usage: /acpanic <PlayerName>
     description: "プレイヤーの背後にNPCを召喚します。"
   bans:
-    aliases: ["banlist", "playerbans", "banlookup"]
+    aliases: [ "banlist", "playerbans", "banlookup" ]
     usage: /bans [-a | kick | ban] <Player_Name>
     description: "プレイヤーのBAN(Kick)履歴を参照します。"
   testknockback:
-    aliases: ["testkb", "kbtest", "knockbacktest"]
+    aliases: [ "testkb", "kbtest", "knockbacktest" ]
     usage: /testkb <Player>
     description: "プレイヤーのノックバックを可視テストします。"
   pull:
-    aliases: ["pul"]
+    aliases: [ "pul" ]
     usage: /pull <Player>
     description: "プレイヤーを引き寄せます。"
   target:
@@ -46,15 +46,15 @@ commands:
     usage: /mods <Player>
     description: "プレイヤーのModを見ます。"
   tracking:
-    aliases: ["track"]
+    aliases: [ "track" ]
     usage: /tracking <Player>
     description: "プレイヤーを追跡します。"
   trust:
-    aliases: ["noscan", "trustplayer"]
+    aliases: [ "noscan", "trustplayer" ]
     usage: /trust <Player>
     description: "プレイヤーを信用し、psac.trust権限を持っているプレイヤーしか解除・テストできないようにします。"
   silentteleport:
-    aliases: ["stp", "tpto"]
+    aliases: [ "stp", "tpto" ]
     usage: /tpto [Player] <Player>
     description: "サイレントにテレポートします。"
 permissions:
