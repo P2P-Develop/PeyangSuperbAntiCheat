@@ -7,7 +7,8 @@ import org.bukkit.plugin.messaging.*;
 
 import java.io.*;
 
-import static ml.peya.plugins.Bukkit.Variables.*;
+import static ml.peya.plugins.Bukkit.Variables.bungeeChannel;
+import static ml.peya.plugins.Bukkit.Variables.bungeeCommand;
 
 public class Bungee implements PluginMessageListener
 {
@@ -23,7 +24,7 @@ public class Bungee implements PluginMessageListener
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] data)
     {
-        if (!channel.equals("BungeeCord"))
+        if (!channel.equals(bungeeChannel))
             return;
         DataInputStream input = new DataInputStream(new ByteArrayInputStream(data));
         String message;

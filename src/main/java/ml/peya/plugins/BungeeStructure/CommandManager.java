@@ -54,6 +54,8 @@ public class CommandManager
             {
                 for (Method method : cls.getMethods())
                 {
+                    if (method.getAnnotation(Command.class) == null)
+                        continue;
                     if (method.getAnnotation(Command.class).label().equals(label))
                         method.invoke(cls, commandComponent);
                 }
