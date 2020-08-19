@@ -15,10 +15,8 @@ public class Bungee implements PluginMessageListener
     public static void sendMessage(String message)
     {
         ByteArrayDataOutput output = ByteStreams.newDataOutput();
-        output.writeUTF("BungeeCord");
-        output.writeUTF(bungeeChannel);
         output.writeUTF(message);
-        Bukkit.getServer().sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "BungeeCord", output.toByteArray());
+        Bukkit.getServer().sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "PSACProxy", output.toByteArray());
     }
 
     @Override

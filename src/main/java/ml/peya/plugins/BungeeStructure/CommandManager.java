@@ -57,7 +57,7 @@ public class CommandManager
                     if (method.getAnnotation(Command.class) == null)
                         continue;
                     if (method.getAnnotation(Command.class).label().equals(label))
-                        method.invoke(cls, commandComponent);
+                        method.invoke(cls.newInstance(), commandComponent);
                 }
             }
             catch (Exception e)

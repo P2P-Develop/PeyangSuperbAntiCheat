@@ -235,7 +235,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "FML|HS");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new ClientModGetter());
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "PSACProxy");
         Bukkit.getMessenger().registerIncomingPluginChannel(this, "PSACProxy", new Bungee());
 
 

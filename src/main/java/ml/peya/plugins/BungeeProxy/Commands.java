@@ -4,7 +4,8 @@ import com.google.common.io.*;
 import ml.peya.plugins.BungeeStructure.*;
 import net.md_5.bungee.api.*;
 
-import static ml.peya.plugins.Bukkit.Variables.*;
+import static ml.peya.plugins.Bukkit.Variables.bungeeChannel;
+import static ml.peya.plugins.Bukkit.Variables.logger;
 
 public class Commands implements CommandExecutor
 {
@@ -22,6 +23,6 @@ public class Commands implements CommandExecutor
     public void pong(CommandComponent cmd)
     {
         PeyangSuperbAntiCheatProxy.servers.add(cmd.getServer());
-        logger.info("<-> " + cmd + " has connected");
+        logger.info("<-> Server [" + cmd.getServer() + "] has connected");
     }
 }

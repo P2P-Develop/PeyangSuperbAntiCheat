@@ -34,7 +34,7 @@ public class Events implements Listener
         if (e.getTarget().getPlayers().size() != 0)
             return;
         PeyangSuperbAntiCheatProxy.servers.remove(e.getTarget().getName());
-        logger.info("<-> " + e.getTarget().getName() + " has disconnected");
+        logger.info("<-> Server [" + e.getTarget().getName() + "] has disconnected");
     }
 
     @EventHandler

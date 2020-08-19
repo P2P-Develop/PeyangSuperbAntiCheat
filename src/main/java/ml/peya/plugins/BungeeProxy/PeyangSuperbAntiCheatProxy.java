@@ -30,6 +30,8 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
         bungeeChannel = "PSACProxy";
         bungeeCommand = new CommandManager();
 
+        bungeeCommand.registerCommand(new Commands());
+
         servers = new ArrayList<>();
 
         getProxy().registerChannel(bungeeChannel);
