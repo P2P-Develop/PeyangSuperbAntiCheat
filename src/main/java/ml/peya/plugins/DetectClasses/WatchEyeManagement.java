@@ -19,16 +19,16 @@ public class WatchEyeManagement
      * WatchEyeにカラムに入れるべきもの含めて追加する。
      *
      * @param target   ターゲット。
-     * @param FromName 名前。
-     * @param FromUUID UUID。
+     * @param fromName 名前。
+     * @param fromUUID UUID。
      * @param level    レベル。
      * @return 管理ID。エラーが発生したら空白。
      */
-    public static String add(Player target, String FromName, String FromUUID, int level)
+    public static String add(Player target, String fromName, String fromUUID, int level)
     {
 
-        if (isInjection(FromName) || isInjection(FromUUID))
-            return "";
+        fromName = parseInjection(fromName);
+        fromUUID = parseInjection(fromUUID);
         String manageId = UUID.randomUUID().toString().replace("-", "");
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
@@ -38,8 +38,8 @@ public class WatchEyeManagement
                     target.getUniqueId().toString().replace("-", ""),
                     target.getName(),
                     new Date().getTime(),
-                    FromName,
-                    FromUUID,
+                    fromName,
+                    fromUUID,
                     manageId,
                     level
             ));
@@ -64,15 +64,14 @@ public class WatchEyeManagement
      */
     public static boolean setReason(String id, EnumCheatType reason, int vl)
     {
-
-        if (isInjection(id))
-            return false;
+        id = parseInjection(id);
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
             String reasonString = reason.getSysName();
             if (reasonString.endsWith(" "))
                 reasonString = reasonString.substring(0, reasonString.length() - 1);
+            reasonString = parseInjection(reasonString);
             statement.execute(String.format(
                     "InSeRt InTo WaTcHrEaSoN VaLuEs ('%s', '%s', %s)",
                     id,
@@ -98,8 +97,8 @@ public class WatchEyeManagement
      */
     public static boolean isExistsRecord(String targetUuid, String fromUuid)
     {
-        if (isInjection(targetUuid) || isInjection(fromUuid))
-            return false;
+        targetUuid = parseInjection(targetUuid);
+        fromUuid = parseInjection(fromUuid);
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
@@ -121,8 +120,7 @@ public class WatchEyeManagement
      */
     public static boolean isExistsRecord(String id)
     {
-        if (isInjection(id))
-            return true;
+        id = parseInjection(id);
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
@@ -140,10 +138,13 @@ public class WatchEyeManagement
      * SQLインジェクションを防止する。
      *
      * @param sql インジェクションと見られるSQL。
-     * @return インジェクションだった場合はtrue。
+     * @return インジェクションだった場合はエスケープ
      */
-    public static boolean isInjection(String sql)
+    public static String parseInjection(String sql)
     {
-        return sql.contains("'") || sql.contains("\"");
+        sql = sql.replace("\\", "\\\\");
+        sql = sql.replace("'", "''");
+        sql = sql.replace("\"", "\"\"");
+        return sql;
     }
 }

@@ -151,13 +151,16 @@ public class DetectConnection
              Statement statement = connection.createStatement();
              Statement statement1 = connection.createStatement())
         {
-            if (WatchEyeManagement.isInjection(player.getName()))
-                return false;
-            ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + player.getName() + "'");
+
+            String name = WatchEyeManagement.parseInjection(player.getName());
+
+            ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + name + "'");
             while (rs.next())
             {
+
+                String MNGID = WatchEyeManagement.parseInjection(rs.getString("MNGID"));
                 ResultSet set = statement1.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
-                        rs.getString("MNGID") + "'");
+                        MNGID + "'");
                 while (set.next())
                     reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
             }

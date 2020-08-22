@@ -135,11 +135,11 @@ public class KickManager
              Statement eyeS3 = eyeC.createStatement())
         {
             kickS.execute("InSeRt InTo KiCk VaLuEs(" +
-                    "'" + player.getName().replace("'", "\\'") + "'," +
-                    "'" + player.getUniqueId().toString().replace("'", "\\'") + "'," +
-                    "'" + id.toString().replace("'", "\\'") + "'," +
+                    "'" + WatchEyeManagement.parseInjection(player.getName()) + "'," +
+                    "'" + WatchEyeManagement.parseInjection(player.getUniqueId().toString()) + "'," +
+                    "'" + WatchEyeManagement.parseInjection(id.toString()) + "'," +
                     "" + new Date().getTime() + "," +
-                    "'" + reason.replace("'", "\\'") + "', " +
+                    "'" + WatchEyeManagement.parseInjection(reason) + "', " +
                     (opFlag ? 1: 0) +
                     ");");
 
@@ -148,8 +148,7 @@ public class KickManager
             while (eyeList.next())
             {
                 String MNGID = eyeList.getString("MNGID");
-                if (WatchEyeManagement.isInjection(MNGID))
-                    return;
+                MNGID = WatchEyeManagement.parseInjection(MNGID);
                 eyeS2.execute("DeLeTe FrOm WaTcHrEaSoN WhErE MnGiD = '" + MNGID + "'");
                 eyeS3.execute("DeLeTe FrOm WaTchEyE WhErE MnGiD = '" + MNGID + "'");
             }

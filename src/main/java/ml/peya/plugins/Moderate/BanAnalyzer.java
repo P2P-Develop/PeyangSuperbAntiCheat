@@ -1,9 +1,13 @@
 package ml.peya.plugins.Moderate;
 
+import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Utils.*;
+import org.bukkit.entity.*;
 
 import java.sql.*;
+import java.util.Date;
 import java.util.*;
+import java.util.stream.*;
 
 import static ml.peya.plugins.Variables.banKick;
 
@@ -51,12 +55,75 @@ public class BanAnalyzer
                 if (type == Type.KICK)
                     break;
             case BAN:
-                break;
+                try (Connection connection = banKick.getConnection();
+                     Statement statement = connection.createStatement())
+                {
+                    ResultSet set = statement.executeQuery("SeLeCt * FrOm ban WhErE UUID='" + uuid.toString() + "'");
+                    while (set.next())
+                    {
+                        abuses.add(new Bans(
+                                set.getLong("DATE"),
+                                set.getString("REASON"),
+                                set.getString("PLAYER"),
+                                set.getString("UUID"),
+                                set.getString("BANID").replace("#", ""),
+                                Type.BAN
+                        ));
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    Utils.errorNotification(Utils.getStackTrace(e));
+                }
+                if (type == Type.BAN)
+                    break;
             default:
                 return abuses;
         }
 
         return abuses;
+    }
+
+    /**
+     * Ban情報を登録
+     *
+     * @param reason Ban理由
+     * @param player Banプレイヤー
+     */
+    public static void ban(Player player, String reason)
+    {
+        reason = WatchEyeManagement.parseInjection(reason);
+        String name = player.getDisplayName();
+        name = WatchEyeManagement.parseInjection(name);
+
+        StringBuilder id = new StringBuilder();
+        Random random = new Random();
+        IntStream.range(0, 8).parallel().forEachOrdered(i -> {
+            if (random.nextBoolean())
+                id.append(random.nextInt(9));
+            else
+                id.append((char) (random.nextInt(5) + 'A'));
+        });
+
+        try (Connection connection = banKick.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            statement.execute("INSERT INTO ban VALUES(" + String.format(
+                    "'%s', '%s', '%s', %d, '%s', 1",
+                    name,
+                    player.getUniqueId(),
+                    id.toString(),
+                    new Date().getTime(),
+                    reason
+            ) + ")");
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            Utils.errorNotification(Utils.getStackTrace(e));
+        }
     }
 
     /**
@@ -66,7 +133,8 @@ public class BanAnalyzer
     {
         ALL,
         KICK,
-        BAN;
+        BAN,
+        MUTE;
 
         /**
          * StringをTypeに変換する。
@@ -82,6 +150,8 @@ public class BanAnalyzer
                     return KICK;
                 case "ban":
                     return BAN;
+                case "mute":
+                    return MUTE;
                 case "all":
                 default:
                     return ALL;

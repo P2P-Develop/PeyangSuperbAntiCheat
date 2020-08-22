@@ -59,8 +59,8 @@ public class View
         {
             String idReq = nameFlag ? String.format("WhErE id = '%s'", offName): "";
 
-            if (WatchEyeManagement.isInjection(idReq))
-                return;
+            offName = WatchEyeManagement.parseInjection(offName);
+
             String query = "SeLeCt * FrOm WaTcHeYe " + idReq + " OrDer By LeVel DeSc LiMiT 5 OfFsEt " + start;
             ResultSet result = statement.executeQuery(query);
             while (result.next())
@@ -69,8 +69,10 @@ public class View
                 String id = result.getString("ID");
                 String issuebyid = result.getString("ISSUEBYID");
                 String mngid = result.getString("MNGID");
-                if (WatchEyeManagement.isInjection(mngid))
-                    return;
+
+                id = WatchEyeManagement.parseInjection(id);
+                issuebyid = WatchEyeManagement.parseInjection(issuebyid);
+                mngid = WatchEyeManagement.parseInjection(mngid);
 
                 ResultSet reason = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
                 ArrayList<EnumCheatType> types = new ArrayList<>();
