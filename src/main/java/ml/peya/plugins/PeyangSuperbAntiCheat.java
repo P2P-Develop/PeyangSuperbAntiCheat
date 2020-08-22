@@ -161,6 +161,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("tracking").setExecutor(new CommandTracking());
         getCommand("trust").setExecutor(new CommandTrust());
         getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
+        getCommand("userinfo").setExecutor(new CommandUserInfo());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new Run(), this);

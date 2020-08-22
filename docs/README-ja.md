@@ -355,6 +355,33 @@ Mod IDの変換は実装しま~~す~~ん。
 
 ---
 
+### /userinfo
+
+指定したプレイヤーに、自分、または、指定したプレイヤーを、テレポートさせます。
+
+### エイリアス
+
+* just /**userinfo**
+
+### 説明
+プレイヤーの情報を一覧表示します。  
+[私](https://github.com/peyang-Celeron)としてはいらないと思いますが、  
+LynxModがつくらないとうごかん！というので仕方ありません。  
+普段はスタイリッシュで簡潔な情報が表示されます。  
+Lynxモード\(-f\)が有効の場合、Rankなどの情報が最低限表示されます。  
+めんどうですね。  
+また、オフラインプレイヤーも対応しております。
+
+### 使用法
+
+* /userinfo \[-f\] \<PlayerName\>
+
+### 権限
+
+* psac.userinfo
+
+---
+
 ### /silentteleport
 
 指定したプレイヤーに、自分、または、指定したプレイヤーを、テレポートさせます。
@@ -437,13 +464,12 @@ Mod IDの変換は実装しま~~す~~ん。
 
 | 権限 | 割り当てられているコマンド | その他説明 | デフォルト | グループ |
 |:-:|:-:|:-:|:-:|:-:|
-| psac.member | サーバーメンバー用の権限です。 | | true | |
+| _**psac.member**_ | サーバーメンバー用の権限です。 | | true | |
 | psac.report | /wdr \(report\) | レポートができます。 | true | psac.member |
 | psac.report | /psac help | このプラグインの（メンバー）ヘルプを見ることができます。 | true | psac.member |
 | psac.notification | プレイヤーが対処されたとき、通知が飛ばされます。 | | true | psac.member |
 | psac.regular | 定期メッセージが流れます。 | | true | psac.member |
-| ----------------- | --------------------------------------------------- | --------------------------------------------------------- | ---------- | ----------- |
-| psac.mod | プレイヤーのキックやテストをできます。 | | op | |
+| _**psac.mod**_ | プレイヤーのキックやテストをできます。 | | op | |
 | psac.kick | /psac kick | プレイヤーをキックできます。 | op | psac.mod |
 | psac.aurapanic | /aurapanic \<\PlyerName\> | プレイヤーに回るNPCを送りつけることができます。 | op | psac.mod |
 | psac.aurabot | /aurabot \<PlayerName\> | プレイヤーの背後に貼り付く、NPCを召喚します。 | op | psac.mod |
@@ -458,8 +484,8 @@ Mod IDの変換は実装しま~~す~~ん。
 | psac.chattarget | プレイヤーのチャットの左にマークが付きます。 | | op | psac.mod |
 | psac.mods | プレイヤーのModを見ることができます。 | | op | psac.mod |
 | psac.tracking | プレイヤー追跡に関する**コマンド**の権限です。 | | op | psac.mod |
-| ----------------- | ------------------------------------------ | ------------------------------------------------- | --------- | ----------- |
-| psac.admin | レポートの削除や、サーバーの根幹に関わる権限です。 | | false | |
+| psac.userinfo | プレイヤーの情報を表示します。LynxモードがOnの場合は、一部増えます\(関係ない情報が\) | | op | psac.mod |
+| _**psac.admin**_ | レポートの削除や、サーバーの根幹に関わる権限です。 | | false | |
 | psac.drop | /psac drop \<ManagementID\> | プレイヤーからのレポートを跡形も残らずに消します。 | false | psac.admin |
 | psac.error | エラーが発生したとき、通知されます。| | false | psac.admin |
 | psac.trust | 信用されているプレイヤーでも問答無用で操作を行うことができます。 | | false | psac.admin |

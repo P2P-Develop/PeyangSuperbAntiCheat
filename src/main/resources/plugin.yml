@@ -3,7 +3,7 @@ main: ml.peya.plugins.PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PeyangSuperbAntiCheat
 load: STARTUP
-author: Peyang_JP
+author: TensaiPeyangSan
 authors: [ "Lemonade19x", "Potato1682" ]
 api-version: 1.12.2
 website: "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat"
@@ -57,6 +57,9 @@ commands:
     aliases: [ "stp", "tpto" ]
     usage: /tpto [Player] <Player>
     description: "サイレントにテレポートします。"
+  userinfo:
+    usage: /userinfo [-f] <Player>
+    description: "ユーザ情報を表示します。"
 permissions:
   #Core
   psac.member:
@@ -88,6 +91,7 @@ permissions:
       psac.mods: true
       psac.tracking: true
       psac.silentteleport: true
+      psac.userinfo: true
       psac.member: true
 
   psac.admin:
@@ -144,6 +148,9 @@ permissions:
     default: op
   psac.silentteleport:
     description: サイレントにテレポートします。
+    default: op
+  psac.userinfo:
+    description: プレイヤーの情報を表示します。
     default: op
   #Detect
   psac.aurapanic:
