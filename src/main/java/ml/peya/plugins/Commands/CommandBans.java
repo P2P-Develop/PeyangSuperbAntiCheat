@@ -7,7 +7,6 @@ import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
-import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -68,10 +67,17 @@ public class CommandBans implements CommandExecutor
         sender.sendMessage(config.getBoolean("message.lynx") ? get("message.bans.lynx", pair("name", name)): get("message.bans.message", pair("name", name)));
 
         if (bans.size() == 0)
+        {
             sender.sendMessage(get("error.bans.databaseInfoNotFound"));
+            return true;
+        }
 
-        IntStream.range(0, 5).parallel().forEachOrdered(ii -> sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(ii), bans.get(ii).getType()).create()));
-
+        for (int ii = 0; ii < 5; ii++)
+        {
+            if (ii >= bans.size())
+                break;
+            sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(ii), bans.get(ii).getType()).create());
+        }
         if (bans.size() <= 5)
             return true;
 
