@@ -1,5 +1,6 @@
 package ml.peya.plugins.Bukkit.Commands;
 
+import ml.peya.plugins.Bukkit.*;
 import ml.peya.plugins.Bukkit.DetectClasses.*;
 import ml.peya.plugins.Bukkit.Enum.*;
 import ml.peya.plugins.Bukkit.Moderate.*;
@@ -150,6 +151,7 @@ public class CommandReport implements CommandExecutor
             }
 
             Utils.adminNotification(target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
+            Bungee.sendMessage("report " + id + " " + target.getName());
         }
         else
             sender.sendMessage(get("error.unknownSQLError"));

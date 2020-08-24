@@ -24,6 +24,11 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
      */
     public static ArrayList<String> servers;
 
+    /**
+     * this
+     */
+    public static PeyangSuperbAntiCheatProxy proxy;
+
     @Override
     public void onEnable()
     {
@@ -31,8 +36,9 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
         logger = getLogger();
         bungeeChannel = "PSACProxy";
         bungeeCommand = new CommandManager();
-
         bungeeCommand.registerCommand(new Commands());
+
+        proxy = this;
 
         servers = new ArrayList<>();
 
@@ -43,6 +49,12 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
         getLogger().info("PeyangSuperbAntiCheatProxy has been activated!");
     }
 
+    /**
+     * データもってくやつ
+     *
+     * @param info サーバ
+     * @param str  内容
+     */
     public static void sendData(ServerInfo info, String str)
     {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
@@ -52,5 +64,13 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
         out.writeUTF(str);
 
         info.sendData(bungeeChannel, out.toByteArray());
+    }
+
+    /**
+     * this取得
+     */
+    public static PeyangSuperbAntiCheatProxy getPlugin()
+    {
+        return proxy;
     }
 }
