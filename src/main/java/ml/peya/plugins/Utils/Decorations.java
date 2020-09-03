@@ -36,7 +36,7 @@ public class Decorations
             @Override
             public void run()
             {
-                if (sec[0] > (seconds * 20))
+                if (sec[0] > (seconds))
                     this.cancel();
 
                 player.getWorld().spawnParticle(
@@ -212,7 +212,7 @@ public class Decorations
             {
                 runnable.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), seconds * 20);
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), seconds);
 
     }
 
