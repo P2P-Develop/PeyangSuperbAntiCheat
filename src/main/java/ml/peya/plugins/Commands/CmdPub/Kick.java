@@ -77,6 +77,6 @@ public class Kick
         if (argSet.size() == 0)
             argSet.add("Kicked by Operator.");
 
-        KickManager.kickPlayer(player, String.join(", ", argSet), false, test);
+        KickManager.kickPlayer(player, String.join(", ", argSet), test, test);
     }
 }

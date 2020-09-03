@@ -5,6 +5,7 @@ import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
+import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
 import java.sql.*;
@@ -13,7 +14,6 @@ import java.util.*;
 import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
-import static ml.peya.plugins.Variables.config;
 
 /**
  * プレイヤーのキックと共にいろいろやってくれるやつ。
@@ -30,7 +30,10 @@ public class KickManager
      */
     public static void kickPlayer(Player player, String reason, boolean wdFlag, boolean isTest) throws ArithmeticException
     {
+        player.setMetadata("psac-kick", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), true));
+
         broadCast(wdFlag, player);
+        decoration(player);
         new BukkitRunnable()
         {
             @Override
@@ -39,7 +42,7 @@ public class KickManager
                 kick(player, reason, isTest, !wdFlag);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(config.getInt("kick.delay"), 20));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
     }
 
     /**
