@@ -28,65 +28,66 @@ var packageSearchIndex;
 var typeSearchIndex;
 var memberSearchIndex;
 var tagSearchIndex;
+
 function loadScripts(doc, tag) {
     createElem(doc, tag, 'script-dir/jszip/dist/jszip.js');
     createElem(doc, tag, 'script-dir/jszip-utils/dist/jszip-utils.js');
     if (window.navigator.userAgent.indexOf('MSIE ') > 0 || window.navigator.userAgent.indexOf('Trident/') > 0 ||
-            window.navigator.userAgent.indexOf('Edge/') > 0) {
+        window.navigator.userAgent.indexOf('Edge/') > 0) {
         createElem(doc, tag, 'script-dir/jszip-utils/dist/jszip-utils-ie.js');
     }
     createElem(doc, tag, 'search.js');
 
     $.get(pathtoroot + "module-search-index.zip")
-            .done(function() {
-                JSZipUtils.getBinaryContent(pathtoroot + "module-search-index.zip", function(e, data) {
-                    JSZip.loadAsync(data).then(function(zip){
-                        zip.file("module-search-index.json").async("text").then(function(content){
-                            moduleSearchIndex = JSON.parse(content);
-                        });
+        .done(function () {
+            JSZipUtils.getBinaryContent(pathtoroot + "module-search-index.zip", function (e, data) {
+                JSZip.loadAsync(data).then(function (zip) {
+                    zip.file("module-search-index.json").async("text").then(function (content) {
+                        moduleSearchIndex = JSON.parse(content);
                     });
                 });
             });
+        });
     $.get(pathtoroot + "package-search-index.zip")
-            .done(function() {
-                JSZipUtils.getBinaryContent(pathtoroot + "package-search-index.zip", function(e, data) {
-                    JSZip.loadAsync(data).then(function(zip){
-                        zip.file("package-search-index.json").async("text").then(function(content){
-                            packageSearchIndex = JSON.parse(content);
-                        });
+        .done(function () {
+            JSZipUtils.getBinaryContent(pathtoroot + "package-search-index.zip", function (e, data) {
+                JSZip.loadAsync(data).then(function (zip) {
+                    zip.file("package-search-index.json").async("text").then(function (content) {
+                        packageSearchIndex = JSON.parse(content);
                     });
                 });
             });
+        });
     $.get(pathtoroot + "type-search-index.zip")
-            .done(function() {
-                JSZipUtils.getBinaryContent(pathtoroot + "type-search-index.zip", function(e, data) {
-                    JSZip.loadAsync(data).then(function(zip){
-                        zip.file("type-search-index.json").async("text").then(function(content){
-                            typeSearchIndex = JSON.parse(content);
-                        });
+        .done(function () {
+            JSZipUtils.getBinaryContent(pathtoroot + "type-search-index.zip", function (e, data) {
+                JSZip.loadAsync(data).then(function (zip) {
+                    zip.file("type-search-index.json").async("text").then(function (content) {
+                        typeSearchIndex = JSON.parse(content);
                     });
                 });
             });
+        });
     $.get(pathtoroot + "member-search-index.zip")
-            .done(function() {
-                JSZipUtils.getBinaryContent(pathtoroot + "member-search-index.zip", function(e, data) {
-                    JSZip.loadAsync(data).then(function(zip){
-                        zip.file("member-search-index.json").async("text").then(function(content){
-                            memberSearchIndex = JSON.parse(content);
-                        });
+        .done(function () {
+            JSZipUtils.getBinaryContent(pathtoroot + "member-search-index.zip", function (e, data) {
+                JSZip.loadAsync(data).then(function (zip) {
+                    zip.file("member-search-index.json").async("text").then(function (content) {
+                        memberSearchIndex = JSON.parse(content);
                     });
                 });
             });
+        });
     $.get(pathtoroot + "tag-search-index.zip")
-            .done(function() {
-                JSZipUtils.getBinaryContent(pathtoroot + "tag-search-index.zip", function(e, data) {
-                    JSZip.loadAsync(data).then(function(zip){
-                        zip.file("tag-search-index.json").async("text").then(function(content){
-                            tagSearchIndex = JSON.parse(content);
-                        });
+        .done(function () {
+            JSZipUtils.getBinaryContent(pathtoroot + "tag-search-index.zip", function (e, data) {
+                JSZip.loadAsync(data).then(function (zip) {
+                    zip.file("tag-search-index.json").async("text").then(function (content) {
+                        tagSearchIndex = JSON.parse(content);
                     });
                 });
             });
+        });
     if (!moduleSearchIndex) {
         createElem(doc, tag, 'module-search-index.js');
     }
@@ -115,11 +116,10 @@ function show(type) {
     count = 0;
     for (var key in data) {
         var row = document.getElementById(key);
-        if ((data[key] &  type) !== 0) {
+        if ((data[key] & type) !== 0) {
             row.style.display = '';
             row.className = (count++ % 2) ? rowColor : altColor;
-        }
-        else
+        } else
             row.style.display = 'none';
     }
     updateTabs(type);
@@ -134,14 +134,13 @@ function updateTabs(type) {
             tab.className = activeTableTab;
             tab.innerHTML = tabs[value][1];
             tab.setAttribute('aria-selected', true);
-            tab.setAttribute('tabindex',0);
+            tab.setAttribute('tabindex', 0);
             table.setAttribute('aria-labelledby', tabs[value][0]);
-        }
-        else {
+        } else {
             tab.className = tableTab;
             tab.setAttribute('aria-selected', false);
-            tab.setAttribute('tabindex',-1);
-            tab.setAttribute('onclick', "show("+ value + ")");
+            tab.setAttribute('tabindex', -1);
+            tab.setAttribute('onclick', "show(" + value + ")");
             tab.innerHTML = tabs[value][1];
         }
     }

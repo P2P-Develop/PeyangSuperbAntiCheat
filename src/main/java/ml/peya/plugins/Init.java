@@ -73,6 +73,16 @@ public class Init
                     "REASON nchar," +
                     "STAFF int" +
                     ");");
+
+            statement.execute("CrEaTe TaBlE If NoT ExIsTs ban(" +
+                    "PLAYER nchar," +
+                    "UUID nchar," +
+                    "BANID nchar," +
+                    "DATE bigint," +
+                    "REASON nchar," +
+                    "STAFF int" +
+                    ");");
+
         }
         catch (Exception e)
         {

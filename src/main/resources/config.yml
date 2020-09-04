@@ -65,12 +65,19 @@ mod:
     trackTicks: 10
 
 kick:
+  #キックまでの遅延です。
+  #リアルにするなら、2(sec)が最強です。
   delay: 2
-  #プレイヤーがキックされるときに雷を召喚するやつです。
-  lightning: true
-
   #Kickまでのデータが見つからない場合のデフォルト値
   defaultKick: 25
+
+decoration:
+  #キックされた瞬間に雷落とすかどうか
+  lighting: true
+  #ブレイズのやつやるかどうか
+  flame: true
+  #魔法陣の表示
+  circle: true
 
 message:
   #プレイヤーがレポートを提出した時などのメッセージを

@@ -23,6 +23,8 @@ public class Kick
      */
     public static void run(CommandSender sender, String[] args)
     {
+        boolean test = false;
+
         if (args.length == 3 && args[2].equals("test"))
         {
             sender.sendMessage(get("message.kick.test"));
@@ -42,11 +44,10 @@ public class Kick
                 return;
             }
 
-            KickManager.kickPlayer(player, args[2], true, true);
-            return;
+            test = true;
         }
 
-        if (args.length < 3)
+        if (args.length < 2)
         {
             sender.sendMessage(get("error.minArgs", pair("label", "psr")));
 
@@ -61,10 +62,20 @@ public class Kick
             return;
         }
 
+        if (player.hasMetadata("psac-kick"))
+        {
+
+            sender.sendMessage(get("error.processing"));
+            return;
+        }
+
         ArrayList<String> argSet = new ArrayList<>(Arrays.asList(args));
 
         argSet.subList(0, 2).clear();
 
-        KickManager.kickPlayer(player, String.join(", ", argSet), false, false);
+        if (argSet.size() == 0)
+            argSet.add("Kicked by Operator.");
+
+        KickManager.kickPlayer(player, String.join(", ", argSet), test, test);
     }
 }

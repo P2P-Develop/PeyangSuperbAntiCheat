@@ -160,6 +160,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("tracking").setExecutor(new CommandTracking());
         getCommand("trust").setExecutor(new CommandTrust());
         getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
+        getCommand("userinfo").setExecutor(new CommandUserInfo());
 
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new Run(), this);
@@ -238,6 +239,24 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     @Override
     public void onDisable()
     {
+        try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+             PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
+        {
+            logger.info("Saving learn weights to learning data file...");
+            Mapper mp = new Mapper();
+            mp.inputWeight = network.inputWeight;
+            mp.middleWeight = network.middleWeight;
+            mp.learnCount = learnCount;
+            pw.print(new ObjectMapper()
+                    .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+                    .configure(SerializationFeature.INDENT_OUTPUT, true).writeValueAsString(mp));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
         if (eye != null)
             eye.close();
         if (banKick != null)
@@ -261,20 +280,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             trackerTask.cancel();
         }
 
-        try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
-             PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
-        {
-            logger.info("Saving learn weights to learning data file...");
-            Mapper mp = new Mapper();
-            mp.inputWeight = network.inputWeight;
-            mp.middleWeight = network.middleWeight;
-            mp.learnCount = learnCount;
-            pw.print(new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).writeValueAsString(mp));
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
 
         logger.info("PeyangSuperbAntiCheat has disabled!");
     }

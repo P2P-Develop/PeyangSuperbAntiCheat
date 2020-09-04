@@ -22,15 +22,6 @@ public class NeuralNetwork
      */
     private static final double weightRange = 10.0;
     /**
-     * ランダムに重みを設定する関数。
-     *
-     * @return ランダムなdoubleから適切な値を引いた数とふり幅をかけてふり幅を最大として値を落とします。
-     */
-    private static double RandomWeight()
-    {
-        return (random.nextDouble() - 0.5) * weightRange;
-    }
-    /**
      * 前層のバイアス。
      */
     private static final double inputLayerBias = 1.0;
@@ -59,6 +50,16 @@ public class NeuralNetwork
      * ローカル変数問題は気にしない。
      */
     private Neuron outputLayer;
+
+    /**
+     * ランダムに重みを設定する関数。
+     *
+     * @return ランダムなdoubleから適切な値を引いた数とふり幅をかけてふり幅を最大として値を落とします。
+     */
+    private static double RandomWeight()
+    {
+        return (random.nextDouble() - 0.5) * weightRange;
+    }
 
     /**
      * 二次元配列のカラムを取得するそれっぽい関数。

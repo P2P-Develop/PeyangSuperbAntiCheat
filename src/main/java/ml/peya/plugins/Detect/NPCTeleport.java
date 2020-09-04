@@ -75,9 +75,12 @@ public class NPCTeleport
             @Override
             public void run()
             {
+                now[0]++;
+
                 connection.sendPacket(new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 1));
 
                 sender.sendMessage(get("message.auraCheck.panic.lynx", Stream.of(Pair.of("hit", ++now[0]), Pair.of("max", count)).collect(Collectors.toMap(Pair::getLeft, Pair::getRight, (a, b) -> b, HashMap::new))));
+
                 if (now[0] >= count)
                     this.cancel();
             }

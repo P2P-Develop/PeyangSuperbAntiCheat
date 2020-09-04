@@ -34,22 +34,25 @@ var searchPattern = "";
 var RANKING_THRESHOLD = 2;
 var NO_MATCH = 0xffff;
 var MAX_RESULTS_PER_CATEGORY = 500;
+
 function escapeHtml(str) {
     return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
+
 function getHighlightedText(item, matcher) {
     var escapedItem = escapeHtml(item);
     return escapedItem.replace(matcher, highlight);
 }
+
 function getURLPrefix(ui) {
-    var urlPrefix="";
+    var urlPrefix = "";
     var slash = "/";
     if (ui.item.category === catModules) {
         return ui.item.l + slash;
     } else if (ui.item.category === catPackages && ui.item.m) {
         return ui.item.m + slash;
     } else if ((ui.item.category === catTypes && ui.item.p) || ui.item.category === catMembers) {
-        $.each(packageSearchIndex, function(index, item) {
+        $.each(packageSearchIndex, function (index, item) {
             if (item.m && ui.item.p == item.l) {
                 urlPrefix = item.m + slash;
             }
@@ -60,10 +63,11 @@ function getURLPrefix(ui) {
     }
     return urlPrefix;
 }
+
 function makeCamelCaseRegex(term) {
     var pattern = "";
     var isWordToken = false;
-    term.replace(/,\s*/g, ", ").trim().split(/\s+/).forEach(function(w, index) {
+    term.replace(/,\s*/g, ", ").trim().split(/\s+/).forEach(function (w, index) {
         if (index > 0) {
             // whitespace between identifiers is significant
             pattern += (isWordToken && /^\w/.test(w)) ? "\\s+" : "\\s*";
@@ -75,7 +79,7 @@ function makeCamelCaseRegex(term) {
                 continue;
             }
             pattern += $.ui.autocomplete.escapeRegex(s);
-            isWordToken =  /\w$/.test(s);
+            isWordToken = /\w$/.test(s);
             if (isWordToken) {
                 pattern += "([a-z0-9_$<>\\[\\]]*?)";
             }
@@ -83,27 +87,29 @@ function makeCamelCaseRegex(term) {
     });
     return pattern;
 }
+
 function createMatcher(pattern, flags) {
     var isCamelCase = /[A-Z]/.test(pattern);
     return new RegExp(pattern, flags + (isCamelCase ? "" : "i"));
 }
+
 var watermark = 'Search';
-$(function() {
+$(function () {
     $("#search").val('');
     $("#search").prop("disabled", false);
     $("#reset").prop("disabled", false);
     $("#search").val(watermark).addClass('watermark');
-    $("#search").blur(function() {
+    $("#search").blur(function () {
         if ($(this).val().length == 0) {
             $(this).val(watermark).addClass('watermark');
         }
     });
-    $("#search").on('click keydown paste', function() {
+    $("#search").on('click keydown paste', function () {
         if ($(this).val() == watermark) {
             $(this).val('').removeClass('watermark');
         }
     });
-    $("#reset").click(function() {
+    $("#reset").click(function () {
         $("#search").val('');
         $("#search").focus();
     });
@@ -111,15 +117,15 @@ $(function() {
     $("#search")[0].setSelectionRange(0, 0);
 });
 $.widget("custom.catcomplete", $.ui.autocomplete, {
-    _create: function() {
+    _create: function () {
         this._super();
         this.widget().menu("option", "items", "> :not(.ui-autocomplete-category)");
     },
-    _renderMenu: function(ul, items) {
+    _renderMenu: function (ul, items) {
         var rMenu = this;
         var currentCategory = "";
         rMenu.menu.bindings = $();
-        $.each(items, function(index, item) {
+        $.each(items, function (index, item) {
             var li;
             if (item.l !== noResult.l && item.category !== currentCategory) {
                 ul.append("<li class=\"ui-autocomplete-category\">" + item.category + "</li>");
@@ -135,19 +141,19 @@ $.widget("custom.catcomplete", $.ui.autocomplete, {
             }
         });
     },
-    _renderItem: function(ul, item) {
+    _renderItem: function (ul, item) {
         var label = "";
         var matcher = createMatcher(escapeHtml(searchPattern), "g");
         if (item.category === catModules) {
             label = getHighlightedText(item.l, matcher);
         } else if (item.category === catPackages) {
             label = (item.m)
-                    ? getHighlightedText(item.m + "/" + item.l, matcher)
-                    : getHighlightedText(item.l, matcher);
+                ? getHighlightedText(item.m + "/" + item.l, matcher)
+                : getHighlightedText(item.l, matcher);
         } else if (item.category === catTypes) {
             label = (item.p)
-                    ? getHighlightedText(item.p + "." + item.l, matcher)
-                    : getHighlightedText(item.l, matcher);
+                ? getHighlightedText(item.p + "." + item.l, matcher)
+                : getHighlightedText(item.l, matcher);
         } else if (item.category === catMembers) {
             label = getHighlightedText(item.p + "." + (item.c + "." + item.l), matcher);
         } else if (item.category === catSearchTags) {
@@ -160,7 +166,7 @@ $.widget("custom.catcomplete", $.ui.autocomplete, {
         if (item.category === catSearchTags) {
             if (item.d) {
                 div.html(label + "<span class=\"searchTagHolderResult\"> (" + item.h + ")</span><br><span class=\"searchTagDescResult\">"
-                                + item.d + "</span><br>");
+                    + item.d + "</span><br>");
             } else {
                 div.html(label + "<span class=\"searchTagHolderResult\"> (" + item.h + ")</span>");
             }
@@ -170,6 +176,7 @@ $.widget("custom.catcomplete", $.ui.autocomplete, {
         return li;
     }
 });
+
 function rankMatch(match, category) {
     if (!match) {
         return NO_MATCH;
@@ -212,11 +219,12 @@ function rankMatch(match, category) {
     return leftBoundaryMatch + periferalMatch + (delta / 200);
 
 }
-$(function() {
+
+$(function () {
     $("#search").catcomplete({
         minLength: 1,
         delay: 300,
-        source: function(request, response) {
+        source: function (request, response) {
             var result = [];
             var newResults = [];
 
@@ -228,73 +236,75 @@ $(function() {
             var boundaryMatcher = createMatcher("\\b" + searchPattern, "");
 
             function concatResults(a1, a2) {
-                a2.sort(function(e1, e2) {
+                a2.sort(function (e1, e2) {
                     return e1.ranking - e2.ranking;
                 });
-                a1 = a1.concat(a2.map(function(e) { return e.item; }));
+                a1 = a1.concat(a2.map(function (e) {
+                    return e.item;
+                }));
                 a2.length = 0;
                 return a1;
             }
 
             if (moduleSearchIndex) {
-                $.each(moduleSearchIndex, function(index, item) {
+                $.each(moduleSearchIndex, function (index, item) {
                     item.category = catModules;
                     var ranking = rankMatch(boundaryMatcher.exec(item.l), catModules);
                     if (ranking < RANKING_THRESHOLD) {
-                        newResults.push({ ranking: ranking, item: item });
+                        newResults.push({ranking: ranking, item: item});
                     }
                     return newResults.length < MAX_RESULTS_PER_CATEGORY;
                 });
                 result = concatResults(result, newResults);
             }
             if (packageSearchIndex) {
-                $.each(packageSearchIndex, function(index, item) {
+                $.each(packageSearchIndex, function (index, item) {
                     item.category = catPackages;
                     var name = (item.m && request.term.indexOf("/") > -1)
-                            ? (item.m + "/" + item.l)
-                            : item.l;
+                        ? (item.m + "/" + item.l)
+                        : item.l;
                     var ranking = rankMatch(boundaryMatcher.exec(name), catPackages);
                     if (ranking < RANKING_THRESHOLD) {
-                        newResults.push({ ranking: ranking, item: item });
+                        newResults.push({ranking: ranking, item: item});
                     }
                     return newResults.length < MAX_RESULTS_PER_CATEGORY;
                 });
                 result = concatResults(result, newResults);
             }
             if (typeSearchIndex) {
-                $.each(typeSearchIndex, function(index, item) {
+                $.each(typeSearchIndex, function (index, item) {
                     item.category = catTypes;
                     var name = request.term.indexOf(".") > -1
                         ? item.p + "." + item.l
                         : item.l;
                     var ranking = rankMatch(camelCaseMatcher.exec(name), catTypes);
                     if (ranking < RANKING_THRESHOLD) {
-                        newResults.push({ ranking: ranking, item: item });
+                        newResults.push({ranking: ranking, item: item});
                     }
                     return newResults.length < MAX_RESULTS_PER_CATEGORY;
                 });
                 result = concatResults(result, newResults);
             }
             if (memberSearchIndex) {
-                $.each(memberSearchIndex, function(index, item) {
+                $.each(memberSearchIndex, function (index, item) {
                     item.category = catMembers;
                     var name = request.term.indexOf(".") > -1
-                            ? item.p + "." + item.c + "." + item.l
-                            : item.l;
+                        ? item.p + "." + item.c + "." + item.l
+                        : item.l;
                     var ranking = rankMatch(camelCaseMatcher.exec(name), catMembers);
                     if (ranking < RANKING_THRESHOLD) {
-                        newResults.push({ ranking: ranking, item: item });
+                        newResults.push({ranking: ranking, item: item});
                     }
                     return newResults.length < MAX_RESULTS_PER_CATEGORY;
                 });
                 result = concatResults(result, newResults);
             }
             if (tagSearchIndex) {
-                $.each(tagSearchIndex, function(index, item) {
+                $.each(tagSearchIndex, function (index, item) {
                     item.category = catSearchTags;
                     var ranking = rankMatch(boundaryMatcher.exec(item.l), catSearchTags);
                     if (ranking < RANKING_THRESHOLD) {
-                        newResults.push({ ranking: ranking, item: item });
+                        newResults.push({ranking: ranking, item: item});
                     }
                     return newResults.length < MAX_RESULTS_PER_CATEGORY;
                 });
@@ -302,7 +312,7 @@ $(function() {
             }
             response(result);
         },
-        response: function(event, ui) {
+        response: function (event, ui) {
             if (!ui.content.length) {
                 ui.content.push(noResult);
             } else {
@@ -313,7 +323,7 @@ $(function() {
         position: {
             collision: "flip"
         },
-        select: function(event, ui) {
+        select: function (event, ui) {
             if (ui.item.l !== noResult.l) {
                 var url = getURLPrefix(ui);
                 if (ui.item.category === catModules) {
@@ -322,7 +332,7 @@ $(function() {
                     if (ui.item.url) {
                         url = ui.item.url;
                     } else {
-                    url += ui.item.l.replace(/\./g, '/') + "/package-summary.html";
+                        url += ui.item.l.replace(/\./g, '/') + "/package-summary.html";
                     }
                 } else if (ui.item.category === catTypes) {
                     if (ui.item.url) {

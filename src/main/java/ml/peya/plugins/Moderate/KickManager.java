@@ -5,6 +5,7 @@ import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
+import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
 import java.sql.*;
@@ -13,7 +14,6 @@ import java.util.*;
 import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
-import static ml.peya.plugins.Variables.*;
 
 /**
  * プレイヤーのキックと共にいろいろやってくれるやつ。
@@ -30,7 +30,10 @@ public class KickManager
      */
     public static void kickPlayer(Player player, String reason, boolean wdFlag, boolean isTest) throws ArithmeticException
     {
+        player.setMetadata("psac-kick", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), true));
+
         broadCast(wdFlag, player);
+        decoration(player);
         new BukkitRunnable()
         {
             @Override
@@ -39,7 +42,7 @@ public class KickManager
                 kick(player, reason, isTest, !wdFlag);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(config.getInt("kick.delay"), 20));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
     }
 
     /**
@@ -70,6 +73,19 @@ public class KickManager
     }
 
     /**
+     * デコ要素すべて展開するやつ
+     *
+     * @param player 被験者
+     */
+    public static void decoration(Player player)
+    {
+        if (Variables.config.getBoolean("decoration.flame"))
+            Decorations.flame(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+        if (Variables.config.getBoolean("decoration.circle"))
+            Decorations.magic(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+    }
+
+    /**
      * 色々やってから結局蹴るやつ。
      *
      * @param player 対象プレイヤー。
@@ -79,9 +95,8 @@ public class KickManager
      */
     private static void kick(Player player, String reason, boolean isTest, boolean opFlag)
     {
-        if (config.getBoolean("kick.lightning"))
-            player.getWorld().strikeLightningEffect(player.getLocation());
-
+        if (Variables.config.getBoolean("decoration.lightning"))
+            Decorations.lighting(player);
         StringBuilder id = new StringBuilder();
         Random random = new Random();
         IntStream.range(0, 8).parallel().forEachOrdered(i -> {
@@ -106,26 +121,26 @@ public class KickManager
         map.put("ggid", IntStream.range(0, 7).parallel().mapToObj(i -> String.valueOf(random.nextInt(9))).collect(Collectors.joining()));
         map.put("id", id.toString());
 
-        String message = get("kick.reason", map);
+        String message = MessageEngine.get("kick.reason", map);
 
         if (isTest)
         {
             player.kickPlayer(message);
             return;
         }
-        try (Connection kickC = banKick.getConnection();
-             Connection eyeC = eye.getConnection();
+        try (Connection kickC = Variables.banKick.getConnection();
+             Connection eyeC = Variables.eye.getConnection();
              Statement kickS = kickC.createStatement();
              Statement eyeS = eyeC.createStatement();
              Statement eyeS2 = eyeC.createStatement();
              Statement eyeS3 = eyeC.createStatement())
         {
             kickS.execute("InSeRt InTo KiCk VaLuEs(" +
-                    "'" + player.getName().replace("'", "\\'") + "'," +
-                    "'" + player.getUniqueId().toString().replace("'", "\\'") + "'," +
-                    "'" + id.toString().replace("'", "\\'") + "'," +
+                    "'" + WatchEyeManagement.parseInjection(player.getName()) + "'," +
+                    "'" + WatchEyeManagement.parseInjection(player.getUniqueId().toString()) + "'," +
+                    "'" + WatchEyeManagement.parseInjection(id.toString()) + "'," +
                     "" + new Date().getTime() + "," +
-                    "'" + reason.replace("'", "\\'") + "', " +
+                    "'" + WatchEyeManagement.parseInjection(reason) + "', " +
                     (opFlag ? 1: 0) +
                     ");");
 
@@ -134,8 +149,7 @@ public class KickManager
             while (eyeList.next())
             {
                 String MNGID = eyeList.getString("MNGID");
-                if (WatchEyeManagement.isInjection(MNGID))
-                    return;
+                MNGID = WatchEyeManagement.parseInjection(MNGID);
                 eyeS2.execute("DeLeTe FrOm WaTcHrEaSoN WhErE MnGiD = '" + MNGID + "'");
                 eyeS3.execute("DeLeTe FrOm WaTchEyE WhErE MnGiD = '" + MNGID + "'");
             }
