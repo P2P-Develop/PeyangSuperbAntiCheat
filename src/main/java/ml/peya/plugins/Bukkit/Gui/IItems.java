@@ -69,7 +69,7 @@ public interface IItems
         /**
          * 名前。
          */
-        String name;
+        final String name;
 
         /**
          * コンストラクター。

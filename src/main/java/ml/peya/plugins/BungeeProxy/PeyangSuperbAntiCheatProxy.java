@@ -50,7 +50,7 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
     }
 
     /**
-     * データもってくやつ
+     * 特定のサーバーに文字列データを送信します。
      *
      * @param info サーバ
      * @param str  内容
@@ -68,6 +68,8 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
 
     /**
      * this取得
+     *
+     * @return this
      */
     public static PeyangSuperbAntiCheatProxy getPlugin()
     {
