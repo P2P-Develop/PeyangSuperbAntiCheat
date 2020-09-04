@@ -248,7 +248,9 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             mp.inputWeight = network.inputWeight;
             mp.middleWeight = network.middleWeight;
             mp.learnCount = learnCount;
-            pw.print(new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false).writeValueAsString(mp));
+            pw.print(new ObjectMapper()
+                    .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+                    .configure(SerializationFeature.INDENT_OUTPUT, true).writeValueAsString(mp));
         }
         catch (Exception e)
         {
