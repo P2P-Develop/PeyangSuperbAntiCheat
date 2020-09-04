@@ -160,8 +160,8 @@ public class CommandUserInfo implements CommandExecutor
         p.add(t(String.format(
                 "Punishments: §a§lBans §r§f%d §6- §a§lMutes §r§f%d §r§6- §a§lKicks §r§f%d",
                 ban,
-                kick,
-                mute
+                mute,
+                kick
         )));
 
         return p;
