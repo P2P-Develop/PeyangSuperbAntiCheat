@@ -56,13 +56,9 @@ public class Metrics
         if (System.getProperty("bstats.relocatecheck") == null || !System.getProperty("bstats.relocatecheck").equals("false"))
         {
             // Maven's Relocate is clever and changes strings, too. So we have to use this little "trick" ... :D
-            final String defaultPackage = new String(
-                    new byte[]{'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'k', 'k', 'i', 't'});
-            final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
             // We want to make sure nobody just copy & pastes the example and use the wrong package names
-            if (Metrics.class.getPackage().getName().equals(defaultPackage) || Metrics.class.getPackage().getName().equals(examplePackage))
+            if (Metrics.class.getPackage().getName().equals(new String(new byte[]{'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'k', 'k', 'i', 't'})) || Metrics.class.getPackage().getName().equals(new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'})))
                 throw new IllegalStateException("bStats Metrics class has not been relocated correctly!");
-
         }
     }
 
@@ -101,8 +97,7 @@ public class Metrics
         this.pluginId = pluginId;
 
         // Get the config file
-        File bStatsFolder = new File(plugin.getDataFolder().getParentFile(), "bStats");
-        File configFile = new File(bStatsFolder, "config.yml");
+        File configFile = new File(new File(plugin.getDataFolder().getParentFile(), "bStats"), "config.yml");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(configFile);
 
         // Check if the config file exists
@@ -161,11 +156,9 @@ public class Metrics
             }
             // Register our service
             Bukkit.getServicesManager().register(Metrics.class, this, plugin, ServicePriority.Normal);
+            // We are the first!
             if (!found)
-            {
-                // We are the first!
                 startSubmitting();
-            }
         }
         charts = new ArrayList<>();
     }
@@ -294,12 +287,9 @@ public class Metrics
     {
         JsonObject data = new JsonObject();
 
-        String pluginName = plugin.getDescription().getName();
-        String pluginVersion = plugin.getDescription().getVersion();
-
-        data.addProperty("pluginName", pluginName); // Append the name of the plugin
+        data.addProperty("pluginName", plugin.getDescription().getName()); // Append the name of the plugin
         data.addProperty("id", pluginId); // Append the id of the plugin
-        data.addProperty("pluginVersion", pluginVersion); // Append the version of the plugin
+        data.addProperty("pluginVersion", plugin.getDescription().getVersion()); // Append the version of the plugin
         JsonArray customCharts = new JsonArray();
         // Add the data of the custom charts
         // If the chart is null, we skip it
@@ -331,31 +321,22 @@ public class Metrics
         {
             playerAmount = Bukkit.getOnlinePlayers().size(); // Just use the new method if the Reflection failed
         }
-        int onlineMode = Bukkit.getOnlineMode() ? 1: 0;
-        String bukkitVersion = Bukkit.getVersion();
-        String bukkitName = Bukkit.getName();
-
-        // OS/Java specific data
-        String javaVersion = System.getProperty("java.version");
-        String osName = System.getProperty("os.name");
-        String osArch = System.getProperty("os.arch");
-        String osVersion = System.getProperty("os.version");
-        int coreCount = Runtime.getRuntime().availableProcessors();
 
         JsonObject data = new JsonObject();
 
         data.addProperty("serverUUID", serverUUID);
 
         data.addProperty("playerAmount", playerAmount);
-        data.addProperty("onlineMode", onlineMode);
-        data.addProperty("bukkitVersion", bukkitVersion);
-        data.addProperty("bukkitName", bukkitName);
+        data.addProperty("onlineMode", Bukkit.getOnlineMode() ? 1: 0);
+        data.addProperty("bukkitVersion", Bukkit.getVersion());
+        data.addProperty("bukkitName", Bukkit.getName());
 
-        data.addProperty("javaVersion", javaVersion);
-        data.addProperty("osName", osName);
-        data.addProperty("osArch", osArch);
-        data.addProperty("osVersion", osVersion);
-        data.addProperty("coreCount", coreCount);
+        // OS/Java specific data
+        data.addProperty("javaVersion", System.getProperty("java.version"));
+        data.addProperty("osName", System.getProperty("os.name"));
+        data.addProperty("osArch", System.getProperty("os.arch"));
+        data.addProperty("osVersion", System.getProperty("os.version"));
+        data.addProperty("coreCount", Runtime.getRuntime().availableProcessors());
 
         return data;
     }
@@ -389,9 +370,7 @@ public class Metrics
                                 {
                                     Method jsonStringGetter = jsonObjectJsonSimple.getDeclaredMethod("toJSONString");
                                     jsonStringGetter.setAccessible(true);
-                                    String jsonString = (String) jsonStringGetter.invoke(plugin);
-                                    JsonObject object = new JsonParser().parse(jsonString).getAsJsonObject();
-                                    pluginData.add(object);
+                                    pluginData.add(new JsonParser().parse((String) jsonStringGetter.invoke(plugin)).getAsJsonObject());
                                 }
                             }
                             catch (ClassNotFoundException e)
@@ -533,7 +512,6 @@ public class Metrics
      */
     public static class AdvancedPie extends CustomChart
     {
-
         private final Callable<Map<String, Integer>> callable;
 
         /**

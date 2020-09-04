@@ -29,13 +29,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 5))
             return true;
 
-        ArrayList<String> commandList = new ArrayList<>();
-
-        commandList.add("help");
-        commandList.add("view");
-        commandList.add("show");
-        commandList.add("drop");
-        commandList.add("kick");
+        ArrayList<String> commandList = new ArrayList<>(Arrays.asList("help", "view", "show", "drop", "kick"));
 
         if (commandList.contains(args[0]) && ErrorMessageSender.unPermMessage(sender, "psac." + args[0])) return true;
 
@@ -58,6 +52,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 break;
             default:
                 sender.sendMessage(get("error.main.notFoundCommand", pair("label", label)));
+                break;
         }
 
         return true;

@@ -5,7 +5,6 @@ import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.*;
 
 import java.util.*;
-import java.util.stream.*;
 
 /**
  * 防具をランダムにNPCに着せるクラス。
@@ -20,16 +19,7 @@ public class RandomArmor
      */
     public static ItemStack getHelmet()
     {
-        ArrayList<Material> helmets = new ArrayList<>();
-        helmets.add(Material.CHAINMAIL_HELMET);
-        helmets.add(Material.DIAMOND_HELMET);
-        helmets.add(Material.GOLD_HELMET);
-        helmets.add(Material.GOLD_HELMET);
-        helmets.add(Material.IRON_HELMET);
-        helmets.add(Material.LEATHER_HELMET);
-        helmets.add(Material.AIR);
-
-        return getRandomItems(helmets);
+        return getRandomItems(new ArrayList<>(Arrays.asList(Material.CHAINMAIL_HELMET, Material.DIAMOND_HELMET, Material.GOLD_HELMET, Material.GOLD_HELMET, Material.IRON_HELMET, Material.LEATHER_HELMET, Material.AIR)));
     }
 
     /**
@@ -39,15 +29,7 @@ public class RandomArmor
      */
     public static ItemStack getChestPlate()
     {
-        ArrayList<Material> chestPlates = new ArrayList<>();
-        chestPlates.add(Material.CHAINMAIL_CHESTPLATE);
-        chestPlates.add(Material.DIAMOND_CHESTPLATE);
-        chestPlates.add(Material.GOLD_CHESTPLATE);
-        chestPlates.add(Material.IRON_CHESTPLATE);
-        chestPlates.add(Material.LEATHER_CHESTPLATE);
-        chestPlates.add(Material.AIR);
-
-        return getRandomItems(chestPlates);
+        return getRandomItems(new ArrayList<>(Arrays.asList(Material.CHAINMAIL_CHESTPLATE, Material.DIAMOND_CHESTPLATE, Material.GOLD_CHESTPLATE, Material.IRON_CHESTPLATE, Material.LEATHER_CHESTPLATE, Material.AIR)));
     }
 
     /**
@@ -57,15 +39,7 @@ public class RandomArmor
      */
     public static ItemStack getLeggings()
     {
-        ArrayList<Material> leggings = new ArrayList<>();
-        leggings.add(Material.LEATHER_LEGGINGS);
-        leggings.add(Material.CHAINMAIL_LEGGINGS);
-        leggings.add(Material.DIAMOND_LEGGINGS);
-        leggings.add(Material.GOLD_LEGGINGS);
-        leggings.add(Material.IRON_LEGGINGS);
-        leggings.add(Material.AIR);
-
-        return getRandomItems(leggings);
+        return getRandomItems(new ArrayList<>(Arrays.asList(Material.LEATHER_LEGGINGS, Material.CHAINMAIL_LEGGINGS, Material.DIAMOND_LEGGINGS, Material.GOLD_LEGGINGS, Material.IRON_LEGGINGS, Material.AIR)));
     }
 
     /**
@@ -75,15 +49,7 @@ public class RandomArmor
      */
     public static ItemStack getBoots()
     {
-        ArrayList<Material> boots = new ArrayList<>();
-        boots.add(Material.CHAINMAIL_BOOTS);
-        boots.add(Material.DIAMOND_BOOTS);
-        boots.add(Material.GOLD_BOOTS);
-        boots.add(Material.IRON_BOOTS);
-        boots.add(Material.LEATHER_BOOTS);
-        boots.add(Material.AIR);
-
-        return getRandomItems(boots);
+        return getRandomItems(new ArrayList<>(Arrays.asList(Material.CHAINMAIL_BOOTS, Material.DIAMOND_BOOTS, Material.GOLD_BOOTS, Material.IRON_BOOTS, Material.LEATHER_BOOTS, Material.AIR)));
     }
 
     /**
@@ -93,20 +59,7 @@ public class RandomArmor
      */
     public static ItemStack getSwords()
     {
-        ArrayList<Material> swords = new ArrayList<>();
-        swords.add(Material.DIAMOND_SWORD);
-        swords.add(Material.STONE_SWORD);
-        swords.add(Material.GOLD_SWORD);
-        swords.add(Material.IRON_SWORD);
-        swords.add(Material.WOOD_SWORD);
-        swords.add(Material.DIAMOND_AXE);
-        swords.add(Material.GOLD_AXE);
-        swords.add(Material.IRON_AXE);
-        swords.add(Material.STONE_AXE);
-        swords.add(Material.WOOD_AXE);
-        IntStream.range(0, 5).parallel().mapToObj(i -> Material.AIR).forEachOrdered(swords::add);
-
-        return getRandomItems(swords);
+        return getRandomItems(new ArrayList<>(Arrays.asList(Material.DIAMOND_SWORD, Material.STONE_SWORD, Material.GOLD_SWORD, Material.IRON_SWORD, Material.WOOD_SWORD, Material.DIAMOND_AXE, Material.GOLD_AXE, Material.IRON_AXE, Material.STONE_AXE, Material.WOOD_AXE, Material.AIR, Material.AIR, Material.AIR, Material.AIR, Material.AIR)));
     }
 
     /**
@@ -117,14 +70,7 @@ public class RandomArmor
      */
     private static boolean isGold(Material item)
     {
-        ArrayList<Material> items = new ArrayList<>();
-
-        items.add(Material.GOLD_BOOTS);
-        items.add(Material.GOLD_CHESTPLATE);
-        items.add(Material.GOLD_HELMET);
-        items.add(Material.GOLD_LEGGINGS);
-
-        return items.contains(item);
+        return new ArrayList<>(Arrays.asList(Material.GOLD_BOOTS, Material.GOLD_CHESTPLATE, Material.GOLD_HELMET, Material.GOLD_LEGGINGS)).contains(item);
     }
 
     /**

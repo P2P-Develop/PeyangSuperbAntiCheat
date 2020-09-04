@@ -43,9 +43,6 @@ public class CommandBans implements CommandExecutor
             return true;
         }
 
-
-        BanAnalyzer.Type typeP = BanAnalyzer.Type.toType(type);
-
         UUID player = null;
 
         for (OfflinePlayer ofPly : Bukkit.getOfflinePlayers())
@@ -63,14 +60,14 @@ public class CommandBans implements CommandExecutor
             return true;
         }
 
-        ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player, typeP);
+        ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player, BanAnalyzer.Type.toType(type));
 
         sender.sendMessage(config.getBoolean("message.lynx") ? get("message.bans.lynx", pair("name", name)): get("message.bans.message", pair("name", name)));
 
         if (bans.size() == 0)
             sender.sendMessage(get("error.bans.databaseInfoNotFound"));
 
-        IntStream.range(0, 5).parallel().forEachOrdered(ii -> sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(ii), bans.get(ii).getType()).create()));
+        IntStream.range(0, 5).parallel().forEachOrdered(i -> sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(i), bans.get(i).getType()).create()));
 
         if (bans.size() <= 5)
             return true;

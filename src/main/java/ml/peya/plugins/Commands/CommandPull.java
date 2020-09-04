@@ -76,26 +76,17 @@ public class CommandPull implements CommandExecutor
         entityLoc.setY(entityLoc.getY() + 0.5d);
         player.teleport(entityLoc);
         double distance = pullLocation.distance(entityLoc);
-        double x = ((1.0D +
-                (0.1d * distance)) *
-                (pullLocation.getX() -
-                        entityLoc.getX())) /
-                distance;
-        double y = (((1.0D +
-                (0.03d *
-                        distance)) *
-                (pullLocation.getY() -
-                        entityLoc.getY())) /
-                distance) -
-                ((0.5D * -0.08D) *
-                        distance);
         Vector vector = player.getVelocity();
-        vector.setX(x);
-        vector.setY(y);
-        vector.setZ(((1.0D +
-                (0.1D * distance)) *
-                (pullLocation.getZ() -
-                        entityLoc.getZ())) / distance);
+        vector.setX(((1.0D +
+                (0.1d * distance)) *
+                (pullLocation.getX() - entityLoc.getX())) / distance)
+                .setY((((1.0D +
+                        (0.03d * distance)) *
+                        (pullLocation.getY() - entityLoc.getY())) / distance) -
+                        ((0.5D * -0.08D) * distance))
+                .setZ(((1.0D +
+                        (0.1D * distance)) *
+                        (pullLocation.getZ() - entityLoc.getZ())) / distance);
         player.setVelocity(vector);
     }
 

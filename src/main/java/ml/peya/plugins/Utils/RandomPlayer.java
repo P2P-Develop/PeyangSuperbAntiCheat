@@ -41,9 +41,7 @@ public class RandomPlayer
         if (name.length() > 16)
             name = random.nextBoolean() ? first: last;
 
-        MinecraftServer server = ((CraftServer) Bukkit.getServer()).getServer();
         WorldServer worldServer = ((CraftWorld) world).getHandle();
-        PlayerInteractManager manager = new PlayerInteractManager(worldServer);
 
         Pair<String, String> skin = getSkin();
 
@@ -51,7 +49,7 @@ public class RandomPlayer
 
         profile.getProperties().put("textures", new Property("textures", skin.getLeft(), skin.getRight()));
 
-        return new EntityPlayer(server, worldServer, profile, manager);
+        return new EntityPlayer(((CraftServer) Bukkit.getServer()).getServer(), worldServer, profile, new PlayerInteractManager(worldServer));
     }
 
     /**
@@ -65,9 +63,7 @@ public class RandomPlayer
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SELECT * FROM Skin ORDER BY RANDOM() LIMIT 1");
-            if (!result.next())
-                return Pair.of("", "");
-            return Pair.of(result.getString("Texture"), result.getString("Signature"));
+            return !result.next() ? Pair.of("", "") : Pair.of(result.getString("Texture"), result.getString("Signature"));
         }
         catch (Exception e)
         {

@@ -54,8 +54,8 @@ public class BookUtil
     public static void openBook(ItemStack i, Player p)
     {
         if (!initialised) return;
-        ItemStack held = p.getInventory().getItemInMainHand();
-        BukkitRunnable runnable = new BukkitRunnable()
+
+        new BukkitRunnable()
         {
             @Override
             public void run()
@@ -72,19 +72,17 @@ public class BookUtil
                 }
                 this.cancel();
             }
-        };
-        runnable.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10L);
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10L);
 
-        BukkitRunnable runnable2 = new BukkitRunnable()
+        new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                p.getInventory().setItemInMainHand(held);
+                p.getInventory().setItemInMainHand(p.getInventory().getItemInMainHand());
                 this.cancel();
             }
-        };
-        runnable2.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20L);
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20L);
     }
 
     private static void sendPacket(ItemStack i, Player p) throws ReflectiveOperationException

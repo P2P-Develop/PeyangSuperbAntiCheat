@@ -51,14 +51,12 @@ public class KickManager
     private static void broadCast(boolean wdFlag, Player target)
     {
         if (wdFlag)
-        {
             Bukkit.getOnlinePlayers().parallelStream().forEachOrdered(player -> {
                 if (player.hasPermission("psac.ntfadmin"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
                 else if (player.hasPermission("psac.notification"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
             });
-        }
 
         new BukkitRunnable()
         {

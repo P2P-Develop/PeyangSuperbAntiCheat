@@ -37,7 +37,6 @@ public class ModList implements IItems
     public ItemStack getItem(String target)
     {
         ItemStack stack = new ItemStack(Material.TNT);
-
         ItemMeta meta = stack.getItemMeta();
         meta.setLore(Item.getLore(this, target));
         meta.setDisplayName(get("item.mods"));

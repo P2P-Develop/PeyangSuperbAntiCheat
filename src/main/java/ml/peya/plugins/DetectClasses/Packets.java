@@ -25,17 +25,13 @@ public class Packets
     {
         try
         {
-            PacketContainer packet = e.getPacket();
-
-            PacketPlayInUseEntity entity = (PacketPlayInUseEntity) packet.getHandle();
+            PacketPlayInUseEntity entity = (PacketPlayInUseEntity) e.getPacket().getHandle();
             Field field = entity.getClass().getDeclaredField("a");
             field.setAccessible(true);
             if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK) return;
             for (CheatDetectNowMeta meta : cheatMeta.getMetas())
             {
-                if (meta.getId() != field.getInt(entity))
-                    continue;
-                if (meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() || Criticals.hasCritical(e.getPlayer()))
+                if (meta.getId() == field.getInt(entity) && meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() || Criticals.hasCritical(e.getPlayer()))
                     System.out.println(meta.addVL());
             }
         }

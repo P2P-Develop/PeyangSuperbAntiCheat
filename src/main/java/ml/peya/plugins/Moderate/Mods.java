@@ -19,11 +19,6 @@ public class Mods
      */
     public static HashMap<String, String> getMods(Player player)
     {
-        UUID uuid = player.getUniqueId();
-
-        if (!mods.containsKey(uuid))
-            return null;
-
-        return mods.get(uuid);
+        return mods.getOrDefault(player.getUniqueId(), null);
     }
 }

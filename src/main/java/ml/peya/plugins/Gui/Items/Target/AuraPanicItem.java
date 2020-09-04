@@ -23,8 +23,7 @@ public class AuraPanicItem implements IItems
     @Override
     public ItemStack getItem(String target)
     {
-        AuraBotItem auraBot = new AuraBotItem();
-        ItemStack stack = auraBot.getItem(target);
+        ItemStack stack = new AuraBotItem().getItem(target);
 
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(get("item.execute", pair("command", "AuraPanic")));

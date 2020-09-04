@@ -6,6 +6,7 @@ import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
+import org.apache.commons.lang3.tuple.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
@@ -14,6 +15,7 @@ import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.cheatMeta;
@@ -73,15 +75,9 @@ public class NPCTeleport
             @Override
             public void run()
             {
-                now[0]++;
-
                 connection.sendPacket(new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 1));
 
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("hit", now[0]);
-                map.put("max", count);
-
-                sender.sendMessage(get("message.auraCheck.panic.lynx", map));
+                sender.sendMessage(get("message.auraCheck.panic.lynx", Stream.of(Pair.of("hit", ++now[0]), Pair.of("max", count)).collect(Collectors.toMap(Pair::getLeft, Pair::getRight, (a, b) -> b, HashMap::new))));
                 if (now[0] >= count)
                     this.cancel();
             }

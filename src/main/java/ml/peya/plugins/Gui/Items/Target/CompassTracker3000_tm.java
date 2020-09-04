@@ -45,9 +45,7 @@ public class CompassTracker3000_tm implements IItems
         ItemStack item = new ItemStack(Material.COMPASS);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(get("item.compass"));
-
         meta.setLore(Item.getLore(this, target));
-
         item.setItemMeta(meta);
         return item;
     }

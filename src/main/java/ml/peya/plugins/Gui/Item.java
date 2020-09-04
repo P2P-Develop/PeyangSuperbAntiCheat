@@ -71,10 +71,8 @@ public class Item
      */
     public static ArrayList<String> getLore(IItems item, String target)
     {
-        ArrayList<String> list = new ArrayList<>();
 
-        list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.");
-        list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: " + item.getExecName());
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.", ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: " + item.getExecName()));
 
         if (item.getType() == IItems.Type.TARGET || item.getType() == IItems.Type.TARGET_2)
             list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: " + target);
@@ -92,10 +90,8 @@ public class Item
     public void register(IItems item)
     {
         for (IItems items : this.items)
-        {
             if (items.getExecName().equals(item.getExecName()))
                 return;
-        }
 
         items.add(item);
     }

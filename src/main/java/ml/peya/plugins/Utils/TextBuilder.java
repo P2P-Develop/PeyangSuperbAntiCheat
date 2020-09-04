@@ -119,6 +119,7 @@ public class TextBuilder
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + mngid))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.click.openAbout")).create()))
                 .append("   ");
+
         if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
             b.append(get("book.click.delete"))
@@ -151,7 +152,7 @@ public class TextBuilder
      */
     public static String getSeverityLevel(EnumSeverity severity)
     {
-        String prefix = ChatColor.YELLOW + "Level " + severity.getColor();
+        final String prefix = ChatColor.YELLOW + "Level " + severity.getColor();
         switch (severity)
         {
             case FINE:

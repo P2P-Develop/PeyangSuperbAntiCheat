@@ -43,13 +43,9 @@ public class BackButton implements IItems
     public ItemStack getItem(String target)
     {
         ItemStack stack = new ItemStack(Material.WATCH);
-
         ItemMeta meta = stack.getItemMeta();
-
         meta.setDisplayName(get("book.words.back"));
-
         meta.setLore(Item.getLore(this, target));
-
         stack.setItemMeta(meta);
         return stack;
     }

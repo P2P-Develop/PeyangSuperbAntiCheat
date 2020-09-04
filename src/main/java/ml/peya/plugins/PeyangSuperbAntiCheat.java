@@ -73,8 +73,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         plugin = this;
         config = getConfig();
-        for (String path : Arrays.asList("npc.seconds", "npc.kill", "npc.vllevel", "npc.learncount", "mod.trackTicks", "kick.defaultKick", "autoMessage.time"))
-        {
+        Arrays.asList("npc.seconds", "npc.kill", "npc.vllevel", "npc.learncount", "mod.trackTicks", "kick.defaultKick", "autoMessage.time").parallelStream().forEachOrdered(path -> {
             try
             {
                 if (config.getInt(path) < 0)
@@ -85,7 +84,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
                 logger.log(Level.WARNING, path + " is minus value! set value to 0");
                 config.set(path, 0);
             }
-        }
+        });
 
         databasePath = config.getString("database.path");
         banKickPath = config.getString("database.logPath");
@@ -121,7 +120,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         item.register(new TestKnockBack());
         item.register(new CompassTracker3000_tm());
         item.register(new BanBook());
-        item.register(new ToPage2());                                   //
+        item.register(new ToPage2());                                   //====Page2
         item.register(new BackButton());
 
         item.register(new BackToPage1());                              //====Page2

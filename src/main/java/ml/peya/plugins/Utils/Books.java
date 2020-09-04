@@ -127,8 +127,8 @@ public class Books
         {
             builder.append(ChatColor.RED + id + ChatColor.GRAY + ": " + ChatColor.BLUE + mods.get(id))
                     .append("\n");
-            count++;
-            if (count < 10)
+
+            if (++count < 10)
                 continue;
 
             count = 0;

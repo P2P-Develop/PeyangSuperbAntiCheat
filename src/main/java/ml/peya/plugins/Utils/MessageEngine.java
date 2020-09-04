@@ -1,12 +1,14 @@
 package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.*;
+import org.apache.commons.lang3.tuple.*;
 import org.bukkit.*;
 import org.bukkit.configuration.file.*;
 
 import java.io.*;
 import java.nio.charset.*;
 import java.util.*;
+import java.util.stream.*;
 
 /**
  * メッセージテンプレートを管理するクラス。
@@ -82,31 +84,29 @@ public class MessageEngine
      */
     private static HashMap<String, ChatColor> getColor()
     {
-        HashMap<String, ChatColor> map = new HashMap<>();
+        return Stream.of(
+                Pair.of("%%black%%", ChatColor.BLACK),
+                Pair.of("%%dark_blue%%", ChatColor.DARK_BLUE),
+                Pair.of("%%dark_green%%", ChatColor.DARK_GREEN),
+                Pair.of("%%dark_aqua%%", ChatColor.DARK_AQUA),
+                Pair.of("%%dark_red%%", ChatColor.DARK_RED),
+                Pair.of("%%dark_purple%%", ChatColor.DARK_PURPLE),
 
-        map.put("%%black%%", ChatColor.BLACK);
-        map.put("%%dark_blue%%", ChatColor.DARK_BLUE);
-        map.put("%%dark_green%%", ChatColor.DARK_GREEN);
-        map.put("%%dark_aqua%%", ChatColor.DARK_AQUA);
-        map.put("%%dark_red%%", ChatColor.DARK_RED);
-        map.put("%%dark_purple%%", ChatColor.DARK_PURPLE);
-        map.put("%%gold%%", ChatColor.GOLD);
-        map.put("%%gray%%", ChatColor.GRAY);
-        map.put("%%dark_gray%%", ChatColor.DARK_GRAY);
-        map.put("%%blue%%", ChatColor.BLUE);
-        map.put("%%green%%", ChatColor.GREEN);
-        map.put("%%aqua%%", ChatColor.AQUA);
-        map.put("%%red%%", ChatColor.RED);
-        map.put("%%light_purple%%", ChatColor.LIGHT_PURPLE);
-        map.put("%%yellow%%", ChatColor.YELLOW);
-        map.put("%%white%%", ChatColor.WHITE);
+                Pair.of("%%gold%%", ChatColor.GOLD),
+                Pair.of("%%gray%%", ChatColor.GRAY),
+                Pair.of("%%blue%%", ChatColor.BLUE),
+                Pair.of("%%green%%", ChatColor.GREEN),
+                Pair.of("%%aqua%%", ChatColor.AQUA),
+                Pair.of("%%red%%", ChatColor.RED),
+                Pair.of("%%light_purple%%", ChatColor.LIGHT_PURPLE),
+                Pair.of("%%yellow%%", ChatColor.YELLOW),
+                Pair.of("%%white%%", ChatColor.WHITE),
 
-        map.put("%%obfuscated%%", ChatColor.MAGIC);
-        map.put("%%bold%%", ChatColor.BOLD);
-        map.put("%%strikethrough%%", ChatColor.STRIKETHROUGH);
-        map.put("%%italic%%", ChatColor.ITALIC);
-        map.put("%%reset%%", ChatColor.RESET);
-
-        return map;
+                Pair.of("%%obfuscated%%", ChatColor.MAGIC),
+                Pair.of("%%bold%%", ChatColor.BOLD),
+                Pair.of("%%strikethrough%%", ChatColor.STRIKETHROUGH),
+                Pair.of("%%italic%%", ChatColor.ITALIC),
+                Pair.of("%%reset%%", ChatColor.RESET)
+        ).collect(Collectors.toMap(Pair::getLeft, Pair::getRight, (a, b) -> b, HashMap::new));
     }
 }

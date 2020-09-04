@@ -36,9 +36,7 @@ public class AuraBotItem implements IItems
     {
         for (final Field field : target.getDeclaredFields())
         {
-            if ((name == null || field.getName().equals(name)) &&
-                    fieldType.isAssignableFrom(field.getType()) &&
-                    index-- <= 0)
+            if ((name == null || field.getName().equals(name)) && fieldType.isAssignableFrom(field.getType()) && index-- <= 0)
             {
                 field.setAccessible(true);
                 return field;
@@ -79,17 +77,15 @@ public class AuraBotItem implements IItems
 
         GameProfile profile = new GameProfile(UUID.randomUUID(), "AURA_BOT");
 
-        String __DOG_SKIN = "ewogICJ0aW1lc3RhbXAiIDogMTU5MzUwOTE0MTgxNiwKICAicHJvZmlsZUlkIiA6ICI0YTc5MmE2YTVkYTI0ODUyODM4N2JkY2YyNjdjNjhkYiIsCiAgInByb2ZpbGVOYW1lIiA6ICJBY3R1YWxseUp1c3RhZG9nIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2UwMzQ2YTQ4YjI4YjEzYWU2ZjkyZWQxOGI3MDRhZmFkY2IzMGIzMGJkZTFjYTk4Yzk4OGM1OTE1MjJiZTYyMzgiCiAgICB9CiAgfQp9";
-        String __SIGNATURE = "fuFok5TwMcvFBKhU+SeIgVUSugsAhqw/4kTF4ErZ5I/726goNMte6fDJmwy1rKSHsvRxtlZboNpJD96pRUOOLnVFXqaVkxEDJoH0VHvtTTcabw3EPMgC0HbjYxiC2X07Kwjrt/FlA1xezX2G6pd5/cvOnDwFBxDz0Na7adraJOclMlSaC/Yuo80IetIJUPjXkwUqeOFzQsZmokI8Bi4c34SbTzB93o2xVhv4Vft4A9oFxc1nik3uDFBqT59Slh9+vWdjpsF2gXLUkegpHJnZIaX/sG8u1MXurLlpvkwbm0/8u9PC6iAIOMuNReT+y0+nhulKEMp9rY0H36FIgqotJyCe3FboWwQfdrQh4UKwsSTUn46KyOFSmN2Ig6a1NyXSuHcFQQ+o3CRiByZwVuzphChvp/2rD3Dx1LsDw5zGgo72+KUQ9UZji+OswRfrLFhOKbzctwadFGp77JabmKMPAcGB2gv7bIeT0/NnzMLoGPC0VAxJAvF4nk3z/ywTAr0MtsZ6X5BDPHC0AWQIpz575GhGrjw/QdjIjncd+Ye1a993faSIsCvTam4amzORj7Vx705sqaepzweQXsDrY3S0EBAGaBe0nkItA+aTDCNGmKEyijZIYIaw05DoJKnrVeQUclPmtLHzBMnqfkY42vecF9W2pkDuBfA3Ev5VzoQ3HB0=";
+        final String __DOG_SKIN = "ewogICJ0aW1lc3RhbXAiIDogMTU5MzUwOTE0MTgxNiwKICAicHJvZmlsZUlkIiA6ICI0YTc5MmE2YTVkYTI0ODUyODM4N2JkY2YyNjdjNjhkYiIsCiAgInByb2ZpbGVOYW1lIiA6ICJBY3R1YWxseUp1c3RhZG9nIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2UwMzQ2YTQ4YjI4YjEzYWU2ZjkyZWQxOGI3MDRhZmFkY2IzMGIzMGJkZTFjYTk4Yzk4OGM1OTE1MjJiZTYyMzgiCiAgICB9CiAgfQp9";
+        final String __SIGNATURE = "fuFok5TwMcvFBKhU+SeIgVUSugsAhqw/4kTF4ErZ5I/726goNMte6fDJmwy1rKSHsvRxtlZboNpJD96pRUOOLnVFXqaVkxEDJoH0VHvtTTcabw3EPMgC0HbjYxiC2X07Kwjrt/FlA1xezX2G6pd5/cvOnDwFBxDz0Na7adraJOclMlSaC/Yuo80IetIJUPjXkwUqeOFzQsZmokI8Bi4c34SbTzB93o2xVhv4Vft4A9oFxc1nik3uDFBqT59Slh9+vWdjpsF2gXLUkegpHJnZIaX/sG8u1MXurLlpvkwbm0/8u9PC6iAIOMuNReT+y0+nhulKEMp9rY0H36FIgqotJyCe3FboWwQfdrQh4UKwsSTUn46KyOFSmN2Ig6a1NyXSuHcFQQ+o3CRiByZwVuzphChvp/2rD3Dx1LsDw5zGgo72+KUQ9UZji+OswRfrLFhOKbzctwadFGp77JabmKMPAcGB2gv7bIeT0/NnzMLoGPC0VAxJAvF4nk3z/ywTAr0MtsZ6X5BDPHC0AWQIpz575GhGrjw/QdjIjncd+Ye1a993faSIsCvTam4amzORj7Vx705sqaepzweQXsDrY3S0EBAGaBe0nkItA+aTDCNGmKEyijZIYIaw05DoJKnrVeQUclPmtLHzBMnqfkY42vecF9W2pkDuBfA3Ev5VzoQ3HB0=";
         profile.getProperties().put("textures", new Property("textures", __DOG_SKIN, __SIGNATURE));
 
         meta.setLore(Item.getLore(this, target));
 
-        Class<?> head = meta.getClass();
-
         try
         {
-            getField(head, "profile", GameProfile.class, 0).set(meta, profile);
+            getField(meta.getClass(), "profile", GameProfile.class, 0).set(meta, profile);
 
         }
         catch (Exception e)

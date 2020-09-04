@@ -48,9 +48,7 @@ public class CommandTrust implements CommandExecutor
         }
 
         if (!player.hasPermission("psac.trust"))
-        {
             return ErrorMessageSender.unPermMessage(sender, "psac.trust");
-        }
 
         TrustModifier.addTrustPlayer(player, sender);
 

@@ -63,8 +63,7 @@ public class Kick
 
         ArrayList<String> argSet = new ArrayList<>(Arrays.asList(args));
 
-        argSet.remove(1);
-        argSet.remove(0);
+        argSet.subList(0, 2).clear();
 
         KickManager.kickPlayer(player, String.join(", ", argSet), false, false);
     }

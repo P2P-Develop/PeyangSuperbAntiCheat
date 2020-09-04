@@ -7,7 +7,6 @@ import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
 
 import java.util.*;
 
@@ -63,9 +62,7 @@ public class CommandReport implements CommandExecutor
                 sender.sendMessage(get("error.requirePlayer"));
                 return true;
             }
-            Player target = Bukkit.getPlayer(args[0]);
-            ItemStack book = Books.getReportBook(target, CheatTypeUtils.getFullType());
-            BookUtil.openBook(book, (Player) sender);
+            BookUtil.openBook(Books.getReportBook(Bukkit.getPlayer(args[0]), CheatTypeUtils.getFullType()), (Player) sender);
             return true;
         }
 
@@ -94,11 +91,9 @@ public class CommandReport implements CommandExecutor
         Player target = Bukkit.getPlayer(args[0]);
         if (reasons.size() != 0 && reasons.get(reasons.size() - 1).equals("\\"))
         {
-            ItemStack book = Books.getReportBook(target, types.toArray(new EnumCheatType[0]));
-            BookUtil.openBook(book, (Player) sender);
+            BookUtil.openBook(Books.getReportBook(target, types.toArray(new EnumCheatType[0])), (Player) sender);
             return true;
         }
-
 
         types.removeIf(type -> !type.isSelected());
 
@@ -143,13 +138,7 @@ public class CommandReport implements CommandExecutor
         {
             sender.sendMessage(get("message.report.thanks"));
 
-            if (!config.getBoolean("message.lynx"))
-            {
-                Utils.adminNotification(id);
-                return;
-            }
-
-            Utils.adminNotification(target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
+            Utils.adminNotification(!config.getBoolean("message.lynx") ? id : target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
         }
         else
             sender.sendMessage(get("error.unknownSQLError"));

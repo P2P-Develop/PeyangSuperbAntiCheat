@@ -127,15 +127,13 @@ public class NeuralNetwork
     private void learn(Triple<Double, Double, Double> data)
     {
         final double outputData = commit(Pair.of(data.getLeft(), data.getMiddle()));
-        final double correctValue = data.getRight();
 
         final double learningRate = config.getDouble("npc.learn");
 
-        final double deltaMO = (correctValue - outputData) * outputData * (1.0 - outputData);
+        final double deltaMO = (data.getRight() - outputData) * outputData * (1.0 - outputData);
         final double[] oldMiddleWeight = middleWeight.clone();
 
-        int bound = middleLayer.length;
-        IntStream.range(0, bound).parallel().forEachOrdered(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
+        IntStream.range(0, middleLayer.length).parallel().forEachOrdered(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
 
         middleWeight[2] += middleLayerBias * deltaMO * learningRate;
 

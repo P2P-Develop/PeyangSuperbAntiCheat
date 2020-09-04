@@ -50,26 +50,11 @@ public class Help
 
     private static ArrayList<String> getNodes()
     {
-        ArrayList<String> nodes = new ArrayList<>();
-        nodes.add("report");
-        nodes.add("view");
-        nodes.add("aurapanic");
-        nodes.add("aurabot");
-        nodes.add("show");
-        nodes.add("drop");
-        nodes.add("kick");
-        nodes.add("bans");
-        nodes.add("testkb");
-        return nodes;
+        return new ArrayList<>(Arrays.asList("report", "view", "aurapanic", "aurabot", "show", "drop", "kick", "bans", "testkb"));
     }
 
     private static ArrayList<String> getPlayerNodes()
     {
-        ArrayList<String> nodes = getNodes();
-        nodes.add("pull");
-        nodes.add("target");
-        nodes.add("silentteleport");
-        nodes.add("tracking");
-        return nodes;
+        return new ArrayList<>(Arrays.asList("pull", "target", "silentteleport", "tracking"));
     }
 }

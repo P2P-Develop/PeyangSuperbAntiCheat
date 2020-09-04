@@ -34,8 +34,7 @@ public class TrustModifier
                 try (Connection connection = trust.getConnection();
                      Statement statement = connection.createStatement())
                 {
-                    ResultSet rs = statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
-                    if (rs.next())
+                    if (statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'").next())
                     {
                         statement.execute("DeLeTe FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
                         sender.sendMessage(get("message.trust.remove", pair("name", player.getName())));
@@ -70,15 +69,13 @@ public class TrustModifier
         try (Connection connection = trust.getConnection();
              Statement statement = connection.createStatement())
         {
-            ResultSet rs = statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
-            result = rs.next();
+            result = statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'").next();
         }
         catch (Exception e)
         {
             e.printStackTrace();
             Utils.errorNotification(Utils.getStackTrace(e));
         }
-
 
         return result;
     }
