@@ -46,9 +46,9 @@ error:
 command:
   report:
     help: "\
-    %%aqua%%/%%label%% <PlayerName> [reason...]\n\
+    %%aqua%%/psac <PlayerName> [reason...]\n\
     %%green%%プレイヤーを報告します。\n\
-    %%aqua%%/%%label%% help\n\
+    %%aqua%%/psac help\n\
     %%green%%このコマンドです。
     "
   help:
@@ -57,7 +57,7 @@ command:
     %%green%%プレイヤーをレポートします。\
     "
     view: "\
-    %%aqua%%/%%label%% view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]\n\
+    %%aqua%%/psac view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]\n\
     %%green%%レポートされた、対処されていない問題を重大度順に表示します。
     "
 
@@ -74,15 +74,15 @@ command:
     %%gray%%%%italic%%Tips：第2引数に、-rをセットすると、リーチモードとして召喚されます。
     "
     show: "\
-    %%aqua%%/%%label%% show %%dark_aqua%%<管理iD>\n\
+    %%aqua%%/psac show %%dark_aqua%%<管理iD>\n\
     %%green%%レポートを表示します。
     "
     drop: "\
-    %%aqua%%/%%label%% drop%%dark_aqua%% <管理iD>\n\
+    %%aqua%%/psac drop%%dark_aqua%% <管理iD>\n\
     %%green%%レポートを削除します。
     "
     kick: "\
-    %%aqua%%/%%label%% kick %%dark_aqua%% <PlayerName>%%dark_purple%% [理由...]\n\
+    %%aqua%%/psac kick %%dark_aqua%% <PlayerName>%%dark_purple%% [理由...]\n\
     %%green%%プレイヤーをキックします。\n\
     %%gray%%%%italic%%Tips：第2引数に、testをセットすると、テストモードでキックされます。
     "
@@ -129,6 +129,21 @@ command:
     %%yellow%%注意：管理IDはランダムで割り当てられる32文字の英数文字列です。\n\
     %%yellow%%プレイヤーからも操作できますが、コンソールから操作することを推奨します。
     "
+  shelp:
+    report: "%%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>"
+    view: "%%aqua%%/psac view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]"
+    aurapanic: "%%aqua%%/acpanic %%dark_aqua%%<PlayerName>%%dark_purple%% [-rf]"
+    aurabot: "%%aqua%%/aurabot%%dark_aqua%% <PlayerName>%%dark_purple%% [-r]"
+    show: "%%aqua%%/psac show %%dark_aqua%%<管理iD>"
+    drop: "%%aqua%%/psac drop%%dark_aqua%% <管理iD>"
+    kick: "%%aqua%%/psac kick %%dark_aqua%% <PlayerName>%%dark_purple%% [理由...]"
+    bans: "%%aqua%%/bans %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>"
+    testkb: "%%aqua%%/testkb %%dark_aqua%%<PlayerName>"
+    pull: "%%aqua%%/pull %%dark_aqua%%<PlayerName>"
+    target: "%%aqua%%/target %%dark_aqua%%<PlayerName>"
+    tracking: "%%aqua%%/track %%dark_purple%%[PlayerName]"
+    trust: "%%aqua%%/trust %%dark_aqua%%<PlayerName>"
+    silentteleport: "%%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>"
 
 message:
   report:
