@@ -39,6 +39,5 @@ public class Bungee implements PluginMessageListener
         }
 
         bungeeCommand.runCommand(message);
-
     }
 }
