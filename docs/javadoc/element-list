@@ -1,4 +1,4 @@
-ml.peya.plugins
+ml.peya.plugins.Bukkit
 ml.peya.plugins.Commands
 ml.peya.plugins.Commands.CmdPub
 ml.peya.plugins.Commands.CmdTst
@@ -14,3 +14,5 @@ ml.peya.plugins.Learn
 ml.peya.plugins.Moderate
 ml.peya.plugins.Task
 ml.peya.plugins.Utils
+ml.peya.plugins.BungeeProxy
+ml.peya.plugins.BungeeStructure

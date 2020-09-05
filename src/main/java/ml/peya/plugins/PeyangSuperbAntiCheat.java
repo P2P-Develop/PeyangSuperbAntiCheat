@@ -16,6 +16,7 @@ import ml.peya.plugins.Gui.Items.Target.Page2.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Task.*;
+import ml.peya.plugins.BungeeStructure.*;
 import org.apache.commons.io.*;
 import org.bukkit.*;
 import org.bukkit.plugin.java.*;
@@ -98,6 +99,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
         trust = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + trustPath));
 
+        bungeeChannel = "PSACProxy";
+
         try
         {
             FileUtils.copyInputStreamToFile(this.getResource("skin.db"), new File(getDataFolder().getAbsolutePath() + "/skin.db"));
@@ -161,6 +164,11 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         getCommand("trust").setExecutor(new CommandTrust());
         getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
         getCommand("userinfo").setExecutor(new CommandUserInfo());
+
+        CommandManager manager = new CommandManager();
+        manager.registerCommand(new BungeeCommands());
+
+        bungeeCommand = manager;
 
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new Run(), this);
@@ -226,8 +234,12 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         mods = new HashMap<>();
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(this, "FML|HS");
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new PluginMessageListener());
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new ClientModGetter());
+        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "PSACProxy");
+        Bukkit.getMessenger().registerIncomingPluginChannel(this, "PSACProxy", new Bungee());
 
+
+        Bungee.sendMessage("ping");
 
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }

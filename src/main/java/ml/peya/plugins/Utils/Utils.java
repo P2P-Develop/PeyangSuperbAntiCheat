@@ -92,6 +92,13 @@ public class Utils
         return str.toString();
     }
 
+    /**
+     * 指定したアクションを繰り返して並列実行します。
+     *
+     * @param count 実行回数。
+     * @param action 行うアクション。匿名クラスを使用できます。
+     * @param ignored 適当にマップに使うやつなんでnullでいいです。
+     */
     public static void times(int count, Consumer action, Object ignored)
     {
         IntStream.range(0, count).parallel().mapToObj(time -> ignored).forEachOrdered(action::accept);

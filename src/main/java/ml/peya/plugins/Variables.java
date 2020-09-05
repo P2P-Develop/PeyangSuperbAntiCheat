@@ -6,6 +6,7 @@ import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.BungeeStructure.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.scheduler.*;
 
@@ -38,6 +39,10 @@ public class Variables
      * Trustのデータベースの置き場所が入ります。
      */
     public static String trustPath;
+    /**
+     * BungeeCordのチャンネルです。
+     */
+    public static String bungeeChannel;
     /**
      * いろいろ値を入手するのに使います。
      * 地味に便利。
@@ -110,6 +115,10 @@ public class Variables
      */
     public static boolean isTrackEnabled;
     /**
+     * バンジー存在チェック
+     */
+    public static boolean bungeeCord;
+    /**
      * どういう定期メッセージを行うのかのアクション。
      */
     public static BukkitRunnable autoMessage;
@@ -117,4 +126,8 @@ public class Variables
      * Tracking時にやること。
      */
     public static BukkitRunnable trackerTask;
+    /**
+     * BungeeCord共通コマンド
+     */
+    public static CommandManager bungeeCommand;
 }

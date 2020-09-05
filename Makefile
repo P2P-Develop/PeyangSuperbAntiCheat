@@ -46,10 +46,11 @@ idea: ## Generate IntelliJ IDEA workspace
 
 javadoc: ## Generate java document files
 	@mvn javadoc:javadoc
+	@rm -rf docs/javadoc
+	@cp -r target/site/apidocs docs/javadoc
 
 refresh: ## Refresh project files
 	mvn ant:ant
 	make eclipse
 	make idea
 	make javadoc
-	mv target/site/apidocs docs/javadoc

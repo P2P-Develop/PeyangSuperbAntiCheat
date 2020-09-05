@@ -1,9 +1,9 @@
 package ml.peya.plugins.Detect;
 
 import develop.p2p.lib.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;

@@ -1,5 +1,6 @@
 package ml.peya.plugins.Commands;
 
+import ml.peya.plugins.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
@@ -145,6 +146,7 @@ public class CommandReport implements CommandExecutor
             }
 
             Utils.adminNotification(target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
+            Bungee.sendMessage("report " + id + " " + target.getName());
         }
         else
             sender.sendMessage(get("error.unknownSQLError"));
