@@ -94,6 +94,9 @@ public class PlayerUtils
         if (name.length() > 16)
             name = random.nextBoolean() ? first: last;
 
+        if (name.length() > 16)
+            name = RandomStringUtils.randomAlphanumeric(random.nextInt(16));
+
         WorldServer worldServer = ((CraftWorld) world).getHandle();
 
         Pair<String, String> skin = getRandomSkin();
@@ -116,7 +119,7 @@ public class PlayerUtils
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SELECT * FROM Skin ORDER BY RANDOM() LIMIT 1");
-            return !result.next() ? Pair.of("", "") : Pair.of(result.getString("Texture"), result.getString("Signature"));
+            return !result.next() ? Pair.of("", ""): Pair.of(result.getString("Texture"), result.getString("Signature"));
         }
         catch (Exception e)
         {
