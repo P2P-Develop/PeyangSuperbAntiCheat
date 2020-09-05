@@ -36,17 +36,20 @@ public class AutoMessageTask extends BukkitRunnable
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
         {
-            while (statement.executeQuery("SeLeCt * FrOm kIcK WhErE DaTe BeTwEeN " +
+            ResultSet wd = statement.executeQuery("SeLeCt * FrOm kIcK WhErE DaTe BeTwEeN " +
                     date.getTime() +
                     " AnD " +
                     new Date().getTime() +
-                    " AnD StAfF=0").next())
+                    " AnD StAfF=0"); //XXX: 短縮不可 => 無限ループ
+            ResultSet s = statement2.executeQuery("SeLeCt * FrOm kIcK WhErE DaTe BeTwEeN " +
+                    date.getTime() +
+                    " AnD " +
+                    new Date().getTime() +
+                    " AnD StAfF=1");
+
+            while (wd.next())
                 watchdog++;
-            while (statement2.executeQuery("SeLeCt * FrOm kIcK WhErE DaTe BeTwEeN " +
-                    date.getTime() +
-                    " AnD " +
-                    new Date().getTime() +
-                    " AnD StAfF=1").next())
+            while (s.next())
                 staff++;
         }
         catch (Exception e)
