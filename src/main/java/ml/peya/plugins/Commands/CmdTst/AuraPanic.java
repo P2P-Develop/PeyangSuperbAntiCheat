@@ -3,13 +3,11 @@ package ml.peya.plugins.Commands.CmdTst;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
-import org.apache.commons.lang3.tuple.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
-import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.cheatMeta;
@@ -65,7 +63,14 @@ public class AuraPanic implements CommandExecutor
         }
 
         if (!config.getBoolean("message.lynx"))
-            sender.sendMessage(get("message.aura.summon", Stream.of(Pair.of("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") "))), Pair.of("type", "AuraPanicBot"), Pair.of("seconds", config.getString("npc.seconds"))).collect(Collectors.toMap(Pair::getLeft, Pair::getRight, (a, b) -> b, HashMap::new))));
+        {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") ")));
+            map.put("type", "AuraPanicBot");
+            map.put("seconds", String.valueOf(config.getInt("npc.seconds")));
+
+            sender.sendMessage(get("message.aura.summon", map));
+        }
         else
             sender.sendMessage(get("message.aura.lynx"));
 

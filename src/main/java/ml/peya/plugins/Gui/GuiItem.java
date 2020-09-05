@@ -33,8 +33,9 @@ public class GuiItem
         {
             if (items.getType() != type && type != IItems.Type.ALL)
                 continue;
-
-            player.getInventory().setItem(i++, items.getItem(target));
+            
+            player.getInventory().setItem(i, items.getItem(target));
+            i++;
             if (items.canSpace())
                 i++;
         }

@@ -6,7 +6,6 @@ import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
-import org.apache.commons.lang3.tuple.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.craftbukkit.v1_12_R1.entity.*;
@@ -15,7 +14,6 @@ import org.bukkit.metadata.*;
 import org.bukkit.scheduler.*;
 
 import java.util.*;
-import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.cheatMeta;
@@ -79,12 +77,16 @@ public class NPCTeleport
 
                 connection.sendPacket(new PacketPlayOutAnimation(((CraftPlayer) player).getHandle(), 1));
 
-                sender.sendMessage(get("message.auraCheck.panic.lynx", Stream.of(Pair.of("hit", ++now[0]), Pair.of("max", count)).collect(Collectors.toMap(Pair::getLeft, Pair::getRight, (a, b) -> b, HashMap::new))));
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("hit", now[0]);
+                map.put("max", count);
 
+                sender.sendMessage(get("message.auraCheck.panic.lynx", map));
                 if (now[0] >= count)
                     this.cancel();
             }
         }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, (long) (10 * ((1.5 / count) * sec)));
+
 
         new BukkitRunnable()
         {
@@ -200,7 +202,7 @@ public class NPCTeleport
                     count[0]++;
                     CheatDetectNowMeta meta = cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
                     if (meta == null) continue;
-                    meta.addSeconds(((LookingUtils.isLooking(player, n) || LookingUtils.isLooking(player, n.clone().add(0, 1, 0))) ? (config.getLong("npc.seconds") * 0.1 / 2): 0.0));
+                    meta.addSeconds(((PlayerUtils.isLooking(player, n) || PlayerUtils.isLooking(player, n.clone().add(0, 1, 0))) ? (config.getLong("npc.seconds") * 0.1 / 2): 0.0));
                 }
                 time[0] += config.getDouble("npc.time") + (config.getBoolean("npc.speed.wave") ? new WaveCreator(0.0, config.getDouble("npc.speed.waveRange"), 0 - config.getDouble("npc.speed.waveRange")).get(0.001, true): 0.0);
             }

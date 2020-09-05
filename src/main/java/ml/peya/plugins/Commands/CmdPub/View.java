@@ -51,8 +51,7 @@ public class View
              Statement statement2 = connection.createStatement())
         {
             String idReq = nameFlag ? String.format("WhErE id = '%s'", offName): "";
-
-            offName = WatchEyeManagement.parseInjection(offName);
+            
 
             String query = "SeLeCt * FrOm WaTcHeYe " + idReq + " OrDer By LeVel DeSc LiMiT 5 OfFsEt " + start;
             ResultSet result = statement.executeQuery(query);

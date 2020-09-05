@@ -11,6 +11,10 @@ import java.util.*;
  */
 public class RandomWordUtils
 {
+
+    //登録スキン数
+    private static final int __MaxLine = 1384;
+
     /**
      * ファイルからランダムな単語を取得します。
      *
@@ -32,7 +36,8 @@ public class RandomWordUtils
         try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/wordsx256.txt"), StandardCharsets.UTF_8);
              BufferedReader bufferedReader = new BufferedReader(reader))
         {
-            return bufferedReader.lines().skip(new Random(bound).nextInt(1384 - 1)).findFirst().orElse("");
+            Optional<String> result = bufferedReader.lines().skip(new Random(bound).nextInt(__MaxLine - 1)).findFirst();
+            return result.orElse("");
         }
         catch (IOException e)
         {

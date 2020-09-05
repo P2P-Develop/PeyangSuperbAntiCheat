@@ -138,7 +138,13 @@ public class CommandReport implements CommandExecutor
         {
             sender.sendMessage(get("message.report.thanks"));
 
-            Utils.adminNotification(!config.getBoolean("message.lynx") ? id : target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
+            if (!config.getBoolean("message.lynx"))
+            {
+                Utils.adminNotification(id);
+                return;
+            }
+
+            Utils.adminNotification(target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
         }
         else
             sender.sendMessage(get("error.unknownSQLError"));

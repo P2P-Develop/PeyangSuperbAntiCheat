@@ -55,7 +55,6 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 break;
             default:
                 sender.sendMessage(get("error.main.notFoundCommand", pair("label", label)));
-                break;
         }
 
         return true;
