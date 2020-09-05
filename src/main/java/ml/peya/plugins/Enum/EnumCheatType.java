@@ -12,9 +12,9 @@ public enum EnumCheatType
      */
     FLY("Fly", false, "fly", "flight"),
     /**
-     * KillAura
+     * KillAura, ForceField
      */
-    KILLAURA("KillAura", false, "killaura", "aura", "ka"),
+    KILLAURA("KillAura", false, "killaura", "aura", "ka", "forcefield", "ff"),
     /**
      * AutoClicker, Macro
      */
