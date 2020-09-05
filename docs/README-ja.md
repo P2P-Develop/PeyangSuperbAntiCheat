@@ -36,7 +36,7 @@ __~~このプラグインはほぼネタプラグインd（殴~~__ **[削除済�
 (1) このプラグインの本当の目的は自動BANを推奨していないのでこの文章は適切ではありません。
 そのためBAN関係のものは実装されていません。
 
-このプラグインでは、常時2個Detectopmで+4個タイマーが動いています（2015/10/21 16:29現在）※~~2020年です~~違います紀元前です
+このプラグインでは、常時2個DetectOPMで+4個タイマーが動いています（2015/10/21 16:29現在）※~~2020年です~~違います紀元前です
 NPCが出てくるたび12個くらいタイマーが増えます。  
 すぐ消えるけどね。JavaのVMによっては消えるのに時間がかかる時もあるけど。  
 詳しくは[こ↑こ↓](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt) 見て、どうぞ。  
@@ -471,7 +471,7 @@ Lynxモード\(-f\)が有効の場合、Rankなどの情報が最低限表示さ
 | psac.regular | 定期メッセージが流れます。 | | true | psac.member |
 | _**psac.mod**_ | プレイヤーのキックやテストをできます。 | | op | |
 | psac.kick | /psac kick | プレイヤーをキックできます。 | op | psac.mod |
-| psac.aurapanic | /aurapanic \<\PlyerName\> | プレイヤーに回るNPCを送りつけることができます。 | op | psac.mod |
+| psac.aurapanic | /aurapanic \<\PlayerName\> | プレイヤーに回るNPCを送りつけることができます。 | op | psac.mod |
 | psac.aurabot | /aurabot \<PlayerName\> | プレイヤーの背後に貼り付く、NPCを召喚します。 | op | psac.mod |
 | psac.testkb | /testkb \<PlayerName\> | プレイヤーに見えない弓を放ち、ノックバックを確かめます。 | op | psac.mod |
 | psac.viewnpc | 対象プレイヤー以外に、NPCを見ることができます。 | | op | psac.mod |
