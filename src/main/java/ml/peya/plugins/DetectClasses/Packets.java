@@ -31,7 +31,7 @@ public class Packets
             if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK) return;
             for (CheatDetectNowMeta meta : cheatMeta.getMetas())
             {
-                if (meta.getId() == field.getInt(entity) && meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() || Criticals.hasCritical(e.getPlayer()))
+                if (meta.getId() == field.getInt(entity) && meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() || PlayerUtils.hasCritical(e.getPlayer()))
                     System.out.println(meta.addVL());
             }
         }
