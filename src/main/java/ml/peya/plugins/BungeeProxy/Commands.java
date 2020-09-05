@@ -4,7 +4,7 @@ import ml.peya.plugins.BungeeStructure.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.config.*;
 
-import static ml.peya.plugins.Bukkit.Variables.logger;
+import static ml.peya.plugins.Variables.logger;
 
 public class Commands implements CommandExecutor
 {

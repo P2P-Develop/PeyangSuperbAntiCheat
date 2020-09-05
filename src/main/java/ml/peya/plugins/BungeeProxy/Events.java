@@ -7,7 +7,7 @@ import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.plugin.*;
 import net.md_5.bungee.event.*;
 
-import static ml.peya.plugins.Bukkit.Variables.*;
+import static ml.peya.plugins.Variables.*;
 
 /**
  * Bungeecordプロキシのサーバーから受け取るデータに基づくイベントを管理します。

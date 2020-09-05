@@ -7,7 +7,7 @@ import net.md_5.bungee.api.plugin.*;
 
 import java.util.*;
 
-import static ml.peya.plugins.Bukkit.Variables.*;
+import static ml.peya.plugins.Variables.*;
 
 /**
  * Bungeeプロキシ用のPSACプラグイン実装。プロキシ用プラグイン情報とサーバーリストの管理をします。
