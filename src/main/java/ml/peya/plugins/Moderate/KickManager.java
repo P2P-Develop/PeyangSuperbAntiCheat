@@ -1,7 +1,7 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.DetectClasses.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import org.bukkit.*;
 import org.bukkit.entity.*;
@@ -83,6 +83,8 @@ public class KickManager
             Decorations.flame(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
         if (Variables.config.getBoolean("decoration.circle"))
             Decorations.magic(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+        if (Variables.config.getBoolean("decoration.laser"))
+            Decorations.laser(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
     }
 
     /**

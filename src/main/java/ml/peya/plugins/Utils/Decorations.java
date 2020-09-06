@@ -102,6 +102,18 @@ public class Decorations
      */
     public static void line(Location path, Location to)
     {
+        line(path, to, Particle.ENCHANTMENT_TABLE);
+    }
+
+    /**
+     * 線を引くよ！
+     *
+     * @param path 開始位置
+     * @param to   終了位置
+     * @param p    パーティクル
+     */
+    public static void line(Location path, Location to, Particle p)
+    {
         double distance = path.distance(to);
 
         Vector vP = path.toVector();
@@ -112,7 +124,7 @@ public class Decorations
         for (double d = 0; distance > d; )
         {
             vP.add(line);
-            particle(vP.toLocation(path.getWorld()), 1, Particle.ENCHANTMENT_TABLE);
+            particle(vP.toLocation(path.getWorld()), 1, p);
             d += 0.2;
         }
     }
@@ -214,6 +226,45 @@ public class Decorations
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), seconds);
 
+    }
+
+    /**
+     * ガーディアンビーム
+     *
+     * @param player 餌食
+     * @param sec    秒数
+     */
+    public static void laser(Player player, int sec)
+    {
+
+        final double[] time = {0.0};
+
+        final double radius = 2.5;
+
+
+        BukkitRunnable runnable = new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                Location c = player.getLocation().clone();
+                Location X = new Location(c.getWorld(), particle_x(time[0], radius) + c.getX(), 5.0 + c.getY(), particle_z(time[0], radius) + c.getZ());
+
+                for (int i = 0; i < 10; i++)
+                    line(c, X, Particle.TOWN_AURA);
+                time[0] += Math.E;
+            }
+        };
+
+        runnable.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0L, 1L);
+        new BukkitRunnable()
+        {
+            @Override
+            public void run()
+            {
+                runnable.cancel();
+            }
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), sec);
     }
 
     /**

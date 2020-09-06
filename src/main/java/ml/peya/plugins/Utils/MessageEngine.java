@@ -17,6 +17,34 @@ import java.util.stream.*;
 public class MessageEngine
 {
     /**
+     * コンフィグ
+     */
+    private static YamlConfiguration config;
+
+    /**
+     * 初期化確認
+     */
+    private static boolean isInitialized = false;
+
+    /**
+     * 初期化
+     */
+    public static void initialize()
+    {
+        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
+        {
+            config = YamlConfiguration.loadConfiguration(new BufferedReader(reader));
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            isInitialized = false;
+        }
+
+        isInitialized = true;
+    }
+
+    /**
      * %%name%%などカラーコード以外に関係する動的な参照データをハッシュマップとして結びつける。
      *
      * @param path 動的データタイプ。
@@ -46,15 +74,13 @@ public class MessageEngine
      */
     public static String get(String key, HashMap<String, Object> format)
     {
-        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
+        if (!isInitialized)
         {
-            return format((String) YamlConfiguration.loadConfiguration(new BufferedReader(reader)).getValues(true).get(key), format);
+            initialize();
+            return get(key, format);
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
+
+        return format((String) config.getValues(true).get(key), format);
     }
 
     /**

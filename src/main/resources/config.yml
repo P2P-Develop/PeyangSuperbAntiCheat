@@ -79,6 +79,9 @@ decoration:
   #魔法陣の表示
   circle: true
 
+  #ガーディアン表示
+  laser: true
+
 message:
   #プレイヤーがレポートを提出した時などのメッセージを
   #「Lynx」Modと互換性をもたせます。
