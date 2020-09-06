@@ -3,15 +3,11 @@ package ml.peya.plugins;
 import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
 import com.fasterxml.jackson.databind.*;
-import com.zaxxer.hikari.*;
-import ml.peya.plugins.BungeeStructure.*;
 import ml.peya.plugins.DetectClasses.Packets;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Task.*;
-import org.apache.commons.io.*;
 import org.bukkit.*;
 import org.bukkit.plugin.java.*;
 
@@ -57,7 +53,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         new Metrics(this, __BSTATS_PLUGIN_ID);
 
-        if (getServer().getPluginManager().getPlugin("ProtocolLib") == null || !getServer().getPluginManager().getPlugin("ProtocolLib").isEnabled())
+        if (Init.isEnablePlugin("ProtocolLib"))
         {
             logger.log(Level.SEVERE, "This plugin requires ProtocolLib!");
             getServer().getPluginManager().disablePlugin(this);
@@ -67,45 +63,22 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         saveDefaultConfig();
 
         plugin = this;
-        config = getConfig();
-        Arrays.asList("npc.seconds", "npc.kill", "npc.vllevel", "npc.learncount", "mod.trackTicks", "kick.defaultKick", "autoMessage.time").parallelStream().forEachOrdered(path -> {
-            try
-            {
-                if (config.getInt(path) < 0)
-                    throw new ArithmeticException();
-            }
-            catch (Exception ignored)
-            {
-                logger.log(Level.WARNING, path + " is minus value! set value to 0");
-                config.set(path, 0);
-            }
-        });
-
-        databasePath = config.getString("database.path");
-        banKickPath = config.getString("database.logPath");
-        trustPath = config.getString("database.trustPath");
+        if (Init.loadConfig())
+        {
+            initialized = false;
+            Bukkit.getPluginManager().disablePlugin(this);
+            return;
+        }
 
         banLeft = config.getInt("npc.vlLevel");
 
         network = new NeuralNetwork();
 
-        eye = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + databasePath));
-        banKick = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + banKickPath));
-        trust = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/" + trustPath));
+        logger.info("Loading Database...");
+        Init.initDataBase();
 
-        bungeeChannel = "PSACProxy";
 
-        try
-        {
-            FileUtils.copyInputStreamToFile(this.getResource("skin.db"), new File(getDataFolder().getAbsolutePath() + "/skin.db"));
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
-        skin = new HikariDataSource(Init.initMngDatabase(getDataFolder().getAbsolutePath() + "/skin.db"));
+        Init.loadSkin();
 
         if (!isEnabled())
             return;
@@ -131,81 +104,31 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         if (!Init.createDefaultTables())
             Bukkit.getPluginManager().disablePlugin(this);
 
+        logger.info("Registering command...");
         Init.registerCommand(); //Command Register
-
-        CommandManager manager = new CommandManager();
-        manager.registerCommand(new BungeeCommands());
-
-        bungeeCommand = manager;
+        Init.registerBungeeCommand();
 
         getServer().getPluginManager().registerEvents(new Events(), this);
         getServer().getPluginManager().registerEvents(new Run(), this);
         getServer().getPluginManager().registerEvents(new Drop(), this);
 
-        isAutoMessageEnabled = config.getBoolean("autoMessage.enabled");
+
         time = config.getLong("autoMessage.time");
         learnCountLimit = config.getInt("npc.learncount");
 
-        if (time == 0L)
-            time = 1L;
-
-        autoMessage = new AutoMessageTask();
-        trackerTask = new TrackerTask();
-
-        isTrackEnabled = config.getBoolean("mod.tracking.enabled");
-
-        if (isTrackEnabled)
-        {
-            logger.info("Starting Tracker Task...");
-            trackerTask.runTaskTimer(this, 0, config.getInt("mod.tracking.trackTicks"));
-        }
-
-        if (isAutoMessageEnabled)
-        {
-            logger.info("Starting Auto-Message Task...");
-            autoMessage.runTaskTimer(this, 0, 20 * (time * 60));
-        }
+        logger.info("Enabling timer...");
+        Init.enableTimer();
 
         logger.info("Reading weights from learnPath...");
-        try
-        {
-            File file = new File(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
-            if (file.exists() && file.length() >= 16)
-            {
-                JsonNode node = new ObjectMapper().readTree(file);
-                int i = 0;
-                for (double[] aIW : network.inputWeight)
-                {
-                    for (int i1 = 0; i1 < aIW.length; i1++)
-                        network.inputWeight[i][i1] = node.get("inputWeight").get(i).get(i1).asDouble();
-                    i++;
-                }
-
-                Arrays.parallelSetAll(network.middleWeight, i2 -> node.get("middleWeight").get(i2).asDouble());
-
-                learnCount = node.get("learnCount").asInt();
-
-                logger.info("Weights setting completed successfully!");
-            }
-        }
-        catch (FileNotFoundException ignored)
-        {
-            logger.warning("Learning data file not found.");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        Init.loadLearn();
 
         mods = new HashMap<>();
 
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "FML|HS");
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, "FML|HS", new ClientModGetter());
-        Bukkit.getMessenger().registerOutgoingPluginChannel(this, "PSACProxy");
-        Bukkit.getMessenger().registerIncomingPluginChannel(this, "PSACProxy", new Bungee());
-
+        Init.registerChannel();
 
         Bungee.sendMessage("ping");
+
+        initialized = true;
 
         logger.info("PeyangSuperbAntiCheat has been activated!");
     }
@@ -217,23 +140,27 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     @Override
     public void onDisable()
     {
-        try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
-             PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
+        if (initialized)
         {
-            logger.info("Saving learn weights to learning data file...");
-            Mapper mp = new Mapper();
-            mp.inputWeight = network.inputWeight;
-            mp.middleWeight = network.middleWeight;
-            mp.learnCount = learnCount;
-            pw.print(new ObjectMapper()
-                    .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-                    .configure(SerializationFeature.INDENT_OUTPUT, true).writeValueAsString(mp));
+            try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+                 PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
+            {
+                logger.info("Saving learn weights to learning data file...");
+                Mapper mp = new Mapper();
+                mp.inputWeight = network.inputWeight;
+                mp.middleWeight = network.middleWeight;
+                mp.learnCount = learnCount;
+                pw.print(new ObjectMapper()
+                        .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+                        .configure(SerializationFeature.INDENT_OUTPUT, true).writeValueAsString(mp));
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+            logger.info("PeyangSuperbAntiCheat has been disabled!");
+            return;
         }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
 
         if (eye != null)
             eye.close();
@@ -241,7 +168,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             banKick.close();
         if (skin != null)
             skin.close();
-        trust.close();
+        if (trust != null)
+            trust.close();
         eye = null;
         banKick = null;
         trust = null;
@@ -258,7 +186,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             trackerTask.cancel();
         }
 
-
-        logger.info("PeyangSuperbAntiCheat has disabled!");
+        logger.info("PeyangSuperbAntiCheat has been disabled!");
     }
 }

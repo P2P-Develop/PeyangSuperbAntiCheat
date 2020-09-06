@@ -2,11 +2,11 @@ package ml.peya.plugins;
 
 import com.comphenix.protocol.*;
 import com.zaxxer.hikari.*;
+import ml.peya.plugins.BungeeStructure.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.BungeeStructure.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.scheduler.*;
 
@@ -118,6 +118,10 @@ public class Variables
      * バンジー存在チェック
      */
     public static boolean bungeeCord;
+    /**
+     * 初期化完了
+     */
+    public static boolean initialized;
     /**
      * どういう定期メッセージを行うのかのアクション。
      */
