@@ -5,6 +5,7 @@ import com.zaxxer.hikari.*;
 import ml.peya.plugins.BungeeStructure.*;
 import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Commands.*;
+import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Items.Main.*;
 import ml.peya.plugins.Gui.Items.Target.*;
@@ -338,4 +339,13 @@ public class Init
         bungeeCommand = manager;
     }
 
+    /**
+     * イベント登録
+     */
+    public static void registerEvents()
+    {
+        Bukkit.getServer().getPluginManager().registerEvents(new Events(), PeyangSuperbAntiCheat.getPlugin());
+        Bukkit.getServer().getPluginManager().registerEvents(new Run(), PeyangSuperbAntiCheat.getPlugin());
+        Bukkit.getServer().getPluginManager().registerEvents(new Drop(), PeyangSuperbAntiCheat.getPlugin());
+    }
 }

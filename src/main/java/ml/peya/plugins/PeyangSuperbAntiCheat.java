@@ -5,7 +5,6 @@ import com.comphenix.protocol.events.*;
 import com.fasterxml.jackson.databind.*;
 import ml.peya.plugins.DetectClasses.Packets;
 import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Gui.Events.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
 import org.bukkit.*;
@@ -108,10 +107,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         Init.registerCommand(); //Command Register
         Init.registerBungeeCommand();
 
-        getServer().getPluginManager().registerEvents(new Events(), this);
-        getServer().getPluginManager().registerEvents(new Run(), this);
-        getServer().getPluginManager().registerEvents(new Drop(), this);
-
+        logger.info("Registering event...");
+        Init.registerEvents();
 
         time = config.getLong("autoMessage.time");
         learnCountLimit = config.getInt("npc.learncount");
