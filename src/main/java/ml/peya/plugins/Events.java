@@ -1,6 +1,7 @@
 package ml.peya.plugins;
 
 import com.mojang.authlib.properties.*;
+import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Utils.*;
 import net.md_5.bungee.api.chat.*;
 import net.minecraft.server.v1_12_R1.*;
@@ -189,6 +190,13 @@ public class Events implements Listener
 
             e.setLeaveMessage("");
         }
+
+        if (e.getReason().startsWith(ChatColor.GRAY + "[" + ChatColor.AQUA + "Matrix" + ChatColor.GRAY + "]")) //Matrix Detection
+        {
+            e.setCancelled(true);
+            KickManager.kickPlayer(e.getPlayer(), e.getReason().replaceFirst("§7\\[§bMatrix§7]§r ", ""), true, false);
+        }
+
     }
 }
 
