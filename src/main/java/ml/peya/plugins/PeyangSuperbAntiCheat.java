@@ -4,19 +4,13 @@ import com.comphenix.protocol.*;
 import com.comphenix.protocol.events.*;
 import com.fasterxml.jackson.databind.*;
 import com.zaxxer.hikari.*;
-import ml.peya.plugins.Commands.CmdTst.*;
-import ml.peya.plugins.Commands.*;
+import ml.peya.plugins.BungeeStructure.*;
 import ml.peya.plugins.DetectClasses.Packets;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.Events.*;
-import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Gui.Items.Main.*;
-import ml.peya.plugins.Gui.Items.Target.*;
-import ml.peya.plugins.Gui.Items.Target.Page2.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Task.*;
-import ml.peya.plugins.BungeeStructure.*;
 import org.apache.commons.io.*;
 import org.bukkit.*;
 import org.bukkit.plugin.java.*;
@@ -116,21 +110,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         if (!isEnabled())
             return;
 
-        item = new Item();
-
-        item.register(new AuraBotItem());  //====Page1
-        item.register(new AuraPanicItem());
-        item.register(new TestKnockBack());
-        item.register(new CompassTracker3000_tm());
-        item.register(new BanBook());
-        item.register(new ToPage2());                                   //====Page2
-        item.register(new BackButton());
-
-        item.register(new BackToPage1());                              //====Page2
-        item.register(new Lead());
-        item.register(new ModList());
-
-        item.register(new TargetStick());                              //====Main
+        item = Init.initItem();
 
         cheatMeta = new DetectingList();
         counting = new KillCounting();
@@ -151,19 +131,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         if (!Init.createDefaultTables())
             Bukkit.getPluginManager().disablePlugin(this);
 
-        getCommand("report").setExecutor(new CommandReport());
-        getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
-        getCommand("aurabot").setExecutor(new AuraBot());
-        getCommand("acpanic").setExecutor(new AuraPanic());
-        getCommand("testknockback").setExecutor(new TestKnockback());
-        getCommand("bans").setExecutor(new CommandBans());
-        getCommand("pull").setExecutor(new CommandPull());
-        getCommand("target").setExecutor(new CommandTarget());
-        getCommand("mods").setExecutor(new CommandMods());
-        getCommand("tracking").setExecutor(new CommandTracking());
-        getCommand("trust").setExecutor(new CommandTrust());
-        getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
-        getCommand("userinfo").setExecutor(new CommandUserInfo());
+        Init.registerCommand(); //Command Register
 
         CommandManager manager = new CommandManager();
         manager.registerCommand(new BungeeCommands());
@@ -219,8 +187,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
                 logger.info("Weights setting completed successfully!");
             }
-            else
-                throw new FileNotFoundException();
         }
         catch (FileNotFoundException ignored)
         {
