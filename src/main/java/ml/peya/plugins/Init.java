@@ -2,6 +2,7 @@ package ml.peya.plugins;
 
 import com.fasterxml.jackson.databind.*;
 import com.zaxxer.hikari.*;
+import me.rerere.matrix.api.*;
 import ml.peya.plugins.BungeeStructure.*;
 import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Commands.*;
@@ -347,5 +348,31 @@ public class Init
         Bukkit.getServer().getPluginManager().registerEvents(new Events(), PeyangSuperbAntiCheat.getPlugin());
         Bukkit.getServer().getPluginManager().registerEvents(new Run(), PeyangSuperbAntiCheat.getPlugin());
         Bukkit.getServer().getPluginManager().registerEvents(new Drop(), PeyangSuperbAntiCheat.getPlugin());
+
+        if (module.isEnable("Matrix"))
+            Bukkit.getServer().getPluginManager().registerEvents(new ml.peya.plugins.Module.Matrix.Events(), PeyangSuperbAntiCheat.getPlugin());
+    }
+
+    /**
+     * モジュール
+     */
+    public static void module()
+    {
+        module = new Modules();
+
+        if (isEnablePlugin("Matrix"))
+        {
+            addModule("Matrix");
+            matrix = MatrixAPIProvider.getAPI();
+        }
+    }
+
+    /**
+     * モジュール追加
+     */
+    private static void addModule(String m)
+    {
+        module.enable(m);
+        logger.info("<-> Module [" + m + "] has connected!");
     }
 }

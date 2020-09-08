@@ -191,6 +191,9 @@ public class Events implements Listener
             e.setLeaveMessage("");
         }
 
+        if (!module.isEnable("Matrix"))
+            return;
+
         if (e.getReason().startsWith(ChatColor.GRAY + "[" + ChatColor.AQUA + "Matrix" + ChatColor.GRAY + "]")) //Matrix Detection
         {
             e.setCancelled(true);

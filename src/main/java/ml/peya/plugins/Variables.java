@@ -2,6 +2,7 @@ package ml.peya.plugins;
 
 import com.comphenix.protocol.*;
 import com.zaxxer.hikari.*;
+import me.rerere.matrix.api.*;
 import ml.peya.plugins.BungeeStructure.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.*;
@@ -134,4 +135,13 @@ public class Variables
      * BungeeCord共通コマンド
      */
     public static CommandManager bungeeCommand;
+    /**
+     * モジュール
+     */
+    public static Modules module;
+
+    /**
+     * Matrix
+     */
+    public static MatrixAPI matrix;
 }

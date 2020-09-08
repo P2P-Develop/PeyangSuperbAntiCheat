@@ -694,6 +694,7 @@ This plugin uses the following Libraries / APIs / Source codes:
 - [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
 - [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
 - [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
+- [Matrix API](https://matrix.rip/) [\(MC-Market\)](https://www.mc-market.org/resources/13999/)
 
 <br>
 <br>

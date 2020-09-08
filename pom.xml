@@ -158,5 +158,10 @@
             <version>1.12-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.jiangdashao</groupId>
+            <artifactId>matrix-api-repo</artifactId>
+            <version>317d4635fd</version>
+        </dependency>
     </dependencies>
 </project>

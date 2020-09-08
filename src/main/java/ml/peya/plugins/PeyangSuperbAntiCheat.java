@@ -52,17 +52,19 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         new Metrics(this, __BSTATS_PLUGIN_ID);
 
-        if (Init.isEnablePlugin("ProtocolLib"))
+        if (!Init.isEnablePlugin("ProtocolLib"))
         {
             logger.log(Level.SEVERE, "This plugin requires ProtocolLib!");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
+        Init.module();
+
         saveDefaultConfig();
 
         plugin = this;
-        if (Init.loadConfig())
+        if (!Init.loadConfig())
         {
             initialized = false;
             Bukkit.getPluginManager().disablePlugin(this);
