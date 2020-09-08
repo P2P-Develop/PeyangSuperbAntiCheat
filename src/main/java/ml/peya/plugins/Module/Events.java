@@ -1,10 +1,9 @@
-package ml.peya.plugins.Module.Matrix;
+package ml.peya.plugins.Module;
 
 import me.rerere.matrix.api.*;
 import me.rerere.matrix.api.events.*;
 import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
 import org.bukkit.event.*;
 
 public class Events implements Listener
@@ -17,7 +16,7 @@ public class Events implements Listener
         if (e.getViolations() == 10)
         {
             DetectConnection.scan(e.getPlayer(), DetectType.AURA_BOT, null, false);
-            Variables.matrix.setViolations(e.getPlayer(), HackType.KILLAURA, 0);
+            ModuleContainer.matrix.setViolations(e.getPlayer(), HackType.KILLAURA, 0);
         }
     }
 }

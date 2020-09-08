@@ -11,6 +11,7 @@ import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Items.Main.*;
 import ml.peya.plugins.Gui.Items.Target.*;
 import ml.peya.plugins.Gui.Items.Target.Page2.*;
+import ml.peya.plugins.Module.*;
 import ml.peya.plugins.Task.*;
 import ml.peya.plugins.Utils.*;
 import org.apache.commons.io.*;
@@ -350,7 +351,7 @@ public class Init
         Bukkit.getServer().getPluginManager().registerEvents(new Drop(), PeyangSuperbAntiCheat.getPlugin());
 
         if (module.isEnable("Matrix"))
-            Bukkit.getServer().getPluginManager().registerEvents(new ml.peya.plugins.Module.Matrix.Events(), PeyangSuperbAntiCheat.getPlugin());
+            Bukkit.getServer().getPluginManager().registerEvents(new ml.peya.plugins.Module.Events(), PeyangSuperbAntiCheat.getPlugin());
     }
 
     /**
@@ -363,7 +364,14 @@ public class Init
         if (isEnablePlugin("Matrix"))
         {
             addModule("Matrix");
-            matrix = MatrixAPIProvider.getAPI();
+            ModuleContainer.matrix = MatrixAPIProvider.getAPI();
+        }
+
+
+        if (isEnablePlugin("Matrix"))
+        {
+            addModule("Matrix");
+            ModuleContainer.matrix = MatrixAPIProvider.getAPI();
         }
     }
 
