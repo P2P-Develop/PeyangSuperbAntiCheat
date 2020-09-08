@@ -1,4 +1,4 @@
-package ml.peya.plugins;
+package ml.peya.plugins.Module;
 
 import java.util.*;
 

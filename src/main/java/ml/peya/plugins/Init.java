@@ -2,7 +2,6 @@ package ml.peya.plugins;
 
 import com.fasterxml.jackson.databind.*;
 import com.zaxxer.hikari.*;
-import me.rerere.matrix.api.*;
 import ml.peya.plugins.BungeeStructure.*;
 import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Commands.*;
@@ -11,7 +10,6 @@ import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Gui.Items.Main.*;
 import ml.peya.plugins.Gui.Items.Target.*;
 import ml.peya.plugins.Gui.Items.Target.Page2.*;
-import ml.peya.plugins.Module.*;
 import ml.peya.plugins.Task.*;
 import ml.peya.plugins.Utils.*;
 import org.apache.commons.io.*;
@@ -30,16 +28,6 @@ import static ml.peya.plugins.Variables.*;
  */
 public class Init
 {
-    /**
-     * プラグイン有効チェック
-     *
-     * @param name プラグイン名
-     * @return 有効否
-     */
-    public static boolean isEnablePlugin(String name)
-    {
-        return Bukkit.getServer().getPluginManager().getPlugin(name) != null && Bukkit.getServer().getPluginManager().getPlugin(name).isEnabled();
-    }
 
     /**
      * データベースの.dbファイルをめっちゃ作成する。
@@ -65,12 +53,11 @@ public class Init
      */
     public static boolean loadConfig()
     {
-        logger.info("Loading configuration.");
+        logger.info("Loading configuration...");
         config = PeyangSuperbAntiCheat.getPlugin().getConfig();
 
         AtomicInteger error = new AtomicInteger();
 
-        logger.info("Loading configuration...");
         Arrays.asList("npc.seconds", "npc.kill", "npc.vllevel", "npc.learncount", "mod.trackTicks", "kick.defaultKick", "autoMessage.time").parallelStream().forEachOrdered(path -> {
             try
             {
@@ -349,38 +336,7 @@ public class Init
         Bukkit.getServer().getPluginManager().registerEvents(new Events(), PeyangSuperbAntiCheat.getPlugin());
         Bukkit.getServer().getPluginManager().registerEvents(new Run(), PeyangSuperbAntiCheat.getPlugin());
         Bukkit.getServer().getPluginManager().registerEvents(new Drop(), PeyangSuperbAntiCheat.getPlugin());
-
-        if (module.isEnable("Matrix"))
-            Bukkit.getServer().getPluginManager().registerEvents(new ml.peya.plugins.Module.Events(), PeyangSuperbAntiCheat.getPlugin());
     }
 
-    /**
-     * モジュール
-     */
-    public static void module()
-    {
-        module = new Modules();
 
-        if (isEnablePlugin("Matrix"))
-        {
-            addModule("Matrix");
-            ModuleContainer.matrix = MatrixAPIProvider.getAPI();
-        }
-
-
-        if (isEnablePlugin("Matrix"))
-        {
-            addModule("Matrix");
-            ModuleContainer.matrix = MatrixAPIProvider.getAPI();
-        }
-    }
-
-    /**
-     * モジュール追加
-     */
-    private static void addModule(String m)
-    {
-        module.enable(m);
-        logger.info("<-> Module [" + m + "] has connected!");
-    }
 }

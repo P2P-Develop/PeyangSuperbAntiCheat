@@ -7,6 +7,7 @@ import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.Module.*;
 import org.bukkit.configuration.file.*;
 import org.bukkit.scheduler.*;
 

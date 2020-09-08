@@ -7,6 +7,7 @@ import ml.peya.plugins.DetectClasses.Packets;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Learn.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.Module.*;
 import org.bukkit.*;
 import org.bukkit.plugin.java.*;
 
@@ -44,6 +45,17 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     }
 
     /**
+     * プラグイン有効チェック
+     *
+     * @param name プラグイン名
+     * @return 有効否
+     */
+    public static boolean isEnablePlugin(String name)
+    {
+        return Bukkit.getServer().getPluginManager().getPlugin(name) != null && Bukkit.getServer().getPluginManager().getPlugin(name).isEnabled();
+    }
+
+    /**
      * プラグインがスタートした時に行う処理をします。
      * 大体初期化とか。
      */
@@ -52,18 +64,17 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         new Metrics(this, __BSTATS_PLUGIN_ID);
 
-        if (!Init.isEnablePlugin("ProtocolLib"))
+        if (!isEnablePlugin("ProtocolLib"))
         {
             logger.log(Level.SEVERE, "This plugin requires ProtocolLib!");
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
 
-        Init.module();
-
         saveDefaultConfig();
 
         plugin = this;
+
         if (!Init.loadConfig())
         {
             initialized = false;
@@ -126,6 +137,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         Init.registerChannel();
 
         Bungee.sendMessage("ping");
+
+        InitModule.init();
 
         initialized = true;
 
