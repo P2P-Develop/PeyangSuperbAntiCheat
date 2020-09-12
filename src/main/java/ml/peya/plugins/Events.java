@@ -100,10 +100,7 @@ public class Events implements Listener
         ));
 
         e.getRecipients().parallelStream().forEach(receiver -> {
-            if (!receiver.hasPermission("psac.chattarget") || (mods.get(receiver.getUniqueId()) != null && mods.get(receiver.getUniqueId()).containsKey("Lynx")))
-                receiver.sendMessage(format);
-            else
-                receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create()));
+            receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create()));
         });
         Bukkit.getConsoleSender().sendMessage(format);
     }
