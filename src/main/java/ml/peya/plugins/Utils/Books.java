@@ -16,7 +16,7 @@ import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
 
 /**
- * 本を本するんだよ。簡単だろ？本なんだよ。
+ * 本のアイテムをまとめたやつ
  */
 public class Books
 {

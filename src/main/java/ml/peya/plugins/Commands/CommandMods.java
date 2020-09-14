@@ -12,6 +12,7 @@ import static ml.peya.plugins.Utils.MessageEngine.get;
 
 /**
  * Mod参照コマンド系クラス。
+ * /mod コマンドで動く
  */
 public class CommandMods implements CommandExecutor
 {

@@ -7,7 +7,6 @@ import org.bukkit.command.*;
 import org.bukkit.entity.*;
 
 import java.util.*;
-import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -15,6 +14,7 @@ import static ml.peya.plugins.Variables.config;
 
 /**
  * Banリスト表示コマンド系クラス。
+ * /ban コマンドで動く
  */
 public class CommandBans implements CommandExecutor
 {

@@ -1,8 +1,8 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Gui.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
 import org.bukkit.entity.*;
@@ -13,6 +13,7 @@ import static ml.peya.plugins.Variables.tracker;
 
 /**
  * ターゲティングコマンド系クラス。
+ * /target コマンドで動く
  */
 public class CommandTarget implements CommandExecutor
 {

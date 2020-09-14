@@ -29,12 +29,15 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
      */
     public static PeyangSuperbAntiCheatProxy proxy;
 
+    /**
+     * プラグインが有効になったときの。
+     */
     @Override
     public void onEnable()
     {
         new Metrics(this, __BSTATS_PLUGIN_ID);
         logger = getLogger();
-        bungeeChannel = "PSACProxy";
+        bungeeChannel = "PSACProxy"; //チャンネル設定
         bungeeCommand = new CommandManager();
         bungeeCommand.registerCommand(new Commands());
 

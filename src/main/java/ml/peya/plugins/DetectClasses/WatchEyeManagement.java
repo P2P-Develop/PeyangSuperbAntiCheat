@@ -89,7 +89,7 @@ public class WatchEyeManagement
     }
 
     /**
-     * 同じレコードであるか確認する。
+     * レコードが存在するかチェックする
      *
      * @param targetUuid ターゲットのUUID。
      * @param fromUuid   普通のUUID。
@@ -113,7 +113,7 @@ public class WatchEyeManagement
     }
 
     /**
-     * 同じレコードであるか確認する。
+     * レコードが存在するかチェックする
      *
      * @param id 管理ID。
      * @return 同じレコードであるかどうか。

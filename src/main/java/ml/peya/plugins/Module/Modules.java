@@ -2,6 +2,9 @@ package ml.peya.plugins.Module;
 
 import java.util.*;
 
+/**
+ * モジュールリスト
+ */
 public class Modules
 {
     /**

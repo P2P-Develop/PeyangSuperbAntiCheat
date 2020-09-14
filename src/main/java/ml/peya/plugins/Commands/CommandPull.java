@@ -12,6 +12,7 @@ import static ml.peya.plugins.Variables.config;
 
 /**
  * 引き寄せコマンド系クラス。
+ * /pull コマンドで動く
  */
 public class CommandPull implements CommandExecutor
 {

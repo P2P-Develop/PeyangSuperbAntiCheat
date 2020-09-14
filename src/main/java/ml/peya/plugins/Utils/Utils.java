@@ -36,7 +36,7 @@ public class Utils
     }
 
     /**
-     * 上のオーバーロード。
+     * 権限持ってるやつが通知できる奴のオーバーロード。
      *
      * @param name    PlayerName。
      * @param id      ID。
@@ -95,8 +95,8 @@ public class Utils
     /**
      * 指定したアクションを繰り返して並列実行します。
      *
-     * @param count 実行回数。
-     * @param action 行うアクション。匿名クラスを使用できます。
+     * @param count   実行回数。
+     * @param action  行うアクション。匿名クラスを使用できます。
      * @param ignored 適当にマップに使うやつなんでnullでいいです。
      */
     public static void times(int count, Consumer action, Object ignored)

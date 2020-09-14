@@ -17,7 +17,7 @@ import static ml.peya.plugins.Variables.banKick;
 public class AutoMessageTask extends BukkitRunnable
 {
     /**
-     * タスクの処理を書く。
+     * 定期メッセージを送信
      */
     @Override
     public void run()

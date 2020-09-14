@@ -17,6 +17,7 @@ import static ml.peya.plugins.Variables.config;
 
 /**
  * 報告コマンド系クラス。
+ * /wdr または /report... コマンドで動く
  */
 public class CommandReport implements CommandExecutor
 {

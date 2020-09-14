@@ -7,7 +7,7 @@ import java.nio.charset.*;
 import java.util.*;
 
 /**
- * ランダムな単語を生成するクラス。
+ * ランダムな単語を取得するクラス
  */
 public class RandomWordUtils
 {

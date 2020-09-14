@@ -1,9 +1,9 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.apache.commons.lang3.tuple.*;
@@ -18,7 +18,8 @@ import java.util.*;
 import static ml.peya.plugins.Variables.*;
 
 /**
- * キック時の処理などを管理する。
+ * NPCの出陣命令を、NPCスポーン命令に変換
+ * 装備を指定や、コマンド等から受け取った物の管理
  */
 public class DetectConnection
 {
@@ -39,7 +40,7 @@ public class DetectConnection
     }
 
     /**
-     * AntiKB用。
+     * スキャン
      *
      * @param player    プレイヤー。
      * @param type      判定タイプ。

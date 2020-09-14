@@ -1,7 +1,7 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -24,7 +24,7 @@ public class TestKnockback
      * 透明な矢をplayerに対して発射する。
      *
      * @param player プレイヤー。
-     * @param type   判定タイプ(不使用)。
+     * @param type   判定タイプ(不使用)。 => AuraBotやAuraPanicは無視。
      * @param sender イベントsender。
      */
     public static void scan(Player player, DetectType type, CommandSender sender)

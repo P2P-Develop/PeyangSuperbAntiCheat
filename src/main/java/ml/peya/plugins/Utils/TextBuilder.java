@@ -96,12 +96,12 @@ public class TextBuilder
     }
 
     /**
-     * showとかに使うんじゃね？しらんけど。
+     * viewした際のライン
      *
-     * @param id        管理ID。
+     * @param id        プレイヤーID。
      * @param issueById 報告した人管理ID。
      * @param types     判定タイプ。
-     * @param mngid     管理ID2nd。
+     * @param mngid     管理ID2。
      * @param sender    イベントsender。
      * @return 完成後。
      */

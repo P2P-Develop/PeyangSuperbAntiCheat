@@ -16,7 +16,7 @@ import static ml.peya.plugins.Variables.item;
 public class Run implements Listener
 {
     /**
-     * Interactイベント...らしい。
+     * GUIのアイテムをクリックした際のやつ
      *
      * @param e なんか使ったときに発令するイベント。
      */

@@ -1,9 +1,9 @@
 package ml.peya.plugins.Detect;
 
 import develop.p2p.lib.*;
-import ml.peya.plugins.*;
 import ml.peya.plugins.DetectClasses.*;
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
@@ -53,7 +53,7 @@ public class NPCTeleport
      *
      * @param player    プレイヤー。
      * @param target    ターゲット。
-     * @param arm       腕？？
+     * @param arm       装備。
      * @param count     回数。
      * @param sender    イベントsender。
      * @param reachMode リーチモードかどうか。
@@ -144,7 +144,7 @@ public class NPCTeleport
      *
      * @param player    プレイヤー。
      * @param target    ターゲット。
-     * @param arm       腕？？？
+     * @param arm       装備。
      * @param reachMode リーチモードかどうか。
      */
     private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
@@ -222,7 +222,7 @@ public class NPCTeleport
     }
 
     /**
-     * Aurabotのz位置を確認する。
+     * Aurabotのz軸を算出する。
      *
      * @param time   時間。
      * @param radius 半径。
@@ -234,7 +234,7 @@ public class NPCTeleport
     }
 
     /**
-     * Aurabotのx位置を確認する。
+     * Aurabotのx軸を算出する。
      *
      * @param time   時間。
      * @param radius 半径。

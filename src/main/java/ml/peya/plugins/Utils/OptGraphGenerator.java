@@ -10,7 +10,7 @@ import java.util.stream.*;
 public class OptGraphGenerator
 {
     /**
-     * p2pなんちゃらと同じなんですが！？！？！？！？
+     * 10分のhogeを算出
      *
      * @param VL  VL。
      * @param max 最大。

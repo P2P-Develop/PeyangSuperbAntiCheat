@@ -48,7 +48,7 @@ public class KickManager
     /**
      * 全員にメッセージ送りつけるやつ。
      *
-     * @param wdFlag 報告してるか...どうか？
+     * @param wdFlag NPC(等)による、オートキック...かどうか?
      * @param target 対象プレイヤー。
      */
     private static void broadCast(boolean wdFlag, Player target)

@@ -6,8 +6,14 @@ import ml.peya.plugins.Module.*;
 import ml.peya.plugins.*;
 import org.bukkit.*;
 
+/**
+ * Matrixの接続
+ */
 public class Matrix
 {
+    /**
+     * Matrix
+     */
     public static void matrix()
     {
         if (PeyangSuperbAntiCheat.isEnablePlugin("Matrix"))

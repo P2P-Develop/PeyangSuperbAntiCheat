@@ -11,6 +11,7 @@ import static ml.peya.plugins.Utils.MessageEngine.pair;
 
 /**
  * PSACコマンド系クラス。
+ * /psac コマンドで動く
  */
 public class CommandPeyangSuperbAntiCheat implements CommandExecutor
 {

@@ -10,8 +10,16 @@ import java.io.*;
 import static ml.peya.plugins.Variables.bungeeChannel;
 import static ml.peya.plugins.Variables.bungeeCommand;
 
+/**
+ * バンジーフック系
+ */
 public class Bungee implements PluginMessageListener
 {
+    /**
+     * バンジーに送信
+     *
+     * @param message メッセージ
+     */
     public static void sendMessage(String message)
     {
         ByteArrayDataOutput output = ByteStreams.newDataOutput();
@@ -19,6 +27,13 @@ public class Bungee implements PluginMessageListener
         Bukkit.getServer().sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "PSACProxy", output.toByteArray());
     }
 
+    /**
+     * コマンド(メッセージ)受信
+     *
+     * @param channel チャンネル
+     * @param player  プレイヤー
+     * @param data    データ
+     */
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] data)
     {

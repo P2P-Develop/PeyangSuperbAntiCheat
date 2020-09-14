@@ -6,8 +6,16 @@ import net.md_5.bungee.api.config.*;
 
 import static ml.peya.plugins.Variables.logger;
 
+/**
+ * Bungee関係のコマンドのやつ(Bungee側)
+ */
 public class Commands implements CommandExecutor
 {
+    /**
+     * pingコマンドを受け取ったときのやつ
+     *
+     * @param cmd コマンド
+     */
     @Command(label = "ping")
     public void ping(CommandComponent cmd)
     {
@@ -15,6 +23,11 @@ public class Commands implements CommandExecutor
         PeyangSuperbAntiCheatProxy.sendData(ProxyServer.getInstance().getServerInfo(cmd.getServer()), "pong");
     }
 
+    /**
+     * pongコマンドを受け取ったときのやつ
+     *
+     * @param cmd コマンド
+     */
     @Command(label = "pong")
     public void pong(CommandComponent cmd)
     {
@@ -22,6 +35,13 @@ public class Commands implements CommandExecutor
         logger.info("<-> Server [" + cmd.getServer() + "] has connected");
     }
 
+    /**
+     * reportコマンドを受け取ったときのやつ
+     * コマンドを解析し、サーバ内のスタッフにブロードキャストする。
+     * SQLの設定が不十分でも、最低限実行される。
+     *
+     * @param cmd コマンド
+     */
     @Command(label = "report")
     public void report(CommandComponent cmd)
     {

@@ -1,7 +1,7 @@
 package ml.peya.plugins.Gui.Events;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.event.*;
@@ -14,12 +14,12 @@ import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.tracker;
 
 /**
- * おもっくそプレイヤーのドロップに関わりそうなイベント。
+ * ドロップのやつ
  */
 public class Drop implements Listener
 {
     /**
-     * ドロップした時に処理する...らしい。
+     * PSAC系アイテムのGUI管理系
      *
      * @param e ドロップした時に発火するイベント。
      */

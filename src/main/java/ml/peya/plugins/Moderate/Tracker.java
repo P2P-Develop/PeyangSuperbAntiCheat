@@ -1,8 +1,8 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Gui.Item;
+import ml.peya.plugins.*;
 import net.md_5.bungee.api.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
@@ -89,7 +89,8 @@ public class Tracker
     }
 
     /**
-     * 時間経過で更新する奴。
+     * トラックの中枢。
+     * デフォルトでは10チック(0.5秒)に1回実行される。
      */
     public void tick()
     {

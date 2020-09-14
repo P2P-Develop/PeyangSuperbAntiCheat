@@ -15,6 +15,7 @@ import static ml.peya.plugins.Variables.config;
 
 /**
  * Aurabot NPCコマンド系クラス。
+ * /aurabot コマンドで動く。
  */
 public class AuraBot implements CommandExecutor
 {

@@ -3,25 +3,51 @@ package ml.peya.plugins.BungeeStructure;
 import java.lang.reflect.*;
 import java.util.*;
 
+/**
+ * コマンドを管理するクラス
+ */
 public class CommandManager
 {
+    /**
+     * コマンド実行クラスリスト
+     */
     private final ArrayList<Class<? extends CommandExecutor>> commands;
 
+    /**
+     * CommandManagerのコンストラクタ
+     */
     public CommandManager()
     {
         commands = new ArrayList<>();
     }
 
+    /**
+     * コマンド登録
+     *
+     * @param t   コマンドクラス
+     * @param <T> コマンドクラス ※要CommandExecutorの継承
+     */
     public <T extends CommandExecutor> void registerCommand(T t)
     {
         this.commands.add(t.getClass());
     }
 
+    /**
+     * コマンド実行
+     *
+     * @param command コマンド
+     */
     public void runCommand(String command)
     {
         runCommand(command, "");
     }
 
+    /**
+     * コマンド実行
+     *
+     * @param command コマンド
+     * @param server  サーバネーム
+     */
     public void runCommand(String command, String server)
     {
         ArrayList<String> commands = new ArrayList<>(Arrays.asList(command.split(" ")));

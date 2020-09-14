@@ -17,11 +17,11 @@ import static ml.peya.plugins.Variables.banKick;
 public class BanAnalyzer
 {
     /**
-     * なんか大文字で表示されるやつ返す。
+     * プレイヤーのBAN履歴の取得
      *
      * @param uuid UUID。
-     * @param type 判定タイプ。
-     * @return 大文字のアレ。
+     * @param type 取得タイプ(BAN, KICK, MUTE, *ALL*)
+     * @return BANデータ
      */
     public static ArrayList<Bans> getAbuse(UUID uuid, Type type)
     {
@@ -86,7 +86,8 @@ public class BanAnalyzer
     }
 
     /**
-     * Ban情報を登録
+     * Ban情報を<b>登録</b>
+     * 実際にはBANせず、登録するだけです。
      *
      * @param reason Ban理由
      * @param player Banプレイヤー
@@ -127,13 +128,25 @@ public class BanAnalyzer
     }
 
     /**
-     * タイプだわーいDoc書くのめんどーい
+     * BAN情報取得タイプ
      */
     public enum Type
     {
+        /**
+         * すべて
+         */
         ALL,
+        /**
+         * KICKのみ
+         */
         KICK,
+        /**
+         * BANのみ
+         */
         BAN,
+        /**
+         * MUTEのみ
+         */
         MUTE;
 
         /**

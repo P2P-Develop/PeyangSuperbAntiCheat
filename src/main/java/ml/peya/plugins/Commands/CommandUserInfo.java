@@ -11,6 +11,10 @@ import java.util.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 
+/**
+ * UserInfoコマンドのクラス
+ * /userinfo コマンドで動く
+ */
 public class CommandUserInfo implements CommandExecutor
 {
     /**

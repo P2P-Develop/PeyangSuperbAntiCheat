@@ -14,6 +14,7 @@ import static ml.peya.plugins.Variables.tracker;
 
 /**
  * トラッキングコマンド系クラス。
+ * /track コマンドで動く
  */
 public class CommandTracking implements CommandExecutor
 {

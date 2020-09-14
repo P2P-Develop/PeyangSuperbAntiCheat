@@ -1,16 +1,24 @@
 package ml.peya.plugins;
 
+import ml.peya.plugins.BungeeStructure.*;
 import ml.peya.plugins.Enum.*;
 import ml.peya.plugins.Moderate.*;
 import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.BungeeStructure.*;
 import org.bukkit.scheduler.*;
 
 import java.sql.*;
 import java.util.*;
 
+/**
+ * バンジーのコマンド
+ */
 public class BungeeCommands implements CommandExecutor
 {
+    /**
+     * pingコマンドを受け取ったとき
+     *
+     * @param command コマンド
+     */
     @Command(label = "ping")
     public static void ping(CommandComponent command)
     {
@@ -18,12 +26,22 @@ public class BungeeCommands implements CommandExecutor
         Variables.bungeeCord = true;
     }
 
+    /**
+     * pongコマンドを受け取ったとき
+     *
+     * @param command コマンド
+     */
     @Command(label = "pong")
     public static void pong(CommandComponent command)
     {
         Variables.bungeeCord = true;
     }
 
+    /**
+     * reportコマンドを受け取ったとき
+     *
+     * @param command コマンド
+     */
     @Command(label = "report")
     public static void report(CommandComponent command)
     {

@@ -10,7 +10,7 @@ import static ml.peya.plugins.Variables.tracker;
 public class TrackerTask extends BukkitRunnable
 {
     /**
-     * 更新する処理を書く。
+     * 更新
      */
     @Override
     public void run()

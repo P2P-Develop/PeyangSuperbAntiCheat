@@ -13,7 +13,7 @@ import java.util.*;
 public class RandomArmor
 {
     /**
-     * こいつらぶっこんでから関数でランダムに取得してる。
+     * ランダムなヘルメットを入手する。
      *
      * @return アイテムどもから選んだやつ。
      */
@@ -63,7 +63,7 @@ public class RandomArmor
     }
 
     /**
-     * 金ってだけでなんかするらしい。運イベかな？
+     * 金アイテムかどうか
      *
      * @param item あいてむ！
      * @return ゴールド全面でござったらtrue。
@@ -96,7 +96,7 @@ public class RandomArmor
         if (stack.getType() == Material.LEATHER_BOOTS || stack.getType() == Material.LEATHER_CHESTPLATE || stack.getType() == Material.LEATHER_HELMET || stack.getType() == Material.LEATHER_LEGGINGS)
         {
             LeatherArmorMeta meta = (LeatherArmorMeta) stack.getItemMeta();
-            meta.setColor(Color.fromRGB(
+            meta.setColor(Color.fromRGB( //色を調整
                     random.nextInt(254),
                     random.nextInt(254),
                     random.nextInt(254)

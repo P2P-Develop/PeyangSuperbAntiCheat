@@ -8,11 +8,11 @@ import net.md_5.bungee.api.*;
 public enum EnumSeverity
 {
     /**
-     * 最も良い
+     * 後回し
      */
     FINEST("Finest", ChatColor.GREEN, 1),
     /**
-     * より細かい
+     * 遅くても可
      */
     FINER("Finer", ChatColor.BLUE, 2),
     /**
@@ -20,7 +20,7 @@ public enum EnumSeverity
      */
     NORMAL("Normal", ChatColor.BLUE, 3),
     /**
-     * 良い
+     * ちょい優先
      */
     FINE("Fine", ChatColor.DARK_GREEN, 4),
     /**
@@ -28,11 +28,11 @@ public enum EnumSeverity
      */
     PRIORITY("Priority", ChatColor.YELLOW, 5),
     /**
-     * 必要最低限
+     * 結構優先
      */
     REQUIRE_FAST("REQUIRE FAST", ChatColor.LIGHT_PURPLE, 6),
     /**
-     * 重度
+     * 最優先
      */
     SEVERE("SEVERE", ChatColor.DARK_RED, 7),
     /**

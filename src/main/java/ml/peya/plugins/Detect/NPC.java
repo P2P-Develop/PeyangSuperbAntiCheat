@@ -1,7 +1,7 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.*;
 import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
 import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
 import org.bukkit.*;
@@ -21,7 +21,7 @@ import static ml.peya.plugins.Variables.config;
 public class NPC
 {
     /**
-     * 場所を設定する。
+     * NMS系の場所を設定する。
      *
      * @param location 場所。
      * @param player   プレイヤー・

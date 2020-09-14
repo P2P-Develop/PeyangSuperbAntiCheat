@@ -6,6 +6,9 @@ import ml.peya.plugins.*;
 import static ml.peya.plugins.Variables.logger;
 import static ml.peya.plugins.Variables.module;
 
+/**
+ * Init時のモジュール
+ */
 public class InitModule
 {
     /**
@@ -16,13 +19,9 @@ public class InitModule
         module = new Modules();
 
         if (PeyangSuperbAntiCheat.isEnablePlugin("Matrix"))
-        {
             Matrix.matrix();
-        }
         if (PeyangSuperbAntiCheat.isEnablePlugin("NoCheatPlus"))
-        {
             NoCheatPlus.ncp();
-        }
     }
 
     /**

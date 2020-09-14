@@ -6,8 +6,14 @@ import fr.neatmonster.nocheatplus.hooks.*;
 import ml.peya.plugins.Module.*;
 import ml.peya.plugins.Module.NoCheatPlus.*;
 
+/**
+ * NoCheatPlusとの接続。
+ */
 public class NoCheatPlus
 {
+    /**
+     * NCP
+     */
     public static void ncp()
     {
         InitModule.addModule("NoCheatPlus");

@@ -9,6 +9,7 @@ import static ml.peya.plugins.Utils.MessageEngine.get;
 
 /**
  * 信用コマンドのクラス。
+ * /trust
  */
 public class CommandTrust implements CommandExecutor
 {

@@ -15,6 +15,7 @@ import static ml.peya.plugins.Variables.config;
 
 /**
  * AuraPanic NPCコマンド系クラス。
+ * /acpanic コマンドで動く。
  */
 public class AuraPanic implements CommandExecutor
 {

@@ -12,6 +12,7 @@ import static ml.peya.plugins.Variables.cheatMeta;
 
 /**
  * Test Knockbackコマンド系クラス。
+ * /testkb コマンドで動く。
  */
 public class TestKnockback implements CommandExecutor
 {

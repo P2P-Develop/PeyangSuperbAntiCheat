@@ -37,7 +37,6 @@ public class CheatDetectNowMeta
     /**
      * テスト中かどうか。
      */
-
     private boolean isTesting = false;
 
     /**

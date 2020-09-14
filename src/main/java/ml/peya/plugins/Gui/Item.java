@@ -11,6 +11,9 @@ import java.util.*;
  */
 public class Item
 {
+    /**
+     * 登録されたアイテム
+     */
     private final ArrayList<IItems> items;
 
     public Item()

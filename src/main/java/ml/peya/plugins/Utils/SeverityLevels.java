@@ -9,7 +9,7 @@ import java.util.*;
 import static ml.peya.plugins.Variables.eye;
 
 /**
- * レベルのいろいろな取得方法まとめたクラス！！
+ * 重要度取得
  */
 public class SeverityLevels
 {

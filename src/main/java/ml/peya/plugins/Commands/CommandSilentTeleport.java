@@ -11,6 +11,7 @@ import static ml.peya.plugins.Utils.MessageEngine.pair;
 
 /**
  * STPコマンド系プラグイン。
+ * /tpto コマンドで動く
  */
 public class CommandSilentTeleport implements CommandExecutor
 {

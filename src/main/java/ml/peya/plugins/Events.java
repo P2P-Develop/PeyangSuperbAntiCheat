@@ -38,7 +38,8 @@ public class Events implements Listener
     }
 
     /**
-     * 痛いっ！の時のダメージをたまに無効化します。
+     * 痛いっ！の時のTestKBの弓のダメージを
+     * 私は親切なので無効化してあげます。
      *
      * @param e 痛かったよぉ...
      */
@@ -99,9 +100,7 @@ public class Events implements Listener
                 new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()
         ));
 
-        e.getRecipients().parallelStream().forEach(receiver -> {
-            receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create()));
-        });
+        e.getRecipients().parallelStream().forEach(receiver -> receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create())));
         Bukkit.getConsoleSender().sendMessage(format);
     }
 

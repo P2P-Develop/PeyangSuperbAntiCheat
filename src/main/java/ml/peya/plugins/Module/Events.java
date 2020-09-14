@@ -6,8 +6,16 @@ import ml.peya.plugins.Detect.*;
 import ml.peya.plugins.Enum.*;
 import org.bukkit.event.*;
 
+/**
+ * イベント(Matrix用
+ */
 public class Events implements Listener
 {
+    /**
+     * プレイヤーVLイベント
+     *
+     * @param e イベント
+     */
     @EventHandler
     public static void vl(PlayerViolationEvent e)
     {

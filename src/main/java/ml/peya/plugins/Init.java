@@ -24,7 +24,7 @@ import java.util.logging.*;
 import static ml.peya.plugins.Variables.*;
 
 /**
- * プラグイン自体ではおさまらない初期化とかするとこ。
+ * メインクラスではおさまらない初期化とかするとこ。
  */
 public class Init
 {
