@@ -1,0 +1,30 @@
+name: "JavaDoc"
+
+on:
+  push:
+    branches: ["dev"]
+    paths: ["src/main/java/**"]
+
+jobs:
+  gen-javadoc:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "Generate JavaDoc"
+        run: "mvn javadoc:javadoc"
+      - name: "Stash"
+        run: "git stash -ua"
+      - name: "Checkout"
+        uses: "actions/checkout@javadoc"
+      - name: "Apply Stash"
+        run: "git stash apply"
+      - name: "Copy Files"
+        run: "cp -rp ./target/site/apidocs/* ."
+      - name: "Remove TempFile"
+        run: "rm -rf target"
+      - name: "Commit and Settings"
+        uses: "EndBug/add-and-commit@v4"
+          with:
+            author_name: "JavaDoc BOT"
+            message: "Generate JavaDoc"
+          env:
+            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
