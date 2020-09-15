@@ -22,7 +22,9 @@ jobs:
       - name: Stash
         run: git stash -ua
       - name: Change Branch
-        run: git checkout javadoc
+        uses: actions/checkout@v2
+        with:
+          ref: javadoc
       - name: Apply Stash
         run: git stash apply
       - name: Copy Files
