@@ -21,7 +21,7 @@ import static ml.peya.plugins.Variables.config;
 public class TestKnockback
 {
     /**
-     * 透明な矢をplayerに対して発射する。
+     * 透明な矢をplayerに向けて発射する。
      *
      * @param player プレイヤー。
      * @param type   判定タイプ(不使用)。(AuraBotやAuraPanicは無視。)
