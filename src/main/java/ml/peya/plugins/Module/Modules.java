@@ -8,7 +8,7 @@ import java.util.*;
 public class Modules
 {
     /**
-     * moduel
+     * module
      */
     private final ArrayList<String> modules;
 
