@@ -18,7 +18,7 @@ jobs:
       - name: Stash
         run: git stash -ua
       - name: Checkout
-        uses: actions/checkout@javadoc
+        uses: actions/checkout@v2
       - name: Apply Stash
         run: git stash apply
       - name: Copy Files
