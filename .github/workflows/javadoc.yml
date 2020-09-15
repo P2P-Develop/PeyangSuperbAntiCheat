@@ -36,5 +36,6 @@ jobs:
         with:
           author_name: JavaDoc BOT
           message: Generate JavaDoc
+          force: false
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
