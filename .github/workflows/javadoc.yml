@@ -28,8 +28,8 @@ jobs:
         run: rm -rf target
       - name: Commit and Settings
         uses: EndBug/add-and-commit@v4
-          with:
-            author_name: JavaDoc BOT
-            message: Generate JavaDoc
-          env:
-            GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          author_name: JavaDoc BOT
+          message: Generate JavaDoc
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
