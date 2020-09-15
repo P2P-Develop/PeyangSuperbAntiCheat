@@ -70,6 +70,7 @@ public class Decorations
      *
      * @param location だすとこ
      * @param size     だすりょー
+     * @param particle 種類
      */
     public static void particle(Location location, int size, Particle particle)
     {
@@ -132,6 +133,7 @@ public class Decorations
     /**
      * えん
      *
+     * @param center 真ん中の位置
      * @param count  カウント！
      * @param radius はんけー
      */
@@ -151,6 +153,7 @@ public class Decorations
     /**
      * えん
      *
+     * @param center   真ん中の位置
      * @param count    カウント！
      * @param radius   はんけー
      * @param particle ぱーてぃくる

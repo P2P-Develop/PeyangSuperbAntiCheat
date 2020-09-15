@@ -26,6 +26,8 @@ public class InitModule
 
     /**
      * モジュール追加
+     *
+     * @param m モジュール
      */
     public static void addModule(String m)
     {

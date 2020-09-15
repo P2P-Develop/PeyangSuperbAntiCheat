@@ -32,6 +32,11 @@ public class Modules
         modules.add(module);
     }
 
+    /**
+     * 無効化
+     *
+     * @param module モジュール
+     */
     public void disable(String module)
     {
         modules.remove(module);
