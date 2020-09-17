@@ -31,6 +31,7 @@
                     <show>private</show>
                     <encoding>UTF-8</encoding>
                     <charset>UTF-8</charset>
+                    <locale>ja_JP</locale>
                     <docencoding>UTF-8</docencoding>
                 </configuration>
             </plugin>
