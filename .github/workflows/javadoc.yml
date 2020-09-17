@@ -9,6 +9,8 @@ jobs:
     name: Generate Javadoc
     runs-on: ubuntu-latest
     steps:
+      - name: Init
+        run: LANG=ja_JP.UTF-8
       - name: Checkout
         uses: actions/checkout@v2
       - name: Debug
