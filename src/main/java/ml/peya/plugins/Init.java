@@ -21,6 +21,7 @@ import java.util.*;
 import java.util.concurrent.atomic.*;
 import java.util.logging.*;
 
+import static ml.peya.plugins.PeyangSuperbAntiCheat.getPlugin;
 import static ml.peya.plugins.Variables.*;
 
 /**
@@ -54,7 +55,7 @@ public class Init
     public static boolean loadConfig()
     {
         logger.info("Loading configuration...");
-        config = PeyangSuperbAntiCheat.getPlugin().getConfig();
+        config = getPlugin().getConfig();
 
         AtomicInteger error = new AtomicInteger();
 
@@ -91,9 +92,9 @@ public class Init
         databasePath = config.getString("database.path");
         banKickPath = config.getString("database.logPath");
         trustPath = config.getString("database.trustPath");
-        eye = new HikariDataSource(Init.initMngDatabase(PeyangSuperbAntiCheat.getPlugin().getDataFolder().getAbsolutePath() + "/" + databasePath));
-        banKick = new HikariDataSource(Init.initMngDatabase(PeyangSuperbAntiCheat.getPlugin().getDataFolder().getAbsolutePath() + "/" + banKickPath));
-        trust = new HikariDataSource(Init.initMngDatabase(PeyangSuperbAntiCheat.getPlugin().getDataFolder().getAbsolutePath() + "/" + trustPath));
+        eye = new HikariDataSource(Init.initMngDatabase(getPlugin().getDataFolder().getAbsolutePath() + "/" + databasePath));
+        banKick = new HikariDataSource(Init.initMngDatabase(getPlugin().getDataFolder().getAbsolutePath() + "/" + banKickPath));
+        trust = new HikariDataSource(Init.initMngDatabase(getPlugin().getDataFolder().getAbsolutePath() + "/" + trustPath));
 
     }
 
@@ -205,19 +206,19 @@ public class Init
      */
     public static void registerCommand()
     {
-        PeyangSuperbAntiCheat.getPlugin().getCommand("report").setExecutor(new CommandReport());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("aurabot").setExecutor(new AuraBot());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("acpanic").setExecutor(new AuraPanic());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("testknockback").setExecutor(new TestKnockback());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("bans").setExecutor(new CommandBans());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("pull").setExecutor(new CommandPull());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("target").setExecutor(new CommandTarget());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("mods").setExecutor(new CommandMods());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("tracking").setExecutor(new CommandTracking());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("trust").setExecutor(new CommandTrust());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
-        PeyangSuperbAntiCheat.getPlugin().getCommand("userinfo").setExecutor(new CommandUserInfo());
+        getPlugin().getCommand("report").setExecutor(new CommandReport());
+        getPlugin().getCommand("peyangsuperbanticheat").setExecutor(new CommandPeyangSuperbAntiCheat());
+        getPlugin().getCommand("aurabot").setExecutor(new AuraBot());
+        getPlugin().getCommand("acpanic").setExecutor(new AuraPanic());
+        getPlugin().getCommand("testknockback").setExecutor(new TestKnockback());
+        getPlugin().getCommand("bans").setExecutor(new CommandBans());
+        getPlugin().getCommand("pull").setExecutor(new CommandPull());
+        getPlugin().getCommand("target").setExecutor(new CommandTarget());
+        getPlugin().getCommand("mods").setExecutor(new CommandMods());
+        getPlugin().getCommand("tracking").setExecutor(new CommandTracking());
+        getPlugin().getCommand("trust").setExecutor(new CommandTrust());
+        getPlugin().getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
+        getPlugin().getCommand("userinfo").setExecutor(new CommandUserInfo());
     }
 
     /**
@@ -227,15 +228,15 @@ public class Init
     {
         try
         {
-            FileUtils.copyInputStreamToFile(PeyangSuperbAntiCheat.getPlugin().getResource("skin.db"), new File(PeyangSuperbAntiCheat.getPlugin().getDataFolder().getAbsolutePath() + "/skin.db"));
+            FileUtils.copyInputStreamToFile(getPlugin().getResource("skin.db"), new File(getPlugin().getDataFolder().getAbsolutePath() + "/skin.db"));
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            Bukkit.getServer().getPluginManager().disablePlugin(PeyangSuperbAntiCheat.getPlugin());
+            Bukkit.getServer().getPluginManager().disablePlugin(getPlugin());
             return;
         }
-        skin = new HikariDataSource(Init.initMngDatabase(PeyangSuperbAntiCheat.getPlugin().getDataFolder().getAbsolutePath() + "/skin.db"));
+        skin = new HikariDataSource(Init.initMngDatabase(getPlugin().getDataFolder().getAbsolutePath() + "/skin.db"));
 
     }
 
@@ -257,13 +258,13 @@ public class Init
         if (isTrackEnabled)
         {
             logger.info("Starting Tracker Task...");
-            trackerTask.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, config.getInt("mod.tracking.trackTicks"));
+            trackerTask.runTaskTimer(getPlugin(), 0, config.getInt("mod.tracking.trackTicks"));
         }
 
         if (isAutoMessageEnabled)
         {
             logger.info("Starting Auto-Message Task...");
-            autoMessage.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 20 * (time * 60));
+            autoMessage.runTaskTimer(getPlugin(), 0, 20 * (time * 60));
         }
     }
 
@@ -274,7 +275,7 @@ public class Init
     {
         try
         {
-            File file = new File(PeyangSuperbAntiCheat.getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+            File file = new File(getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
             if (file.exists() && file.length() >= 16)
             {
                 JsonNode node = new ObjectMapper().readTree(file);
@@ -310,10 +311,10 @@ public class Init
     public static void registerChannel()
     {
         bungeeChannel = "PSACProxy";
-        Bukkit.getMessenger().registerOutgoingPluginChannel(PeyangSuperbAntiCheat.getPlugin(), "FML|HS");
-        Bukkit.getMessenger().registerIncomingPluginChannel(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new ClientModGetter());
-        Bukkit.getMessenger().registerOutgoingPluginChannel(PeyangSuperbAntiCheat.getPlugin(), bungeeChannel);
-        Bukkit.getMessenger().registerIncomingPluginChannel(PeyangSuperbAntiCheat.getPlugin(), bungeeChannel, new Bungee());
+        Bukkit.getMessenger().registerOutgoingPluginChannel(getPlugin(), "FML|HS");
+        Bukkit.getMessenger().registerIncomingPluginChannel(getPlugin(), "FML|HS", new ClientModGetter());
+        Bukkit.getMessenger().registerOutgoingPluginChannel(getPlugin(), bungeeChannel);
+        Bukkit.getMessenger().registerIncomingPluginChannel(getPlugin(), bungeeChannel, new Bungee());
     }
 
     /**
@@ -333,9 +334,9 @@ public class Init
      */
     public static void registerEvents()
     {
-        Bukkit.getServer().getPluginManager().registerEvents(new Events(), PeyangSuperbAntiCheat.getPlugin());
-        Bukkit.getServer().getPluginManager().registerEvents(new Run(), PeyangSuperbAntiCheat.getPlugin());
-        Bukkit.getServer().getPluginManager().registerEvents(new Drop(), PeyangSuperbAntiCheat.getPlugin());
+        Bukkit.getServer().getPluginManager().registerEvents(new Events(), getPlugin());
+        Bukkit.getServer().getPluginManager().registerEvents(new Run(), getPlugin());
+        Bukkit.getServer().getPluginManager().registerEvents(new Drop(), getPlugin());
     }
 
 
