@@ -34,6 +34,8 @@ Bukkit/Spigot/PaperMCのプラグインだったような気がしないよう�
 大手サーバー/運営が常にいるサーバー向け。
 ([ぺやんぐ研究員の研究メモ](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/memo/memo01.txt)参照。
 
+バンジーコードのつなぎ方見たい人は[>>>こっち<<<](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/dev/BUNGEE-ja.md)。
+
 ### 注意
 
 __~~このプラグインはほぼネタプラグインd（殴~~__ **[削除済み]** **[削除済み]** **[削除済み]** **[権限なし]** **[編集済]**
