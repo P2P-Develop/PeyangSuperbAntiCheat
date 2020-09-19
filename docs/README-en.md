@@ -1,11 +1,11 @@
 # PeyangSuperbAntiCheat(PSAC) English Documentation
   
-[Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [FAQ](#what-is-this-npcwatchdog)
+[Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [BungeeCord](BUNGEE-en.md) | [FAQ](#what-is-this-npcwatchdog)
   
 > **WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
 > If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
   
-> ***VERY WARNING***: **With this plugin, detectopm will run +4 timers at the same time.  
+> ***VERY WARNING***: **With this plugin, DetectOPM will run +4 timers at the same time.  
 > In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**  
 > For more information on the number of threads, see [Plugin Threads Summary](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt).
 
@@ -142,12 +142,12 @@ Other settings can be done using permissions.
 
 |      Permission     |     Assigned Command     | Description                                                                                                                               | Default Value | Permission Group |
 | :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------------------------------------------- | :-----------: | :--------------: |
-|   **psac.member**   |           group          | This is a server member permission group.                                                                                                 |      true     |       none       |
+|  ***psac.member***  |           group          | This is a server member permission group.                                                                                                 |      true     |       none       |
 |    `psac.report`    |    [/report](#report)    | This permission can execute report commands.  Player deprived of this permission cannot report.                                           |      true     |    psac.member   |
 |    `psac.report`    | [/psac help](#arguments) | This permission can view help for members of this plugin.                                                                                 |      true     |    psac.member   |
 | `psac.notification` |           none           | This permission will receive broadcast messages when other players are kicked.                                                            |      true     |    psac.member   |
 |    `psac.regular`   |           none           | This permission can visible sended regular messages.                                                                                      |      true     |    psac.member   |
-|     **psac.mod**    |           group          | This permission can kick or test the player.                                                                                              |       op      |       none       |
+|   ***psac.mod***    |           group          | This permission can kick or test the player.                                                                                              |       op      |       none       |
 |     `psac.kick`     | [/psac kick](#arguments) | This permission can kick player manually.                                                                                                 |       op      |     psac.mod     |
 |    `psac.aurabot`   |   [/aurabot](#aurabot)   | This permission can summon [KillAura Test NPC](#aurabot).                                                                                 |       op      |     psac.mod     |
 |   `psac.aurapanic`  |   [/acpanic](#acpanic)   | This permission can summon [Panic NPC](#acpanic).                                                                                         |       op      |     psac.mod     |
@@ -161,7 +161,8 @@ Other settings can be done using permissions.
 |     `psac.pull`     |      [/pull](#pull)      | This permission can pull other players.                                                                                                   |       op      |     psac.mod     |
 |  `psac.chattarget`  |           none           | A mark will be added to the left of the chat for players with this permission.                                                            |       op      |     psac.mod     |
 |     `psac.mods`     |           none           | This permission can see the mods that other players have introduced.                                                                      |       op      |     psac.mod     |
-|    **psac.admin**   |           group          | This permission can use all commands of the plugin.                                                                                       |     false     |       none       |
+|   `psac.userinfo`   |  [/userinfo](#userinfo)  | This permission can see the player information. If `message.lynx` enabled, add some information.                                          |
+|  ***psac.admin***   |           group          | This permission can use all commands of the plugin.                                                                                       |     false     |       none       |
 |     `psac.drop`     | [/psac drop](#arguments) | This permission can delete submitted report.                                                                                              |     false     |    psac.admin    |
 |     `psac.error`    |           none           | This permission can get error information when the plugin encountered an internal error.                                                  |     false     |    psac.admin    |
 |     `psac.trust`    |     [/trust](#trust)     | This permission can add and execute Scan / Kick / Test with trusted players.                                                              |     false     |    psac.admin    |
@@ -591,6 +592,8 @@ In this plugin, the following config is set by default.
 |     kick.delay        |        2        | Specifies the delay between sending a broadcast message and kicking the player.                                               |
 |   kick.defaultKick    |       25        | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                        |
 | decoration.lightning  |      true       | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                         |
+|   decoration.flame    |      true       | Specifies whether to apply flame effect to player when kicking.                                                               |
+|   decoration.circle   |      true       | Specifies whether to draw colored circle with effect to player when kicking.                                                  |
 |     message.lynx      |      true       | Specifies whether Lynx Mod compatible.                                                                                        |
 |  autoMessage.enabled  |      true       | Toggle the presence or absence of regular messages.                                                                           |
 |   autoMessage.time    |       15        | Specify a minuites for recurring messages.                                                                                    |
