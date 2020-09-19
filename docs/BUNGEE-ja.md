@@ -15,10 +15,10 @@ READMEを読みたい方は[>>こ↑こ↓<<](README-ja.md) \([English](README-e
 TODO: 順次追加
 
 ### つなぎ方
-+ 1. すべてのサーバにPeyangSuperbAntiCheatを入れる。
-+ 2. BungeeCordにもプラグインを入れる。\(ダウンロードは[>>こちら<<](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases) \)
-+ 3. つなげたいサーバ全てのコンフィグをいじくる
-+ 4. おしり
+1. すべてのサーバにPeyangSuperbAntiCheatを入れる。
+2. BungeeCordにもプラグインを入れる。\(ダウンロードは[>>こちら<<](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases) \)
+3. つなげたいサーバ全てのコンフィグをいじくる
+4. おしり
 
 
 ### 注意事項
