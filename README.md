@@ -3,7 +3,7 @@
 <p align="center">"If possible."</p>
 
 <p align="center">
-  <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/commits/master"
+  <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/commits/stable"
     ><img
       src="https://img.shields.io/github/commit-activity/m/peyang-Celeron/PeyangSuperbAntiCheat?label=commits&style=flat-square"
       alt="GitHub Commit Activity"
@@ -23,7 +23,7 @@
       src="https://img.shields.io/github/issues/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
       alt="GitHub Issues"
   ></a>
-  <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/LICENSE"
+  <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/stable/LICENSE"
     ><img
       src="https://img.shields.io/github/license/peyang-Celeron/PeyangSuperbAntiCheat?color=blue&style=flat-square"
       alt="GitHub License"
@@ -36,25 +36,25 @@
   <a href="https://www.codefactor.io/repository/github/peyang-celeron/peyangsuperbanticheat"
      ><img
            alt="CodeFactor Grade (stable)"
-           src="https://img.shields.io/codefactor/grade/github/peyang-Celeron/PeyangSuperbAntiCheat/master?label=code%20quality%20%28stable%29&style=flat-square"
+           src="https://img.shields.io/codefactor/grade/github/peyang-Celeron/PeyangSuperbAntiCheat/stable?label=code%20quality%20%28stable%29&style=flat-square"
   ></a>
   <a href=""
      ><img
            alt="CodeFactor Grade (development)"
-           src="https://img.shields.io/codefactor/grade/github/peyang-Celeron/PeyangSuperbAntiCheat/dev?label=code%20quality%20%28development%29&style=flat-square"
+           src="https://img.shields.io/codefactor/grade/github/peyang-Celeron/PeyangSuperbAntiCheat/develop?label=code%20quality%20%28development%29&style=flat-square"
   ></a>
   <a href="https://codeclimate.com/github/peyang-Celeron/PeyangSuperbAntiCheat"
-     ><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/peyang-Celeron/PeyangSuperbAntiCheat?label=CodeClimate%28dev%29&style=flat-square"
+     ><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/peyang-Celeron/PeyangSuperbAntiCheat?label=CodeClimate%28develop%29&style=flat-square"
   ></a><br>
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/actions?query=workflow%3A%22Java+CI+with+Maven+%28stable%29%22"
      ><img
            alt="GitHub Workflow Status (stable)"
-           src="https://img.shields.io/github/workflow/status/peyang-Celeron/PeyangSuperbAntiCheat/Java%20CI%20with%20Maven%20(stable)/master?label=build%20%28stable%29&style=flat-square"
+           src="https://img.shields.io/github/workflow/status/peyang-Celeron/PeyangSuperbAntiCheat/Java%20CI%20with%20Maven%20(stable)/stable?label=build%20%28stable%29&style=flat-square"
   ></a>
   <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/actions?query=workflow%3A%22Java+CI+with+Maven+%28development%29%22"
      ><img
            alt="GitHub Workflow Status (development)"
-           src="https://img.shields.io/github/workflow/status/peyang-Celeron/PeyangSuperbAntiCheat/Java%20CI%20with%20Maven%20(development)/master?label=build%20%28dev%29&style=flat-square"
+           src="https://img.shields.io/github/workflow/status/peyang-Celeron/PeyangSuperbAntiCheat/Java%20CI%20with%20Maven%20(development)/stable?label=build%20%28develop%29&style=flat-square"
   ></a>
   <a href="https://snyk.io/test/github/peyang-Celeron/PeyangSuperbAntiCheat"
      ><img 
@@ -70,14 +70,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-en.md"
+  <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/stable/docs/README-en.md"
     ><img
       height="40"
       src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/US.svg"
       alt="English"
   ></a>
   &nbsp;
-  <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/README-ja.md"
+  <a href="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/stable/docs/README-ja.md"
     ><img
       height="40"
       src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/JP.svg"
