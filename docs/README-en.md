@@ -462,6 +462,27 @@ Players without the `psac.trust` cannot run the following commands on trusted pl
 
 - `psac.trust`
 
+## /userinfo
+
+Lists player information.
+
+### Description
+
+Lists the information of the specified player.  
+If you add "-f" to the argument, more information (such as rank) will be displayed if "message.lynx" is enabled.  
+This command was created to be consistent with Lynx, but states that [main developer](https://github.com/peyang-Celeron) don't need it.  
+If `-f` is not specified or is not available, concise information is displayed.
+
+### Usage
+
+- /userinfo \[f\] \<PlayerName\>
+  Displays information about \<PlayerName\>.
+  If \[-f\] is specified, more detailed information will be displayed.
+
+### Permission
+
+- `psac.userinfo`
+
 ## /silentteleport
 
 Causes the specified player to teleport you or the specified player.  
