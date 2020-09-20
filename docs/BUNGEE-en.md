@@ -26,7 +26,7 @@ PSAC takes advantage of it to implement a variety of new features.
 ### How to change the plugin configuration
 
 Edit `database.HogeHogePath`.  
-Only a **relative path** are supported for path specification.  
+The path supports the relative path and absolute path
 If the directories is:
 ```
 servers/
@@ -49,4 +49,7 @@ servers/
 │  ├─ bar
 │  ├─ Bukkit.jar
 ```
-In such cases, the configuration path will be `../../ databaseX.db` counting from the plugin. X is determined by the incremental number.
+
+In such cases, the configuration path will be `../../../database.db`, counting from plugins.
+Also, if the `eyePath` of one server is` ../../../database.db`,
+Set the eyePath of all servers to which PSAC is linked to `../../../database.db`.
