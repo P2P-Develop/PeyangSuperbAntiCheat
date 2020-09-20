@@ -1,12 +1,17 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Moderate.BanAnalyzer;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Utils.TextBuilder;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.UUID;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -33,18 +38,17 @@ public class CommandBans implements CommandExecutor
         if (ErrorMessageSender.unPermMessage(sender, "psac.bans") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
             return true;
 
-        String type = args.length == 2 ? args[0]: "-a";
-        String name = args.length == 2 ? args[1]: args[0];
+        final String type = args.length == 2 ? args[0] : "-a";
+        final String name = args.length == 2 ? args[1] : args[0];
 
-        if (!type.equals("-a") && !type.toLowerCase().equals("ban") && !type.toLowerCase().equals("kick"))
+        if (!type.equals("-a") && !type.toLowerCase()
+                .equals("ban") && !type.toLowerCase()
+                .equals("kick"))
         {
             sender.sendMessage(get("error.bans.unknownSearchType"));
 
             return true;
         }
-
-
-        BanAnalyzer.Type typeP = BanAnalyzer.Type.toType(type);
 
         UUID player = null;
 
@@ -63,7 +67,7 @@ public class CommandBans implements CommandExecutor
             return true;
         }
 
-        ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player, typeP);
+        ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player, BanAnalyzer.Type.toType(type));
 
         sender.sendMessage(config.getBoolean("message.lynx") ? get("message.bans.lynx", pair("name", name)): get("message.bans.message", pair("name", name)));
 

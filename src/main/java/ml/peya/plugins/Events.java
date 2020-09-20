@@ -118,7 +118,7 @@ public class Events implements Listener
 
         e.getRecipients()
                 .parallelStream()
-                .forEach(receiver -> receiver.spigot()
+                .forEachOrdered(receiver -> receiver.spigot()
                         .sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create())));
         Bukkit.getConsoleSender()
                 .sendMessage(format);

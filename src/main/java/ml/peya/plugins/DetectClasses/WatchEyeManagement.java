@@ -1,12 +1,13 @@
 package ml.peya.plugins.DetectClasses;
 
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Utils.Utils;
+import org.bukkit.entity.Player;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Date;
-import java.util.*;
+import java.util.UUID;
 
 import static ml.peya.plugins.Variables.eye;
 
@@ -142,9 +143,9 @@ public class WatchEyeManagement
      */
     public static String parseInjection(String sql)
     {
-        sql = sql.replace("\\", "\\\\");
-        sql = sql.replace("'", "''");
-        sql = sql.replace("\"", "\"\"");
+        sql = sql.replace("\\", "\\\\")
+                .replace("'", "''")
+                .replace("\"", "\"\"");
         return sql;
     }
 }

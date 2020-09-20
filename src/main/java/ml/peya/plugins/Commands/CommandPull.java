@@ -1,10 +1,14 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.util.*;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Moderate.TrustModifier;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -76,7 +80,7 @@ public class CommandPull implements CommandExecutor
         Location entityLoc = player.getLocation();
         entityLoc.setY(entityLoc.getY() + 0.5d);
         player.teleport(entityLoc);
-        double distance = pullLocation.distance(entityLoc);
+        final double distance = pullLocation.distance(entityLoc);
         Vector vector = player.getVelocity();
         vector.setX(((1.0D +
                 (0.1d * distance)) *

@@ -1,12 +1,13 @@
 package ml.peya.plugins.Module.NoCheatPlus;
 
-import fr.neatmonster.nocheatplus.checks.*;
-import fr.neatmonster.nocheatplus.checks.access.*;
-import fr.neatmonster.nocheatplus.hooks.*;
-import ml.peya.plugins.Detect.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
-import org.bukkit.entity.*;
+import fr.neatmonster.nocheatplus.checks.CheckType;
+import fr.neatmonster.nocheatplus.checks.access.IViolationInfo;
+import fr.neatmonster.nocheatplus.hooks.NCPHook;
+import ml.peya.plugins.Detect.DetectConnection;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Variables;
+import org.bukkit.entity.Player;
 
 /**
  * NoCheatPLusのフック
@@ -46,10 +47,7 @@ public class Hook implements NCPHook
     @Override
     public boolean onCheckFailure(CheckType checkType, Player player, IViolationInfo info)
     {
-        if (checkType != CheckType.FIGHT_ANGLE && checkType != CheckType.FIGHT_DIRECTION && checkType != CheckType.FIGHT_REACH)
-            return true;
-
-        if (Variables.cheatMeta.exists(player.getUniqueId()))
+        if ((checkType != CheckType.FIGHT_ANGLE && checkType != CheckType.FIGHT_DIRECTION && checkType != CheckType.FIGHT_REACH) || Variables.cheatMeta.exists(player.getUniqueId()))
             return true;
 
         DetectConnection.scan(player, DetectType.AURA_BOT, null, false);

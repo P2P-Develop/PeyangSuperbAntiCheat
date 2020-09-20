@@ -1,11 +1,11 @@
 package ml.peya.plugins.DetectClasses;
 
-import com.comphenix.protocol.events.*;
-import com.comphenix.protocol.wrappers.*;
-import ml.peya.plugins.Utils.*;
-import net.minecraft.server.v1_12_R1.*;
+import com.comphenix.protocol.events.PacketEvent;
+import com.comphenix.protocol.wrappers.EnumWrappers;
+import ml.peya.plugins.Utils.PlayerUtils;
+import net.minecraft.server.v1_12_R1.PacketPlayInUseEntity;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
 
 import static ml.peya.plugins.Variables.cheatMeta;
 
@@ -30,10 +30,10 @@ public class Packets
             field.setAccessible(true);
             if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK) return;
             for (CheatDetectNowMeta meta : cheatMeta.getMetas())
-            {
-                if (meta.getId() == field.getInt(entity) && meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() || PlayerUtils.hasCritical(e.getPlayer()))
+                if (meta.getId() == field.getInt(entity) && meta.getTarget()
+                        .getUniqueId() == e.getPlayer()
+                        .getUniqueId() || PlayerUtils.hasCritical(e.getPlayer()))
                     System.out.println(meta.addVL());
-            }
         }
         catch (Exception ex)
         {
