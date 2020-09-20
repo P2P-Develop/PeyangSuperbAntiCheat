@@ -1,21 +1,32 @@
 package ml.peya.plugins;
 
-import com.mojang.authlib.properties.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import net.md_5.bungee.api.chat.*;
-import net.minecraft.server.v1_12_R1.*;
-import org.apache.commons.lang.*;
-import org.apache.commons.lang3.tuple.*;
+import com.mojang.authlib.properties.Property;
+import ml.peya.plugins.Moderate.KickManager;
+import ml.peya.plugins.Utils.Books;
+import ml.peya.plugins.Utils.PlayerUtils;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.minecraft.server.v1_12_R1.EntityPlayer;
+import net.minecraft.server.v1_12_R1.PacketPlayOutPlayerInfo;
+import net.minecraft.server.v1_12_R1.PlayerConnection;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_12_R1.entity.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.*;
-import org.bukkit.event.entity.*;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftArrow;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.metadata.*;
-import org.bukkit.scheduler.*;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import static ml.peya.plugins.Variables.*;
 
@@ -89,19 +100,28 @@ public class Events implements Listener
     public void onChat(AsyncPlayerChatEvent e)
     {
         e.setCancelled(true);
-        String format = e.getFormat().replace("%1$s", e.getPlayer().getDisplayName()).replace("%2$s", e.getMessage());
+        String format = e.getFormat()
+                .replace("%1$s", e.getPlayer()
+                        .getDisplayName())
+                .replace("%2$s", e.getMessage());
 
         ComponentBuilder builder = new ComponentBuilder("");
 
-        builder.append(ChatColor.RED + "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED + "] ");
-        builder.event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()));
-        builder.event(new HoverEvent(
-                HoverEvent.Action.SHOW_TEXT,
-                new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()
-        ));
+        builder.append(ChatColor.RED + "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED + "] ")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer()
+                        .getName()))
+                .event(new HoverEvent(
+                        HoverEvent.Action.SHOW_TEXT,
+                        new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer()
+                                .getName()).create()
+                ));
 
-        e.getRecipients().parallelStream().forEach(receiver -> receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create())));
-        Bukkit.getConsoleSender().sendMessage(format);
+        e.getRecipients()
+                .parallelStream()
+                .forEach(receiver -> receiver.spigot()
+                        .sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create())));
+        Bukkit.getConsoleSender()
+                .sendMessage(format);
     }
 
     /**
@@ -195,7 +215,6 @@ public class Events implements Listener
             e.setCancelled(true);
             KickManager.kickPlayer(e.getPlayer(), e.getReason().replaceFirst("§7\\[§bMatrix§7]§r ", ""), true, false);
         }
-
     }
 }
 

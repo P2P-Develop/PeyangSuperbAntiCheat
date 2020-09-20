@@ -1,22 +1,31 @@
 package ml.peya.plugins.Utils;
 
-import com.mojang.authlib.*;
-import com.mojang.authlib.properties.*;
-import net.minecraft.server.v1_12_R1.*;
-import org.apache.commons.lang.*;
-import org.apache.commons.lang3.tuple.*;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+import net.minecraft.server.v1_12_R1.EntityPlayer;
+import net.minecraft.server.v1_12_R1.PlayerInteractManager;
+import net.minecraft.server.v1_12_R1.WorldServer;
+import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_12_R1.*;
+import org.bukkit.craftbukkit.v1_12_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.*;
-import org.bukkit.potion.*;
-import org.bukkit.util.*;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.BlockIterator;
 
-import java.sql.*;
-import java.util.*;
-import java.util.stream.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static ml.peya.plugins.Variables.skin;
 
@@ -92,7 +101,7 @@ public class PlayerUtils
 
         String name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ? "19" + random.nextInt(120): "");
         if (name.length() > 16)
-            name = random.nextBoolean() ? first: last;
+            name = random.nextBoolean() ? first : last;
 
         if (name.length() > 16)
             name = RandomStringUtils.randomAlphanumeric(random.nextInt(16));

@@ -1,18 +1,28 @@
 package ml.peya.plugins.BungeeProxy;
 
-import com.google.gson.*;
-import net.md_5.bungee.api.plugin.*;
-import net.md_5.bungee.config.*;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
+import net.md_5.bungee.api.plugin.Plugin;
+import net.md_5.bungee.config.Configuration;
+import net.md_5.bungee.config.ConfigurationProvider;
+import net.md_5.bungee.config.YamlConfiguration;
 
-import javax.net.ssl.*;
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
-import java.lang.reflect.*;
-import java.net.*;
-import java.nio.charset.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.logging.*;
-import java.util.zip.*;
+import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * bStats collects some data for plugin authors.
@@ -248,43 +258,58 @@ public class Metrics
     }
 
     /**
-     * Collects the data and sends it afterwards.
+     * Sends the data to the bStats server.
+     *
+     * @param plugin Any plugin. It's just used to get a logger instance.
+     * @param data   The data to send.
+     *
+     * @throws Exception If the request failed.
      */
-    private void submitData()
+    private static void sendData(Plugin plugin, JsonObject data) throws Exception
     {
-        final JsonObject data = getServerData();
-
-        final JsonArray pluginData = new JsonArray();
-        // Search for all other bStats Metrics classes to get their plugin data
-        for (Object metrics : knownMetricsInstances)
+        if (data == null)
         {
-            try
-            {
-                Object plugin = metrics.getClass().getMethod("getPluginData").invoke(metrics);
-                if (plugin instanceof JsonObject)
-                {
-                    pluginData.add((JsonObject) plugin);
-                }
-            }
-            catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored)
-            {
-            }
+            throw new IllegalArgumentException("Data cannot be null");
+        }
+        if (logSentData)
+        {
+            plugin.getLogger()
+                    .info("Sending data to bStats: " + data);
         }
 
-        data.add("plugins", pluginData);
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
 
-        try
+        // Compress the data to save bandwidth
+        byte[] compressedData = compress(data.toString());
+
+        // Add headers
+        connection.setRequestMethod("POST");
+        connection.addRequestProperty("Accept", "application/json");
+        connection.addRequestProperty("Connection", "close");
+        connection.addRequestProperty("Content-Encoding", "gzip"); // We gzip our request
+        connection.addRequestProperty("Content-Length", String.valueOf(compressedData.length));
+        connection.setRequestProperty("Content-Type", "application/json"); // We send our data in JSON format
+        connection.setRequestProperty("User-Agent", "MC-Server/" + B_STATS_VERSION);
+
+        // Send data
+        connection.setDoOutput(true);
+        try (DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream()))
         {
-            // Send the data
-            sendData(plugin, data);
+            outputStream.write(compressedData);
         }
-        catch (Exception e)
+
+        String builder;
+
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
         {
-            // Something went wrong! :(
-            if (logFailedRequests)
-            {
-                plugin.getLogger().log(Level.WARNING, "Could not submit plugin stats!", e);
-            }
+            builder = bufferedReader.lines()
+                    .collect(Collectors.joining());
+        }
+
+        if (logResponseStatusText)
+        {
+            plugin.getLogger()
+                    .info("Sent data to bStats and received response: " + builder);
         }
     }
 
@@ -401,58 +426,47 @@ public class Metrics
     }
 
     /**
-     * Sends the data to the bStats server.
-     *
-     * @param plugin Any plugin. It's just used to get a logger instance.
-     * @param data   The data to send.
-     * @throws Exception If the request failed.
+     * Collects the data and sends it afterwards.
      */
-    private static void sendData(Plugin plugin, JsonObject data) throws Exception
+    private void submitData()
     {
-        if (data == null)
+        final JsonObject data = getServerData();
+
+        final JsonArray pluginData = new JsonArray();
+        // Search for all other bStats Metrics classes to get their plugin data
+        knownMetricsInstances.parallelStream()
+                .forEachOrdered(metrics ->
+                {
+                    try
+                    {
+                        Object plugin = metrics.getClass()
+                                .getMethod("getPluginData")
+                                .invoke(metrics);
+                        if (plugin instanceof JsonObject)
+                        {
+                            pluginData.add((JsonObject) plugin);
+                        }
+                    }
+                    catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored)
+                    {
+                    }
+                });
+
+        data.add("plugins", pluginData);
+
+        try
         {
-            throw new IllegalArgumentException("Data cannot be null");
+            // Send the data
+            sendData(plugin, data);
         }
-        if (logSentData)
+        catch (Exception e)
         {
-            plugin.getLogger().info("Sending data to bStats: " + data);
-        }
-
-        HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
-
-        // Compress the data to save bandwidth
-        byte[] compressedData = compress(data.toString());
-
-        // Add headers
-        connection.setRequestMethod("POST");
-        connection.addRequestProperty("Accept", "application/json");
-        connection.addRequestProperty("Connection", "close");
-        connection.addRequestProperty("Content-Encoding", "gzip"); // We gzip our request
-        connection.addRequestProperty("Content-Length", String.valueOf(compressedData.length));
-        connection.setRequestProperty("Content-Type", "application/json"); // We send our data in JSON format
-        connection.setRequestProperty("User-Agent", "MC-Server/" + B_STATS_VERSION);
-
-        // Send data
-        connection.setDoOutput(true);
-        try (DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream()))
-        {
-            outputStream.write(compressedData);
-        }
-
-        StringBuilder builder = new StringBuilder();
-
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
-        {
-            String line;
-            while ((line = bufferedReader.readLine()) != null)
+            // Something went wrong! :(
+            if (logFailedRequests)
             {
-                builder.append(line);
+                plugin.getLogger()
+                        .log(Level.WARNING, "Could not submit plugin stats!", e);
             }
-        }
-
-        if (logResponseStatusText)
-        {
-            plugin.getLogger().info("Sent data to bStats and received response: " + builder);
         }
     }
 
@@ -791,12 +805,12 @@ public class Metrics
                 // Null = skip the chart
                 return null;
             }
-            for (Map.Entry<String, Integer> entry : map.entrySet())
+            map.forEach((key, value) ->
             {
                 JsonArray categoryValues = new JsonArray();
-                categoryValues.add(new JsonPrimitive(entry.getValue()));
-                values.add(entry.getKey(), categoryValues);
-            }
+                categoryValues.add(new JsonPrimitive(value));
+                values.add(key, categoryValues);
+            });
             data.add("values", values);
             return data;
         }

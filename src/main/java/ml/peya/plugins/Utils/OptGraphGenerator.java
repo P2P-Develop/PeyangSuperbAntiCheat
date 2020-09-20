@@ -1,8 +1,8 @@
 package ml.peya.plugins.Utils;
 
-import org.bukkit.*;
+import org.bukkit.ChatColor;
 
-import java.util.stream.*;
+import java.util.stream.IntStream;
 
 /**
  * グラフじぇねれーと
@@ -30,29 +30,33 @@ public class OptGraphGenerator
      */
     static String genGraph(int VL, int max)
     {
-        int genVL = calcVLGraph(VL, max);
-
         StringBuilder builder = new StringBuilder("[");
 
-        IntStream.range(1, 11).parallel().forEachOrdered(i -> {
+        IntStream.range(1, 11).parallel().forEachOrdered(i ->
+        {
             if (VL >= max && i == 10)
-                builder.append(ChatColor.WHITE).append("|");
+                builder.append(ChatColor.WHITE)
+                        .append("|");
             else if (VL == 0 && i == 1)
-            {
-                builder.append(ChatColor.WHITE);
-                builder.append("|");
-            }
-            if (i == genVL)
-                builder.append(ChatColor.WHITE).append("|");
+                builder.append(ChatColor.WHITE)
+                        .append("|");
+
+            if (i == calcVLGraph(VL, max))
+                builder.append(ChatColor.WHITE)
+                        .append("|");
             else if (i < 5)
-                builder.append(ChatColor.GREEN).append("=");
+                builder.append(ChatColor.GREEN)
+                        .append("=");
             else if (i < 8)
-                builder.append(ChatColor.YELLOW).append("=");
+                builder.append(ChatColor.YELLOW)
+                        .append("=");
             else
-                builder.append(ChatColor.RED).append("=");
+                builder.append(ChatColor.RED)
+                        .append("=");
         });
 
-        builder.append(ChatColor.WHITE).append("]");
-        return builder.toString();
+        return builder.append(ChatColor.WHITE)
+                .append("]")
+                .toString();
     }
 }

@@ -1,7 +1,8 @@
 package ml.peya.plugins.BungeeStructure;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * コマンドを管理するクラス
@@ -54,36 +55,39 @@ public class CommandManager
         if (commands.size() == 0)
             return;
         String label = commands.remove(0);
-        CommandComponent commandComponent = new CommandComponent()
-        {
-            @Override
-            public String getLabel()
-            {
-                return label;
-            }
 
-            @Override
-            public String[] getArgs()
-            {
-                return commands.toArray(new String[0]);
-            }
-
-            @Override
-            public String getServer()
-            {
-                return server;
-            }
-        };
-
-        this.commands.parallelStream().forEachOrdered(cls -> {
-            try
-            {
-                for (Method method : cls.getMethods())
+        this.commands.parallelStream()
+                .forEachOrdered(cls ->
                 {
-                    if (method.getAnnotation(Command.class) == null)
-                        continue;
-                    if (method.getAnnotation(Command.class).label().equals(label))
-                        method.invoke(cls.newInstance(), commandComponent);
+                    try
+                    {
+                        for (Method method : cls.getMethods())
+                        {
+                            if (method.getAnnotation(Command.class) == null)
+                                continue;
+                            if (method.getAnnotation(Command.class)
+                                    .label()
+                                    .equals(label))
+                                method.invoke(cls.newInstance(), new CommandComponent()
+                                {
+                                    @Override
+                                    public String getLabel()
+                                    {
+                                        return label;
+                                    }
+
+                                    @Override
+                                    public String[] getArgs()
+                                    {
+                                        return commands.toArray(new String[0]);
+                                    }
+
+                                    @Override
+                                    public String getServer()
+                                    {
+                                        return server;
+                                    }
+                                });
                 }
             }
             catch (Exception e)

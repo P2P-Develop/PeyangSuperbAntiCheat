@@ -1,8 +1,11 @@
 package ml.peya.plugins.BungeeProxy;
 
-import ml.peya.plugins.BungeeStructure.*;
-import net.md_5.bungee.api.*;
-import net.md_5.bungee.api.config.*;
+import ml.peya.plugins.BungeeStructure.Command;
+import ml.peya.plugins.BungeeStructure.CommandComponent;
+import ml.peya.plugins.BungeeStructure.CommandExecutor;
+import net.md_5.bungee.api.ProxyServer;
+
+import java.util.Objects;
 
 import static ml.peya.plugins.Variables.logger;
 
@@ -51,19 +54,16 @@ public class Commands implements CommandExecutor
             return;
         String id = args[0];
         String player = args[1];
-        String sender = cmd.getServer();
 
         logger.info("Reported Player [" + player + "](id=" + id + ")");
 
-
-        for (String serverName : PeyangSuperbAntiCheatProxy.servers)
-        {
-            if (sender.equals(serverName))
-                continue;
-            ServerInfo server = PeyangSuperbAntiCheatProxy.getPlugin().getProxy().getServerInfo(serverName);
-            if (server == null)
-                continue;
-            PeyangSuperbAntiCheatProxy.sendData(server, "report " + id + " " + player);
-        }
+        PeyangSuperbAntiCheatProxy.servers.parallelStream()
+                .filter(serverName -> !cmd.getServer()
+                        .equals(serverName))
+                .map(serverName -> PeyangSuperbAntiCheatProxy.getPlugin()
+                        .getProxy()
+                        .getServerInfo(serverName))
+                .filter(Objects::nonNull)
+                .forEachOrdered(server -> PeyangSuperbAntiCheatProxy.sendData(server, "report " + id + " " + player));
     }
 }

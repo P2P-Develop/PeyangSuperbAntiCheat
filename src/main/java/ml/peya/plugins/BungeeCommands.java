@@ -1,13 +1,16 @@
 package ml.peya.plugins;
 
-import ml.peya.plugins.BungeeStructure.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.BungeeStructure.Command;
+import ml.peya.plugins.BungeeStructure.CommandComponent;
+import ml.peya.plugins.BungeeStructure.CommandExecutor;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import ml.peya.plugins.Utils.Utils;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * バンジーのコマンド
@@ -47,7 +50,6 @@ public class BungeeCommands implements CommandExecutor
     {
         String[] args = command.getArgs();
 
-
         if (args.length < 1)
             return;
 
@@ -57,7 +59,7 @@ public class BungeeCommands implements CommandExecutor
         if (args.length == 2)
             player = args[1];
 
-        String finalPlayer = player;
+        final String finalPlayer = player;
         new BukkitRunnable()
         {
             @Override
@@ -69,16 +71,12 @@ public class BungeeCommands implements CommandExecutor
                 {
                     ResultSet result = statement.executeQuery("SELECT * FROM watchreason WHERE MNGID='" + id + "'");
                     while (result.next())
-                    {
-                        String reason = result.getString("REASON");
-                        EnumCheatType type = CheatTypeUtils.getCheatTypeFromString(reason);
-                        reasons.add(type.getText());
-                    }
+                        reasons.add(CheatTypeUtils.getCheatTypeFromString(result.getString("REASON"))
+                                .getText());
                 }
                 catch (Exception e)
                 {
                     e.printStackTrace();
-
                 }
 
                 Utils.adminNotification(finalPlayer, id, reasons.toArray(new String[0]));

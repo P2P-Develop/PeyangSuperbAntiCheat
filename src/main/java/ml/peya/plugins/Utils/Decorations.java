@@ -1,11 +1,14 @@
 package ml.peya.plugins.Utils;
 
-import develop.p2p.lib.*;
-import ml.peya.plugins.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
-import org.bukkit.util.*;
+import develop.p2p.lib.WaveCreator;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
+
+import java.util.stream.IntStream;
 
 /**
  * でこれーしょん☆！
@@ -115,18 +118,15 @@ public class Decorations
      */
     public static void line(Location path, Location to, Particle p)
     {
-        double distance = path.distance(to);
-
         Vector vP = path.toVector();
-        Vector tP = to.toVector();
-
-        Vector line = tP.clone().subtract(vP).normalize().multiply(0.2);
-
-        for (double d = 0; distance > d; )
+        for (double d = 0; path.distance(to) > d; d += 0.2)
         {
-            vP.add(line);
+            vP.add(to.toVector()
+                    .clone()
+                    .subtract(vP)
+                    .normalize()
+                    .multiply(0.2));
             particle(vP.toLocation(path.getWorld()), 1, p);
-            d += 0.2;
         }
     }
 
@@ -139,15 +139,12 @@ public class Decorations
      */
     public static void circle(Location center, int count, double radius)
     {
-        Location n = new Location(
+        particle(new Location(
                 center.getWorld(),
                 particle_x(count, radius) + center.getX(),
                 center.getY(),
                 particle_z(count, radius) + center.getZ()
-        );
-
-        particle(n);
-
+        ));
     }
 
     /**
@@ -160,15 +157,12 @@ public class Decorations
      */
     public static void circle(Location center, int count, double radius, Particle particle)
     {
-        Location n = new Location(
+        particle(new Location(
                 center.getWorld(),
                 particle_x(count, radius) + center.getX(),
                 center.getY(),
                 particle_z(count, radius) + center.getZ()
-        );
-
-        particle(n, 5, particle);
-
+        ), 5, particle);
     }
 
     /**
@@ -240,21 +234,21 @@ public class Decorations
     public static void laser(Player player, int sec)
     {
 
-        final double[] time = {0.0};
+        final double[] time = { 0.0 };
 
         final double radius = 2.5;
-
 
         BukkitRunnable runnable = new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                Location c = player.getLocation().clone();
-                Location X = new Location(c.getWorld(), particle_x(time[0], radius) + c.getX(), 5.0 + c.getY(), particle_z(time[0], radius) + c.getZ());
+                final Location c = player.getLocation()
+                        .clone();
 
-                for (int i = 0; i < 10; i++)
-                    line(c, X, Particle.TOWN_AURA);
+                IntStream.range(0, 10)
+                        .parallel()
+                        .forEachOrdered(i -> line(c, new Location(c.getWorld(), particle_x(time[0], radius) + c.getX(), 5.0 + c.getY(), particle_z(time[0], radius) + c.getZ()), Particle.TOWN_AURA));
                 time[0] += Math.E;
             }
         };
