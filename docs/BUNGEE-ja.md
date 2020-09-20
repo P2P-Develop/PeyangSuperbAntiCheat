@@ -47,7 +47,7 @@ servers/
 │  ├─ bar
 │  ├─ Bukkit.jar
 ```
-などの場合、設定パスは、pluginsから数えて、`../../database.db`となります。  
-また、1つのサーバの`eyePath`を、`../../database.db`とした場合、  
-PSACを連携させるすべてのサーバのeyePathを`../../database.db`にしてください。
+などの場合、設定パスは、pluginsから数えて、`../../../database.db`となります。  
+また、1つのサーバの`eyePath`を、`../../../database.db`とした場合、  
+PSACを連携させるすべてのサーバのeyePathを`../../../database.db`にしてください。
 \(Mysqlは現在対応作業中です。~~多分無理だと思う~~\)
