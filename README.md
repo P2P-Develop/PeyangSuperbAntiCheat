@@ -36,15 +36,15 @@
   <a href="https://www.codefactor.io/repository/github/P2P-Develop/peyangsuperbanticheat"
      ><img
            alt="CodeFactor Grade (stable)"
-           src="https://img.shields.io/codefactor/grade/github/peyang-Celeron/PeyangSuperbAntiCheat/stable?label=code%20quality%20%28stable%29&style=flat-square"
+           src="https://img.shields.io/codefactor/grade/github/P2P-Develop/PeyangSuperbAntiCheat/stable?label=code%20quality%20%28stable%29&style=flat-square"
   ></a>
   <a href=""
      ><img
            alt="CodeFactor Grade (development)"
            src="https://img.shields.io/codefactor/grade/github/P2P-Develop/PeyangSuperbAntiCheat/develop?label=code%20quality%20%28development%29&style=flat-square"
   ></a>
-  <a href="https://codeclimate.com/github/peyang-Celeron/PeyangSuperbAntiCheat"
-     ><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/peyang-Celeron/PeyangSuperbAntiCheat?label=CodeClimate%28develop%29&style=flat-square"
+  <a href="https://codeclimate.com/github/P2P-Develop/PeyangSuperbAntiCheat"
+     ><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/P2P-Develop/PeyangSuperbAntiCheat?label=CodeClimate%28develop%29&style=flat-square"
   ></a><br>
   <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/actions?query=workflow%3A%22Java+CI+with+Maven+%28stable%29%22"
      ><img
