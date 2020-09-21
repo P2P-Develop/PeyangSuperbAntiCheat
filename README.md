@@ -30,7 +30,7 @@
   ></a><br>
   <a href="https://codeclimate.com/github/P2P-Develop/PeyangSuperbAntiCheat"
      ><img
-       src="https://img.shields.io/codeclimate/maintainability-percentage/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
+       src="https://img.shields.io/codeclimate/maintainability-percentage/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
        alt="Code Climate maintainability"
   ></a>
   <a href="https://www.codefactor.io/repository/github/P2P-Develop/peyangsuperbanticheat"
