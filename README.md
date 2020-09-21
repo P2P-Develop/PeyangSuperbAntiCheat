@@ -28,18 +28,15 @@
       src="https://img.shields.io/github/license/P2P-Develop/PeyangSuperbAntiCheat?color=blue&style=flat-square"
       alt="GitHub License"
   ></a><br>
-  <a href="https://codeclimate.com/github/peyang-Celeron/PeyangSuperbAntiCheat"
+  <a href="https://codeclimate.com/github/P2P-Develop/PeyangSuperbAntiCheat"
      ><img
-       src="https://img.shields.io/codeclimate/maintainability-percentage/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
+       src="https://img.shields.io/codeclimate/maintainability-percentage/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
        alt="Code Climate maintainability"
   ></a>
   <a href="https://www.codefactor.io/repository/github/P2P-Develop/peyangsuperbanticheat"
      ><img
            alt="CodeFactor Grade"
            src="https://img.shields.io/codefactor/grade/github/P2P-Develop/PeyangSuperbAntiCheat/develop?label=code%20quality&style=flat-square"
-  ></a>
-  <a href="https://codeclimate.com/github/peyang-Celeron/PeyangSuperbAntiCheat"
-     ><img alt="Code Climate maintainability" src="https://img.shields.io/codeclimate/maintainability-percentage/P2P-develop/PeyangSuperbAntiCheat/develop?label=maintainability&style=flat-square"
   ></a><br>
   <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/actions?query=workflow%3A%22Java+CI+with+Maven"
      ><img
