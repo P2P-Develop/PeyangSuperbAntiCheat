@@ -46,7 +46,7 @@
   <a href="https://snyk.io/test/github/peyang-Celeron/PeyangSuperbAntiCheat"
      ><img 
            alt="Snyk Vulnerabilities for GitHub Repo" 
-           src="https://img.shields.io/snyk/vulnerabilities/github/peyang-Celeron/PeyangSuperbAntiCheat?style=flat-square"
+           src="https://img.shields.io/snyk/vulnerabilities/github/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
   ></a>
 
 ---
