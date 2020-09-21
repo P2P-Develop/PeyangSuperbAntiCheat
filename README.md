@@ -38,7 +38,7 @@
            alt="CodeFactor Grade"
            src="https://img.shields.io/codefactor/grade/github/P2P-Develop/PeyangSuperbAntiCheat/develop?label=code%20quality&style=flat-square"
   ></a>
-  <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/actions?query=workflow%3A%22Java+CI+with+Maven"
+  <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/actions?query=workflow%3A%22Java+CI+with+Maven%22"
      ><img
            alt="GitHub Workflow Status"
            src="https://img.shields.io/github/workflow/status/P2P-Develop/PeyangSuperbAntiCheat/Java%20CI%20with%20Maven?label=build&style=flat-square"
