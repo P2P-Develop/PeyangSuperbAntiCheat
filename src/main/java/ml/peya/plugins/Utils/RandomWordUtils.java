@@ -1,10 +1,12 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.*;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
 
-import java.io.*;
-import java.nio.charset.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 /**
  * ランダムな単語を取得するクラス
@@ -36,8 +38,10 @@ public class RandomWordUtils
         try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/wordsx256.txt"), StandardCharsets.UTF_8);
              BufferedReader bufferedReader = new BufferedReader(reader))
         {
-            Optional<String> result = bufferedReader.lines().skip(new Random(bound).nextInt(__MaxLine - 1)).findFirst();
-            return result.orElse("");
+            return bufferedReader.lines()
+                    .skip(new Random(bound).nextInt(__MaxLine - 1))
+                    .findFirst()
+                    .orElse("");
         }
         catch (IOException e)
         {

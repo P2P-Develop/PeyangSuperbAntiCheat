@@ -1,16 +1,24 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import net.md_5.bungee.api.chat.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Enum.EnumSeverity;
+import ml.peya.plugins.Moderate.BanAnalyzer;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.math.*;
-import java.text.*;
-import java.util.*;
-import java.util.stream.*;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -76,22 +84,29 @@ public class TextBuilder
     {
         ComponentBuilder hover = new ComponentBuilder(get("book.clickable"));
 
-        ComponentBuilder b1 = new ComponentBuilder("    " + get("book.text.issueBy", pair("id", issueById)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid));
-        sender.spigot().sendMessage(b1.create());
+        sender.spigot()
+                .sendMessage(new ComponentBuilder("    " + get("book.text.issueBy", pair("id", issueById)))
+                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
+                        .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid))
+                        .create());
 
-        ComponentBuilder b2 = new ComponentBuilder("    " + get("book.text.issueTo", pair("id", id)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create())).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid));
-        sender.spigot().sendMessage(b2.create());
+        sender.spigot()
+                .sendMessage(new ComponentBuilder("    " + get("book.text.issueTo", pair("id", id)))
+                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
+                        .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid))
+                        .create());
 
         sender.sendMessage("    " + get("book.text.dateTime", pair("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))));
 
-        sender.sendMessage("    " + get("book.text.reason", pair("reason", types.parallelStream().map(type -> "        " + type.getText() + "\n").collect(Collectors.joining()))));
+        sender.sendMessage("    " + get("book.text.reason", pair("reason", types.parallelStream()
+                .map(type -> "        " + type.getText() + "\n")
+                .collect(Collectors.joining()))));
 
         HashMap<String, Object> serv = new HashMap<>();
-        serv.put("color", SeverityLevels.getSeverity(types).getColor());
-        serv.put("level", SeverityLevels.getSeverity(types).getText());
+        serv.put("color", SeverityLevels.getSeverity(types)
+                .getColor());
+        serv.put("level", SeverityLevels.getSeverity(types)
+                .getText());
         sender.sendMessage(get("book.text.severity", serv));
     }
 
@@ -187,10 +202,10 @@ public class TextBuilder
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        return new ComponentBuilder(prevFlag ? prev: uBar)
+        return new ComponentBuilder(String.valueOf(prevFlag ? prev : uBar))
                 .append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA)
-                .append(nextFlag ? next: uBar);
+                .append(String.valueOf(nextFlag ? next : uBar));
     }
 
     /**
@@ -213,11 +228,11 @@ public class TextBuilder
     {
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", player.getName());
-        map.put("uuid", player.getUniqueId().toString());
+        map.put("uuid", player.getUniqueId()
+                .toString());
 
-        ComponentBuilder component = getBroadCastWdDetectionText();
-        component.event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("kick.broadcastAdmin", map)).create()));
-        return component;
+        return getBroadCastWdDetectionText()
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("kick.broadcastAdmin", map)).create()));
     }
 
     /**

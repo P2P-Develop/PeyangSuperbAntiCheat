@@ -1,11 +1,14 @@
 package ml.peya.plugins.Learn;
 
-import org.apache.commons.lang3.tuple.*;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import static ml.peya.plugins.Utils.Utils.times;
 import static ml.peya.plugins.Variables.config;
 
 /**
@@ -84,10 +87,10 @@ public class NeuralNetwork
      */
     static ArrayList<Input> toInputData(double[] inputLayer, double[] inputWeight)
     {
-        ArrayList<Input> it = new ArrayList<>();
-        int count = 0;
-        for (double layer : inputLayer) it.add(new Input(layer, inputWeight[count++] - 1));
-        return it;
+        return IntStream.range(0, inputLayer.length)
+                .parallel()
+                .mapToObj(i -> new Input(inputLayer[i], inputWeight[i] - 1))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -98,11 +101,13 @@ public class NeuralNetwork
      */
     public double commit(Pair<Double, Double> data)
     {
-        inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
-        middleLayer = new Neuron[]{new Neuron(), new Neuron()};
+        inputLayer = new double[] { data.getLeft(), data.getRight(), inputLayerBias };
+        middleLayer = new Neuron[] { new Neuron(), new Neuron() };
         outputLayer = new Neuron();
 
-        IntStream.range(0, middleLayer.length).parallel().forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
+        IntStream.range(0, middleLayer.length)
+                .parallel()
+                .forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
 
         outputLayer.input(new ArrayList<>(Arrays.asList(new Input(middleLayer[0].getValue(), middleWeight[0]), new Input(middleLayer[1].getValue(), middleWeight[1]), new Input(middleLayerBias, middleWeight[2]))));
 
@@ -117,7 +122,10 @@ public class NeuralNetwork
      */
     public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int count)
     {
-        times(count, (data) -> dataCollection.parallelStream().forEachOrdered(this::learn), null);
+        IntStream.range(0, count)
+                .parallel()
+                .forEachOrdered(i -> dataCollection.parallelStream()
+                        .forEachOrdered(this::learn));
     }
 
     /**

@@ -1,16 +1,20 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.Enum.*;
-import net.md_5.bungee.api.chat.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.*;
+import ml.peya.plugins.Enum.EnumCheatType;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BookMeta;
 
-import java.math.*;
-import java.text.*;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -84,12 +88,12 @@ public class Books
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.text.uuid", pair("uuid", uuid))).create()))
                 .append("\n");
 
-        ComponentBuilder b1 = new ComponentBuilder(new TextComponent(b.create()))
+        ComponentBuilder b1 = new ComponentBuilder(String.valueOf(new TextComponent(b.create())))
                 .append(get("book.text.issueBy", pair("id", issueById)))
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.text.uuid", pair("uuid", issueByUuid))).create()))
                 .append("\n");
 
-        ComponentBuilder b2 = new ComponentBuilder(new TextComponent(b1.create()));
+        ComponentBuilder b2 = new ComponentBuilder(String.valueOf(new TextComponent(b1.create())));
 
         HashMap<String, Object> map = new HashMap<>();
         map.put("color", SeverityLevels.getSeverity(types).getColor());
@@ -116,9 +120,8 @@ public class Books
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
 
-        ComponentBuilder builder = new ComponentBuilder(get("message.mods.title", pair("name", player.getName())));
-
-        builder.append("\n")
+        ComponentBuilder builder = new ComponentBuilder(get("message.mods.title", pair("name", player.getName())))
+                .append("\n")
                 .append("\n");
 
         int count = 0;

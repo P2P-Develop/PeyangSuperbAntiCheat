@@ -1,10 +1,14 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.DetectClasses.WatchEyeManagement;
+import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Enum.EnumSeverity;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static ml.peya.plugins.Variables.eye;
 
@@ -42,16 +46,7 @@ public class SeverityLevels
      */
     public static ArrayList<EnumSeverity> getAllSeverity()
     {
-        ArrayList<EnumSeverity> severities = new ArrayList<>();
-
-        severities.add(EnumSeverity.FINE);
-        severities.add(EnumSeverity.FINER);
-        severities.add(EnumSeverity.FINEST);
-        severities.add(EnumSeverity.NORMAL);
-        severities.add(EnumSeverity.PRIORITY);
-        severities.add(EnumSeverity.REQUIRE_FAST);
-        severities.add(EnumSeverity.SEVERE);
-        return severities;
+        return new ArrayList<>(Arrays.asList(EnumSeverity.FINE, EnumSeverity.FINER, EnumSeverity.FINEST, EnumSeverity.NORMAL, EnumSeverity.PRIORITY, EnumSeverity.REQUIRE_FAST, EnumSeverity.SEVERE));
     }
 
     /**

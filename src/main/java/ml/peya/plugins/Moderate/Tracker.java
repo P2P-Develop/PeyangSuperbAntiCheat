@@ -1,16 +1,20 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.Enum.DetectType;
 import ml.peya.plugins.Gui.Item;
-import ml.peya.plugins.*;
-import net.md_5.bungee.api.*;
-import net.md_5.bungee.api.chat.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.math.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Objects;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.cheatMeta;
@@ -102,7 +106,7 @@ public class Tracker
                 tracker.remove(playerName);
                 return;
             }
-            Location location = target.getLocation();
+            final Location location = target.getLocation();
             HashMap<String, Object> map = new HashMap<>();
             map.put("name", target.getName());
             map.put("world", location.getWorld().getName());

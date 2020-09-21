@@ -1,9 +1,10 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.Enum.EnumCheatType;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * 判定タイプ管理するやつ。
@@ -17,37 +18,16 @@ public class CheatTypeUtils
      */
     public static EnumCheatType[] getFullType()
     {
-        ArrayList<EnumCheatType> types = new ArrayList<>();
-
-        types.add(EnumCheatType.FLY);
-        types.add(EnumCheatType.KILLAURA);
-        types.add(EnumCheatType.AUTOCLICKER);
-        types.add(EnumCheatType.SPEED);
-        types.add(EnumCheatType.ANTIKNOCKBACK);
-        types.add(EnumCheatType.REACH);
-        types.add(EnumCheatType.DOLPHIN);
-
-        types.parallelStream().forEachOrdered(type -> type.setSelected(false));
-        return types.toArray(new EnumCheatType[0]);
+        return createTypes().toArray(new EnumCheatType[0]);
     }
 
-    /**
-     * 上のメソッドのArrayList版。
-     *
-     * @return 全部！
-     */
-    public static ArrayList<EnumCheatType> getFullTypeArrayList()
+    private static ArrayList<EnumCheatType> createTypes()
     {
-        ArrayList<EnumCheatType> types = new ArrayList<>();
+        ArrayList<EnumCheatType> types = new ArrayList<>(Arrays.asList(EnumCheatType.FLY, EnumCheatType.KILLAURA, EnumCheatType.AUTOCLICKER, EnumCheatType.SPEED, EnumCheatType.ANTIKNOCKBACK, EnumCheatType.REACH, EnumCheatType.DOLPHIN));
 
-        types.add(EnumCheatType.FLY);
-        types.add(EnumCheatType.KILLAURA);
-        types.add(EnumCheatType.AUTOCLICKER);
-        types.add(EnumCheatType.SPEED);
-        types.add(EnumCheatType.ANTIKNOCKBACK);
-        types.add(EnumCheatType.REACH);
-        types.add(EnumCheatType.DOLPHIN);
-        types.parallelStream().forEachOrdered(type -> type.setSelected(false));
+        types.parallelStream()
+                .forEachOrdered(type -> type.setSelected(false));
+
         return types;
     }
 
@@ -59,7 +39,7 @@ public class CheatTypeUtils
      */
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
-        ArrayList<EnumCheatType> types = getFullTypeArrayList();
+        ArrayList<EnumCheatType> types = createTypes();
         Arrays.stream(values).parallel().<Consumer<? super EnumCheatType>>map(reason -> type -> {
             if (reason.toLowerCase().equals(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
                 type.setSelected(true);
@@ -76,7 +56,11 @@ public class CheatTypeUtils
      */
     public static EnumCheatType getCheatTypeFromString(String sysname)
     {
-        return getFullTypeArrayList().parallelStream().filter(type -> type.getSysName().equals(sysname)).findFirst().orElse(null);
+        return createTypes().parallelStream()
+                .filter(type -> type.getSysName()
+                        .equals(sysname))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
