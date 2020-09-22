@@ -42,4 +42,6 @@ else
   echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}maven${RESET} and ${BOLD}make${RESET} required"
 fi
 
-read -n1 -p "Do you want to install PSAC?? (y/N): " yn; [[ $yn =~ y|Y|\n ]] && make install || exit 0
+read -rn1 -p "Do you want to install PSAC? (y/N): " yn; [[ $yn =~ y|Y|\n ]] \
+  && make install \
+  || exit 0
