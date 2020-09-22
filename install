@@ -10,7 +10,7 @@ fi
 if [ ! -z $2 ]; then
   export psacdist=${2}
 else
-  read -rp "Plugin install dir(Auto create directory):" ans
+  read -rp "Plugin install dir (directory create automatically):" ans
   export psacdist="${ans}/PSAC.jar"
 fi
 
