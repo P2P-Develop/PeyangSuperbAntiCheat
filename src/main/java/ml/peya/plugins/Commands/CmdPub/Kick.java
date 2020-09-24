@@ -1,11 +1,13 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.Moderate.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Moderate.KickManager;
+import ml.peya.plugins.Moderate.TrustModifier;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;

@@ -1,10 +1,15 @@
 package ml.peya.plugins.Utils;
 
-import net.md_5.bungee.api.chat.*;
-import org.bukkit.*;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 
-import java.io.*;
-import java.util.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.HashMap;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 

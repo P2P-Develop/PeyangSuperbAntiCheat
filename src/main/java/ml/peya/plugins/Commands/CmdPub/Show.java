@@ -1,15 +1,21 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.DetectClasses.WatchEyeManagement;
+import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Utils.BookUtil;
+import ml.peya.plugins.Utils.Books;
+import ml.peya.plugins.Utils.TextBuilder;
+import ml.peya.plugins.Utils.Utils;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.math.*;
-import java.sql.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.eye;

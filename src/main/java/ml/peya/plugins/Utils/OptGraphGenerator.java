@@ -1,8 +1,8 @@
 package ml.peya.plugins.Utils;
 
-import org.bukkit.*;
+import org.bukkit.ChatColor;
 
-import java.util.stream.*;
+import java.util.stream.IntStream;
 
 /**
  * グラフじぇねれーと

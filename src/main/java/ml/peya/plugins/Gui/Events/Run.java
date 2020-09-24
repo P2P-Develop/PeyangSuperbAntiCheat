@@ -1,12 +1,14 @@
 package ml.peya.plugins.Gui.Events;
 
-import ml.peya.plugins.Gui.*;
-import org.bukkit.*;
-import org.bukkit.event.*;
-import org.bukkit.event.player.*;
-import org.bukkit.inventory.*;
+import ml.peya.plugins.Gui.Item;
+import org.bukkit.Material;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.Objects;
 
 import static ml.peya.plugins.Variables.item;
 

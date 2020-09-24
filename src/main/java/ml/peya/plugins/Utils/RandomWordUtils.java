@@ -1,10 +1,12 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.*;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
 
-import java.io.*;
-import java.nio.charset.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 /**
  * ランダムな単語を取得するクラス

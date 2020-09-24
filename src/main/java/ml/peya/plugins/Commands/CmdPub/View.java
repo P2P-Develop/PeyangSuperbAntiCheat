@@ -1,14 +1,18 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.*;
-import org.bukkit.command.*;
+import ml.peya.plugins.DetectClasses.WatchEyeManagement;
+import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import ml.peya.plugins.Utils.MessageEngine;
+import ml.peya.plugins.Utils.TextBuilder;
+import ml.peya.plugins.Utils.Utils;
+import ml.peya.plugins.Variables;
+import org.bukkit.command.CommandSender;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * /psac viewで動くクラス。

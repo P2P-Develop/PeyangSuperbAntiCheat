@@ -1,6 +1,6 @@
 package ml.peya.plugins.Enum;
 
-import net.md_5.bungee.api.*;
+import net.md_5.bungee.api.ChatColor;
 
 /**
  * 重大度

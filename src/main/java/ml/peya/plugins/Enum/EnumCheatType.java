@@ -1,6 +1,7 @@
 package ml.peya.plugins.Enum;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * D(ry

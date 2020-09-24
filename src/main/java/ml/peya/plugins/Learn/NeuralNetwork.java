@@ -1,9 +1,13 @@
 package ml.peya.plugins.Learn;
 
-import org.apache.commons.lang3.tuple.*;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static ml.peya.plugins.Variables.config;
 

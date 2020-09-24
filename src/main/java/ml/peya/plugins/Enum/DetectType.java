@@ -1,6 +1,6 @@
 package ml.peya.plugins.Enum;
 
-import org.bukkit.command.*;
+import org.bukkit.command.CommandSender;
 
 /**
  * 検出タイプ

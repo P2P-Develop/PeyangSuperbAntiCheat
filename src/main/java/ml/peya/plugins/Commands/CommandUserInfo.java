@@ -1,14 +1,24 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.*;
-import net.md_5.bungee.api.chat.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Moderate.BanAnalyzer;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.text.*;
-import java.util.*;
-import java.util.stream.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.stream.Stream;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 

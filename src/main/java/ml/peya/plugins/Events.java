@@ -1,21 +1,32 @@
 package ml.peya.plugins;
 
-import com.mojang.authlib.properties.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import net.md_5.bungee.api.chat.*;
-import net.minecraft.server.v1_12_R1.*;
-import org.apache.commons.lang.*;
-import org.apache.commons.lang3.tuple.*;
+import com.mojang.authlib.properties.Property;
+import ml.peya.plugins.Moderate.KickManager;
+import ml.peya.plugins.Utils.Books;
+import ml.peya.plugins.Utils.PlayerUtils;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.minecraft.server.v1_12_R1.EntityPlayer;
+import net.minecraft.server.v1_12_R1.PacketPlayOutPlayerInfo;
+import net.minecraft.server.v1_12_R1.PlayerConnection;
+import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.tuple.Pair;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_12_R1.entity.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.*;
-import org.bukkit.event.entity.*;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftArrow;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.metadata.*;
-import org.bukkit.scheduler.*;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import static ml.peya.plugins.Variables.*;
 

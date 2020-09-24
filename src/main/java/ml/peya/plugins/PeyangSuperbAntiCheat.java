@@ -1,19 +1,27 @@
 package ml.peya.plugins;
 
-import com.comphenix.protocol.*;
-import com.comphenix.protocol.events.*;
-import com.fasterxml.jackson.databind.*;
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.ListenerPriority;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import ml.peya.plugins.DetectClasses.DetectingList;
+import ml.peya.plugins.DetectClasses.KillCounting;
 import ml.peya.plugins.DetectClasses.Packets;
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Learn.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Module.*;
-import org.bukkit.*;
-import org.bukkit.plugin.java.*;
+import ml.peya.plugins.Learn.Mapper;
+import ml.peya.plugins.Learn.NeuralNetwork;
+import ml.peya.plugins.Moderate.Tracker;
+import ml.peya.plugins.Module.InitModule;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
-import java.util.*;
-import java.util.logging.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.logging.Level;
 
 import static ml.peya.plugins.Variables.*;
 
@@ -159,12 +167,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             {
                 logger.info("Saving learn weights to learning data file...");
                 Mapper mp = new Mapper();
-                mp.inputWeight = network.inputWeight;
-                mp.middleWeight = network.middleWeight;
+                mp.inputWeight = NeuralNetwork.inputWeight;
+                mp.middleWeight = NeuralNetwork.middleWeight;
                 mp.learnCount = learnCount;
                 pw.print(new ObjectMapper()
                         .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-                        .configure(SerializationFeature.INDENT_OUTPUT, true).writeValueAsString(mp));
+                        .configure(SerializationFeature.INDENT_OUTPUT, true)
+                        .writeValueAsString(mp));
             }
             catch (Exception e)
             {

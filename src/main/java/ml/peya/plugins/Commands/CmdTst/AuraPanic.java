@@ -1,13 +1,16 @@
 package ml.peya.plugins.Commands.CmdTst;
 
-import ml.peya.plugins.Detect.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Detect.DetectConnection;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Moderate.TrustModifier;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.HashMap;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.cheatMeta;

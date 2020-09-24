@@ -1,19 +1,27 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
-import net.minecraft.server.v1_12_R1.*;
-import org.apache.commons.lang3.tuple.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.DetectClasses.CheatDetectNowMeta;
+import ml.peya.plugins.DetectClasses.WatchEyeManagement;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import ml.peya.plugins.Moderate.KickManager;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Utils.TextBuilder;
+import ml.peya.plugins.Utils.Utils;
+import net.minecraft.server.v1_12_R1.EntityPlayer;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Objects;
 
 import static ml.peya.plugins.Variables.*;
 

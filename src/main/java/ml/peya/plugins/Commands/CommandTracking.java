@@ -1,12 +1,14 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.*;
-import net.md_5.bungee.api.*;
-import net.md_5.bungee.api.chat.*;
-import org.bukkit.*;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Moderate.TrustModifier;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Player;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;

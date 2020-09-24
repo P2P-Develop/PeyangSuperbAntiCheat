@@ -1,10 +1,11 @@
 package ml.peya.plugins.Module.Load;
 
-import fr.neatmonster.nocheatplus.*;
-import fr.neatmonster.nocheatplus.checks.*;
-import fr.neatmonster.nocheatplus.hooks.*;
-import ml.peya.plugins.Module.*;
-import ml.peya.plugins.Module.NoCheatPlus.*;
+import fr.neatmonster.nocheatplus.NCPAPIProvider;
+import fr.neatmonster.nocheatplus.checks.CheckType;
+import fr.neatmonster.nocheatplus.hooks.NCPHookManager;
+import ml.peya.plugins.Module.InitModule;
+import ml.peya.plugins.Module.ModuleContainer;
+import ml.peya.plugins.Module.NoCheatPlus.Hook;
 
 /**
  * NoCheatPlusとの接続。

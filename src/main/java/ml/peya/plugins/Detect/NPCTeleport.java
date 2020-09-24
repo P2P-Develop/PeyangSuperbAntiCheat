@@ -1,19 +1,20 @@
 package ml.peya.plugins.Detect;
 
-import develop.p2p.lib.*;
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
+import develop.p2p.lib.WaveCreator;
+import ml.peya.plugins.DetectClasses.CheatDetectNowMeta;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Utils.PlayerUtils;
 import net.minecraft.server.v1_12_R1.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.craftbukkit.v1_12_R1.entity.*;
-import org.bukkit.entity.*;
-import org.bukkit.metadata.*;
-import org.bukkit.scheduler.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.entity.Player;
+import org.bukkit.metadata.MetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.HashMap;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.cheatMeta;

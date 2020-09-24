@@ -1,9 +1,10 @@
 package ml.peya.plugins;
 
-import org.bukkit.entity.*;
-import org.bukkit.plugin.messaging.*;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import static ml.peya.plugins.Variables.mods;
 

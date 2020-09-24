@@ -1,7 +1,8 @@
 package ml.peya.plugins.BungeeStructure;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * コマンドを管理するクラス

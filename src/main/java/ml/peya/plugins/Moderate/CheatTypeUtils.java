@@ -1,9 +1,10 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.Enum.EnumCheatType;
 
-import java.util.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Consumer;
 
 /**
  * 判定タイプ管理するやつ。

@@ -1,18 +1,20 @@
 package ml.peya.plugins;
 
-import com.comphenix.protocol.*;
-import com.zaxxer.hikari.*;
-import ml.peya.plugins.BungeeStructure.*;
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Learn.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Module.*;
-import org.bukkit.configuration.file.*;
-import org.bukkit.scheduler.*;
+import com.comphenix.protocol.ProtocolManager;
+import com.zaxxer.hikari.HikariDataSource;
+import ml.peya.plugins.BungeeStructure.CommandManager;
+import ml.peya.plugins.DetectClasses.DetectingList;
+import ml.peya.plugins.DetectClasses.KillCounting;
+import ml.peya.plugins.Gui.Item;
+import ml.peya.plugins.Learn.NeuralNetwork;
+import ml.peya.plugins.Moderate.Tracker;
+import ml.peya.plugins.Module.Modules;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
-import java.util.logging.*;
+import java.util.HashMap;
+import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * PSAC全体で使用する変数群を管理します。

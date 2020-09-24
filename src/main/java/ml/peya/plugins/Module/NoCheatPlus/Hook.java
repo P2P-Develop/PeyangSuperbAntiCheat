@@ -1,12 +1,13 @@
 package ml.peya.plugins.Module.NoCheatPlus;
 
-import fr.neatmonster.nocheatplus.checks.*;
-import fr.neatmonster.nocheatplus.checks.access.*;
-import fr.neatmonster.nocheatplus.hooks.*;
-import ml.peya.plugins.Detect.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
-import org.bukkit.entity.*;
+import fr.neatmonster.nocheatplus.checks.CheckType;
+import fr.neatmonster.nocheatplus.checks.access.IViolationInfo;
+import fr.neatmonster.nocheatplus.hooks.NCPHook;
+import ml.peya.plugins.Detect.DetectConnection;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Variables;
+import org.bukkit.entity.Player;
 
 /**
  * NoCheatPLusのフック

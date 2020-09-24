@@ -1,6 +1,6 @@
 package ml.peya.plugins.Learn;
 
-import java.util.*;
+import java.util.ArrayList;
 
 import static develop.p2p.lib.LearnMath.sigmoid;
 

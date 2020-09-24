@@ -1,12 +1,16 @@
 package ml.peya.plugins;
 
-import ml.peya.plugins.BungeeStructure.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.BungeeStructure.Command;
+import ml.peya.plugins.BungeeStructure.CommandComponent;
+import ml.peya.plugins.BungeeStructure.CommandExecutor;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import ml.peya.plugins.Utils.Utils;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * バンジーのコマンド

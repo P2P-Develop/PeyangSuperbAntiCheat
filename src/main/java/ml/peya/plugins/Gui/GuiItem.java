@@ -1,9 +1,9 @@
 package ml.peya.plugins.Gui;
 
-import org.bukkit.*;
-import org.bukkit.entity.*;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Arrays;
 
 import static ml.peya.plugins.Variables.item;
 

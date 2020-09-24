@@ -1,15 +1,23 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.*;
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Bungee;
+import ml.peya.plugins.DetectClasses.WatchEyeManagement;
+import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Utils.BookUtil;
+import ml.peya.plugins.Utils.Books;
+import ml.peya.plugins.Utils.SeverityLevels;
+import ml.peya.plugins.Utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;

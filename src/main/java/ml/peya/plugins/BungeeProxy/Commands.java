@@ -1,9 +1,11 @@
 package ml.peya.plugins.BungeeProxy;
 
-import ml.peya.plugins.BungeeStructure.*;
-import net.md_5.bungee.api.*;
+import ml.peya.plugins.BungeeStructure.Command;
+import ml.peya.plugins.BungeeStructure.CommandComponent;
+import ml.peya.plugins.BungeeStructure.CommandExecutor;
+import net.md_5.bungee.api.ProxyServer;
 
-import java.util.*;
+import java.util.Objects;
 
 import static ml.peya.plugins.Variables.logger;
 

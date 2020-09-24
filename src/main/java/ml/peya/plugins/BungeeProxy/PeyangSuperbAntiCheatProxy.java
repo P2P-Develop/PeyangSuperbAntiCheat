@@ -1,11 +1,12 @@
 package ml.peya.plugins.BungeeProxy;
 
-import com.google.common.io.*;
-import ml.peya.plugins.BungeeStructure.*;
-import net.md_5.bungee.api.config.*;
-import net.md_5.bungee.api.plugin.*;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import ml.peya.plugins.BungeeStructure.CommandManager;
+import net.md_5.bungee.api.config.ServerInfo;
+import net.md_5.bungee.api.plugin.Plugin;
 
-import java.util.*;
+import java.util.ArrayList;
 
 import static ml.peya.plugins.Variables.*;
 

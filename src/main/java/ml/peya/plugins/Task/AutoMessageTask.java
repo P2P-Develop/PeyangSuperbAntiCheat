@@ -1,12 +1,15 @@
 package ml.peya.plugins.Task;
 
-import ml.peya.plugins.Utils.*;
-import org.bukkit.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.Utils.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.*;
+import java.util.HashMap;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.banKick;

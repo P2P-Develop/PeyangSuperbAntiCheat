@@ -1,17 +1,20 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Utils.PlayerUtils;
+import ml.peya.plugins.Utils.RandomArmor;
 import net.minecraft.server.v1_12_R1.*;
-import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_12_R1.entity.*;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
-import org.bukkit.craftbukkit.v1_12_R1.scoreboard.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_12_R1.scoreboard.CraftScoreboard;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
 
 import static ml.peya.plugins.Variables.config;
 
