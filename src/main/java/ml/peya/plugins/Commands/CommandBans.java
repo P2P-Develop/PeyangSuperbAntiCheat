@@ -1,12 +1,17 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Moderate.BanAnalyzer;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Utils.TextBuilder;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.UUID;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -51,8 +56,7 @@ public class CommandBans implements CommandExecutor
                 .parallel()
                 .forEachOrdered(ofPly ->
                         player[0] = ofPly.getName()
-                                .toLowerCase()
-                                .equals(name.toLowerCase())
+                                .equalsIgnoreCase(name)
                                 ? ofPly.getUniqueId()
                                 : player[0]);
 
@@ -63,8 +67,7 @@ public class CommandBans implements CommandExecutor
                     .parallel()
                     .forEachOrdered(onPly ->
                             player[0] = onPly.getName()
-                                    .toLowerCase()
-                                    .equals(name.toLowerCase())
+                                    .equalsIgnoreCase(name)
                                     ? onPly.getUniqueId()
                                     : player[0]);
 
