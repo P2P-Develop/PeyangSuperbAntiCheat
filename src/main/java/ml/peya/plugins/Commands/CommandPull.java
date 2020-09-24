@@ -57,7 +57,7 @@ public class CommandPull implements CommandExecutor
             return true;
         }
 
-        Player playerSender = (Player) sender;
+        final Player playerSender = (Player) sender;
 
         if (!playerSender.getWorld().getName().equals(player.getWorld().getName()))
             player.teleport(new Location(playerSender.getWorld(), playerSender.getLocation().getX(), playerSender.getLocation().getY(), playerSender.getLocation().getZ()));

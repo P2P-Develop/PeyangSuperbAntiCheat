@@ -101,6 +101,7 @@ public class CommandReport implements CommandExecutor
         }
 
         Player target = Bukkit.getPlayer(args[0]);
+
         if (reasons.size() != 0 && reasons.get(reasons.size() - 1).equals("\\"))
         {
             BookUtil.openBook(Books.getReportBook(target, types.toArray(new EnumCheatType[0])), (Player) sender);
@@ -130,17 +131,22 @@ public class CommandReport implements CommandExecutor
      * @param types  判定タイプ。
      * @param target ターゲット。
      */
-    private void report(CommandSender sender, ArrayList<EnumCheatType> types, Player target)
+    private void report(CommandSender sender, final ArrayList<EnumCheatType> types, Player target)
     {
-        String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]": ((Player) sender).getUniqueId().toString().replace("-", "");
+        final String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]" : ((Player) sender).getUniqueId()
+                .toString()
+                .replace("-", "");
 
-        if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
+        if (WatchEyeManagement.isExistsRecord(target.getUniqueId()
+                .toString()
+                .replace("-", ""), senderUUID))
         {
             sender.sendMessage(get("error.report.alreadyReported"));
             return;
         }
 
-        String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender ? "[CONSOLE]": sender.getName(), senderUUID, SeverityLevels.getSeverity(types).getLevel());
+        final String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender ? "[CONSOLE]" : sender.getName(), senderUUID, SeverityLevels.getSeverity(types)
+                .getLevel());
         boolean successFlag = false;
         for (EnumCheatType type : types)
             successFlag = WatchEyeManagement.setReason(id, type, 0);
@@ -156,10 +162,13 @@ public class CommandReport implements CommandExecutor
                 return;
             }
 
-            Utils.adminNotification(target.getName(), id, types.parallelStream().map(EnumCheatType::getText).toArray(String[]::new));
+            Utils.adminNotification(target.getName(), id, types.parallelStream()
+                    .map(EnumCheatType::getText)
+                    .toArray(String[]::new));
             Bungee.sendMessage("report " + id + " " + target.getName());
+            return;
         }
-        else
-            sender.sendMessage(get("error.unknownSQLError"));
+
+        sender.sendMessage(get("error.unknownSQLError"));
     }
 }

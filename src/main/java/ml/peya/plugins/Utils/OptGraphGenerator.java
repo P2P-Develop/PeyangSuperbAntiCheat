@@ -32,24 +32,21 @@ public class OptGraphGenerator
     {
         StringBuilder builder = new StringBuilder("[");
 
-        IntStream.range(1, 11).parallel().forEachOrdered(i ->
-        {
-            if (VL >= max && i == 10)
-                builder.append(ChatColor.WHITE)
-                        .append("|");
-            else if (VL == 0 && i == 1)
-                builder.append(ChatColor.WHITE)
-                        .append("|");
+        IntStream.range(1, 11)
+                .forEachOrdered(i ->
+                {
+                    if (VL >= max && i == 10 || VL == 0 && i == 1) builder.append(ChatColor.WHITE)
+                            .append("|");
 
-            if (i == calcVLGraph(VL, max))
-                builder.append(ChatColor.WHITE)
-                        .append("|");
-            else if (i < 5)
-                builder.append(ChatColor.GREEN)
-                        .append("=");
-            else if (i < 8)
-                builder.append(ChatColor.YELLOW)
-                        .append("=");
+                    if (i == calcVLGraph(VL, max))
+                        builder.append(ChatColor.WHITE)
+                                .append("|");
+                    else if (i < 5)
+                        builder.append(ChatColor.GREEN)
+                                .append("=");
+                    else if (i < 8)
+                        builder.append(ChatColor.YELLOW)
+                                .append("=");
             else
                 builder.append(ChatColor.RED)
                         .append("=");

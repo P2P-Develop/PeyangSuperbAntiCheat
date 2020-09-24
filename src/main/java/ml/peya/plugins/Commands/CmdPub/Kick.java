@@ -1,11 +1,13 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.Moderate.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Moderate.KickManager;
+import ml.peya.plugins.Moderate.TrustModifier;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -21,7 +23,7 @@ public class Kick
      * @param sender イベントsender。
      * @param args   引数。
      */
-    public static void run(CommandSender sender, String[] args)
+    public static void run(CommandSender sender, final String[] args)
     {
         boolean test = false;
 
@@ -29,7 +31,7 @@ public class Kick
         {
             sender.sendMessage(get("message.kick.test"));
 
-            Player player = Bukkit.getPlayer(args[1]);
+            final Player player = Bukkit.getPlayer(args[1]);
             if (player == null)
             {
                 sender.sendMessage(get("error.playerNotFound"));
@@ -54,7 +56,7 @@ public class Kick
             return;
         }
 
-        Player player = Bukkit.getPlayer(args[1]);
+        final Player player = Bukkit.getPlayer(args[1]);
         if (player == null)
         {
             sender.sendMessage(get("error.playerNotFound"));
@@ -71,8 +73,8 @@ public class Kick
 
         ArrayList<String> argSet = new ArrayList<>(Arrays.asList(args));
 
-        argSet.remove(1);
-        argSet.remove(0);
+        argSet.subList(0, 2)
+                .clear();
 
         if (argSet.size() == 0)
             argSet.add("Kicked by Operator.");

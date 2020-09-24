@@ -1,12 +1,14 @@
 package ml.peya.plugins.Gui.Events;
 
-import ml.peya.plugins.Gui.*;
-import org.bukkit.*;
-import org.bukkit.event.*;
-import org.bukkit.event.player.*;
-import org.bukkit.inventory.*;
+import ml.peya.plugins.Gui.Item;
+import org.bukkit.Material;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.Objects;
 
 import static ml.peya.plugins.Variables.item;
 
@@ -25,10 +27,14 @@ public class Run implements Listener
     {
         ItemStack itemStack = e.getItem();
 
-        if (e.getItem() == null || e.getItem().getType() == Material.AIR || Item.canGuiItem(itemStack)) return;
+        if (e.getItem() == null || e.getItem()
+                .getType() == Material.AIR || Item.canGuiItem(itemStack)) return;
 
         e.setCancelled(true);
 
-        item.getItems().parallelStream().filter(items -> Objects.equals(Item.getType(itemStack), items.getExecName())).forEachOrdered(items -> items.run(e.getPlayer(), Item.getTarget(itemStack)));
+        item.getItems()
+                .parallelStream()
+                .filter(items -> Objects.equals(Item.getType(itemStack), items.getExecName()))
+                .forEachOrdered(items -> items.run(e.getPlayer(), Item.getTarget(itemStack)));
     }
 }

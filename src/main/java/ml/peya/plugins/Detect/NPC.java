@@ -1,17 +1,20 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Utils.PlayerUtils;
+import ml.peya.plugins.Utils.RandomArmor;
 import net.minecraft.server.v1_12_R1.*;
-import org.bukkit.*;
-import org.bukkit.craftbukkit.v1_12_R1.entity.*;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
-import org.bukkit.craftbukkit.v1_12_R1.scoreboard.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_12_R1.scoreboard.CraftScoreboard;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
 
 import static ml.peya.plugins.Variables.config;
 
@@ -41,22 +44,25 @@ public class NPC
      */
     public static EntityPlayer spawn(Player player, DetectType teleportCase, boolean reachMode)
     {
-        EntityPlayer npc = PlayerUtils.getRandomPlayer(player.getWorld());
-
         Location center = player.getLocation();
 
         if (center.getPitch() <= 0.0f || center.getPitch() > 15.0f)
             center.setPitch(0.0f);
 
-        setLocation(player.getLocation().add(0, 1, 0).add(center.getDirection().multiply(-3)), npc);
+        final EntityPlayer npc = PlayerUtils.getRandomPlayer(player.getWorld());
+
+        setLocation(player.getLocation()
+                .add(0, 1, 0)
+                .add(center.getDirection()
+                        .multiply(-3)), npc);
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
-        ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
+        final ItemStack[] arm = { CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
                 CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
                 CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
                 CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
-                CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
+                CraftItemStack.asNMSCopy(RandomArmor.getSwords()) };
 
         new BukkitRunnable()
         {
@@ -80,16 +86,25 @@ public class NPC
 
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
-                Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> {
-                    c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
-                    c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-                });
+                Bukkit.getOnlinePlayers()
+                        .parallelStream()
+                        .filter(p -> p.hasPermission("psac.viewnpc"))
+                        .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
+                        .forEachOrdered(c ->
+                        {
+                            c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
+                            c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+                        });
 
                 NPCTeleport.teleport(player, npc, arm, teleportCase, reachMode);
 
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
-                Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
+                Bukkit.getOnlinePlayers()
+                        .parallelStream()
+                        .filter(p -> p.hasPermission("psac.viewnpc"))
+                        .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
+                        .forEachOrdered(c -> c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
 
                 new BukkitRunnable()
                 {

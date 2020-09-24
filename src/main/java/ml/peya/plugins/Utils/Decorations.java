@@ -2,12 +2,15 @@ package ml.peya.plugins.Utils;
 
 import develop.p2p.lib.WaveCreator;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 /**
@@ -42,15 +45,9 @@ public class Decorations
                 if (sec[0] > (seconds))
                     this.cancel();
 
-                player.getWorld().spawnParticle(
-                        Particle.FLAME,
-                        player.getLocation().add(0, 0.5, 0),
-                        30,
-                        0,
-                        0,
-                        0,
-                        0.65
-                );
+                player.getWorld()
+                        .spawnParticle(Particle.FLAME, player.getLocation()
+                                .add(0, 0.5, 0), 30, 0, 0, 0, 0.65);
 
                 sec[0] += 5;
             }
@@ -77,15 +74,8 @@ public class Decorations
      */
     public static void particle(Location location, int size, Particle particle)
     {
-        location.getWorld().spawnParticle(
-                particle,
-                location,
-                size,
-                0,
-                0,
-                0,
-                0.001
-        ); //XXX: 誰だよこんな引数多く設計したやつ
+        location.getWorld()
+                .spawnParticle(particle, location, size, 0, 0, 0, 0.001); //XXX: 誰だよこんな引数多く設計したやつ
     }
 
     /**
@@ -107,6 +97,18 @@ public class Decorations
     public static void line(Location path, Location to)
     {
         line(path, to, Particle.ENCHANTMENT_TABLE);
+    }
+
+    /**
+     * 可変長引数でいっこの関数で線を引くよ！
+     *
+     * @param lines 引数をタプルとして入れれるよ！
+     */
+    @SafeVarargs
+    public static void line(final ImmutablePair<Location, Location>... lines)
+    {
+        Arrays.stream(lines)
+                .forEachOrdered(line -> line(line.getLeft(), line.getRight()));
     }
 
     /**
@@ -148,6 +150,18 @@ public class Decorations
     }
 
     /**
+     * 可変長引数でいっこの関数で実行できるえん
+     *
+     * @param circles 引数をタプルとして入れれるよ！
+     */
+    @SafeVarargs
+    public static void circle(final Triple<Location, Integer, Double>... circles)
+    {
+        Arrays.stream(circles)
+                .forEachOrdered(circle -> circle(circle.getLeft(), circle.getMiddle(), circle.getRight()));
+    }
+
+    /**
      * えん
      *
      * @param center   真ん中の位置
@@ -175,6 +189,7 @@ public class Decorations
     {
         final int[] count = {0};
         WaveCreator wave = new WaveCreator(0.8, 1.8, 0.1);
+        final Location center = player.getLocation();
 
         BukkitRunnable runnable = new BukkitRunnable()
         {
@@ -183,33 +198,52 @@ public class Decorations
             {
                 for (double i = 0; i < Math.PI * 2; i++)
                 {
-                    Location center = player.getLocation();
-
-                    circle(center.clone().add(0, 0.9, 0), count[0], 3, Particle.CRIT);
+                    circle(center.clone()
+                            .add(0, 0.9, 0), count[0], 3, Particle.CRIT);
 
                     circle(center.add(0, 0.7, 0), count[0], 2.7, Particle.ENCHANTMENT_TABLE);
 
-                    circle(center.clone().add(0, wave.get(0.01, false), 0), count[0], wave.getStatic());
+                    circle(
+                            Triple.of(center.clone()
+                                    .add(0, wave.get(0.01, false), 0), count[0], wave.getStatic()),
+                            Triple.of(center.clone()
+                                    .add(0, wave.get(0.01, false), 0), count[0], wave.getStatic()),
+                            Triple.of(center.clone()
+                                    .add(3.2, 0.7, 3.2), count[0], 1.5),
+                            Triple.of(center.clone()
+                                    .add(-3.2, 0.7, -3.2), count[0], 1.5),
+                            Triple.of(center.clone()
+                                    .add(-3.2, 0.7, 3.2), count[0], 1.5),
+                            Triple.of(center.clone()
+                                    .add(3.2, 0.7, -3.2), count[0], 1.5)
+                    );
 
-                    circle(center.clone().add(3.2, 0.7, 3.2), count[0], 1.5);
-                    circle(center.clone().add(-3.2, 0.7, -3.2), count[0], 1.5);
-                    circle(center.clone().add(-3.2, 0.7, 3.2), count[0], 1.5);
-                    circle(center.clone().add(3.2, 0.7, -3.2), count[0], 1.5);
-
-                    circle(center.clone().add(0, 1.5, 0), count[0], 5, Particle.SPELL_WITCH);
+                    circle(center.clone()
+                            .add(0, 1.5, 0), count[0], 5, Particle.SPELL_WITCH);
 
                     count[0]++;
                 }
 
-                Location center = player.getLocation();
-
-                line(center.clone().add(3, 0.7, 0), center.clone().add(-1.5, 0.7, 2.3));
-                line(center.clone().add(-1.5, 0.7, 2.3), center.clone().add(-1.5, 0.7, -2.3)); //三角
-                line(center.clone().add(3, 0.7, 0), center.clone().add(-1.5, 0.7, -2.3));
-
-                line(center.clone().add(-3, 0.7, 0), center.clone().add(1.5, 0.7, -2.3));
-                line(center.clone().add(1.5, 0.7, -2.3), center.clone().add(1.5, 0.7, 2.3)); //三角(反転)
-                line(center.clone().add(-3, 0.7, 0), center.clone().add(1.5, 0.7, 2.3));
+                line(
+                        ImmutablePair.of(center.clone()
+                                .add(3, 0.7, 0), center.clone()
+                                .add(-1.5, 0.7, 2.3)),
+                        ImmutablePair.of(center.clone()
+                                .add(-1.5, 0.7, 2.3), center.clone()
+                                .add(-1.5, 0.7, -2.3)), // 三角
+                        ImmutablePair.of(center.clone()
+                                .add(3, 0.7, 0), center.clone()
+                                .add(-1.5, 0.7, -2.3)),
+                        ImmutablePair.of(center.clone()
+                                .add(-3, 0.7, 0), center.clone()
+                                .add(1.5, 0.7, -2.3)),
+                        ImmutablePair.of(center.clone()
+                                .add(1.5, 0.7, -2.3), center.clone()
+                                .add(1.5, 0.7, 2.3)), // 三角 (反転)
+                        ImmutablePair.of(center.clone()
+                                .add(-3, 0.7, 0), center.clone()
+                                .add(1.5, 0.7, 2.3))
+                );
             }
         };
 

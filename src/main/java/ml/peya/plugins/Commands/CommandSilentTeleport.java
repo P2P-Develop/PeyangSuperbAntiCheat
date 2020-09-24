@@ -1,10 +1,12 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.player.*;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -36,14 +38,8 @@ public class CommandSilentTeleport implements CommandExecutor
             return true;
         }
 
-        Player target = Bukkit.getPlayer(args[0]);
-        Player player = (Player) sender;
-
-        if (args.length == 2)
-        {
-            target = Bukkit.getPlayer(args[1]);
-            player = Bukkit.getPlayer(args[0]);
-        }
+        final Player target = args.length == 2 ? Bukkit.getPlayer(args[1]) : Bukkit.getPlayer(args[0]);
+        final Player player = args.length == 2 ? Bukkit.getPlayer(args[0]) : (Player) sender;
 
         if (target == null || player == null)
         {

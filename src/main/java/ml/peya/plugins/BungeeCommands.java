@@ -80,7 +80,6 @@ public class BungeeCommands implements CommandExecutor
                 }
 
                 Utils.adminNotification(finalPlayer, id, reasons.toArray(new String[0]));
-
             }
         }.runTaskAsynchronously(PeyangSuperbAntiCheat.getPlugin());
     }

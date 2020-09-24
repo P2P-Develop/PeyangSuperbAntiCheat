@@ -173,8 +173,8 @@ public class NPCTeleport
                     if (config.getBoolean("npc.wave"))
                         rangeTmp = new WaveCreator(radius - 0.1, radius, config.getDouble("npc.waveMin")).get(0.01, true);
 
-                    Location center = player.getLocation();
-                    Location n = new Location(
+                    final Location center = player.getLocation();
+                    final Location n = new Location(
                             center.getWorld(),
                             auraBot_xPos(time[0], rangeTmp + speed) + center.getX(),
                             center.getY() + new WaveCreator(1.0, 2.0, 0.0).get(0.01, count[0] < 20),
@@ -192,10 +192,14 @@ public class NPCTeleport
                         @Override
                         public void run()
                         {
-                            Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).forEachOrdered(p -> {
-                                ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityTeleport(target));
-                                NPC.setArmor(p, target, arm);
-                            });
+                            Bukkit.getOnlinePlayers()
+                                    .parallelStream()
+                                    .filter(p -> p.hasPermission("psac.viewnpc"))
+                                    .forEachOrdered(p ->
+                                    {
+                                        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityTeleport(target));
+                                        NPC.setArmor(p, target, arm);
+                                    });
                             this.cancel();
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());

@@ -36,13 +36,13 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
         if (Arrays.asList("help", "view", "show", "drop", "kick")
                 .contains(args[0]) && ErrorMessageSender.unPermMessage(sender, "psac." + args[0])) return true;
 
-        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(args));
-        arrayList.remove(0);
+        ArrayList<String> argList = new ArrayList<>(Arrays.asList(args));
+        argList.remove(0);
 
         switch (args[0].toLowerCase())
         {
             case "help":
-                Help.run(sender, label, arrayList.toArray(new String[0]));
+                Help.run(sender, label, argList.toArray(new String[0]));
                 break;
             case "view":
                 View.run(sender, args);

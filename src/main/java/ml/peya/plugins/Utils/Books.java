@@ -35,7 +35,10 @@ public class Books
     {
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
-        String tmpReasonText = Arrays.stream(types).parallel().map(type -> type.isSelected() ? type.getSysName() + " ": "").collect(Collectors.joining());
+        final String tmpReasonText = Arrays.stream(types)
+                .parallel()
+                .map(type -> type.isSelected() ? type.getSysName() + " " : "")
+                .collect(Collectors.joining());
         ComponentBuilder component = new ComponentBuilder(get("reportbook.cheat"));
         component.append("\n");
 
@@ -80,30 +83,36 @@ public class Books
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
 
-        ComponentBuilder b = new ComponentBuilder(get("book.text.report"))
-                .append("\n")
-                .append(ChatColor.GRAY + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(TextBuilder.getLine("UNIX秒", String.valueOf(dateInt))).create())).append("\n")
-                .append(get("book.text.issueTo", pair("id", id)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.text.uuid", pair("uuid", uuid))).create()))
-                .append("\n");
-
-        ComponentBuilder b1 = new ComponentBuilder(String.valueOf(new TextComponent(b.create())))
-                .append(get("book.text.issueBy", pair("id", issueById)))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.text.uuid", pair("uuid", issueByUuid))).create()))
-                .append("\n");
-
-        ComponentBuilder b2 = new ComponentBuilder(String.valueOf(new TextComponent(b1.create())));
-
         HashMap<String, Object> map = new HashMap<>();
-        map.put("color", SeverityLevels.getSeverity(types).getColor());
-        map.put("level", SeverityLevels.getSeverity(types).getText());
+        map.put("color", SeverityLevels.getSeverity(types)
+                .getColor());
+        map.put("level", SeverityLevels.getSeverity(types)
+                .getText());
 
-        Arrays.asList(get("book.text.severity", map), "\n", get("book.text.reason", pair("reason", types.parallelStream().map(type -> "\n           " + ChatColor.BLUE + type.getText()).collect(Collectors.joining()))), "\n").parallelStream().forEachOrdered(b2::append);
+        Arrays.asList(get("book.text.severity", map), "\n", get("book.text.reason", pair("reason", types.parallelStream()
+                .map(type -> "\n           " + ChatColor.BLUE + type.getText())
+                .collect(Collectors.joining()))), "\n")
+                .parallelStream()
+                .forEachOrdered(b2::append);
         meta.setTitle("-");
         meta.setAuthor("AntiCheat Dev");
         meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
-        meta.spigot().addPage(b2.create());
+        meta.spigot()
+                .addPage(
+                        new ComponentBuilder(new TextComponent(new ComponentBuilder(new TextComponent(
+                                new ComponentBuilder(get("book.text.report"))
+                                        .append("\n")
+                                        .append(ChatColor.GRAY + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(dateInt.longValue())))
+                                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(TextBuilder.getLine("UNIX秒", String.valueOf(dateInt))).create()))
+                                        .append("\n")
+                                        .append(get("book.text.issueTo", pair("id", id)))
+                                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.text.uuid", pair("uuid", uuid))).create()))
+                                        .append("\n")
+                                        .create()))
+                                .append(get("book.text.issueBy", pair("id", issueById)))
+                                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.text.uuid", pair("uuid", issueByUuid))).create()))
+                                .append("\n")
+                                .create())).create());
         book.setItemMeta(meta);
         return book;
     }

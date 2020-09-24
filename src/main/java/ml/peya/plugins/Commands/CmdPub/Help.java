@@ -1,13 +1,16 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.*;
-import net.md_5.bungee.api.chat.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -30,10 +33,9 @@ public class Help
 
         if (args.length != 0)
         {
-            if (getPlayerNodes().contains(args[0]))
-                sender.sendMessage(get("command.help." + args[0]));
-            else
-                sender.sendMessage(get("error.psac.notPage"));
+            sender.sendMessage(getPlayerNodes().contains(args[0])
+                    ? get("command.help." + args[0])
+                    : get("error.psac.notPage"));
 
             if (args[0].equals("show") || args[0].equals("drop"))
                 sender.sendMessage(get("command.help.mngIdWarning"));
@@ -41,26 +43,24 @@ public class Help
             return;
         }
 
-        ArrayList<String> nodes = sender instanceof Player ? getPlayerNodes(): getNodes();
+        ArrayList<String> nodes = sender instanceof Player
+                ? getPlayerNodes()
+                : getNodes();
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-
                 nodes.parallelStream()
                         .filter(node -> sender.hasPermission("psac." + node))
-                        .forEachOrdered(str -> {
-                            String msg = get("command.shelp." + str, pair("label", label));
-                            BaseComponent[] st = new ComponentBuilder(msg)
-                                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac help " + str))
-                                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.AQUA + "詳細").create()))
-                                    .create();
-                            sender.spigot().sendMessage(st);
-                        });
+                        .forEachOrdered(str ->
+                                sender.spigot()
+                                        .sendMessage(new ComponentBuilder(get("command.shelp." + str, pair("label", label)))
+                                                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac help " + str))
+                                                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.AQUA + "詳細").create()))
+                                                .create()));
             }
         }.runTaskAsynchronously(PeyangSuperbAntiCheat.getPlugin());
-
     }
 
     private static ArrayList<String> getNodes()
