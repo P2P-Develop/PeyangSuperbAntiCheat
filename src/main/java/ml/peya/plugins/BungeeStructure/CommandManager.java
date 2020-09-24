@@ -1,8 +1,7 @@
 package ml.peya.plugins.BungeeStructure;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * コマンドを管理するクラス
@@ -88,12 +87,12 @@ public class CommandManager
                                         return server;
                                     }
                                 });
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        });
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                });
     }
 }

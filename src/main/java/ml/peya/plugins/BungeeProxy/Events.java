@@ -1,13 +1,11 @@
 package ml.peya.plugins.BungeeProxy;
 
-import com.google.common.io.ByteStreams;
-import net.md_5.bungee.api.config.ServerInfo;
-import net.md_5.bungee.api.connection.Server;
-import net.md_5.bungee.api.event.PluginMessageEvent;
-import net.md_5.bungee.api.event.ServerConnectedEvent;
-import net.md_5.bungee.api.event.ServerDisconnectEvent;
-import net.md_5.bungee.api.plugin.Listener;
-import net.md_5.bungee.event.EventHandler;
+import com.google.common.io.*;
+import net.md_5.bungee.api.config.*;
+import net.md_5.bungee.api.connection.*;
+import net.md_5.bungee.api.event.*;
+import net.md_5.bungee.api.plugin.*;
+import net.md_5.bungee.event.*;
 
 import static ml.peya.plugins.Variables.*;
 

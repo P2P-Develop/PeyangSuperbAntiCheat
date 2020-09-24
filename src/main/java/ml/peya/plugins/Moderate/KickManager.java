@@ -1,25 +1,17 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.DetectClasses.WatchEyeManagement;
-import ml.peya.plugins.PeyangSuperbAntiCheat;
-import ml.peya.plugins.Utils.Decorations;
-import ml.peya.plugins.Utils.MessageEngine;
-import ml.peya.plugins.Utils.TextBuilder;
-import ml.peya.plugins.Utils.Utils;
-import ml.peya.plugins.Variables;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
+import ml.peya.plugins.DetectClasses.*;
+import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
+import org.bukkit.*;
+import org.bukkit.entity.*;
+import org.bukkit.metadata.*;
+import org.bukkit.scheduler.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 
@@ -110,7 +102,7 @@ public class KickManager
         StringBuilder id = new StringBuilder();
         Random random = new Random();
         IntStream.range(0, 8).parallel().forEachOrdered(i -> {
-            id.append(random.nextBoolean() ? random.nextInt(9) : (char) (random.nextInt(5) + 'A'));
+            id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A'));
         });
 
         String reasonP;

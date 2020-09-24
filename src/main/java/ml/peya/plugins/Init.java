@@ -1,36 +1,27 @@
 package ml.peya.plugins;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import ml.peya.plugins.BungeeStructure.CommandManager;
-import ml.peya.plugins.Commands.CmdTst.AuraBot;
-import ml.peya.plugins.Commands.CmdTst.AuraPanic;
-import ml.peya.plugins.Commands.CmdTst.TestKnockback;
+import com.fasterxml.jackson.databind.*;
+import com.zaxxer.hikari.*;
+import ml.peya.plugins.BungeeStructure.*;
+import ml.peya.plugins.Commands.CmdTst.*;
 import ml.peya.plugins.Commands.*;
-import ml.peya.plugins.Gui.Events.Drop;
-import ml.peya.plugins.Gui.Events.Run;
-import ml.peya.plugins.Gui.Item;
-import ml.peya.plugins.Gui.Items.Main.TargetStick;
+import ml.peya.plugins.Gui.Events.*;
+import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.Gui.Items.Main.*;
 import ml.peya.plugins.Gui.Items.Target.*;
-import ml.peya.plugins.Gui.Items.Target.Page2.BackToPage1;
-import ml.peya.plugins.Gui.Items.Target.Page2.ModList;
-import ml.peya.plugins.Learn.NeuralNetwork;
-import ml.peya.plugins.Task.AutoMessageTask;
-import ml.peya.plugins.Task.TrackerTask;
-import ml.peya.plugins.Utils.Utils;
-import org.apache.commons.io.FileUtils;
-import org.bukkit.Bukkit;
+import ml.peya.plugins.Gui.Items.Target.Page2.*;
+import ml.peya.plugins.Learn.*;
+import ml.peya.plugins.Task.*;
+import ml.peya.plugins.Utils.*;
+import org.apache.commons.io.*;
+import org.bukkit.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.Statement;
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
+import java.io.*;
+import java.nio.file.*;
+import java.sql.*;
+import java.util.*;
+import java.util.concurrent.atomic.*;
+import java.util.logging.*;
 
 import static ml.peya.plugins.PeyangSuperbAntiCheat.getPlugin;
 import static ml.peya.plugins.Variables.*;
@@ -104,13 +95,13 @@ public class Init
         banKickPath = config.getString("database.logPath");
         trustPath = config.getString("database.trustPath");
         eye = new HikariDataSource(Init.initMngDatabase(Paths.get(databasePath)
-                .isAbsolute() ? databasePath : getPlugin().getDataFolder()
+                .isAbsolute() ? databasePath: getPlugin().getDataFolder()
                 .getAbsolutePath() + "/" + databasePath));
         banKick = new HikariDataSource(Init.initMngDatabase(Paths.get(banKickPath)
-                .isAbsolute() ? banKickPath : getPlugin().getDataFolder()
+                .isAbsolute() ? banKickPath: getPlugin().getDataFolder()
                 .getAbsolutePath() + "/" + banKickPath));
         trust = new HikariDataSource(Init.initMngDatabase(Paths.get(trustPath)
-                .isAbsolute() ? trustPath : getPlugin().getDataFolder()
+                .isAbsolute() ? trustPath: getPlugin().getDataFolder()
                 .getAbsolutePath() + "/" + trustPath));
 
     }

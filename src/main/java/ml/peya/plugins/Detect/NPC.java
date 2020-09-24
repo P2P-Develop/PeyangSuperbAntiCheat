@@ -1,20 +1,17 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.Enum.DetectType;
-import ml.peya.plugins.PeyangSuperbAntiCheat;
-import ml.peya.plugins.Utils.PlayerUtils;
-import ml.peya.plugins.Utils.RandomArmor;
+import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
+import ml.peya.plugins.Utils.*;
 import net.minecraft.server.v1_12_R1.*;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.v1_12_R1.scoreboard.CraftScoreboard;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.*;
+import org.bukkit.craftbukkit.v1_12_R1.entity.*;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.*;
+import org.bukkit.craftbukkit.v1_12_R1.scoreboard.*;
+import org.bukkit.entity.*;
+import org.bukkit.scheduler.*;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 import static ml.peya.plugins.Variables.config;
 
@@ -58,11 +55,11 @@ public class NPC
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
-        final ItemStack[] arm = { CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
+        final ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
                 CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
                 CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
                 CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
-                CraftItemStack.asNMSCopy(RandomArmor.getSwords()) };
+                CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
 
         new BukkitRunnable()
         {

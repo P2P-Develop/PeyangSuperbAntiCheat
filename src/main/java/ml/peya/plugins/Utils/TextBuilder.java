@@ -1,24 +1,16 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.Enum.EnumCheatType;
-import ml.peya.plugins.Enum.EnumSeverity;
-import ml.peya.plugins.Moderate.BanAnalyzer;
-import ml.peya.plugins.Moderate.CheatTypeUtils;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.Moderate.*;
+import net.md_5.bungee.api.chat.*;
+import org.bukkit.*;
+import org.bukkit.command.*;
+import org.bukkit.entity.*;
 
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.stream.Collectors;
+import java.math.*;
+import java.text.*;
+import java.util.*;
+import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -202,10 +194,10 @@ public class TextBuilder
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        return new ComponentBuilder(String.valueOf(prevFlag ? prev : uBar))
+        return new ComponentBuilder(String.valueOf(prevFlag ? prev: uBar))
                 .append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA)
-                .append(String.valueOf(nextFlag ? next : uBar));
+                .append(String.valueOf(nextFlag ? next: uBar));
     }
 
     /**

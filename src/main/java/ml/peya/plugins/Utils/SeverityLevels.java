@@ -1,14 +1,10 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.DetectClasses.WatchEyeManagement;
-import ml.peya.plugins.Enum.EnumCheatType;
-import ml.peya.plugins.Enum.EnumSeverity;
+import ml.peya.plugins.DetectClasses.*;
+import ml.peya.plugins.Enum.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.sql.*;
+import java.util.*;
 
 import static ml.peya.plugins.Variables.eye;
 

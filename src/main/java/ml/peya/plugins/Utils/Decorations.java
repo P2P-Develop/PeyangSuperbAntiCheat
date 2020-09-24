@@ -1,17 +1,15 @@
 package ml.peya.plugins.Utils;
 
-import develop.p2p.lib.WaveCreator;
-import ml.peya.plugins.PeyangSuperbAntiCheat;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Triple;
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
+import develop.p2p.lib.*;
+import ml.peya.plugins.*;
+import org.apache.commons.lang3.tuple.*;
+import org.bukkit.*;
+import org.bukkit.entity.*;
+import org.bukkit.scheduler.*;
 import org.bukkit.util.Vector;
 
-import java.util.Arrays;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.util.stream.*;
 
 /**
  * でこれーしょん☆！
@@ -268,7 +266,7 @@ public class Decorations
     public static void laser(Player player, int sec)
     {
 
-        final double[] time = { 0.0 };
+        final double[] time = {0.0};
 
         final double radius = 2.5;
 

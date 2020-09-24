@@ -1,11 +1,10 @@
 package ml.peya.plugins.Module;
 
-import me.rerere.matrix.api.HackType;
-import me.rerere.matrix.api.events.PlayerViolationEvent;
-import ml.peya.plugins.Detect.DetectConnection;
-import ml.peya.plugins.Enum.DetectType;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
+import me.rerere.matrix.api.*;
+import me.rerere.matrix.api.events.*;
+import ml.peya.plugins.Detect.*;
+import ml.peya.plugins.Enum.*;
+import org.bukkit.event.*;
 
 /**
  * イベント(Matrix用

@@ -1,8 +1,8 @@
 package ml.peya.plugins.Utils;
 
-import org.bukkit.ChatColor;
+import org.bukkit.*;
 
-import java.util.stream.IntStream;
+import java.util.stream.*;
 
 /**
  * グラフじぇねれーと
@@ -47,10 +47,10 @@ public class OptGraphGenerator
                     else if (i < 8)
                         builder.append(ChatColor.YELLOW)
                                 .append("=");
-            else
-                builder.append(ChatColor.RED)
-                        .append("=");
-        });
+                    else
+                        builder.append(ChatColor.RED)
+                                .append("=");
+                });
 
         return builder.append(ChatColor.WHITE)
                 .append("]")

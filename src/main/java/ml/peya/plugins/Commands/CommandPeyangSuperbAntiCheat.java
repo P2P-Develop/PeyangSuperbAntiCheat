@@ -1,13 +1,10 @@
 package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Commands.CmdPub.*;
-import ml.peya.plugins.Moderate.ErrorMessageSender;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import ml.peya.plugins.Moderate.*;
+import org.bukkit.command.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;

@@ -1,16 +1,14 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.PeyangSuperbAntiCheat;
-import org.apache.commons.lang3.tuple.Pair;
-import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.YamlConfiguration;
+import ml.peya.plugins.*;
+import org.apache.commons.lang3.tuple.*;
+import org.bukkit.*;
+import org.bukkit.configuration.file.*;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.io.*;
+import java.nio.charset.*;
+import java.util.*;
+import java.util.stream.*;
 
 /**
  * メッセージテンプレートを管理するクラス。

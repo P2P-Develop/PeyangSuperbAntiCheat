@@ -1,12 +1,11 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.DetectClasses.WatchEyeManagement;
-import ml.peya.plugins.Moderate.ErrorMessageSender;
-import ml.peya.plugins.Utils.Utils;
-import org.bukkit.command.CommandSender;
+import ml.peya.plugins.DetectClasses.*;
+import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.Utils.*;
+import org.bukkit.command.*;
 
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.eye;

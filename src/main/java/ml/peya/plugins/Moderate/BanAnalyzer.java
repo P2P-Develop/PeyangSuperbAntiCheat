@@ -1,17 +1,13 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.DetectClasses.WatchEyeManagement;
-import ml.peya.plugins.Utils.Utils;
-import org.bukkit.entity.Player;
+import ml.peya.plugins.DetectClasses.*;
+import ml.peya.plugins.Utils.*;
+import org.bukkit.entity.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.sql.*;
 import java.util.Date;
-import java.util.Random;
-import java.util.UUID;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.util.stream.*;
 
 import static ml.peya.plugins.Variables.banKick;
 
@@ -105,7 +101,7 @@ public class BanAnalyzer
         StringBuilder id = new StringBuilder();
         Random random = new Random();
         IntStream.range(0, 8).parallel().forEachOrdered(i -> {
-            id.append(random.nextBoolean() ? random.nextInt(9) : (char) (random.nextInt(5) + 'A'));
+            id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A'));
         });
 
         try (Connection connection = banKick.getConnection();

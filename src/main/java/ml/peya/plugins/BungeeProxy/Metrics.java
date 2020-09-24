@@ -1,28 +1,19 @@
 package ml.peya.plugins.BungeeProxy;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import net.md_5.bungee.api.plugin.Plugin;
-import net.md_5.bungee.config.Configuration;
-import net.md_5.bungee.config.ConfigurationProvider;
-import net.md_5.bungee.config.YamlConfiguration;
+import com.google.gson.*;
+import net.md_5.bungee.api.plugin.*;
+import net.md_5.bungee.config.*;
 
-import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.*;
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.util.zip.GZIPOutputStream;
+import java.lang.reflect.*;
+import java.net.*;
+import java.nio.charset.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.logging.*;
+import java.util.stream.*;
+import java.util.zip.*;
 
 /**
  * bStats collects some data for plugin authors.
@@ -32,6 +23,17 @@ import java.util.zip.GZIPOutputStream;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class Metrics
 {
+
+    // The version of this bStats class
+    public static final int B_STATS_VERSION = 1;
+    // The url to which the data is sent
+    private static final String URL = "https://bStats.org/submitData/bungeecord";
+    // A list with all known metrics class objects including this one
+    private static final List<Object> knownMetricsInstances = new ArrayList<>();
+    // Should the sent data be logged?
+    private static boolean logSentData;
+    // Should the response text be logged?
+    private static boolean logResponseStatusText;
 
     static
     {
@@ -50,38 +52,18 @@ public class Metrics
         }
     }
 
-    // The version of this bStats class
-    public static final int B_STATS_VERSION = 1;
-
-    // The url to which the data is sent
-    private static final String URL = "https://bStats.org/submitData/bungeecord";
-
     // The plugin
     private final Plugin plugin;
-
     // The plugin id
     private final int pluginId;
-
-    // Is bStats enabled on this server?
-    private boolean enabled;
-
-    // The uuid of the server
-    private String serverUUID;
-
-    // Should failed requests be logged?
-    private boolean logFailedRequests = false;
-
-    // Should the sent data be logged?
-    private static boolean logSentData;
-
-    // Should the response text be logged?
-    private static boolean logResponseStatusText;
-
-    // A list with all known metrics class objects including this one
-    private static final List<Object> knownMetricsInstances = new ArrayList<>();
-
     // A list with all custom charts
     private final List<CustomChart> charts = new ArrayList<>();
+    // Is bStats enabled on this server?
+    private boolean enabled;
+    // The uuid of the server
+    private String serverUUID;
+    // Should failed requests be logged?
+    private boolean logFailedRequests = false;
 
     /**
      * Class constructor.
@@ -142,6 +124,93 @@ public class Metrics
     }
 
     /**
+     * Links an other metrics class with this class.
+     * This method is called using Reflection.
+     *
+     * @param metrics An object of the metrics class to link.
+     */
+    public static void linkMetrics(Object metrics)
+    {
+        knownMetricsInstances.add(metrics);
+    }
+
+    /**
+     * Sends the data to the bStats server.
+     *
+     * @param plugin Any plugin. It's just used to get a logger instance.
+     * @param data   The data to send.
+     * @throws Exception If the request failed.
+     */
+    private static void sendData(Plugin plugin, JsonObject data) throws Exception
+    {
+        if (data == null)
+        {
+            throw new IllegalArgumentException("Data cannot be null");
+        }
+        if (logSentData)
+        {
+            plugin.getLogger()
+                    .info("Sending data to bStats: " + data);
+        }
+
+        HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
+
+        // Compress the data to save bandwidth
+        byte[] compressedData = compress(data.toString());
+
+        // Add headers
+        connection.setRequestMethod("POST");
+        connection.addRequestProperty("Accept", "application/json");
+        connection.addRequestProperty("Connection", "close");
+        connection.addRequestProperty("Content-Encoding", "gzip"); // We gzip our request
+        connection.addRequestProperty("Content-Length", String.valueOf(compressedData.length));
+        connection.setRequestProperty("Content-Type", "application/json"); // We send our data in JSON format
+        connection.setRequestProperty("User-Agent", "MC-Server/" + B_STATS_VERSION);
+
+        // Send data
+        connection.setDoOutput(true);
+        try (DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream()))
+        {
+            outputStream.write(compressedData);
+        }
+
+        String builder;
+
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
+        {
+            builder = bufferedReader.lines()
+                    .collect(Collectors.joining());
+        }
+
+        if (logResponseStatusText)
+        {
+            plugin.getLogger()
+                    .info("Sent data to bStats and received response: " + builder);
+        }
+    }
+
+    /**
+     * Gzips the given String.
+     *
+     * @param str The string to gzip.
+     * @return The gzipped String.
+     * @throws IOException If the compression failed.
+     */
+    private static byte[] compress(final String str) throws IOException
+    {
+        if (str == null)
+        {
+            return null;
+        }
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        try (GZIPOutputStream gzip = new GZIPOutputStream(outputStream))
+        {
+            gzip.write(str.getBytes(StandardCharsets.UTF_8));
+        }
+        return outputStream.toByteArray();
+    }
+
+    /**
      * Checks if bStats is enabled.
      *
      * @return Whether bStats is enabled or not.
@@ -163,17 +232,6 @@ public class Metrics
             plugin.getLogger().log(Level.WARNING, "Chart cannot be null");
         }
         charts.add(chart);
-    }
-
-    /**
-     * Links an other metrics class with this class.
-     * This method is called using Reflection.
-     *
-     * @param metrics An object of the metrics class to link.
-     */
-    public static void linkMetrics(Object metrics)
-    {
-        knownMetricsInstances.add(metrics);
     }
 
     /**
@@ -255,62 +313,6 @@ public class Metrics
         data.addProperty("coreCount", coreCount);
 
         return data;
-    }
-
-    /**
-     * Sends the data to the bStats server.
-     *
-     * @param plugin Any plugin. It's just used to get a logger instance.
-     * @param data   The data to send.
-     *
-     * @throws Exception If the request failed.
-     */
-    private static void sendData(Plugin plugin, JsonObject data) throws Exception
-    {
-        if (data == null)
-        {
-            throw new IllegalArgumentException("Data cannot be null");
-        }
-        if (logSentData)
-        {
-            plugin.getLogger()
-                    .info("Sending data to bStats: " + data);
-        }
-
-        HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
-
-        // Compress the data to save bandwidth
-        byte[] compressedData = compress(data.toString());
-
-        // Add headers
-        connection.setRequestMethod("POST");
-        connection.addRequestProperty("Accept", "application/json");
-        connection.addRequestProperty("Connection", "close");
-        connection.addRequestProperty("Content-Encoding", "gzip"); // We gzip our request
-        connection.addRequestProperty("Content-Length", String.valueOf(compressedData.length));
-        connection.setRequestProperty("Content-Type", "application/json"); // We send our data in JSON format
-        connection.setRequestProperty("User-Agent", "MC-Server/" + B_STATS_VERSION);
-
-        // Send data
-        connection.setDoOutput(true);
-        try (DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream()))
-        {
-            outputStream.write(compressedData);
-        }
-
-        String builder;
-
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
-        {
-            builder = bufferedReader.lines()
-                    .collect(Collectors.joining());
-        }
-
-        if (logResponseStatusText)
-        {
-            plugin.getLogger()
-                    .info("Sent data to bStats and received response: " + builder);
-        }
     }
 
     /**
@@ -468,27 +470,6 @@ public class Metrics
                         .log(Level.WARNING, "Could not submit plugin stats!", e);
             }
         }
-    }
-
-    /**
-     * Gzips the given String.
-     *
-     * @param str The string to gzip.
-     * @return The gzipped String.
-     * @throws IOException If the compression failed.
-     */
-    private static byte[] compress(final String str) throws IOException
-    {
-        if (str == null)
-        {
-            return null;
-        }
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try (GZIPOutputStream gzip = new GZIPOutputStream(outputStream))
-        {
-            gzip.write(str.getBytes(StandardCharsets.UTF_8));
-        }
-        return outputStream.toByteArray();
     }
 
     /**

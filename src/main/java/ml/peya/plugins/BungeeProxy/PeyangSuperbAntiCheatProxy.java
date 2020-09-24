@@ -30,29 +30,6 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
     public static PeyangSuperbAntiCheatProxy proxy;
 
     /**
-     * プラグインが有効になったときの。
-     */
-    @Override
-    public void onEnable()
-    {
-        new Metrics(this, __BSTATS_PLUGIN_ID);
-        logger = getLogger();
-        bungeeChannel = "PSACProxy"; //チャンネル設定
-        bungeeCommand = new CommandManager();
-        bungeeCommand.registerCommand(new Commands());
-
-        proxy = this;
-
-        servers = new ArrayList<>();
-
-        getProxy().registerChannel(bungeeChannel);
-
-        getProxy().getPluginManager().registerListener(this, new Events());
-
-        getLogger().info("PeyangSuperbAntiCheatProxy has been activated!");
-    }
-
-    /**
      * 特定のサーバーに文字列データを送信します。
      *
      * @param info サーバ
@@ -77,5 +54,28 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
     public static PeyangSuperbAntiCheatProxy getPlugin()
     {
         return proxy;
+    }
+
+    /**
+     * プラグインが有効になったときの。
+     */
+    @Override
+    public void onEnable()
+    {
+        new Metrics(this, __BSTATS_PLUGIN_ID);
+        logger = getLogger();
+        bungeeChannel = "PSACProxy"; //チャンネル設定
+        bungeeCommand = new CommandManager();
+        bungeeCommand.registerCommand(new Commands());
+
+        proxy = this;
+
+        servers = new ArrayList<>();
+
+        getProxy().registerChannel(bungeeChannel);
+
+        getProxy().getPluginManager().registerListener(this, new Events());
+
+        getLogger().info("PeyangSuperbAntiCheatProxy has been activated!");
     }
 }

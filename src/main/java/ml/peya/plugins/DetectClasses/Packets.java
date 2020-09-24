@@ -1,11 +1,11 @@
 package ml.peya.plugins.DetectClasses;
 
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers;
-import ml.peya.plugins.Utils.PlayerUtils;
-import net.minecraft.server.v1_12_R1.PacketPlayInUseEntity;
+import com.comphenix.protocol.events.*;
+import com.comphenix.protocol.wrappers.*;
+import ml.peya.plugins.Utils.*;
+import net.minecraft.server.v1_12_R1.*;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.*;
 
 import static ml.peya.plugins.Variables.cheatMeta;
 

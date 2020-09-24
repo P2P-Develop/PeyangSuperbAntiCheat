@@ -1,13 +1,9 @@
 package ml.peya.plugins.Learn;
 
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
+import org.apache.commons.lang3.tuple.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.*;
+import java.util.stream.*;
 
 import static ml.peya.plugins.Variables.config;
 
@@ -25,14 +21,6 @@ public class NeuralNetwork
      */
     private static final double weightRange = 10.0;
     /**
-     * 前層のバイアス。
-     */
-    private static final double inputLayerBias = 1.0;
-    /**
-     * 中層のバイアス。
-     */
-    private static final double middleLayerBias = 1.0;
-    /**
      * 前層の重み。
      */
     public static final double[][] inputWeight = new double[][]{{RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}};
@@ -40,6 +28,14 @@ public class NeuralNetwork
      * 中層の重み。
      */
     public static final double[] middleWeight = new double[]{RandomWeight(), RandomWeight(), RandomWeight()};
+    /**
+     * 前層のバイアス。
+     */
+    private static final double inputLayerBias = 1.0;
+    /**
+     * 中層のバイアス。
+     */
+    private static final double middleLayerBias = 1.0;
     /**
      * 前層自体の表現。
      */
@@ -101,8 +97,8 @@ public class NeuralNetwork
      */
     public double commit(Pair<Double, Double> data)
     {
-        inputLayer = new double[] { data.getLeft(), data.getRight(), inputLayerBias };
-        middleLayer = new Neuron[] { new Neuron(), new Neuron() };
+        inputLayer = new double[]{data.getLeft(), data.getRight(), inputLayerBias};
+        middleLayer = new Neuron[]{new Neuron(), new Neuron()};
         outputLayer = new Neuron();
 
         IntStream.range(0, middleLayer.length)

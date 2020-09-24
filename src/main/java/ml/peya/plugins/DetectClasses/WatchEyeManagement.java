@@ -1,13 +1,12 @@
 package ml.peya.plugins.DetectClasses;
 
-import ml.peya.plugins.Enum.EnumCheatType;
-import ml.peya.plugins.Utils.Utils;
-import org.bukkit.entity.Player;
+import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.Utils.*;
+import org.bukkit.entity.*;
 
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 import static ml.peya.plugins.Variables.eye;
 

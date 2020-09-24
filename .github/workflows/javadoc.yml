@@ -2,8 +2,8 @@ name: JavaDoc
 
 on:
   push:
-    branches: [ develop ]
-    paths: [ src/main/java/** ]
+    branches: [develop]
+    paths: [src/main/java/**]
 
 jobs:
   gen-javadoc:
