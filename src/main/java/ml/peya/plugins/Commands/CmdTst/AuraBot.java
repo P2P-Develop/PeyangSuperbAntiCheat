@@ -70,9 +70,7 @@ public class AuraBot implements CommandExecutor
         if (!config.getBoolean("message.lynx"))
         {
             HashMap<String, Object> map = new HashMap<>();
-            map.put("name", player.getDisplayName() + (player.getDisplayName()
-                                                             .equals(player.getName()) ? "" : (" (" + player
-                    .getName() + ") ")));
+            map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": " (" + player.getName() + ") "));
             map.put("type", "AuraBot");
             map.put("seconds", config.getString("npc.seconds"));
 

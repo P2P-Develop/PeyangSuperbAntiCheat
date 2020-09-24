@@ -30,8 +30,7 @@ public class CommandSilentTeleport implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.invalidLengthMessage(sender, args, 0, 2) || ErrorMessageSender
-                .unPermMessage(sender, "psac.silentteleport"))
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 0, 2) || ErrorMessageSender.unPermMessage(sender, "psac.silentteleport"))
             return true;
 
         if (!(sender instanceof Player))

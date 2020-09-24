@@ -12,12 +12,23 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.zip.GZIPOutputStream;
@@ -27,7 +38,7 @@ import java.util.zip.GZIPOutputStream;
  * <p>
  * Check out https://bStats.org/ to learn more about bStats!
  */
-@SuppressWarnings({ "WeakerAccess", "unused" })
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Metrics
 {
 
@@ -48,15 +59,15 @@ public class Metrics
     {
         // You can use the property to disable the check in your test environment
         if (System.getProperty("bstats.relocatecheck") == null || !System.getProperty("bstats.relocatecheck")
-                                                                         .equals("false"))
+                .equals("false"))
         {
             // Maven's Relocate is clever and changes strings, too. So we have to use this little "trick" ... :D
             final String defaultPackage = new String(
-                    new byte[] { 'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'k', 'k', 'i', 't' });
-            final String examplePackage = new String(new byte[] { 'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e' });
+                    new byte[]{'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'k', 'k', 'i', 't'});
+            final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
             // We want to make sure nobody just copy & pastes the example and use the wrong package names
             if (Metrics.class.getPackage().getName().equals(defaultPackage) || Metrics.class.getPackage().getName()
-                                                                                            .equals(examplePackage))
+                    .equals(examplePackage))
             {
                 throw new IllegalStateException("bStats Metrics class has not been relocated correctly!");
             }
@@ -162,7 +173,6 @@ public class Metrics
      *
      * @param plugin Any plugin. It's just used to get a logger instance.
      * @param data   The data to send.
-     *
      * @throws Exception If the request failed.
      */
     private static void sendData(Plugin plugin, JsonObject data) throws Exception
@@ -220,9 +230,7 @@ public class Metrics
      * Gzips the given String.
      *
      * @param str The string to gzip.
-     *
      * @return The gzipped String.
-     *
      * @throws IOException If the compression failed.
      */
     private static byte[] compress(final String str) throws IOException
@@ -343,7 +351,7 @@ public class Metrics
         {
             playerAmount = Bukkit.getOnlinePlayers().size(); // Just use the new method if the Reflection failed
         }
-        int onlineMode = Bukkit.getOnlineMode() ? 1 : 0;
+        int onlineMode = Bukkit.getOnlineMode() ? 1: 0;
         String bukkitVersion = Bukkit.getVersion();
         String bukkitName = Bukkit.getName();
 
@@ -395,7 +403,8 @@ public class Metrics
                         if (plugin instanceof JsonObject)
                         {
                             pluginData.add((JsonObject) plugin);
-                        } else
+                        }
+                        else
                         { // old bstats version compatibility
                             try
                             {

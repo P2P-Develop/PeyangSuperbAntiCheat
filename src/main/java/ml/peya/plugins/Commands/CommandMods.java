@@ -35,8 +35,7 @@ public class CommandMods implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psac.mods") || ErrorMessageSender
-                .invalidLengthMessage(sender, args, 1, 1))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.mods") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
             return true;
 
         Player player = Bukkit.getPlayer(args[0]);

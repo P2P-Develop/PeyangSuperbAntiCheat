@@ -5,7 +5,12 @@ import ml.peya.plugins.DetectClasses.CheatDetectNowMeta;
 import ml.peya.plugins.Enum.DetectType;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
 import ml.peya.plugins.Utils.PlayerUtils;
-import net.minecraft.server.v1_12_R1.*;
+import net.minecraft.server.v1_12_R1.EntityPlayer;
+import net.minecraft.server.v1_12_R1.ItemStack;
+import net.minecraft.server.v1_12_R1.PacketPlayOutAnimation;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntityHeadRotation;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntityTeleport;
+import net.minecraft.server.v1_12_R1.PlayerConnection;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
@@ -213,14 +218,13 @@ public class NPCTeleport
                     count[0]++;
                     CheatDetectNowMeta meta = cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
                     if (meta == null) continue;
-                    meta.addSeconds(((PlayerUtils.isLooking(player, n) || PlayerUtils
-                            .isLooking(player, n.clone().add(0, 1, 0))) ? (config
-                            .getLong("npc.seconds") * 0.1 / 2) : 0.0));
+                    meta.addSeconds(PlayerUtils.isLooking(player, n) || PlayerUtils.isLooking(player, n.clone().add(0, 1, 0))
+                            ? config.getLong("npc.seconds") * 0.1 / 2
+                            : 0.0);
                 }
-                time[0] += config.getDouble("npc.time") + (config
-                        .getBoolean("npc.speed.wave") ? new WaveCreator(0.0, config
-                        .getDouble("npc.speed.waveRange"), 0 - config.getDouble("npc.speed.waveRange"))
-                        .get(0.001, true) : 0.0);
+                time[0] += config.getDouble("npc.time") + (config.getBoolean("npc.speed.wave")
+                                ? new WaveCreator(0.0, config.getDouble("npc.speed.waveRange"), 0 - config.getDouble("npc.speed.waveRange")).get(0.001, true)
+                                : 0.0);
             }
         };
         r.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);

@@ -33,8 +33,7 @@ public class CommandPull implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psac.pull") || ErrorMessageSender
-                .invalidLengthMessage(sender, args, 1, 1))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.pull") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
             return true;
 
         if (!(sender instanceof Player))
@@ -62,13 +61,13 @@ public class CommandPull implements CommandExecutor
         final Player playerSender = (Player) sender;
 
         if (!playerSender.getWorld().getName().equals(player.getWorld().getName()))
-            player.teleport(new Location(playerSender.getWorld(), playerSender.getLocation().getX(), playerSender
-                    .getLocation().getY(), playerSender.getLocation().getZ()));
+            player.teleport(new Location(playerSender.getWorld(), playerSender.getLocation().getX(), playerSender.getLocation().getY(), playerSender.getLocation().getZ()));
         else
             pull(player, playerSender.getLocation());
 
-        sender.sendMessage(config.getBoolean("message.lynx") ? get("message.pull.lynx", pair("name", player
-                .getName())) : get("message.pull.normal", pair("name", player.getName())));
+        sender.sendMessage(config.getBoolean("message.lynx")
+                ? get("message.pull.lynx", pair("name", player.getName()))
+                : get("message.pull.normal", pair("name", player.getName())));
 
         return true;
     }

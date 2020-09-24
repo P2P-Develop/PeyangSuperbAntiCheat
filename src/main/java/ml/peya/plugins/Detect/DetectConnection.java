@@ -23,7 +23,13 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.banLeft;
+import static ml.peya.plugins.Variables.cheatMeta;
+import static ml.peya.plugins.Variables.config;
+import static ml.peya.plugins.Variables.eye;
+import static ml.peya.plugins.Variables.learnCount;
+import static ml.peya.plugins.Variables.learnCountLimit;
+import static ml.peya.plugins.Variables.network;
 
 /**
  * NPCの出陣命令を、NPCスポーン命令に変換
@@ -96,9 +102,7 @@ public class DetectConnection
                     @Override
                     public void run()
                     {
-                        String name = player.getDisplayName() + (player.getDisplayName()
-                                                                       .equals(player.getName()) ? "" : (" (" + player
-                                .getName() + ") "));
+                        String name = player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") "));
 
                         switch (type)
                         {
@@ -106,11 +110,10 @@ public class DetectConnection
                                 if (sender == null)
                                     Bukkit.getOnlinePlayers().parallelStream()
                                           .filter(np -> np.hasPermission("psac.aurabot"))
-                                          .forEachOrdered(np -> np.spigot().sendMessage(TextBuilder
-                                                  .textTestRep(name, meta.getVL(), banLeft).create()));
+                                          .forEachOrdered(np ->
+                                                  np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create()));
                                 else
-                                    sender.spigot()
-                                          .sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create());
+                                    sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create());
                                 break;
 
                             case AURA_PANIC:
@@ -178,11 +181,9 @@ public class DetectConnection
             {
 
                 final String MNGID = WatchEyeManagement.parseInjection(rs.getString("MNGID"));
-                ResultSet set = statement1.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
-                        MNGID + "'");
+                ResultSet set = statement1.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" + MNGID + "'");
                 while (set.next())
-                    reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON")))
-                                      .getText());
+                    reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
             }
         }
         catch (Exception e)

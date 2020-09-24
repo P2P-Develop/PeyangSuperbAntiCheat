@@ -70,8 +70,7 @@ public class CommandReport implements CommandExecutor
                 sender.sendMessage(get("error.requirePlayer"));
                 return true;
             }
-            BookUtil.openBook(Books
-                    .getReportBook(Bukkit.getPlayer(args[0]), CheatTypeUtils.getFullType()), (Player) sender);
+            BookUtil.openBook(Books.getReportBook(Bukkit.getPlayer(args[0]), CheatTypeUtils.getFullType()), (Player) sender);
             return true;
         }
 
@@ -142,9 +141,9 @@ public class CommandReport implements CommandExecutor
             return;
         }
 
-        final String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender ? "[CONSOLE]" : sender
-                .getName(), senderUUID, SeverityLevels.getSeverity(types)
-                                                      .getLevel());
+        final String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender
+                ? "[CONSOLE]"
+                : sender.getName(), senderUUID, SeverityLevels.getSeverity(types).getLevel());
         boolean successFlag = false;
         for (EnumCheatType type : types)
             successFlag = WatchEyeManagement.setReason(id, type, 0);

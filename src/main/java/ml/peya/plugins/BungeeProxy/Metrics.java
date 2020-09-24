@@ -9,7 +9,15 @@ import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -29,7 +37,7 @@ import java.util.zip.GZIPOutputStream;
  * <p>
  * Check out https://bStats.org/ to learn more about bStats!
  */
-@SuppressWarnings({ "WeakerAccess", "unused" })
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class Metrics
 {
 
@@ -48,15 +56,15 @@ public class Metrics
     {
         // You can use the property to disable the check in your test environment
         if (System.getProperty("bstats.relocatecheck") == null || !System.getProperty("bstats.relocatecheck")
-                                                                         .equals("false"))
+                .equals("false"))
         {
             // Maven's Relocate is clever and changes strings, too. So we have to use this little "trick" ... :D
             final String defaultPackage = new String(
-                    new byte[] { 'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'n', 'g', 'e', 'e', 'c', 'o', 'r', 'd' });
-            final String examplePackage = new String(new byte[] { 'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e' });
+                    new byte[]{'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'n', 'g', 'e', 'e', 'c', 'o', 'r', 'd'});
+            final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
             // We want to make sure nobody just copy & pastes the example and use the wrong package names
             if (Metrics.class.getPackage().getName().equals(defaultPackage) || Metrics.class.getPackage().getName()
-                                                                                            .equals(examplePackage))
+                    .equals(examplePackage))
             {
                 throw new IllegalStateException("bStats Metrics class has not been relocated correctly!");
             }
@@ -116,7 +124,8 @@ public class Metrics
             // We are the first! :)
             linkMetrics(this);
             startSubmitting();
-        } else
+        }
+        else
         {
             // We aren't the first so we link to the first metrics class
             try
@@ -150,7 +159,6 @@ public class Metrics
      *
      * @param plugin Any plugin. It's just used to get a logger instance.
      * @param data   The data to send.
-     *
      * @throws Exception If the request failed.
      */
     private static void sendData(Plugin plugin, JsonObject data) throws Exception
@@ -162,7 +170,7 @@ public class Metrics
         if (logSentData)
         {
             plugin.getLogger()
-                  .info("Sending data to bStats: " + data);
+                    .info("Sending data to bStats: " + data);
         }
 
         HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
@@ -191,13 +199,13 @@ public class Metrics
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
         {
             builder = bufferedReader.lines()
-                                    .collect(Collectors.joining());
+                    .collect(Collectors.joining());
         }
 
         if (logResponseStatusText)
         {
             plugin.getLogger()
-                  .info("Sent data to bStats and received response: " + builder);
+                    .info("Sent data to bStats and received response: " + builder);
         }
     }
 
@@ -205,9 +213,7 @@ public class Metrics
      * Gzips the given String.
      *
      * @param str The string to gzip.
-     *
      * @return The gzipped String.
-     *
      * @throws IOException If the compression failed.
      */
     private static byte[] compress(final String str) throws IOException
@@ -300,7 +306,7 @@ public class Metrics
     {
         // Minecraft specific data
         int playerAmount = Math.min(plugin.getProxy().getOnlineCount(), 500);
-        int onlineMode = plugin.getProxy().getConfig().isOnlineMode() ? 1 : 0;
+        int onlineMode = plugin.getProxy().getConfig().isOnlineMode() ? 1: 0;
         String bungeecordVersion = plugin.getProxy().getVersion();
         int managedServers = plugin.getProxy().getServers().size();
 
@@ -407,9 +413,7 @@ public class Metrics
      * Reads the first line of the file.
      *
      * @param file The file to read. Cannot be null.
-     *
      * @return The first line of the file or {@code null} if the file does not exist or is empty.
-     *
      * @throws IOException If something did not work :(
      */
     private String readFile(File file) throws IOException
@@ -429,7 +433,6 @@ public class Metrics
      *
      * @param file  The file to write to. Cannot be null.
      * @param lines The lines to write.
-     *
      * @throws IOException If something did not work :(
      */
     private void writeFile(File file, String... lines) throws IOException
@@ -454,22 +457,22 @@ public class Metrics
         final JsonArray pluginData = new JsonArray();
         // Search for all other bStats Metrics classes to get their plugin data
         knownMetricsInstances.parallelStream()
-                             .forEachOrdered(metrics ->
-                             {
-                                 try
-                                 {
-                                     Object plugin = metrics.getClass()
-                                                            .getMethod("getPluginData")
-                                                            .invoke(metrics);
-                                     if (plugin instanceof JsonObject)
-                                     {
-                                         pluginData.add((JsonObject) plugin);
-                                     }
-                                 }
-                                 catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored)
-                                 {
-                                 }
-                             });
+                .forEachOrdered(metrics ->
+                {
+                    try
+                    {
+                        Object plugin = metrics.getClass()
+                                .getMethod("getPluginData")
+                                .invoke(metrics);
+                        if (plugin instanceof JsonObject)
+                        {
+                            pluginData.add((JsonObject) plugin);
+                        }
+                    }
+                    catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored)
+                    {
+                    }
+                });
 
         data.add("plugins", pluginData);
 
@@ -484,7 +487,7 @@ public class Metrics
             if (logFailedRequests)
             {
                 plugin.getLogger()
-                      .log(Level.WARNING, "Could not submit plugin stats!", e);
+                        .log(Level.WARNING, "Could not submit plugin stats!", e);
             }
         }
     }

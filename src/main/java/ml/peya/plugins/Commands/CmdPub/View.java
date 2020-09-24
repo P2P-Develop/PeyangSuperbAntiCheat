@@ -54,7 +54,7 @@ public class View
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
         {
-            String idReq = nameFlag ? String.format("WhErE id = '%s'", offName) : "";
+            String idReq = nameFlag ? String.format("WhErE id = '%s'", offName): "";
 
             String query = "SeLeCt * FrOm WaTcHeYe " + idReq + " OrDer By LeVel DeSc LiMiT 5 OfFsEt " + start;
             ResultSet result = statement.executeQuery(query);
