@@ -28,10 +28,8 @@ public class Packets
             if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK)
                 return;
 
-            final PacketPlayInUseEntity entity = (PacketPlayInUseEntity) e.getPacket()
-                    .getHandle();
-            Field field = entity.getClass()
-                    .getDeclaredField("a");
+            final PacketPlayInUseEntity entity = (PacketPlayInUseEntity) e.getPacket().getHandle();
+            Field field = entity.getClass().getDeclaredField("a");
             field.setAccessible(true);
 
             cheatMeta.getMetas()
@@ -49,8 +47,7 @@ public class Packets
                             ex.printStackTrace();
                         }
                         return false;
-                    })
-                    .forEachOrdered(meta -> System.out.println(meta.addVL()));
+                    }).forEachOrdered(meta -> System.out.println(meta.addVL()));
         }
         catch (Exception ex)
         {

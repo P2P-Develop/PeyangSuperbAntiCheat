@@ -35,8 +35,7 @@ public class CommandBans implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psac.bans") || ErrorMessageSender
-                .invalidLengthMessage(sender, args, 1, 2))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.bans") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
             return true;
 
         final String type = args.length == 2 ? args[0]: "-a";
@@ -76,8 +75,11 @@ public class CommandBans implements CommandExecutor
 
         ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player[0], BanAnalyzer.Type.toType(type));
 
-        sender.sendMessage(config
-                .getBoolean("message.lynx") ? get("message.bans.lynx", pair("name", name)): get("message.bans.message", pair("name", name)));
+        sender.sendMessage(
+                config.getBoolean("message.lynx")
+                        ? get("message.bans.lynx", pair("name", name))
+                        : get("message.bans.message", pair("name", name))
+        );
 
         if (bans.size() == 0)
             sender.sendMessage(get("error.bans.databaseInfoNotFound"));

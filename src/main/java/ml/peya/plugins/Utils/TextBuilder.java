@@ -101,8 +101,7 @@ public class TextBuilder
                 .format(new Date(dateInt.longValue())))));
 
         sender.sendMessage("    " + get("book.text.reason", pair("reason", types.parallelStream()
-                .map(type -> "        " + type
-                        .getText() + "\n")
+                .map(type -> "        " + type.getText() + "\n")
                 .collect(Collectors.joining()))));
 
         HashMap<String, Object> serv = new HashMap<>();

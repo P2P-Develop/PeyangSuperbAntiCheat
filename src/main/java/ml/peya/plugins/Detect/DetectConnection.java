@@ -162,7 +162,7 @@ public class DetectConnection
     /**
      * キック動作の開始DA!
      *
-     * @param player プレイヤー０。
+     * @param player プレイヤー。
      * @return 処理が正常に終了したかどうか。
      */
     private static boolean kick(final Player player)
@@ -193,8 +193,14 @@ public class DetectConnection
 
         ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
 
-        KickManager.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String
-                .join(", ", realReason)), true, false);
+        KickManager.kickPlayer(
+                player,
+                String.join(", ", realReason).equals("")
+                        ? "KillAura"
+                        : "Report: " + String.join(", ", realReason),
+                true,
+                false
+        );
         return true;
     }
 }

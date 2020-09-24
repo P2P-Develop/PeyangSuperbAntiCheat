@@ -4,7 +4,6 @@ import ml.peya.plugins.Moderate.ErrorMessageSender;
 import ml.peya.plugins.Moderate.TrustModifier;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
+import static ml.peya.plugins.Utils.PlayerUtils.getPlayer;
 import static ml.peya.plugins.Variables.tracker;
 
 /**
@@ -46,27 +46,15 @@ public class CommandTracking implements CommandExecutor
         {
             tracker.remove(sender.getName());
             sender.sendMessage(get("item.stopTarget"));
-            ((Player) sender).spigot()
-                    .sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.noTarget")));
+            ((Player) sender).spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.noTarget")));
 
             return true;
         }
 
-        if (args.length == 0)
-        {
-            sender.sendMessage(get("error.invalidArgument"));
-
-            return true;
-        }
-
-        Player player = Bukkit.getPlayer(args[0]);
+        Player player = getPlayer(sender, args);
 
         if (player == null)
-        {
-            sender.sendMessage(get("error.playerNotFound"));
-
             return true;
-        }
 
         if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
         {
@@ -80,4 +68,6 @@ public class CommandTracking implements CommandExecutor
 
         return true;
     }
+
+
 }

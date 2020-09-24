@@ -56,6 +56,7 @@ public class AuraPanic implements CommandExecutor
         if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
         {
             sender.sendMessage(get("error.trusted"));
+
             return true;
         }
 

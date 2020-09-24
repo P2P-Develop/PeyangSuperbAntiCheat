@@ -278,8 +278,10 @@ public class Init
     {
         try
         {
-            FileUtils.copyInputStreamToFile(getPlugin().getResource("skin.db"), new File(getPlugin().getDataFolder()
-                    .getAbsolutePath() + "/skin.db"));
+            FileUtils.copyInputStreamToFile(
+                    getPlugin().getResource("skin.db"),
+                    new File(getPlugin().getDataFolder().getAbsolutePath() + "/skin.db")
+                );
         }
         catch (Exception e)
         {
@@ -326,8 +328,7 @@ public class Init
     {
         try
         {
-            File file = new File(getPlugin().getDataFolder().getAbsolutePath() + "/" + config
-                    .getString("database.learnPath"));
+            File file = new File(getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
             if (file.exists() && file.length() >= 16)
             {
                 JsonNode node = new ObjectMapper().readTree(file);

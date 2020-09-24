@@ -51,9 +51,11 @@ public class Books
             String text = " ⦾ " + type.getText() + "\n";
             if (type.isSelected())
                 text = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + text;
-            component.append(text)
-                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player
-                            .getName() + " " + tmpReasonText + " " + type.getSysName() + " \\"));
+
+            component.append(text).event(new ClickEvent(
+                    ClickEvent.Action.RUN_COMMAND,
+                    "/report " + player.getName() + " " + tmpReasonText + " " + type.getSysName() + " \\"
+            ));
         }
 
         component.append("\n\n");
@@ -63,8 +65,9 @@ public class Books
         meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
 
         component.append(get("reportbook.submit"))
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report " + player
-                        .getName() + " " + tmpReasonText + " $__BOOKS__;"))
+                .event(new ClickEvent(
+                        ClickEvent.Action.RUN_COMMAND,
+                        "/report " + player.getName() + " " + tmpReasonText + " $__BOOKS__;"))
                 .append(get("reportbook.cancel"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report $$cancel$$"));
 
@@ -146,8 +149,7 @@ public class Books
 
         for (String id : mods.keySet())
         {
-            builder.append(ChatColor.RED + id + ChatColor.GRAY + ": " + ChatColor.BLUE + mods.get(id))
-                    .append("\n");
+            builder.append(ChatColor.RED + id + ChatColor.GRAY + ": " + ChatColor.BLUE + mods.get(id)).append("\n");
 
             if (++count < 10)
                 continue;

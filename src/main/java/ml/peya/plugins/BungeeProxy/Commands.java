@@ -64,7 +64,6 @@ public class Commands implements CommandExecutor
                         .getProxy()
                         .getServerInfo(serverName))
                 .filter(Objects::nonNull)
-                .forEachOrdered(server -> PeyangSuperbAntiCheatProxy
-                        .sendData(server, "report " + id + " " + player));
+                .forEachOrdered(server -> PeyangSuperbAntiCheatProxy.sendData(server, "report " + id + " " + player));
     }
 }

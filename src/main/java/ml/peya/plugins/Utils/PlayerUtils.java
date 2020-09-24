@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_12_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
 import org.bukkit.entity.Entity;
@@ -19,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BlockIterator;
 
+import javax.annotation.Nullable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -27,6 +29,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.skin;
 
 /**
@@ -64,9 +67,10 @@ public class PlayerUtils
 
         while (it.hasNext())
         {
-            Block block = it.next();
-            if (block.getX() == location.getBlockX() && block.getY() == location.getBlockY() && block.getZ() == location
-                    .getBlockZ())
+            final Block block = it.next();
+            if (block.getX() == location.getBlockX() &&
+                block.getY() == location.getBlockY() &&
+                block.getZ() == location.getBlockZ())
                 return true;
         }
         return false;
@@ -96,10 +100,12 @@ public class PlayerUtils
     public static EntityPlayer getRandomPlayer(World world)
     {
         Random random = new Random();
-        String first = random.nextBoolean() ? RandomStringUtils
-                .randomAlphanumeric(new Random().nextInt(13) + 1): RandomWordUtils.getRandomWord();
-        String last = random.nextBoolean() ? RandomStringUtils
-                .randomAlphanumeric(new Random().nextInt(13) + 1): RandomWordUtils.getRandomWord();
+        String first = random.nextBoolean()
+                ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1)
+                : RandomWordUtils.getRandomWord();
+        String last = random.nextBoolean()
+                ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1)
+                : RandomWordUtils.getRandomWord();
 
         if (random.nextBoolean())
         {
@@ -107,8 +113,7 @@ public class PlayerUtils
             last = develop.p2p.lib.LeetConverter.convert(last);
         }
 
-        String name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ? "19" + random
-                .nextInt(120): "");
+        String name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ? "19" + random.nextInt(120): "");
         if (name.length() > 16)
             name = random.nextBoolean() ? first: last;
 
@@ -147,5 +152,33 @@ public class PlayerUtils
             Utils.errorNotification(Utils.getStackTrace(e));
             return Pair.of("", "");
         }
+    }
+
+    /**
+     * プレイヤーを取得する。たぶん。
+     *
+     * @param sender イベントセンダー。
+     * @param args 引数たち。
+     * @return Playerの取得に失敗した場合null。
+     */
+    @Nullable
+    public static Player getPlayer(CommandSender sender, String[] args)
+    {
+        if (args.length == 0)
+        {
+            sender.sendMessage(get("error.invalidArgument"));
+
+            return null;
+        }
+
+        Player player = Bukkit.getPlayer(args[0]);
+
+        if (player == null)
+        {
+            sender.sendMessage(get("error.playerNotFound"));
+
+            return null;
+        }
+        return player;
     }
 }

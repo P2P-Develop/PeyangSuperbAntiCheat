@@ -46,6 +46,7 @@ public class Help
         ArrayList<String> nodes = sender instanceof Player
                 ? getPlayerNodes()
                 : getNodes();
+
         new BukkitRunnable()
         {
             @Override

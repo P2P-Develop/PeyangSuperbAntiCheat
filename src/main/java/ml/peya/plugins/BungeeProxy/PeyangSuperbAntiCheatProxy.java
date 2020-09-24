@@ -8,7 +8,9 @@ import net.md_5.bungee.api.plugin.Plugin;
 
 import java.util.ArrayList;
 
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.bungeeChannel;
+import static ml.peya.plugins.Variables.bungeeCommand;
+import static ml.peya.plugins.Variables.logger;
 
 /**
  * Bungeeプロキシ用のPSACプラグイン実装。プロキシ用プラグイン情報とサーバーリストの管理をします。

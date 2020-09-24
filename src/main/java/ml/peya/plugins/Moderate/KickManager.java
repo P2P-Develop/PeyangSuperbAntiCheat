@@ -50,8 +50,7 @@ public class KickManager
                 kick(player, reason, isTest, !wdFlag);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math
-                .multiplyExact(Variables.config.getInt("kick.delay"), 20));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
     }
 
     /**

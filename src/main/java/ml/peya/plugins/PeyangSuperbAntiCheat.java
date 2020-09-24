@@ -79,8 +79,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
      */
     public static boolean isEnablePlugin(String name)
     {
-        return Bukkit.getServer().getPluginManager().getPlugin(name) != null && Bukkit.getServer().getPluginManager()
-                .getPlugin(name).isEnabled();
+        return Bukkit.getServer().getPluginManager().getPlugin(name) != null &&
+                Bukkit.getServer().getPluginManager().getPlugin(name).isEnabled();
     }
 
     /**
@@ -183,8 +183,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         if (initialized)
         {
-            try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + config
-                    .getString("database.learnPath"));
+            try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
                  PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
             {
                 logger.info("Saving learn weights to learning data file...");

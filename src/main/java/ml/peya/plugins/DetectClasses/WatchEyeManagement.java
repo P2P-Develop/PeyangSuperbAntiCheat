@@ -103,9 +103,7 @@ public class WatchEyeManagement
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
-            return statement
-                    .executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UUID = '" + targetUuid + "' AND ISSUEBYUUID = '" + fromUuid + "'")
-                    .isBeforeFirst();
+            return statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UUID = '" + targetUuid + "' AND ISSUEBYUUID = '" + fromUuid + "'").isBeforeFirst();
         }
         catch (Exception e)
         {

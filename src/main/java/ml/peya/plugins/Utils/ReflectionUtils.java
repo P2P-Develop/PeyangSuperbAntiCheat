@@ -51,8 +51,7 @@ public final class ReflectionUtils
     {
         for (Constructor<?> constructor : clazz.getConstructors())
         {
-            if (!DataType.compare(DataType.getPrimitive(constructor.getParameterTypes()), DataType
-                    .getPrimitive(parameterTypes)))
+            if (!DataType.compare(DataType.getPrimitive(constructor.getParameterTypes()), DataType.getPrimitive(parameterTypes)))
                 continue;
             return constructor;
         }
@@ -127,8 +126,8 @@ public final class ReflectionUtils
     {
         for (Method method : clazz.getMethods())
         {
-            if (!method.getName().equals(methodName) || !DataType
-                    .compare(DataType.getPrimitive(method.getParameterTypes()), DataType.getPrimitive(parameterTypes)))
+            if (!method.getName().equals(methodName) ||
+                !DataType.compare(DataType.getPrimitive(method.getParameterTypes()), DataType.getPrimitive(parameterTypes)))
                 continue;
             return method;
         }

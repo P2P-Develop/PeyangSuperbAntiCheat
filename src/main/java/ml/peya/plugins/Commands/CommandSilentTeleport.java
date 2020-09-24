@@ -12,7 +12,7 @@ import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
 
 /**
- * STPコマンド系プラグイン。
+ * STPコマンド系クラス。
  * /tpto コマンドで動く
  */
 public class CommandSilentTeleport implements CommandExecutor
@@ -38,8 +38,13 @@ public class CommandSilentTeleport implements CommandExecutor
             return true;
         }
 
-        final Player target = args.length == 2 ? Bukkit.getPlayer(args[1]): Bukkit.getPlayer(args[0]);
-        final Player player = args.length == 2 ? Bukkit.getPlayer(args[0]): (Player) sender;
+        final Player target = args.length == 2
+                ? Bukkit.getPlayer(args[1])
+                : Bukkit.getPlayer(args[0]);
+
+        final Player player = args.length == 2
+                ? Bukkit.getPlayer(args[0])
+                : (Player) sender;
 
         if (target == null || player == null)
         {
