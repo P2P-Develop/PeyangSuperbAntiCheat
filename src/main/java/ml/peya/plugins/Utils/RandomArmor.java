@@ -74,7 +74,6 @@ public class RandomArmor
      * 金アイテムかどうか
      *
      * @param item あいてむ！
-     *
      * @return ゴールド全面でござったらtrue。
      */
     private static boolean isGold(Material item)
@@ -88,7 +87,6 @@ public class RandomArmor
      * ランダムにえりすぐる。
      *
      * @param itemsArg あいてむ！なArrayList。
-     *
      * @return えりすぐったアイテム。
      */
     public static ItemStack getRandomItems(ArrayList<Material> itemsArg)

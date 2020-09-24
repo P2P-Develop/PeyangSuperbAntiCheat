@@ -113,7 +113,7 @@ public class KickManager
         Random random = new Random();
         IntStream.range(0, 8).parallel().forEachOrdered(i ->
         {
-            id.append(random.nextBoolean() ? random.nextInt(9) : (char) (random.nextInt(5) + 'A'));
+            id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A'));
         });
 
         String reasonP;
@@ -129,7 +129,7 @@ public class KickManager
 
         map.put("reason", reasonP);
         map.put("ggid", IntStream.range(0, 7).parallel().mapToObj(i -> String.valueOf(random.nextInt(9)))
-                                 .collect(Collectors.joining()));
+                .collect(Collectors.joining()));
         map.put("id", id.toString());
 
         String message = MessageEngine.get("kick.reason", map);
@@ -152,13 +152,13 @@ public class KickManager
                     "'" + WatchEyeManagement.parseInjection(id.toString()) + "'," +
                     "" + new Date().getTime() + "," +
                     "'" + WatchEyeManagement.parseInjection(reason) + "', " +
-                    (opFlag ? 1 : 0) +
+                    (opFlag ? 1: 0) +
                     ");");
 
             ResultSet eyeList = eyeS
                     .executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString()
-                                                                                  .replace("-", "")
-                                                                                  .replace("'", "\\'") + "'");
+                            .replace("-", "")
+                            .replace("'", "\\'") + "'");
 
             while (eyeList.next())
             {

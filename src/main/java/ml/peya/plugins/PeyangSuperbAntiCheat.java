@@ -23,7 +23,26 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.logging.Level;
 
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.autoMessage;
+import static ml.peya.plugins.Variables.banKick;
+import static ml.peya.plugins.Variables.banLeft;
+import static ml.peya.plugins.Variables.cheatMeta;
+import static ml.peya.plugins.Variables.config;
+import static ml.peya.plugins.Variables.counting;
+import static ml.peya.plugins.Variables.eye;
+import static ml.peya.plugins.Variables.initialized;
+import static ml.peya.plugins.Variables.item;
+import static ml.peya.plugins.Variables.learnCount;
+import static ml.peya.plugins.Variables.learnCountLimit;
+import static ml.peya.plugins.Variables.logger;
+import static ml.peya.plugins.Variables.mods;
+import static ml.peya.plugins.Variables.network;
+import static ml.peya.plugins.Variables.protocolManager;
+import static ml.peya.plugins.Variables.skin;
+import static ml.peya.plugins.Variables.time;
+import static ml.peya.plugins.Variables.tracker;
+import static ml.peya.plugins.Variables.trackerTask;
+import static ml.peya.plugins.Variables.trust;
 
 /**
  * このプラグインの中枢です。必ずここからスタートします。
@@ -56,13 +75,12 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
      * プラグイン有効チェック
      *
      * @param name プラグイン名
-     *
      * @return 有効否
      */
     public static boolean isEnablePlugin(String name)
     {
         return Bukkit.getServer().getPluginManager().getPlugin(name) != null && Bukkit.getServer().getPluginManager()
-                                                                                      .getPlugin(name).isEnabled();
+                .getPlugin(name).isEnabled();
     }
 
     /**

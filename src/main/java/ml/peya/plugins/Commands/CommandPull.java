@@ -27,7 +27,6 @@ public class CommandPull implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
-     *
      * @return 正常に終わったかどうか。
      */
     @Override
@@ -88,13 +87,13 @@ public class CommandPull implements CommandExecutor
         vector.setX(((1.0D +
                 (0.1d * distance)) *
                 (pullLocation.getX() - entityLoc.getX())) / distance)
-              .setY((((1.0D +
-                      (0.03d * distance)) *
-                      (pullLocation.getY() - entityLoc.getY())) / distance) -
-                      ((0.5D * -0.08D) * distance))
-              .setZ(((1.0D +
-                      (0.1D * distance)) *
-                      (pullLocation.getZ() - entityLoc.getZ())) / distance);
+                .setY((((1.0D +
+                        (0.03d * distance)) *
+                        (pullLocation.getY() - entityLoc.getY())) / distance) -
+                        ((0.5D * -0.08D) * distance))
+                .setZ(((1.0D +
+                        (0.1D * distance)) *
+                        (pullLocation.getZ() - entityLoc.getZ())) / distance);
         player.setVelocity(vector);
     }
 

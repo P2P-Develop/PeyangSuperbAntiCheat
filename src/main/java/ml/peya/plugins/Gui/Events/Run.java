@@ -32,8 +32,8 @@ public class Run implements Listener
         e.setCancelled(true);
 
         item.getItems()
-            .parallelStream()
-            .filter(items -> Objects.equals(Item.getType(itemStack), items.getExecName()))
-            .forEachOrdered(items -> items.run(e.getPlayer(), Item.getTarget(itemStack)));
+                .parallelStream()
+                .filter(items -> Objects.equals(Item.getType(itemStack), items.getExecName()))
+                .forEachOrdered(items -> items.run(e.getPlayer(), Item.getTarget(itemStack)));
     }
 }

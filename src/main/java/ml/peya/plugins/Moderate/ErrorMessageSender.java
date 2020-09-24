@@ -14,7 +14,6 @@ public class ErrorMessageSender
      *
      * @param sender イベントsender。
      * @param perm   チェックする権限。
-     *
      * @return 処理が正常に終了したかどうか。
      */
     public static boolean unPermMessage(CommandSender sender, String perm)
@@ -32,7 +31,6 @@ public class ErrorMessageSender
      * @param args   length図るやつ。
      * @param min    最小。
      * @param max    最大。
-     *
      * @return (エラー発令)処理が正常に終了したかどうか。
      */
     public static boolean invalidLengthMessage(CommandSender sender, String[] args, int min, int max)

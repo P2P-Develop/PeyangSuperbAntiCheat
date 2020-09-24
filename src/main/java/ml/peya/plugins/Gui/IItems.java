@@ -20,7 +20,6 @@ public interface IItems
      * itemsのゲッター。
      *
      * @param target ターゲット。
-     *
      * @return アイテム。
      */
     ItemStack getItem(String target);
@@ -86,7 +85,6 @@ public interface IItems
          * Type変換。
          *
          * @param type stringのType。
-         *
          * @return 変換後。
          */
         public static Type toType(String type)

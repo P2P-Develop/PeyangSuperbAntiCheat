@@ -24,7 +24,6 @@ public class CommandSilentTeleport implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
-     *
      * @return 正常に終わったかどうか。
      */
     @Override
@@ -39,8 +38,8 @@ public class CommandSilentTeleport implements CommandExecutor
             return true;
         }
 
-        final Player target = args.length == 2 ? Bukkit.getPlayer(args[1]) : Bukkit.getPlayer(args[0]);
-        final Player player = args.length == 2 ? Bukkit.getPlayer(args[0]) : (Player) sender;
+        final Player target = args.length == 2 ? Bukkit.getPlayer(args[1]): Bukkit.getPlayer(args[0]);
+        final Player player = args.length == 2 ? Bukkit.getPlayer(args[0]): (Player) sender;
 
         if (target == null || player == null)
         {

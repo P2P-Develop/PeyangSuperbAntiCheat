@@ -28,7 +28,6 @@ public class CommandTarget implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
-     *
      * @return 正常に終わったかどうか。
      */
     @Override

@@ -23,7 +23,6 @@ public class WatchEyeManagement
      * @param fromName 名前。
      * @param fromUUID UUID。
      * @param level    レベル。
-     *
      * @return 管理ID。エラーが発生したら空白。
      */
     public static String add(Player target, String fromName, String fromUUID, int level)
@@ -62,7 +61,6 @@ public class WatchEyeManagement
      * @param id     管理ID。
      * @param reason 事由。
      * @param vl     VL。
-     *
      * @return 設定が成功したかどうか。
      */
     public static boolean setReason(String id, EnumCheatType reason, int vl)
@@ -96,7 +94,6 @@ public class WatchEyeManagement
      *
      * @param targetUuid ターゲットのUUID。
      * @param fromUuid   普通のUUID。
-     *
      * @return 同じレコードであるかどうか。
      */
     public static boolean isExistsRecord(String targetUuid, String fromUuid)
@@ -122,7 +119,6 @@ public class WatchEyeManagement
      * レコードが存在するかチェックする
      *
      * @param id 管理ID。
-     *
      * @return 同じレコードであるかどうか。
      */
     public static boolean isExistsRecord(String id)
@@ -145,14 +141,13 @@ public class WatchEyeManagement
      * SQLインジェクションを防止する。
      *
      * @param sql インジェクションと見られるSQL。
-     *
      * @return インジェクションだった場合はエスケープ
      */
     public static String parseInjection(String sql)
     {
         sql = sql.replace("\\", "\\\\")
-                 .replace("'", "''")
-                 .replace("\"", "\"\"");
+                .replace("'", "''")
+                .replace("\"", "\"\"");
         return sql;
     }
 }

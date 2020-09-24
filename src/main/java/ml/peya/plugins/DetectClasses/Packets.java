@@ -29,28 +29,28 @@ public class Packets
                 return;
 
             final PacketPlayInUseEntity entity = (PacketPlayInUseEntity) e.getPacket()
-                                                                          .getHandle();
+                    .getHandle();
             Field field = entity.getClass()
-                                .getDeclaredField("a");
+                    .getDeclaredField("a");
             field.setAccessible(true);
 
             cheatMeta.getMetas()
-                     .parallelStream()
-                     .filter(meta ->
-                     {
-                         try
-                         {
-                             return meta.getId() == field.getInt(entity) &&
-                                     meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() ||
-                                     PlayerUtils.hasCritical(e.getPlayer());
-                         }
-                         catch (IllegalAccessException ex)
-                         {
-                             ex.printStackTrace();
-                         }
-                         return false;
-                     })
-                     .forEachOrdered(meta -> System.out.println(meta.addVL()));
+                    .parallelStream()
+                    .filter(meta ->
+                    {
+                        try
+                        {
+                            return meta.getId() == field.getInt(entity) &&
+                                    meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() ||
+                                    PlayerUtils.hasCritical(e.getPlayer());
+                        }
+                        catch (IllegalAccessException ex)
+                        {
+                            ex.printStackTrace();
+                        }
+                        return false;
+                    })
+                    .forEachOrdered(meta -> System.out.println(meta.addVL()));
         }
         catch (Exception ex)
         {

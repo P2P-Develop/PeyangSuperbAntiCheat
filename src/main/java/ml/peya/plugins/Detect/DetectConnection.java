@@ -43,7 +43,6 @@ public class DetectConnection
      * @param player    プレイヤー。
      * @param type      判定タイプ。
      * @param reachMode リーチモードかどうか。
-     *
      * @return 万能クラス。
      */
     public static CheatDetectNowMeta spawnWithArmor(Player player, DetectType type, boolean reachMode)
@@ -90,7 +89,8 @@ public class DetectConnection
 
                         if (kick(player)) return;
                     }
-                } else if (banLeft <= vl)
+                }
+                else if (banLeft <= vl)
                 {
                     learn(vl, seconds);
 
@@ -109,9 +109,9 @@ public class DetectConnection
                             case AURA_BOT:
                                 if (sender == null)
                                     Bukkit.getOnlinePlayers().parallelStream()
-                                          .filter(np -> np.hasPermission("psac.aurabot"))
-                                          .forEachOrdered(np ->
-                                                  np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create()));
+                                            .filter(np -> np.hasPermission("psac.aurabot"))
+                                            .forEachOrdered(np ->
+                                                    np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create());
                                 break;
@@ -119,9 +119,9 @@ public class DetectConnection
                             case AURA_PANIC:
                                 if (sender == null)
                                     Bukkit.getOnlinePlayers().parallelStream()
-                                          .filter(np -> np.hasPermission("psac.aurapanic"))
-                                          .forEachOrdered(np -> np.spigot().sendMessage(TextBuilder
-                                                  .textPanicRep(name, meta.getVL()).create()));
+                                            .filter(np -> np.hasPermission("psac.aurapanic"))
+                                            .forEachOrdered(np -> np.spigot().sendMessage(TextBuilder
+                                                    .textPanicRep(name, meta.getVL()).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 break;
@@ -163,7 +163,6 @@ public class DetectConnection
      * キック動作の開始DA!
      *
      * @param player プレイヤー０。
-     *
      * @return 処理が正常に終了したかどうか。
      */
     private static boolean kick(final Player player)
@@ -194,7 +193,7 @@ public class DetectConnection
 
         ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
 
-        KickManager.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura" : "Report: " + String
+        KickManager.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String
                 .join(", ", realReason)), true, false);
         return true;
     }

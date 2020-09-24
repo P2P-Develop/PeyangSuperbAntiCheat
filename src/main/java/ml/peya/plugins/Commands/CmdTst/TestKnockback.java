@@ -26,7 +26,6 @@ public class TestKnockback implements CommandExecutor
      * @param cmd    コマンド。
      * @param label  ラベル。
      * @param args   引数。
-     *
      * @return 正常に終わったかどうか。
      */
     @Override

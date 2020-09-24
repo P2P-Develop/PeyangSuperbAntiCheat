@@ -29,7 +29,6 @@ public class CommandMods implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
-     *
      * @return 正常に終わったかどうか。
      */
     @Override
@@ -56,9 +55,9 @@ public class CommandMods implements CommandExecutor
         if (sender instanceof ConsoleCommandSender)
         {
             mods.keySet()
-                .parallelStream()
-                .forEachOrdered(id -> sender
-                        .sendMessage(ChatColor.RED + id + ChatColor.GREEN + ": " + ChatColor.BLUE + mods.get(id)));
+                    .parallelStream()
+                    .forEachOrdered(id -> sender
+                            .sendMessage(ChatColor.RED + id + ChatColor.GREEN + ": " + ChatColor.BLUE + mods.get(id)));
             return true;
         }
 

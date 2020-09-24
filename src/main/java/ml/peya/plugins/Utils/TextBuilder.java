@@ -34,7 +34,6 @@ public class TextBuilder
      *
      * @param bind   なんこれ
      * @param button ボタン...?
-     *
      * @return 完成後
      */
     private static TextComponent getPrevNextButton(int bind, String button)
@@ -53,7 +52,6 @@ public class TextBuilder
      * 上のメソッドを分けたやつ。
      *
      * @param next ボタン
-     *
      * @return 完成後
      */
     public static TextComponent getNextButton(int next)
@@ -65,7 +63,6 @@ public class TextBuilder
      * 上のメソッドを分けたやつ2nd。
      *
      * @param previous ボタン
-     *
      * @return 完成後
      */
     public static TextComponent getPrevButton(int previous)
@@ -89,30 +86,30 @@ public class TextBuilder
         ComponentBuilder hover = new ComponentBuilder(get("book.clickable"));
 
         sender.spigot()
-              .sendMessage(new ComponentBuilder("    " + get("book.text.issueBy", pair("id", issueById)))
-                      .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                      .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid))
-                      .create());
+                .sendMessage(new ComponentBuilder("    " + get("book.text.issueBy", pair("id", issueById)))
+                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
+                        .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid))
+                        .create());
 
         sender.spigot()
-              .sendMessage(new ComponentBuilder("    " + get("book.text.issueTo", pair("id", id)))
-                      .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                      .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid))
-                      .create());
+                .sendMessage(new ComponentBuilder("    " + get("book.text.issueTo", pair("id", id)))
+                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
+                        .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid))
+                        .create());
 
         sender.sendMessage("    " + get("book.text.dateTime", pair("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss")
                 .format(new Date(dateInt.longValue())))));
 
         sender.sendMessage("    " + get("book.text.reason", pair("reason", types.parallelStream()
-                                                                                .map(type -> "        " + type
-                                                                                        .getText() + "\n")
-                                                                                .collect(Collectors.joining()))));
+                .map(type -> "        " + type
+                        .getText() + "\n")
+                .collect(Collectors.joining()))));
 
         HashMap<String, Object> serv = new HashMap<>();
         serv.put("color", SeverityLevels.getSeverity(types)
-                                        .getColor());
+                .getColor());
         serv.put("level", SeverityLevels.getSeverity(types)
-                                        .getText());
+                .getText());
         sender.sendMessage(get("book.text.severity", serv));
     }
 
@@ -124,7 +121,6 @@ public class TextBuilder
      * @param types     判定タイプ。
      * @param mngid     管理ID2。
      * @param sender    イベントsender。
-     *
      * @return 完成後。
      */
     public static ComponentBuilder getLine(String id, String issueById, ArrayList<EnumCheatType> types, String mngid, CommandSender sender)
@@ -146,10 +142,11 @@ public class TextBuilder
         if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
             b.append(get("book.click.delete"))
-             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac drop " + mngid))
-             .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.click.deleteReport"))
-                     .create()));
-        } else
+                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac drop " + mngid))
+                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.click.deleteReport"))
+                            .create()));
+        }
+        else
             b.append(ChatColor.YELLOW + mngid);
 
         return b;
@@ -160,7 +157,6 @@ public class TextBuilder
      *
      * @param prefix [PSAC]ってやつ。
      * @param value  値...?
-     *
      * @return かーんせーい！
      */
     public static String getLine(String prefix, String value)
@@ -172,7 +168,6 @@ public class TextBuilder
      * レベル返す。
      *
      * @param severity レベル。
-     *
      * @return レベル返す。
      */
     public static String getSeverityLevel(EnumSeverity severity)
@@ -206,17 +201,16 @@ public class TextBuilder
      * @param next     次に進むボタン
      * @param prevFlag ボタン使える？
      * @param nextFlag ボタン使える2nd？
-     *
      * @return 完成後。
      */
     public static ComponentBuilder getNextPrevButtonText(TextComponent prev, TextComponent next, boolean prevFlag, boolean nextFlag)
     {
         TextComponent uBar = new TextComponent("----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
-        return new ComponentBuilder(String.valueOf(prevFlag ? prev : uBar))
+        return new ComponentBuilder(String.valueOf(prevFlag ? prev: uBar))
                 .append("------------------------")
                 .color(net.md_5.bungee.api.ChatColor.AQUA)
-                .append(String.valueOf(nextFlag ? next : uBar));
+                .append(String.valueOf(nextFlag ? next: uBar));
     }
 
     /**
@@ -233,7 +227,6 @@ public class TextBuilder
      * 上のオーバーロード。
      *
      * @param player 罪を犯しかけたプレイヤー。
-     *
      * @return メッセージを結果として組み立てたやつ。
      */
     public static ComponentBuilder getBroadCastWdDetectionText(Player player)
@@ -241,7 +234,7 @@ public class TextBuilder
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", player.getName());
         map.put("uuid", player.getUniqueId()
-                              .toString());
+                .toString());
 
         return getBroadCastWdDetectionText()
                 .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("kick.broadcastAdmin", map))
@@ -254,7 +247,6 @@ public class TextBuilder
      * @param name   プレイヤー名。
      * @param VL     算出されたVL。
      * @param kickVL VLキック基準値。
-     *
      * @return 組み立てたやつ。
      */
     public static ComponentBuilder textTestRep(String name, int VL, int kickVL)
@@ -271,7 +263,7 @@ public class TextBuilder
                 .append("\n")
                 .append(OptGraphGenerator.genGraph(VL, kickVL))
                 .append("\n")
-                .append(get("message.auraCheck.result.result", pair("result", VL >= kickVL ? get("message.auraCheck.result.words.kick") : get("message.auraCheck.result.words.ok"))));
+                .append(get("message.auraCheck.result.result", pair("result", VL >= kickVL ? get("message.auraCheck.result.words.kick"): get("message.auraCheck.result.words.ok"))));
     }
 
     /**
@@ -279,7 +271,6 @@ public class TextBuilder
      *
      * @param name PlayerName
      * @param vl   そのまんま
-     *
      * @return 完成後。
      */
     public static ComponentBuilder textPanicRep(String name, int vl)
@@ -298,7 +289,6 @@ public class TextBuilder
      *
      * @param ban  Bansらしい
      * @param type 判定タイプ？
-     *
      * @return 完成後。
      */
     public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
@@ -316,7 +306,7 @@ public class TextBuilder
         if (reasonSet.toString().endsWith(", "))
             reasonSet.setLength(reasonSet.length() - 2);
 
-        return new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick" : "Ban"))
+        return new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"))
                 .append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())))
                 .append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
     }

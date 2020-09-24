@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * コマンド実行メソッドのアノテーション
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.METHOD })
+@Target({ElementType.METHOD})
 public @interface Command
 {
     String label();

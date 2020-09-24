@@ -57,43 +57,43 @@ public class CommandManager
         String label = commands.remove(0);
 
         this.commands.parallelStream()
-                     .forEachOrdered(cls ->
-                     {
-                         try
-                         {
-                             for (Method method : cls.getMethods())
-                             {
-                                 if (method.getAnnotation(Command.class) == null)
-                                     continue;
-                                 if (method.getAnnotation(Command.class)
-                                           .label()
-                                           .equals(label))
-                                     method.invoke(cls.newInstance(), new CommandComponent()
-                                     {
-                                         @Override
-                                         public String getLabel()
-                                         {
-                                             return label;
-                                         }
+                .forEachOrdered(cls ->
+                {
+                    try
+                    {
+                        for (Method method : cls.getMethods())
+                        {
+                            if (method.getAnnotation(Command.class) == null)
+                                continue;
+                            if (method.getAnnotation(Command.class)
+                                    .label()
+                                    .equals(label))
+                                method.invoke(cls.newInstance(), new CommandComponent()
+                                {
+                                    @Override
+                                    public String getLabel()
+                                    {
+                                        return label;
+                                    }
 
-                                         @Override
-                                         public String[] getArgs()
-                                         {
-                                             return commands.toArray(new String[0]);
-                                         }
+                                    @Override
+                                    public String[] getArgs()
+                                    {
+                                        return commands.toArray(new String[0]);
+                                    }
 
-                                         @Override
-                                         public String getServer()
-                                         {
-                                             return server;
-                                         }
-                                     });
-                             }
-                         }
-                         catch (Exception e)
-                         {
-                             e.printStackTrace();
-                         }
-                     });
+                                    @Override
+                                    public String getServer()
+                                    {
+                                        return server;
+                                    }
+                                });
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                });
     }
 }

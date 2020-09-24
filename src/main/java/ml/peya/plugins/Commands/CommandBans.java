@@ -30,7 +30,6 @@ public class CommandBans implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
-     *
      * @return 正常に終わったかどうか。
      */
     @Override
@@ -40,8 +39,8 @@ public class CommandBans implements CommandExecutor
                 .invalidLengthMessage(sender, args, 1, 2))
             return true;
 
-        final String type = args.length == 2 ? args[0] : "-a";
-        final String name = args.length == 2 ? args[1] : args[0];
+        final String type = args.length == 2 ? args[0]: "-a";
+        final String name = args.length == 2 ? args[1]: args[0];
 
         if (!type.equals("-a") && !type.equalsIgnoreCase("ban") && !type.equalsIgnoreCase("kick"))
         {
@@ -50,23 +49,23 @@ public class CommandBans implements CommandExecutor
             return true;
         }
 
-        final UUID[] player = { null };
+        final UUID[] player = {null};
 
         Arrays.stream(Bukkit.getOfflinePlayers())
-              .parallel()
-              .forEachOrdered(ofPly ->
-                      player[0] = ofPly.getName().equalsIgnoreCase(name)
-                              ? ofPly.getUniqueId()
-                              : player[0]);
+                .parallel()
+                .forEachOrdered(ofPly ->
+                        player[0] = ofPly.getName().equalsIgnoreCase(name)
+                                ? ofPly.getUniqueId()
+                                : player[0]);
 
         if (player[0] == null)
         {
             Arrays.stream(((Player[]) Bukkit.getOnlinePlayers().toArray()))
-                  .parallel()
-                  .forEachOrdered(onPly ->
-                          player[0] = onPly.getName().equalsIgnoreCase(name)
-                                  ? onPly.getUniqueId()
-                                  : player[0]);
+                    .parallel()
+                    .forEachOrdered(onPly ->
+                            player[0] = onPly.getName().equalsIgnoreCase(name)
+                                    ? onPly.getUniqueId()
+                                    : player[0]);
 
             if (player[0] == null)
             {
@@ -78,7 +77,7 @@ public class CommandBans implements CommandExecutor
         ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player[0], BanAnalyzer.Type.toType(type));
 
         sender.sendMessage(config
-                .getBoolean("message.lynx") ? get("message.bans.lynx", pair("name", name)) : get("message.bans.message", pair("name", name)));
+                .getBoolean("message.lynx") ? get("message.bans.lynx", pair("name", name)): get("message.bans.message", pair("name", name)));
 
         if (bans.size() == 0)
             sender.sendMessage(get("error.bans.databaseInfoNotFound"));

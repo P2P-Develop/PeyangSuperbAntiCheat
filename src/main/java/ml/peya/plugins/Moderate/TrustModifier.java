@@ -39,7 +39,8 @@ public class TrustModifier
                     {
                         statement.execute("DeLeTe FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
                         sender.sendMessage(get("message.trust.remove", pair("name", player.getName())));
-                    } else
+                    }
+                    else
                     {
                         statement.execute("InSeRt InTo TrUsT vAlUeS ('" + player.getName() + "');");
                         sender.sendMessage(get("message.trust.add", pair("name", player.getName())));
@@ -60,7 +61,6 @@ public class TrustModifier
      * プレイヤーが信用されてるか調べる。
      *
      * @param player 信用されてる気がするプレイヤー。
-     *
      * @return 信用されてたらtrue。
      */
     public static boolean isTrusted(Player player)

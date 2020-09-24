@@ -31,7 +31,6 @@ public class RandomWordUtils
      * ファイルからランダムな単語を取得します。
      *
      * @param bound ランダムなシード値。ランダム性を強化します。
-     *
      * @return 生成した単語。
      */
     public static String getRandomWord(int bound)
@@ -41,9 +40,9 @@ public class RandomWordUtils
              BufferedReader bufferedReader = new BufferedReader(reader))
         {
             return bufferedReader.lines()
-                                 .skip(new Random(bound).nextInt(__MaxLine - 1))
-                                 .findFirst()
-                                 .orElse("");
+                    .skip(new Random(bound).nextInt(__MaxLine - 1))
+                    .findFirst()
+                    .orElse("");
         }
         catch (IOException e)
         {

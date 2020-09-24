@@ -38,13 +38,12 @@ public class PlayerUtils
      * 誰が見てるのかわかるやつ。
      *
      * @param player 見られてるプレイヤー。
-     *
      * @return 見てるプレイヤー。
      */
     public static Player getLookingEntity(Player player)
     {
         for (Location location : player.getLineOfSight(null, 4).parallelStream().map(Block::getLocation)
-                                       .collect(Collectors.toCollection(ArrayList::new)))
+                .collect(Collectors.toCollection(ArrayList::new)))
             for (Entity entity : player.getNearbyEntities(3.5, 3.5, 3.5))
                 if (isLooking((Player) entity, location) && entity.getType() == EntityType.PLAYER)
                     return (Player) entity;
@@ -57,7 +56,6 @@ public class PlayerUtils
      *
      * @param player   見られてるプレイヤー。
      * @param location あと場所。
-     *
      * @return 見られてたらtrue。
      */
     public static boolean isLooking(Player player, Location location)
@@ -78,7 +76,6 @@ public class PlayerUtils
      * めっちゃクリティカルされたよぉふえええええぇぇぇっていうの確認するやつ
      *
      * @param player クリティカルゥ！プレイヤー。
-     *
      * @return クリティカル警察が反応したらtrueを返してくれます。
      */
     public static boolean hasCritical(Player player)
@@ -94,16 +91,15 @@ public class PlayerUtils
      * ワールド内に新しいプレイヤーを捏造して、{@code EntityPlayer}として返します。
      *
      * @param world ワールドのハンドルを取得するための引数。
-     *
      * @return 創造されたプレイヤー。
      */
     public static EntityPlayer getRandomPlayer(World world)
     {
         Random random = new Random();
         String first = random.nextBoolean() ? RandomStringUtils
-                .randomAlphanumeric(new Random().nextInt(13) + 1) : RandomWordUtils.getRandomWord();
+                .randomAlphanumeric(new Random().nextInt(13) + 1): RandomWordUtils.getRandomWord();
         String last = random.nextBoolean() ? RandomStringUtils
-                .randomAlphanumeric(new Random().nextInt(13) + 1) : RandomWordUtils.getRandomWord();
+                .randomAlphanumeric(new Random().nextInt(13) + 1): RandomWordUtils.getRandomWord();
 
         if (random.nextBoolean())
         {
@@ -111,10 +107,10 @@ public class PlayerUtils
             last = develop.p2p.lib.LeetConverter.convert(last);
         }
 
-        String name = first + (random.nextBoolean() ? "_" : "") + last + (random.nextBoolean() ? "19" + random
-                .nextInt(120) : "");
+        String name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ? "19" + random
+                .nextInt(120): "");
         if (name.length() > 16)
-            name = random.nextBoolean() ? first : last;
+            name = random.nextBoolean() ? first: last;
 
         if (name.length() > 16)
             name = RandomStringUtils.randomAlphanumeric(random.nextInt(16));
@@ -142,7 +138,7 @@ public class PlayerUtils
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SELECT * FROM Skin ORDER BY RANDOM() LIMIT 1");
-            return !result.next() ? Pair.of("", "") : Pair
+            return !result.next() ? Pair.of("", ""): Pair
                     .of(result.getString("Texture"), result.getString("Signature"));
         }
         catch (Exception e)

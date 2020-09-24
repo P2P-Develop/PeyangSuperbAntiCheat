@@ -36,7 +36,6 @@ public class CommandReport implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
-     *
      * @return 正常に終わったかどうか。
      */
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
@@ -48,7 +47,8 @@ public class CommandReport implements CommandExecutor
         {
             sender.sendMessage(get("error.minArgs", pair("label", label)));
             return true;
-        } else if (args.length == 1)
+        }
+        else if (args.length == 1)
         {
             if (args[0].equals("help"))
             {
@@ -61,11 +61,13 @@ public class CommandReport implements CommandExecutor
             {
                 sender.sendMessage(get("message.report.cancel"));
                 return true;
-            } else if (Bukkit.getPlayer(args[0]) == null)
+            }
+            else if (Bukkit.getPlayer(args[0]) == null)
             {
                 sender.sendMessage(get("error.playerNotFound"));
                 return true;
-            } else if (sender instanceof ConsoleCommandSender)
+            }
+            else if (sender instanceof ConsoleCommandSender)
             {
                 sender.sendMessage(get("error.requirePlayer"));
                 return true;
@@ -160,8 +162,8 @@ public class CommandReport implements CommandExecutor
             }
 
             Utils.adminNotification(target.getName(), id, types.parallelStream()
-                                                               .map(EnumCheatType::getText)
-                                                               .toArray(String[]::new));
+                    .map(EnumCheatType::getText)
+                    .toArray(String[]::new));
             Bungee.sendMessage("report " + id + " " + target.getName());
             return;
         }

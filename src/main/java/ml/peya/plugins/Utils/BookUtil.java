@@ -103,8 +103,8 @@ public class BookUtil
         {
             return ReflectionUtils.getMethod(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY
                     .getClass("CraftItemStack"), "asNMSCopy", ItemStack.class)
-                                  .invoke(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY
-                                          .getClass("CraftItemStack"), item);
+                    .invoke(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY
+                            .getClass("CraftItemStack"), item);
         }
         catch (Exception e)
         {
@@ -128,10 +128,10 @@ public class BookUtil
             {
                 Collections.singletonList(ReflectionUtils.getField(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY
                         .getClass("CraftMetaBook"), true, "pages")
-                                                         .get(metadata))
-                           .add(ReflectionUtils.invokeMethod(ReflectionUtils.PackageType.MINECRAFT_SERVER
-                                   .getClass("IChatBaseComponent$ChatSerializer")
-                                   .newInstance(), "a", text));
+                        .get(metadata))
+                        .add(ReflectionUtils.invokeMethod(ReflectionUtils.PackageType.MINECRAFT_SERVER
+                                .getClass("IChatBaseComponent$ChatSerializer")
+                                .newInstance(), "a", text));
             }
         }
         catch (Exception e)

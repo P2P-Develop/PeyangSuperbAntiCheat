@@ -27,7 +27,6 @@ public class CommandTracking implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
-     *
      * @return 正常に終わったかどうか。
      */
     @Override
@@ -48,7 +47,7 @@ public class CommandTracking implements CommandExecutor
             tracker.remove(sender.getName());
             sender.sendMessage(get("item.stopTarget"));
             ((Player) sender).spigot()
-                             .sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.noTarget")));
+                    .sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.noTarget")));
 
             return true;
         }

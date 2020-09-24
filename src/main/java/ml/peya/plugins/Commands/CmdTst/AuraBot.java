@@ -29,7 +29,6 @@ public class AuraBot implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
-     *
      * @return 正常に終わったかどうか。
      */
     @Override
@@ -75,7 +74,8 @@ public class AuraBot implements CommandExecutor
             map.put("seconds", config.getString("npc.seconds"));
 
             sender.sendMessage(get("message.aura.summon", map));
-        } else
+        }
+        else
             sender.sendMessage(get("message.aura.lynx"));
 
         DetectConnection.scan(player, DetectType.AURA_BOT, sender, reachModeEnabled);

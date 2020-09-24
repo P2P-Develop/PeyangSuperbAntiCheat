@@ -42,7 +42,6 @@ public class Hook implements NCPHook
      * @param checkType 引っかかったタイプ
      * @param player    対象プレイヤー
      * @param info      VLInfo
-     *
      * @return 実行結果
      */
     @Override

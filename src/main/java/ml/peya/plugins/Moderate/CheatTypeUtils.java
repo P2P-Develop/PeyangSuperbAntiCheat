@@ -27,7 +27,7 @@ public class CheatTypeUtils
                 .asList(EnumCheatType.FLY, EnumCheatType.KILLAURA, EnumCheatType.AUTOCLICKER, EnumCheatType.SPEED, EnumCheatType.ANTIKNOCKBACK, EnumCheatType.REACH, EnumCheatType.DOLPHIN));
 
         types.parallelStream()
-             .forEachOrdered(type -> type.setSelected(false));
+                .forEachOrdered(type -> type.setSelected(false));
 
         return types;
     }
@@ -36,7 +36,6 @@ public class CheatTypeUtils
      * まぁこれも。
      *
      * @param values Stringから変換する奴。
-     *
      * @return 変換後。
      */
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
@@ -55,16 +54,15 @@ public class CheatTypeUtils
      * まぁ同じくらい。
      *
      * @param sysname Stringから普通に変換する奴。
-     *
      * @return 変換後。
      */
     public static EnumCheatType getCheatTypeFromString(String sysname)
     {
         return createTypes().parallelStream()
-                            .filter(type -> type.getSysName()
-                                                .equals(sysname))
-                            .findFirst()
-                            .orElse(null);
+                .filter(type -> type.getSysName()
+                        .equals(sysname))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
@@ -72,7 +70,6 @@ public class CheatTypeUtils
      *
      * @param types 判定タイプ。
      * @param name  なまえ
-     *
      * @return OK=true
      */
     public static boolean aliasEquals(EnumCheatType types, String name)
