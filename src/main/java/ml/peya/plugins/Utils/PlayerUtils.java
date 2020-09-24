@@ -83,8 +83,11 @@ public class PlayerUtils
      */
     public static boolean hasCritical(Player player)
     {
-        return !(player.getFallDistance() <= 0.0F) && !player.getLocation().getBlock().isLiquid() && !player
-                .isOnGround() && !player.hasPotionEffect(PotionEffectType.BLINDNESS) && player.getVehicle() == null;
+        return player.getFallDistance() > 0.0F &&
+                !player.getLocation().getBlock().isLiquid() &&
+                !player.isOnGround() &&
+                !player.hasPotionEffect(PotionEffectType.BLINDNESS) &&
+                player.getVehicle() == null;
     }
 
     /**

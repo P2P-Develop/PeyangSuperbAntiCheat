@@ -85,7 +85,6 @@ public class View
 
             return;
         }
-        sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(TextBuilder.getPrevButton(previous), TextBuilder
-                .getNextButton(next), !(previous < 0), !(count < 5)).create());
+        sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(TextBuilder.getPrevButton(previous), TextBuilder.getNextButton(next), previous >= 0, count >= 5).create());
     }
 }
