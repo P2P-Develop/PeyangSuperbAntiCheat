@@ -27,14 +27,13 @@ public class Run implements Listener
     {
         ItemStack itemStack = e.getItem();
 
-        if (e.getItem() == null || e.getItem()
-                .getType() == Material.AIR || Item.canGuiItem(itemStack)) return;
+        if (e.getItem() == null || e.getItem().getType() == Material.AIR || Item.canGuiItem(itemStack)) return;
 
         e.setCancelled(true);
 
         item.getItems()
-                .parallelStream()
-                .filter(items -> Objects.equals(Item.getType(itemStack), items.getExecName()))
-                .forEachOrdered(items -> items.run(e.getPlayer(), Item.getTarget(itemStack)));
+            .parallelStream()
+            .filter(items -> Objects.equals(Item.getType(itemStack), items.getExecName()))
+            .forEachOrdered(items -> items.run(e.getPlayer(), Item.getTarget(itemStack)));
     }
 }

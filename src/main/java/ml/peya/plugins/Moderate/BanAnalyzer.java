@@ -25,6 +25,7 @@ public class BanAnalyzer
      *
      * @param uuid UUID。
      * @param type 取得タイプ(BAN, KICK, MUTE, *ALL*)
+     *
      * @return BANデータ
      */
     public static ArrayList<Bans> getAbuse(UUID uuid, Type type)
@@ -104,8 +105,9 @@ public class BanAnalyzer
 
         StringBuilder id = new StringBuilder();
         Random random = new Random();
-        IntStream.range(0, 8).parallel().forEachOrdered(i -> {
-            id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A'));
+        IntStream.range(0, 8).parallel().forEachOrdered(i ->
+        {
+            id.append(random.nextBoolean() ? random.nextInt(9) : (char) (random.nextInt(5) + 'A'));
         });
 
         try (Connection connection = banKick.getConnection();
@@ -154,6 +156,7 @@ public class BanAnalyzer
          * StringをTypeに変換する。
          *
          * @param name before
+         *
          * @return AFTER
          */
         public static Type toType(String name)

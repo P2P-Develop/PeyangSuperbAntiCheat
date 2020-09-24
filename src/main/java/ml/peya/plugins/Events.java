@@ -57,7 +57,9 @@ public class Events implements Listener
     @EventHandler(priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent e)
     {
-        if (!(e.getEntity() instanceof CraftPlayer) || !(e.getDamager() instanceof CraftArrow) || !cheatMeta.exists(e.getEntity().getUniqueId()) || !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
+        if (!(e.getEntity() instanceof CraftPlayer) || !(e.getDamager() instanceof CraftArrow) || !cheatMeta
+                .exists(e.getEntity().getUniqueId()) || !e.getDamager()
+                                                          .hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
             return;
 
         e.setDamage(0);
@@ -88,7 +90,9 @@ public class Events implements Listener
     {
         if (!tracker.isTrackingByPlayer(e.getPlayer().getName()) && !cheatMeta.exists(e.getPlayer().getUniqueId()))
             return;
-        e.getPlayer().setMetadata("speed", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo())));
+        e.getPlayer().setMetadata("speed", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom()
+                                                                                                      .distance(e
+                                                                                                              .getTo())));
     }
 
     /**
@@ -101,27 +105,28 @@ public class Events implements Listener
     {
         e.setCancelled(true);
         String format = e.getFormat()
-                .replace("%1$s", e.getPlayer()
-                        .getDisplayName())
-                .replace("%2$s", e.getMessage());
+                         .replace("%1$s", e.getPlayer()
+                                           .getDisplayName())
+                         .replace("%2$s", e.getMessage());
 
         ComponentBuilder builder = new ComponentBuilder("");
 
         builder.append(ChatColor.RED + "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED + "] ")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer()
-                        .getName()))
-                .event(new HoverEvent(
-                        HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer()
-                                .getName()).create()
-                ));
+               .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer()
+                                                                                  .getName()))
+               .event(new HoverEvent(
+                       HoverEvent.Action.SHOW_TEXT,
+                       new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer()
+                                                                         .getName()).create()
+               ));
 
         e.getRecipients()
-                .parallelStream()
-                .forEachOrdered(receiver -> receiver.spigot()
-                        .sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create())));
+         .parallelStream()
+         .forEachOrdered(receiver -> receiver.spigot()
+                                             .sendMessage((BaseComponent[]) ArrayUtils
+                                                     .addAll(builder.create(), new ComponentBuilder(format).create())));
         Bukkit.getConsoleSender()
-                .sendMessage(format);
+              .sendMessage(format);
     }
 
     /**
@@ -139,8 +144,8 @@ public class Events implements Listener
             @Override
             public void run()
             {
-                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[]{-2, 0});
-                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[]{0, 2, 0, 0, 0, 0});
+                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[] { -2, 0 });
+                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[] { 0, 2, 0, 0, 0, 0 });
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 5);
 
@@ -166,7 +171,8 @@ public class Events implements Listener
                         )
                 );
 
-                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, tab));
+                connection
+                        .sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, tab));
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 10);
 
@@ -175,7 +181,8 @@ public class Events implements Listener
             @Override
             public void run()
             {
-                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, tab));
+                connection
+                        .sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, tab));
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 20 * 3);
     }
@@ -188,7 +195,8 @@ public class Events implements Listener
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDrop(PlayerDropItemEvent e)
     {
-        if (e.getItemDrop().getItemStack().getType() == Material.WRITTEN_BOOK && Books.hasPSACBook(e.getItemDrop().getItemStack()))
+        if (e.getItemDrop().getItemStack().getType() == Material.WRITTEN_BOOK && Books
+                .hasPSACBook(e.getItemDrop().getItemStack()))
             e.setCancelled(true);
     }
 
@@ -210,7 +218,8 @@ public class Events implements Listener
         if (!module.isEnable("Matrix"))
             return;
 
-        if (e.getReason().startsWith(ChatColor.GRAY + "[" + ChatColor.AQUA + "Matrix" + ChatColor.GRAY + "]")) //Matrix Detection
+        if (e.getReason()
+             .startsWith(ChatColor.GRAY + "[" + ChatColor.AQUA + "Matrix" + ChatColor.GRAY + "]")) //Matrix Detection
         {
             e.setCancelled(true);
             KickManager.kickPlayer(e.getPlayer(), e.getReason().replaceFirst("§7\\[§bMatrix§7]§r ", ""), true, false);

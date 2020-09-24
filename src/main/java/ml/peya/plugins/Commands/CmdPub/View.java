@@ -54,7 +54,7 @@ public class View
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
         {
-            String idReq = nameFlag ? String.format("WhErE id = '%s'", offName): "";
+            String idReq = nameFlag ? String.format("WhErE id = '%s'", offName) : "";
 
             String query = "SeLeCt * FrOm WaTcHeYe " + idReq + " OrDer By LeVel DeSc LiMiT 5 OfFsEt " + start;
             ResultSet result = statement.executeQuery(query);
@@ -69,9 +69,7 @@ public class View
                 while (reason.next())
                     types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
 
-                sender.spigot()
-                        .sendMessage(TextBuilder.getLine(id, issuebyid, types, mngid, sender)
-                                .create());
+                sender.spigot().sendMessage(TextBuilder.getLine(id, issuebyid, types, mngid, sender).create());
                 count++;
             }
         }
@@ -87,6 +85,7 @@ public class View
 
             return;
         }
-        sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(TextBuilder.getPrevButton(previous), TextBuilder.getNextButton(next), !(previous < 0), !(count < 5)).create());
+        sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(TextBuilder.getPrevButton(previous), TextBuilder
+                .getNextButton(next), !(previous < 0), !(count < 5)).create());
     }
 }

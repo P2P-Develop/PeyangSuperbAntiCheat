@@ -42,12 +42,14 @@ public class Hook implements NCPHook
      * @param checkType 引っかかったタイプ
      * @param player    対象プレイヤー
      * @param info      VLInfo
+     *
      * @return 実行結果
      */
     @Override
     public boolean onCheckFailure(CheckType checkType, Player player, IViolationInfo info)
     {
-        if ((checkType != CheckType.FIGHT_ANGLE && checkType != CheckType.FIGHT_DIRECTION && checkType != CheckType.FIGHT_REACH) || Variables.cheatMeta.exists(player.getUniqueId()))
+        if ((checkType != CheckType.FIGHT_ANGLE && checkType != CheckType.FIGHT_DIRECTION && checkType != CheckType.FIGHT_REACH) || Variables.cheatMeta
+                .exists(player.getUniqueId()))
             return true;
 
         DetectConnection.scan(player, DetectType.AURA_BOT, null, false);

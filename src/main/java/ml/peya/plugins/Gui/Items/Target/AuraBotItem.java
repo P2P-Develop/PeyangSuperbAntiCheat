@@ -29,13 +29,15 @@ public class AuraBotItem implements IItems
      * @param fieldType フィールドの種類。
      * @param index     インデックス。
      * @param <T>       どんな型も入るよ！
+     *
      * @return 取得できたフィールド。
      */
     private static <T> Field getField(Class<?> target, String name, Class<T> fieldType, int index)
     {
         for (final Field field : target.getDeclaredFields())
         {
-            if ((name == null || field.getName().equals(name)) && fieldType.isAssignableFrom(field.getType()) && index-- <= 0)
+            if ((name == null || field.getName().equals(name)) && fieldType
+                    .isAssignableFrom(field.getType()) && index-- <= 0)
             {
                 field.setAccessible(true);
                 return field;
@@ -63,6 +65,7 @@ public class AuraBotItem implements IItems
      * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
      *
      * @param target ターゲットが誰であるか。
+     *
      * @return 関数内の処理によって設定されたアイテム。
      */
     @Override

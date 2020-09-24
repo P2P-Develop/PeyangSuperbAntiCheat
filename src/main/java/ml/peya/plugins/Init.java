@@ -45,6 +45,7 @@ public class Init
      * データベースの.dbファイルをめっちゃ作成する。
      *
      * @param path 相対パスでいいお。
+     *
      * @return こいつをHikariDataSourceに突っ込むといい感じになります。
      */
     public static HikariConfig initMngDatabase(String path)
@@ -70,7 +71,9 @@ public class Init
 
         AtomicInteger error = new AtomicInteger();
 
-        Arrays.asList("npc.seconds", "npc.kill", "npc.vllevel", "npc.learncount", "mod.trackTicks", "kick.defaultKick", "autoMessage.time").parallelStream().forEachOrdered(path -> {
+        Arrays.asList("npc.seconds", "npc.kill", "npc.vllevel", "npc.learncount", "mod.trackTicks", "kick.defaultKick", "autoMessage.time")
+              .parallelStream().forEachOrdered(path ->
+        {
             try
             {
                 if (config.getInt(path) < 0)
@@ -103,16 +106,15 @@ public class Init
         databasePath = config.getString("database.path");
         banKickPath = config.getString("database.logPath");
         trustPath = config.getString("database.trustPath");
-        eye = new HikariDataSource(Init.initMngDatabase(Paths.get(databasePath)
-                .isAbsolute() ? databasePath: getPlugin().getDataFolder()
-                .getAbsolutePath() + "/" + databasePath));
-        banKick = new HikariDataSource(Init.initMngDatabase(Paths.get(banKickPath)
-                .isAbsolute() ? banKickPath: getPlugin().getDataFolder()
-                .getAbsolutePath() + "/" + banKickPath));
-        trust = new HikariDataSource(Init.initMngDatabase(Paths.get(trustPath)
-                .isAbsolute() ? trustPath: getPlugin().getDataFolder()
-                .getAbsolutePath() + "/" + trustPath));
-
+        eye = new HikariDataSource(Init.initMngDatabase(Paths.get(databasePath).isAbsolute()
+                ? databasePath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + databasePath));
+        banKick = new HikariDataSource(Init.initMngDatabase(Paths.get(banKickPath).isAbsolute()
+                ? banKickPath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + banKickPath));
+        trust = new HikariDataSource(Init.initMngDatabase(Paths.get(trustPath).isAbsolute()
+                ? trustPath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + trustPath));
     }
 
     /**
@@ -245,7 +247,8 @@ public class Init
     {
         try
         {
-            FileUtils.copyInputStreamToFile(getPlugin().getResource("skin.db"), new File(getPlugin().getDataFolder().getAbsolutePath() + "/skin.db"));
+            FileUtils.copyInputStreamToFile(getPlugin().getResource("skin.db"), new File(getPlugin().getDataFolder()
+                                                                                                    .getAbsolutePath() + "/skin.db"));
         }
         catch (Exception e)
         {
@@ -292,7 +295,8 @@ public class Init
     {
         try
         {
-            File file = new File(getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+            File file = new File(getPlugin().getDataFolder().getAbsolutePath() + "/" + config
+                    .getString("database.learnPath"));
             if (file.exists() && file.length() >= 16)
             {
                 JsonNode node = new ObjectMapper().readTree(file);
@@ -301,15 +305,15 @@ public class Init
                 {
                     for (int i1 = 0; i1 < aIW.length; i1++)
                         NeuralNetwork.inputWeight[i][i1] = node.get("inputWeight")
-                                .get(i)
-                                .get(i1)
-                                .asDouble();
+                                                               .get(i)
+                                                               .get(i1)
+                                                               .asDouble();
                     i++;
                 }
 
                 Arrays.parallelSetAll(NeuralNetwork.middleWeight, i2 -> node.get("middleWeight")
-                        .get(i2)
-                        .asDouble());
+                                                                            .get(i2)
+                                                                            .asDouble());
 
                 learnCount = node.get("learnCount").asInt();
 

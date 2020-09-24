@@ -30,46 +30,44 @@ public class CommandBans implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
+     *
      * @return 正常に終わったかどうか。
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psac.bans") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.bans") || ErrorMessageSender
+                .invalidLengthMessage(sender, args, 1, 2))
             return true;
 
-        final String type = args.length == 2 ? args[0]: "-a";
-        final String name = args.length == 2 ? args[1]: args[0];
+        final String type = args.length == 2 ? args[0] : "-a";
+        final String name = args.length == 2 ? args[1] : args[0];
 
-        if (!type.equals("-a") && !type.toLowerCase()
-                .equals("ban") && !type.toLowerCase()
-                .equals("kick"))
+        if (!type.equals("-a") && !type.toLowerCase().equals("ban") && !type.toLowerCase().equals("kick"))
         {
             sender.sendMessage(get("error.bans.unknownSearchType"));
 
             return true;
         }
 
-        final UUID[] player = {null};
+        final UUID[] player = { null };
 
         Arrays.stream(Bukkit.getOfflinePlayers())
-                .parallel()
-                .forEachOrdered(ofPly ->
-                        player[0] = ofPly.getName()
-                                .equalsIgnoreCase(name)
-                                ? ofPly.getUniqueId()
-                                : player[0]);
+              .parallel()
+              .forEachOrdered(ofPly ->
+                      player[0] = ofPly.getName().equalsIgnoreCase(name)
+                              ? ofPly.getUniqueId()
+                              : player[0]);
 
         if (player[0] == null)
         {
             Arrays.stream(((Player[]) Bukkit.getOnlinePlayers()
-                    .toArray()))
-                    .parallel()
-                    .forEachOrdered(onPly ->
-                            player[0] = onPly.getName()
-                                    .equalsIgnoreCase(name)
-                                    ? onPly.getUniqueId()
-                                    : player[0]);
+                                            .toArray()))
+                  .parallel()
+                  .forEachOrdered(onPly ->
+                          player[0] = onPly.getName().equalsIgnoreCase(name)
+                                  ? onPly.getUniqueId()
+                                  : player[0]);
 
             if (player[0] == null)
             {
@@ -80,7 +78,8 @@ public class CommandBans implements CommandExecutor
 
         ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player[0], BanAnalyzer.Type.toType(type));
 
-        sender.sendMessage(config.getBoolean("message.lynx") ? get("message.bans.lynx", pair("name", name)): get("message.bans.message", pair("name", name)));
+        sender.sendMessage(config
+                .getBoolean("message.lynx") ? get("message.bans.lynx", pair("name", name)) : get("message.bans.message", pair("name", name)));
 
         if (bans.size() == 0)
             sender.sendMessage(get("error.bans.databaseInfoNotFound"));
@@ -90,10 +89,7 @@ public class CommandBans implements CommandExecutor
         {
             if (i >= bans.size())
                 break;
-            sender.spigot()
-                    .sendMessage(TextBuilder.getTextBan(bans.get(i), bans.get(i++)
-                            .getType())
-                            .create());
+            sender.spigot().sendMessage(TextBuilder.getTextBan(bans.get(i), bans.get(i++).getType()).create());
         }
         while (i < 5);
 
@@ -101,7 +97,8 @@ public class CommandBans implements CommandExecutor
             return true;
 
         final int count = bans.size() - 5;
-        sender.sendMessage(config.getBoolean("message.lynx") ? get("message.bans.more.lynx", pair("count", count)): get("message.bans.more.normal", pair("count", count)));
+        sender.sendMessage(config
+                .getBoolean("message.lynx") ? get("message.bans.more.lynx", pair("count", count)) : get("message.bans.more.normal", pair("count", count)));
 
         return true;
     }

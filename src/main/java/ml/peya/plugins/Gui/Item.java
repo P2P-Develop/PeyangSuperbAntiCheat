@@ -27,6 +27,7 @@ public class Item
      * GUIで表示できるアイテムであるか。
      *
      * @param item チェックするアイテム。
+     *
      * @return GUI表示可能であればちゃんとしてくれる。
      */
     public static boolean canGuiItem(ItemStack item)
@@ -45,26 +46,30 @@ public class Item
      * どのようなアイテムであるかStringで取得できる奴。
      *
      * @param item チェックするアイテム。
+     *
      * @return 説明付きのString結果。
      */
     public static String getType(ItemStack item)
     {
         if (canGuiItem(item))
             return null;
-        return item.getItemMeta().getLore().get(1).replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: ", "");
+        return item.getItemMeta().getLore().get(1)
+                   .replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: ", "");
     }
 
     /**
      * トラッキングに関わる関数。トラッキングしているプレイヤーを表示する。
      *
      * @param item チェックするアイテム。
+     *
      * @return トラッキングしているプレイヤー付きのString。
      */
     public static String getTarget(ItemStack item)
     {
         if (canGuiItem(item))
             return null;
-        return item.getItemMeta().getLore().get(2).replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: ", "");
+        return item.getItemMeta().getLore().get(2)
+                   .replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: ", "");
     }
 
     /**
@@ -72,12 +77,15 @@ public class Item
      *
      * @param item   チェックするアイテム。
      * @param target ターゲット(?)
+     *
      * @return チェックした後のArrayList。
      */
     public static ArrayList<String> getLore(IItems item, String target)
     {
 
-        ArrayList<String> list = new ArrayList<>(Arrays.asList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.", ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: " + item.getExecName()));
+        ArrayList<String> list = new ArrayList<>(Arrays
+                .asList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.", ChatColor.GRAY + ChatColor.ITALIC
+                        .toString() + "Execution type: " + item.getExecName()));
 
         if (item.getType() == IItems.Type.TARGET || item.getType() == IItems.Type.TARGET_2)
             list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: " + target);

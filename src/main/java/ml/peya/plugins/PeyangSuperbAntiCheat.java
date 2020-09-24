@@ -56,11 +56,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
      * プラグイン有効チェック
      *
      * @param name プラグイン名
+     *
      * @return 有効否
      */
     public static boolean isEnablePlugin(String name)
     {
-        return Bukkit.getServer().getPluginManager().getPlugin(name) != null && Bukkit.getServer().getPluginManager().getPlugin(name).isEnabled();
+        return Bukkit.getServer().getPluginManager().getPlugin(name) != null && Bukkit.getServer().getPluginManager()
+                                                                                      .getPlugin(name).isEnabled();
     }
 
     /**
@@ -111,14 +113,15 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         protocolManager = ProtocolLibrary.getProtocolManager();
 
-        protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
-        {
-            @Override
-            public void onPacketReceiving(PacketEvent event)
-            {
-                Packets.useEntity(event);
-            }
-        });
+        protocolManager
+                .addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
+                {
+                    @Override
+                    public void onPacketReceiving(PacketEvent event)
+                    {
+                        Packets.useEntity(event);
+                    }
+                });
 
 
         if (!Init.createDefaultTables())
@@ -162,7 +165,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         if (initialized)
         {
-            try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+            try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + config
+                    .getString("database.learnPath"));
                  PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
             {
                 logger.info("Saving learn weights to learning data file...");

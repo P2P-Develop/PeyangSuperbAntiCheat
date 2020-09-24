@@ -21,6 +21,7 @@ public class SeverityLevels
      * タイプそのまんま通過する奴
      *
      * @param types タイプ
+     *
      * @return 通過
      */
     public static EnumSeverity getSeverity(ArrayList<EnumCheatType> types)
@@ -32,11 +33,13 @@ public class SeverityLevels
      * intでも突っ込めるようにしたやつ。基準かなこれ
      *
      * @param level Stream APIの餌食となる引数
+     *
      * @return 変換後？
      */
     public static EnumSeverity getSeverity(int level)
     {
-        return getAllSeverity().parallelStream().filter(severity -> severity.getLevel() == level).findFirst().orElse(EnumSeverity.UNKNOWN);
+        return getAllSeverity().parallelStream().filter(severity -> severity.getLevel() == level).findFirst()
+                               .orElse(EnumSeverity.UNKNOWN);
     }
 
     /**
@@ -46,13 +49,15 @@ public class SeverityLevels
      */
     public static ArrayList<EnumSeverity> getAllSeverity()
     {
-        return new ArrayList<>(Arrays.asList(EnumSeverity.FINE, EnumSeverity.FINER, EnumSeverity.FINEST, EnumSeverity.NORMAL, EnumSeverity.PRIORITY, EnumSeverity.REQUIRE_FAST, EnumSeverity.SEVERE));
+        return new ArrayList<>(Arrays
+                .asList(EnumSeverity.FINE, EnumSeverity.FINER, EnumSeverity.FINEST, EnumSeverity.NORMAL, EnumSeverity.PRIORITY, EnumSeverity.REQUIRE_FAST, EnumSeverity.SEVERE));
     }
 
     /**
      * IDからレベル取得する。
      *
      * @param id ID。
+     *
      * @return 取得できたやつ。
      */
     public static EnumSeverity getSeverityFromId(String id)

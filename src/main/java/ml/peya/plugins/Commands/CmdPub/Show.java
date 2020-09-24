@@ -68,7 +68,8 @@ public class Show
 
             if (sender instanceof Player)
             {
-                BookUtil.openBook(Books.getShowBook(id, uuid, issuebyid, issuebyuuid, issuedate, types), (Player) sender);
+                BookUtil.openBook(Books
+                        .getShowBook(id, uuid, issuebyid, issuebyuuid, issuedate, types), (Player) sender);
                 return;
             }
 

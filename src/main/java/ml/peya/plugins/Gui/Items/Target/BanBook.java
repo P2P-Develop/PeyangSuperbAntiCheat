@@ -31,6 +31,7 @@ public class BanBook implements IItems
      * アイテムを取得する関数のオーバーライド。どのようなアイテムを返すか、どのような動きをするか、などと言った詳細をこの関数で設定し、アイテムとして返す。
      *
      * @param target ターゲットが誰であるか。
+     *
      * @return 関数内の処理によって設定されたアイテム。
      */
     @Override

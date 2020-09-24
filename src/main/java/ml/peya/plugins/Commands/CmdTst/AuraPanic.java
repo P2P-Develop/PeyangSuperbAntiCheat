@@ -29,12 +29,14 @@ public class AuraPanic implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
+     *
      * @return 正常に終わったかどうか。
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psac.aurapanic") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.aurapanic") || ErrorMessageSender
+                .invalidLengthMessage(sender, args, 1, 2))
             return true;
 
         int count = 5;
@@ -69,13 +71,14 @@ public class AuraPanic implements CommandExecutor
         if (!config.getBoolean("message.lynx"))
         {
             HashMap<String, Object> map = new HashMap<>();
-            map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") ")));
+            map.put("name", player.getDisplayName() + (player.getDisplayName()
+                                                             .equals(player.getName()) ? "" : (" (" + player
+                    .getName() + ") ")));
             map.put("type", "AuraPanicBot");
             map.put("seconds", String.valueOf(config.getInt("npc.seconds")));
 
             sender.sendMessage(get("message.aura.summon", map));
-        }
-        else
+        } else
             sender.sendMessage(get("message.aura.lynx"));
 
         if (args.length == 2)

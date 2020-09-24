@@ -61,9 +61,9 @@ public class NPCTeleport
      */
     private static void auraPanic_teleport(Player player, EntityPlayer target, ItemStack[] arm, int count, CommandSender sender, boolean reachMode)
     {
-        final double range = reachMode ? config.getDouble("npc.reachPanicRange"): config.getDouble("npc.panicRange");
-        final double[] clt = {0.0};
-        final int[] now = {0};
+        final double range = reachMode ? config.getDouble("npc.reachPanicRange") : config.getDouble("npc.panicRange");
+        final double[] clt = { 0.0 };
+        final int[] now = { 0 };
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
@@ -122,11 +122,15 @@ public class NPCTeleport
                         @Override
                         public void run()
                         {
-                            Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).forEachOrdered(p -> {
-                                ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityTeleport(target));
-                                connection.sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) finalHead));
-                                NPC.setArmor(p, target, arm);
-                            });
+                            Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc"))
+                                  .forEachOrdered(p ->
+                                  {
+                                      ((CraftPlayer) p).getHandle().playerConnection
+                                              .sendPacket(new PacketPlayOutEntityTeleport(target));
+                                      connection
+                                              .sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) finalHead));
+                                      NPC.setArmor(p, target, arm);
+                                  });
                             this.cancel();
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
@@ -150,12 +154,12 @@ public class NPCTeleport
      */
     private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
     {
-        final double[] time = {0.0};
-        final double radius = reachMode ? config.getDouble("npc.reachRange"): config.getDouble("npc.range");
+        final double[] time = { 0.0 };
+        final double radius = reachMode ? config.getDouble("npc.reachRange") : config.getDouble("npc.range");
 
         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
 
-        final int[] count = {0};
+        final int[] count = { 0 };
         BukkitRunnable r = new BukkitRunnable()
         {
             public void run()
@@ -171,7 +175,8 @@ public class NPCTeleport
                     double rangeTmp = radius;
 
                     if (config.getBoolean("npc.wave"))
-                        rangeTmp = new WaveCreator(radius - 0.1, radius, config.getDouble("npc.waveMin")).get(0.01, true);
+                        rangeTmp = new WaveCreator(radius - 0.1, radius, config.getDouble("npc.waveMin"))
+                                .get(0.01, true);
 
                     final Location center = player.getLocation();
                     final Location n = new Location(
@@ -184,7 +189,8 @@ public class NPCTeleport
                     );
 
                     NPC.setLocation(n, target);
-                    ((CraftPlayer) player).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityTeleport(target));
+                    ((CraftPlayer) player).getHandle().playerConnection
+                            .sendPacket(new PacketPlayOutEntityTeleport(target));
 
                     NPC.setArmor(player, target, arm);
                     new BukkitRunnable()
@@ -193,22 +199,28 @@ public class NPCTeleport
                         public void run()
                         {
                             Bukkit.getOnlinePlayers()
-                                    .parallelStream()
-                                    .filter(p -> p.hasPermission("psac.viewnpc"))
-                                    .forEachOrdered(p ->
-                                    {
-                                        ((CraftPlayer) p).getHandle().playerConnection.sendPacket(new PacketPlayOutEntityTeleport(target));
-                                        NPC.setArmor(p, target, arm);
-                                    });
+                                  .parallelStream()
+                                  .filter(p -> p.hasPermission("psac.viewnpc"))
+                                  .forEachOrdered(p ->
+                                  {
+                                      ((CraftPlayer) p).getHandle().playerConnection
+                                              .sendPacket(new PacketPlayOutEntityTeleport(target));
+                                      NPC.setArmor(p, target, arm);
+                                  });
                             this.cancel();
                         }
                     }.runTask(PeyangSuperbAntiCheat.getPlugin());
                     count[0]++;
                     CheatDetectNowMeta meta = cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
                     if (meta == null) continue;
-                    meta.addSeconds(((PlayerUtils.isLooking(player, n) || PlayerUtils.isLooking(player, n.clone().add(0, 1, 0))) ? (config.getLong("npc.seconds") * 0.1 / 2): 0.0));
+                    meta.addSeconds(((PlayerUtils.isLooking(player, n) || PlayerUtils
+                            .isLooking(player, n.clone().add(0, 1, 0))) ? (config
+                            .getLong("npc.seconds") * 0.1 / 2) : 0.0));
                 }
-                time[0] += config.getDouble("npc.time") + (config.getBoolean("npc.speed.wave") ? new WaveCreator(0.0, config.getDouble("npc.speed.waveRange"), 0 - config.getDouble("npc.speed.waveRange")).get(0.001, true): 0.0);
+                time[0] += config.getDouble("npc.time") + (config
+                        .getBoolean("npc.speed.wave") ? new WaveCreator(0.0, config
+                        .getDouble("npc.speed.waveRange"), 0 - config.getDouble("npc.speed.waveRange"))
+                        .get(0.001, true) : 0.0);
             }
         };
         r.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
@@ -230,6 +242,7 @@ public class NPCTeleport
      *
      * @param time   時間。
      * @param radius 半径。
+     *
      * @return 位置。
      */
     private static double auraBot_zPos(double time, double radius)
@@ -242,6 +255,7 @@ public class NPCTeleport
      *
      * @param time   時間。
      * @param radius 半径。
+     *
      * @return 位置。
      */
     private static double auraBot_xPos(double time, double radius)

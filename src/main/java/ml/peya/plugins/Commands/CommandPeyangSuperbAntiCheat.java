@@ -25,6 +25,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
+     *
      * @return 正常に終わったかどうか。
      */
     @Override
@@ -34,7 +35,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
             return true;
 
         if (Arrays.asList("help", "view", "show", "drop", "kick")
-                .contains(args[0]) && ErrorMessageSender.unPermMessage(sender, "psac." + args[0])) return true;
+                  .contains(args[0]) && ErrorMessageSender.unPermMessage(sender, "psac." + args[0])) return true;
 
         ArrayList<String> argList = new ArrayList<>(Arrays.asList(args));
         argList.remove(0);

@@ -72,7 +72,7 @@ public class BungeeCommands implements CommandExecutor
                     ResultSet result = statement.executeQuery("SELECT * FROM watchreason WHERE MNGID='" + id + "'");
                     while (result.next())
                         reasons.add(CheatTypeUtils.getCheatTypeFromString(result.getString("REASON"))
-                                .getText());
+                                                  .getText());
                 }
                 catch (Exception e)
                 {

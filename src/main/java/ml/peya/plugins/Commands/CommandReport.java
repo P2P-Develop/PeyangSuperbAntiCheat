@@ -36,6 +36,7 @@ public class CommandReport implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
+     *
      * @return 正常に終わったかどうか。
      */
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
@@ -47,8 +48,7 @@ public class CommandReport implements CommandExecutor
         {
             sender.sendMessage(get("error.minArgs", pair("label", label)));
             return true;
-        }
-        else if (args.length == 1)
+        } else if (args.length == 1)
         {
             if (args[0].equals("help"))
             {
@@ -61,18 +61,17 @@ public class CommandReport implements CommandExecutor
             {
                 sender.sendMessage(get("message.report.cancel"));
                 return true;
-            }
-            else if (Bukkit.getPlayer(args[0]) == null)
+            } else if (Bukkit.getPlayer(args[0]) == null)
             {
                 sender.sendMessage(get("error.playerNotFound"));
                 return true;
-            }
-            else if (sender instanceof ConsoleCommandSender)
+            } else if (sender instanceof ConsoleCommandSender)
             {
                 sender.sendMessage(get("error.requirePlayer"));
                 return true;
             }
-            BookUtil.openBook(Books.getReportBook(Bukkit.getPlayer(args[0]), CheatTypeUtils.getFullType()), (Player) sender);
+            BookUtil.openBook(Books
+                    .getReportBook(Bukkit.getPlayer(args[0]), CheatTypeUtils.getFullType()), (Player) sender);
             return true;
         }
 
@@ -133,20 +132,21 @@ public class CommandReport implements CommandExecutor
      */
     private void report(CommandSender sender, final ArrayList<EnumCheatType> types, Player target)
     {
-        final String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]": ((Player) sender).getUniqueId()
-                .toString()
-                .replace("-", "");
+        final String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]" : ((Player) sender).getUniqueId()
+                                                                                                          .toString()
+                                                                                                          .replace("-", "");
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId()
-                .toString()
-                .replace("-", ""), senderUUID))
+                                                    .toString()
+                                                    .replace("-", ""), senderUUID))
         {
             sender.sendMessage(get("error.report.alreadyReported"));
             return;
         }
 
-        final String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender ? "[CONSOLE]": sender.getName(), senderUUID, SeverityLevels.getSeverity(types)
-                .getLevel());
+        final String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender ? "[CONSOLE]" : sender
+                .getName(), senderUUID, SeverityLevels.getSeverity(types)
+                                                      .getLevel());
         boolean successFlag = false;
         for (EnumCheatType type : types)
             successFlag = WatchEyeManagement.setReason(id, type, 0);
@@ -163,8 +163,8 @@ public class CommandReport implements CommandExecutor
             }
 
             Utils.adminNotification(target.getName(), id, types.parallelStream()
-                    .map(EnumCheatType::getText)
-                    .toArray(String[]::new));
+                                                               .map(EnumCheatType::getText)
+                                                               .toArray(String[]::new));
             Bungee.sendMessage("report " + id + " " + target.getName());
             return;
         }

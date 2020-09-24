@@ -27,7 +27,8 @@ public class Events implements Listener
         if (!e.getTag().equals(bungeeChannel) || !(e.getSender() instanceof Server))
             return;
 
-        bungeeCommand.runCommand(ByteStreams.newDataInput(e.getData()).readUTF(), ((Server) e.getSender()).getInfo().getName());
+        bungeeCommand.runCommand(ByteStreams.newDataInput(e.getData()).readUTF(), ((Server) e.getSender()).getInfo()
+                                                                                                          .getName());
     }
 
     /**

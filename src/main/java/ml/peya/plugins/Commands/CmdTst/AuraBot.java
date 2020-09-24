@@ -29,12 +29,14 @@ public class AuraBot implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
+     *
      * @return 正常に終わったかどうか。
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psac.aurabot") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.aurabot") || ErrorMessageSender
+                .invalidLengthMessage(sender, args, 1, 2))
             return true;
         Player player = Bukkit.getPlayer(args[0]);
         boolean reachModeEnabled = false;
@@ -68,13 +70,14 @@ public class AuraBot implements CommandExecutor
         if (!config.getBoolean("message.lynx"))
         {
             HashMap<String, Object> map = new HashMap<>();
-            map.put("name", player.getDisplayName() + (player.getDisplayName().equals(player.getName()) ? "": (" (" + player.getName() + ") ")));
+            map.put("name", player.getDisplayName() + (player.getDisplayName()
+                                                             .equals(player.getName()) ? "" : (" (" + player
+                    .getName() + ") ")));
             map.put("type", "AuraBot");
             map.put("seconds", config.getString("npc.seconds"));
 
             sender.sendMessage(get("message.aura.summon", map));
-        }
-        else
+        } else
             sender.sendMessage(get("message.aura.lynx"));
 
         DetectConnection.scan(player, DetectType.AURA_BOT, sender, reachModeEnabled);

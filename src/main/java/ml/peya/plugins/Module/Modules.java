@@ -46,6 +46,7 @@ public class Modules
      * 有効チェック
      *
      * @param module モジュール
+     *
      * @return 存在
      */
     public boolean isEnable(String module)

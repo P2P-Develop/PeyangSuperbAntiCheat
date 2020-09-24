@@ -58,12 +58,13 @@ public class Commands implements CommandExecutor
         logger.info("Reported Player [" + player + "](id=" + id + ")");
 
         PeyangSuperbAntiCheatProxy.servers.parallelStream()
-                .filter(serverName -> !cmd.getServer()
-                        .equals(serverName))
-                .map(serverName -> PeyangSuperbAntiCheatProxy.getPlugin()
-                        .getProxy()
-                        .getServerInfo(serverName))
-                .filter(Objects::nonNull)
-                .forEachOrdered(server -> PeyangSuperbAntiCheatProxy.sendData(server, "report " + id + " " + player));
+                                          .filter(serverName -> !cmd.getServer()
+                                                                    .equals(serverName))
+                                          .map(serverName -> PeyangSuperbAntiCheatProxy.getPlugin()
+                                                                                       .getProxy()
+                                                                                       .getServerInfo(serverName))
+                                          .filter(Objects::nonNull)
+                                          .forEachOrdered(server -> PeyangSuperbAntiCheatProxy
+                                                  .sendData(server, "report " + id + " " + player));
     }
 }

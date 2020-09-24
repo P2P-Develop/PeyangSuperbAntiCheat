@@ -50,7 +50,8 @@ public class KickManager
                 kick(player, reason, isTest, !wdFlag);
                 this.cancel();
             }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math
+                .multiplyExact(Variables.config.getInt("kick.delay"), 20));
     }
 
     /**
@@ -62,7 +63,8 @@ public class KickManager
     private static void broadCast(boolean wdFlag, Player target)
     {
         if (wdFlag)
-            Bukkit.getOnlinePlayers().parallelStream().forEachOrdered(player -> {
+            Bukkit.getOnlinePlayers().parallelStream().forEachOrdered(player ->
+            {
                 if (player.hasPermission("psac.ntfadmin"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
                 else if (player.hasPermission("psac.notification"))
@@ -109,8 +111,9 @@ public class KickManager
             Decorations.lighting(player);
         StringBuilder id = new StringBuilder();
         Random random = new Random();
-        IntStream.range(0, 8).parallel().forEachOrdered(i -> {
-            id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A'));
+        IntStream.range(0, 8).parallel().forEachOrdered(i ->
+        {
+            id.append(random.nextBoolean() ? random.nextInt(9) : (char) (random.nextInt(5) + 'A'));
         });
 
         String reasonP;
@@ -125,7 +128,8 @@ public class KickManager
         HashMap<String, Object> map = new HashMap<>();
 
         map.put("reason", reasonP);
-        map.put("ggid", IntStream.range(0, 7).parallel().mapToObj(i -> String.valueOf(random.nextInt(9))).collect(Collectors.joining()));
+        map.put("ggid", IntStream.range(0, 7).parallel().mapToObj(i -> String.valueOf(random.nextInt(9)))
+                                 .collect(Collectors.joining()));
         map.put("id", id.toString());
 
         String message = MessageEngine.get("kick.reason", map);
@@ -148,10 +152,13 @@ public class KickManager
                     "'" + WatchEyeManagement.parseInjection(id.toString()) + "'," +
                     "" + new Date().getTime() + "," +
                     "'" + WatchEyeManagement.parseInjection(reason) + "', " +
-                    (opFlag ? 1: 0) +
+                    (opFlag ? 1 : 0) +
                     ");");
 
-            ResultSet eyeList = eyeS.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString().replace("-", "").replace("'", "\\'") + "'");
+            ResultSet eyeList = eyeS
+                    .executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString()
+                                                                                  .replace("-", "")
+                                                                                  .replace("'", "\\'") + "'");
 
             while (eyeList.next())
             {

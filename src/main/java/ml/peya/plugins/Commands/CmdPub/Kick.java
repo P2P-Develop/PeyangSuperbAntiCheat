@@ -73,8 +73,7 @@ public class Kick
 
         ArrayList<String> argSet = new ArrayList<>(Arrays.asList(args));
 
-        argSet.subList(0, 2)
-                .clear();
+        argSet.subList(0, 2).clear();
 
         if (argSet.size() == 0)
             argSet.add("Kicked by Operator.");

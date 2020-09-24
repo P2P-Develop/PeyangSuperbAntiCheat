@@ -42,8 +42,10 @@ public class TestKnockback
 
         Arrow arrow = (Arrow) player.getWorld().spawnEntity(location, EntityType.ARROW);
         cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), DetectType.ANTI_KB);
-        arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), player.getUniqueId()));
-        Bukkit.getOnlinePlayers().parallelStream().map(hide -> ((CraftPlayer) hide).getHandle().playerConnection).forEachOrdered(connection -> connection.sendPacket(new PacketPlayOutEntityDestroy(arrow.getEntityId())));
+        arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat
+                .getPlugin(), player.getUniqueId()));
+        Bukkit.getOnlinePlayers().parallelStream().map(hide -> ((CraftPlayer) hide).getHandle().playerConnection)
+              .forEachOrdered(connection -> connection.sendPacket(new PacketPlayOutEntityDestroy(arrow.getEntityId())));
 
         arrow.setVelocity(location.getDirection().multiply(32767f));
 
@@ -66,7 +68,9 @@ public class TestKnockback
             @Override
             public void run()
             {
-                sender.sendMessage(get(config.getBoolean("message.lynx") ? "message.testkb.normal": "message.textkb.lynx", pair("name", player.getName())));
+                sender.sendMessage(get(config
+                        .getBoolean("message.lynx") ? "message.testkb.normal" : "message.textkb.lynx", pair("name", player
+                        .getName())));
                 arrow.remove();
                 cheatMeta.remove(arrow.getUniqueId());
             }

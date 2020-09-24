@@ -38,16 +38,17 @@ public class Drop implements Listener
             public void run()
             {
                 Arrays.stream(e.getPlayer()
-                        .getInventory()
-                        .getContents())
-                        .parallel()
-                        .filter(stack -> !Item.canGuiItem(stack))
-                        .forEachOrdered(stack -> stack.setAmount(0));
+                               .getInventory()
+                               .getContents())
+                      .parallel()
+                      .filter(stack -> !Item.canGuiItem(stack))
+                      .forEachOrdered(stack -> stack.setAmount(0));
                 this.cancel();
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());
         tracker.remove(e.getPlayer().getName());
-        e.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.noTarget")));
+        e.getPlayer().spigot()
+         .sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.noTarget")));
         e.getPlayer().sendMessage(get("item.stopTarget"));
     }
 }

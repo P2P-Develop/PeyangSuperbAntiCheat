@@ -24,12 +24,14 @@ public class CommandSilentTeleport implements CommandExecutor
      * @param command コマンド。
      * @param label   ラベル。
      * @param args    引数。
+     *
      * @return 正常に終わったかどうか。
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
-        if (ErrorMessageSender.invalidLengthMessage(sender, args, 0, 2) || ErrorMessageSender.unPermMessage(sender, "psac.silentteleport"))
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 0, 2) || ErrorMessageSender
+                .unPermMessage(sender, "psac.silentteleport"))
             return true;
 
         if (!(sender instanceof Player))
@@ -38,8 +40,8 @@ public class CommandSilentTeleport implements CommandExecutor
             return true;
         }
 
-        final Player target = args.length == 2 ? Bukkit.getPlayer(args[1]): Bukkit.getPlayer(args[0]);
-        final Player player = args.length == 2 ? Bukkit.getPlayer(args[0]): (Player) sender;
+        final Player target = args.length == 2 ? Bukkit.getPlayer(args[1]) : Bukkit.getPlayer(args[0]);
+        final Player player = args.length == 2 ? Bukkit.getPlayer(args[0]) : (Player) sender;
 
         if (target == null || player == null)
         {

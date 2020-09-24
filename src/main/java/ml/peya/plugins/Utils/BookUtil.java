@@ -28,8 +28,11 @@ public class BookUtil
     {
         try
         {
-            getHandle = ReflectionUtils.getMethod("CraftPlayer", ReflectionUtils.PackageType.CRAFTBUKKIT_ENTITY, "getHandle");
-            openBook = ReflectionUtils.getMethod("EntityPlayer", ReflectionUtils.PackageType.MINECRAFT_SERVER, "a", ReflectionUtils.PackageType.MINECRAFT_SERVER.getClass("ItemStack"), ReflectionUtils.PackageType.MINECRAFT_SERVER.getClass("EnumHand"));
+            getHandle = ReflectionUtils
+                    .getMethod("CraftPlayer", ReflectionUtils.PackageType.CRAFTBUKKIT_ENTITY, "getHandle");
+            openBook = ReflectionUtils
+                    .getMethod("EntityPlayer", ReflectionUtils.PackageType.MINECRAFT_SERVER, "a", ReflectionUtils.PackageType.MINECRAFT_SERVER
+                            .getClass("ItemStack"), ReflectionUtils.PackageType.MINECRAFT_SERVER.getClass("EnumHand"));
             initialised = true;
         }
         catch (ReflectiveOperationException e)
@@ -90,14 +93,18 @@ public class BookUtil
 
     private static void sendPacket(ItemStack i, Player p) throws ReflectiveOperationException
     {
-        openBook.invoke(getHandle.invoke(p), getItemStack(i), ReflectionUtils.PackageType.MINECRAFT_SERVER.getClass("EnumHand").getEnumConstants()[0]);
+        openBook.invoke(getHandle.invoke(p), getItemStack(i), ReflectionUtils.PackageType.MINECRAFT_SERVER
+                .getClass("EnumHand").getEnumConstants()[0]);
     }
 
     public static Object getItemStack(ItemStack item)
     {
         try
         {
-            return ReflectionUtils.getMethod(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY.getClass("CraftItemStack"), "asNMSCopy", ItemStack.class).invoke(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY.getClass("CraftItemStack"), item);
+            return ReflectionUtils.getMethod(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY
+                    .getClass("CraftItemStack"), "asNMSCopy", ItemStack.class)
+                                  .invoke(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY
+                                          .getClass("CraftItemStack"), item);
         }
         catch (Exception e)
         {
@@ -119,10 +126,12 @@ public class BookUtil
         {
             for (String text : pages)
             {
-                Collections.singletonList(ReflectionUtils.getField(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY.getClass("CraftMetaBook"), true, "pages")
-                        .get(metadata))
-                        .add(ReflectionUtils.invokeMethod(ReflectionUtils.PackageType.MINECRAFT_SERVER.getClass("IChatBaseComponent$ChatSerializer")
-                                .newInstance(), "a", text));
+                Collections.singletonList(ReflectionUtils.getField(ReflectionUtils.PackageType.CRAFTBUKKIT_INVENTORY
+                        .getClass("CraftMetaBook"), true, "pages")
+                                                         .get(metadata))
+                           .add(ReflectionUtils.invokeMethod(ReflectionUtils.PackageType.MINECRAFT_SERVER
+                                   .getClass("IChatBaseComponent$ChatSerializer")
+                                   .newInstance(), "a", text));
             }
         }
         catch (Exception e)

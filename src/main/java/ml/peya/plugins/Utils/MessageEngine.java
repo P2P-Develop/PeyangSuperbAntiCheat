@@ -33,7 +33,8 @@ public class MessageEngine
      */
     public static void initialize()
     {
-        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
+        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class
+                .getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
         {
             config = YamlConfiguration.loadConfiguration(new BufferedReader(reader));
         }
@@ -52,6 +53,7 @@ public class MessageEngine
      * @param path 動的データタイプ。
      * @param obj  結びつけるオブジェクト。
      *             get(String, HashMap)との併用で使用する。
+     *
      * @return 結びつけたハッシュマップ。
      */
     public static HashMap<String, Object> pair(String path, Object obj)
@@ -72,6 +74,7 @@ public class MessageEngine
      *
      * @param key    参照するメッセージテンプレート。
      * @param format hsh()するやつ。
+     *
      * @return 参照できたやつ。
      */
     public static String get(String key, HashMap<String, Object> format)
@@ -90,6 +93,7 @@ public class MessageEngine
      *
      * @param text   Before
      * @param format After
+     *
      * @return AFTER^2
      */
     public static String format(String text, HashMap<String, Object> format)

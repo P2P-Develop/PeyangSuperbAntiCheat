@@ -36,7 +36,7 @@ public class Decorations
      */
     public static void flame(Player player, int seconds)
     {
-        final int[] sec = {0};
+        final int[] sec = { 0 };
         new BukkitRunnable()
         {
             @Override
@@ -45,9 +45,9 @@ public class Decorations
                 if (sec[0] > (seconds))
                     this.cancel();
 
-                player.getWorld()
-                        .spawnParticle(Particle.FLAME, player.getLocation()
-                                .add(0, 0.5, 0), 30, 0, 0, 0, 0.65);
+                player.getWorld().spawnParticle(
+                        Particle.FLAME,
+                        player.getLocation().add(0, 0.5, 0), 30, 0, 0, 0, 0.65);
 
                 sec[0] += 5;
             }
@@ -74,8 +74,7 @@ public class Decorations
      */
     public static void particle(Location location, int size, Particle particle)
     {
-        location.getWorld()
-                .spawnParticle(particle, location, size, 0, 0, 0, 0.001); //XXX: 誰だよこんな引数多く設計したやつ
+        location.getWorld().spawnParticle(particle, location, size, 0, 0, 0, 0.001); //XXX: 誰だよこんな引数多く設計したやつ
     }
 
     /**
@@ -108,7 +107,7 @@ public class Decorations
     public static void line(final ImmutablePair<Location, Location>... lines)
     {
         Arrays.stream(lines)
-                .forEachOrdered(line -> line(line.getLeft(), line.getRight()));
+              .forEachOrdered(line -> line(line.getLeft(), line.getRight()));
     }
 
     /**
@@ -124,10 +123,10 @@ public class Decorations
         for (double d = 0; path.distance(to) > d; d += 0.2)
         {
             vP.add(to.toVector()
-                    .clone()
-                    .subtract(vP)
-                    .normalize()
-                    .multiply(0.2));
+                     .clone()
+                     .subtract(vP)
+                     .normalize()
+                     .multiply(0.2));
             particle(vP.toLocation(path.getWorld()), 1, p);
         }
     }
@@ -158,7 +157,7 @@ public class Decorations
     public static void circle(final Triple<Location, Integer, Double>... circles)
     {
         Arrays.stream(circles)
-                .forEachOrdered(circle -> circle(circle.getLeft(), circle.getMiddle(), circle.getRight()));
+              .forEachOrdered(circle -> circle(circle.getLeft(), circle.getMiddle(), circle.getRight()));
     }
 
     /**
@@ -187,7 +186,7 @@ public class Decorations
      */
     public static void magic(Player player, int seconds)
     {
-        final int[] count = {0};
+        final int[] count = { 0 };
         WaveCreator wave = new WaveCreator(0.8, 1.8, 0.1);
         final Location center = player.getLocation();
 
@@ -199,50 +198,32 @@ public class Decorations
                 for (double i = 0; i < Math.PI * 2; i++)
                 {
                     circle(center.clone()
-                            .add(0, 0.9, 0), count[0], 3, Particle.CRIT);
+                                 .add(0, 0.9, 0), count[0], 3, Particle.CRIT);
 
                     circle(center.add(0, 0.7, 0), count[0], 2.7, Particle.ENCHANTMENT_TABLE);
 
                     circle(
-                            Triple.of(center.clone()
-                                    .add(0, wave.get(0.01, false), 0), count[0], wave.getStatic()),
-                            Triple.of(center.clone()
-                                    .add(0, wave.get(0.01, false), 0), count[0], wave.getStatic()),
-                            Triple.of(center.clone()
-                                    .add(3.2, 0.7, 3.2), count[0], 1.5),
-                            Triple.of(center.clone()
-                                    .add(-3.2, 0.7, -3.2), count[0], 1.5),
-                            Triple.of(center.clone()
-                                    .add(-3.2, 0.7, 3.2), count[0], 1.5),
-                            Triple.of(center.clone()
-                                    .add(3.2, 0.7, -3.2), count[0], 1.5)
+                            Triple.of(center.clone().add(0, wave.get(0.01, false), 0), count[0], wave.getStatic()),
+                            Triple.of(center.clone().add(0, wave.get(0.01, false), 0), count[0], wave.getStatic()),
+                            Triple.of(center.clone().add(3.2, 0.7, 3.2), count[0], 1.5),
+                            Triple.of(center.clone().add(-3.2, 0.7, -3.2), count[0], 1.5),
+                            Triple.of(center.clone().add(-3.2, 0.7, 3.2), count[0], 1.5),
+                            Triple.of(center.clone().add(3.2, 0.7, -3.2), count[0], 1.5)
                     );
 
                     circle(center.clone()
-                            .add(0, 1.5, 0), count[0], 5, Particle.SPELL_WITCH);
+                                 .add(0, 1.5, 0), count[0], 5, Particle.SPELL_WITCH);
 
                     count[0]++;
                 }
 
                 line(
-                        ImmutablePair.of(center.clone()
-                                .add(3, 0.7, 0), center.clone()
-                                .add(-1.5, 0.7, 2.3)),
-                        ImmutablePair.of(center.clone()
-                                .add(-1.5, 0.7, 2.3), center.clone()
-                                .add(-1.5, 0.7, -2.3)), // 三角
-                        ImmutablePair.of(center.clone()
-                                .add(3, 0.7, 0), center.clone()
-                                .add(-1.5, 0.7, -2.3)),
-                        ImmutablePair.of(center.clone()
-                                .add(-3, 0.7, 0), center.clone()
-                                .add(1.5, 0.7, -2.3)),
-                        ImmutablePair.of(center.clone()
-                                .add(1.5, 0.7, -2.3), center.clone()
-                                .add(1.5, 0.7, 2.3)), // 三角 (反転)
-                        ImmutablePair.of(center.clone()
-                                .add(-3, 0.7, 0), center.clone()
-                                .add(1.5, 0.7, 2.3))
+                        ImmutablePair.of(center.clone().add(3, 0.7, 0), center.clone().add(-1.5, 0.7, 2.3)),
+                        ImmutablePair.of(center.clone().add(-1.5, 0.7, 2.3), center.clone().add(-1.5, 0.7, -2.3)), // 三角
+                        ImmutablePair.of(center.clone().add(3, 0.7, 0), center.clone().add(-1.5, 0.7, -2.3)),
+                        ImmutablePair.of(center.clone().add(-3, 0.7, 0), center.clone().add(1.5, 0.7, -2.3)),
+                        ImmutablePair.of(center.clone().add(1.5, 0.7, -2.3), center.clone().add(1.5, 0.7, 2.3)), // 三角 (反転)
+                        ImmutablePair.of(center.clone().add(-3, 0.7, 0), center.clone().add(1.5, 0.7, 2.3))
                 );
             }
         };
@@ -268,7 +249,7 @@ public class Decorations
     public static void laser(Player player, int sec)
     {
 
-        final double[] time = {0.0};
+        final double[] time = { 0.0 };
 
         final double radius = 2.5;
 
@@ -278,11 +259,12 @@ public class Decorations
             public void run()
             {
                 final Location c = player.getLocation()
-                        .clone();
+                                         .clone();
 
                 IntStream.range(0, 10)
-                        .parallel()
-                        .forEachOrdered(i -> line(c, new Location(c.getWorld(), particle_x(time[0], radius) + c.getX(), 5.0 + c.getY(), particle_z(time[0], radius) + c.getZ()), Particle.TOWN_AURA));
+                         .parallel()
+                         .forEachOrdered(i -> line(c, new Location(c.getWorld(), particle_x(time[0], radius) + c
+                                 .getX(), 5.0 + c.getY(), particle_z(time[0], radius) + c.getZ()), Particle.TOWN_AURA));
                 time[0] += Math.E;
             }
         };
@@ -303,6 +285,7 @@ public class Decorations
      *
      * @param time   時間。
      * @param radius 半径。
+     *
      * @return 位置。
      */
     private static double particle_z(double time, double radius)
@@ -315,6 +298,7 @@ public class Decorations
      *
      * @param time   時間。
      * @param radius 半径。
+     *
      * @return 位置。
      */
     private static double particle_x(double time, double radius)

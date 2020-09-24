@@ -52,20 +52,22 @@ public class Help
             public void run()
             {
                 nodes.parallelStream()
-                        .filter(node -> sender.hasPermission("psac." + node))
-                        .forEachOrdered(str ->
-                                sender.spigot()
-                                        .sendMessage(new ComponentBuilder(get("command.shelp." + str, pair("label", label)))
-                                                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac help " + str))
-                                                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.AQUA + "詳細").create()))
-                                                .create()));
+                     .filter(node -> sender.hasPermission("psac." + node))
+                     .forEachOrdered(str ->
+                             sender.spigot()
+                                   .sendMessage(new ComponentBuilder(get("command.shelp." + str, pair("label", label)))
+                                           .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac help " + str))
+                                           .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(ChatColor.AQUA + "詳細")
+                                                   .create()))
+                                           .create()));
             }
         }.runTaskAsynchronously(PeyangSuperbAntiCheat.getPlugin());
     }
 
     private static ArrayList<String> getNodes()
     {
-        return new ArrayList<>(Arrays.asList("report", "view", "aurapanic", "aurabot", "show", "drop", "kick", "bans", "testkb"));
+        return new ArrayList<>(Arrays
+                .asList("report", "view", "aurapanic", "aurabot", "show", "drop", "kick", "bans", "testkb"));
     }
 
     private static ArrayList<String> getPlayerNodes()

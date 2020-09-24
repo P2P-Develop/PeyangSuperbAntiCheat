@@ -33,6 +33,7 @@ public class DetectingList
      * @param npc    NPCのUUID。
      * @param id     管理ID。
      * @param type   判定タイプ。
+     *
      * @return 順次メソッド...に見える時代もありました。
      */
     public CheatDetectNowMeta add(Player target, UUID npc, int id, DetectType type)
@@ -66,6 +67,7 @@ public class DetectingList
      * metaをUUIDから手に入れる。
      *
      * @param uuid UUID。
+     *
      * @return meta。
      */
     public CheatDetectNowMeta getMetaByUUID(UUID uuid)
@@ -77,6 +79,7 @@ public class DetectingList
      * metaを別のUUIDから手に入れる。
      *
      * @param uuid UUID。
+     *
      * @return meta。
      */
     public CheatDetectNowMeta getMetaByPlayerUUID(UUID uuid)
@@ -88,6 +91,7 @@ public class DetectingList
      * UUIDとして存在するかどうか。
      *
      * @param uuid UUID。
+     *
      * @return 存在したらtrue。
      */
     public boolean exists(UUID uuid)

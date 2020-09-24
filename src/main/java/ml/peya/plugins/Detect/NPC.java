@@ -40,6 +40,7 @@ public class NPC
      * @param player       プレイヤー。
      * @param teleportCase 判定タイプ。
      * @param reachMode    リーチモードかどうか。
+     *
      * @return スポーンするNPCを返す。
      */
     public static EntityPlayer spawn(Player player, DetectType teleportCase, boolean reachMode)
@@ -52,17 +53,17 @@ public class NPC
         final EntityPlayer npc = PlayerUtils.getRandomPlayer(player.getWorld());
 
         setLocation(player.getLocation()
-                .add(0, 1, 0)
-                .add(center.getDirection()
-                        .multiply(-3)), npc);
+                          .add(0, 1, 0)
+                          .add(center.getDirection()
+                                     .multiply(-3)), npc);
 
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
-        final ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
+        final ItemStack[] arm = { CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
                 CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
                 CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
                 CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
-                CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
+                CraftItemStack.asNMSCopy(RandomArmor.getSwords()) };
 
         new BukkitRunnable()
         {
@@ -70,11 +71,14 @@ public class NPC
             public void run()
             {
 
-                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
+                connection
+                        .sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
 
                 connection.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
 
-                ScoreboardTeam team = new ScoreboardTeam((((CraftScoreboard) Bukkit.getScoreboardManager().getMainScoreboard()).getHandle()), player.getName());
+                ScoreboardTeam team = new ScoreboardTeam((((CraftScoreboard) Bukkit.getScoreboardManager()
+                                                                                   .getMainScoreboard())
+                        .getHandle()), player.getName());
 
                 team.setPrefix(EnumChatFormat.RED.toString());
 
@@ -82,29 +86,31 @@ public class NPC
                 connection.sendPacket(new PacketPlayOutScoreboardTeam(team, 0));
                 connection.sendPacket(new PacketPlayOutScoreboardTeam(team, Collections.singleton(npc.getName()), 3));
 
-                connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
+                connection
+                        .sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc));
 
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
                 Bukkit.getOnlinePlayers()
-                        .parallelStream()
-                        .filter(p -> p.hasPermission("psac.viewnpc"))
-                        .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
-                        .forEachOrdered(c ->
-                        {
-                            c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
-                            c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-                        });
+                      .parallelStream()
+                      .filter(p -> p.hasPermission("psac.viewnpc"))
+                      .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
+                      .forEachOrdered(c ->
+                      {
+                          c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
+                          c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+                      });
 
                 NPCTeleport.teleport(player, npc, arm, teleportCase, reachMode);
 
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
                 Bukkit.getOnlinePlayers()
-                        .parallelStream()
-                        .filter(p -> p.hasPermission("psac.viewnpc"))
-                        .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
-                        .forEachOrdered(c -> c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
+                      .parallelStream()
+                      .filter(p -> p.hasPermission("psac.viewnpc"))
+                      .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
+                      .forEachOrdered(c -> c
+                              .sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
 
                 new BukkitRunnable()
                 {
@@ -112,7 +118,9 @@ public class NPC
                     public void run()
                     {
                         connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
-                        Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc")).map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId())));
+                        Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc"))
+                              .map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c -> c
+                                .sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId())));
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(config.getInt("npc.seconds"), 20));
             }
@@ -130,7 +138,13 @@ public class NPC
      */
     public static void setArmor(Player target, EntityPlayer player, ItemStack[] arm)
     {
-        Arrays.asList(new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.HEAD, arm[0]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.CHEST, arm[1]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.LEGS, arm[2]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]), new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4])).parallelStream().forEachOrdered(((CraftPlayer) target).getHandle().playerConnection::sendPacket);
+        Arrays.asList(new PacketPlayOutEntityEquipment(player.getBukkitEntity()
+                                                             .getEntityId(), EnumItemSlot.HEAD, arm[0]), new PacketPlayOutEntityEquipment(player
+                .getBukkitEntity().getEntityId(), EnumItemSlot.CHEST, arm[1]), new PacketPlayOutEntityEquipment(player
+                .getBukkitEntity().getEntityId(), EnumItemSlot.LEGS, arm[2]), new PacketPlayOutEntityEquipment(player
+                .getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]), new PacketPlayOutEntityEquipment(player
+                .getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4])).parallelStream()
+              .forEachOrdered(((CraftPlayer) target).getHandle().playerConnection::sendPacket);
     }
 }
 
