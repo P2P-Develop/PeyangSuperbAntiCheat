@@ -25,24 +25,24 @@ public class Packets
     {
         try
         {
+            if (e.getPacket().getEntityUseActions().readSafely(0) != EnumWrappers.EntityUseAction.ATTACK)
+                return;
+
             final PacketPlayInUseEntity entity = (PacketPlayInUseEntity) e.getPacket()
                                                                           .getHandle();
             Field field = entity.getClass()
                                 .getDeclaredField("a");
             field.setAccessible(true);
-            if (e.getPacket()
-                 .getEntityUseActions()
-                 .readSafely(0) != EnumWrappers.EntityUseAction.ATTACK) return;
+
             cheatMeta.getMetas()
                      .parallelStream()
                      .filter(meta ->
                      {
                          try
                          {
-                             return meta.getId() == field.getInt(entity) && meta.getTarget()
-                                                                                .getUniqueId() == e.getPlayer()
-                                                                                                   .getUniqueId() || PlayerUtils
-                                     .hasCritical(e.getPlayer());
+                             return meta.getId() == field.getInt(entity) &&
+                                     meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() ||
+                                     PlayerUtils.hasCritical(e.getPlayer());
                          }
                          catch (IllegalAccessException ex)
                          {

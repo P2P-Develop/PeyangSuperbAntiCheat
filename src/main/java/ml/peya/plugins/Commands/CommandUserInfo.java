@@ -167,9 +167,8 @@ public class CommandUserInfo implements CommandExecutor
         {
             Arrays.stream(Bukkit.getOfflinePlayers())
                   .parallel()
-                  .filter(op -> !op.getName()
-                                   .equals(args[0]) || !op.getName()
-                                                          .equals(args[1]))
+                  .filter(op -> !op.getName().equals(args[0]) ||
+                          !op.getName().equals(args[1]))
                   .forEachOrdered(op -> player[0] = op.getPlayer());
 
             if (player[0] == null)
@@ -183,9 +182,7 @@ public class CommandUserInfo implements CommandExecutor
         ComponentBuilder builder = new ComponentBuilder("");
         userInfo(player[0], lynx).parallelStream()
                                  .forEachOrdered(builder::append);
-        player[0].spigot()
-                 .sendMessage(builder.append(action(player[0].getName()))
-                                     .create());
+        player[0].spigot().sendMessage(builder.append(action(player[0].getName())).create());
         return true;
     }
 }

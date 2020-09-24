@@ -132,13 +132,11 @@ public class CommandReport implements CommandExecutor
      */
     private void report(CommandSender sender, final ArrayList<EnumCheatType> types, Player target)
     {
-        final String senderUUID = sender instanceof ConsoleCommandSender ? "[CONSOLE]" : ((Player) sender).getUniqueId()
-                                                                                                          .toString()
-                                                                                                          .replace("-", "");
+        final String senderUUID = sender instanceof ConsoleCommandSender
+                ? "[CONSOLE]"
+                : ((Player) sender).getUniqueId().toString().replace("-", "");
 
-        if (WatchEyeManagement.isExistsRecord(target.getUniqueId()
-                                                    .toString()
-                                                    .replace("-", ""), senderUUID))
+        if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
         {
             sender.sendMessage(get("error.report.alreadyReported"));
             return;

@@ -31,9 +31,7 @@ public class WatchEyeManagement
 
         fromName = parseInjection(fromName);
         fromUUID = parseInjection(fromUUID);
-        final String manageId = UUID.randomUUID()
-                                    .toString()
-                                    .replace("-", "");
+        final String manageId = UUID.randomUUID().toString().replace("-", "");
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
