@@ -1,12 +1,12 @@
 package ml.peya.plugins.Gui.Items.Target.Page2;
 
+import ml.peya.plugins.Gui.IItems;
 import ml.peya.plugins.Gui.Item;
-import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Gui.Items.Target.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.*;
+import ml.peya.plugins.Gui.Items.Target.BackButton;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 /**
  * ページ1に戻るやつ

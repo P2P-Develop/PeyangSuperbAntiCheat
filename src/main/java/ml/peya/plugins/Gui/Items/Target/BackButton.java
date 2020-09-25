@@ -1,13 +1,14 @@
 package ml.peya.plugins.Gui.Items.Target;
 
+import ml.peya.plugins.Gui.GuiItem;
+import ml.peya.plugins.Gui.IItems;
 import ml.peya.plugins.Gui.Item;
-import ml.peya.plugins.Gui.*;
-import net.md_5.bungee.api.*;
-import net.md_5.bungee.api.chat.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.*;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.tracker;

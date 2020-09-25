@@ -24,11 +24,20 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.cheatMeta;
+import static ml.peya.plugins.Variables.counting;
+import static ml.peya.plugins.Variables.mods;
+import static ml.peya.plugins.Variables.module;
+import static ml.peya.plugins.Variables.tracker;
 
 /**
  * イベントハンドラをめちゃくちゃ管理します。
@@ -57,7 +66,10 @@ public class Events implements Listener
     @EventHandler(priority = EventPriority.LOWEST)
     public void onDamage(EntityDamageByEntityEvent e)
     {
-        if (!(e.getEntity() instanceof CraftPlayer) || !(e.getDamager() instanceof CraftArrow) || !cheatMeta.exists(e.getEntity().getUniqueId()) || !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
+        if (!(e.getEntity() instanceof CraftPlayer) ||
+            !(e.getDamager() instanceof CraftArrow) ||
+            !cheatMeta.exists(e.getEntity().getUniqueId()) ||
+            !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
             return;
 
         e.setDamage(0);
@@ -88,7 +100,10 @@ public class Events implements Listener
     {
         if (!tracker.isTrackingByPlayer(e.getPlayer().getName()) && !cheatMeta.exists(e.getPlayer().getUniqueId()))
             return;
-        e.getPlayer().setMetadata("speed", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo())));
+        e.getPlayer().setMetadata(
+                "speed",
+                new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo()))
+        );
     }
 
     /**
@@ -101,27 +116,23 @@ public class Events implements Listener
     {
         e.setCancelled(true);
         String format = e.getFormat()
-                .replace("%1$s", e.getPlayer()
-                        .getDisplayName())
+                .replace("%1$s", e.getPlayer().getDisplayName())
                 .replace("%2$s", e.getMessage());
 
         ComponentBuilder builder = new ComponentBuilder("");
 
         builder.append(ChatColor.RED + "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED + "] ")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer()
-                        .getName()))
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()))
                 .event(new HoverEvent(
                         HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer()
-                                .getName()).create()
+                        new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()
                 ));
 
         e.getRecipients()
                 .parallelStream()
-                .forEachOrdered(receiver -> receiver.spigot()
-                        .sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create())));
-        Bukkit.getConsoleSender()
-                .sendMessage(format);
+                .forEachOrdered(receiver ->
+                        receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create())));
+        Bukkit.getConsoleSender().sendMessage(format);
     }
 
     /**
@@ -188,7 +199,8 @@ public class Events implements Listener
     @EventHandler(priority = EventPriority.MONITOR)
     public void onDrop(PlayerDropItemEvent e)
     {
-        if (e.getItemDrop().getItemStack().getType() == Material.WRITTEN_BOOK && Books.hasPSACBook(e.getItemDrop().getItemStack()))
+        if (e.getItemDrop().getItemStack().getType() == Material.WRITTEN_BOOK &&
+            Books.hasPSACBook(e.getItemDrop().getItemStack()))
             e.setCancelled(true);
     }
 

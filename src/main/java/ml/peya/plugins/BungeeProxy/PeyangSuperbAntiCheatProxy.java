@@ -1,13 +1,16 @@
 package ml.peya.plugins.BungeeProxy;
 
-import com.google.common.io.*;
-import ml.peya.plugins.BungeeStructure.*;
-import net.md_5.bungee.api.config.*;
-import net.md_5.bungee.api.plugin.*;
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import ml.peya.plugins.BungeeStructure.CommandManager;
+import net.md_5.bungee.api.config.ServerInfo;
+import net.md_5.bungee.api.plugin.Plugin;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.bungeeChannel;
+import static ml.peya.plugins.Variables.bungeeCommand;
+import static ml.peya.plugins.Variables.logger;
 
 /**
  * Bungeeプロキシ用のPSACプラグイン実装。プロキシ用プラグイン情報とサーバーリストの管理をします。
@@ -28,29 +31,6 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
      * this
      */
     public static PeyangSuperbAntiCheatProxy proxy;
-
-    /**
-     * プラグインが有効になったときの。
-     */
-    @Override
-    public void onEnable()
-    {
-        new Metrics(this, __BSTATS_PLUGIN_ID);
-        logger = getLogger();
-        bungeeChannel = "PSACProxy"; //チャンネル設定
-        bungeeCommand = new CommandManager();
-        bungeeCommand.registerCommand(new Commands());
-
-        proxy = this;
-
-        servers = new ArrayList<>();
-
-        getProxy().registerChannel(bungeeChannel);
-
-        getProxy().getPluginManager().registerListener(this, new Events());
-
-        getLogger().info("PeyangSuperbAntiCheatProxy has been activated!");
-    }
 
     /**
      * 特定のサーバーに文字列データを送信します。
@@ -77,5 +57,28 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
     public static PeyangSuperbAntiCheatProxy getPlugin()
     {
         return proxy;
+    }
+
+    /**
+     * プラグインが有効になったときの。
+     */
+    @Override
+    public void onEnable()
+    {
+        new Metrics(this, __BSTATS_PLUGIN_ID);
+        logger = getLogger();
+        bungeeChannel = "PSACProxy"; //チャンネル設定
+        bungeeCommand = new CommandManager();
+        bungeeCommand.registerCommand(new Commands());
+
+        proxy = this;
+
+        servers = new ArrayList<>();
+
+        getProxy().registerChannel(bungeeChannel);
+
+        getProxy().getPluginManager().registerListener(this, new Events());
+
+        getLogger().info("PeyangSuperbAntiCheatProxy has been activated!");
     }
 }

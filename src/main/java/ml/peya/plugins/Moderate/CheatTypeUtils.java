@@ -23,7 +23,8 @@ public class CheatTypeUtils
 
     private static ArrayList<EnumCheatType> createTypes()
     {
-        ArrayList<EnumCheatType> types = new ArrayList<>(Arrays.asList(EnumCheatType.FLY, EnumCheatType.KILLAURA, EnumCheatType.AUTOCLICKER, EnumCheatType.SPEED, EnumCheatType.ANTIKNOCKBACK, EnumCheatType.REACH, EnumCheatType.DOLPHIN));
+        ArrayList<EnumCheatType> types = new ArrayList<>(Arrays
+                .asList(EnumCheatType.FLY, EnumCheatType.KILLAURA, EnumCheatType.AUTOCLICKER, EnumCheatType.SPEED, EnumCheatType.ANTIKNOCKBACK, EnumCheatType.REACH, EnumCheatType.DOLPHIN));
 
         types.parallelStream()
                 .forEachOrdered(type -> type.setSelected(false));
@@ -40,7 +41,8 @@ public class CheatTypeUtils
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
         ArrayList<EnumCheatType> types = createTypes();
-        Arrays.stream(values).parallel().<Consumer<? super EnumCheatType>>map(reason -> type -> {
+        Arrays.stream(values).parallel().<Consumer<? super EnumCheatType>>map(reason -> type ->
+        {
             if (reason.toLowerCase().equals(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
                 type.setSelected(true);
         }).forEachOrdered(types::forEach);

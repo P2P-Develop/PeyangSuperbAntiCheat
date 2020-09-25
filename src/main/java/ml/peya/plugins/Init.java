@@ -8,14 +8,30 @@ import ml.peya.plugins.BungeeStructure.CommandManager;
 import ml.peya.plugins.Commands.CmdTst.AuraBot;
 import ml.peya.plugins.Commands.CmdTst.AuraPanic;
 import ml.peya.plugins.Commands.CmdTst.TestKnockback;
-import ml.peya.plugins.Commands.*;
+import ml.peya.plugins.Commands.CommandBans;
+import ml.peya.plugins.Commands.CommandMods;
+import ml.peya.plugins.Commands.CommandPeyangSuperbAntiCheat;
+import ml.peya.plugins.Commands.CommandPull;
+import ml.peya.plugins.Commands.CommandReport;
+import ml.peya.plugins.Commands.CommandSilentTeleport;
+import ml.peya.plugins.Commands.CommandTarget;
+import ml.peya.plugins.Commands.CommandTracking;
+import ml.peya.plugins.Commands.CommandTrust;
+import ml.peya.plugins.Commands.CommandUserInfo;
 import ml.peya.plugins.Gui.Events.Drop;
 import ml.peya.plugins.Gui.Events.Run;
 import ml.peya.plugins.Gui.Item;
 import ml.peya.plugins.Gui.Items.Main.TargetStick;
-import ml.peya.plugins.Gui.Items.Target.*;
+import ml.peya.plugins.Gui.Items.Target.AuraBotItem;
+import ml.peya.plugins.Gui.Items.Target.AuraPanicItem;
+import ml.peya.plugins.Gui.Items.Target.BackButton;
+import ml.peya.plugins.Gui.Items.Target.BanBook;
+import ml.peya.plugins.Gui.Items.Target.CompassTracker3000_tm;
+import ml.peya.plugins.Gui.Items.Target.Lead;
 import ml.peya.plugins.Gui.Items.Target.Page2.BackToPage1;
 import ml.peya.plugins.Gui.Items.Target.Page2.ModList;
+import ml.peya.plugins.Gui.Items.Target.TestKnockBack;
+import ml.peya.plugins.Gui.Items.Target.ToPage2;
 import ml.peya.plugins.Learn.NeuralNetwork;
 import ml.peya.plugins.Task.AutoMessageTask;
 import ml.peya.plugins.Task.TrackerTask;
@@ -33,7 +49,23 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 
 import static ml.peya.plugins.PeyangSuperbAntiCheat.getPlugin;
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.autoMessage;
+import static ml.peya.plugins.Variables.banKick;
+import static ml.peya.plugins.Variables.banKickPath;
+import static ml.peya.plugins.Variables.bungeeChannel;
+import static ml.peya.plugins.Variables.bungeeCommand;
+import static ml.peya.plugins.Variables.config;
+import static ml.peya.plugins.Variables.databasePath;
+import static ml.peya.plugins.Variables.eye;
+import static ml.peya.plugins.Variables.isAutoMessageEnabled;
+import static ml.peya.plugins.Variables.isTrackEnabled;
+import static ml.peya.plugins.Variables.learnCount;
+import static ml.peya.plugins.Variables.logger;
+import static ml.peya.plugins.Variables.skin;
+import static ml.peya.plugins.Variables.time;
+import static ml.peya.plugins.Variables.trackerTask;
+import static ml.peya.plugins.Variables.trust;
+import static ml.peya.plugins.Variables.trustPath;
 
 /**
  * メインクラスではおさまらない初期化とかするとこ。
@@ -70,7 +102,9 @@ public class Init
 
         AtomicInteger error = new AtomicInteger();
 
-        Arrays.asList("npc.seconds", "npc.kill", "npc.vllevel", "npc.learncount", "mod.trackTicks", "kick.defaultKick", "autoMessage.time").parallelStream().forEachOrdered(path -> {
+        Arrays.asList("npc.seconds", "npc.kill", "npc.vllevel", "npc.learncount", "mod.trackTicks", "kick.defaultKick", "autoMessage.time")
+                .parallelStream().forEachOrdered(path ->
+        {
             try
             {
                 if (config.getInt(path) < 0)
@@ -103,16 +137,15 @@ public class Init
         databasePath = config.getString("database.path");
         banKickPath = config.getString("database.logPath");
         trustPath = config.getString("database.trustPath");
-        eye = new HikariDataSource(Init.initMngDatabase(Paths.get(databasePath)
-                .isAbsolute() ? databasePath : getPlugin().getDataFolder()
-                .getAbsolutePath() + "/" + databasePath));
-        banKick = new HikariDataSource(Init.initMngDatabase(Paths.get(banKickPath)
-                .isAbsolute() ? banKickPath : getPlugin().getDataFolder()
-                .getAbsolutePath() + "/" + banKickPath));
-        trust = new HikariDataSource(Init.initMngDatabase(Paths.get(trustPath)
-                .isAbsolute() ? trustPath : getPlugin().getDataFolder()
-                .getAbsolutePath() + "/" + trustPath));
-
+        eye = new HikariDataSource(Init.initMngDatabase(Paths.get(databasePath).isAbsolute()
+                ? databasePath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + databasePath));
+        banKick = new HikariDataSource(Init.initMngDatabase(Paths.get(banKickPath).isAbsolute()
+                ? banKickPath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + banKickPath));
+        trust = new HikariDataSource(Init.initMngDatabase(Paths.get(trustPath).isAbsolute()
+                ? trustPath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + trustPath));
     }
 
     /**
@@ -245,7 +278,10 @@ public class Init
     {
         try
         {
-            FileUtils.copyInputStreamToFile(getPlugin().getResource("skin.db"), new File(getPlugin().getDataFolder().getAbsolutePath() + "/skin.db"));
+            FileUtils.copyInputStreamToFile(
+                    getPlugin().getResource("skin.db"),
+                    new File(getPlugin().getDataFolder().getAbsolutePath() + "/skin.db")
+                );
         }
         catch (Exception e)
         {

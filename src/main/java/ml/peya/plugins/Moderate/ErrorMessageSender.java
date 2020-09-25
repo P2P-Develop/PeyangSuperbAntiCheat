@@ -1,6 +1,6 @@
 package ml.peya.plugins.Moderate;
 
-import org.bukkit.command.*;
+import org.bukkit.command.CommandSender;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 

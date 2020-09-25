@@ -1,21 +1,48 @@
 package ml.peya.plugins;
 
-import com.comphenix.protocol.*;
-import com.comphenix.protocol.events.*;
-import com.fasterxml.jackson.databind.*;
+import com.comphenix.protocol.PacketType;
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.events.ListenerPriority;
+import com.comphenix.protocol.events.PacketAdapter;
+import com.comphenix.protocol.events.PacketEvent;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import ml.peya.plugins.DetectClasses.DetectingList;
+import ml.peya.plugins.DetectClasses.KillCounting;
 import ml.peya.plugins.DetectClasses.Packets;
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Learn.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Module.*;
-import org.bukkit.*;
-import org.bukkit.plugin.java.*;
+import ml.peya.plugins.Learn.Mapper;
+import ml.peya.plugins.Learn.NeuralNetwork;
+import ml.peya.plugins.Moderate.Tracker;
+import ml.peya.plugins.Module.InitModule;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
-import java.util.*;
-import java.util.logging.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.logging.Level;
 
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.autoMessage;
+import static ml.peya.plugins.Variables.banKick;
+import static ml.peya.plugins.Variables.banLeft;
+import static ml.peya.plugins.Variables.cheatMeta;
+import static ml.peya.plugins.Variables.config;
+import static ml.peya.plugins.Variables.counting;
+import static ml.peya.plugins.Variables.eye;
+import static ml.peya.plugins.Variables.initialized;
+import static ml.peya.plugins.Variables.item;
+import static ml.peya.plugins.Variables.learnCount;
+import static ml.peya.plugins.Variables.learnCountLimit;
+import static ml.peya.plugins.Variables.logger;
+import static ml.peya.plugins.Variables.mods;
+import static ml.peya.plugins.Variables.network;
+import static ml.peya.plugins.Variables.protocolManager;
+import static ml.peya.plugins.Variables.skin;
+import static ml.peya.plugins.Variables.time;
+import static ml.peya.plugins.Variables.tracker;
+import static ml.peya.plugins.Variables.trackerTask;
+import static ml.peya.plugins.Variables.trust;
 
 /**
  * このプラグインの中枢です。必ずここからスタートします。
@@ -52,7 +79,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
      */
     public static boolean isEnablePlugin(String name)
     {
-        return Bukkit.getServer().getPluginManager().getPlugin(name) != null && Bukkit.getServer().getPluginManager().getPlugin(name).isEnabled();
+        return Bukkit.getServer().getPluginManager().getPlugin(name) != null &&
+                Bukkit.getServer().getPluginManager().getPlugin(name).isEnabled();
     }
 
     /**
@@ -103,15 +131,16 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         protocolManager = ProtocolLibrary.getProtocolManager();
 
-        protocolManager.addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
-        {
-            @Override
-            public void onPacketReceiving(PacketEvent event)
-            {
-                Packets.useEntity(event);
-            }
-        });
-
+        protocolManager.addPacketListener(
+                new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
+                {
+                    @Override
+                    public void onPacketReceiving(PacketEvent event)
+                    {
+                        Packets.useEntity(event);
+                    }
+                }
+        );
 
         if (!Init.createDefaultTables())
             Bukkit.getPluginManager().disablePlugin(this);
@@ -159,12 +188,13 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             {
                 logger.info("Saving learn weights to learning data file...");
                 Mapper mp = new Mapper();
-                mp.inputWeight = network.inputWeight;
-                mp.middleWeight = network.middleWeight;
+                mp.inputWeight = NeuralNetwork.inputWeight;
+                mp.middleWeight = NeuralNetwork.middleWeight;
                 mp.learnCount = learnCount;
                 pw.print(new ObjectMapper()
                         .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-                        .configure(SerializationFeature.INDENT_OUTPUT, true).writeValueAsString(mp));
+                        .configure(SerializationFeature.INDENT_OUTPUT, true)
+                        .writeValueAsString(mp));
             }
             catch (Exception e)
             {

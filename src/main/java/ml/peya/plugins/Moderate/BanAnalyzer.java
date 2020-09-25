@@ -104,8 +104,9 @@ public class BanAnalyzer
 
         StringBuilder id = new StringBuilder();
         Random random = new Random();
-        IntStream.range(0, 8).parallel().forEachOrdered(i -> {
-            id.append(random.nextBoolean() ? random.nextInt(9) : (char) (random.nextInt(5) + 'A'));
+        IntStream.range(0, 8).parallel().forEachOrdered(i ->
+        {
+            id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A'));
         });
 
         try (Connection connection = banKick.getConnection();

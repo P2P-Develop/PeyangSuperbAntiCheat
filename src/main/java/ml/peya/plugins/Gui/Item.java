@@ -1,10 +1,12 @@
 package ml.peya.plugins.Gui;
 
-import org.bukkit.*;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * アイテム自体をなんとなく管理してくれるクラス。
@@ -49,7 +51,8 @@ public class Item
     {
         if (canGuiItem(item))
             return null;
-        return item.getItemMeta().getLore().get(1).replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: ", "");
+        return item.getItemMeta().getLore().get(1)
+                .replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: ", "");
     }
 
     /**
@@ -62,7 +65,8 @@ public class Item
     {
         if (canGuiItem(item))
             return null;
-        return item.getItemMeta().getLore().get(2).replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: ", "");
+        return item.getItemMeta().getLore().get(2)
+                .replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: ", "");
     }
 
     /**
@@ -75,7 +79,9 @@ public class Item
     public static ArrayList<String> getLore(IItems item, String target)
     {
 
-        ArrayList<String> list = new ArrayList<>(Arrays.asList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.", ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: " + item.getExecName()));
+        ArrayList<String> list = new ArrayList<>(Arrays
+                .asList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.", ChatColor.GRAY + ChatColor.ITALIC
+                        .toString() + "Execution type: " + item.getExecName()));
 
         if (item.getType() == IItems.Type.TARGET || item.getType() == IItems.Type.TARGET_2)
             list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: " + target);

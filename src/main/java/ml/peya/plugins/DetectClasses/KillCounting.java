@@ -1,12 +1,13 @@
 package ml.peya.plugins.DetectClasses;
 
-import ml.peya.plugins.*;
-import ml.peya.plugins.Detect.*;
-import ml.peya.plugins.Enum.*;
-import org.bukkit.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.Detect.DetectConnection;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import org.bukkit.Bukkit;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.UUID;
 
 import static ml.peya.plugins.Variables.cheatMeta;
 import static ml.peya.plugins.Variables.config;

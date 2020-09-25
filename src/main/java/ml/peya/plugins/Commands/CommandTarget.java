@@ -1,12 +1,16 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.Gui.GuiItem;
+import ml.peya.plugins.Gui.IItems;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Moderate.TrustModifier;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.tracker;

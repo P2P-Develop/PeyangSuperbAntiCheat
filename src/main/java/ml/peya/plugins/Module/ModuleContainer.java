@@ -1,7 +1,7 @@
 package ml.peya.plugins.Module;
 
-import fr.neatmonster.nocheatplus.components.*;
-import me.rerere.matrix.api.*;
+import fr.neatmonster.nocheatplus.components.NoCheatPlusAPI;
+import me.rerere.matrix.api.MatrixAPI;
 
 /**
  * モジュール保存

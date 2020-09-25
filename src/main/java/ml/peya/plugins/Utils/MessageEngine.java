@@ -1,14 +1,16 @@
 package ml.peya.plugins.Utils;
 
-import ml.peya.plugins.*;
-import org.apache.commons.lang3.tuple.*;
-import org.bukkit.*;
-import org.bukkit.configuration.file.*;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import org.apache.commons.lang3.tuple.Pair;
+import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.*;
-import java.nio.charset.*;
-import java.util.*;
-import java.util.stream.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * メッセージテンプレートを管理するクラス。
@@ -31,7 +33,8 @@ public class MessageEngine
      */
     public static void initialize()
     {
-        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
+        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class
+                .getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
         {
             config = YamlConfiguration.loadConfiguration(new BufferedReader(reader));
         }
@@ -104,7 +107,7 @@ public class MessageEngine
     }
 
     /**
-     * いい感じにEnumのChatColorに変更してくれるやつ。マジでハイなピクセルに寄せてくるな。
+     * 特定の文字セットをEnumのChatColorに変更するためのリストをマップとして返すやつ。
      *
      * @return 変換した後のはっしゅまっぷ。
      */

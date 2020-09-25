@@ -1,7 +1,7 @@
 package ml.peya.plugins.Gui;
 
-import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * アイテムたちの実装を強制するインターフェース。

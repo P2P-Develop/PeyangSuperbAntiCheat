@@ -2,25 +2,29 @@ name: JavaDoc
 
 on:
   push:
-    branches: [ develop ]
-    paths: [ src/main/java/** ]
+    branches: [develop]
+    paths: [src/main/java/**]
 
 jobs:
+
   gen-javadoc:
+
     name: Generate Javadoc
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Init
-        run: LANG=ja_JP.UTF-8
+        run: export LANG=ja_JP.UTF-8
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Debug
+      - name: List files (for Debug)
         run: ls -A
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Generate JavaDoc
+      - name: Generate Javadoc
         run: mvn javadoc:javadoc --file pom.xml
       - name: Stash
         run: git stash -ua
@@ -34,11 +38,11 @@ jobs:
         run: cp -rp ./target/site/apidocs/* .
       - name: Remove TempFile
         run: rm -rf target
-      - name: Commit and Settings
+      - name: Commit Javadoc
         uses: EndBug/add-and-commit@v4
         with:
-          author_name: JavaDoc BOT
-          message: Generate JavaDoc
+          author_name: Javadoc BOT
+          message: Generate Javadoc
           force: false
           ref: javadoc
         env:

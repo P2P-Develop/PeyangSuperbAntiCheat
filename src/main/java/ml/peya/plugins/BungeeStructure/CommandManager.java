@@ -88,12 +88,12 @@ public class CommandManager
                                         return server;
                                     }
                                 });
-                }
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
-        });
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                });
     }
 }

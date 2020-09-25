@@ -9,7 +9,9 @@ import net.md_5.bungee.api.event.ServerDisconnectEvent;
 import net.md_5.bungee.api.plugin.Listener;
 import net.md_5.bungee.event.EventHandler;
 
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.bungeeChannel;
+import static ml.peya.plugins.Variables.bungeeCommand;
+import static ml.peya.plugins.Variables.logger;
 
 /**
  * Bungeecordプロキシのサーバーから受け取るデータに基づくイベントを管理します。

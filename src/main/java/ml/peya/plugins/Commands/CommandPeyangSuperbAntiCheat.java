@@ -1,6 +1,10 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Commands.CmdPub.*;
+import ml.peya.plugins.Commands.CmdPub.Drop;
+import ml.peya.plugins.Commands.CmdPub.Help;
+import ml.peya.plugins.Commands.CmdPub.Kick;
+import ml.peya.plugins.Commands.CmdPub.Show;
+import ml.peya.plugins.Commands.CmdPub.View;
 import ml.peya.plugins.Moderate.ErrorMessageSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,13 +40,13 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
         if (Arrays.asList("help", "view", "show", "drop", "kick")
                 .contains(args[0]) && ErrorMessageSender.unPermMessage(sender, "psac." + args[0])) return true;
 
-        ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(args));
-        arrayList.remove(0);
+        ArrayList<String> argList = new ArrayList<>(Arrays.asList(args));
+        argList.remove(0);
 
         switch (args[0].toLowerCase())
         {
             case "help":
-                Help.run(sender, label, arrayList.toArray(new String[0]));
+                Help.run(sender, label, argList.toArray(new String[0]));
                 break;
             case "view":
                 View.run(sender, args);

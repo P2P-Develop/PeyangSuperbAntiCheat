@@ -1,6 +1,6 @@
 # セキュリティーポリシー
 
-For English-speaking users, click [here](SECURITY-en.md).
+For users in English, click [here](SECURITY-en.md).
 
 ## Supported Versions
 
@@ -16,4 +16,4 @@ For English-speaking users, click [here](SECURITY-en.md).
 心優しいコラボレーター達や開発者が
 > これやったらおもっくそ権限無視できるじゃないですかやだー  
   
-と言ったら[こ→こ←](Vulnerabilities.md)(時空間異常)に追加されるぽん。
+と言ったらセキュリティ草案立ててhotfixなりなんなりで急遽修正します。

@@ -1,15 +1,18 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import ml.peya.plugins.*;
-import net.md_5.bungee.api.chat.*;
-import org.bukkit.command.*;
+import ml.peya.plugins.DetectClasses.WatchEyeManagement;
+import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import ml.peya.plugins.Utils.MessageEngine;
+import ml.peya.plugins.Utils.TextBuilder;
+import ml.peya.plugins.Utils.Utils;
+import ml.peya.plugins.Variables;
+import org.bukkit.command.CommandSender;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  * /psac viewで動くクラス。
@@ -47,7 +50,6 @@ public class View
 
         int count = 0;
 
-
         try (Connection connection = Variables.eye.getConnection();
              Statement statement = connection.createStatement();
              Statement statement2 = connection.createStatement())
@@ -58,22 +60,16 @@ public class View
             ResultSet result = statement.executeQuery(query);
             while (result.next())
             {
-
-                String id = result.getString("ID");
-                String issuebyid = result.getString("ISSUEBYID");
-                String mngid = result.getString("MNGID");
-
-                id = WatchEyeManagement.parseInjection(id);
-                issuebyid = WatchEyeManagement.parseInjection(issuebyid);
-                mngid = WatchEyeManagement.parseInjection(mngid);
+                final String id = WatchEyeManagement.parseInjection(result.getString("ID"));
+                final String issuebyid = WatchEyeManagement.parseInjection(result.getString("ISSUEBYID"));
+                final String mngid = WatchEyeManagement.parseInjection(result.getString("MNGID"));
 
                 ResultSet reason = statement2.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
                 ArrayList<EnumCheatType> types = new ArrayList<>();
                 while (reason.next())
                     types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
-                ComponentBuilder line = TextBuilder.getLine(id, issuebyid, types, mngid, sender);
 
-                sender.spigot().sendMessage(line.create());
+                sender.spigot().sendMessage(TextBuilder.getLine(id, issuebyid, types, mngid, sender).create());
                 count++;
             }
         }
@@ -89,6 +85,6 @@ public class View
 
             return;
         }
-        sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(TextBuilder.getPrevButton(previous), TextBuilder.getNextButton(next), !(previous < 0), !(count < 5)).create());
+        sender.spigot().sendMessage(TextBuilder.getNextPrevButtonText(TextBuilder.getPrevButton(previous), TextBuilder.getNextButton(next), previous >= 0, count >= 5).create());
     }
 }

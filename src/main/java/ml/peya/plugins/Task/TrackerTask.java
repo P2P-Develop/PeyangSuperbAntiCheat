@@ -1,6 +1,6 @@
 package ml.peya.plugins.Task;
 
-import org.bukkit.scheduler.*;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import static ml.peya.plugins.Variables.tracker;
 

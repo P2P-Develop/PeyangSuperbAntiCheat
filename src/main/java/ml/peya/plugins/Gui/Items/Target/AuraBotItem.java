@@ -1,17 +1,17 @@
 package ml.peya.plugins.Gui.Items.Target;
 
-import com.mojang.authlib.*;
-import com.mojang.authlib.properties.*;
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
+import ml.peya.plugins.Gui.IItems;
 import ml.peya.plugins.Gui.Item;
-import ml.peya.plugins.Gui.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.*;
-import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.*;
+import ml.peya.plugins.Utils.Utils;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import java.lang.reflect.*;
-import java.util.*;
+import java.lang.reflect.Field;
+import java.util.UUID;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -35,7 +35,8 @@ public class AuraBotItem implements IItems
     {
         for (final Field field : target.getDeclaredFields())
         {
-            if ((name == null || field.getName().equals(name)) && fieldType.isAssignableFrom(field.getType()) && index-- <= 0)
+            if ((name == null || field.getName().equals(name)) && fieldType
+                    .isAssignableFrom(field.getType()) && index-- <= 0)
             {
                 field.setAccessible(true);
                 return field;

@@ -71,8 +71,7 @@ public class BungeeCommands implements CommandExecutor
                 {
                     ResultSet result = statement.executeQuery("SELECT * FROM watchreason WHERE MNGID='" + id + "'");
                     while (result.next())
-                        reasons.add(CheatTypeUtils.getCheatTypeFromString(result.getString("REASON"))
-                                .getText());
+                        reasons.add(CheatTypeUtils.getCheatTypeFromString(result.getString("REASON")).getText());
                 }
                 catch (Exception e)
                 {
@@ -80,7 +79,6 @@ public class BungeeCommands implements CommandExecutor
                 }
 
                 Utils.adminNotification(finalPlayer, id, reasons.toArray(new String[0]));
-
             }
         }.runTaskAsynchronously(PeyangSuperbAntiCheat.getPlugin());
     }

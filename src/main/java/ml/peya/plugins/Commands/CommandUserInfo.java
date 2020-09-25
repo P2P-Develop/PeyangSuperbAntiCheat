@@ -16,6 +16,7 @@ import org.bukkit.entity.Player;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.stream.Stream;
 
@@ -27,77 +28,25 @@ import static ml.peya.plugins.Utils.MessageEngine.get;
  */
 public class CommandUserInfo implements CommandExecutor
 {
-    /**
-     * コマンド動作のオーバーライド。
-     *
-     * @param sender  イベントsender。
-     * @param command コマンド。
-     * @param label   ラベル。
-     * @param args    引数。
-     * @return 正常に終わったかどうか。
-     */
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
-    {
-        if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2) || ErrorMessageSender.unPermMessage(sender, "psac.userinfo"))
-            return true;
-
-        Player player;
-        boolean lynx = false;
-        if (args[0].equals("-f"))
-        {
-            player = Bukkit.getPlayer(args[1]);
-            lynx = true;
-        }
-        else
-            player = Bukkit.getPlayer(args[0]);
-
-        if (player == null)
-        {
-            for (OfflinePlayer op : Bukkit.getOfflinePlayers())
-            {
-                if (!op.getName().equals(args[0]) || !op.getName().equals(args[1]))
-                    continue;
-                player = op.getPlayer();
-            }
-
-            if (player == null)
-            {
-                sender.sendMessage(get("error.playerNotFound"));
-
-                return true;
-            }
-        }
-
-        ComponentBuilder builder = new ComponentBuilder("");
-        for (TextComponent component : userInfo(player, lynx))
-            builder.append(component);
-        builder.append(action(player.getName()));
-        player.spigot().sendMessage(builder.create());
-        return true;
-    }
-
     private static BaseComponent[] action(String player)
     {
-        ComponentBuilder builder = new ComponentBuilder(ChatColor.GOLD + "Actions: ");
-
-        builder.append(ChatColor.AQUA + "[TPTO] ")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpto " + player));
-        builder.append(ChatColor.AQUA + "[BAN] ")
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/ban " + player + " "));
-        /*builder.append(ChatColor.AQUA + "[TEMPBAN] ")
+        return new ComponentBuilder(ChatColor.GOLD + "Actions: ").append(ChatColor.AQUA + "[TPTO] ")
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpto " + player))
+                .append(ChatColor.AQUA + "[BAN] ")
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/ban " + player + " "))
+                /*.append(ChatColor.AQUA + "[TEMPBAN] ")
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tempban " + player + " "));*/
-        builder.append(ChatColor.AQUA + "[KICK] ")
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/psac kick " + player + " "));
-        /*builder.append(ChatColor.AQUA + "[MUTE] ")
+                .append(ChatColor.AQUA + "[KICK] ")
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/psac kick " + player + " "))
+                /*.append(ChatColor.AQUA + "[MUTE] ")
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/mute " + player + " "));*/
-        return builder.create();
+                .create();
     }
 
     private static TextComponent t(String str)
     {
         //String opts = ChatColor.RESET + ChatColor.WHITE.toString();
-        String prefix = /*opts +*/ChatColor.GOLD.toString();
+        final String prefix = /*opts +*/ChatColor.GOLD.toString();
         return new TextComponent(prefix + str + prefix + "\n");
     }
 
@@ -122,6 +71,7 @@ public class CommandUserInfo implements CommandExecutor
         if (lynx)
             p.add(t("Most Recent Name: " + data + player.getName()));
         p.add(t("UUID: " + data + player.getUniqueId().toString()));
+
         String rank;
         if (player.hasPermission("psac.admin"))
             rank = ChatColor.RED + "ADMIN";
@@ -129,16 +79,21 @@ public class CommandUserInfo implements CommandExecutor
             rank = ChatColor.DARK_GREEN + ChatColor.BOLD.toString() + "MOD";
         else
             rank = ChatColor.GRAY + ChatColor.ITALIC.toString() + "MEMBER";
+
         p.add(t("Rank: " + rank));
+
         if (lynx)
         {
-            p.add(t("PackageRank: " + ChatColor.GRAY + ChatColor.ITALIC.toString() + "MEMBER"));
-            p.add(t("OldPackageRank: " + ChatColor.GRAY + ChatColor.ITALIC.toString() + "MEMBER"));
+            Stream.of("PackageRank: ", "OldPackageRank: ")
+                    .parallel()
+                    .map(s -> t(s + ChatColor.GRAY + ChatColor.ITALIC.toString() + "MEMBER"))
+                    .forEachOrdered(p::add);
         }
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:s z");
 
-        Stream.of("Network Level: " + data + player.getTotalExperience(),
+        Stream.of(
+                "Network Level: " + data + player.getTotalExperience(),
                 "Network EXP: " + data + (int) player.getExp(),
                 "Guild: " + ChatColor.GRAY + ChatColor.ITALIC.toString() + "NONE",
                 "Current Server: " + data + player.getWorld()
@@ -146,7 +101,8 @@ public class CommandUserInfo implements CommandExecutor
                 "First Login: " + data + formatter.format(new Date(offline.getFirstPlayed())),
                 "Last Login: " + data + formatter.format(new Date(offline.getLastPlayed())),
                 "Packages: ",
-                "Boosters: ")
+                "Boosters: "
+        )
                 .parallel()
                 .map(CommandUserInfo::t)
                 .forEachOrdered(p::add);
@@ -160,6 +116,8 @@ public class CommandUserInfo implements CommandExecutor
             {
                 case BAN:
                     ban++;
+                    break;
+                case ALL:
                     break;
                 case KICK:
                     kick++;
@@ -177,5 +135,54 @@ public class CommandUserInfo implements CommandExecutor
         )));
 
         return p;
+    }
+
+    /**
+     * コマンド動作のオーバーライド。
+     *
+     * @param sender  イベントsender。
+     * @param command コマンド。
+     * @param label   ラベル。
+     * @param args    引数。
+     * @return 正常に終わったかどうか。
+     */
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
+    {
+        if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 2) || ErrorMessageSender
+                .unPermMessage(sender, "psac.userinfo"))
+            return true;
+
+        final Player[] player = new Player[1];
+        boolean lynx = false;
+        if (args[0].equals("-f"))
+        {
+            player[0] = Bukkit.getPlayer(args[1]);
+            lynx = true;
+        }
+        else
+            player[0] = Bukkit.getPlayer(args[0]);
+
+        if (player[0] == null)
+        {
+            Arrays.stream(Bukkit.getOfflinePlayers())
+                    .parallel()
+                    .filter(op -> !op.getName().equals(args[0]) ||
+                            !op.getName().equals(args[1]))
+                    .forEachOrdered(op -> player[0] = op.getPlayer());
+
+            if (player[0] == null)
+            {
+                sender.sendMessage(get("error.playerNotFound"));
+
+                return true;
+            }
+        }
+
+        ComponentBuilder builder = new ComponentBuilder("");
+        userInfo(player[0], lynx).parallelStream()
+                .forEachOrdered(builder::append);
+        player[0].spigot().sendMessage(builder.append(action(player[0].getName())).create());
+        return true;
     }
 }

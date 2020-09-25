@@ -1,10 +1,16 @@
 package ml.peya.plugins.Utils;
 
-import org.bukkit.*;
+import org.bukkit.Bukkit;
 
-import java.lang.reflect.*;
-import java.util.*;
-import java.util.stream.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.IntStream;
 
 /**
  * <b>ReflectionUtils</b>
@@ -120,7 +126,8 @@ public final class ReflectionUtils
     {
         for (Method method : clazz.getMethods())
         {
-            if (!method.getName().equals(methodName) || !DataType.compare(DataType.getPrimitive(method.getParameterTypes()), DataType.getPrimitive(parameterTypes)))
+            if (!method.getName().equals(methodName) ||
+                !DataType.compare(DataType.getPrimitive(method.getParameterTypes()), DataType.getPrimitive(parameterTypes)))
                 continue;
             return method;
         }
@@ -473,7 +480,8 @@ public final class ReflectionUtils
         // Initialize map for quick class lookup
         static
         {
-            Arrays.stream(values()).parallel().forEachOrdered(type -> {
+            Arrays.stream(values()).parallel().forEachOrdered(type ->
+            {
                 CLASS_MAP.put(type.primitive, type);
                 CLASS_MAP.put(type.reference, type);
             });
@@ -534,7 +542,9 @@ public final class ReflectionUtils
          */
         public static Class<?>[] getPrimitive(Class<?>[] classes)
         {
-            return IntStream.range(0, classes == null ? 0: classes.length).parallel().mapToObj(index -> getPrimitive(Objects.requireNonNull(classes)[index])).toArray(Class<?>[]::new);
+            return IntStream.range(0, classes == null ? 0: classes.length).parallel()
+                    .mapToObj(index -> getPrimitive(Objects.requireNonNull(classes)[index]))
+                    .toArray(Class<?>[]::new);
         }
 
         /**
@@ -545,7 +555,9 @@ public final class ReflectionUtils
          */
         public static Class<?>[] getReference(Class<?>[] classes)
         {
-            return IntStream.range(0, classes == null ? 0: classes.length).parallel().mapToObj(index -> getReference(Objects.requireNonNull(classes)[index])).toArray(Class<?>[]::new);
+            return IntStream.range(0, classes == null ? 0: classes.length).parallel()
+                    .mapToObj(index -> getReference(Objects.requireNonNull(classes)[index]))
+                    .toArray(Class<?>[]::new);
         }
 
         /**
@@ -556,7 +568,9 @@ public final class ReflectionUtils
          */
         public static Class<?>[] getPrimitive(Object[] objects)
         {
-            return IntStream.range(0, objects == null ? 0: objects.length).parallel().mapToObj(index -> getPrimitive(Objects.requireNonNull(objects)[index].getClass())).toArray(Class<?>[]::new);
+            return IntStream.range(0, objects == null ? 0: objects.length).parallel()
+                    .mapToObj(index -> getPrimitive(Objects.requireNonNull(objects)[index].getClass()))
+                    .toArray(Class<?>[]::new);
         }
 
         /**
@@ -567,7 +581,9 @@ public final class ReflectionUtils
          */
         public static Class<?>[] getReference(Object[] objects)
         {
-            return IntStream.range(0, objects == null ? 0: objects.length).parallel().mapToObj(index -> getReference(Objects.requireNonNull(objects)[index].getClass())).toArray(Class<?>[]::new);
+            return IntStream.range(0, objects == null ? 0: objects.length).parallel()
+                    .mapToObj(index -> getReference(Objects.requireNonNull(objects)[index].getClass()))
+                    .toArray(Class<?>[]::new);
         }
 
         /**
@@ -579,7 +595,10 @@ public final class ReflectionUtils
          */
         public static boolean compare(Class<?>[] primary, Class<?>[] secondary)
         {
-            return primary != null && secondary != null && primary.length == secondary.length && IntStream.range(0, primary.length).parallel().noneMatch(index -> !primary[index].equals(secondary[index]) && !primary[index].isAssignableFrom(secondary[index]));
+            return primary != null && secondary != null && primary.length == secondary.length && IntStream
+                    .range(0, primary.length).parallel()
+                    .noneMatch(index -> !primary[index].equals(secondary[index]) && !primary[index]
+                            .isAssignableFrom(secondary[index]));
         }
 
         /**

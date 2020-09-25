@@ -1,9 +1,10 @@
 package ml.peya.plugins.DetectClasses;
 
-import ml.peya.plugins.Enum.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Enum.DetectType;
+import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * チート判定管理クラス

@@ -1,21 +1,35 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
-import net.minecraft.server.v1_12_R1.*;
-import org.apache.commons.lang3.tuple.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.DetectClasses.CheatDetectNowMeta;
+import ml.peya.plugins.DetectClasses.WatchEyeManagement;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import ml.peya.plugins.Moderate.KickManager;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Utils.TextBuilder;
+import ml.peya.plugins.Utils.Utils;
+import net.minecraft.server.v1_12_R1.EntityPlayer;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Objects;
 
-import static ml.peya.plugins.Variables.*;
+import static ml.peya.plugins.Variables.banLeft;
+import static ml.peya.plugins.Variables.cheatMeta;
+import static ml.peya.plugins.Variables.config;
+import static ml.peya.plugins.Variables.eye;
+import static ml.peya.plugins.Variables.learnCount;
+import static ml.peya.plugins.Variables.learnCountLimit;
+import static ml.peya.plugins.Variables.network;
 
 /**
  * NPCの出陣命令を、NPCスポーン命令に変換
@@ -94,14 +108,20 @@ public class DetectConnection
                         {
                             case AURA_BOT:
                                 if (sender == null)
-                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurabot")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create()));
+                                    Bukkit.getOnlinePlayers().parallelStream()
+                                            .filter(np -> np.hasPermission("psac.aurabot"))
+                                            .forEachOrdered(np ->
+                                                    np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create());
                                 break;
 
                             case AURA_PANIC:
                                 if (sender == null)
-                                    Bukkit.getOnlinePlayers().parallelStream().filter(np -> np.hasPermission("psac.aurapanic")).forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create()));
+                                    Bukkit.getOnlinePlayers().parallelStream()
+                                            .filter(np -> np.hasPermission("psac.aurapanic"))
+                                            .forEachOrdered(np -> np.spigot().sendMessage(TextBuilder
+                                                    .textPanicRep(name, meta.getVL()).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 break;
@@ -142,10 +162,10 @@ public class DetectConnection
     /**
      * キック動作の開始DA!
      *
-     * @param player プレイヤー０。
+     * @param player プレイヤー。
      * @return 処理が正常に終了したかどうか。
      */
-    private static boolean kick(Player player)
+    private static boolean kick(final Player player)
     {
         ArrayList<String> reason = new ArrayList<>();
         try (Connection connection = eye.getConnection();
@@ -153,15 +173,14 @@ public class DetectConnection
              Statement statement1 = connection.createStatement())
         {
 
-            String name = WatchEyeManagement.parseInjection(player.getName());
+            final String name = WatchEyeManagement.parseInjection(player.getName());
 
             ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + name + "'");
             while (rs.next())
             {
 
-                String MNGID = WatchEyeManagement.parseInjection(rs.getString("MNGID"));
-                ResultSet set = statement1.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" +
-                        MNGID + "'");
+                final String MNGID = WatchEyeManagement.parseInjection(rs.getString("MNGID"));
+                ResultSet set = statement1.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" + MNGID + "'");
                 while (set.next())
                     reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
             }
@@ -174,7 +193,14 @@ public class DetectConnection
 
         ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
 
-        KickManager.kickPlayer(player, (String.join(", ", realReason).equals("") ? "KillAura": "Report: " + String.join(", ", realReason)), true, false);
+        KickManager.kickPlayer(
+                player,
+                String.join(", ", realReason).equals("")
+                        ? "KillAura"
+                        : "Report: " + String.join(", ", realReason),
+                true,
+                false
+        );
         return true;
     }
 }

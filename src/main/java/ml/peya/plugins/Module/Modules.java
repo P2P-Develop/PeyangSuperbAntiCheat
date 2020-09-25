@@ -1,6 +1,6 @@
 package ml.peya.plugins.Module;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * モジュールリスト

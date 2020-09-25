@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_12_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
 import org.bukkit.entity.Entity;
@@ -19,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BlockIterator;
 
+import javax.annotation.Nullable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -27,6 +29,7 @@ import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.skin;
 
 /**
@@ -42,7 +45,8 @@ public class PlayerUtils
      */
     public static Player getLookingEntity(Player player)
     {
-        for (Location location : player.getLineOfSight(null, 4).parallelStream().map(Block::getLocation).collect(Collectors.toCollection(ArrayList::new)))
+        for (Location location : player.getLineOfSight(null, 4).parallelStream().map(Block::getLocation)
+                .collect(Collectors.toCollection(ArrayList::new)))
             for (Entity entity : player.getNearbyEntities(3.5, 3.5, 3.5))
                 if (isLooking((Player) entity, location) && entity.getType() == EntityType.PLAYER)
                     return (Player) entity;
@@ -63,8 +67,10 @@ public class PlayerUtils
 
         while (it.hasNext())
         {
-            Block block = it.next();
-            if (block.getX() == location.getBlockX() && block.getY() == location.getBlockY() && block.getZ() == location.getBlockZ())
+            final Block block = it.next();
+            if (block.getX() == location.getBlockX() &&
+                block.getY() == location.getBlockY() &&
+                block.getZ() == location.getBlockZ())
                 return true;
         }
         return false;
@@ -78,7 +84,11 @@ public class PlayerUtils
      */
     public static boolean hasCritical(Player player)
     {
-        return !(player.getFallDistance() <= 0.0F) && !player.getLocation().getBlock().isLiquid() && !player.isOnGround() && !player.hasPotionEffect(PotionEffectType.BLINDNESS) && player.getVehicle() == null;
+        return player.getFallDistance() > 0.0F &&
+                !player.getLocation().getBlock().isLiquid() &&
+                !player.isOnGround() &&
+                !player.hasPotionEffect(PotionEffectType.BLINDNESS) &&
+                player.getVehicle() == null;
     }
 
     /**
@@ -90,8 +100,12 @@ public class PlayerUtils
     public static EntityPlayer getRandomPlayer(World world)
     {
         Random random = new Random();
-        String first = random.nextBoolean() ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): RandomWordUtils.getRandomWord();
-        String last = random.nextBoolean() ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1): RandomWordUtils.getRandomWord();
+        String first = random.nextBoolean()
+                ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1)
+                : RandomWordUtils.getRandomWord();
+        String last = random.nextBoolean()
+                ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1)
+                : RandomWordUtils.getRandomWord();
 
         if (random.nextBoolean())
         {
@@ -101,7 +115,7 @@ public class PlayerUtils
 
         String name = first + (random.nextBoolean() ? "_": "") + last + (random.nextBoolean() ? "19" + random.nextInt(120): "");
         if (name.length() > 16)
-            name = random.nextBoolean() ? first : last;
+            name = random.nextBoolean() ? first: last;
 
         if (name.length() > 16)
             name = RandomStringUtils.randomAlphanumeric(random.nextInt(16));
@@ -114,7 +128,12 @@ public class PlayerUtils
 
         profile.getProperties().put("textures", new Property("textures", skin.getLeft(), skin.getRight()));
 
-        return new EntityPlayer(((CraftServer) Bukkit.getServer()).getServer(), worldServer, profile, new PlayerInteractManager(worldServer));
+        return new EntityPlayer(
+                ((CraftServer) Bukkit.getServer()).getServer(),
+                worldServer,
+                profile,
+                new PlayerInteractManager(worldServer)
+        );
     }
 
     /**
@@ -128,7 +147,9 @@ public class PlayerUtils
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SELECT * FROM Skin ORDER BY RANDOM() LIMIT 1");
-            return !result.next() ? Pair.of("", ""): Pair.of(result.getString("Texture"), result.getString("Signature"));
+            return !result.next()
+                    ? Pair.of("", "")
+                    : Pair.of(result.getString("Texture"), result.getString("Signature"));
         }
         catch (Exception e)
         {
@@ -136,5 +157,33 @@ public class PlayerUtils
             Utils.errorNotification(Utils.getStackTrace(e));
             return Pair.of("", "");
         }
+    }
+
+    /**
+     * プレイヤーを取得する。たぶん。
+     *
+     * @param sender イベントセンダー。
+     * @param args 引数たち。
+     * @return Playerの取得に失敗した場合null。
+     */
+    @Nullable
+    public static Player getPlayer(CommandSender sender, String[] args)
+    {
+        if (args.length == 0)
+        {
+            sender.sendMessage(get("error.invalidArgument"));
+
+            return null;
+        }
+
+        Player player = Bukkit.getPlayer(args[0]);
+
+        if (player == null)
+        {
+            sender.sendMessage(get("error.playerNotFound"));
+
+            return null;
+        }
+        return player;
     }
 }

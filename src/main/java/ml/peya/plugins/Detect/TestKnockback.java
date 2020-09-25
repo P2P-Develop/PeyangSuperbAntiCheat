@@ -1,14 +1,17 @@
 package ml.peya.plugins.Detect;
 
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.*;
-import net.minecraft.server.v1_12_R1.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.craftbukkit.v1_12_R1.entity.*;
-import org.bukkit.entity.*;
-import org.bukkit.metadata.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import net.minecraft.server.v1_12_R1.PacketPlayOutEntityDestroy;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.command.CommandSender;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -39,8 +42,10 @@ public class TestKnockback
 
         Arrow arrow = (Arrow) player.getWorld().spawnEntity(location, EntityType.ARROW);
         cheatMeta.add(player, arrow.getUniqueId(), arrow.getEntityId(), DetectType.ANTI_KB);
-        arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), player.getUniqueId()));
-        Bukkit.getOnlinePlayers().parallelStream().map(hide -> ((CraftPlayer) hide).getHandle().playerConnection).forEachOrdered(connection -> connection.sendPacket(new PacketPlayOutEntityDestroy(arrow.getEntityId())));
+        arrow.setMetadata("testArrow-" + arrow.getUniqueId(), new FixedMetadataValue(PeyangSuperbAntiCheat
+                .getPlugin(), player.getUniqueId()));
+        Bukkit.getOnlinePlayers().parallelStream().map(hide -> ((CraftPlayer) hide).getHandle().playerConnection)
+                .forEachOrdered(connection -> connection.sendPacket(new PacketPlayOutEntityDestroy(arrow.getEntityId())));
 
         arrow.setVelocity(location.getDirection().multiply(32767f));
 
@@ -63,7 +68,9 @@ public class TestKnockback
             @Override
             public void run()
             {
-                sender.sendMessage(get(config.getBoolean("message.lynx") ? "message.testkb.normal": "message.textkb.lynx", pair("name", player.getName())));
+                sender.sendMessage(get(config
+                        .getBoolean("message.lynx") ? "message.testkb.normal": "message.textkb.lynx", pair("name", player
+                        .getName())));
                 arrow.remove();
                 cheatMeta.remove(arrow.getUniqueId());
             }

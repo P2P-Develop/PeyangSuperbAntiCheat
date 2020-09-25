@@ -1,15 +1,21 @@
 package ml.peya.plugins.Commands.CmdPub;
 
-import ml.peya.plugins.DetectClasses.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.DetectClasses.WatchEyeManagement;
+import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Moderate.CheatTypeUtils;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Utils.BookUtil;
+import ml.peya.plugins.Utils.Books;
+import ml.peya.plugins.Utils.TextBuilder;
+import ml.peya.plugins.Utils.Utils;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
-import java.math.*;
-import java.sql.*;
-import java.util.*;
+import java.math.BigDecimal;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.eye;
@@ -47,11 +53,11 @@ public class Show
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD='" + mngid + "'");
             result.next();
 
-            String uuid = result.getString("UUID");
-            String id = result.getString("ID");
-            BigDecimal issuedate = result.getBigDecimal("ISSUEDATE");
-            String issuebyid = result.getString("ISSUEBYID");
-            String issuebyuuid = result.getString("ISSUEBYUUID");
+            final String uuid = result.getString("UUID");
+            final String id = result.getString("ID");
+            final BigDecimal issuedate = result.getBigDecimal("ISSUEDATE");
+            final String issuebyid = result.getString("ISSUEBYID");
+            final String issuebyuuid = result.getString("ISSUEBYUUID");
 
             ResultSet reason = statement.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
 
@@ -61,9 +67,12 @@ public class Show
                 types.add(CheatTypeUtils.getCheatTypeFromString(reason.getString("REASON")));
 
             if (sender instanceof Player)
+            {
                 BookUtil.openBook(Books.getShowBook(id, uuid, issuebyid, issuebyuuid, issuedate, types), (Player) sender);
-            else
-                TextBuilder.showText(id, uuid, issuebyid, issuebyuuid, issuedate, types, sender);
+                return;
+            }
+
+            TextBuilder.showText(id, uuid, issuebyid, issuebyuuid, issuedate, types, sender);
         }
         catch (Exception e)
         {

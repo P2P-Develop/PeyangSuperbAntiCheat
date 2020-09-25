@@ -5,18 +5,22 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ stable, develop ]
+    branches: [stable, develop]
   pull_request:
-    branches: [ stable, develop ]
+    branches: [stable, develop]
 
 jobs:
   build-linux:
+
+    name: Build in Linux
 
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:
@@ -35,11 +39,15 @@ jobs:
 
   build-macos:
 
+    name: Build in MacOS
+
     runs-on: macos-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
         with:

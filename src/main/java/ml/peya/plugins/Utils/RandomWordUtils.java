@@ -35,7 +35,8 @@ public class RandomWordUtils
      */
     public static String getRandomWord(int bound)
     {
-        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/wordsx256.txt"), StandardCharsets.UTF_8);
+        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class
+                .getResourceAsStream("/wordsx256.txt"), StandardCharsets.UTF_8);
              BufferedReader bufferedReader = new BufferedReader(reader))
         {
             return bufferedReader.lines()

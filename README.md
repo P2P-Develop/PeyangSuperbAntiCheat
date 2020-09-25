@@ -33,10 +33,10 @@
        src="https://img.shields.io/codeclimate/maintainability-percentage/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
        alt="Code Climate maintainability"
   ></a>
-  <a href="https://www.codefactor.io/repository/github/P2P-Develop/peyangsuperbanticheat"
+  <a href="https://app.codacy.com/gh/P2P-Develop/PeyangSuperbAntiCheat"
      ><img
-           alt="CodeFactor Grade"
-           src="https://img.shields.io/codefactor/grade/github/P2P-Develop/PeyangSuperbAntiCheat/develop?label=code%20quality&style=flat-square"
+     src="https://img.shields.io/codacy/grade/dc66e1631fcd4ba68f8f831b0e701b7d/develop?style=flat-square"
+     alt="Codacy code quality (develop)"
   ></a>
   <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/actions?query=workflow%3A%22Java+CI+with+Maven%22"
      ><img

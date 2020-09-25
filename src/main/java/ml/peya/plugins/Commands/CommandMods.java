@@ -56,7 +56,8 @@ public class CommandMods implements CommandExecutor
         {
             mods.keySet()
                     .parallelStream()
-                    .forEachOrdered(id -> sender.sendMessage(ChatColor.RED + id + ChatColor.GREEN + ": " + ChatColor.BLUE + mods.get(id)));
+                    .forEachOrdered(id ->
+                            sender.sendMessage(ChatColor.RED + id + ChatColor.GREEN + ": " + ChatColor.BLUE + mods.get(id)));
             return true;
         }
 

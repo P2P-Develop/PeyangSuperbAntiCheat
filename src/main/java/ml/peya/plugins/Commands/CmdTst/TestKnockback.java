@@ -1,11 +1,14 @@
 package ml.peya.plugins.Commands.CmdTst;
 
-import ml.peya.plugins.Detect.*;
-import ml.peya.plugins.Enum.*;
-import ml.peya.plugins.Moderate.*;
-import org.bukkit.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
+import ml.peya.plugins.Detect.DetectConnection;
+import ml.peya.plugins.Enum.DetectType;
+import ml.peya.plugins.Moderate.ErrorMessageSender;
+import ml.peya.plugins.Moderate.TrustModifier;
+import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.cheatMeta;
@@ -28,10 +31,7 @@ public class TestKnockback implements CommandExecutor
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
-        if (ErrorMessageSender.unPermMessage(sender, "psac.testkb"))
-            return true;
-
-        if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
+        if (ErrorMessageSender.unPermMessage(sender, "psac.testkb") || ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1))
             return true;
 
         Player player = Bukkit.getPlayer(args[0]);

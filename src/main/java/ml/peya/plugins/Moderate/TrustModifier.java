@@ -1,12 +1,13 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.*;
-import ml.peya.plugins.Utils.*;
-import org.bukkit.command.*;
-import org.bukkit.entity.*;
-import org.bukkit.scheduler.*;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Utils.Utils;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Statement;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
