@@ -128,8 +128,12 @@ public class PlayerUtils
 
         profile.getProperties().put("textures", new Property("textures", skin.getLeft(), skin.getRight()));
 
-        return new EntityPlayer(((CraftServer) Bukkit.getServer())
-                .getServer(), worldServer, profile, new PlayerInteractManager(worldServer));
+        return new EntityPlayer(
+                ((CraftServer) Bukkit.getServer()).getServer(),
+                worldServer,
+                profile,
+                new PlayerInteractManager(worldServer)
+        );
     }
 
     /**
@@ -143,8 +147,9 @@ public class PlayerUtils
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SELECT * FROM Skin ORDER BY RANDOM() LIMIT 1");
-            return !result.next() ? Pair.of("", ""): Pair
-                    .of(result.getString("Texture"), result.getString("Signature"));
+            return !result.next()
+                    ? Pair.of("", "")
+                    : Pair.of(result.getString("Texture"), result.getString("Signature"));
         }
         catch (Exception e)
         {

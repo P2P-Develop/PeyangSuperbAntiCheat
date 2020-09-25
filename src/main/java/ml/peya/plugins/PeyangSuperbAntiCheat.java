@@ -131,16 +131,16 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         protocolManager = ProtocolLibrary.getProtocolManager();
 
-        protocolManager
-                .addPacketListener(new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
+        protocolManager.addPacketListener(
+                new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
                 {
                     @Override
                     public void onPacketReceiving(PacketEvent event)
                     {
                         Packets.useEntity(event);
                     }
-                });
-
+                }
+        );
 
         if (!Init.createDefaultTables())
             Bukkit.getPluginManager().disablePlugin(this);
