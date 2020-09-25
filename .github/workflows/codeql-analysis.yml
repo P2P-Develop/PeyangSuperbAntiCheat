@@ -5,7 +5,7 @@ on:
     branches: [develop]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [stable, develop]
+    branches: [stable]
   schedule:
     - cron: '0 5 * * 1'
 
