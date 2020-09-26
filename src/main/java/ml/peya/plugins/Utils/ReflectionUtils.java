@@ -126,8 +126,7 @@ public final class ReflectionUtils
     {
         for (Method method : clazz.getMethods())
         {
-            if (!method.getName().equals(methodName) ||
-                !DataType.compare(DataType.getPrimitive(method.getParameterTypes()), DataType.getPrimitive(parameterTypes)))
+            if (!method.getName().equals(methodName) || !DataType.compare(DataType.getPrimitive(method.getParameterTypes()), DataType.getPrimitive(parameterTypes)))
                 continue;
             return method;
         }
@@ -487,7 +486,9 @@ public final class ReflectionUtils
             });
         }
 
-        private final Class<?> primitive, reference;
+        private final Class<?>
+                primitive,
+                reference;
 
         /**
          * Construct a new data type

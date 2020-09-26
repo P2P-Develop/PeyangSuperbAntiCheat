@@ -23,8 +23,15 @@ public class CheatTypeUtils
 
     private static ArrayList<EnumCheatType> createTypes()
     {
-        ArrayList<EnumCheatType> types = new ArrayList<>(Arrays
-                .asList(EnumCheatType.FLY, EnumCheatType.KILLAURA, EnumCheatType.AUTOCLICKER, EnumCheatType.SPEED, EnumCheatType.ANTIKNOCKBACK, EnumCheatType.REACH, EnumCheatType.DOLPHIN));
+        ArrayList<EnumCheatType> types = new ArrayList<>(Arrays.asList(
+                EnumCheatType.FLY,
+                EnumCheatType.KILLAURA,
+                EnumCheatType.AUTOCLICKER,
+                EnumCheatType.SPEED,
+                EnumCheatType.ANTIKNOCKBACK,
+                EnumCheatType.REACH,
+                EnumCheatType.DOLPHIN
+        ));
 
         types.parallelStream()
                 .forEachOrdered(type -> type.setSelected(false));
@@ -43,9 +50,9 @@ public class CheatTypeUtils
         ArrayList<EnumCheatType> types = createTypes();
         Arrays.stream(values).parallel().<Consumer<? super EnumCheatType>>map(reason -> type ->
         {
-            if (reason.toLowerCase().equals(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
+            if (reason.equalsIgnoreCase(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
                 type.setSelected(true);
-        }).forEachOrdered(types::forEach);
+        }).forEachOrdered(types.parallelStream()::forEachOrdered);
 
         return types;
     }
@@ -59,8 +66,7 @@ public class CheatTypeUtils
     public static EnumCheatType getCheatTypeFromString(String sysname)
     {
         return createTypes().parallelStream()
-                .filter(type -> type.getSysName()
-                        .equals(sysname))
+                .filter(type -> type.getSysName().equals(sysname))
                 .findFirst()
                 .orElse(null);
     }

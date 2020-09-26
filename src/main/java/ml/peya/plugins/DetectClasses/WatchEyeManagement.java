@@ -27,9 +27,6 @@ public class WatchEyeManagement
      */
     public static String add(Player target, String fromName, String fromUUID, int level)
     {
-
-        fromName = parseInjection(fromName);
-        fromUUID = parseInjection(fromUUID);
         final String manageId = UUID.randomUUID().toString().replace("-", "");
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
@@ -39,8 +36,8 @@ public class WatchEyeManagement
                     target.getUniqueId().toString().replace("-", ""),
                     target.getName(),
                     new Date().getTime(),
-                    fromName,
-                    fromUUID,
+                    parseInjection(fromName),
+                    parseInjection(fromUUID),
                     manageId,
                     level
             ));
@@ -65,7 +62,6 @@ public class WatchEyeManagement
      */
     public static boolean setReason(String id, EnumCheatType reason, int vl)
     {
-        id = parseInjection(id);
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
@@ -75,7 +71,7 @@ public class WatchEyeManagement
             reasonString = parseInjection(reasonString);
             statement.execute(String.format(
                     "InSeRt InTo WaTcHrEaSoN VaLuEs ('%s', '%s', %s)",
-                    id,
+                    parseInjection(id),
                     reasonString,
                     vl
             ));
@@ -98,12 +94,10 @@ public class WatchEyeManagement
      */
     public static boolean isExistsRecord(String targetUuid, String fromUuid)
     {
-        targetUuid = parseInjection(targetUuid);
-        fromUuid = parseInjection(fromUuid);
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
-            return statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UUID = '" + targetUuid + "' AND ISSUEBYUUID = '" + fromUuid + "'").isBeforeFirst();
+            return statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UUID = '" + parseInjection(targetUuid) + "' AND ISSUEBYUUID = '" + parseInjection(fromUuid) + "'").isBeforeFirst();
         }
         catch (Exception e)
         {
@@ -121,11 +115,10 @@ public class WatchEyeManagement
      */
     public static boolean isExistsRecord(String id)
     {
-        id = parseInjection(id);
         try (Connection connection = eye.getConnection();
              Statement statement = connection.createStatement())
         {
-            return !statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'").isBeforeFirst();
+            return !statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + parseInjection(id) + "'").isBeforeFirst();
         }
         catch (Exception e)
         {
@@ -143,9 +136,8 @@ public class WatchEyeManagement
      */
     public static String parseInjection(String sql)
     {
-        sql = sql.replace("\\", "\\\\")
+        return sql.replace("\\", "\\\\")
                 .replace("'", "''")
                 .replace("\"", "\"\"");
-        return sql;
     }
 }

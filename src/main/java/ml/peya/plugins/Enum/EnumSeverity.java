@@ -47,7 +47,7 @@ public enum EnumSeverity
     /**
      * 色。
      */
-    private final net.md_5.bungee.api.ChatColor color;
+    private final ChatColor color;
     /**
      * レベル。
      */
@@ -60,7 +60,7 @@ public enum EnumSeverity
      * @param color いろ。
      * @param level レベル。
      */
-    EnumSeverity(String text, net.md_5.bungee.api.ChatColor color, int level)
+    EnumSeverity(String text, ChatColor color, int level)
     {
         this.text = text;
         this.color = color;
@@ -82,7 +82,7 @@ public enum EnumSeverity
      *
      * @return いろ。
      */
-    public net.md_5.bungee.api.ChatColor getColor()
+    public ChatColor getColor()
     {
         return color;
     }

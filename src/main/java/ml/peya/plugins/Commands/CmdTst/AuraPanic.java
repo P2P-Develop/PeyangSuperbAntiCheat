@@ -90,7 +90,6 @@ public class AuraPanic implements CommandExecutor
                 sender.sendMessage(get("error.invalidArgument"));
                 return true;
             }
-
         }
 
         DetectType type = DetectType.AURA_PANIC;

@@ -125,6 +125,9 @@ public class DetectConnection
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 break;
+
+                            default:
+                                break;
                         }
 
                         cheatMeta.remove(meta.getUUIDs());
@@ -178,7 +181,6 @@ public class DetectConnection
             ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + name + "'");
             while (rs.next())
             {
-
                 final String MNGID = WatchEyeManagement.parseInjection(rs.getString("MNGID"));
                 ResultSet set = statement1.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" + MNGID + "'");
                 while (set.next())

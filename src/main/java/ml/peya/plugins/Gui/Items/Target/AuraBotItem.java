@@ -33,10 +33,11 @@ public class AuraBotItem implements IItems
      */
     private static <T> Field getField(Class<?> target, String name, Class<T> fieldType, int index)
     {
+        int localIndex = index;
+
         for (final Field field : target.getDeclaredFields())
         {
-            if ((name == null || field.getName().equals(name)) && fieldType
-                    .isAssignableFrom(field.getType()) && index-- <= 0)
+            if ((name == null || field.getName().equals(name)) && fieldType.isAssignableFrom(field.getType()) && localIndex-- <= 0)
             {
                 field.setAccessible(true);
                 return field;
@@ -44,7 +45,7 @@ public class AuraBotItem implements IItems
         }
 
         if (target.getSuperclass() != null)
-            return getField(target.getSuperclass(), name, fieldType, index);
+            return getField(target.getSuperclass(), name, fieldType, localIndex);
         throw new IllegalArgumentException("Cannot find field with type " + fieldType);
     }
 

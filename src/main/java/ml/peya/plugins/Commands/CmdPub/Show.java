@@ -51,7 +51,13 @@ public class Show
              Statement statement = connection.createStatement())
         {
             ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD='" + mngid + "'");
-            result.next();
+
+            if (!result.next())
+            {
+                sender.sendMessage(get("error.unknownSQLError"));
+
+                return;
+            }
 
             final String uuid = result.getString("UUID");
             final String id = result.getString("ID");

@@ -98,27 +98,22 @@ public class BanAnalyzer
      */
     public static void ban(Player player, String reason)
     {
-        reason = WatchEyeManagement.parseInjection(reason);
-        String name = player.getDisplayName();
-        name = WatchEyeManagement.parseInjection(name);
-
         StringBuilder id = new StringBuilder();
         Random random = new Random();
+
         IntStream.range(0, 8).parallel().forEachOrdered(i ->
-        {
-            id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A'));
-        });
+                id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A')));
 
         try (Connection connection = banKick.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("INSERT INTO ban VALUES(" + String.format(
                     "'%s', '%s', '%s', %d, '%s', 1",
-                    name,
+                    WatchEyeManagement.parseInjection(player.getDisplayName()),
                     player.getUniqueId(),
                     id.toString(),
                     new Date().getTime(),
-                    reason
+                    WatchEyeManagement.parseInjection(reason)
             ) + ")");
 
         }

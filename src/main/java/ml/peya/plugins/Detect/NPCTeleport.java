@@ -44,7 +44,7 @@ public class NPCTeleport
         switch (tpCase)
         {
             case AURA_BOT:
-                auraBot_teleport(player, target, arm, reachMode);
+                auraBotTeleport(player, target, arm, reachMode);
                 break;
             case AURA_PANIC:
                 auraPanic_teleport(player, target, arm, tpCase.getPanicCount(), tpCase.getSender(), reachMode);
@@ -157,7 +157,7 @@ public class NPCTeleport
      * @param arm       装備。
      * @param reachMode リーチモードかどうか。
      */
-    private static void auraBot_teleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
+    private static void auraBotTeleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
     {
         final double[] time = {0.0};
         final double radius = reachMode ? config.getDouble("npc.reachRange"): config.getDouble("npc.range");
@@ -186,9 +186,9 @@ public class NPCTeleport
                     final Location center = player.getLocation();
                     final Location n = new Location(
                             center.getWorld(),
-                            auraBot_xPos(time[0], rangeTmp + speed) + center.getX(),
+                            auraBotXPos(time[0], rangeTmp + speed) + center.getX(),
                             center.getY() + new WaveCreator(1.0, 2.0, 0.0).get(0.01, count[0] < 20),
-                            auraBot_zPos(time[0], rangeTmp + speed) + center.getZ(),
+                            auraBotZPos(time[0], rangeTmp + speed) + center.getZ(),
                             (float) ypp.getStatic(),
                             (float) ypp.get(4.5, false)
                     );
@@ -248,7 +248,7 @@ public class NPCTeleport
      * @param radius 半径。
      * @return 位置。
      */
-    private static double auraBot_zPos(double time, double radius)
+    private static double auraBotZPos(double time, double radius)
     {
         return Math.sin(time) * radius * Math.cos(Math.PI / 180 * 360.0);
     }
@@ -260,9 +260,8 @@ public class NPCTeleport
      * @param radius 半径。
      * @return 位置。
      */
-    private static double auraBot_xPos(double time, double radius)
+    private static double auraBotXPos(double time, double radius)
     {
         return Math.cos(time) * radius;
     }
-
 }

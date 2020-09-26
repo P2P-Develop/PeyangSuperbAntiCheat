@@ -33,8 +33,7 @@ public class MessageEngine
      */
     public static void initialize()
     {
-        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class
-                .getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
+        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
         {
             config = YamlConfiguration.loadConfiguration(new BufferedReader(reader));
         }
@@ -97,13 +96,15 @@ public class MessageEngine
     {
         HashMap<String, ChatColor> map = getColor();
 
+        String replaced = text;
+
         for (String key : map.keySet())
-            text = text.replace(key, map.get(key).toString());
+            replaced = replaced.replace(key, map.get(key).toString());
 
         for (String key : format.keySet())
-            text = text.replace("%%" + key + "%%", String.valueOf(format.get(key)));
+            replaced = replaced.replace("%%" + key + "%%", String.valueOf(format.get(key)));
 
-        return text;
+        return replaced;
     }
 
     /**
