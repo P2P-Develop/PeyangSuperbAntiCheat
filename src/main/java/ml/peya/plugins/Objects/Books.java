@@ -1,6 +1,8 @@
-package ml.peya.plugins.Utils;
+package ml.peya.plugins.Objects;
 
 import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Utils.SeverityLevels;
+import ml.peya.plugins.Utils.TextBuilder;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;

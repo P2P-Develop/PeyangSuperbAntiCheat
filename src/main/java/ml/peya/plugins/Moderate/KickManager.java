@@ -2,7 +2,7 @@ package ml.peya.plugins.Moderate;
 
 import ml.peya.plugins.DetectClasses.WatchEyeManagement;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
-import ml.peya.plugins.Utils.Decorations;
+import ml.peya.plugins.Objects.Decorations;
 import ml.peya.plugins.Utils.MessageEngine;
 import ml.peya.plugins.Utils.TextBuilder;
 import ml.peya.plugins.Utils.Utils;

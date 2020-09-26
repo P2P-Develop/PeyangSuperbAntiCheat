@@ -3,7 +3,7 @@ package ml.peya.plugins.Detect;
 import ml.peya.plugins.Enum.DetectType;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
 import ml.peya.plugins.Utils.PlayerUtils;
-import ml.peya.plugins.Utils.RandomArmor;
+import ml.peya.plugins.Objects.RandomArmor;
 import net.minecraft.server.v1_12_R1.EntityPlayer;
 import net.minecraft.server.v1_12_R1.EnumChatFormat;
 import net.minecraft.server.v1_12_R1.EnumItemSlot;

@@ -5,7 +5,7 @@ import ml.peya.plugins.Enum.EnumCheatType;
 import ml.peya.plugins.Moderate.CheatTypeUtils;
 import ml.peya.plugins.Moderate.ErrorMessageSender;
 import ml.peya.plugins.Utils.BookUtil;
-import ml.peya.plugins.Utils.Books;
+import ml.peya.plugins.Objects.Books;
 import ml.peya.plugins.Utils.TextBuilder;
 import ml.peya.plugins.Utils.Utils;
 import org.bukkit.command.CommandSender;

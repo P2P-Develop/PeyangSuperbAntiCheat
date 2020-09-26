@@ -1,4 +1,4 @@
-package ml.peya.plugins.Utils;
+package ml.peya.plugins.Objects;
 
 import org.bukkit.Color;
 import org.bukkit.Material;

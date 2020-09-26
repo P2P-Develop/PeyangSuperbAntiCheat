@@ -1,4 +1,4 @@
-package ml.peya.plugins.Utils;
+package ml.peya.plugins.Objects;
 
 import develop.p2p.lib.WaveCreator;
 import ml.peya.plugins.PeyangSuperbAntiCheat;

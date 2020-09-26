@@ -2,7 +2,7 @@ package ml.peya.plugins;
 
 import com.mojang.authlib.properties.Property;
 import ml.peya.plugins.Moderate.KickManager;
-import ml.peya.plugins.Utils.Books;
+import ml.peya.plugins.Objects.Books;
 import ml.peya.plugins.Utils.PlayerUtils;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
