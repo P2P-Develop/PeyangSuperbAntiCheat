@@ -60,7 +60,7 @@ public class CommandTarget implements CommandExecutor
 
         if (args.length >= 2)
         {
-            switch (args[2])
+            switch (args[1])
             {
                 case "1":
                     GuiItem.giveAllItems((Player) sender, IItems.Type.TARGET, player.getName());

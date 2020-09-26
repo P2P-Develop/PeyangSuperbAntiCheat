@@ -35,7 +35,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import static ml.peya.plugins.Variables.cheatMeta;
 import static ml.peya.plugins.Variables.counting;
-import static ml.peya.plugins.Variables.mods;
 import static ml.peya.plugins.Variables.module;
 import static ml.peya.plugins.Variables.tracker;
 
@@ -84,10 +83,7 @@ public class Events implements Listener
     public void onLeave(PlayerQuitEvent e)
     {
         Player player = e.getPlayer();
-
         tracker.remove(player.getName());
-
-        mods.remove(player.getUniqueId());
     }
 
     /**
@@ -145,15 +141,6 @@ public class Events implements Listener
     {
         Player p = e.getPlayer();
 
-        new BukkitRunnable()
-        {
-            @Override
-            public void run()
-            {
-                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[]{-2, 0});
-                p.sendPluginMessage(PeyangSuperbAntiCheat.getPlugin(), "FML|HS", new byte[]{0, 2, 0, 0, 0, 0});
-            }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 5);
 
         EntityPlayer tab = PlayerUtils.getRandomPlayer(e.getPlayer().getWorld());
         tab.getBukkitEntity().setPlayerListName(ChatColor.RED + tab.getName());

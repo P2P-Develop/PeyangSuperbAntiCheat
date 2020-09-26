@@ -43,9 +43,6 @@ commands:
   target:
     usage: /target <Player>
     description: "プレイヤーをターゲットにします。"
-  mods:
-    usage: /mods <Player>
-    description: "プレイヤーのModを見ます。"
   tracking:
     aliases: ["track"]
     usage: /tracking <Player>
@@ -89,7 +86,6 @@ permissions:
       psac.pull: true
       psac.target: true
       psac.chattarget: true
-      psac.mods: true
       psac.tracking: true
       psac.silentteleport: true
       psac.userinfo: true
@@ -140,9 +136,6 @@ permissions:
     default: op
   psac.chattarget:
     description: チャットのプレイヤーネームの左にターゲッティングボタンを追加します。
-    default: op
-  psac.mods:
-    description: プレイヤーのModを見ます。
     default: op
   psac.tracking:
     description: プレイヤーを追跡するコマンドです。

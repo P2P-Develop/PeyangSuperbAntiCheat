@@ -20,7 +20,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.logging.Level;
 
 import static ml.peya.plugins.Variables.autoMessage;
@@ -35,7 +34,6 @@ import static ml.peya.plugins.Variables.item;
 import static ml.peya.plugins.Variables.learnCount;
 import static ml.peya.plugins.Variables.learnCountLimit;
 import static ml.peya.plugins.Variables.logger;
-import static ml.peya.plugins.Variables.mods;
 import static ml.peya.plugins.Variables.network;
 import static ml.peya.plugins.Variables.protocolManager;
 import static ml.peya.plugins.Variables.skin;
@@ -161,7 +159,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         logger.info("Reading weights from learnPath...");
         Init.loadLearn();
 
-        mods = new HashMap<>();
 
         Init.registerChannel();
 

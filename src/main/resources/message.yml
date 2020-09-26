@@ -40,8 +40,6 @@ error:
   bans:
     unknownSearchType: "%%red%%%%bold%%エラー：検索タイプが不明です。"
     databaseInfoNotFound: "%%red%%%%bold%%エラー：データベースに情報が見つかりませんでした。"
-  mods:
-    noDataFound: "%%red%%%%bold%%エラー：このプレイヤーの導入しているMODが見つかりませんでした。"
 
 command:
   report:
@@ -191,8 +189,6 @@ message:
       lynx: "%%yellow%%More %%count%% Bans(Kicks)."
       normal: "%%aqua%%ほか %%yellow%%%%count%% %%aqua%%件"
     lynx: "%%gold%%--- Bans for %%name%% ---"
-  mods:
-    title: "%%blue%%%%name%% %%gold%%さんの導入Mod一覧"
   tracking:
     track: "%%red%%%%player%%さんを追跡します。"
     unTrack: "%%red%%追跡モードを解除しました。"
@@ -278,4 +274,3 @@ item:
     title: "%%red%%%%name%% の処罰一覧"
   targetStick: "%%gold%%%%bold%%ターゲットスティック"
   lead: "%%red%%プレイヤーを引き寄せる"
-  mods: "%%red%%MOD一覧"

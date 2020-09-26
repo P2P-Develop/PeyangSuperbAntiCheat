@@ -9,7 +9,6 @@ import ml.peya.plugins.Commands.CmdTst.AuraBot;
 import ml.peya.plugins.Commands.CmdTst.AuraPanic;
 import ml.peya.plugins.Commands.CmdTst.TestKnockback;
 import ml.peya.plugins.Commands.CommandBans;
-import ml.peya.plugins.Commands.CommandMods;
 import ml.peya.plugins.Commands.CommandPeyangSuperbAntiCheat;
 import ml.peya.plugins.Commands.CommandPull;
 import ml.peya.plugins.Commands.CommandReport;
@@ -27,9 +26,8 @@ import ml.peya.plugins.Gui.Items.Target.AuraPanicItem;
 import ml.peya.plugins.Gui.Items.Target.BackButton;
 import ml.peya.plugins.Gui.Items.Target.BanBook;
 import ml.peya.plugins.Gui.Items.Target.CompassTracker3000_tm;
-import ml.peya.plugins.Gui.Items.Target.Lead;
 import ml.peya.plugins.Gui.Items.Target.Page2.BackToPage1;
-import ml.peya.plugins.Gui.Items.Target.Page2.ModList;
+import ml.peya.plugins.Gui.Items.Target.Lead;
 import ml.peya.plugins.Gui.Items.Target.TestKnockBack;
 import ml.peya.plugins.Gui.Items.Target.ToPage2;
 import ml.peya.plugins.Learn.NeuralNetwork;
@@ -244,7 +242,6 @@ public class Init
 
         item.register(new BackToPage1());                              //====Page2
         item.register(new Lead());
-        item.register(new ModList());
 
         item.register(new TargetStick());                              //====Main
 
@@ -264,7 +261,6 @@ public class Init
         getPlugin().getCommand("bans").setExecutor(new CommandBans());
         getPlugin().getCommand("pull").setExecutor(new CommandPull());
         getPlugin().getCommand("target").setExecutor(new CommandTarget());
-        getPlugin().getCommand("mods").setExecutor(new CommandMods());
         getPlugin().getCommand("tracking").setExecutor(new CommandTracking());
         getPlugin().getCommand("trust").setExecutor(new CommandTrust());
         getPlugin().getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
@@ -369,8 +365,6 @@ public class Init
     public static void registerChannel()
     {
         bungeeChannel = "PSACProxy";
-        Bukkit.getMessenger().registerOutgoingPluginChannel(getPlugin(), "FML|HS");
-        Bukkit.getMessenger().registerIncomingPluginChannel(getPlugin(), "FML|HS", new ClientModGetter());
         Bukkit.getMessenger().registerOutgoingPluginChannel(getPlugin(), bungeeChannel);
         Bukkit.getMessenger().registerIncomingPluginChannel(getPlugin(), bungeeChannel, new Bungee());
     }

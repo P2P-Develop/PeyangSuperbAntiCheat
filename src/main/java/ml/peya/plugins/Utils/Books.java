@@ -129,45 +129,6 @@ public class Books
         return book;
     }
 
-    /**
-     * Modリストの本をぶん投げてくれます。
-     *
-     * @param player Mod何入れてるんこの人？？ねぇ？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？？
-     * @param mods   検査済みじゃないと駄目ですよぉ！
-     * @return 本に変換した後のアイテム。
-     */
-    public static ItemStack getModsBook(Player player, HashMap<String, String> mods)
-    {
-        ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
-        BookMeta meta = (BookMeta) book.getItemMeta();
-
-        ComponentBuilder builder = new ComponentBuilder(get("message.mods.title", pair("name", player.getName())))
-                .append("\n")
-                .append("\n");
-
-        int count = 0;
-
-        for (String id : mods.keySet())
-        {
-            builder.append(ChatColor.RED + id + ChatColor.GRAY + ": " + ChatColor.BLUE + mods.get(id)).append("\n");
-
-            if (++count < 10)
-                continue;
-
-            count = 0;
-            meta.spigot().addPage(builder.create());
-            builder = new ComponentBuilder("");
-        }
-
-        meta.spigot().addPage(builder.create());
-
-        meta.setTitle("-");
-        meta.setAuthor("AntiCheat Dev");
-        meta.setLore(Collections.singletonList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "PSAC Book"));
-
-        book.setItemMeta(meta);
-        return book;
-    }
 
     /**
      * Q. これは PSAC の 本 です か？

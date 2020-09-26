@@ -12,8 +12,6 @@ import ml.peya.plugins.Module.Modules;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.UUID;
 import java.util.logging.Logger;
 
 /**
@@ -68,10 +66,6 @@ public class Variables
      * {@code CommandTracking}で追跡が入った時にこの値に動きがあるそうです。
      */
     public static Tracker tracker;
-    /**
-     * {@code CommandMods}に関与するクラスの関数とかで出てきたmodsをここに格納するそうです。
-     */
-    public static HashMap<UUID, HashMap<String, String>> mods;
     /**
      * 定期メッセージに使います。なんかあったのか初期化されてる。
      */

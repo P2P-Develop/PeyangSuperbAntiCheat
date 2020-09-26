@@ -160,7 +160,6 @@ Other settings can be done using permissions.
 |   `psac.reportntf`  |           none           | Players with this permission can be notified when the player submits a report.                                                            |       op      |     psac.mod     |
 |     `psac.pull`     |      [/pull](#pull)      | This permission can pull other players.                                                                                                   |       op      |     psac.mod     |
 |  `psac.chattarget`  |           none           | A mark will be added to the left of the chat for players with this permission.                                                            |       op      |     psac.mod     |
-|     `psac.mods`     |           none           | This permission can see the mods that other players have introduced.                                                                      |       op      |     psac.mod     |
 |   `psac.userinfo`   |  [/userinfo](#userinfo)  | This permission can see the player information. If `message.lynx` enabled, add some information.                                          |
 |  ***psac.admin***   |           group          | This permission can use all commands of the plugin.                                                                                       |     false     |       none       |
 |     `psac.drop`     | [/psac drop](#arguments) | This permission can delete submitted report.                                                                                              |     false     |    psac.admin    |
@@ -363,26 +362,6 @@ Displays the player's kick (BAN) history **remaining in this plugin**.
 ### Permission
 
 - `psac.bans`
-
-## /mods
-
-Displays the mods installed by the specified player.
-
-### Description
-
-If the mod loader is Forge, can view the mods installed by the player.  
-The response is returned as the Mod ID.
-
-### Usage
-
-- /mods \<PlayerName\>  
-  Displays the mods of the player specified by \<PlayerName\>.
-
-### Permission
-
-- `psac.mods`  
-  
-> **WARNING: This command use `psac.mods` permission. Not `psac.mod` permission.**
 
 ## /target
 
@@ -686,7 +665,6 @@ Player can get the following utility items by executing [/target](#target).
 |    Arrow    |  TO_TARGET_\<Number\>  | Go to next page.                                 |           [/target](#target) \<Number\>         |
 |    Clock    |         BACK           | Go back.                                         |                      none                       |
 |    Reed     |         PULL           | Pull the target.                                 |             [/pull](#pull) \<Target\>           |
-|    Book     |       MOD_LIST         | Gets the list of mods introduced by the target.  |             [/mods](#mods) \<Target\>           |
 |  Blaze Rod  |     TARGET_STICK       | Target the player you are looking at.            |     [/target](#target) \<Looking Player\>       |
 
 ## What library does this plugin use?
