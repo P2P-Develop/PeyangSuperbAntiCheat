@@ -1,6 +1,6 @@
 # PSAC contribution ルール
 
-For English-speaking users, click [here](CONTRIBUTING-en.md).
+For contributors in English, click [here](CONTRIBUTING-en.md).
 
 ## 概要
 
@@ -16,7 +16,7 @@ PSACにはPSACの貢献者として適切に貢献するために、少々のル
 - Pull Requestは**フォーク先のブランチ**からリクエストしましょう。  
   PSACでは**基本**ブランチを`stable`、`develop`の二つのみにしています。
 - **Pull Requestのベースは必ず`develop`ブランチを選びましょう。**  
-  masterブランチはリリースされてからそのままの安定したソースコードのみ残しています。
+  `stable`はリリースされてからそのままの安定したソースコードのみ残しています。
 - Pull RequestやIssueはなるべくテンプレートを使用するようにしましょう。  
   英語のテンプレートしか用意していませんが、日本語でも英語でも、ロシア語でも中国語でもグジャラート語でもなんでも大丈夫です。
 
