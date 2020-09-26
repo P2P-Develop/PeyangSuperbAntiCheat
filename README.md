@@ -18,7 +18,7 @@
       src="https://img.shields.io/badge/java-%3E=%208u221-success.svg?style=flat-square"
       alt="Java Version Support"
   ></a>
-    <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/issues"
+  <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/issues"
     ><img
       src="https://img.shields.io/github/issues/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
       alt="GitHub Issues"
@@ -29,29 +29,30 @@
       alt="GitHub License"
   ></a><br>
   <a href="https://codeclimate.com/github/P2P-Develop/PeyangSuperbAntiCheat"
-     ><img
-       src="https://img.shields.io/codeclimate/maintainability-percentage/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
-       alt="Code Climate maintainability"
+    ><img
+      src="https://img.shields.io/codeclimate/maintainability-percentage/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
+      alt="Code Climate maintainability"
   ></a>
-  <a href="https://app.codacy.com/gh/P2P-Develop/PeyangSuperbAntiCheat"
-     ><img
-     src="https://img.shields.io/codacy/grade/dc66e1631fcd4ba68f8f831b0e701b7d/develop?style=flat-square"
-     alt="Codacy code quality (develop)"
+  <a href="https://app.codacy.com/gh/P2P-Develop/PeyangSuperbAntiCheat?branch=stable"
+    ><img
+      src="https://img.shields.io/codacy/grade/dc66e1631fcd4ba68f8f831b0e701b7d/stable?style=flat-square"
+      alt="Codacy code quality"
   ></a>
   <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/actions?query=workflow%3A%22Java+CI+with+Maven%22"
-     ><img
-           alt="GitHub Workflow Status"
-           src="https://img.shields.io/github/workflow/status/P2P-Develop/PeyangSuperbAntiCheat/Java%20CI%20with%20Maven?label=build&style=flat-square"
+    ><img
+      src="https://img.shields.io/github/workflow/status/P2P-Develop/PeyangSuperbAntiCheat/Java%20CI%20with%20Maven?label=build&style=flat-square"
+      alt="GitHub Workflow Status"
   ></a>
   <a href="https://snyk.io/test/github/peyang-Celeron/PeyangSuperbAntiCheat"
-     ><img 
-           alt="Snyk Vulnerabilities for GitHub Repo" 
-           src="https://img.shields.io/snyk/vulnerabilities/github/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
+    ><img 
+      src="https://img.shields.io/snyk/vulnerabilities/github/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
+      alt="Snyk Vulnerabilities for GitHub Repo"  
   ></a>
+</p>
 
 ---
 
-<p align="center" style="color: #6A737D"><strong>このプラグインのドキュメントは多言語に対応していますがネタ成分が次第に多くなっています。<br>
+<p align="center"><strong>このプラグインのドキュメントは多言語に対応していますがネタ成分が次第に多くなっています。<br>
   真面目なドキュメントを読みたい方は英語ドキュメントをお読みください。</strong><br>
   This plugin document supported multi language.
 </p>
@@ -63,7 +64,6 @@
       src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/US.svg"
       alt="English"
   ></a>
-  &nbsp;
   <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/blob/stable/docs/README-ja.md"
     ><img
       height="40"
