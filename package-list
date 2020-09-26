@@ -17,5 +17,6 @@ ml.peya.plugins.Moderate
 ml.peya.plugins.Module
 ml.peya.plugins.Module.Load
 ml.peya.plugins.Module.NoCheatPlus
+ml.peya.plugins.Objects
 ml.peya.plugins.Task
 ml.peya.plugins.Utils
