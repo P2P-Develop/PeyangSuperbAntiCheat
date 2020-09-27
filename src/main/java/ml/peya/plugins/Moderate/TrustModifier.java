@@ -1,13 +1,17 @@
 package ml.peya.plugins.Moderate;
 
 import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Utils.SQL;
 import ml.peya.plugins.Utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.HashMap;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -35,14 +39,17 @@ public class TrustModifier
                 try (Connection connection = trust.getConnection();
                      Statement statement = connection.createStatement())
                 {
-                    if (statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'").next())
+                    if (isTrusted(player))
                     {
-                        statement.execute("DeLeTe FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'");
+                        SQL.delete(connection, "trust",
+                                new HashMap<String, String>(){{put("PLAYER",
+                                        player.getUniqueId().toString().replace("-", ""));}});
                         sender.sendMessage(get("message.trust.remove", pair("name", player.getName())));
                     }
                     else
                     {
-                        statement.execute("InSeRt InTo TrUsT vAlUeS ('" + player.getName() + "');");
+                        SQL.insert(connection, "trust",
+                                player.getUniqueId().toString().replace("-", ""));
                         sender.sendMessage(get("message.trust.add", pair("name", player.getName())));
                     }
                 }
@@ -68,9 +75,10 @@ public class TrustModifier
         boolean result = false;
 
         try (Connection connection = trust.getConnection();
-             Statement statement = connection.createStatement())
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM trust WHERE PLAYER=?"))
         {
-            result = statement.executeQuery("SeLeCt * FrOm TrUsT wHeRe PLAYER='" + player.getName() + "'").next();
+            statement.setString(1, player.getUniqueId().toString().replace("-", ""));
+            result = statement.executeQuery().next();
         }
         catch (Exception e)
         {

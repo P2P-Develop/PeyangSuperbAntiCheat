@@ -4,6 +4,7 @@ import ml.peya.plugins.DetectClasses.WatchEyeManagement;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
 import ml.peya.plugins.Objects.Decorations;
 import ml.peya.plugins.Utils.MessageEngine;
+import ml.peya.plugins.Utils.SQL;
 import ml.peya.plugins.Utils.TextBuilder;
 import ml.peya.plugins.Utils.Utils;
 import ml.peya.plugins.Variables;
@@ -140,31 +141,29 @@ public class KickManager
         }
         try (Connection kickC = Variables.banKick.getConnection();
              Connection eyeC = Variables.eye.getConnection();
-             Statement kickS = kickC.createStatement();
              Statement eyeS = eyeC.createStatement();
              Statement eyeS2 = eyeC.createStatement();
              Statement eyeS3 = eyeC.createStatement())
         {
-            kickS.execute("InSeRt InTo KiCk VaLuEs(" +
-                    "'" + WatchEyeManagement.parseInjection(player.getName()) + "'," +
-                    "'" + WatchEyeManagement.parseInjection(player.getUniqueId().toString()) + "'," +
-                    "'" + WatchEyeManagement.parseInjection(id.toString()) + "'," +
-                    "" + new Date().getTime() + "," +
-                    "'" + WatchEyeManagement.parseInjection(reason) + "', " +
-                    (opFlag ? 1: 0) +
-                    ");");
+
+            SQL.insert(kickC, "kick",
+                    player.getName(),
+                    player.getUniqueId().toString().replace("-", ""),
+                    id.toString(),
+                    new Date().getTime(),
+                    reason,
+                    opFlag ? 1: 0);
 
             ResultSet eyeList = eyeS
                     .executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString()
-                            .replace("-", "")
-                            .replace("'", "\\'") + "'");
+                            .replace("-", "") +
+                            "'");
 
             while (eyeList.next())
             {
                 String MNGID = eyeList.getString("MNGID");
-                MNGID = WatchEyeManagement.parseInjection(MNGID);
-                eyeS2.execute("DeLeTe FrOm WaTcHrEaSoN WhErE MnGiD = '" + MNGID + "'");
-                eyeS3.execute("DeLeTe FrOm WaTchEyE WhErE MnGiD = '" + MNGID + "'");
+                SQL.delete(eyeC, "watchreason", new HashMap<String, String>(){{put("MNGID", MNGID);}});
+                SQL.delete(eyeC, "watcheye", new HashMap<String, String>(){{put("MNGID", MNGID);}});
             }
 
         }

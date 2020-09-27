@@ -1,6 +1,7 @@
 package ml.peya.plugins.Moderate;
 
 import ml.peya.plugins.DetectClasses.WatchEyeManagement;
+import ml.peya.plugins.Utils.SQL;
 import ml.peya.plugins.Utils.Utils;
 import org.bukkit.entity.Player;
 
@@ -38,7 +39,7 @@ public class BanAnalyzer
                 try (Connection connection = banKick.getConnection();
                      Statement statement = connection.createStatement())
                 {
-                    ResultSet set = statement.executeQuery("SeLeCt * FrOm KiCk WhErE UUID='" + uuid.toString() + "'");
+                    ResultSet set = statement.executeQuery("SeLeCt * FrOm KiCk WhErE UUID='" + uuid.toString().replace("-", "") + "'");
                     while (set.next())
                     {
                         abuses.add(new Bans(
@@ -62,7 +63,7 @@ public class BanAnalyzer
                 try (Connection connection = banKick.getConnection();
                      Statement statement = connection.createStatement())
                 {
-                    ResultSet set = statement.executeQuery("SeLeCt * FrOm ban WhErE UUID='" + uuid.toString() + "'");
+                    ResultSet set = statement.executeQuery("SeLeCt * FrOm ban WhErE UUID='" + uuid.toString().replace("-", "") + "'");
                     while (set.next())
                     {
                         abuses.add(new Bans(
@@ -104,17 +105,15 @@ public class BanAnalyzer
         IntStream.range(0, 8).parallel().forEachOrdered(i ->
                 id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A')));
 
-        try (Connection connection = banKick.getConnection();
-             Statement statement = connection.createStatement())
+        try (Connection connection = banKick.getConnection())
         {
-            statement.execute("INSERT INTO ban VALUES(" + String.format(
-                    "'%s', '%s', '%s', %d, '%s', 1",
-                    WatchEyeManagement.parseInjection(player.getDisplayName()),
-                    player.getUniqueId(),
+            SQL.insert(connection, "ban",
+                    player.getName(),
+                    player.getUniqueId().toString().replace("-", ""),
                     id.toString(),
                     new Date().getTime(),
-                    WatchEyeManagement.parseInjection(reason)
-            ) + ")");
+                    reason,
+                    1);
 
         }
         catch (Exception e)

@@ -1,6 +1,7 @@
 package ml.peya.plugins.DetectClasses;
 
 import ml.peya.plugins.Enum.EnumCheatType;
+import ml.peya.plugins.Utils.SQL;
 import ml.peya.plugins.Utils.Utils;
 import org.bukkit.entity.Player;
 
@@ -28,20 +29,16 @@ public class WatchEyeManagement
     public static String add(Player target, String fromName, String fromUUID, int level)
     {
         final String manageId = UUID.randomUUID().toString().replace("-", "");
-        try (Connection connection = eye.getConnection();
-             Statement statement = connection.createStatement())
+        try (Connection connection = eye.getConnection())
         {
-            statement.execute(String.format(
-                    "InSeRt InTo WaTcHeYe VaLuEs ('%s', '%s', %s, '%s', '%s', '%s', %s)",
+            SQL.insert(connection, "watcheye",
                     target.getUniqueId().toString().replace("-", ""),
                     target.getName(),
                     new Date().getTime(),
-                    parseInjection(fromName),
-                    parseInjection(fromUUID),
+                    fromName,
+                    fromUUID,
                     manageId,
-                    level
-            ));
-            statement.close();
+                    level);
             return manageId;
         }
         catch (Exception e)
@@ -62,19 +59,16 @@ public class WatchEyeManagement
      */
     public static boolean setReason(String id, EnumCheatType reason, int vl)
     {
-        try (Connection connection = eye.getConnection();
-             Statement statement = connection.createStatement())
+        try (Connection connection = eye.getConnection())
         {
             String reasonString = reason.getSysName();
             if (reasonString.endsWith(" "))
                 reasonString = reasonString.substring(0, reasonString.length() - 1);
-            reasonString = parseInjection(reasonString);
-            statement.execute(String.format(
-                    "InSeRt InTo WaTcHrEaSoN VaLuEs ('%s', '%s', %s)",
-                    parseInjection(id),
+
+            SQL.insert(connection, "watchreason",
+                    id,
                     reasonString,
-                    vl
-            ));
+                    vl);
             return true;
         }
         catch (Exception e)
