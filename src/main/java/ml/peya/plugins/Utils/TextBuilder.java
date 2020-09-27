@@ -204,7 +204,7 @@ public class TextBuilder
      */
     public static ComponentBuilder getNextPrevButtonText(TextComponent prev, TextComponent next, boolean prevFlag, boolean nextFlag)
     {
-        TextComponent uBar = new TextComponent("----");
+        TextComponent uBar = new TextComponent("-----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
         return new ComponentBuilder(prevFlag ? prev: uBar)
                 .append("------------------------")
