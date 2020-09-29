@@ -1,6 +1,5 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.DetectClasses.WatchEyeManagement;
 import ml.peya.plugins.Utils.SQL;
 import ml.peya.plugins.Utils.Utils;
 import org.bukkit.entity.Player;

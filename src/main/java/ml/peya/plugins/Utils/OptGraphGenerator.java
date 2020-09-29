@@ -28,7 +28,7 @@ public class OptGraphGenerator
      * @param max 最大。
      * @return 生成するらしい。
      */
-    static String genGraph(int VL, int max)
+    public static String genGraph(int VL, int max)
     {
         StringBuilder builder = new StringBuilder("[");
 

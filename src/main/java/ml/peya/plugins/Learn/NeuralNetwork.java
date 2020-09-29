@@ -85,7 +85,7 @@ public class NeuralNetwork
      * @param inputWeight 入力の重み
      * @return 変換後
      */
-    static ArrayList<Input> toInputData(double[] inputLayer, double[] inputWeight)
+    private static ArrayList<Input> toInputData(double[] inputLayer, double[] inputWeight)
     {
         return IntStream.range(0, inputLayer.length)
                 .parallel()

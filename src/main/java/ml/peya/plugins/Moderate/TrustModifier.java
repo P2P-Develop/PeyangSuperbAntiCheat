@@ -5,7 +5,6 @@ import ml.peya.plugins.Utils.SQL;
 import ml.peya.plugins.Utils.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.Connection;

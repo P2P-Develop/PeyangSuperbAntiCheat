@@ -96,16 +96,12 @@ public class CommandUserInfo implements CommandExecutor
                 "Network Level: " + data + player.getTotalExperience(),
                 "Network EXP: " + data + (int) player.getExp(),
                 "Guild: " + ChatColor.GRAY + ChatColor.ITALIC.toString() + "NONE",
-                "Current Server: " + data + player.getWorld()
-                        .getName(),
+                "Current Server: " + data + player.getWorld().getName(),
                 "First Login: " + data + formatter.format(new Date(offline.getFirstPlayed())),
                 "Last Login: " + data + formatter.format(new Date(offline.getLastPlayed())),
                 "Packages: ",
                 "Boosters: "
-        )
-                .parallel()
-                .map(CommandUserInfo::t)
-                .forEachOrdered(p::add);
+        ).parallel().map(CommandUserInfo::t).forEachOrdered(p::add);
 
         int ban = 0;
         int kick = 0;
@@ -117,13 +113,13 @@ public class CommandUserInfo implements CommandExecutor
                 case BAN:
                     ban++;
                     break;
-                case ALL:
-                    break;
                 case KICK:
                     kick++;
                     break;
                 case MUTE:
                     mute++;
+                    break;
+                case ALL: default:
                     break;
             }
 

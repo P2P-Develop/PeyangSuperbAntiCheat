@@ -1,9 +1,7 @@
 package ml.peya.plugins.Moderate;
 
-import ml.peya.plugins.DetectClasses.WatchEyeManagement;
-import ml.peya.plugins.PeyangSuperbAntiCheat;
 import ml.peya.plugins.Objects.Decorations;
-import ml.peya.plugins.Utils.MessageEngine;
+import ml.peya.plugins.PeyangSuperbAntiCheat;
 import ml.peya.plugins.Utils.SQL;
 import ml.peya.plugins.Utils.TextBuilder;
 import ml.peya.plugins.Utils.Utils;
@@ -132,7 +130,7 @@ public class KickManager
                 .collect(Collectors.joining()));
         map.put("id", id.toString());
 
-        String message = MessageEngine.get("kick.reason", map);
+        String message = get("kick.reason", map);
 
         if (isTest)
         {
@@ -161,7 +159,7 @@ public class KickManager
 
             while (eyeList.next())
             {
-                String MNGID = eyeList.getString("MNGID");
+                final String MNGID = eyeList.getString("MNGID");
                 SQL.delete(eyeC, "watchreason", new HashMap<String, String>(){{put("MNGID", MNGID);}});
                 SQL.delete(eyeC, "watcheye", new HashMap<String, String>(){{put("MNGID", MNGID);}});
             }

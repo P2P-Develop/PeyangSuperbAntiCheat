@@ -7,7 +7,6 @@ import ml.peya.plugins.Utils.Utils;
 import org.bukkit.command.CommandSender;
 
 import java.sql.Connection;
-import java.sql.Statement;
 import java.util.HashMap;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;

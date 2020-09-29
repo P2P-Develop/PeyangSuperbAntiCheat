@@ -139,9 +139,6 @@ public class Events implements Listener
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e)
     {
-        Player p = e.getPlayer();
-
-
         EntityPlayer tab = PlayerUtils.getRandomPlayer(e.getPlayer().getWorld());
         tab.getBukkitEntity().setPlayerListName(ChatColor.RED + tab.getName());
         PlayerConnection connection = ((CraftPlayer) e.getPlayer()).getHandle().playerConnection;
