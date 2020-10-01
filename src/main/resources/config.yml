@@ -79,7 +79,7 @@ decoration:
   #魔法陣の表示
   circle: true
 
-  #ガーディアン表示
+  #レーザー表示
   laser: true
 
 message:
