@@ -597,7 +597,6 @@ In this plugin, the following config is set by default.
 |     message.lynx      |      true       | Specifies whether Lynx Mod compatible.                                                                                        |
 |  autoMessage.enabled  |      true       | Toggle the presence or absence of regular messages.                                                                           |
 |   autoMessage.time    |       15        | Specify a minuites for recurring messages.                                                                                    |
-|        skins          |    \(UUID\)     | Specifies the skin to apply to the NPC.<br>You can specify multiple UUIDs and it will be selected from a random UUID.         |
 
 ---
 

@@ -559,7 +559,6 @@ Lynxモード\(-f\)が有効の場合、Rankなどの情報が最低限表示さ
 | message.lynx | true | Lynx Modと互換性を持たせるかどうかです。 |
 | autoMessage.enabled | true | 定期メッセージの有効または無効を切り替えます。 |
 | autoMessage.time | 15 | 定期メッセージの時間周期です。分で指定します。 |
-| skins | \(UUID...\) | NPCに適用するスキンです。この中からランダムで選ばれます。 |
 
 ### 人工知能もどきについて
 

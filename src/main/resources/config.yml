@@ -93,27 +93,3 @@ autoMessage:
 
   #定期メッセージの周期です。(分指定)
   time: 15
-
-#スキンのUUIDセットです。
-#ここにプレイヤーのUUIDを指定すれば、そのプレイヤーのスキンが使用されます。
-skins:
-  - 6b93a8e658ee4794b69a56a3c2287010
-  - 36f2cdbc77d545c7a205f5e8e6c0fb3b
-  - 1fdd7771d09c407e9e6f86f8efab5604
-  - eee5a0b7db174398abf0d462a2a0d910
-  - f53127e597ad4fbfaa25ff7b18f156ef
-  - 36f2cdbc77d545c7a205f5e8e6c0fb3b
-  - 556ad16a459a46f29dbc6838906d1bf2
-  - 6b93a8e658ee4794b69a56a3c2287010
-  - 2fc54874b6134996b7512cbe85f04ea8
-  - f7c77d999f154a66a87dc4a51ef30d19
-  - 03b8fa5ac6774410be3081de2ccf490b
-  - 95f9ec2297e84a5d89216b5c05029f12
-  - a98e94094f014e58b07956e9640bc8d9
-  - 10bd5a621b36458da4a474df6b9b95be
-  - 07fe4381aaa24633bae183e58c5cc85b
-  - b339457baf3c439680fc33c7a01398e8
-  - 9f76cdc4c9004e34947a5f7615e07fde
-  - 69e5aea0dd5e4cf88fcad8b4dd8b2243
-  - 4e5959217b894ead96b9c50a4256da1e
-  - c52fafa6e2234bddb884b39f641a4cf4
