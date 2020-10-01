@@ -5,6 +5,7 @@ import ml.peya.plugins.Utils.Utils;
 import org.bukkit.entity.Player;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -36,9 +37,10 @@ public class BanAnalyzer
             case ALL:
             case KICK:
                 try (Connection connection = banKick.getConnection();
-                     Statement statement = connection.createStatement())
+                     PreparedStatement statement = connection.prepareStatement("SELECT DATE, REASON, PLAYER, UUID, KICKID FROM kick WHERE UUID=?"))
                 {
-                    ResultSet set = statement.executeQuery("SeLeCt * FrOm KiCk WhErE UUID='" + uuid.toString().replace("-", "") + "'");
+                    statement.setString(1, uuid.toString().replace("-", ""));
+                    ResultSet set = statement.executeQuery();
                     while (set.next())
                     {
                         abuses.add(new Bans(
@@ -60,9 +62,10 @@ public class BanAnalyzer
                     break;
             case BAN:
                 try (Connection connection = banKick.getConnection();
-                     Statement statement = connection.createStatement())
+                     PreparedStatement statement = connection.prepareStatement("SELECT DATE, REASON, PLAYER, UUID, BANID FROM ban WHERE UUID=?"))
                 {
-                    ResultSet set = statement.executeQuery("SeLeCt * FrOm ban WhErE UUID='" + uuid.toString().replace("-", "") + "'");
+                    statement.setString(1, uuid.toString().replace("-", ""));
+                    ResultSet set = statement.executeQuery();
                     while (set.next())
                     {
                         abuses.add(new Bans(

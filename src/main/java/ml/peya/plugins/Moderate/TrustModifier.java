@@ -74,7 +74,7 @@ public class TrustModifier
         boolean result = false;
 
         try (Connection connection = trust.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM trust WHERE PLAYER=?"))
+             PreparedStatement statement = connection.prepareStatement("SELECT PLAYER FROM trust WHERE PLAYER=?"))
         {
             statement.setString(1, player.getUniqueId().toString().replace("-", ""));
             result = statement.executeQuery().next();

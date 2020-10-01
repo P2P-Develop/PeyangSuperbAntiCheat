@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class Show
 
         args[1] = WatchEyeManagement.parseInjection(args[1]);
 
-        if (WatchEyeManagement.isExistsRecord(args[1]))
+        if (!WatchEyeManagement.isExistsRecord(args[1]))
         {
             sender.sendMessage(get("error.showDrop.notFoundReport"));
 
@@ -48,9 +49,13 @@ public class Show
         String mngid = args[1];
 
         try (Connection connection = eye.getConnection();
-             Statement statement = connection.createStatement())
+             PreparedStatement statement =
+                     connection.prepareStatement("SELECT UUID, ID, ISSUEBYID, UUID FROM watcheye WHERE MNGID=?");
+             PreparedStatement reasons =
+                     connection.prepareStatement("SELECT REASON FROM watchreason WHERE MNGID=?"))
         {
-            ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD='" + mngid + "'");
+            statement.setString(1, mngid);
+            ResultSet result = statement.executeQuery();
 
             if (!result.next())
             {
@@ -65,7 +70,9 @@ public class Show
             final String issuebyid = result.getString("ISSUEBYID");
             final String issuebyuuid = result.getString("ISSUEBYUUID");
 
-            ResultSet reason = statement.executeQuery("SeLeCt * FrOm WaTcHrEaSoN WhErE MnGiD='" + mngid + "'");
+            reasons.setString(1, mngid);
+
+            ResultSet reason = statement.executeQuery();
 
             ArrayList<EnumCheatType> types = new ArrayList<>();
 

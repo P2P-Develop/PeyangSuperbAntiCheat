@@ -6,6 +6,7 @@ import ml.peya.plugins.Utils.Utils;
 import org.bukkit.entity.Player;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.UUID;
@@ -89,9 +90,11 @@ public class WatchEyeManagement
     public static boolean isExistsRecord(String targetUuid, String fromUuid)
     {
         try (Connection connection = eye.getConnection();
-             Statement statement = connection.createStatement())
+             PreparedStatement statement = connection.prepareStatement("SELECT MNGID FROM watcheye WHERE UUID=? AND ISSUEBYUUID=?"))
         {
-            return statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UUID = '" + parseInjection(targetUuid) + "' AND ISSUEBYUUID = '" + parseInjection(fromUuid) + "'").isBeforeFirst();
+            statement.setString(1, targetUuid);
+            statement.setString(2, fromUuid);
+            return statement.executeQuery().isBeforeFirst();
         }
         catch (Exception e)
         {
@@ -105,20 +108,22 @@ public class WatchEyeManagement
      * レコードが存在するかチェックする
      *
      * @param id 管理ID。
-     * @return 同じレコードであるかどうか。
+     * @return レコードが存在するかどうか
      */
-    public static boolean isExistsRecord(String id)
+    public static boolean isExistsRecord(String id) //メソッドの名前的に反転しなくておｋ
     {
         try (Connection connection = eye.getConnection();
-             Statement statement = connection.createStatement())
+             PreparedStatement statement = connection.prepareStatement("SELECT MNGID FROM watcheye WHERE MNGID=?"))
         {
-            return !statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + parseInjection(id) + "'").isBeforeFirst();
+            statement.setString(1, id);
+
+            return statement.executeQuery().isBeforeFirst();
         }
         catch (Exception e)
         {
             e.printStackTrace();
             Utils.errorNotification(Utils.getStackTrace(e));
-            return true;
+            return false;
         }
     }
 

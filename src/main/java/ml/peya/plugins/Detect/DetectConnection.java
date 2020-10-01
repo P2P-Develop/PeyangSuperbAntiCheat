@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -172,17 +173,15 @@ public class DetectConnection
     {
         ArrayList<String> reason = new ArrayList<>();
         try (Connection connection = eye.getConnection();
-             Statement statement = connection.createStatement();
-             Statement statement1 = connection.createStatement())
+             PreparedStatement statement = connection.prepareStatement("SELECT MNGID FROM watcheye WHERE ID=?");
+             PreparedStatement statement1 = connection.prepareStatement("SELECT REASON FROM watchreason WHERE MNGID=?"))
         {
-
-            final String name = WatchEyeManagement.parseInjection(player.getName());
-
-            ResultSet rs = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE ID='" + name + "'");
+            statement.setString(1, player.getName());
+            ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                final String MNGID = WatchEyeManagement.parseInjection(rs.getString("MNGID"));
-                ResultSet set = statement1.executeQuery("SeLeCt * FrOm WaTcHrEaSon WhErE MNGID='" + MNGID + "'");
+                statement1.setString(1, rs.getString("MNGID"));
+                ResultSet set = statement1.executeQuery();
                 while (set.next())
                     reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
             }

@@ -5,6 +5,7 @@ import ml.peya.plugins.Enum.EnumCheatType;
 import ml.peya.plugins.Enum.EnumSeverity;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -65,12 +66,13 @@ public class SeverityLevels
      */
     public static EnumSeverity getSeverityFromId(String id)
     {
-        if (WatchEyeManagement.isExistsRecord(id))
+        if (!WatchEyeManagement.isExistsRecord(id))
             return EnumSeverity.UNKNOWN;
         try (Connection connection = eye.getConnection();
-             Statement statement = connection.createStatement())
+             PreparedStatement statement = connection.prepareStatement("SELECT LEVEL FROM watcheye WHERE MNGID=?"))
         {
-            ResultSet result = statement.executeQuery("SeLeCt * FrOm WaTcHeYe WhErE MnGiD = '" + id + "'");
+            statement.setString(1, id);
+            ResultSet result = statement.executeQuery();
             if (result.next())
                 return getSeverity(result.getInt("LEVEL"));
             return EnumSeverity.UNKNOWN;

@@ -12,6 +12,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
@@ -139,9 +140,7 @@ public class KickManager
         }
         try (Connection kickC = Variables.banKick.getConnection();
              Connection eyeC = Variables.eye.getConnection();
-             Statement eyeS = eyeC.createStatement();
-             Statement eyeS2 = eyeC.createStatement();
-             Statement eyeS3 = eyeC.createStatement())
+             PreparedStatement statement = eyeC.prepareStatement("SELECT MNGID FROM watcheye WHERE UUID=?"))
         {
 
             SQL.insert(kickC, "kick",
@@ -152,10 +151,8 @@ public class KickManager
                     reason,
                     opFlag ? 1: 0);
 
-            ResultSet eyeList = eyeS
-                    .executeQuery("SeLeCt * FrOm WaTcHeYe WhErE UuId = '" + player.getUniqueId().toString()
-                            .replace("-", "") +
-                            "'");
+            statement.setString(1, player.getUniqueId().toString().replace("-", ""));
+            ResultSet eyeList = statement.executeQuery();
 
             while (eyeList.next())
             {

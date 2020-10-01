@@ -28,7 +28,7 @@ public class Drop
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))
             return;
 
-        if (WatchEyeManagement.isExistsRecord(args[1]))
+        if (!WatchEyeManagement.isExistsRecord(args[1]))
         {
             sender.sendMessage(get("error.showDrop.notFoundReport"));
             return;

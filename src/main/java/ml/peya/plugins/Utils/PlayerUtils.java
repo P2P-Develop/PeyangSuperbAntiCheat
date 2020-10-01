@@ -146,7 +146,7 @@ public class PlayerUtils
         try (Connection connection = skin.getConnection();
              Statement statement = connection.createStatement())
         {
-            ResultSet result = statement.executeQuery("SELECT * FROM Skin ORDER BY RANDOM() LIMIT 1");
+            ResultSet result = statement.executeQuery("SELECT Texture, Signature FROM Skin ORDER BY RANDOM() LIMIT 1");
             return !result.next()
                     ? Pair.of("", "")
                     : Pair.of(result.getString("Texture"), result.getString("Signature"));

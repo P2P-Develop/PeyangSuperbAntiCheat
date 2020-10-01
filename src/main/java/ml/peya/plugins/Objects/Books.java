@@ -69,7 +69,7 @@ public class Books
         component.append(get("reportbook.submit"))
                 .event(new ClickEvent(
                         ClickEvent.Action.RUN_COMMAND,
-                        "/report " + player.getName() + " " + tmpReasonText + " $__BOOKS__;"))
+                        "/report " + player.getName() + " " + tmpReasonText + " -B"))
                 .append(get("reportbook.cancel"))
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/report $$cancel$$"));
 

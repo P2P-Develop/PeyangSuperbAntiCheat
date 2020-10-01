@@ -8,6 +8,7 @@ import ml.peya.plugins.Utils.Utils;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -67,9 +68,10 @@ public class BungeeCommands implements CommandExecutor
             {
                 ArrayList<String> reasons = new ArrayList<>();
                 try (Connection connection = Variables.eye.getConnection();
-                     Statement statement = connection.createStatement())
+                     PreparedStatement statement = connection.prepareStatement("SELECT REASON FROM watchreason WHERE MNGID=?"))
                 {
-                    ResultSet result = statement.executeQuery("SELECT * FROM watchreason WHERE MNGID='" + id + "'");
+                    statement.setString(1, id);
+                    ResultSet result = statement.executeQuery();
                     while (result.next())
                         reasons.add(CheatTypeUtils.getCheatTypeFromString(result.getString("REASON")).getText());
                 }
