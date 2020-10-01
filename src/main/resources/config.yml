@@ -6,6 +6,11 @@ database:
   learnPath: "./learn.json"
   trustPath: "./trust.db"
 
+commands:
+  override:
+    #Kickコマンドを、PSAC製のオリジナルに置き換えるかどうか
+    kick: true
+
 #npc関係のコンフィグです。
 npc:
   #指定された秒数、NPCを召喚します。

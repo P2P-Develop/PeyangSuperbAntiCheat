@@ -537,6 +537,7 @@ Lynxモード\(-f\)が有効の場合、Rankなどの情報が最低限表示さ
 | database.logPath | ./log.db | キック情報などを保存する、SQLiteデータベースの置き場所です。 |
 | database.learnPath | ./learn.json | 学習によって値が変更された「重み」と学習回数を保存する、JSONファイルの置き場所です。 |
 | database.learnPath | ./trust.db | 信用したプレイヤーを保存する、SQLiteデータベースの置き場所です。つまりこれ消せば信用データ消えます。やっぱ鯖を操る人最強。 |
+| commands.override.kick | true | KICKコマンドをPSAC製のものに置き換えるかどうかです。 |
 | npc.seconds | 4 | NPCがプレイヤーの周りを回る秒数です。 |
 | npc.time | 0.3 | NPCが回る速さです。感覚で調整してください。 |
 | npc.range | 2.1 | NPCが回る半径です。ロマンが全て。デフォルトが最高。これがPSACｸｵﾘﾃｨ。 |

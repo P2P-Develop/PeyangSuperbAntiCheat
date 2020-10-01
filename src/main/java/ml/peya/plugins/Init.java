@@ -17,6 +17,7 @@ import ml.peya.plugins.Commands.CommandTarget;
 import ml.peya.plugins.Commands.CommandTracking;
 import ml.peya.plugins.Commands.CommandTrust;
 import ml.peya.plugins.Commands.CommandUserInfo;
+import ml.peya.plugins.Commands.VanillaCommands;
 import ml.peya.plugins.Gui.Events.Drop;
 import ml.peya.plugins.Gui.Events.Run;
 import ml.peya.plugins.Gui.Item;
@@ -389,6 +390,7 @@ public class Init
         Bukkit.getServer().getPluginManager().registerEvents(new Events(), getPlugin());
         Bukkit.getServer().getPluginManager().registerEvents(new Run(), getPlugin());
         Bukkit.getServer().getPluginManager().registerEvents(new Drop(), getPlugin());
+        Bukkit.getServer().getPluginManager().registerEvents(new VanillaCommands(), getPlugin());
     }
 
 
