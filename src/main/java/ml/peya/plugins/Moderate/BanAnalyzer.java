@@ -93,7 +93,7 @@ public class BanAnalyzer
     }
 
     /**
-     * Ban情報を<b>登録</b>
+     * Ban情報を<b>登録</b>します。
      * 実際にはBANせず、登録するだけです。
      *
      * @param reason Ban理由
