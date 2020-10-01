@@ -130,19 +130,29 @@ public class BanAnalyzer
         /**
          * すべて
          */
-        ALL,
+        ALL(null),
         /**
          * KICKのみ
          */
-        KICK,
+        KICK("Kick"),
         /**
          * BANのみ
          */
-        BAN,
+        BAN("Ban"),
         /**
          * MUTEのみ
          */
-        MUTE;
+        MUTE("Mute");
+
+        /**
+         * text
+         */
+        String text;
+
+        Type(String text)
+        {
+            this.text = text;
+        }
 
         /**
          * StringをTypeに変換する。
@@ -164,6 +174,15 @@ public class BanAnalyzer
                 default:
                     return ALL;
             }
+        }
+
+        /**
+         * Textを取得
+         * @return てきすと
+         */
+        public String text()
+        {
+            return this.text;
         }
     }
 

@@ -305,7 +305,7 @@ public class TextBuilder
         if (reasonSet.toString().endsWith(", "))
             reasonSet.setLength(reasonSet.length() - 2);
 
-        return new ComponentBuilder(ChatColor.YELLOW + (type == BanAnalyzer.Type.KICK ? "Kick": "Ban"))
+        return new ComponentBuilder(ChatColor.YELLOW + type.text())
                 .append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())))
                 .append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
     }
