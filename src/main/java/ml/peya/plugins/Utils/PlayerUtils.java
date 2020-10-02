@@ -69,8 +69,8 @@ public class PlayerUtils
         {
             final Block block = it.next();
             if (block.getX() == location.getBlockX() &&
-                block.getY() == location.getBlockY() &&
-                block.getZ() == location.getBlockZ())
+                    block.getY() == location.getBlockY() &&
+                    block.getZ() == location.getBlockZ())
                 return true;
         }
         return false;
@@ -163,20 +163,13 @@ public class PlayerUtils
      * プレイヤーを取得する。たぶん。
      *
      * @param sender イベントセンダー。
-     * @param args 引数たち。
+     * @param name   なまえ
      * @return Playerの取得に失敗した場合null。
      */
     @Nullable
-    public static Player getPlayer(CommandSender sender, String[] args)
+    public static Player getPlayer(CommandSender sender, String name)
     {
-        if (args.length == 0)
-        {
-            sender.sendMessage(get("error.invalidArgument"));
-
-            return null;
-        }
-
-        Player player = Bukkit.getPlayer(args[0]);
+        Player player = Bukkit.getPlayer(name);
 
         if (player == null)
         {

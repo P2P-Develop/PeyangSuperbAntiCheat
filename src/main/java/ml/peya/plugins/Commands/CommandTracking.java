@@ -50,8 +50,13 @@ public class CommandTracking implements CommandExecutor
 
             return true;
         }
+        else if (args.length == 0)
+        {
+            sender.sendMessage(get("error.invalidArgument"));
+            return true;
+        }
 
-        Player player = getPlayer(sender, args);
+        Player player = getPlayer(sender, args[0]);
 
         if (player == null)
             return true;
