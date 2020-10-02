@@ -1,5 +1,6 @@
 package ml.peya.plugins.Commands;
 
+import ml.peya.plugins.Commands.CmdPub.Ban;
 import ml.peya.plugins.Commands.CmdPub.Kick;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -22,9 +23,15 @@ public class VanillaCommands implements Listener
         switch (label)
         {
             case "kick":
-                if (!config.getBoolean("commands.override.kick"))
+                if (!config.getBoolean("commands.override.kick.enable"))
                     return;
                 Kick.run(e.getPlayer(), args);
+                e.setCancelled(true);
+                break;
+            case "ban":
+                if (!config.getBoolean("commands.override.ban.enable"))
+                    return;
+                Ban.run(e.getPlayer(), args);
                 e.setCancelled(true);
                 break;
             default:

@@ -6,11 +6,6 @@ database:
   learnPath: "./learn.json"
   trustPath: "./trust.db"
 
-commands:
-  override:
-    #Kickコマンドを、PSAC製のオリジナルに置き換えるかどうか
-    kick: true
-
 #npc関係のコンフィグです。
 npc:
   #指定された秒数、NPCを召喚します。
@@ -95,6 +90,14 @@ message:
 autoMessage:
   #定期メッセージの有効/無効です
   enabled: true
-
   #定期メッセージの周期です。(分指定)
+  #0にすると、自動で1になりますが、ぶっ壊れるので注意です。
   time: 15
+
+commands:
+  override:
+    #kickコマンドのオーバーライド
+    kick:
+      enable: true
+    ban:
+      enable: true

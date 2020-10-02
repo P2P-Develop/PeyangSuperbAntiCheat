@@ -1,5 +1,6 @@
 package ml.peya.plugins.Commands;
 
+import ml.peya.plugins.Commands.CmdPub.Ban;
 import ml.peya.plugins.Commands.CmdPub.Drop;
 import ml.peya.plugins.Commands.CmdPub.Help;
 import ml.peya.plugins.Commands.CmdPub.Kick;
@@ -60,6 +61,8 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
             case "kick":
                 Kick.run(sender, args);
                 break;
+            case "ban":
+                Ban.run(sender, args);
             default:
                 sender.sendMessage(get("error.main.notFoundCommand", pair("label", label)));
                 break;

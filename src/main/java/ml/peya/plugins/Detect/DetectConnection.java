@@ -1,13 +1,10 @@
 package ml.peya.plugins.Detect;
 
 import ml.peya.plugins.DetectClasses.CheatDetectNowMeta;
-import ml.peya.plugins.DetectClasses.WatchEyeManagement;
 import ml.peya.plugins.Enum.DetectType;
-import ml.peya.plugins.Moderate.CheatTypeUtils;
 import ml.peya.plugins.Moderate.KickManager;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
 import ml.peya.plugins.Utils.TextBuilder;
-import ml.peya.plugins.Utils.Utils;
 import net.minecraft.server.v1_12_R1.EntityPlayer;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
@@ -16,18 +13,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
 
 import static ml.peya.plugins.Variables.banLeft;
 import static ml.peya.plugins.Variables.cheatMeta;
 import static ml.peya.plugins.Variables.config;
-import static ml.peya.plugins.Variables.eye;
 import static ml.peya.plugins.Variables.learnCount;
 import static ml.peya.plugins.Variables.learnCountLimit;
 import static ml.peya.plugins.Variables.network;
@@ -171,34 +161,9 @@ public class DetectConnection
      */
     private static boolean kick(final Player player)
     {
-        ArrayList<String> reason = new ArrayList<>();
-        try (Connection connection = eye.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT MNGID FROM watcheye WHERE ID=?");
-             PreparedStatement statement1 = connection.prepareStatement("SELECT REASON FROM watchreason WHERE MNGID=?"))
-        {
-            statement.setString(1, player.getName());
-            ResultSet rs = statement.executeQuery();
-            while (rs.next())
-            {
-                statement1.setString(1, rs.getString("MNGID"));
-                ResultSet set = statement1.executeQuery();
-                while (set.next())
-                    reason.add(Objects.requireNonNull(CheatTypeUtils.getCheatTypeFromString(set.getString("REASON"))).getText());
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            Utils.errorNotification(Utils.getStackTrace(e));
-        }
-
-        ArrayList<String> realReason = new ArrayList<>(new HashSet<>(reason));
-
         KickManager.kickPlayer(
                 player,
-                String.join(", ", realReason).equals("")
-                        ? "KillAura"
-                        : "Report: " + String.join(", ", realReason),
+                "PEYANG CHEAT DETECTION",
                 true,
                 false
         );

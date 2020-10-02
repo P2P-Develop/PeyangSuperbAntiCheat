@@ -2,16 +2,12 @@ package ml.peya.plugins.Objects;
 
 import develop.p2p.lib.WaveCreator;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Triple;
+import ml.peya.plugins.Variables;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
-
-import java.util.Arrays;
-import java.util.stream.IntStream;
 
 /**
  * でこれーしょん☆！
@@ -47,7 +43,12 @@ public class Decorations
 
                 player.getWorld().spawnParticle(
                         Particle.FLAME,
-                        player.getLocation().add(0, 0.5, 0), 30, 0, 0, 0, 0.65
+                        player.getLocation().add(0, 0.5, 0),
+                        30,
+                        0,
+                        0,
+                        0,
+                        0.65
                 );
 
                 sec[0] += 5;
@@ -75,7 +76,15 @@ public class Decorations
      */
     public static void particle(Location location, int size, Particle particle)
     {
-        location.getWorld().spawnParticle(particle, location, size, 0, 0, 0, 0.001); //XXX: 誰だよこんな引数多く設計したやつ
+        location.getWorld().spawnParticle(
+                particle,
+                location,
+                size,
+                0,
+                0,
+                0,
+                0.001
+        ); //XXX: 誰だよこんな引数多く設計したやつ
     }
 
     /**
@@ -100,18 +109,6 @@ public class Decorations
     }
 
     /**
-     * 可変長引数でいっこの関数で線を引くよ！
-     *
-     * @param lines 引数をタプルとして入れれるよ！
-     */
-    @SafeVarargs
-    public static void line(final ImmutablePair<Location, Location>... lines)
-    {
-        Arrays.stream(lines)
-                .forEachOrdered(line -> line(line.getLeft(), line.getRight()));
-    }
-
-    /**
      * 線を引くよ！
      *
      * @param path 開始位置
@@ -120,15 +117,18 @@ public class Decorations
      */
     public static void line(Location path, Location to, Particle p)
     {
+        double distance = path.distance(to);
+
         Vector vP = path.toVector();
-        for (double d = 0; path.distance(to) > d; d += 0.2)
+        Vector tP = to.toVector();
+
+        Vector line = tP.clone().subtract(vP).normalize().multiply(0.2);
+
+        for (double d = 0; distance > d; )
         {
-            vP.add(to.toVector()
-                    .clone()
-                    .subtract(vP)
-                    .normalize()
-                    .multiply(0.2));
+            vP.add(line);
             particle(vP.toLocation(path.getWorld()), 1, p);
+            d += 0.2;
         }
     }
 
@@ -141,24 +141,15 @@ public class Decorations
      */
     public static void circle(Location center, int count, double radius)
     {
-        particle(new Location(
+        Location n = new Location(
                 center.getWorld(),
                 particle_x(count, radius) + center.getX(),
                 center.getY(),
                 particle_z(count, radius) + center.getZ()
-        ));
-    }
+        );
 
-    /**
-     * 可変長引数でいっこの関数で実行できるえん
-     *
-     * @param circles 引数をタプルとして入れれるよ！
-     */
-    @SafeVarargs
-    public static void circle(final Triple<Location, Integer, Double>... circles)
-    {
-        Arrays.stream(circles)
-                .forEachOrdered(circle -> circle(circle.getLeft(), circle.getMiddle(), circle.getRight()));
+        particle(n);
+
     }
 
     /**
@@ -171,12 +162,15 @@ public class Decorations
      */
     public static void circle(Location center, int count, double radius, Particle particle)
     {
-        particle(new Location(
+        Location n = new Location(
                 center.getWorld(),
                 particle_x(count, radius) + center.getX(),
                 center.getY(),
                 particle_z(count, radius) + center.getZ()
-        ), 5, particle);
+        );
+
+        particle(n, 5, particle);
+
     }
 
     /**
@@ -189,7 +183,6 @@ public class Decorations
     {
         final int[] count = {0};
         WaveCreator wave = new WaveCreator(0.8, 1.8, 0.1);
-        final Location center = player.getLocation();
 
         BukkitRunnable runnable = new BukkitRunnable()
         {
@@ -198,34 +191,33 @@ public class Decorations
             {
                 for (double i = 0; i < Math.PI * 2; i++)
                 {
-                    circle(center.clone()
-                            .add(0, 0.9, 0), count[0], 3, Particle.CRIT);
+                    Location center = player.getLocation();
+
+                    circle(center.clone().add(0, 0.9, 0), count[0], 3, Particle.CRIT);
 
                     circle(center.add(0, 0.7, 0), count[0], 2.7, Particle.ENCHANTMENT_TABLE);
 
-                    circle(
-                            Triple.of(center.clone().add(0, wave.get(0.01, false), 0), count[0], wave.getStatic()),
-                            Triple.of(center.clone().add(0, wave.get(0.01, false), 0), count[0], wave.getStatic()),
-                            Triple.of(center.clone().add(3.2, 0.7, 3.2), count[0], 1.5),
-                            Triple.of(center.clone().add(-3.2, 0.7, -3.2), count[0], 1.5),
-                            Triple.of(center.clone().add(-3.2, 0.7, 3.2), count[0], 1.5),
-                            Triple.of(center.clone().add(3.2, 0.7, -3.2), count[0], 1.5)
-                    );
+                    circle(center.clone().add(0, wave.get(0.01, false), 0), count[0], wave.getStatic());
 
-                    circle(center.clone()
-                            .add(0, 1.5, 0), count[0], 5, Particle.SPELL_WITCH);
+                    circle(center.clone().add(3.2, 0.7, 3.2), count[0], 1.5);
+                    circle(center.clone().add(-3.2, 0.7, -3.2), count[0], 1.5);
+                    circle(center.clone().add(-3.2, 0.7, 3.2), count[0], 1.5);
+                    circle(center.clone().add(3.2, 0.7, -3.2), count[0], 1.5);
+
+                    circle(center.clone().add(0, 1.5, 0), count[0], 5, Particle.SPELL_WITCH);
 
                     count[0]++;
                 }
 
-                line(
-                        ImmutablePair.of(center.clone().add(3, 0.7, 0), center.clone().add(-1.5, 0.7, 2.3)),
-                        ImmutablePair.of(center.clone().add(-1.5, 0.7, 2.3), center.clone().add(-1.5, 0.7, -2.3)), // 三角
-                        ImmutablePair.of(center.clone().add(3, 0.7, 0), center.clone().add(-1.5, 0.7, -2.3)),
-                        ImmutablePair.of(center.clone().add(-3, 0.7, 0), center.clone().add(1.5, 0.7, -2.3)),
-                        ImmutablePair.of(center.clone().add(1.5, 0.7, -2.3), center.clone().add(1.5, 0.7, 2.3)), // 三角 (反転)
-                        ImmutablePair.of(center.clone().add(-3, 0.7, 0), center.clone().add(1.5, 0.7, 2.3))
-                );
+                Location center = player.getLocation();
+
+                line(center.clone().add(3, 0.7, 0), center.clone().add(-1.5, 0.7, 2.3));
+                line(center.clone().add(-1.5, 0.7, 2.3), center.clone().add(-1.5, 0.7, -2.3)); //三角
+                line(center.clone().add(3, 0.7, 0), center.clone().add(-1.5, 0.7, -2.3));
+
+                line(center.clone().add(-3, 0.7, 0), center.clone().add(1.5, 0.7, -2.3));
+                line(center.clone().add(1.5, 0.7, -2.3), center.clone().add(1.5, 0.7, 2.3)); //三角(反転)
+                line(center.clone().add(-3, 0.7, 0), center.clone().add(1.5, 0.7, 2.3));
             }
         };
 
@@ -254,18 +246,17 @@ public class Decorations
 
         final double radius = 2.5;
 
+
         BukkitRunnable runnable = new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                final Location c = player.getLocation()
-                        .clone();
+                Location c = player.getLocation().clone();
+                Location X = new Location(c.getWorld(), particle_x(time[0], radius) + c.getX(), 5.0 + c.getY(), particle_z(time[0], radius) + c.getZ());
 
-                IntStream.range(0, 10)
-                        .parallel()
-                        .forEachOrdered(i -> line(c, new Location(c.getWorld(), particle_x(time[0], radius) + c
-                                .getX(), 5.0 + c.getY(), particle_z(time[0], radius) + c.getZ()), Particle.TOWN_AURA));
+                for (int i = 0; i < 10; i++)
+                    line(c, X, Particle.TOWN_AURA);
                 time[0] += Math.E;
             }
         };
@@ -304,4 +295,20 @@ public class Decorations
     {
         return Math.cos(time) * radius;
     }
+
+    /**
+     * デコ要素すべて展開するやつ
+     *
+     * @param player 被験者
+     */
+    public static void decoration(Player player)
+    {
+        if (Variables.config.getBoolean("decoration.flame"))
+            flame(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+        if (Variables.config.getBoolean("decoration.circle"))
+            magic(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+        if (Variables.config.getBoolean("decoration.laser"))
+            laser(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+    }
+
 }

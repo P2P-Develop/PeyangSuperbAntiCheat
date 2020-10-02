@@ -197,6 +197,7 @@ public class Init
                     "BANID nchar," +
                     "DATE bigint," +
                     "REASON nchar," +
+                    "EXPIRE nchar," +
                     "STAFF int" +
                     ");");
 
@@ -278,7 +279,7 @@ public class Init
             FileUtils.copyInputStreamToFile(
                     getPlugin().getResource("skin.db"),
                     new File(getPlugin().getDataFolder().getAbsolutePath() + "/skin.db")
-                );
+            );
         }
         catch (Exception e)
         {

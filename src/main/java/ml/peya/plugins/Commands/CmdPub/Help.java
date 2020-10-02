@@ -31,9 +31,13 @@ public class Help
     {
         sender.sendMessage(get("base.prefix"));
 
+        ArrayList<String> nodes = getNodes();
+        if (sender instanceof Player)
+            nodes.addAll(getPlayerNodes());
+
         if (args.length != 0)
         {
-            sender.sendMessage(getPlayerNodes().contains(args[0])
+            sender.sendMessage(nodes.contains(args[0])
                     ? get("command.help." + args[0])
                     : get("error.psac.notPage"));
 
@@ -43,9 +47,6 @@ public class Help
             return;
         }
 
-        ArrayList<String> nodes = sender instanceof Player
-                ? getPlayerNodes()
-                : getNodes();
 
         new BukkitRunnable()
         {
@@ -67,7 +68,7 @@ public class Help
 
     private static ArrayList<String> getNodes()
     {
-        return new ArrayList<>(Arrays.asList("report", "view", "aurapanic", "aurabot", "show", "drop", "kick", "bans", "testkb"));
+        return new ArrayList<>(Arrays.asList("report", "view", "aurapanic", "aurabot", "show", "drop", "kick", "bans", "testkb", "ban"));
     }
 
     private static ArrayList<String> getPlayerNodes()

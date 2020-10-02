@@ -9,6 +9,7 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
@@ -177,6 +178,26 @@ public class PlayerUtils
 
             return null;
         }
+        return player;
+    }
+
+    /**
+     * プレイヤーを取得します(オフラインでも可)
+     *
+     * @return 取得したプレイヤー
+     */
+    public static Player getPlayerAllowOffline(String playerName)
+    {
+        Player player = Bukkit.getPlayer(playerName);
+        if (player == null)
+        {
+            for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers())
+            {
+                if (offlinePlayer.getName().toLowerCase().equals(playerName.toLowerCase()))
+                    player = offlinePlayer.getPlayer();
+            }
+        }
+
         return player;
     }
 }

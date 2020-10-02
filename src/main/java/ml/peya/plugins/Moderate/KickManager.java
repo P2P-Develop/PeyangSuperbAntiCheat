@@ -3,10 +3,8 @@ package ml.peya.plugins.Moderate;
 import ml.peya.plugins.Objects.Decorations;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
 import ml.peya.plugins.Utils.SQL;
-import ml.peya.plugins.Utils.TextBuilder;
 import ml.peya.plugins.Utils.Utils;
 import ml.peya.plugins.Variables;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -14,12 +12,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 
@@ -40,8 +34,8 @@ public class KickManager
     {
         player.setMetadata("psac-kick", new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), true));
 
-        broadCast(wdFlag, player);
-        decoration(player);
+        BroadcastMessenger.broadCast(wdFlag, player);
+        Decorations.decoration(player);
         new BukkitRunnable()
         {
             @Override
@@ -51,49 +45,6 @@ public class KickManager
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
-    }
-
-    /**
-     * 全員にメッセージ送りつけるやつ。
-     *
-     * @param wdFlag NPC(等)による、オートキック...かどうか?
-     * @param target 対象プレイヤー。
-     */
-    private static void broadCast(boolean wdFlag, Player target)
-    {
-        if (wdFlag)
-            Bukkit.getOnlinePlayers().parallelStream().forEachOrdered(player ->
-            {
-                if (player.hasPermission("psac.ntfadmin"))
-                    player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
-                else if (player.hasPermission("psac.notification"))
-                    player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
-            });
-
-        new BukkitRunnable()
-        {
-            @Override
-            public void run()
-            {
-                Bukkit.broadcast(get("kick.broadcast"), "psac.notification");
-                this.cancel();
-            }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
-    }
-
-    /**
-     * デコ要素すべて展開するやつ
-     *
-     * @param player 被験者
-     */
-    public static void decoration(Player player)
-    {
-        if (Variables.config.getBoolean("decoration.flame"))
-            Decorations.flame(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
-        if (Variables.config.getBoolean("decoration.circle"))
-            Decorations.magic(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
-        if (Variables.config.getBoolean("decoration.laser"))
-            Decorations.laser(player, Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
     }
 
     /**
@@ -108,28 +59,14 @@ public class KickManager
     {
         if (Variables.config.getBoolean("decoration.lightning"))
             Decorations.lighting(player);
-        StringBuilder id = new StringBuilder();
-        Random random = new Random();
-        IntStream.range(0, 8).parallel().forEachOrdered(i ->
-        {
-            id.append(random.nextBoolean() ? random.nextInt(9): (char) (random.nextInt(5) + 'A'));
-        });
-
-        String reasonP;
-
-        if (isTest)
-            reasonP = "PEYANG CHEAT TEST";
-        else if (opFlag)
-            reasonP = "KICKED BY STAFF";
-        else
-            reasonP = "PEYANG CHEAT DETECTION ";
 
         HashMap<String, Object> map = new HashMap<>();
 
-        map.put("reason", reasonP);
-        map.put("ggid", IntStream.range(0, 7).parallel().mapToObj(i -> String.valueOf(random.nextInt(9)))
-                .collect(Collectors.joining()));
-        map.put("id", id.toString());
+        String id = Abuse.genRandomId(8);
+
+        map.put("reason", reason);
+        map.put("ggid", Abuse.genRandomId(7));
+        map.put("id", id);
 
         String message = get("kick.reason", map);
 
@@ -146,10 +83,11 @@ public class KickManager
             SQL.insert(kickC, "kick",
                     player.getName(),
                     player.getUniqueId().toString().replace("-", ""),
-                    id.toString(),
+                    id,
                     new Date().getTime(),
                     reason,
-                    opFlag ? 1: 0);
+                    opFlag ? 1: 0
+            );
 
             statement.setString(1, player.getUniqueId().toString().replace("-", ""));
             ResultSet eyeList = statement.executeQuery();
@@ -157,8 +95,14 @@ public class KickManager
             while (eyeList.next())
             {
                 final String MNGID = eyeList.getString("MNGID");
-                SQL.delete(eyeC, "watchreason", new HashMap<String, String>(){{put("MNGID", MNGID);}});
-                SQL.delete(eyeC, "watcheye", new HashMap<String, String>(){{put("MNGID", MNGID);}});
+                SQL.delete(eyeC, "watchreason", new HashMap<String, String>()
+                {{
+                    put("MNGID", MNGID);
+                }});
+                SQL.delete(eyeC, "watcheye", new HashMap<String, String>()
+                {{
+                    put("MNGID", MNGID);
+                }});
             }
 
         }

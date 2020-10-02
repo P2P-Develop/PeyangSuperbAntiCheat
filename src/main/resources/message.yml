@@ -142,6 +142,7 @@ command:
     tracking: "%%aqua%%/track %%dark_purple%%[PlayerName]"
     trust: "%%aqua%%/trust %%dark_aqua%%<PlayerName>"
     silentteleport: "%%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>"
+    ban: "%%aqua%%/ban %%dark_aqua%%<PlayerName> %%dark_purple%% [理由...]"
 
 message:
   report:
@@ -197,8 +198,8 @@ message:
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\
-%%white%%Peyang Anti Cheat はこの７日間に %%red%%%%bold%%%%count%%%%reset%% 人のプレイヤーをキックしました。\n\
-%%white%%スタッフがこの７日間に追加で %%red%%%%bold%%%%staff_count%%%%reset%% 人をキックしました。\n\
+%%white%%Peyang Anti Cheat はこの７日間に %%red%%%%bold%%%%count%%%%reset%% 人のプレイヤーを対処しました。\n\
+%%white%%スタッフがこの７日間に追加で %%red%%%%bold%%%%staff_count%%%%reset%% 人を対処しました。\n\
 %%red%%禁止されている MOD はアクセス禁止の対象です！
 "
 
@@ -256,6 +257,25 @@ kick:
   \n\
   %%gray%%Kick ID：%%white%%%%id%%
   "
+
+ban:
+  permReason: "\
+  %%red%%あなたはこのサーバーから永久的にアクセスを禁止されています！\n
+  \n\
+  %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+  \n\
+  %%gray%%Ban ID：%%white%%%%id%%
+  "
+
+  tempReason: "\
+  %%red%%あなたはこのサーバーから一時的にアクセスを禁止されています！\n
+  \n\
+  %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+  \n\
+  %%gray%%Ban ID：%%white%%%%id%%
+  "
+
+
 report:
   submited: "%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%] プレイヤーがレポートを提出しました！"
   click: "%%yellow%%クリックしてレポートを確認してください！"

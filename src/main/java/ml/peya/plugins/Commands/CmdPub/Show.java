@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
@@ -36,8 +35,6 @@ public class Show
     {
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 2, 2))
             return;
-
-        args[1] = WatchEyeManagement.parseInjection(args[1]);
 
         if (!WatchEyeManagement.isExistsRecord(args[1]))
         {

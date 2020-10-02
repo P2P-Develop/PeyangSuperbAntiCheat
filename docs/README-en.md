@@ -547,22 +547,6 @@ Specifying \[test\] as the second argument kick player in test mode.
 This message is sent when the watchdog automatically detects a cheat.  
 For staff kicks, you will only broadcast secondary message.
 
-### Kick reasons
-
-There are three types of kick reasons:
-
-#### PEYANG CHEAT DETECTION
-
-This is the message when this plugin automatically detects cheats.
-
-#### KICKED BY STAFF
-
-This message is displayed when a staff member issues a [kick command](#psac-kick-playername-test).
-
-#### PEYANG ANTI CHEAT TEST
-
-A test message for this plugin. Please use it for testing.
-
 ---
 
 ## Config settings

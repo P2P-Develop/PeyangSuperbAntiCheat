@@ -4,11 +4,9 @@ import ml.peya.plugins.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,16 +36,23 @@ public class AutoMessageTask extends BukkitRunnable
         int staff = 0;
 
         try (Connection connection = banKick.getConnection();
-             PreparedStatement wdStatement =
-                     connection.prepareStatement("SELECT STAFF FROM kick WHERE DATE BETWEEN ? AND ? AND STAFF=1 "+
-                                                "UNION SELECT STAFF FROM ban WHERE DATE BETWEEN ? AND ? AND STAFF=0"))
+             PreparedStatement wd = connection.prepareStatement("SELECT STAFF FROM kick WHERE DATE BETWEEN ? AND ?");
+             PreparedStatement sr = connection.prepareStatement("SELECT STAFF FROM ban WHERE DATE BETWEEN ? AND ?"))
         {
-            wdStatement.setLong(1, date.getTime());
-            wdStatement.setLong(2, new Date().getTime());
-            wdStatement.setInt(3, 0);
-            ResultSet wd = wdStatement.executeQuery();
-            while (wd.next())
-                if (wd.getInt("STAFF") == 0)
+            wd.setLong(1, date.getTime());
+            wd.setLong(2, new Date().getTime());
+            sr.setLong(1, date.getTime());
+            sr.setLong(2, new Date().getTime());
+            ResultSet wdr = wd.executeQuery();
+            while (wdr.next())
+                if (wdr.getInt("STAFF") == 0)
+                    watchdog++;
+                else
+                    staff++;
+
+            ResultSet srr = sr.executeQuery();
+            while (srr.next())
+                if (srr.getInt("STAFF") == 0)
                     watchdog++;
                 else
                     staff++;

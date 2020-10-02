@@ -7,8 +7,9 @@ import org.bukkit.entity.Player;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.UUID;
 
 import static ml.peya.plugins.Variables.eye;
@@ -39,7 +40,8 @@ public class WatchEyeManagement
                     fromName,
                     fromUUID,
                     manageId,
-                    level);
+                    level
+            );
             return manageId;
         }
         catch (Exception e)
@@ -69,7 +71,8 @@ public class WatchEyeManagement
             SQL.insert(connection, "watchreason",
                     id,
                     reasonString,
-                    vl);
+                    vl
+            );
             return true;
         }
         catch (Exception e)
@@ -128,15 +131,36 @@ public class WatchEyeManagement
     }
 
     /**
-     * SQLインジェクションを防止する。
+     * レコードを削除する
      *
-     * @param sql インジェクションと見られるSQL。
-     * @return インジェクションだった場合はエスケープ
+     * @param uuid プレイヤーUUID
      */
-    public static String parseInjection(String sql)
+    public static void deleteReportWithPlayerID(String uuid)
     {
-        return sql.replace("\\", "\\\\")
-                .replace("'", "''")
-                .replace("\"", "\"\"");
+        try (Connection report = eye.getConnection();
+             PreparedStatement statement = report.prepareStatement("SELECT MNGID FROM watcheye WHERE UUID=?"))
+        {
+            statement.setString(1, uuid.replace("-", ""));
+
+            ResultSet result = statement.executeQuery();
+            while (result.next())
+                SQL.delete(report, "watchreason", new HashMap<String, String>()
+                        {{
+                            put("MNGID", result.getString("MNGID"));
+                        }}
+                );
+
+            SQL.delete(report, "watcheye",
+                    new HashMap<String, String>()
+                    {{
+                        put("UUID", uuid.replace("-", ""));
+                    }}
+            );
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
