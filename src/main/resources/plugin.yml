@@ -3,10 +3,10 @@ main: ml.peya.plugins.PeyangSuperbAntiCheat
 version: 1.0.0
 prefix: PeyangSuperbAntiCheat
 load: POSTWORLD
-author: TensaiPeyangSan
+author: Peyang
 authors: ["Lemonade19x", "Potato1682"]
 api-version: 1.12.2
-website: "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat"
+website: "https://psac.peya.tokyo"
 
 depend: ["ProtocolLib"]
 softdepend: ["Matrix", "NoCheatPlus"]
