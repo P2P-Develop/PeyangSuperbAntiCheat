@@ -62,7 +62,7 @@ public class Events implements Listener
      *
      * @param e 痛かったよぉ...
      */
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onDamage(EntityDamageByEntityEvent e)
     {
         if (!(e.getEntity() instanceof CraftPlayer) ||
@@ -91,7 +91,7 @@ public class Events implements Listener
      *
      * @param e 動いたときに発行されるイベントハンドラ。これ毎回発行してんのか...
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onMove(PlayerMoveEvent e)
     {
         if (!tracker.isTrackingByPlayer(e.getPlayer().getName()) && !cheatMeta.exists(e.getPlayer().getUniqueId()))
@@ -107,9 +107,11 @@ public class Events implements Listener
      *
      * @param e 非同期でチャットイベントを送ってくれます。こういうところやさしい。
      */
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onChat(AsyncPlayerChatEvent e)
     {
+        if (e.isCancelled())
+            return;
         e.setCancelled(true);
         String format = e.getFormat()
                 .replace("%1$s", e.getPlayer().getDisplayName())

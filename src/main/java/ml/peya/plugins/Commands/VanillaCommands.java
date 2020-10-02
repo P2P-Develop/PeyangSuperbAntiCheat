@@ -13,6 +13,9 @@ public class VanillaCommands implements Listener
     @EventHandler(priority = EventPriority.LOWEST)
     public void onCommand(PlayerCommandPreprocessEvent e)
     {
+        if (e.isCancelled())
+            return;
+
         String[] args = e.getMessage().split(" ");
         String label = args[0].replaceFirst("/", "");
 
@@ -23,7 +26,11 @@ public class VanillaCommands implements Listener
                     return;
                 Kick.run(e.getPlayer(), args);
                 e.setCancelled(true);
+                break;
+            default:
+                return;
         }
+
     }
 
 }
