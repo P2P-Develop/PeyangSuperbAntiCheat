@@ -103,7 +103,7 @@ $ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/dow
    $ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git PSACBuild
    ```
 
-2. enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-yaml-resources-filesrcmainresources)\).
+2. enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-yaml-resources-file)\).
 
    ```bash
    $ cd PSACBuild && mvn package
