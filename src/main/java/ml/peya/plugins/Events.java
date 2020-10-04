@@ -269,9 +269,7 @@ public class Events implements Listener
         String message;
 
         if (banInfo.get("expire").equals("_PERM"))
-        {
             message = MessageEngine.get("ban.permReason", map);
-        }
         else
         {
             long time;
