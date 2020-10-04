@@ -2,16 +2,16 @@
   
 [Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [BungeeCord](BUNGEE-en.md) | [FAQ](#what-is-this-npcwatchdog)
   
-> **WARNING: This repository has jokes in commit messages and source by developer(and a little contributor).  
+> **WARNING: This repository has jokes in commit messages and source by a developer(and a little contributor).  
 > If you want to introduce an anti-cheat plugin with high detection rate, please do not use this plugin.**  
   
 > ***VERY WARNING***: **With this plugin, DetectOPM will run +4 timers at the same time.  
 > In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**  
-> For more information on the number of threads, see [Plugin Threads Summary](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/blob/master/docs/PluginThreads.txt).
+> For more information on the number of threads, see [Plugin Threads Summary](PluginThreads.txt).
 
 ## Overview
 
-Anti Cheat plugin for Bukkit / Spigot / PaperMC based server.  
+AntiCheat plugin for Bukkit / Spigot / PaperMC based server.  
 It has been confirmed to work with version 1.12.2.  
   
 This plugin is a **Cheat Report Management** / **Cheat Detection Test** plugin.  
@@ -38,8 +38,8 @@ This means important items that the user should read.
   
 - /foo \<bar\> \[player\]
 
-This list a represents command and argmuents.  
-Argument enclosed in <>, it represents the necessary command, Enclosed in \[\] indicates an arbitrary command.  
+This list a represents command and arguments.  
+Argument enclosed in \<\>, it represents the necessary command, Enclosed in \[\] indicates an arbitrary command.  
   
 - `fooperm.bar`
 
@@ -103,7 +103,7 @@ $ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/dow
    $ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git PSACBuild
    ```
 
-2. enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-messageyml)\).
+2. enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-yaml-resources-file)\).
 
    ```bash
    $ cd PSACBuild && mvn package
@@ -137,7 +137,7 @@ $ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/dow
 
 ## Permissions
 
-Commands are always assigned one or more premissions.  
+Commands are always assigned one or more permissions.  
 Other settings can be done using permissions.
 
 |      Permission     |     Assigned Command     | Description                                                                                                                               | Default Value | Permission Group |
@@ -146,7 +146,7 @@ Other settings can be done using permissions.
 |    `psac.report`    |    [/report](#report)    | This permission can execute report commands.  Player deprived of this permission cannot report.                                           |      true     |    psac.member   |
 |    `psac.report`    | [/psac help](#arguments) | This permission can view help for members of this plugin.                                                                                 |      true     |    psac.member   |
 | `psac.notification` |           none           | This permission will receive broadcast messages when other players are kicked.                                                            |      true     |    psac.member   |
-|    `psac.regular`   |           none           | This permission can visible sended regular messages.                                                                                      |      true     |    psac.member   |
+|    `psac.regular`   |           none           | This permission can visible sent regular messages.                                                                                        |      true     |    psac.member   |
 |   ***psac.mod***    |           group          | This permission can kick or test the player.                                                                                              |       op      |       none       |
 |     `psac.kick`     | [/psac kick](#arguments) | This permission can kick player manually.                                                                                                 |       op      |     psac.mod     |
 |    `psac.aurabot`   |   [/aurabot](#aurabot)   | This permission can summon [KillAura Test NPC](#aurabot).                                                                                 |       op      |     psac.mod     |
@@ -160,7 +160,7 @@ Other settings can be done using permissions.
 |   `psac.reportntf`  |           none           | Players with this permission can be notified when the player submits a report.                                                            |       op      |     psac.mod     |
 |     `psac.pull`     |      [/pull](#pull)      | This permission can pull other players.                                                                                                   |       op      |     psac.mod     |
 |  `psac.chattarget`  |           none           | A mark will be added to the left of the chat for players with this permission.                                                            |       op      |     psac.mod     |
-|   `psac.userinfo`   |  [/userinfo](#userinfo)  | This permission can see the player information. If `message.lynx` enabled, add some information.                                          |
+|   `psac.userinfo`   |  [/userinfo](#userinfo)  | This permission can see the player information. If `message.lynx` enabled, add some information.                                          |       op      |     psac.mod     |
 |  ***psac.admin***   |           group          | This permission can use all commands of the plugin.                                                                                       |     false     |       none       |
 |     `psac.drop`     | [/psac drop](#arguments) | This permission can delete submitted report.                                                                                              |     false     |    psac.admin    |
 |     `psac.error`    |           none           | This permission can get error information when the plugin encountered an internal error.                                                  |     false     |    psac.admin    |
@@ -204,7 +204,7 @@ Staff can check the contents of the report with the `[CLICK]` button.
 This report format is lets them know who reported who and why.  
   
 > **WARNING: This report format is compatible with the Hypixel Lynx Mod (Keep leaking users down).  
-> This mod may be Bannable on Hypixel server, so never use this on Hypixel server.  
+> This mod may be bannable on Hypixel server, so never use this on Hypixel server.  
 > [Developer](https://github.com/peyang-Celeron) does not take any responsibility.**
 
 ### Usages
@@ -213,7 +213,7 @@ This report format is lets them know who reported who and why.
   Player can execute this command with this argument to open a book where you can select the reason for the report.  
   If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.
 
-- ![#008000](https://via.placeholder.com/15/008000/000000?text=+) Click to send report in "レポートを送信" , or
+- ![#008000](https://via.placeholder.com/15/008000/000000?text=+) Click to send report in "レポートを送信" , or:
 
 - ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Click the "レポートをキャンセル" to discard.
 
@@ -233,7 +233,7 @@ The books are sorted in the order they are displayed.
 |     Speed     |     speed, bhop, timer     | Run at a impossible speed(Bunny hops and Timer belong to speed).                                    |
 | AntiKnockback |    akb, velocity, antikb   | Never be knocked back.                                                                              |
 |     Reach     |            reach           | Extend the attack distance.                                                                         |
-|    Dolphin    |           dolphin          | Swiming automatically like a dolphin.                                                               |
+|    Dolphin    |           dolphin          | Swimming automatically like a dolphin.                                                               |
 
 ##### To avoid reporting spam, the same player cannot report to the same player.
 
@@ -253,7 +253,7 @@ The books are sorted in the order they are displayed.
 
 Executing this command will summon an NPC that spins around the player at a constant speed.  
 When an NPC is attacked a certain number of times, it kicks that player.  
-Also, to use the reach mode, add the "-r" argument to the first or second argument.  
+Also, to use the reach mode, adds the "-r" argument to the first or second argument.  
 Reach mode can scan the radius and check the reach.
 
 ### Usage
@@ -268,7 +268,7 @@ Reach mode can scan the radius and check the reach.
 
 - `psac.aurabot`
 
-Manages the permission to execute the summon command of Aurabot.  
+Manages the permission to execute the command on summoning of AuraBot.  
 Players with this permission can summon Watchdogs.
 
 ## /acpanic
@@ -283,7 +283,7 @@ Players with this permission can summon Watchdogs.
 
 This command always summons the NPC that is trying to move behind the player.  
 When an NPC is attacked a certain number of times, it kicks that player.  
-Also, to use the reach mode, add the "-r" argument to the first or second argument.
+Also, to use the reach mode, adds the "-r" argument to the first or second argument.
 
 ### Usage
 
@@ -313,7 +313,7 @@ This allows you to see if the player is knocking back.
 ### Usage
 
 - /testkb \<PlayerName\>  
-  Fire invisible arrow at \<PlayerName\>.
+  Fire an invisible arrow at \<PlayerName\>.
 
 ### Permission
 
@@ -371,7 +371,7 @@ Tracks the specified player as a target.
 
 Executing this command gives utility items.  
 These items allow you to execute useful commands with a click.  
-Dropping a gived item, clears all items.
+Dropping a given item, clears all items.
 
 ### Usage
 
@@ -510,16 +510,22 @@ Displays help for this plugin command.
 **Commands related to management ID can be used in `psac.mod`, but they are not shown in help.**  
 Players with `psac.mod` or `psac.admin` permissions will also see the following help:
 
+The command's permission is `psac.help`.
+
 #### /psac view \[Pages\]
 
-See the report submitted by player.  
+See the report submitted by the player.  
 The reports are sorted by highest risk, five at a time.
+
+The command's permission is `psac.view`.
 
 #### /psac show \<ManagementID\>
 
-View details of the report sent by player.  
-You can run this command from the player to view the report details by book.  
-If you run it from the console, it will appear as a log in the console.
+View details of the report sent by the player.  
+You can run this command from the player to view the report details by the player's book.  
+If you run it from the console, it will appear as a log to the console.
+
+The command's permission is `psac.show`.
 
 #### /psac drop \<ManagementID\>
 
@@ -527,12 +533,21 @@ If you run it from the console, it will appear as a log in the console.
   
 > **NOTE: The log of the deletion itself is not displayed. Be careful when discarding.**
 
+The command's permission is `psac.drop`.
+
 #### /psac kick \<PlayerName\> \[test\]
 
 Kick player specified by \<PlayerName\>.  
 Specifying \[test\] as the second argument kick player in test mode.
 
-### Bloadcast Messages
+The command's permission is `psac.kick`.
+
+#### /psac ban \<PlayerName\> \[reason...\]
+
+Ban \<PlayerName\> **manually**.  
+If you not specify \[reason...\], ban \<PlayerName\> with reason `Kicked by operator`.
+
+### Broadcast Messages
 
 **The following broadcast message will be played when the player is kicked.**  
 
@@ -545,7 +560,7 @@ Specifying \[test\] as the second argument kick player in test mode.
 ```
 
 This message is sent when the watchdog automatically detects a cheat.  
-For staff kicks, you will only broadcast secondary message.
+For staff kicks, you will only broadcast a secondary message.
 
 ---
 
@@ -580,7 +595,8 @@ In this plugin, the following config is set by default.
 |   decoration.circle   |      true       | Specifies whether to draw colored circle with effect to player when kicking.                                                  |
 |     message.lynx      |      true       | Specifies whether Lynx Mod compatible.                                                                                        |
 |  autoMessage.enabled  |      true       | Toggle the presence or absence of regular messages.                                                                           |
-|   autoMessage.time    |       15        | Specify a minuites for recurring messages.                                                                                    |
+|   autoMessage.time    |       15        | Specify a minutes for recurring messages.                                                                                     |
+|      commands.**      |  \[property\]   | See [command override feature](#what-is-command-override).
 
 ---
 
@@ -595,7 +611,7 @@ The NPC skin is displayed randomly by included 1400 skin sets.
 This ID is displayed when you run `/psac view` from console.  
 Also, can execute commands related to the \<ManagementID\> from the player.
 
-### Why not execute BAN command in this plugin?
+### Why not automatically execute BAN commands in this plugin?
 
 The plugin is concerned about falsely banning players due to false Watchdog detection.  
 Therefore, the plugin does not ban players **automatically**.
@@ -605,7 +621,7 @@ Therefore, the plugin does not ban players **automatically**.
 
 This plugin has a learning function that automatically adjusts the parameters using the actual cheat material.  
 Learning cheat data can improve the accuracy of function decision to kick or not.  
-The learning function of this plugin uses machine learning using a neural network.  
+The learning function of this plugin uses machine learning to use a neural network.  
 **This feature is under development. Please note that this function cannot learn completely.**
 
 ### Learning mechanism
@@ -625,9 +641,9 @@ Programmatically, YAML is referenced as a node tree and anything related to **dy
 ***[config.yml](../src/main/resources/config.yml)***  
 
 *[config.yml](../src/main/resources/config.yml)* is **automatically included jar resource** and **the plugin references the pre-build configuration dataset**.  
-See [here](#config-settings) for configulation settings.
+See [here](#config-settings) for configuration settings.
   
-> **WARNING: Configulation settings will not change unless you change them before building.**
+> **WARNING: Configuration settings will not change unless you change them before building.**
   
 ***[plugin.yml](../src/main/resources/plugin.yml)***  
 
@@ -638,17 +654,33 @@ See [here](#config-settings) for configulation settings.
 
 Player can get the following utility items by executing [/target](#target).
 
-|    Item     |          ID            | Description                                      |                Executing Command                |
-| :---------: | :--------------------: | :----------------------------------------------- | :---------------------------------------------: |
-|  Dog head   |       AURA_BOT         | Summon [AuraBot NPC](#aurabot) to  the target.   |         [/aurabot](#aurabot) \<Target\>         |
-|  Dog head   |      AURA_PANIC        | Summon [AuraPanic NPC](#acpanic) to the target.  |         [/acpanic](#acpanic) \<Target\>         |
-|    Arrow    |       TEST_KB          | Shoot an arrow invisible from target.            |          [/testkb](#testkb) \<Target\>          |
-|   Compass   |       TRACKER          | Silent teleport to the target.                   |  [/silentteleport](#silentteleport) \<Target\>  |
-|    Book     |         BANS           | The Kick/Ban record of the target is displayed.  |           [/bans](#bans) -a \<Target\>          |
-|    Arrow    |  TO_TARGET_\<Number\>  | Go to next page.                                 |           [/target](#target) \<Number\>         |
-|    Clock    |         BACK           | Go back.                                         |                      none                       |
-|    Reed     |         PULL           | Pull the target.                                 |             [/pull](#pull) \<Target\>           |
-|  Blaze Rod  |     TARGET_STICK       | Target the player you are looking at.            |     [/target](#target) \<Looking Player\>       |
+|    Item     |           ID             | Description                                      |                Executing Command                |
+| :---------: | :----------------------: | :----------------------------------------------- | :---------------------------------------------: |
+|  Dog head   |        AURA_BOT          | Summon [AuraBot NPC](#aurabot) to the target. |         [/aurabot](#aurabot) \<Target\>            |
+|  Dog head   |       AURA_PANIC         | Summon [AuraPanic NPC](#acpanic) to the target.  |         [/acpanic](#acpanic) \<Target\>         |
+|    Arrow    |        TEST_KB           | Shoot an arrow invisible from target.            |          [/testkb](#testkb) \<Target\>          |
+|   Compass   |        TRACKER           | Silent teleport to the target.                   |  [/silentteleport](#silentteleport) \<Target\>  |
+|    Book     |          BANS            | The Kick/Ban record of the target is displayed.  |           [/bans](#bans) -a \<Target\>          |
+|    Arrow    |   TO_TARGET_\<Number\>   | Go to next page.                                 |           [/target](#target) \<Number\>         |
+|    Clock    |          BACK            | Go back.                                         |                      none                       |
+|    Arrow    | BACK_TOTARGET_\<Number\> | Back to page 1.                                  |           [/target](#target) \<Number\>         |
+|    Reed     |          PULL            | Pull the target.                                 |             [/pull](#pull) \<Target\>           |
+|  Blaze Rod  |      TARGET_STICK        | Target the player you are looking at.            |     [/target](#target) \<Looking Player\>       |
+
+## What is command override?
+
+PSAC has been implemented command override feature. got cha!  
+The feature is able to setting in [config file](../src/main/resources/config.yml).
+
+```yaml
+commands:
+  kick:
+    #Enable command override feature
+    enable: true
+```
+
+This example is replacing minecraft's default command to [/psac kick](#arguments).  
+[/psac kick](#arguments) can show particles, add decorations when kicking, and record to databases.
 
 ## What library does this plugin use?
 
@@ -679,7 +711,7 @@ This plugin uses the following Libraries / APIs / Source codes:
 - [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
 - [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
 - [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
-- [Matrix API](https://matrix.rip/) [\(MC-Market\)](https://www.mc-market.org/resources/13999/)
+- [Matrix API](https://matrix.rip/) [\[MC-Market\]](https://www.mc-market.org/resources/13999/)
 
 <br>
 <br>

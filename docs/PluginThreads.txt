@@ -13,7 +13,7 @@ NPC: 3
 NPCTeleport: 5
 KillCounting: 2
 Stream API parallel functions: Max Threads
-->12 Threads + Max Threads
+-> 12 Threads + Max Threads
 
 ----------
 
@@ -25,7 +25,7 @@ KickUtil: 2
 
 Tracker: 1
 unTrack: 1
-->2 Threads
+-> 2 Threads
 
 ----------
 

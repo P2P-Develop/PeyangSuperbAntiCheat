@@ -26,12 +26,13 @@
                 <configuration>
                     <author>true</author>
                     <outputDirectory>${project.basedir}/docs/javadoc</outputDirectory>
-                    <bottom>(c) 2020 Peyang.</bottom>
+                    <bottom>(c) 2020 P2P-Develop.</bottom>
                     <source>1.8</source>
                     <show>private</show>
                     <encoding>UTF-8</encoding>
                     <charset>UTF-8</charset>
                     <locale>ja_JP</locale>
+                    <windowtitle>PSAC Project Javadoc</windowtitle>
                     <docencoding>UTF-8</docencoding>
                 </configuration>
             </plugin>
