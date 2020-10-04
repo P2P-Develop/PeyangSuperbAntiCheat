@@ -9,6 +9,7 @@ import ml.peya.plugins.Utils.SQL;
 import ml.peya.plugins.Utils.TimeParser;
 import ml.peya.plugins.Utils.Utils;
 import ml.peya.plugins.Variables;
+import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -47,12 +48,12 @@ public class BanManager
         map.put("id", id);
 
         Decorations.decoration(player);
+        BroadcastMessenger.broadCast(false, player);
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
-                BroadcastMessenger.broadCast(false, player);
 
                 if (Variables.config.getBoolean("decoration.lightning"))
                     Decorations.lighting(player);
@@ -109,7 +110,7 @@ public class BanManager
             found.setInt(1, 0);
             found.setString(2, player.getUniqueId().toString().replace("-", ""));
 
-            ResultSet set = found.getResultSet();
+            ResultSet set = found.executeQuery();
 
             while (set.next())
             {
@@ -125,7 +126,9 @@ public class BanManager
                     e.printStackTrace();
                 }
 
-                Bukkit.getBanList(BanList.Type.NAME).pardon(set.getString("PLAYER"));
+                BanEntry entry = Bukkit.getBanList(BanList.Type.NAME).getBanEntry(set.getString("PLAYER"));
+                if (entry != null)
+                    entry.setExpiration(new Date(new Date().getTime() + 1));
             }
         }
         catch (Exception e)

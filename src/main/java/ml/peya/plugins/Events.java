@@ -287,14 +287,7 @@ public class Events implements Listener
             Date date = new Date(time);
             if (date.before(new Date()))
             {
-                new BukkitRunnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        BanManager.pardon(player);
-                    }
-                }.runTask(PeyangSuperbAntiCheat.getPlugin());
+                BanManager.pardon(player);
                 return;
             }
 

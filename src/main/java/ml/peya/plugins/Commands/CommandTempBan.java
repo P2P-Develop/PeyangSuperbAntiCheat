@@ -66,7 +66,8 @@ public class CommandTempBan implements CommandExecutor
                     Player player = PlayerUtils.getPlayerAllowOffline(arg);
                     if (player != null)
                     {
-                        pl = player;
+                        if (pl == null)
+                            pl = player;
                         continue;
                     }
 
@@ -88,7 +89,7 @@ public class CommandTempBan implements CommandExecutor
                 BanManager.ban(pl, reason.toString(), date);
 
             }
-        }.runTaskAsynchronously(PeyangSuperbAntiCheat.getPlugin());
+        }.runTask(PeyangSuperbAntiCheat.getPlugin());
 
         return true;
     }

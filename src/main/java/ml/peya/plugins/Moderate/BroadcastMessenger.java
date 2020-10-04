@@ -19,7 +19,8 @@ public class BroadcastMessenger
     static void broadCast(boolean wdFlag, Player target)
     {
         if (wdFlag)
-            Bukkit.getOnlinePlayers().parallelStream().forEachOrdered(player ->
+        {
+            Bukkit.getOnlinePlayers().parallelStream().forEach(player ->
             {
                 if (player.hasPermission("psac.ntfadmin"))
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText(target).create());
@@ -27,14 +28,18 @@ public class BroadcastMessenger
                     player.spigot().sendMessage(TextBuilder.getBroadCastWdDetectionText().create());
             });
 
-        new BukkitRunnable()
-        {
-            @Override
-            public void run()
+            new BukkitRunnable()
             {
-                Bukkit.broadcast(get("kick.broadcast"), "psac.notification");
-                this.cancel();
-            }
-        }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
+                @Override
+                public void run()
+                {
+                    Bukkit.broadcast(get("kick.broadcast"), "psac.notification");
+                    this.cancel();
+                }
+            }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
+        }
+        else
+            Bukkit.broadcast(get("kick.broadcast"), "psac.notification");
+
     }
 }
