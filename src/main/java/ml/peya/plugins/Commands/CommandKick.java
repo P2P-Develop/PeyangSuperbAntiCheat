@@ -1,8 +1,11 @@
-package ml.peya.plugins.Commands.CmdPub;
+package ml.peya.plugins.Commands;
 
+import ml.peya.plugins.Moderate.ErrorMessageSender;
 import ml.peya.plugins.Moderate.KickManager;
 import ml.peya.plugins.Moderate.TrustModifier;
 import org.bukkit.Bukkit;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -13,71 +16,79 @@ import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
 
 /**
- * /psac kickで動くクラス。
+ * Kick!!!
+ * /kick で動く。
  */
-public class Kick
+public class CommandKick implements CommandExecutor
 {
     /**
-     * コマンド
+     * コマンド動作のオーバーライド。
      *
      * @param sender イベントsender。
+     * @param cmd    コマンド。
+     * @param label  ラベル。
      * @param args   引数。
+     * @return 正常に終わったかどうか。
      */
-    public static void run(CommandSender sender, final String[] args)
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
     {
+        if (ErrorMessageSender.unPermMessage(sender, "psac.kick"))
+            return true;
         boolean test = false;
 
-        if (args.length == 3 && args[2].equals("test"))
+        if (args.length == 2 && args[1].equals("test"))
         {
             sender.sendMessage(get("message.kick.test"));
 
-            final Player player = Bukkit.getPlayer(args[1]);
+            final Player player = Bukkit.getPlayer(args[0]);
             if (player == null)
             {
                 sender.sendMessage(get("error.playerNotFound"));
 
-                return;
+                return true;
             }
 
             if (TrustModifier.isTrusted(player) && !player.hasPermission("psac.trust"))
             {
                 sender.sendMessage(get("error.trusted"));
 
-                return;
+                return true;
             }
 
             test = true;
         }
 
-        if (args.length < 2)
+        if (args.length < 1)
         {
-            sender.sendMessage(get("error.minArgs", pair("label", "psr")));
+            sender.sendMessage(get("error.minArgs", pair("label", "psac")));
 
-            return;
+            return true;
         }
 
-        final Player player = Bukkit.getPlayer(args[1]);
+        final Player player = Bukkit.getPlayer(args[0]);
         if (player == null)
         {
             sender.sendMessage(get("error.playerNotFound"));
 
-            return;
+            return true;
         }
 
         if (player.hasMetadata("psac-kick"))
         {
 
             sender.sendMessage(get("error.processing"));
-            return;
+            return true;
         }
 
         ArrayList<String> argSet = new ArrayList<>(Arrays.asList(args));
 
-        argSet.subList(0, 2).clear();
+        argSet.remove(0);
 
         if (argSet.size() == 0)
             argSet.add("Kicked by Operator.");
 
         KickManager.kickPlayer(player, String.join(", ", argSet), test, test);
+        return true;
     }
 }

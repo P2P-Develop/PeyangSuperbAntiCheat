@@ -8,16 +8,18 @@ import ml.peya.plugins.BungeeStructure.CommandManager;
 import ml.peya.plugins.Commands.CmdTst.AuraBot;
 import ml.peya.plugins.Commands.CmdTst.AuraPanic;
 import ml.peya.plugins.Commands.CmdTst.TestKnockback;
+import ml.peya.plugins.Commands.CommandBan;
 import ml.peya.plugins.Commands.CommandBans;
+import ml.peya.plugins.Commands.CommandKick;
 import ml.peya.plugins.Commands.CommandPeyangSuperbAntiCheat;
 import ml.peya.plugins.Commands.CommandPull;
 import ml.peya.plugins.Commands.CommandReport;
 import ml.peya.plugins.Commands.CommandSilentTeleport;
 import ml.peya.plugins.Commands.CommandTarget;
+import ml.peya.plugins.Commands.CommandTempBan;
 import ml.peya.plugins.Commands.CommandTracking;
 import ml.peya.plugins.Commands.CommandTrust;
 import ml.peya.plugins.Commands.CommandUserInfo;
-import ml.peya.plugins.Commands.VanillaCommands;
 import ml.peya.plugins.Gui.Events.Drop;
 import ml.peya.plugins.Gui.Events.Run;
 import ml.peya.plugins.Gui.Item;
@@ -198,7 +200,9 @@ public class Init
                     "DATE bigint," +
                     "REASON nchar," +
                     "EXPIRE nchar," +
-                    "STAFF int" +
+                    "STAFF int," +
+                    "UNBAN int," +
+                    "UNBANDATE nchar" +
                     ");");
 
         }
@@ -267,6 +271,9 @@ public class Init
         getPlugin().getCommand("trust").setExecutor(new CommandTrust());
         getPlugin().getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
         getPlugin().getCommand("userinfo").setExecutor(new CommandUserInfo());
+        getPlugin().getCommand("kick").setExecutor(new CommandKick());
+        getPlugin().getCommand("ban").setExecutor(new CommandBan());
+        getPlugin().getCommand("tempban").setExecutor(new CommandTempBan());
     }
 
     /**
@@ -391,7 +398,6 @@ public class Init
         Bukkit.getServer().getPluginManager().registerEvents(new Events(), getPlugin());
         Bukkit.getServer().getPluginManager().registerEvents(new Run(), getPlugin());
         Bukkit.getServer().getPluginManager().registerEvents(new Drop(), getPlugin());
-        Bukkit.getServer().getPluginManager().registerEvents(new VanillaCommands(), getPlugin());
     }
 
 

@@ -68,7 +68,7 @@ public class Help
 
     private static ArrayList<String> getNodes()
     {
-        return new ArrayList<>(Arrays.asList("report", "view", "aurapanic", "aurabot", "show", "drop", "kick", "bans", "testkb", "ban"));
+        return new ArrayList<>(Arrays.asList("report", "view", "aurapanic", "aurabot", "show", "drop", "kick", "bans", "testkb", "ban", "tempban"));
     }
 
     private static ArrayList<String> getPlayerNodes()

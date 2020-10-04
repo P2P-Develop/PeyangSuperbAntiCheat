@@ -1,9 +1,7 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Commands.CmdPub.Ban;
 import ml.peya.plugins.Commands.CmdPub.Drop;
 import ml.peya.plugins.Commands.CmdPub.Help;
-import ml.peya.plugins.Commands.CmdPub.Kick;
 import ml.peya.plugins.Commands.CmdPub.Show;
 import ml.peya.plugins.Commands.CmdPub.View;
 import ml.peya.plugins.Moderate.ErrorMessageSender;
@@ -38,7 +36,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 5))
             return true;
 
-        if (Arrays.asList("help", "view", "show", "drop", "kick")
+        if (Arrays.asList("help", "view", "show", "drop", "kick", "ban")
                 .contains(args[0]) && ErrorMessageSender.unPermMessage(sender, "psac." + args[0])) return true;
 
         ArrayList<String> argList = new ArrayList<>(Arrays.asList(args));
@@ -58,11 +56,6 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
             case "drop":
                 Drop.run(sender, args);
                 break;
-            case "kick":
-                Kick.run(sender, args);
-                break;
-            case "ban":
-                Ban.run(sender, args);
             default:
                 sender.sendMessage(get("error.main.notFoundCommand", pair("label", label)));
                 break;

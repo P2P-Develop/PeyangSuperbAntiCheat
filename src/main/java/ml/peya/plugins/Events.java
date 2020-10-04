@@ -1,9 +1,12 @@
 package ml.peya.plugins;
 
 import com.mojang.authlib.properties.Property;
+import ml.peya.plugins.Moderate.BanManager;
 import ml.peya.plugins.Moderate.KickManager;
 import ml.peya.plugins.Objects.Books;
+import ml.peya.plugins.Utils.MessageEngine;
 import ml.peya.plugins.Utils.PlayerUtils;
+import ml.peya.plugins.Utils.TimeParser;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -28,10 +31,17 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
+import java.util.HashMap;
 
 import static ml.peya.plugins.Variables.cheatMeta;
 import static ml.peya.plugins.Variables.counting;
@@ -66,9 +76,9 @@ public class Events implements Listener
     public void onDamage(EntityDamageByEntityEvent e)
     {
         if (!(e.getEntity() instanceof CraftPlayer) ||
-            !(e.getDamager() instanceof CraftArrow) ||
-            !cheatMeta.exists(e.getEntity().getUniqueId()) ||
-            !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
+                !(e.getDamager() instanceof CraftArrow) ||
+                !cheatMeta.exists(e.getEntity().getUniqueId()) ||
+                !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
             return;
 
         e.setDamage(0);
@@ -186,7 +196,7 @@ public class Events implements Listener
     public void onDrop(PlayerDropItemEvent e)
     {
         if (e.getItemDrop().getItemStack().getType() == Material.WRITTEN_BOOK &&
-            Books.hasPSACBook(e.getItemDrop().getItemStack()))
+                Books.hasPSACBook(e.getItemDrop().getItemStack()))
             e.setCancelled(true);
     }
 
@@ -213,6 +223,87 @@ public class Events implements Listener
             e.setCancelled(true);
             KickManager.kickPlayer(e.getPlayer(), e.getReason().replaceFirst("§7\\[§bMatrix§7]§r ", ""), true, false);
         }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onLogin(PlayerLoginEvent e)
+    {
+        Player player = e.getPlayer();
+
+        boolean banned = false;
+
+        HashMap<String, String> banInfo = new HashMap<>();
+
+        try (Connection connection = Variables.banKick.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT UNBAN, EXPIRE, BANID, REASON FROM ban WHERE UUID=?"))
+        {
+            statement.setString(1, player.getUniqueId().toString().replace("-", ""));
+            ResultSet set = statement.executeQuery();
+            while (set.next())
+            {
+                if (set.getInt("UNBAN") == 0)
+                {
+                    banInfo.put("id", set.getString("BANID"));
+                    banInfo.put("reason", set.getString("REASON"));
+                    banInfo.put("expire", set.getString("EXPIRE"));
+                    banned = true;
+                    break;
+                }
+            }
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        if (!banned)
+            return;
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        final String id = banInfo.get("id");
+
+        map.put("reason", banInfo.get("reason"));
+        map.put("ggid", PlayerUtils.getGGID(id.hashCode()));
+        map.put("id", id);
+
+        String message;
+
+        if (banInfo.get("expire").equals("_PERM"))
+        {
+            message = MessageEngine.get("ban.permReason", map);
+        }
+        else
+        {
+            long time;
+            try
+            {
+                time = Long.parseLong(banInfo.get("expire"));
+            }
+            catch (Exception ignored)
+            {
+                return;
+            }
+
+            Date date = new Date(time);
+            if (date.before(new Date()))
+            {
+                new BukkitRunnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        BanManager.pardon(player);
+                    }
+                }.runTask(PeyangSuperbAntiCheat.getPlugin());
+                return;
+            }
+
+            map.put("date", TimeParser.convertFromDate(date));
+            message = MessageEngine.get("ban.tempReason", map);
+        }
+
+        e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
+        e.setKickMessage(message);
     }
 }
 

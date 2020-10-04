@@ -4,7 +4,9 @@ import ml.peya.plugins.DetectClasses.WatchEyeManagement;
 import ml.peya.plugins.Objects.Decorations;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
 import ml.peya.plugins.Utils.MessageEngine;
+import ml.peya.plugins.Utils.PlayerUtils;
 import ml.peya.plugins.Utils.SQL;
+import ml.peya.plugins.Utils.TimeParser;
 import ml.peya.plugins.Utils.Utils;
 import ml.peya.plugins.Variables;
 import org.bukkit.BanList;
@@ -15,6 +17,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import javax.annotation.Nullable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -39,7 +43,7 @@ public class BanManager
         String id = Abuse.genRandomId(8);
 
         map.put("reason", reason);
-        map.put("ggid", Abuse.genRandomId(7));
+        map.put("ggid", PlayerUtils.getGGID(id.hashCode()));
         map.put("id", id);
 
         Decorations.decoration(player);
@@ -48,6 +52,7 @@ public class BanManager
             @Override
             public void run()
             {
+                BroadcastMessenger.broadCast(false, player);
 
                 if (Variables.config.getBoolean("decoration.lightning"))
                     Decorations.lighting(player);
@@ -61,7 +66,9 @@ public class BanManager
                             new Date().getTime(),
                             reason,
                             date == null ? "_PERM": date.getTime(),
-                            1
+                            1,
+                            0,
+                            ""
                     );
 
                     WatchEyeManagement.deleteReportWithPlayerID(player.getUniqueId().toString());
@@ -72,12 +79,58 @@ public class BanManager
                     Utils.errorNotification(Utils.getStackTrace(e));
                 }
 
-                String message = date == null ? MessageEngine.get("ban.permReason", map): MessageEngine.get("ban.tempReason", map);
-                Bukkit.getBanList(BanList.Type.NAME).addBan(player.getName(), message, date, null);
+                String message = MessageEngine.get("ban.permReason", map);
+
+                if (date != null)
+                {
+                    map.put("date", TimeParser.convertFromDate(date));
+                    message = MessageEngine.get("ban.tempReason", map);
+                }
+
+
+                Bukkit.getBanList(BanList.Type.NAME).addBan(player.getName(), reason, date, id).save();
                 player.kickPlayer(message);
 
                 this.cancel();
             }
         }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(Variables.config.getInt("kick.delay"), 20));
+    }
+
+    /**
+     * BAN解除!
+     *
+     * @param player 対象
+     */
+    public static void pardon(Player player)
+    {
+        try (Connection connection = Variables.banKick.getConnection();
+             PreparedStatement found = connection.prepareStatement("SELECT BANID, PLAYER FROM ban WHERE UNBAN=? AND UUID=?"))
+        {
+            found.setInt(1, 0);
+            found.setString(2, player.getUniqueId().toString().replace("-", ""));
+
+            ResultSet set = found.getResultSet();
+
+            while (set.next())
+            {
+                try (PreparedStatement update = connection.prepareStatement("UPDATE ban SET UNBAN=?, UNBANDATE=? WHERE BANID=?"))
+                {
+                    update.setInt(1, 1);
+                    update.setString(2, String.valueOf(new Date().getTime()));
+                    update.setString(3, set.getString("BANID"));
+                    update.execute();
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+                Bukkit.getBanList(BanList.Type.NAME).pardon(set.getString("PLAYER"));
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

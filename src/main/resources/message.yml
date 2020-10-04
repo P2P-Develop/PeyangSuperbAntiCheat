@@ -4,7 +4,10 @@ base:
   false: "%%red%%False"
   enable: "%%green%%有効"
   disable: "%%red%%無効"
-
+  day: "日"
+  hour: "時間"
+  minutes: "分"
+  seconds: "秒"
 
 error:
   minArgs: "%%red%%%%bold%%エラー：引数が不足しています。/%%label%% help でヘルプを見てください。"
@@ -123,6 +126,17 @@ command:
     %%green%%引数を2つつけると、引数1のプレイヤーが、引数2のプレイヤーにテレポートします。
     "
 
+    ban: "\
+    %%aqua%%/ban %%dark_aqua%%<PlayerName> %%dark_purple%% [理由...]\n\
+    %%green%%指定したプレイヤーを永久的にアクセスを禁止します。\n\
+    "
+
+    tempban: "\
+    %%aqua%%/tempban %%dark_aqua%%<期間> <PlayerName> %%dark_purple%% [理由...]\n\
+    %%green%%指定したプレイヤーを一時的にアクセス禁止にします。\n\
+    %%green%%期間指定方法は、8y 1mo 0d 9h 3m 1sで、8年1ヶ月9時間3分1秒間アクセス禁止にします。\n\
+    "
+
     mngIdWarning: "\
     %%yellow%%注意：管理IDはランダムで割り当てられる32文字の英数文字列です。\n\
     %%yellow%%プレイヤーからも操作できますが、コンソールから操作することを推奨します。
@@ -143,6 +157,7 @@ command:
     trust: "%%aqua%%/trust %%dark_aqua%%<PlayerName>"
     silentteleport: "%%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>"
     ban: "%%aqua%%/ban %%dark_aqua%%<PlayerName> %%dark_purple%% [理由...]"
+    tempban: "%%aqua%%/tempban %%dark_aqua%%<期間> <PlayerName> %%dark_purple%% [理由...]"
 
 message:
   report:
@@ -251,7 +266,7 @@ kick:
   "
 
   reason: "\
-  %%red%%ゲームから退出させられました！\n
+  %%red%%ゲームから退出させられました！\n\
   \n\
   %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
   \n\
@@ -260,19 +275,19 @@ kick:
 
 ban:
   permReason: "\
-  %%red%%あなたはこのサーバーから永久的にアクセスを禁止されています！\n
+  %%red%%このサーバーへのアクセスは永久に禁止されています！\n\
   \n\
   %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
   \n\
-  %%gray%%Ban ID：%%white%%%%id%%
+  %%gray%%アクセス禁止 ID：%%white%%%%id%%
   "
 
   tempReason: "\
-  %%red%%あなたはこのサーバーから一時的にアクセスを禁止されています！\n
+  %%white%%%%date%% %%red%%の間このサーバーから一時的にアクセスを禁止されています！\n\
   \n\
   %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
   \n\
-  %%gray%%Ban ID：%%white%%%%id%%
+  %%gray%%アクセス禁止 ID：%%white%%%%id%%
   "
 
 

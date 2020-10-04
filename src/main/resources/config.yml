@@ -98,13 +98,10 @@ autoMessage:
   #パラメーターが0だと自動で1になりますが、それでもぶっ壊れるので注意です。
   time: 15
 
-#コマンド関連の設定です。
 commands:
-  #コマンドのオーバーライドに関する設定です。
   override:
-    #kickコマンドのオーバーライドを有効にします。
+    #kickコマンドのオーバーライド
     kick:
       enable: true
-    #banコマンドのオーバーライドを有効にします。
     ban:
       enable: true

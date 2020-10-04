@@ -55,6 +55,16 @@ commands:
     aliases: ["stp", "tpto"]
     usage: /tpto [Player] <Player>
     description: "サイレントにテレポートします。"
+  kick:
+    usage: /kick <Player> [Reason]
+    description: "理由をつけてプレイヤーをキックします。"
+  ban:
+    aliases: ["acban", "permban"]
+    usage: /ban <Player> [Reason]
+    description: "理由をつけてプレイヤーをアクセス禁止に。"
+  tempban:
+    usage: /tempban <Expire> <Player> [Reason]
+    description: "一定の期間の間、プレイヤーをアクセス禁止にします。"
   userinfo:
     usage: /userinfo [-f] <Player>
     description: "ユーザ情報を表示します。"
@@ -89,6 +99,8 @@ permissions:
       psac.tracking: true
       psac.silentteleport: true
       psac.userinfo: true
+      psac.ban: true
+      psac.tempban: true
       psac.member: true
 
   psac.admin:
@@ -116,6 +128,12 @@ permissions:
     default: true
 
   #Moderator
+  psac.tempban:
+    description: 他プレイヤーを一時的にアクセス禁止にできます。
+    default: op
+  psac.ban:
+    description: 他プレイヤーをアクセス禁止にできます。
+    default: op
   psac.kick:
     description: 他プレイヤーをキックできます。
     default: op

@@ -200,4 +200,19 @@ public class PlayerUtils
 
         return player;
     }
+
+    /**
+     * プレイヤーのGGなIDを生成します
+     *
+     * @param seed シード値
+     * @return GGなID
+     */
+    public static String getGGID(long seed)
+    {
+        StringBuilder builder = new StringBuilder();
+        Random random = new Random(seed);
+        for (int i = 0; i < 7; i++)
+            builder.append(random.nextInt(9));
+        return builder.toString();
+    }
 }
