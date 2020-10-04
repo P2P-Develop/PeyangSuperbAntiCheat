@@ -19,6 +19,8 @@ error:
   notPlayerFoundInRange: "%%red%%%%bold%%エラー：範囲内にプレイヤーが見つかりませんでした。"
   processing: "%%red%%%%bold%%エラー：現在処理中です。"
   trusted: "%%red%%%bold%%エラー：対象プレイヤーは信用されています！それでも実行するにはpsac.trust権限を持っているプレイヤーが実行してください！"
+  playerNotBanned: "%%red%%%%bold%%エラー：対象プレイヤーはアクセスを禁止されていません。"
+
   report:
     invalidReason: "%%red%%%%bold%%エラー：理由が正しくありません！"
     reasonNotSelected: "%%red%%%%bold%%エラー：理由が選択されていません！"
@@ -61,7 +63,6 @@ command:
     %%aqua%%/psac view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]\n\
     %%green%%レポートされた、対処されていない問題を重大度順に表示します。
     "
-
 
     aurapanic: "\
     %%aqua%%/acpanic %%dark_aqua%%<PlayerName>%%dark_purple%% [-rf]\n\
@@ -194,11 +195,9 @@ message:
   testkb:
     normal: "%%aqua%%Anti kbのために、 '%%name%%' をテストしました！"
     lynx: "%%aqua%%Tested '%%name%%' for anti kb!"
-
   pull:
     normal: "%%yellow%%プレイヤー %%name%% を引き寄せました！"
     lynx: "%%yellow%%Pulled player '%%name%%' to you!"
-
   bans:
     message: "%%prefix%%\n%%gold%%--- %%name%% さんのBAN情報 ---"
     more:
@@ -210,6 +209,8 @@ message:
     unTrack: "%%red%%追跡モードを解除しました。"
   teleport:
     teleport: "%%aqua%%%%player%% さんにテレポートしました。"
+  unban:
+    playerUnBanned: "%%player%% %%green%%さんのアクセス禁止を解除しました。"
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\
@@ -222,7 +223,6 @@ reportbook:
   cheat: "どんなチートを使っていましたか？"
   submit: "%%dark_green%%%%bold%%レポートを提出"
   cancel: "%%red%%レポートをキャンセル"
-
 
 book:
   words:
@@ -289,7 +289,6 @@ ban:
   \n\
   %%gray%%アクセス禁止 ID：%%white%%%%id%%
   "
-
 
 report:
   submited: "%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%] プレイヤーがレポートを提出しました！"

@@ -202,6 +202,21 @@ public class PlayerUtils
     }
 
     /**
+     * オフラインプレイヤーを取得します
+     *
+     * @return 取得したプレイヤー
+     */
+    public static OfflinePlayer getOfflinePlayer(String playerName)
+    {
+        for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers())
+        {
+            if (offlinePlayer.getName().toLowerCase().equals(playerName.toLowerCase()))
+                return offlinePlayer;
+        }
+        return null;
+    }
+
+    /**
      * プレイヤーのGGなIDを生成します
      *
      * @param seed シード値

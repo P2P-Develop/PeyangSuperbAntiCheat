@@ -19,6 +19,7 @@ import ml.peya.plugins.Commands.CommandTarget;
 import ml.peya.plugins.Commands.CommandTempBan;
 import ml.peya.plugins.Commands.CommandTracking;
 import ml.peya.plugins.Commands.CommandTrust;
+import ml.peya.plugins.Commands.CommandUnBan;
 import ml.peya.plugins.Commands.CommandUserInfo;
 import ml.peya.plugins.Gui.Events.Drop;
 import ml.peya.plugins.Gui.Events.Run;
@@ -271,6 +272,7 @@ public class Init
         getPlugin().getCommand("userinfo").setExecutor(new CommandUserInfo());
         getPlugin().getCommand("kick").setExecutor(new CommandKick());
         getPlugin().getCommand("ban").setExecutor(new CommandBan());
+        getPlugin().getCommand("unban").setExecutor(new CommandUnBan());
         getPlugin().getCommand("tempban").setExecutor(new CommandTempBan());
     }
 

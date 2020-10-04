@@ -61,7 +61,11 @@ commands:
   ban:
     aliases: ["acban", "permban"]
     usage: /ban <Player> [Reason]
-    description: "理由をつけてプレイヤーをアクセス禁止に。"
+    description: "理由をつけてプレイヤーをアクセス禁止にします。"
+  unban:
+    aliases: ["pardon"]
+    usage: /unban <Player>
+    description: "プレイヤーのBANを解除します。"
   tempban:
     usage: /tempban <Expire> <Player> [Reason]
     description: "一定の期間の間、プレイヤーをアクセス禁止にします。"

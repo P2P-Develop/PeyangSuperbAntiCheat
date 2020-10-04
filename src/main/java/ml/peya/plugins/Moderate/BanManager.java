@@ -22,6 +22,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * BAN発行等
@@ -102,13 +103,13 @@ public class BanManager
      *
      * @param player 対象
      */
-    public static void pardon(Player player)
+    public static void pardon(UUID player)
     {
         try (Connection connection = Variables.banKick.getConnection();
              PreparedStatement found = connection.prepareStatement("SELECT BANID, PLAYER FROM ban WHERE UNBAN=? AND UUID=?"))
         {
             found.setInt(1, 0);
-            found.setString(2, player.getUniqueId().toString().replace("-", ""));
+            found.setString(2, player.toString().replace("-", ""));
 
             ResultSet set = found.executeQuery();
 
@@ -128,7 +129,7 @@ public class BanManager
 
                 BanEntry entry = Bukkit.getBanList(BanList.Type.NAME).getBanEntry(set.getString("PLAYER"));
                 if (entry != null)
-                    entry.setExpiration(new Date(new Date().getTime() + 1));
+                    Bukkit.getBanList(BanList.Type.NAME).pardon(set.getString("PLAYER"));
             }
         }
         catch (Exception e)

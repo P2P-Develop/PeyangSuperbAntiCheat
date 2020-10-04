@@ -285,7 +285,7 @@ public class Events implements Listener
             Date date = new Date(time);
             if (date.before(new Date()))
             {
-                BanManager.pardon(player);
+                BanManager.pardon(player.getUniqueId());
                 return;
             }
 
