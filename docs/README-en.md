@@ -678,7 +678,7 @@ commands:
     enable: true
 ```
 
-This example is replacing minecraft's default command, kick to [/psac kick](#arguments).  
+This example is replacing minecraft's default command to [/psac kick](#arguments).  
 [/psac kick](#arguments) can show particles, add decorations when kicking, and record to databases.
 
 ## What library does this plugin use?
