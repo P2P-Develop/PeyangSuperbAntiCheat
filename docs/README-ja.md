@@ -587,10 +587,12 @@ Lynxモード\(-f\)が有効の場合、Rankなどの情報が最低限表示さ
 ### コンフィグについて
 
 このプラグインでは、以下のコンフィグを使用しています。適当に変えてください。
+SQL関係は、[こ↓こ↑](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/blob/develop/docs/SQL.md) を参照
 
 | 設定名 | デフォルト値 | 説明 |
 |:-----:|:----------:|-----|
-| database.path | ./eye.db | レポート情報などを保存する、SQLiteデータベースの置き場所です。 |
+| database.method | org.sqlite.JDBC | SQLの設定(メソッド) |
+| database.url | jdbc:sqlite | SQLの設定(URL) |
 | database.logPath | ./log.db | キック情報などを保存する、SQLiteデータベースの置き場所です。 |
 | database.learnPath | ./learn.json | 学習によって値が変更された「重み」と学習回数を保存する、JSONファイルの置き場所です。 |
 | database.trustPath | ./trust.db | 信用したプレイヤーを保存する、SQLiteデータベースの置き場所です。つまりこれ消せば信用データ消えます。やっぱ鯖を操る人最強。 |
