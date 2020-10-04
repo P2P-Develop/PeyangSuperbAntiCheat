@@ -14,7 +14,9 @@ import java.util.Random;
 public class RandomWordUtils
 {
 
-    //登録スキン数
+    /**
+     * 登録スキン数
+     */
     private static final int __MaxLine = 1384;
 
     /**
