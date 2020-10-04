@@ -654,17 +654,18 @@ See [here](#config-settings) for configuration settings.
 
 Player can get the following utility items by executing [/target](#target).
 
-|    Item     |          ID            | Description                                      |                Executing Command                |
-| :---------: | :--------------------: | :----------------------------------------------- | :---------------------------------------------: |
-|  Dog head   |       AURA_BOT         | Summon [AuraBot NPC](#aurabot) to the target.   |         [/aurabot](#aurabot) \<Target\>         |
-|  Dog head   |      AURA_PANIC        | Summon [AuraPanic NPC](#acpanic) to the target.  |         [/acpanic](#acpanic) \<Target\>         |
-|    Arrow    |       TEST_KB          | Shoot an arrow invisible from target.            |          [/testkb](#testkb) \<Target\>          |
-|   Compass   |       TRACKER          | Silent teleport to the target.                   |  [/silentteleport](#silentteleport) \<Target\>  |
-|    Book     |         BANS           | The Kick/Ban record of the target is displayed.  |           [/bans](#bans) -a \<Target\>          |
-|    Arrow    |  TO_TARGET_\<Number\>  | Go to next page.                                 |           [/target](#target) \<Number\>         |
-|    Clock    |         BACK           | Go back.                                         |                      none                       |
-|    Reed     |         PULL           | Pull the target.                                 |             [/pull](#pull) \<Target\>           |
-|  Blaze Rod  |     TARGET_STICK       | Target the player you are looking at.            |     [/target](#target) \<Looking Player\>       |
+|    Item     |           ID             | Description                                      |                Executing Command                |
+| :---------: | :----------------------: | :----------------------------------------------- | :---------------------------------------------: |
+|  Dog head   |        AURA_BOT          | Summon [AuraBot NPC](#aurabot) to the target. |         [/aurabot](#aurabot) \<Target\>            |
+|  Dog head   |       AURA_PANIC         | Summon [AuraPanic NPC](#acpanic) to the target.  |         [/acpanic](#acpanic) \<Target\>         |
+|    Arrow    |        TEST_KB           | Shoot an arrow invisible from target.            |          [/testkb](#testkb) \<Target\>          |
+|   Compass   |        TRACKER           | Silent teleport to the target.                   |  [/silentteleport](#silentteleport) \<Target\>  |
+|    Book     |          BANS            | The Kick/Ban record of the target is displayed.  |           [/bans](#bans) -a \<Target\>          |
+|    Arrow    |   TO_TARGET_\<Number\>   | Go to next page.                                 |           [/target](#target) \<Number\>         |
+|    Clock    |          BACK            | Go back.                                         |                      none                       |
+|    Arrow    | BACK_TOTARGET_\<Number\> | Back to page 1.                                  |           [/target](#target) \<Number\>         |
+|    Reed     |          PULL            | Pull the target.                                 |             [/pull](#pull) \<Target\>           |
+|  Blaze Rod  |      TARGET_STICK        | Target the player you are looking at.            |     [/target](#target) \<Looking Player\>       |
 
 ## What is command override?
 
