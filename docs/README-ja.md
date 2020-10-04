@@ -571,6 +571,9 @@ Lynxモード\(-f\)が有効の場合、Rankなどの情報が最低限表示さ
 | psac.chattarget | プレイヤーのチャットの左にマークが付きます。 | | op | psac.mod |
 | psac.tracking | プレイヤー追跡に関する**コマンド**の権限です。 | | op | psac.mod |
 | psac.userinfo | プレイヤーの情報を表示します。LynxモードがOnの場合は、一部増えます\(関係ない情報が\) | | op | psac.mod |
+| psac.ban | プレイヤーをアクセス禁止にします。 | | op | psac.mod |
+| psac.tempban | プレイヤーを一時的にアクセス禁止にします。 | | op | psac.mod |
+| psac.unban | プレイヤーのアクセス禁止を解除します。 | | op | psac.mod |
 | _**psac.admin**_ | レポートの削除や、サーバーの根幹に関わる権限です。 | | false | |
 | psac.drop | /psac drop \<ManagementID\> | プレイヤーからのレポートを跡形も残らずに消します。 | false | psac.admin |
 | psac.error | エラーが発生したとき、通知されます。| | false | psac.admin |
