@@ -84,14 +84,8 @@ public class Init
     {
         HikariConfig hConfig = new HikariConfig();
         new File(path).getParentFile().mkdirs();
-
         hConfig.setDriverClassName(config.getString("database.method"));
         hConfig.setJdbcUrl(config.getString("database.url") + path);
-
-        if (!config.getString("database.connection.user").equals(""))
-            hConfig.addDataSourceProperty("user", config.getString("database.connection.user"));
-        if (!config.getString("database.connection.password").equals(""))
-            hConfig.addDataSourceProperty("password", config.getString("database.connection.password"));
         return hConfig;
     }
 

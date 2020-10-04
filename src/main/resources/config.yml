@@ -3,7 +3,7 @@
 database:
   #メソッド。sqliteなら org.sqlite.JDBC Mysqlなら com.mysql.jdbc.Driver
   method: "org.sqlite.JDBC"
-  url: "jdbc:sqlite"
+  url: "jdbc:sqlite:"
 
   path: "./eye.db"
   logPath: "./log.db"
