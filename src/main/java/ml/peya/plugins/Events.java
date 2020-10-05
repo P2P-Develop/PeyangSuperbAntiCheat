@@ -37,9 +37,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -230,32 +227,10 @@ public class Events implements Listener
     {
         Player player = e.getPlayer();
 
-        boolean banned = false;
+        HashMap<String, String> banInfo = BanManager.getBanInfo(player.getUniqueId());
 
-        HashMap<String, String> banInfo = new HashMap<>();
 
-        try (Connection connection = Variables.banKick.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT UNBAN, EXPIRE, BANID, REASON FROM ban WHERE UUID=?"))
-        {
-            statement.setString(1, player.getUniqueId().toString().replace("-", ""));
-            ResultSet set = statement.executeQuery();
-            while (set.next())
-            {
-                if (set.getInt("UNBAN") == 0)
-                {
-                    banInfo.put("id", set.getString("BANID"));
-                    banInfo.put("reason", set.getString("REASON"));
-                    banInfo.put("expire", set.getString("EXPIRE"));
-                    banned = true;
-                    break;
-                }
-            }
-        }
-        catch (Exception ignored)
-        {
-        }
-
-        if (!banned)
+        if (!Boolean.parseBoolean(banInfo.get("banned")))
             return;
 
         HashMap<String, Object> map = new HashMap<>();
@@ -284,10 +259,7 @@ public class Events implements Listener
 
             Date date = new Date(time);
             if (date.before(new Date()))
-            {
-                BanManager.pardon(player.getUniqueId());
                 return;
-            }
 
             map.put("date", TimeParser.convertFromDate(date));
             message = MessageEngine.get("ban.tempReason", map);

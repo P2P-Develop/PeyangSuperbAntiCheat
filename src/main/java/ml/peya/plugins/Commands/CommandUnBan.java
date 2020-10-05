@@ -3,8 +3,6 @@ package ml.peya.plugins.Commands;
 import ml.peya.plugins.Moderate.BanManager;
 import ml.peya.plugins.Moderate.ErrorMessageSender;
 import ml.peya.plugins.Utils.PlayerUtils;
-import org.bukkit.BanList;
-import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -44,7 +42,7 @@ public class CommandUnBan implements CommandExecutor
             return true;
         }
 
-        if (!Bukkit.getBanList(BanList.Type.NAME).isBanned(player.getName()))
+        if (!Boolean.parseBoolean(BanManager.getBanInfo(player.getUniqueId()).get("banned")))
         {
             sender.sendMessage(get("error.playerNotBanned"));
             return true;

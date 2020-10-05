@@ -9,9 +9,6 @@ import ml.peya.plugins.Utils.SQL;
 import ml.peya.plugins.Utils.TimeParser;
 import ml.peya.plugins.Utils.Utils;
 import ml.peya.plugins.Variables;
-import org.bukkit.BanEntry;
-import org.bukkit.BanList;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -89,8 +86,6 @@ public class BanManager
                     message = MessageEngine.get("ban.tempReason", map);
                 }
 
-
-                Bukkit.getBanList(BanList.Type.NAME).addBan(player.getName(), reason, date, id).save();
                 player.kickPlayer(message);
 
                 this.cancel();
@@ -126,15 +121,47 @@ public class BanManager
                 {
                     e.printStackTrace();
                 }
-
-                BanEntry entry = Bukkit.getBanList(BanList.Type.NAME).getBanEntry(set.getString("PLAYER"));
-                if (entry != null)
-                    Bukkit.getBanList(BanList.Type.NAME).pardon(set.getString("PLAYER"));
             }
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * BANの詳細を取得します。
+     * BANがない場合、banInfo.banned にfalseを格納して返します。
+     *
+     * @param uuid 対象
+     * @return Info
+     */
+    public static HashMap<String, String> getBanInfo(UUID uuid)
+    {
+        HashMap<String, String> banInfo = new HashMap<>();
+        boolean banned = false;
+        try (Connection connection = Variables.banKick.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT UNBAN, EXPIRE, BANID, REASON FROM ban WHERE UUID=?"))
+        {
+            statement.setString(1, uuid.toString().replace("-", ""));
+            ResultSet set = statement.executeQuery();
+            while (set.next())
+            {
+                if (set.getInt("UNBAN") == 0)
+                {
+                    banInfo.put("id", set.getString("BANID"));
+                    banInfo.put("reason", set.getString("REASON"));
+                    banInfo.put("expire", set.getString("EXPIRE"));
+                    banned = true;
+                    break;
+                }
+            }
+        }
+        catch (Exception ignored)
+        {
+        }
+
+        banInfo.put("banned", String.valueOf(banned));
+        return banInfo;
     }
 }
