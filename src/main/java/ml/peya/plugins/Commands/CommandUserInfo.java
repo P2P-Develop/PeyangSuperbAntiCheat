@@ -34,8 +34,8 @@ public class CommandUserInfo implements CommandExecutor
                 .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpto " + player))
                 .append(ChatColor.AQUA + "[BAN] ")
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/ban " + player + " "))
-                /*.append(ChatColor.AQUA + "[TEMPBAN] ")
-                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tempban " + player + " "));*/
+                .append(ChatColor.AQUA + "[TEMPBAN] ")
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tempban " + player + " "))
                 .append(ChatColor.AQUA + "[KICK] ")
                 .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/psac kick " + player + " "))
                 /*.append(ChatColor.AQUA + "[MUTE] ")
@@ -119,7 +119,8 @@ public class CommandUserInfo implements CommandExecutor
                 case MUTE:
                     mute++;
                     break;
-                case ALL: default:
+                case ALL:
+                default:
                     break;
             }
 
