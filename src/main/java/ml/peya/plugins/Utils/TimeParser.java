@@ -51,20 +51,25 @@ public class TimeParser
                 case "month":
                 case "mo":
                     c.add(Calendar.MONTH, num);
+                    break;
                 case "day":
                 case "d":
                     c.add(Calendar.DAY_OF_MONTH, num);
+                    break;
                 case "hour":
                 case "h":
                     c.add(Calendar.HOUR, num);
+                    break;
                 case "minute":
                 case "min":
                 case "m":
                     c.add(Calendar.MINUTE, num);
+                    break;
                 case "second":
                 case "sec":
                 case "s":
                     c.add(Calendar.SECOND, num);
+                    break;
             }
         }
 
