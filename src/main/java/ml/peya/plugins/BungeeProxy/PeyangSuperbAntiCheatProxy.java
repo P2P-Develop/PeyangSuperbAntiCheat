@@ -81,4 +81,20 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
 
         getLogger().info("PeyangSuperbAntiCheatProxy has been activated!");
     }
+
+    /**
+     * プラグインが無効になったときの。
+     */
+    @Override
+    public void onDisable()
+    {
+        getLogger().info("Sending Disconnect packet...");
+        servers.parallelStream()
+                .forEach(s -> {
+                    sendData(getProxy().getServerInfo(s), "dc");
+                });
+
+        servers = null;
+        getLogger().info("PeyangSuperbAntiCheatProxy has been disabled!");
+    }
 }

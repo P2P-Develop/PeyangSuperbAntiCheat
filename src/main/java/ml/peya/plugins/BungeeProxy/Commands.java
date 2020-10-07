@@ -27,6 +27,18 @@ public class Commands implements CommandExecutor
     }
 
     /**
+     * disconnectしたときの
+     *
+     * @param cmd コマンド
+     */
+    @Command(label = "dc")
+    public void disconnect(CommandComponent cmd)
+    {
+        logger.info("<-> Server [" + cmd.getServer() + "] has disconnected");
+        PeyangSuperbAntiCheatProxy.servers.remove(cmd.getServer());
+    }
+
+    /**
      * pongコマンドを受け取ったときのやつ
      *
      * @param cmd コマンド

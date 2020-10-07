@@ -10,7 +10,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -27,7 +26,20 @@ public class BungeeCommands implements CommandExecutor
     public static void ping(CommandComponent command)
     {
         Bungee.sendMessage("pong");
+        Variables.logger.info("<-> [BungeeCord] connected.");
         Variables.bungeeCord = true;
+    }
+
+    /**
+     * BungeeCordがDisconnectしたとき
+     *
+     * @param command コマンド
+     */
+    @Command(label = "dc")
+    public static void disconnect(CommandComponent command)
+    {
+        Variables.logger.info("<-> [BungeeCord] has disconnected.");
+        Variables.bungeeCord = false;
     }
 
     /**
