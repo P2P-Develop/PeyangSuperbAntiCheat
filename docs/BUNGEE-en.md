@@ -4,31 +4,32 @@
 
 ## Overview
 
-PSAC can be managed through all servers using BungeeCord.  
+PSAC can be managed through all servers using BungeeCord.
 This document provides a way to enable BungeeCord integration.
 
 ## What changes with BungeeCord integration
 
-BungeeCord is well known as a proxy server that manages all servers at the same time.  
-PSAC takes advantage of it to implement a variety of new features.  
+BungeeCord is well known as a proxy server that manages all servers at the same time.
+PSAC takes advantage of it to implement a variety of new features.
 
-- Receiving reports on all servers
-- etc... \(sorry\)
+-   Receiving reports on all servers
+-   etc... \(sorry\)
 
 ## Installation
 
-1. Install PSAC on all servers and BungeeCord.  
-   Binary releases is [here](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases)
-2. *Optional*: Change the configuration of each server. Be careful when changing the configuration!
+1. Install PSAC on all servers and BungeeCord.
+   Binary releases is [here](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases).
+2. _Optional_: Change the configuration of each server. Be careful when changing the configuration!
 
 ## Precautions
 
 ### How to change the plugin configuration
 
-Edit `database.HogeHogePath`.  
+Edit `database.HogeHogePath`.
 The path supports the relative path and absolute path
 If the directories is:
-```
+
+```tree
 servers/
 ├─ database.db
 ├─ database2.db
