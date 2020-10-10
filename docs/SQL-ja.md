@@ -20,7 +20,7 @@ database:
 | database.method | org.sqlite.JDBC | SQLの設定(メソッド) |
 |  database.url   |   jdbc:sqlite   | SQLの設定(URL)      |
 
-## 設定パラメータ
+## 設定パラメーター
 ### database.method
 データベースのドライバー名です。
 クラス名を用いて設定します。
