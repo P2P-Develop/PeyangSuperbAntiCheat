@@ -189,6 +189,8 @@ public class CheatDetectNowMeta
      */
     public void addAngle(double angle)
     {
+        if (this.angles.size() > 100)
+            this.angles.clear();
         this.angles.add(angle);
     }
 
