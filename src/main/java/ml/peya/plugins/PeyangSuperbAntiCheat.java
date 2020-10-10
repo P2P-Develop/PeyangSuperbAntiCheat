@@ -116,7 +116,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         logger.info("Loading Database...");
         Init.initDataBase();
 
-
         Init.loadSkin();
 
         if (!isEnabled())
@@ -159,7 +158,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         logger.info("Reading weights from learnPath...");
         Init.loadLearn();
-
 
         Init.registerChannel();
 

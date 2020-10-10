@@ -61,7 +61,7 @@ public class BungeeCommands implements CommandExecutor
     @Command(label = "report")
     public static void report(CommandComponent command)
     {
-        String[] args = command.getArgs();
+        final String[] args = command.getArgs();
 
         if (args.length < 1)
             return;

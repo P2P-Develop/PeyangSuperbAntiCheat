@@ -18,7 +18,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_12_R1.entity.CraftArrow;
 import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -54,6 +53,7 @@ public class Events implements Listener
     {
         if (e.getEntity().getKiller() == null)
             return;
+
         counting.kill(e.getEntity().getKiller().getUniqueId());
     }
 
@@ -83,8 +83,7 @@ public class Events implements Listener
     @EventHandler
     public void onLeave(PlayerQuitEvent e)
     {
-        Player player = e.getPlayer();
-        tracker.remove(player.getName());
+        tracker.remove(e.getPlayer().getName());
     }
 
     /**
@@ -97,6 +96,7 @@ public class Events implements Listener
     {
         if (!tracker.isTrackingByPlayer(e.getPlayer().getName()) && !cheatMeta.exists(e.getPlayer().getUniqueId()))
             return;
+
         e.getPlayer().setMetadata(
                 "speed",
                 new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo()))
@@ -113,24 +113,24 @@ public class Events implements Listener
     {
         if (e.isCancelled())
             return;
+
         e.setCancelled(true);
-        String format = e.getFormat()
+
+        final String format = e.getFormat()
                 .replace("%1$s", e.getPlayer().getDisplayName())
                 .replace("%2$s", e.getMessage());
-
-        ComponentBuilder builder = new ComponentBuilder("");
-
-        builder.append(ChatColor.RED + "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED + "] ")
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()))
-                .event(new HoverEvent(
-                        HoverEvent.Action.SHOW_TEXT,
-                        new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()
-                ));
 
         e.getRecipients()
                 .parallelStream()
                 .forEachOrdered(receiver ->
-                        receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(builder.create(), new ComponentBuilder(format).create())));
+                        receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(
+                                new ComponentBuilder("").append(ChatColor.RED + "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED + "] ")
+                                        .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()))
+                                        .event(new HoverEvent(
+                                                HoverEvent.Action.SHOW_TEXT,
+                                                new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()
+                                        )).create(),
+                                new ComponentBuilder(format).create())));
         Bukkit.getConsoleSender().sendMessage(format);
     }
 
@@ -221,9 +221,12 @@ public class Events implements Listener
     {
         if (Variables.bungeeCord)
             return;
-        String login = PlayerUtils.preLoginPending(e.getPlayer().getUniqueId());
+
+        final String login = PlayerUtils.preLoginPending(e.getPlayer().getUniqueId());
+
         if (login.equals(""))
             return;
+
         e.setKickMessage(login);
         e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
     }

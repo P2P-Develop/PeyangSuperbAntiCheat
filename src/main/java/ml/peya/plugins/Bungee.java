@@ -42,7 +42,8 @@ public class Bungee implements PluginMessageListener
     {
         if (!channel.equals(bungeeChannel))
             return;
-        DataInputStream input = new DataInputStream(new ByteArrayInputStream(data));
+
+        final DataInputStream input = new DataInputStream(new ByteArrayInputStream(data));
         String message;
         try
         {

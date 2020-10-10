@@ -26,7 +26,9 @@ public class Utils
      */
     public static void adminNotification(String id)
     {
-        Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.hasPermission("psac.reportntf"))
+        Bukkit.getOnlinePlayers()
+                .parallelStream()
+                .filter(player -> player.hasPermission("psac.reportntf"))
                 .forEachOrdered(player ->
                 {
                     player.sendMessage(get("report.submited"));
@@ -53,14 +55,15 @@ public class Utils
         Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.hasPermission("psac.reportntf"))
                 .forEachOrdered(player ->
                 {
-                    ComponentBuilder hover = new ComponentBuilder("/psac show " + id)
-                            .color(net.md_5.bungee.api.ChatColor.AQUA);
                     HashMap<String, Object> map = new HashMap<>();
                     map.put("name", name);
                     map.put("reason", String.join(", ", reasons));
                     TextComponent builder = new TextComponent(get("report.lynx.submited", map));
                     builder.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + id));
-                    builder.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()));
+                    builder.setHoverEvent(new HoverEvent(
+                            HoverEvent.Action.SHOW_TEXT,
+                            new ComponentBuilder("/psac show " + id).color(net.md_5.bungee.api.ChatColor.AQUA).create()
+                    ));
                     player.spigot()
                             .sendMessage(builder);
                 });
@@ -73,7 +76,9 @@ public class Utils
      */
     public static void errorNotification(String stacktrace)
     {
-        Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.hasPermission("psac.error"))
+        Bukkit.getOnlinePlayers()
+                .parallelStream()
+                .filter(player -> player.hasPermission("psac.error"))
                 .forEachOrdered(player ->
                 {
                     player.sendMessage(ChatColor.GREEN + "[" +
