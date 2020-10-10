@@ -3,6 +3,7 @@ package ml.peya.plugins.DetectClasses;
 import ml.peya.plugins.Enum.DetectType;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 /**
@@ -40,6 +41,11 @@ public class CheatDetectNowMeta
     private boolean isTesting = false;
 
     /**
+     * アングル
+     */
+    private ArrayList<Double> angles;
+
+    /**
      * コンストラクター。
      *
      * @param target ターゲット。
@@ -53,6 +59,7 @@ public class CheatDetectNowMeta
         this.uuids = uuids;
         this.id = id;
         this.type = type;
+        this.angles = new ArrayList<>();
     }
 
     /**
@@ -173,5 +180,25 @@ public class CheatDetectNowMeta
     public void addSeconds(double seconds)
     {
         this.seconds += seconds;
+    }
+
+    /**
+     * アングルの追加
+     *
+     * @param angle 追加するアングル
+     */
+    public void addAngle(double angle)
+    {
+        this.angles.add(angle);
+    }
+
+    /**
+     * アングルの取得
+     *
+     * @return アングルs
+     */
+    public ArrayList<Double> getAngles()
+    {
+        return angles;
     }
 }

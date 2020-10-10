@@ -70,7 +70,9 @@ public class DetectConnection
                 meta.setTesting(false);
 
                 final double vl = meta.getVL();
-                final double seconds = cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds();
+                final double seconds = cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds(); //削除対象
+                final Double[] angles = cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getAngles().toArray(new Double[0]);
+                //ごにょごにょする
 
                 if (learnCount > learnCountLimit)
                 {

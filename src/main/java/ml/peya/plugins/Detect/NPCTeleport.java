@@ -4,7 +4,6 @@ import develop.p2p.lib.WaveCreator;
 import ml.peya.plugins.DetectClasses.CheatDetectNowMeta;
 import ml.peya.plugins.Enum.DetectType;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
-import ml.peya.plugins.Utils.PlayerUtils;
 import net.minecraft.server.v1_12_R1.EntityPlayer;
 import net.minecraft.server.v1_12_R1.ItemStack;
 import net.minecraft.server.v1_12_R1.PacketPlayOutAnimation;
@@ -19,6 +18,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
@@ -160,6 +160,9 @@ public class NPCTeleport
     private static void auraBotTeleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
     {
         final double[] time = {0.0};
+
+        final ArrayList<Double> angles = new ArrayList<>();
+
         final double radius = reachMode ? config.getDouble("npc.reachRange"): config.getDouble("npc.range");
 
         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
@@ -218,9 +221,12 @@ public class NPCTeleport
                     count[0]++;
                     CheatDetectNowMeta meta = cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
                     if (meta == null) continue;
-                    meta.addSeconds(PlayerUtils.isLooking(player, n) || PlayerUtils.isLooking(player, n.clone().add(0, 1, 0))
-                            ? config.getLong("npc.seconds") * 0.1 / 2
-                            : 0.0);
+                    double angle = player.getEyeLocation().getDirection().angle(
+                            n.toVector().subtract(
+                                    player.getEyeLocation().toVector()
+                            ));
+
+                    meta.addAngle(angle);
                 }
                 time[0] += config.getDouble("npc.time") + (config.getBoolean("npc.speed.wave")
                         ? new WaveCreator(0.0, config.getDouble("npc.speed.waveRange"), 0 - config.getDouble("npc.speed.waveRange")).get(0.001, true)
