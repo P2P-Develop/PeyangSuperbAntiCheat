@@ -14,6 +14,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static ml.peya.plugins.Variables.banLeft;
 import static ml.peya.plugins.Variables.cheatMeta;
@@ -70,22 +71,21 @@ public class DetectConnection
                 meta.setTesting(false);
 
                 final double vl = meta.getVL();
-                final double seconds = cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getSeconds(); //削除対象
                 final Double[] angles = cheatMeta.getMetaByPlayerUUID(player.getUniqueId()).getAngles().toArray(new Double[0]);
-                //ごにょごにょする
+                //ごにょごにょする ←　一時的になんとなく実装
 
                 if (learnCount > learnCountLimit)
                 {
-                    if (network.commit(Pair.of(vl, seconds)) > 0.01)
+                    if (Arrays.stream(angles).mapToDouble(angle -> network.commit(Pair.of(vl, angle))).sum() / angles.length > 0.01)
                     {
-                        learn(vl, seconds);
+                        Arrays.stream(angles).forEachOrdered(angle -> learn(vl, angle));
 
                         if (kick(player)) return;
                     }
                 }
                 else if (banLeft <= vl)
                 {
-                    learn(vl, seconds);
+                    Arrays.stream(angles).forEachOrdered(angle -> learn(vl, angle));
 
                     if (kick(player)) return;
                 }
@@ -111,14 +111,13 @@ public class DetectConnection
 
                             case AURA_PANIC:
                                 if (sender == null)
-                                    Bukkit.getOnlinePlayers().parallelStream()
+                                    Bukkit.getOnlinePlayers()
+                                            .parallelStream()
                                             .filter(np -> np.hasPermission("psac.aurapanic"))
-                                            .forEachOrdered(np -> np.spigot().sendMessage(TextBuilder
-                                                    .textPanicRep(name, meta.getVL()).create()));
+                                            .forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 break;
-
                             default:
                                 break;
                         }
