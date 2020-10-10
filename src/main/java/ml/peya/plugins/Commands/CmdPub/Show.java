@@ -47,7 +47,7 @@ public class Show
 
         try (Connection connection = eye.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement("SELECT UUID, ID, ISSUEBYID, UUID FROM watcheye WHERE MNGID=?");
+                     connection.prepareStatement("SELECT UUID, ID, ISSUEBYID, ISSUEBYUUID, ISSUEDATE, UUID FROM watcheye WHERE MNGID=?");
              PreparedStatement reasons =
                      connection.prepareStatement("SELECT REASON FROM watchreason WHERE MNGID=?"))
         {
@@ -69,7 +69,7 @@ public class Show
 
             reasons.setString(1, mngid);
 
-            ResultSet reason = statement.executeQuery();
+            ResultSet reason = reasons.executeQuery();
 
             ArrayList<EnumCheatType> types = new ArrayList<>();
 
