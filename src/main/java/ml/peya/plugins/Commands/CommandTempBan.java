@@ -1,6 +1,6 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.BanManager;
+import ml.peya.plugins.Moderate.BanWithEffect;
 import ml.peya.plugins.Moderate.ErrorMessageSender;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
 import ml.peya.plugins.Utils.PlayerUtils;
@@ -86,7 +86,7 @@ public class CommandTempBan implements CommandExecutor
 
                 Date date = TimeParser.convert(ex.toArray(new String[0]));
 
-                BanManager.ban(pl, reason.toString(), date);
+                BanWithEffect.ban(pl, reason.toString(), date);
 
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());

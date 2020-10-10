@@ -22,7 +22,7 @@ TODO: 順次追加
 
 
 ### 注意事項
-#### コンフィグの設定方法
+#### コンフィグの設定方法 (Spigot|bukkit|Paper)
 `database.HogeHogePath` を編集します。  
 このパスは、相対パスと絶対パスの双方を利用できます。
 もしディレクトリ階層が
@@ -52,3 +52,15 @@ servers/
 PSACを連携させるすべてのサーバのeyePathを`../../../database.db`にしてください。
 ~~\(Mysqlは現在対応作業中です。~~多分無理だと思う~~\)~~
 MySQL対応しました。
+
+#### コンフィグの設定方法(BungeeCord|Waterfall)
+はい。  
+上と一緒です。  
+
+##### Mysqlを使いたいって?かんたんさ！  
+[SQL.md](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/tree/develop/docs/SQL-ja.md) をミて後はいっしょ！かんたん！
+##### は?SQLiteを使いたいって?
+さぁ、[このプラグイン](https://www.spigotmc.org/resources/sqlite-for-bungeecord.57191/update?update=344657)を入れよう！    
+あとはいっしょ！
+
+## え?わからない?じゃぁ最強の[SQL.md](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/tree/develop/docs/SQL-ja.md) をミてみよう！

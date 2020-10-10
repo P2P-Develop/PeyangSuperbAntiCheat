@@ -2,6 +2,7 @@ package ml.peya.plugins.Utils;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import ml.peya.plugins.Moderate.BanWithEffect;
 import net.minecraft.server.v1_12_R1.EntityPlayer;
 import net.minecraft.server.v1_12_R1.PlayerInteractManager;
 import net.minecraft.server.v1_12_R1.WorldServer;
@@ -26,6 +27,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -230,4 +233,55 @@ public class PlayerUtils
             builder.append(random.nextInt(9));
         return builder.toString();
     }
+
+    /**
+     * ログイン資格の審査をします。
+     *
+     * @param target ターゲット
+     * @return kickメッセージ。Login可能なら空。
+     */
+    public static String preLoginPending(UUID target)
+    {
+
+        HashMap<String, String> banInfo = BanWithEffect.getBanInfo(target);
+
+
+        if (!Boolean.parseBoolean(banInfo.get("banned")))
+            return "";
+
+        HashMap<String, Object> map = new HashMap<>();
+
+        final String id = banInfo.get("id");
+
+        map.put("reason", banInfo.get("reason"));
+        map.put("ggid", getGGID(id.hashCode()));
+        map.put("id", id);
+
+        String message;
+
+        if (banInfo.get("expire").equals("_PERM"))
+            message = MessageEngine.get("ban.permReason", map);
+        else
+        {
+            long time;
+            try
+            {
+                time = Long.parseLong(banInfo.get("expire"));
+            }
+            catch (Exception ignored)
+            {
+                return "";
+            }
+
+            Date date = new Date(time);
+            if (date.before(new Date()))
+                return "";
+
+            map.put("date", TimeParser.convertFromDate(date));
+            message = MessageEngine.get("ban.tempReason", map);
+        }
+
+        return message;
+    }
+
 }

@@ -1,6 +1,6 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.BanManager;
+import ml.peya.plugins.Moderate.BanWithEffect;
 import ml.peya.plugins.Moderate.ErrorMessageSender;
 import ml.peya.plugins.Utils.MessageEngine;
 import ml.peya.plugins.Utils.PlayerUtils;
@@ -48,7 +48,7 @@ public class CommandBan implements CommandExecutor
             reason = String.join(" ", reasons);
         }
 
-        BanManager.ban(player, reason, null);
+        BanWithEffect.ban(player, reason, null);
 
         return true;
     }

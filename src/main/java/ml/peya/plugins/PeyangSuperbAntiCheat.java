@@ -20,6 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 
 import static ml.peya.plugins.Variables.autoMessage;
@@ -180,7 +181,9 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     {
         if (initialized)
         {
-            try (FileWriter fw = new FileWriter(getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+            try (FileWriter fw = new FileWriter(Paths.get(config.getString("database.learnPath")).isAbsolute()
+                    ? config.getString("database.learnPath")
+                    : getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
                  PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
             {
                 logger.info("Saving learn weights to learning data file...");

@@ -1,8 +1,10 @@
 package ml.peya.plugins.BungeeProxy;
 
 import com.google.common.io.ByteStreams;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.Server;
+import net.md_5.bungee.api.event.LoginEvent;
 import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.event.ServerConnectedEvent;
 import net.md_5.bungee.api.event.ServerDisconnectEvent;
@@ -59,5 +61,21 @@ public class Events implements Listener
         ServerInfo info = e.getServer().getInfo();
         logger.info("<-> Server [" + info.getName() + "] pinging...");
         PeyangSuperbAntiCheatProxy.sendData(info, "ping");
+    }
+
+    /**
+     * プレイヤーがサーバに接続
+     *
+     * @param e いべ
+     */
+    @EventHandler
+    public void onPlayerConnect(LoginEvent e)
+    {
+        String message = BungeePlayerLogin.preLoginPending(e.getConnection().getUniqueId());
+        if (message.equals(""))
+            return;
+
+        e.setCancelled(true);
+        e.setCancelReason(new ComponentBuilder(message).create());
     }
 }

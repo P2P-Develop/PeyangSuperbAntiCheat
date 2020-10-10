@@ -1,12 +1,9 @@
 package ml.peya.plugins;
 
 import com.mojang.authlib.properties.Property;
-import ml.peya.plugins.Moderate.BanManager;
 import ml.peya.plugins.Moderate.KickManager;
 import ml.peya.plugins.Objects.Books;
-import ml.peya.plugins.Utils.MessageEngine;
 import ml.peya.plugins.Utils.PlayerUtils;
-import ml.peya.plugins.Utils.TimeParser;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -36,9 +33,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.Date;
-import java.util.HashMap;
 
 import static ml.peya.plugins.Variables.cheatMeta;
 import static ml.peya.plugins.Variables.counting;
@@ -225,48 +219,13 @@ public class Events implements Listener
     @EventHandler(priority = EventPriority.MONITOR)
     public void onLogin(PlayerLoginEvent e)
     {
-        Player player = e.getPlayer();
-
-        HashMap<String, String> banInfo = BanManager.getBanInfo(player.getUniqueId());
-
-
-        if (!Boolean.parseBoolean(banInfo.get("banned")))
+        if (Variables.bungeeCord)
             return;
-
-        HashMap<String, Object> map = new HashMap<>();
-
-        final String id = banInfo.get("id");
-
-        map.put("reason", banInfo.get("reason"));
-        map.put("ggid", PlayerUtils.getGGID(id.hashCode()));
-        map.put("id", id);
-
-        String message;
-
-        if (banInfo.get("expire").equals("_PERM"))
-            message = MessageEngine.get("ban.permReason", map);
-        else
-        {
-            long time;
-            try
-            {
-                time = Long.parseLong(banInfo.get("expire"));
-            }
-            catch (Exception ignored)
-            {
-                return;
-            }
-
-            Date date = new Date(time);
-            if (date.before(new Date()))
-                return;
-
-            map.put("date", TimeParser.convertFromDate(date));
-            message = MessageEngine.get("ban.tempReason", map);
-        }
-
+        String login = PlayerUtils.preLoginPending(e.getPlayer().getUniqueId());
+        if (login.equals(""))
+            return;
+        e.setKickMessage(login);
         e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
-        e.setKickMessage(message);
     }
 }
 

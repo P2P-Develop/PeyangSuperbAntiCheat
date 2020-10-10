@@ -137,6 +137,14 @@ public class Init
         databasePath = config.getString("database.path");
         banKickPath = config.getString("database.logPath");
         trustPath = config.getString("database.trustPath");
+        if (!config.getString("database.method").contains("sqlite"))
+        {
+            eye = new HikariDataSource(Init.initMngDatabase(databasePath));
+            banKick = new HikariDataSource(Init.initMngDatabase(banKickPath));
+            trust = new HikariDataSource(Init.initMngDatabase(trustPath));
+            return;
+        }
+
         eye = new HikariDataSource(Init.initMngDatabase(Paths.get(databasePath).isAbsolute()
                 ? databasePath
                 : getPlugin().getDataFolder().getAbsolutePath() + "/" + databasePath));
@@ -333,7 +341,9 @@ public class Init
     {
         try
         {
-            File file = new File(getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+            File file = new File(Paths.get(config.getString("database.learnPath")).isAbsolute()
+                    ? config.getString("database.learnPath")
+                    : getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
             if (file.exists() && file.length() >= 16)
             {
                 JsonNode node = new ObjectMapper().readTree(file);
@@ -353,7 +363,6 @@ public class Init
                         .asDouble());
 
                 learnCount = node.get("learnCount").asInt();
-
                 logger.info("Weights setting completed successfully!");
             }
         }
