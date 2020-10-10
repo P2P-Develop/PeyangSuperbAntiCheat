@@ -26,14 +26,14 @@ public class SQL
                 p.toString() +
                 ")";
 
-        try(PreparedStatement s = connection.prepareStatement(sql))
+        try (PreparedStatement s = connection.prepareStatement(sql))
         {
-            AtomicInteger count = new AtomicInteger();
+            int[] count = {0};
             Arrays.stream(value)
                     .forEachOrdered(o -> {
                         try
                         {
-                            s.setObject(count.incrementAndGet(), o);
+                            s.setObject(++count[0], o);
                         }
                         catch (SQLException e)
                         {
@@ -62,7 +62,7 @@ public class SQL
         if (p.toString().isEmpty())
             sql = "DELETE FROM " + database;
 
-        try(PreparedStatement s = connection.prepareStatement(sql))
+        try (PreparedStatement s = connection.prepareStatement(sql))
         {
             AtomicInteger count = new AtomicInteger();
             map.values()
@@ -83,7 +83,7 @@ public class SQL
 
     public static void exec(Connection connection, String sql, Object... values) throws SQLException
     {
-        try(PreparedStatement statement = connection.prepareStatement(sql))
+        try (PreparedStatement statement = connection.prepareStatement(sql))
         {
             AtomicReference<SQLException> exception = new AtomicReference<>();
             AtomicInteger integer = new AtomicInteger();
