@@ -62,8 +62,8 @@ The settings are following:
 
 |  Setting name   |  Default value  | Description                                  |
 | :-------------: | :-------------: | :------------------------------------------- |
-| database.method | org.sqlite.JDBC | [Methods](#methods) of SQL configulation     |
-|  database.url   |   jdbc:sqlite   | [Protocols](#protocols) of SQL configulation |
+| database.method | org.sqlite.JDBC | [Methods](#methods) of SQL configuration     |
+|  database.url   |   jdbc:sqlite   | [Protocols](#protocols) of SQL configuration |
 
 ## Methods
 
