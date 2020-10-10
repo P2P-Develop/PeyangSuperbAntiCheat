@@ -13,7 +13,8 @@ BungeeCord is well known as a proxy server that manages all servers at the same 
 PSAC takes advantage of it to implement a variety of new features.
 
 -   Receiving reports on all servers
--   etc... \(sorry\)
+-   Share BAN records with all servers
+-   Distribute the processing time of each server
 
 ## Installation
 
@@ -29,7 +30,7 @@ Edit `database.HogeHogePath`.
 The path supports the relative path and absolute path
 If the directories is:
 
-```tree
+```tst
 servers/
 ├─ database.db
 ├─ database2.db
@@ -52,5 +53,5 @@ servers/
 ```
 
 In such cases, the configuration path will be `../../../database.db`, counting from plugins.
-Also, if the `eyePath` of one server is` ../../../database.db`,
-Set the eyePath of all servers to which PSAC is linked to `../../../database.db`.
+Also, if `eyePath` of one server is` ../../../database.db`,
+Set `eyePath` of all servers to which PSAC is linked to `../../../database.db`.
