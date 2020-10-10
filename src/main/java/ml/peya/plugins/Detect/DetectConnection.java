@@ -143,18 +143,9 @@ public class DetectConnection
      */
     private static void learn(double vl, double angle)
     {
-        new BukkitRunnable()
-        {
-            @Override
-            public void run()
-            {
-                ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                arr.add(Triple.of(vl, angle, angle / vl));
-                network.learn(arr, 1000);
-
-                this.cancel();
-            }
-        }.runTask(PeyangSuperbAntiCheat.getPlugin());
+        ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
+        arr.add(Triple.of(vl, angle, angle / vl));
+        network.learn(arr, 1000);
     }
 
     /**
