@@ -200,8 +200,6 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             {
                 e.printStackTrace();
             }
-            logger.info("PeyangSuperbAntiCheat has been disabled!");
-            return;
         }
 
         if (eye != null)
