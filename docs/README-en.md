@@ -2,6 +2,115 @@
 
 [Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [SQL](SQL-en.md) | [BungeeCord](BUNGEE-en.md) | [FAQ](#what-is-this-npcwatchdog)
 
+<details>
+<summary>Table of Contents</summary>
+
+- [PeyangSuperbAntiCheat (PSAC) English Documentation](#peyangsuperbanticheat-psac-english-documentation)
+  - [Overview](#overview)
+    - [Markdown formatting (This area is not so important)](#markdown-formatting-this-area-is-not-so-important)
+  - [Installation](#installation)
+    - [Download binary](#download-binary)
+    - [Auto Build (Only supported Linux, MacOS, Git Bash)](#auto-build-only-supported-linux-macos-git-bash)
+    - [Manual Build](#manual-build)
+  - [Permissions](#permissions)
+  - [Commands](#commands)
+  - [/report](#report)
+    - [Aliases](#aliases)
+    - [Description](#description)
+    - [Usages](#usages)
+    - [Reasons](#reasons)
+        - [To avoid reporting spam, the same player cannot report to the same player.](#to-avoid-reporting-spam-the-same-player-cannot-report-to-the-same-player)
+    - [Permission](#permission)
+  - [/aurabot](#aurabot)
+    - [Aliases](#aliases-1)
+    - [Description](#description-1)
+    - [Usage](#usage)
+    - [Permission](#permission-1)
+  - [/acpanic](#acpanic)
+    - [Aliases](#aliases-2)
+    - [Description](#description-2)
+    - [Usage](#usage-1)
+    - [Permission](#permission-2)
+  - [/testkb](#testkb)
+    - [Aliases](#aliases-3)
+    - [Description](#description-3)
+    - [Usage](#usage-2)
+    - [Permission](#permission-3)
+  - [/pull](#pull)
+    - [Aliases](#aliases-4)
+    - [Description](#description-4)
+    - [Usage](#usage-3)
+    - [Permission](#permission-4)
+  - [/bans](#bans)
+    - [Aliases](#aliases-5)
+    - [Description](#description-5)
+    - [Usage](#usage-4)
+    - [Permission](#permission-5)
+  - [/target](#target)
+    - [Description](#description-6)
+    - [Usage](#usage-5)
+    - [Permission](#permission-6)
+  - [/tracking](#tracking)
+    - [Alias](#alias)
+    - [Description](#description-7)
+    - [Usages](#usages-1)
+    - [Permission](#permission-7)
+  - [/trust](#trust)
+  - [Alias](#alias-1)
+    - [Description](#description-8)
+    - [Usage](#usage-6)
+    - [Permission](#permission-8)
+  - [/userinfo](#userinfo)
+    - [Description](#description-9)
+    - [Usage](#usage-7)
+    - [Permission](#permission-9)
+  - [/silentteleport](#silentteleport)
+    - [Aliases](#aliases-6)
+    - [Description](#description-10)
+    - [Usages](#usages-2)
+    - [Permission](#permission-10)
+  - [/kick](#kick)
+    - [Description](#description-11)
+    - [Usages](#usages-3)
+    - [Permission](#permission-11)
+  - [/ban](#ban)
+    - [Aliases](#aliases-7)
+    - [Description](#description-12)
+    - [Usages](#usages-4)
+  - [/unban](#unban)
+    - [Aliases](#aliases-8)
+    - [Description](#description-13)
+    - [Usage](#usage-8)
+    - [Permission](#permission-12)
+  - [/tempban](#tempban)
+    - [Description](#description-14)
+    - [Units](#units)
+    - [Usage](#usage-9)
+    - [Example](#example)
+    - [Permission](#permission-13)
+  - [/psac](#psac)
+    - [Aliases](#aliases-9)
+    - [Description](#description-15)
+    - [Arguments](#arguments)
+      - [/psac help](#psac-help)
+      - [/psac view \[Pages\]](#psac-view-pages)
+      - [/psac show \<ManagementID\>](#psac-show-managementid)
+      - [/psac drop \<ManagementID\>](#psac-drop-managementid)
+    - [Broadcast Messages](#broadcast-messages)
+  - [Config settings](#config-settings)
+  - [What is this NPC\(WatchDog\)?](#what-is-this-npcwatchdog)
+    - [What is \<ManagementID\>?](#what-is-managementid)
+    - [Why not automatically execute BAN commands in this plugin?](#why-not-automatically-execute-ban-commands-in-this-plugin)
+  - [What is learning function?](#what-is-learning-function)
+    - [Learning mechanism](#learning-mechanism)
+  - [What is _YAML resources file_?](#what-is-yaml-resources-file)
+  - [What utility items for /target?](#what-utility-items-for-target)
+  - [What library does this plugin use?](#what-library-does-this-plugin-use)
+  - [Did you find any bugs or errors?](#did-you-find-any-bugs-or-errors)
+      - [Assignees](#assignees)
+  - [Thanks](#thanks)
+</details>
+
 > [!CAUTION]
 > This repository has jokes in commit messages and source by a developer(and a little contributor).
 > If you want to introduce an anti-cheat plugin with high detection rate, **please do not use this plugin.**
@@ -12,7 +121,7 @@
 
 ## Overview
 
-AntiCheat plugin for Bukkit / Spigot / PaperMC based server.
+AntiCheat plugin for Bukkit / Spigot / PaperMC based server.  
 It has been confirmed to work with version 1.12.2.
 
 This plugin is a **Cheat Report Management** / **Cheat Detection Test** plugin.
@@ -48,7 +157,7 @@ This allows the user to view more useful information.
 
 -   /foo \<bar\> \[player\]
 
-This list a represents command and arguments.
+This list a represents command and arguments.  
 Argument enclosed in \<\>, it represents the necessary command, Enclosed in \[\] indicates an arbitrary command.
 
 -   `fooperm.bar`
@@ -146,7 +255,7 @@ This block of code represents a permission.
 
 ## Permissions
 
-Commands are always assigned one or more permissions.
+Commands are always assigned one or more permissions.  
 Other settings can be done using permissions.
 
 |     Permission      |     Assigned Command     | Description                                                                                                                               | Default Value | Permission Group |
@@ -198,9 +307,9 @@ This section are describe plugin commands.
 
 Send the content of the report selected and submitted by the player to the staff.
 
-> **WARNING: It is not a command to automatically summon NPC.**
+> [!WARNING] It is not a command to automatically summon NPC.
 
-The staff can see if the player is doing the same as the report.
+The staff can see if the player is doing the same as the report.  
 User can also set the format for the report.
 
 ```tst
@@ -223,7 +332,7 @@ This report format is lets them know who reported who and why.
 
 -   /report \<PlayerName\>
 
-    Player can execute this command with this argument to open a book where you can select the reason for the report.
+    Player can execute this command with this argument to open a book where you can select the reason for the report.  
     If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.
 
 -   ![#008000](https://via.placeholder.com/15/008000/000000?text=+) Click to send report in "レポートを送信" , or:
@@ -233,7 +342,8 @@ This report format is lets them know who reported who and why.
 -   /report \<PlayerName\> \<Reason1\> \[Reason2\]...
 
     Player can execute this command with this argument to report directly in chat/console without using a book.
-    **Can use an alias for this reason. Please read below.**
+
+    > [!TIP] Can use an alias for this reason.
 
 ### Reasons
 
@@ -265,9 +375,9 @@ The books are sorted in the order they are displayed.
 
 ### Description
 
-Executing this command will summon an NPC that spins around the player at a constant speed.
-When an NPC is attacked a certain number of times, it kicks that player.
-Also, to use the reach mode, adds the "-r" argument to the first or second argument.
+Executing this command will summon an NPC that spins around the player at a constant speed.  
+When an NPC is attacked a certain number of times, it kicks that player.  
+Also, to use the reach mode, adds the "-r" argument to the first or second argument.  
 Reach mode can scan the radius and check the reach.
 
 ### Usage
@@ -284,7 +394,7 @@ Reach mode can scan the radius and check the reach.
 
 -   `psac.aurabot`
 
-Manages the permission to execute the command on summoning of AuraBot.
+Manages the permission to execute the command on summoning of AuraBot.  
 Players with this permission can summon Watchdogs.
 
 ## /acpanic
@@ -297,8 +407,8 @@ Players with this permission can summon Watchdogs.
 
 ### Description
 
-This command always summons the NPC that is trying to move behind the player.
-When an NPC is attacked a certain number of times, it kicks that player.
+This command always summons the NPC that is trying to move behind the player.  
+When an NPC is attacked a certain number of times, it kicks that player.  
 Also, to use the reach mode, adds the "-r" argument to the first or second argument.
 
 ### Usage
@@ -325,7 +435,7 @@ Also, to use the reach mode, adds the "-r" argument to the first or second argum
 
 ### Description
 
-Fire a **invisible arrow** at the specified player.
+Fire a **invisible arrow** at the specified player.  
 This allows you to see if the player is knocking back.
 
 ### Usage
@@ -348,7 +458,7 @@ Pull the specified player.
 
 ### Description
 
-Pull the specified player to the executed player.
+Pull the specified player to the executed player.  
 It cannot be run from console.
 
 ### Usage
@@ -377,7 +487,7 @@ Displays the player's kick (BAN) history **remaining in this plugin**.
 
 -   /bans \[\-a | ban | kick\] \<PlayerName\>
 
-    Displays the BAN history of player specified by \<PlayerName\>.
+    Displays the BAN history of player specified by \<PlayerName\>.  
     Add \-a to show all bans and kicks.
 
 ### Permission
@@ -390,8 +500,8 @@ Tracks the specified player as a target.
 
 ### Description
 
-Executing this command gives utility items.
-These items allow you to execute useful commands with a click.
+Executing this command gives utility items.  
+These items allow you to execute useful commands with a click.  
 Dropping a given item, clears all items.
 
 ### Usage
@@ -416,7 +526,7 @@ Tracks the specified player as a target without utility items.
 
 ### Description
 
-Tracks the specified player.
+Tracks the specified player.  
 If tracking is currently started and no argument is specified, tracking will be stopped.
 
 ### Usages
@@ -444,8 +554,8 @@ Trust specified player.
 
 ### Description
 
-Adds the specified player as a "trusted player".
-If already trusted, can remove player from "trusted player".
+Adds the specified player as a "trusted player".  
+If already trusted, can remove player from "trusted player".  
 Players without the `psac.trust` cannot run the following commands on trusted players.
 
 -   [/aurabot](#aurabot)
@@ -472,16 +582,16 @@ Lists player information.
 
 ### Description
 
-Lists the information of the specified player.
-If you add "-f" to the argument, more information (such as rank) will be displayed if "message.lynx" is enabled.
-This command was created to be consistent with Lynx, but states that [main developer](https://github.com/peyang-Celeron) don't need it.
+Lists the information of the specified player.  
+If you add "-f" to the argument, more information (such as rank) will be displayed if "message.lynx" is enabled.  
+This command was created to be consistent with Lynx, but states that [main developer](https://github.com/peyang-Celeron) don't need it.  
 If `-f` is not specified or is not available, concise information is displayed.
 
 ### Usage
 
 -   /userinfo \[f\] \<PlayerName\>
 
-    Displays information about \<PlayerName\>.
+    Displays information about \<PlayerName\>.  
     If \[-f\] is specified, more detailed information will be displayed.
 
 ### Permission
@@ -490,8 +600,8 @@ If `-f` is not specified or is not available, concise information is displayed.
 
 ## /silentteleport
 
-Causes the specified player to teleport you or the specified player.
-Used for utility item internal commands in the [/target](#target).
+Causes the specified player to teleport you or the specified player.  
+Used for utility item internal commands in the [/target](#target).  
 It also suppresses broadcast messages on servers that do not have Essentials installed.
 
 ### Aliases
@@ -523,7 +633,7 @@ Kick specified player.
 
 ### Description
 
-Kick the player and record it on the record.
+Kick the player and record it on the record.  
 Specifying \[test\] as the second argument kick player in _test mode_.
 
 ### Usages
@@ -551,7 +661,7 @@ Ban specified player **manually**.
 
 ### Description
 
-Ban the player and record it on the record.
+Ban the player and record it on the record.  
 If you not specify \[Reasons...\], ban \<PlayerName\> with reason `Kicked by operator`.
 
 ### Usages
@@ -574,7 +684,7 @@ Removes the ban on the specified player.
 
 ### Description
 
-Removes the ban on the player.
+Removes the ban on the player.  
 Even if it is permanent, the player's access ban will be lifted.
 
 ### Usage
@@ -593,8 +703,8 @@ Temporarily bans the specified player.
 
 ### Description
 
-Specify the player ban limit in seconds to temporarily block access.
-This is recommended over banning access permanently, but you need to remember the time.
+Specify the player ban limit in seconds to temporarily block access.  
+This is recommended over banning access permanently, but you need to remember the time.  
 The period is specified in units and is in no particular order.
 
 ### Units
@@ -621,6 +731,7 @@ The period is specified in units and is in no particular order.
 ### Example
 
 -   /tempban 1y 1mo 4days 5hour 1min 4sec SaikyouPeyangsan Blacklisted Modifications
+
     In this case, ban SaikyouPeyangsan for One year, one month, four days, five hours, one minute, four seconds with Blacklisted Modifications.
 
 ### Permission
@@ -644,9 +755,9 @@ The main command of this plugin. It works by adding an argument.
 
 #### /psac help
 
-Displays help for this plugin command.
-**Commands related to management ID can be used in `psac.mod`, but they are not shown in help.**
-Players with `psac.mod` or `psac.admin` permissions will also see the following help:
+Displays help for this plugin command.  
+**Commands related to management ID can be used in `psac.mod`, but they are not shown in help.**  
+Players with `psac.mod` or `psac.admin` permissions will also see other help.
 
 The command's permission is `psac.help`.
 
@@ -659,8 +770,8 @@ The command's permission is `psac.view`.
 
 #### /psac show \<ManagementID\>
 
-View details of the report sent by the player.
-You can run this command from the player to view the report details by the player's book.
+View details of the report sent by the player.  
+You can run this command from the player to view the report details by the player's book.  
 If you run it from the console, it will appear as a log to the console.
 
 The command's permission is `psac.show`.
@@ -686,7 +797,7 @@ The command's permission is `psac.drop`.
 違反行為をしたプレイヤーをゲームから対処しました。ご報告ありがとうございました！
 ```
 
-This message is sent when the watchdog automatically detects a cheat.
+This message is sent when the watchdog automatically detects a cheat.  
 For staff kicks, you will only broadcast a secondary message.
 
 ---
@@ -729,26 +840,27 @@ In this plugin, the following config is set by default.
 
 ## What is this NPC\(WatchDog\)?
 
-The Watchdog calls the NPC with a random username using the [words file](../src/main/resources/wordsx256.txt).
+The Watchdog calls the NPC with a random username using the [words file](../src/main/resources/wordsx256.txt).  
 The NPC skin is displayed randomly by included 1400 skin sets.
 
 ### What is \<ManagementID\>?
 
-\<ManagementID\> is a 32-character alphanumeric string that is automatically assigned when the player submits the report.
-This ID is displayed when you run `/psac view` from console.
+\<ManagementID\> is a 32-character alphanumeric string that is automatically assigned when the player submits the report.  
+This ID is displayed when you run `/psac view` from console.  
 Also, can execute commands related to the \<ManagementID\> from the player.
 
 ### Why not automatically execute BAN commands in this plugin?
 
-The plugin is concerned about falsely banning players due to false Watchdog detection.
+The plugin is concerned about falsely banning players due to false Watchdog detection.  
 Therefore, the plugin does not ban players **automatically**.
 
 ## What is learning function?
 
-This plugin has a learning function that automatically adjusts the parameters using the actual cheat material.
-Learning cheat data can improve the accuracy of function decision to kick or not.
+This plugin has a learning function that automatically adjusts the parameters using the actual cheat material.  
+Learning cheat data can improve the accuracy of function decision to kick or not.  
 The learning function of this plugin uses machine learning to use a neural network.
-**This feature is under development. Please note that this function cannot learn completely.**
+
+> [!WARNING] This feature is under development. This function may cannot learn completely.
 
 ### Learning mechanism
 
@@ -756,25 +868,24 @@ The learning feature of this plugin adjusts key parameters by iteratively calcul
 
 ## What is _[YAML resources file](../src/main/resources)_?
 
-When you build PeyangSuperbAntiCheat.jar with `mvn package`, `mvn shade` is automatically executed.
+When you build PeyangSuperbAntiCheat.jar with `mvn package`, `mvn shade` is automatically executed.  
 You can edit this file to change the plugin resources before building.
 
 **_[message.yml](../src/main/resources/message.yml)_**
 
-_[message.yml](../src/main/resources/message.yml)_ is **automatically included jar resource** and **used to change the PSAC message**.
+_[message.yml](../src/main/resources/message.yml)_ is **automatically included jar resource** and **used to change the PSAC message**.  
 Programmatically, YAML is referenced as a node tree and anything related to **dynamic references such as "%%name%%" cannot be changed**.
 
 **_[config.yml](../src/main/resources/config.yml)_**
 
-_[config.yml](../src/main/resources/config.yml)_ is **automatically included jar resource** and **the plugin references the pre-build configuration dataset**.
+_[config.yml](../src/main/resources/config.yml)_ is **automatically included jar resource** and **the plugin references the pre-build configuration dataset**.  
 See [here](#config-settings) for configuration settings.
 
 > **WARNING: Configuration settings will not change unless you change them before building.**
 
 **_[plugin.yml](../src/main/resources/plugin.yml)_**
 
-_[plugin.yml](../src/main/resources/plugin.yml)_ contains assembly information, commands, and permission settings for the plugin itself.
-**Therefore, do not change much.**
+_[plugin.yml](../src/main/resources/plugin.yml)_ contains assembly information, commands, and permission settings for the plugin itself. **Therefore, do not change much.**
 
 ## What utility items for [/target](#target)?
 
@@ -793,17 +904,17 @@ Player can get the following utility items by executing [/target](#target).
 |   Reed    |          PULL           | Pull the target.                                |           [/pull](#pull) \<Target\>           |
 | Blaze Rod |      TARGET_STICK       | Target the player you are looking at.           |     [/target](#target) \<Looking Player\>     |
 
-This example is replacing minecraft's default command to [/psac kick](#arguments).
+This example is replacing minecraft's default command to [/psac kick](#arguments).  
 [/psac kick](#arguments) can show particles, add decorations when kicking, and record to databases.
 
 ## What library does this plugin use?
 
-See _[pom.xml](../pom.xml)_ for more information.
+See _[pom.xml](../pom.xml)_ for more information.  
 It also describes the Source codes / Libraries / APIs used in [Thanks](#thanks).
 
 ## Did you find any bugs or errors?
 
-We accept bugs and errors related to [GitHub issues](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues).
+We accept bugs and errors related to [GitHub issues](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues).  
 I think that it will be handled by about two people, so please feel free to post.
 
 #### Assignees

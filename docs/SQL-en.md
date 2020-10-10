@@ -1,6 +1,23 @@
 # PeyangSuperbAntiCheat (PSAC) SQL Configulation Tutorial
 
-[Overview](README-en.md#overview) | [Installation](README-en.md#installation) | [Permissions](README-en.md#permissions) | [Commands](README-en.md#commands) | [Config settings](README-en.md#config-settings) | SQL |[BungeeCord](BUNGEE-en.md) | [FAQ](README-en.md#what-is-this-npcwatchdog)
+[Overview](README-en.md#overview) | [Installation](README-en.md#installation) | [Permissions](README-en.md#permissions) | [Commands](README-en.md#commands) | [Config settings](README-en.md#config-settings) | SQL | [BungeeCord](BUNGEE-en.md) | [FAQ](README-en.md#what-is-this-npcwatchdog)
+
+<details>
+<summary>Table of Contents</summary>
+
+- [PeyangSuperbAntiCheat (PSAC) SQL Configulation Tutorial](#peyangsuperbanticheat-psac-sql-configulation-tutorial)
+  - [Overview](#overview)
+  - [Configulation](#configulation)
+    - [SQLite](#sqlite)
+    - [MySQL](#mysql)
+  - [Settings file format](#settings-file-format)
+  - [Config settings](#config-settings)
+  - [Methods](#methods)
+  - [Protocols](#protocols)
+  - [SQL path specification for each databases](#sql-path-specification-for-each-databases)
+    - [SQLite](#sqlite-1)
+    - [MySQL](#mysql-1)
+</details>
 
 ## Overview
 

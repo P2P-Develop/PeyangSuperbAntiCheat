@@ -2,6 +2,17 @@
 
 [Overview](README-en.md#overview) | [Installation](README-en.md#installation) | [Permissions](README-en.md#permissions) | [Commands](README-en.md#commands) | [Config settings](README-en.md#config-settings) | [SQL](SQL-en.md) | BungeeCord | [FAQ](README-en.md#what-is-this-npcwatchdog)
 
+<details>
+<summary>Table of Contents</summary>
+
+- [PeyangSuperbAntiCheat (PSAC) BungeeCord Integration Tutorial](#peyangsuperbanticheat-psac-bungeecord-integration-tutorial)
+  - [Overview](#overview)
+  - [What changes with BungeeCord integration](#what-changes-with-bungeecord-integration)
+  - [Installation](#installation)
+  - [Precautions](#precautions)
+    - [How to change the plugin configuration](#how-to-change-the-plugin-configuration)
+</details>
+
 ## Overview
 
 PSAC can be managed through all servers using BungeeCord.
