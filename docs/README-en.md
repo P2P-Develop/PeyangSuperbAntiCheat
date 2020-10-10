@@ -813,14 +813,14 @@ In this plugin, the following config is set by default.
 |   database.logPath   |    ./log.db     | Save kick information by specifying location of SQLite database path.                                                             |
 |  database.learnPath  |  ./learn.json   | Specify the path to the JSON file that stores the neural network weights and learning count from learning.                        |
 |  database.trustPath  |   ./trust.db    | Save trusted players information by specifying location of SQLite database path.                                                  |
-|     npc.seconds      |        4        | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                                        |
-|       npc.time       |       0.3       | Specifies the value of [NPC](#aurabot) orbit speed.                                                                               |
-|      npc.range       |       2.1       | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.                           |
+|     npc.seconds      |        3        | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                                        |
+|       npc.time       |      0.35       | Specifies the value of [NPC](#aurabot) orbit speed.                                                                               |
+|      npc.range       |    3.0, 1.5     | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.                           |
 |    npc.reachRange    |       4.6       | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection with reach mode.           |
 |    npc.panicRange    |       1.5       | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                            |
 | npc.panicReachRange  |       4.6       | Specifies the relative height of the [Panic NPC](#acpanic) and player with reach mode.                                            |
 |       npc.wave       |      true       | Whether the [NPC](#aurabot) spins like a wave.                                                                                    |
-|     npc.waveMin      |       1.0       | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                                   |
+|     npc.waveMin      |       0.3       | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                                   |
 |    npc.speed.wave    |      true       | Specify whether to make the orbital velocity of NPC variable.                                                                     |
 | npc.speed.waveRange  |      0.03       | Specify the speed change range.                                                                                                   |
 |       npc.kill       |        3        | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                                     |

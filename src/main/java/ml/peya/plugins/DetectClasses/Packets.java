@@ -49,10 +49,7 @@ public class Packets
                         return false;
                     }).forEachOrdered(meta -> {
                 if (meta.getNpcLocation() != null)
-                {
-                    double angle = meta.getTarget().getEyeLocation().getDirection().angle(meta.getNpcLocation().subtract(meta.getTarget().getEyeLocation().toVector()));
-                    meta.addAngle(angle);
-                }
+                    meta.addAngle(meta.getTarget().getEyeLocation().getDirection().angle(meta.getNpcLocation().subtract(meta.getTarget().getEyeLocation().toVector())));
 
                 System.out.println(meta.addVL());
             });

@@ -80,12 +80,16 @@ public class DetectConnection
                     {
                         Arrays.stream(angles).forEachOrdered(angle -> learn(vl, angle));
 
+                        learnCount++;
+
                         if (kick(player)) return;
                     }
                 }
                 else if (banLeft <= vl)
                 {
                     Arrays.stream(angles).forEachOrdered(angle -> learn(vl, angle));
+
+                    learnCount++;
 
                     if (kick(player)) return;
                 }
@@ -135,9 +139,9 @@ public class DetectConnection
      * 学習回数を増やしAIを学習させる。
      *
      * @param vl      評価したVL。
-     * @param seconds NPCに対しメンチ切った秒数。
+     * @param angle あんぐるず
      */
-    private static void learn(double vl, double seconds)
+    private static void learn(double vl, double angle)
     {
         new BukkitRunnable()
         {
@@ -145,8 +149,7 @@ public class DetectConnection
             public void run()
             {
                 ArrayList<Triple<Double, Double, Double>> arr = new ArrayList<>();
-                arr.add(Triple.of(vl, seconds, seconds / vl));
-                learnCount++;
+                arr.add(Triple.of(vl, angle, angle / vl));
                 network.learn(arr, 1000);
 
                 this.cancel();
