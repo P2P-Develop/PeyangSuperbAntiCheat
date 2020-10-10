@@ -764,12 +764,12 @@ SQL関係は、[こ↓こ↑](https://github.com/P2P-Develop/PeyangSuperbAntiChe
 |   database.logPath   |    ./log.db     | キック情報などを保存する、SQLiteデータベースの置き場所です。                                                               |
 |  database.learnPath  |  ./learn.json   | 学習によって値が変更された「重み」と学習回数を保存する、JSONファイルの置き場所です。                                       |
 |  database.trustPath  |   ./trust.db    | 信用したプレイヤーを保存する、SQLiteデータベースの置き場所です。つまりこれ消せば信用データ消えます。やっぱ鯖を操る人最強。 |
-|     npc.seconds      |        4        | NPCがプレイヤーの周りを回る秒数です。                                                                                      |
-|       npc.time       |       0.3       | NPCが回る速さです。感覚で調整してください。                                                                                |
-|      npc.range       |       2.1       | NPCが回る半径です。ロマンが全て。デフォルトが最高。これがPSACｸｵﾘﾃｨ。                                                       |
+|     npc.seconds      |        3        | NPCがプレイヤーの周りを回る秒数です。                                                                                      |
+|       npc.time       |      0.35       | NPCが回る速さです。感覚で調整してください。                                                                                |
+|      npc.range       |    3.0, 1.5     | NPCが回る半径です。ロマンが全て。デフォルトが最高。これがPSACｸｵﾘﾃｨ。                                                       |
 |    npc.reachRange    |       4.6       | NPCがリーチモードとしてぶん回る半径です。-rオプションがつくとこの値が使用されます。精度？なんそれおいしいの？              |
 |       npc.wave       |      true       | NPCが波を描くようにして回るかどうかです。                                                                                  |
-|     npc.waveMin      |       1.0       | NPCが波を描くようにして回る最低ラインです。                                                                                |
+|     npc.waveMin      |       0.3       | NPCが波を描くようにして回る最低ラインです。                                                                                |
 |    npc.panicRange    |       1.5       | Panic NPCがプレイヤーの背後をへばりつく相対的な高さでえす。                                                                |
 | npc.panicReachRange  |       4.6       | Panic NPCがプレイヤーの背後をリーチモードとしてへばりつく相対的な高さですよん。-rオｐ(ry。精ｄ(ry                          |
 |    npc.speed.wave    |      true       | NPCのスピードをWaveで変更するかどうかです。                                                                                |
