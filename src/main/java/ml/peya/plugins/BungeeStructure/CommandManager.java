@@ -62,12 +62,8 @@ public class CommandManager
                     try
                     {
                         for (Method method : cls.getMethods())
-                        {
-                            if (method.getAnnotation(Command.class) == null)
-                                continue;
-                            if (method.getAnnotation(Command.class)
-                                    .label()
-                                    .equals(label))
+                            if (method.getAnnotation(Command.class) != null && method.getAnnotation(Command.class).label().equals(label))
+                            {
                                 method.invoke(cls.newInstance(), new CommandComponent()
                                 {
                                     @Override
@@ -88,7 +84,7 @@ public class CommandManager
                                         return server;
                                     }
                                 });
-                        }
+                            }
                     }
                     catch (Exception e)
                     {

@@ -34,8 +34,8 @@ public class Commands implements CommandExecutor
     @Command(label = "dc")
     public void disconnect(CommandComponent cmd)
     {
-        logger.info("<-> Server [" + cmd.getServer() + "] has disconnected");
         PeyangSuperbAntiCheatProxy.servers.remove(cmd.getServer());
+        logger.info("<-> Server [" + cmd.getServer() + "] has disconnected");
     }
 
     /**
@@ -64,17 +64,15 @@ public class Commands implements CommandExecutor
 
         if (args.length > 2)
             return;
-        String id = args[0];
-        String player = args[1];
+
+        final String id = args[0];
+        final String player = args[1];
 
         logger.info("Reported Player [" + player + "](id=" + id + ")");
 
         PeyangSuperbAntiCheatProxy.servers.parallelStream()
-                .filter(serverName -> !cmd.getServer()
-                        .equals(serverName))
-                .map(serverName -> PeyangSuperbAntiCheatProxy.getPlugin()
-                        .getProxy()
-                        .getServerInfo(serverName))
+                .filter(serverName -> !cmd.getServer().equals(serverName))
+                .map(serverName -> PeyangSuperbAntiCheatProxy.getPlugin().getProxy().getServerInfo(serverName))
                 .filter(Objects::nonNull)
                 .forEachOrdered(server -> PeyangSuperbAntiCheatProxy.sendData(server, "report " + id + " " + player));
     }
