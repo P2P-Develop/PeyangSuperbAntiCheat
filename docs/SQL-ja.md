@@ -57,7 +57,7 @@ hogePath3: "../data/hoge2.db"
 
 こんな感じにやってください。
 
-####MySQL
+#### MySQL
 
 ホスト名:ポート番号/DB名?user=ユーザ名&password=パスワード
 
