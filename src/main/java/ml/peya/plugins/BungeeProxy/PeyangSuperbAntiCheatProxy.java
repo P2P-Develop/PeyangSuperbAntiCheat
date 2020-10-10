@@ -29,7 +29,7 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
     /**
      * bStats
      */
-    private static final int __BSTATS_PLUGIN_ID = 8084;
+    private static final int __BSTATS_PLUGIN_ID = 9068;
 
     /**
      * PSAC有効サーバリスト
