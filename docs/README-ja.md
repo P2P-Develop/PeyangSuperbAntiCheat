@@ -663,6 +663,7 @@ BANされるべき人がBANされなくても~~上の通り~~知りません。�
 ### message.ymlについて
 
 PeyangSuperbAntiCheat.jarを`mvn package`でビルドすると、`mvn shade`が自動実行されます（たぶん）←ちゃんと実行されます
+
 その時、message.ymlとかもくっついてきます。
 それがPeyangSuperbAntiCheat.jarのなかに同梱されています。
 message.ymlをいじくり倒すことで、いろいろできますが、まぁ…うん。後はすべて察しろ。
@@ -697,19 +698,21 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 ### [**こ↑こ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)場所の担当者
 
 日本語：[ぺやんぐ](https://github.com/peyang-Celeron)←開発者
+
 ~~日本語校正してない人：[Lemonade19x](https://github.com/Lemonade19x)←自称ﾌﾟﾛｸﾞﾗﾏｰ&ここのコミット100回くらいやり直した人♡~~
-英語：[Potato1682](https://github.com/Potato1682)←ここのコミット~~3回くらいやり直した~~人♡
+
+英語：[Potato1682](https://github.com/Potato1682)←ここのコミット~~3回くらいやり直して改行されてないのに気付いて数か月後慌てて直した~~人♡
 
 ### 謝辞
 
 このプラグインは、以下のライブラリ / API を使用しています。
-[brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
-[dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*)](https://dev.bukkit.org/projects/protocollib)
-[jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)
-[DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
-[P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
-[PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
-[Matrix API](https://matrix.rip/) [\(*\)](https://www.mc-market.org/resources/13999/)
+- [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
+- [dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*)](https://dev.bukkit.org/projects/protocollib)
+- [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)
+- [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
+- [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
+- [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
+- [Matrix API](https://matrix.rip/) [\(*\)](https://www.mc-market.org/resources/13999/)
 <br />
 <br />
 <br />
