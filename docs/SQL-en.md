@@ -95,7 +95,7 @@ An example is following:
 
 ```yml
 # For Windows
-fooPath: "%USERPROFILE%\\\DataBases\\foo.db"
+fooPath: "%USERPROFILE%\\DataBases\\foo.db"
 
 # For Linux (Mac)
 fooPath2: "/path/to/foo2.db"
