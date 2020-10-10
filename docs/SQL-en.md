@@ -1,29 +1,30 @@
-# PeyangSuperbAntiCheat (PSAC) SQL Configulation Tutorial
+# PeyangSuperbAntiCheat (PSAC) SQL Configuration Tutorial
 
 [Overview](README-en.md#overview) | [Installation](README-en.md#installation) | [Permissions](README-en.md#permissions) | [Commands](README-en.md#commands) | [Config settings](README-en.md#config-settings) | SQL | [BungeeCord](BUNGEE-en.md) | [FAQ](README-en.md#what-is-this-npcwatchdog)
 
 <details>
 <summary>Table of Contents</summary>
 
-- [PeyangSuperbAntiCheat (PSAC) SQL Configulation Tutorial](#peyangsuperbanticheat-psac-sql-configulation-tutorial)
+- [PeyangSuperbAntiCheat (PSAC) SQL Configuration Tutorial](#peyangsuperbanticheat-psac-sql-configuration-tutorial)
   - [Overview](#overview)
-  - [Configulation](#configulation)
+  - [Configuration](#configuration)
     - [SQLite](#sqlite)
     - [MySQL](#mysql)
   - [Settings file format](#settings-file-format)
   - [Config settings](#config-settings)
   - [Methods](#methods)
   - [Protocols](#protocols)
-  - [SQL path specification for each databases](#sql-path-specification-for-each-databases)
+  - [SQL path specification for each database](#sql-path-specification-for-each-database)
     - [SQLite](#sqlite-1)
     - [MySQL](#mysql-1)
+
 </details>
 
 ## Overview
 
 PSAC can use other SQLs such as SQLite, MySQL.
 
-## Configulation
+## Configuration
 
 Each SQLs may require specific settings.
 
@@ -39,7 +40,7 @@ You can edit settings file and start database.
 
 ## Settings file format
 
-PSAC sets SQL configulations in settings file.
+PSAC sets SQL configurations in settings file.
 The settings are described in following format:
 
 ```yml
@@ -77,16 +78,16 @@ Specify the JDBC driver namespace for the database.
 
 Specify the database access protocol.
 This used as a URL prefix.
-The driver is JDBC, so __first__ prefix is starts `jdbc:`.
+The driver is JDBC, so **first** prefix is starts `jdbc:`.
 
 |  Name  |    Prefix     |
 | :----: | :-----------: |
 | MySql  | jdbc:sqlite:  |
 | SQLite | jdbc:mysql:// |
 
-## SQL path specification for each databases
+## SQL path specification for each database
 
-The SQL path specification is different in each databases.
+The SQL path specification is different in each database.
 
 ### SQLite
 
@@ -108,6 +109,7 @@ fooPath3: "../rel/path/to/foo2.db"
 
 In this case, path is this format: `Hostname:Port/Database?user=username&password=password`
 An example is following:
+
 ```yaml
 fooPath: "localhost:3306/eyeData?user=peyang&password=P_young"
 ```

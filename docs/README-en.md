@@ -1,6 +1,6 @@
 # PeyangSuperbAntiCheat (PSAC) English Documentation
 
-[Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [SQL](SQL-en.md) | [BungeeCord](BUNGEE-en.md) | [FAQ](#what-is-this-npcwatchdog)
+[Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [SQL](SQL-en.md) | [BungeeCord](BUNGEE-en.md) | [Contributing](CONTRIBUTING-en.md) | [Security](SECURITY-en.md) | [FAQ](#what-is-this-npcwatchdog)
 
 <details>
 <summary>Table of Contents</summary>
@@ -183,7 +183,7 @@ This block of code represents a permission.
 
 1.  Execute this command.
 
-    `maven`, `curl`, `make` and `git` required.
+    `maven` `curl` `make` `git` required.
 
     ```bash
     $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/peyang-Celeron/PeyangSuperbAntiCheat/master/build)"
@@ -280,7 +280,7 @@ Other settings can be done using permissions.
 |  `psac.chattarget`  |           none           | A mark will be added to the left of the chat for players with this permission.                                                            |      op       |     psac.mod     |
 |   `psac.userinfo`   |  [/userinfo](#userinfo)  | This permission can see the player information. If `message.lynx` enabled, add some information.                                          |      op       |     psac.mod     |
 |     `psac.ban`      |       [/ban](#ban)       | This permission allows you to restrict player access.                                                                                     |      op       |     psac.mod     |
-|   `psac.tempban`    |   [/tempban](#tempban)   | This permission allows you to restrict player access temporaly.                                                                           |      op       |     psac.mod     |
+|   `psac.tempban`    |   [/tempban](#tempban)   | This permission allows you to restrict player access temporally.                                                                           |      op       |     psac.mod     |
 |    `psac.unban`     |     [/unban](#unban)     | This permission can removes the player's access ban.                                                                                      |      op       |     psac.mod     |
 |  **_psac.admin_**   |          group           | This permission can use all commands of the plugin.                                                                                       |     false     |       none       |
 |     `psac.drop`     | [/psac drop](#arguments) | This permission can delete submitted report.                                                                                              |     false     |    psac.admin    |

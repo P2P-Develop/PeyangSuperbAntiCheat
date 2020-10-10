@@ -1,5 +1,18 @@
 # PSAC contribution rules
 
+[Overview](README-en.md#overview) | [Installation](README-en.md#installation) | [Permissions](README-en.md#permissions) | [Commands](README-en.md#commands) | [Config settings](README-en.md#config-settings) | [SQL](SQL-en.md) | [BungeeCord](BUNGEE-en.md) | Contributing | [Security](SECURITY-en.md) | [FAQ](README-en.md#what-is-this-npcwatchdog)
+
+<details>
+<summary>Table of Contents</summary>
+
+- [PSAC contribution rules](#psac-contribution-rules)
+  - [Overview](#overview)
+    - [Issue, Pull Request manners](#issue-pull-request-manners)
+    - [Commit manners](#commit-manners)
+    - [See also](#see-also)
+
+</details>
+
 まぁまぁ真面目な日本語(笑)が欲しいなら[ここ](CONTRIBUTING.md)へ、どうぞ。
 
 ## Overview

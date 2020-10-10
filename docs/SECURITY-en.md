@@ -1,5 +1,16 @@
 # Security Policy
 
+[Overview](README-en.md#overview) | [Installation](README-en.md#installation) | [Permissions](README-en.md#permissions) | [Commands](README-en.md#commands) | [Config settings](README-en.md#config-settings) | [SQL](SQL-en.md) | [BungeeCord](BUNGEE-en.md) | [Contributing](CONTRIBUTING-en.md) | Security | [FAQ](README-en.md#what-is-this-npcwatchdog)
+
+<details>
+<summary>Table of Contents</summary>
+
+- [Security Policy](#security-policy)
+  - [Supported Versions](#supported-versions)
+  - [Reporting a Vulnerability](#reporting-a-vulnerability)
+
+</details>
+
 もっとネタを求めたいかい？それじゃあ[こ ↑ こ ↓](SECURITY.md)へ行くんだ。
 
 ## Supported Versions
