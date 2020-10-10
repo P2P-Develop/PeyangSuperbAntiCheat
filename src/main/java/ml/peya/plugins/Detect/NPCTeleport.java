@@ -18,8 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.cheatMeta;
@@ -160,10 +160,8 @@ public class NPCTeleport
     private static void auraBotTeleport(Player player, EntityPlayer target, ItemStack[] arm, boolean reachMode)
     {
         final double[] time = {0.0};
-
-        final ArrayList<Double> angles = new ArrayList<>();
-
-        final double radius = reachMode ? config.getDouble("npc.reachRange"): config.getDouble("npc.range");
+        final double radius = reachMode ? config.getDouble("npc.reachRange"): config.getDoubleList("npc.range")
+                .get(new Random().nextInt(config.getDoubleList("npc.range").size()));
 
         WaveCreator ypp = new WaveCreator(10.0, 100.0, 10.0);
 
