@@ -13,8 +13,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
@@ -45,34 +43,32 @@ public class CommandTempBan implements CommandExecutor
             return true;
         }
 
-        String regex = "^[0-9]+((year|y)|(month|mo)|(day|d)|(hour|h)|(minute|min|m)|(second|sec|s))(s)?$";
-
         new BukkitRunnable()
         {
             @Override
             public void run()
             {
 
-                ArrayList<String> ex = new ArrayList<>(Arrays.asList(args));
+                ArrayList<String> argList = new ArrayList<>(Arrays.asList(args));
 
                 Player pl = null;
 
-                Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-
                 StringBuilder reason = new StringBuilder();
 
-                for (String arg : ex)
+                for (String arg : argList)
                 {
                     Player player = PlayerUtils.getPlayerAllowOffline(arg);
                     if (player != null)
                     {
                         if (pl == null)
                             pl = player;
+
                         continue;
                     }
 
-                    Matcher m = p.matcher(arg);
-                    if (m.find())
+                    if (Pattern.compile(
+                            "^[0-9]+((year|y)|(month|mo)|(day|d)|(hour|h)|(minute|min|m)|(second|sec|s))(s)?$",
+                            Pattern.CASE_INSENSITIVE).matcher(arg).find())
                         continue;
 
                     reason.append(arg).append(" ");
@@ -84,9 +80,7 @@ public class CommandTempBan implements CommandExecutor
                     return;
                 }
 
-                Date date = TimeParser.convert(ex.toArray(new String[0]));
-
-                BanWithEffect.ban(pl, reason.toString(), date);
+                BanWithEffect.ban(pl, reason.toString(), TimeParser.convert(argList.toArray(new String[0])));
 
             }
         }.runTask(PeyangSuperbAntiCheat.getPlugin());

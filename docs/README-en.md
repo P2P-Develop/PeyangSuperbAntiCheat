@@ -662,7 +662,7 @@ Ban specified player **manually**.
 ### Description
 
 Ban the player and record it on the record.  
-If you not specify \[Reasons...\], ban \<PlayerName\> with reason `Kicked by operator`.
+If you not specify \[Reasons...\], ban \<PlayerName\> with reason `Banned by operator`.
 
 ### Usages
 

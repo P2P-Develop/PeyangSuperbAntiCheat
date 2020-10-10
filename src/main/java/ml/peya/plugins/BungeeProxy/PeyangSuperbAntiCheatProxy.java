@@ -118,15 +118,17 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
         }
 
         banKickPath = config.getString("database.logPath");
+
         if (config.getString("database.method").contains("sqlite"))
         {
             if (getProxy().getPluginManager().getPlugin("SQLiteBungeecord") == null)
             {
-                getLogger().log(Level.SEVERE, "Hey, there! This server isn't supporting SQLite!\n");
+                getLogger().log(Level.SEVERE, "This server isn't supporting SQLite!\n");
                 getLogger().log(Level.INFO, "NOTE: Install SQLiteBungeeCord will solve this problem.");
                 getLogger().log(Level.INFO, "Download >>> https://www.spigotmc.org/resources/sqlite-for-bungeecord.57191/update?update=344657 <<<");
                 severeDisable();
             }
+
             banKick = new HikariDataSource(getDBSetting(Paths.get(banKickPath).isAbsolute()
                     ? banKickPath
                     : getPlugin().getDataFolder().getAbsolutePath() + "/" + banKickPath));

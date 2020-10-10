@@ -32,9 +32,7 @@ public class CommandUnBan implements CommandExecutor
         if (ErrorMessageSender.invalidLengthMessage(sender, args, 1, 1) || ErrorMessageSender.unPermMessage(sender, "psac.unban"))
             return true;
 
-        String playerName = args[0];
-
-        OfflinePlayer player = PlayerUtils.getOfflinePlayer(playerName);
+        OfflinePlayer player = PlayerUtils.getOfflinePlayer(args[0]);
 
         if (player == null)
         {

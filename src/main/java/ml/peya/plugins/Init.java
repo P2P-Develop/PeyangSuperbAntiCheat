@@ -344,19 +344,18 @@ public class Init
             File file = new File(Paths.get(config.getString("database.learnPath")).isAbsolute()
                     ? config.getString("database.learnPath")
                     : getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+
             if (file.exists() && file.length() >= 16)
             {
                 JsonNode node = new ObjectMapper().readTree(file);
+
                 int i = 0;
                 for (double[] aIW : NeuralNetwork.inputWeight)
-                {
                     for (int i1 = 0; i1 < aIW.length; i1++)
                         NeuralNetwork.inputWeight[i][i1] = node.get("inputWeight")
-                                .get(i)
+                                .get(i++)
                                 .get(i1)
                                 .asDouble();
-                    i++;
-                }
 
                 Arrays.parallelSetAll(NeuralNetwork.middleWeight, i2 -> node.get("middleWeight")
                         .get(i2)
