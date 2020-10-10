@@ -222,6 +222,7 @@ This report format is lets them know who reported who and why.
 ### Usages
 
 -   /report \<PlayerName\>
+
     Player can execute this command with this argument to open a book where you can select the reason for the report.
     If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.
 
@@ -230,6 +231,7 @@ This report format is lets them know who reported who and why.
 -   ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Click the "レポートをキャンセル" to discard.
 
 -   /report \<PlayerName\> \<Reason1\> \[Reason2\]...
+
     Player can execute this command with this argument to report directly in chat/console without using a book.
     **Can use an alias for this reason. Please read below.**
 
@@ -271,9 +273,11 @@ Reach mode can scan the radius and check the reach.
 ### Usage
 
 -   /aurabot \<PlayerName\>
+
     Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
 
 -   /aurabot \<PlayerName\> \[-r\]
+
     Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
 
 ### Permission
@@ -300,9 +304,11 @@ Also, to use the reach mode, adds the "-r" argument to the first or second argum
 ### Usage
 
 -   /acpanic \<PlayerName\>
+
     Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
 
 -   /acpanic \<PlayerName\> \[-r\]
+
     Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
 
 ### Permission
@@ -325,6 +331,7 @@ This allows you to see if the player is knocking back.
 ### Usage
 
 -   /testkb \<PlayerName\>
+
     Fire an invisible arrow at \<PlayerName\>.
 
 ### Permission
@@ -347,6 +354,7 @@ It cannot be run from console.
 ### Usage
 
 -   /pull \<PlayerName\>
+
     Pull \<PlayerName\> to the executed player.
 
 ### Permission
@@ -368,6 +376,7 @@ Displays the player's kick (BAN) history **remaining in this plugin**.
 ### Usage
 
 -   /bans \[\-a | ban | kick\] \<PlayerName\>
+
     Displays the BAN history of player specified by \<PlayerName\>.
     Add \-a to show all bans and kicks.
 
@@ -388,6 +397,7 @@ Dropping a given item, clears all items.
 ### Usage
 
 -   /target \<PlayerName\>
+
     Start tracking \<PlayerName\> with utility items.
 
 ### Permission
@@ -412,9 +422,11 @@ If tracking is currently started and no argument is specified, tracking will be 
 ### Usages
 
 -   /tracking \[PlayerName\]
+
     Start tracking \[PlayerName\].
 
 -   /tracking
+
     Stop track if tracking.
 
 ### Permission
@@ -447,6 +459,7 @@ Players without the `psac.trust` cannot run the following commands on trusted pl
 ### Usage
 
 -   /trust \<PlayerName\>
+
     Add / Remove \<PlayerName\> into "trusted player".
 
 ### Permission
@@ -467,6 +480,7 @@ If `-f` is not specified or is not available, concise information is displayed.
 ### Usage
 
 -   /userinfo \[f\] \<PlayerName\>
+
     Displays information about \<PlayerName\>.
     If \[-f\] is specified, more detailed information will be displayed.
 
@@ -492,9 +506,11 @@ Teleports to the player specified in the argument.
 ### Usages
 
 -   /stp \[PlayerName\]
+
     Teleport to \[PlayerName\].
 
 -   /stp \[PlayerName\] \[DestPlayerName\]
+
     Teleport \[PlayerName\] to \[DestPlayerName\].
 
 ### Permission
@@ -513,9 +529,11 @@ Specifying \[test\] as the second argument kick player in _test mode_.
 ### Usages
 
 -   /kick \<PlayerName\>
+
     Kick \<PlayerName\>.
 
 -   /kick \<PlayerName\> test
+
     Kick \<PlayerName\> as test mode.
 
 ### Permission
@@ -539,9 +557,11 @@ If you not specify \[Reasons...\], ban \<PlayerName\> with reason `Kicked by ope
 ### Usages
 
 -   /ban \<PlayerName\> \[Reasons...\]
+
     Ban \<PlayerName\> with \[Reasons...\].
 
 -   /ban \<PlayerName\>
+
     Ban \<PlayerName\> with `Kicked by operator`.
 
 ## /unban
@@ -560,6 +580,7 @@ Even if it is permanent, the player's access ban will be lifted.
 ### Usage
 
 -   /unban \<PlayerName\>
+
     Removes the ban on \<PlayerName\>.
 
 ### Permission
@@ -590,9 +611,11 @@ The period is specified in units and is in no particular order.
 ### Usage
 
 -   /tempban \<Units...\> \<PlayerName\>
+
     Ban \<PlayerName\> for \<Units...\>.
 
 -   /tempban \<Units...\> \<PlayerName\> \<Reasons...\>
+
     Ban \<PlayerName\> for \<Units...\> with \<Reasons...\>.
 
 ### Example
