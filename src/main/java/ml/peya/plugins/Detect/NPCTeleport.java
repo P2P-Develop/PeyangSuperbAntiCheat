@@ -221,12 +221,7 @@ public class NPCTeleport
                     count[0]++;
                     CheatDetectNowMeta meta = cheatMeta.getMetaByPlayerUUID(player.getUniqueId());
                     if (meta == null) continue;
-                    double angle = player.getEyeLocation().getDirection().angle(
-                            n.toVector().subtract(
-                                    player.getEyeLocation().toVector()
-                            ));
-
-                    meta.addAngle(angle);
+                    meta.setNpcLocation(n.toVector());
                 }
                 time[0] += config.getDouble("npc.time") + (config.getBoolean("npc.speed.wave")
                         ? new WaveCreator(0.0, config.getDouble("npc.speed.waveRange"), 0 - config.getDouble("npc.speed.waveRange")).get(0.001, true)

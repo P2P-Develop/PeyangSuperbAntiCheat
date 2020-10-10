@@ -33,7 +33,7 @@ public class Packets
             field.setAccessible(true);
 
             cheatMeta.getMetas()
-                    .parallelStream()
+                    .stream()
                     .filter(meta ->
                     {
                         try
@@ -47,7 +47,15 @@ public class Packets
                             ex.printStackTrace();
                         }
                         return false;
-                    }).forEachOrdered(meta -> System.out.println(meta.addVL()));
+                    }).forEachOrdered(meta -> {
+                if (meta.getNpcLocation() != null)
+                {
+                    double angle = meta.getTarget().getEyeLocation().getDirection().angle(meta.getNpcLocation().subtract(meta.getTarget().getEyeLocation().toVector()));
+                    meta.addAngle(angle);
+                }
+
+                System.out.println(meta.addVL());
+            });
         }
         catch (Exception ex)
         {

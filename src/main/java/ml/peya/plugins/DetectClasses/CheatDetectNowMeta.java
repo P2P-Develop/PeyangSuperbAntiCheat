@@ -2,6 +2,7 @@ package ml.peya.plugins.DetectClasses;
 
 import ml.peya.plugins.Enum.DetectType;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -43,7 +44,9 @@ public class CheatDetectNowMeta
     /**
      * アングル
      */
-    private ArrayList<Double> angles;
+    private final ArrayList<Double> angles;
+
+    private Vector npcLocation = null;
 
     /**
      * コンストラクター。
@@ -202,5 +205,25 @@ public class CheatDetectNowMeta
     public ArrayList<Double> getAngles()
     {
         return angles;
+    }
+
+    /**
+     * ロケーション取得
+     *
+     * @return ロケーション
+     */
+    public Vector getNpcLocation()
+    {
+        return npcLocation;
+    }
+
+    /**
+     * ロケーションセット
+     *
+     * @param npcLocation ロケーション
+     */
+    public void setNpcLocation(Vector npcLocation)
+    {
+        this.npcLocation = npcLocation;
     }
 }
