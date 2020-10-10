@@ -44,9 +44,9 @@
       alt="GitHub Workflow Status"
   ></a>
   <a href="https://snyk.io/test/github/peyang-Celeron/PeyangSuperbAntiCheat"
-    ><img 
+    ><img
       src="https://img.shields.io/snyk/vulnerabilities/github/P2P-Develop/PeyangSuperbAntiCheat?style=flat-square"
-      alt="Snyk Vulnerabilities for GitHub Repo"  
+      alt="Snyk Vulnerabilities for GitHub Repo"
   ></a>
 </p>
 

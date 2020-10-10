@@ -1,6 +1,6 @@
-# PeyangSuperbAntiCheat(PSAC) BungeeCord Integration Tutorial
+# PeyangSuperbAntiCheat (PSAC) BungeeCord Integration Tutorial
 
-[Overview](README-en.md#overview) | [Installation](README-en.md#installation) | [Permissions](README-en.md#permissions) | [Commands](README-en.md#commands) | [Config settings](README-en.md#config-settings) | BungeeCord | [FAQ](README-en.md#what-is-this-npcwatchdog)
+[Overview](README-en.md#overview) | [Installation](README-en.md#installation) | [Permissions](README-en.md#permissions) | [Commands](README-en.md#commands) | [Config settings](README-en.md#config-settings) | [SQL](SQL-en.md) | BungeeCord | [FAQ](README-en.md#what-is-this-npcwatchdog)
 
 ## Overview
 

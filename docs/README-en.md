@@ -1,4 +1,4 @@
-# PeyangSuperbAntiCheat(PSAC) English Documentation
+# PeyangSuperbAntiCheat (PSAC) English Documentation
 
 [Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [SQL](SQL-en.md) | [BungeeCord](BUNGEE-en.md) | [FAQ](#what-is-this-npcwatchdog)
 
@@ -170,9 +170,9 @@ Other settings can be done using permissions.
 |     `psac.pull`     |      [/pull](#pull)      | This permission can pull other players.                                                                                                   |      op       |     psac.mod     |
 |  `psac.chattarget`  |           none           | A mark will be added to the left of the chat for players with this permission.                                                            |      op       |     psac.mod     |
 |   `psac.userinfo`   |  [/userinfo](#userinfo)  | This permission can see the player information. If `message.lynx` enabled, add some information.                                          |      op       |     psac.mod     |
-|      `psac.ban`     |        [/ban](#ban)      | This permission allows you to restrict player access.                                                                                     |      op       |     psac.mod    |
-|    `psac.tempban`   |    [/tempban](#tempban)  | This permission allows you to restrict player access temporaly.                                                                           |      op       |     psac.mod    |
-|     `psac.unban`    |      [/unban](#unban)    | This permission can removes the player's access ban.                                                                                       |      op       |     psac.mod    |
+|     `psac.ban`      |       [/ban](#ban)       | This permission allows you to restrict player access.                                                                                     |      op       |     psac.mod     |
+|   `psac.tempban`    |   [/tempban](#tempban)   | This permission allows you to restrict player access temporaly.                                                                           |      op       |     psac.mod     |
+|    `psac.unban`     |     [/unban](#unban)     | This permission can removes the player's access ban.                                                                                      |      op       |     psac.mod     |
 |  **_psac.admin_**   |          group           | This permission can use all commands of the plugin.                                                                                       |     false     |       none       |
 |     `psac.drop`     | [/psac drop](#arguments) | This permission can delete submitted report.                                                                                              |     false     |    psac.admin    |
 |    `psac.error`     |           none           | This permission can get error information when the plugin encountered an internal error.                                                  |     false     |    psac.admin    |
@@ -578,14 +578,14 @@ The period is specified in units and is in no particular order.
 
 ### Units
 
-| Keyword |  Alias |      Example      | Description          |
+| Keyword | Alias  |      Example      | Description          |
 | :-----: | :----: | :---------------: | :------------------- |
-|   year  |    y   |     3year, 3y     | Specify the years.   |
+|  year   |   y    |     3year, 3y     | Specify the years.   |
 |  month  |   mo   |    3month, 3mo    | Specify the months.  |
-|   day   |    d   |     3day, 3d      | Specify the days.    |
-|   hour  |    h   |     3hour, 3h     | Specify the hours.   |
-|  minute | min, m | 3minute, 3min, 3m | Specify the minutes. |
-|  second | sec, s | 3second, 3sec, 3s | Specify the seconds. |
+|   day   |   d    |     3day, 3d      | Specify the days.    |
+|  hour   |   h    |     3hour, 3h     | Specify the hours.   |
+| minute  | min, m | 3minute, 3min, 3m | Specify the minutes. |
+| second  | sec, s | 3second, 3sec, 3s | Specify the seconds. |
 
 ### Usage
 

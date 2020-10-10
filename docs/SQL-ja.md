@@ -1,7 +1,7 @@
 # PeyangSuperbAntiCheat SQL設定
-PSACでは、SQL設定をconfigファイルに設定します。  
-この設定は、以下の書式に決定されます。  
-```yaml
+PSACでは、SQL設定をconfigファイルに設定します。
+この設定は、以下の書式に決定されます。
+```yml
 #データベースのパス
 #相対パスが利用できます。
 database:
@@ -15,32 +15,32 @@ database:
   trustPath: "./trust.db"
 ```
 
-| 設定名 | デフォルト値 | 説明 |
-|:-----:|:----------:|-----|
+|     設定名      |  デフォルト値   | 説明                |
+| :-------------: | :-------------: | ------------------- |
 | database.method | org.sqlite.JDBC | SQLの設定(メソッド) |
-| database.url | jdbc:sqlite | SQLの設定(URL) |
+|  database.url   |   jdbc:sqlite   | SQLの設定(URL)      |
 
 ## 設定パラメータ
 ### database.method
-データベースのドライバー名です。  
-クラス名を用いて設定します。  
+データベースのドライバー名です。
+クラス名を用いて設定します。
 
-| 名前 | クラス名 |
-|:-----:|:----------:|
-| MySql | com.mysql.jdbc.Driver |
-| SQLite | org.sqlite.JDBC |
+|  名前  |       クラス名        |
+| :----: | :-------------------: |
+| MySql  | com.mysql.jdbc.Driver |
+| SQLite |    org.sqlite.JDBC    |
 
 ### database.url
-データベースのアレ(?)です。  
-jdbc:hogehogeの形で設定します。  
+データベースのアレ(?)です。
+jdbc:hogehogeの形で設定します。
 
-| 名前 | クラス名 |
-|:-----:|:----------:|
-| MySql | jdbc:sqlite: |
+|  名前  |   クラス名    |
+| :----: | :-----------: |
+| MySql  | jdbc:sqlite:  |
 | SQLite | jdbc:mysql:// |
 
 ### なんとかPath
-SQLiteを設定するときは簡単にできます。  
+SQLiteを設定するときは簡単にできます。
 
 #### SQLite
 
