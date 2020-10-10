@@ -1,6 +1,6 @@
 # PeyangSuperbAntiCheat(PSAC) English Documentation
 
-[Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [BungeeCord](BUNGEE-en.md) | [FAQ](#what-is-this-npcwatchdog)
+[Overview](#overview) | [Installation](#installation) | [Permissions](#permissions) | [Commands](#commands) | [Config settings](#config-settings) | [SQL](SQL-en.md) | [BungeeCord](BUNGEE-en.md) | [FAQ](#what-is-this-npcwatchdog)
 
 > [!CAUTION]
 > This repository has jokes in commit messages and source by a developer(and a little contributor).
@@ -170,6 +170,9 @@ Other settings can be done using permissions.
 |     `psac.pull`     |      [/pull](#pull)      | This permission can pull other players.                                                                                                   |      op       |     psac.mod     |
 |  `psac.chattarget`  |           none           | A mark will be added to the left of the chat for players with this permission.                                                            |      op       |     psac.mod     |
 |   `psac.userinfo`   |  [/userinfo](#userinfo)  | This permission can see the player information. If `message.lynx` enabled, add some information.                                          |      op       |     psac.mod     |
+|      `psac.ban`     |        [/ban](#ban)      | This permission allows you to restrict player access.                                                                                     |      op       |     psac.mod    |
+|    `psac.tempban`   |    [/tempban](#tempban)  | This permission allows you to restrict player access temporaly.                                                                           |      op       |     psac.mod    |
+|     `psac.unban`    |      [/unban](#unban)    | This permission can removes the player's access ban.                                                                                       |      op       |     psac.mod    |
 |  **_psac.admin_**   |          group           | This permission can use all commands of the plugin.                                                                                       |     false     |       none       |
 |     `psac.drop`     | [/psac drop](#arguments) | This permission can delete submitted report.                                                                                              |     false     |    psac.admin    |
 |    `psac.error`     |           none           | This permission can get error information when the plugin encountered an internal error.                                                  |     false     |    psac.admin    |
@@ -498,6 +501,109 @@ Teleports to the player specified in the argument.
 
 -   `psac.silentteleport`
 
+## /kick
+
+Kick specified player.
+
+### Description
+
+Kick the player and record it on the record.
+Specifying \[test\] as the second argument kick player in _test mode_.
+
+### Usages
+
+-   /kick \<PlayerName\>
+    Kick \<PlayerName\>.
+
+-   /kick \<PlayerName\> test
+    Kick \<PlayerName\> as test mode.
+
+### Permission
+
+-   `psac.kick`.
+
+## /ban
+
+Ban specified player **manually**.
+
+### Aliases
+
+-   /permban
+-   /acban
+
+### Description
+
+Ban the player and record it on the record.
+If you not specify \[Reasons...\], ban \<PlayerName\> with reason `Kicked by operator`.
+
+### Usages
+
+-   /ban \<PlayerName\> \[Reasons...\]
+    Ban \<PlayerName\> with \[Reasons...\].
+
+-   /ban \<PlayerName\>
+    Ban \<PlayerName\> with `Kicked by operator`.
+
+## /unban
+
+Removes the ban on the specified player.
+
+### Aliases
+
+-   /pardon
+
+### Description
+
+Removes the ban on the player.
+Even if it is permanent, the player's access ban will be lifted.
+
+### Usage
+
+-   /unban \<PlayerName\>
+    Removes the ban on \<PlayerName\>.
+
+### Permission
+
+-   `psac.unban`
+
+## /tempban
+
+Temporarily bans the specified player.
+
+### Description
+
+Specify the player ban limit in seconds to temporarily block access.
+This is recommended over banning access permanently, but you need to remember the time.
+The period is specified in units and is in no particular order.
+
+### Units
+
+| Keyword |  Alias |      Example      | Description          |
+| :-----: | :----: | :---------------: | :------------------- |
+|   year  |    y   |     3year, 3y     | Specify the years.   |
+|  month  |   mo   |    3month, 3mo    | Specify the months.  |
+|   day   |    d   |     3day, 3d      | Specify the days.    |
+|   hour  |    h   |     3hour, 3h     | Specify the hours.   |
+|  minute | min, m | 3minute, 3min, 3m | Specify the minutes. |
+|  second | sec, s | 3second, 3sec, 3s | Specify the seconds. |
+
+### Usage
+
+-   /tempban \<Units...\> \<PlayerName\>
+    Ban \<PlayerName\> for \<Units...\>.
+
+-   /tempban \<Units...\> \<PlayerName\> \<Reasons...\>
+    Ban \<PlayerName\> for \<Units...\> with \<Reasons...\>.
+
+### Example
+
+-   /tempban 1y 1mo 4days 5hour 1min 4sec SaikyouPeyangsan Blacklisted Modifications
+    In this case, ban SaikyouPeyangsan for One year, one month, four days, five hours, one minute, four seconds with Blacklisted Modifications.
+
+### Permission
+
+-   `psac.tempban`
+
 ## /psac
 
 ### Aliases
@@ -545,18 +651,6 @@ The command's permission is `psac.show`.
 
 The command's permission is `psac.drop`.
 
-#### /psac kick \<PlayerName\> \[test\]
-
-Kick player specified by \<PlayerName\>.
-Specifying \[test\] as the second argument kick player in test mode.
-
-The command's permission is `psac.kick`.
-
-#### /psac ban \<PlayerName\> \[reason...\]
-
-Ban \<PlayerName\> **manually**.
-If you not specify \[reason...\], ban \<PlayerName\> with reason `Kicked by operator`.
-
 ### Broadcast Messages
 
 **The following broadcast message will be played when the player is kicked.**
@@ -578,35 +672,35 @@ For staff kicks, you will only broadcast a secondary message.
 
 In this plugin, the following config is set by default.
 
-|     Setting name     | Default value | Description                                                                                                                  |
-| :------------------: | :-----------: | :--------------------------------------------------------------------------------------------------------------------------- |
-|    database.path     |   ./eye.db    | Save report information by specifying location of SQLite database path.                                                      |
-|   database.logPath   |   ./log.db    | Save kick information by specifying location of SQLite database path.                                                        |
-|  database.learnPath  | ./learn.json  | Specify the path to the JSON file that stores the neural network weights and learning count from learning.                   |
-|  database.trustPath  |  ./trust.db   | Save trusted players information by specifying location of SQLite database path.                                             |
-|     npc.seconds      |       4       | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                                   |
-|       npc.time       |      0.3      | Specifies the value of [NPC](#aurabot) orbit speed.                                                                          |
-|      npc.range       |      2.1      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.                      |
-|    npc.reachRange    |      4.6      | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection with reach mode.      |
-|    npc.panicRange    |      1.5      | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                       |
-| npc.panicReachRange  |      4.6      | Specifies the relative height of the [Panic NPC](#acpanic) and player with reach mode.                                       |
-|       npc.wave       |     true      | Whether the [NPC](#aurabot) spins like a wave.                                                                               |
-|     npc.waveMin      |      1.0      | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                              |
-|    npc.speed.wave    |     true      | Specify whether to make the orbital velocity of NPC variable.                                                                |
-| npc.speed.waveRange  |     0.03      | Specify the speed change range.                                                                                              |
-|       npc.kill       |       3       | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                                |
-|      npc.learn       |      0.3      | Specify the learning coefficient of the learning function. The higher the value, the less processing, but the less accurate. |
-|     npc.vlLevel      |      17       | This value is used to evaluate the VL when the NPC has not learned beyond this npc.learnCount.                               |
-|    npc.learnCount    |      15       | If the learn function learns more than this number of times, the kick rating will be transferred to the learn function.      |
-|      kick.delay      |       2       | Specifies the delay between sending a broadcast message and kicking the player.                                              |
-|   kick.defaultKick   |      25       | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                       |
-| decoration.lightning |     true      | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                        |
-|   decoration.flame   |     true      | Specifies whether to apply flame effect to player when kicking.                                                              |
-|  decoration.circle   |     true      | Specifies whether to draw colored circle with effect to player when kicking.                                                 |
-|     message.lynx     |     true      | Specifies whether Lynx Mod compatible.                                                                                       |
-| autoMessage.enabled  |     true      | Toggle the presence or absence of regular messages.                                                                          |
-|   autoMessage.time   |      15       | Specify a minutes for recurring messages.                                                                                    |
-|    commands.\*\*     | \[property\]  | See [command override feature](#what-is-command-override).                                                                   |
+|     Setting name     |  Default value  | Description                                                                                                                       |
+| :------------------: | :-------------: | :-------------------------------------------------------------------------------------------------------------------------------- |
+|   database.method    | org.sqlite.JDBC | Specify the [database driver](SQL-en.md#methods). By default, the [SQLite driver](https://github.com/xerial/sqlite-jdbc) is used. |
+|     database.url     |   jdbc:sqlite   | Specify the [database access protocol](SQL-en.md#protocols). This used as a URL prefix.                                           |
+|   database.logPath   |    ./log.db     | Save kick information by specifying location of SQLite database path.                                                             |
+|  database.learnPath  |  ./learn.json   | Specify the path to the JSON file that stores the neural network weights and learning count from learning.                        |
+|  database.trustPath  |   ./trust.db    | Save trusted players information by specifying location of SQLite database path.                                                  |
+|     npc.seconds      |        4        | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                                        |
+|       npc.time       |       0.3       | Specifies the value of [NPC](#aurabot) orbit speed.                                                                               |
+|      npc.range       |       2.1       | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.                           |
+|    npc.reachRange    |       4.6       | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection with reach mode.           |
+|    npc.panicRange    |       1.5       | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                            |
+| npc.panicReachRange  |       4.6       | Specifies the relative height of the [Panic NPC](#acpanic) and player with reach mode.                                            |
+|       npc.wave       |      true       | Whether the [NPC](#aurabot) spins like a wave.                                                                                    |
+|     npc.waveMin      |       1.0       | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                                   |
+|    npc.speed.wave    |      true       | Specify whether to make the orbital velocity of NPC variable.                                                                     |
+| npc.speed.waveRange  |      0.03       | Specify the speed change range.                                                                                                   |
+|       npc.kill       |        3        | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                                     |
+|      npc.learn       |       0.3       | Specify the learning coefficient of the learning function. The higher the value, the less processing, but the less accurate.      |
+|     npc.vlLevel      |       17        | This value is used to evaluate the VL when the NPC has not learned beyond this npc.learnCount.                                    |
+|    npc.learnCount    |       15        | If the learn function learns more than this number of times, the kick rating will be transferred to the learn function.           |
+|      kick.delay      |        2        | Specifies the delay between sending a broadcast message and kicking the player.                                                   |
+|   kick.defaultKick   |       25        | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                            |
+| decoration.lightning |      true       | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                             |
+|   decoration.flame   |      true       | Specifies whether to apply flame effect to player when kicking.                                                                   |
+|  decoration.circle   |      true       | Specifies whether to draw colored circle with effect to player when kicking.                                                      |
+|     message.lynx     |      true       | Specifies whether Lynx Mod compatible.                                                                                            |
+| autoMessage.enabled  |      true       | Toggle the presence or absence of regular messages.                                                                               |
+|   autoMessage.time   |       15        | Specify a minutes for recurring messages.                                                                                         |
 
 ---
 
@@ -675,18 +769,6 @@ Player can get the following utility items by executing [/target](#target).
 |   Arrow   | BACK_TOTARGET\<Number\> | Back to page 1.                                 |         [/target](#target) \<Number\>         |
 |   Reed    |          PULL           | Pull the target.                                |           [/pull](#pull) \<Target\>           |
 | Blaze Rod |      TARGET_STICK       | Target the player you are looking at.           |     [/target](#target) \<Looking Player\>     |
-
-## What is command override?
-
-PSAC has been implemented command override feature. got cha!
-The feature is able to setting in [config file](../src/main/resources/config.yml).
-
-```yaml
-commands:
-    kick:
-        #Enable command override feature
-        enable: true
-```
 
 This example is replacing minecraft's default command to [/psac kick](#arguments).
 [/psac kick](#arguments) can show particles, add decorations when kicking, and record to databases.
