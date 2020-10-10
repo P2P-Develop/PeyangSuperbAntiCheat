@@ -10,41 +10,41 @@ base:
   seconds: "秒"
 
 error:
-  minArgs: "%%red%%%%bold%%エラー：引数が不足しています。/%%label%% help でヘルプを見てください。"
-  playerNotFound: "%%red%%%%bold%%エラー：対象プレイヤーが見つかりませんでした。"
-  unknownSQLError: "%%red%%%%bold%%エラー：不明なSQLエラーが発生しました。運営に報告しています。"
-  notHavePermission: "%%red%%%%bold%%エラー：権限がありません！"
-  invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
-  requirePlayer: "%%red%%%%bold%%エラー：プレイヤーから実行してください。"
-  notPlayerFoundInRange: "%%red%%%%bold%%エラー：範囲内にプレイヤーが見つかりませんでした。"
-  processing: "%%red%%%%bold%%エラー：現在処理中です。"
-  trusted: "%%red%%%bold%%エラー：対象プレイヤーは信用されています！それでも実行するにはpsac.trust権限を持っているプレイヤーが実行してください！"
-  playerNotBanned: "%%red%%%%bold%%エラー：対象プレイヤーはアクセスを禁止されていません。"
+  minArgs: "%%red%%エラー：引数が不足しています。/%%label%% help でヘルプを見てください。"
+  playerNotFound: "%%red%%エラー：対象プレイヤーが見つかりませんでした。"
+  unknownSQLError: "%%red%%エラー：不明なSQLエラーが発生しました。運営に報告しています。"
+  notHavePermission: "%%red%%エラー：権限がありません！"
+  invalidArgument: "%%red%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
+  requirePlayer: "%%red%%エラー：プレイヤーから実行してください。"
+  notPlayerFoundInRange: "%%red%%エラー：範囲内にプレイヤーが見つかりませんでした。"
+  processing: "%%red%%エラー：現在処理中です。"
+  trusted: "%%red%エラー：対象プレイヤーは信用されています！それでも実行するにはpsac.trust権限を持っているプレイヤーが実行してください！"
+  playerNotBanned: "%%red%%エラー：対象プレイヤーはアクセスを禁止されていません。"
 
   report:
-    invalidReason: "%%red%%%%bold%%エラー：理由が正しくありません！"
-    reasonNotSelected: "%%red%%%%bold%%エラー：理由が選択されていません！"
-    alreadyReported: "%%red%%%%bold%%エラー：既に報告済みです！"
+    invalidReason: "%%red%%エラー：理由が正しくありません！"
+    reasonNotSelected: "%%red%%エラー：理由が選択されていません！"
+    alreadyReported: "%%red%%エラー：既に報告済みです！"
 
   main:
-    notFoundCommand: "%%red%%%%bold%%エラー：対応するコマンドが見つかりませんでした。/%%label%% help でヘルプを見てください。"
+    notFoundCommand: "%%red%%エラー：対応するコマンドが見つかりませんでした。/%%label%% help でヘルプを見てください。"
 
   psac:
-    notPage: "%%red%%%%bold%%エラー：表示できるものが何もありません！"
+    notPage: "%%red%%エラー：表示できるものが何もありません！"
 
   view:
-    notFoundReport: "%%red%%%%bold%%エラー：レポートが1件も見つかりませんでした。"
+    notFoundReport: "%%red%%エラー：レポートが1件も見つかりませんでした。"
 
   showDrop:
-    notFoundReport: "%%red%%%%bold%%エラー：IDに合致するレポートが見つかりませんでした！"
+    notFoundReport: "%%red%%エラー：IDに合致するレポートが見つかりませんでした！"
 
   aura:
-    testingNow: "%%red%%%%bold%%エラー：対象プレイヤーは、現在テスト中です。"
-    notNumeric: "%%red%%%%bold%%エラー：指定された秒数が数字ではありません。/psac help でヘルプを見てください。"
+    testingNow: "%%red%%エラー：対象プレイヤーは、現在テスト中です。"
+    notNumeric: "%%red%%エラー：指定された秒数が数字ではありません。/psac help でヘルプを見てください。"
 
   bans:
-    unknownSearchType: "%%red%%%%bold%%エラー：検索タイプが不明です。"
-    databaseInfoNotFound: "%%red%%%%bold%%エラー：データベースに情報が見つかりませんでした。"
+    unknownSearchType: "%%red%%エラー：検索タイプが不明です。"
+    databaseInfoNotFound: "%%red%%エラー：データベースに情報が見つかりませんでした。"
 
 command:
   report:
@@ -167,7 +167,7 @@ message:
   drop:
     success: "%%green%%報告の削除に成功しました。"
   kick:
-    test: "%%green%%テストモード%%red%%%%bold%%で、プレイヤーをキックします。"
+    test: "%%green%%テストモード%%red%%で、プレイヤーをキックします。"
   aura:
     summon: "\
     %%green%%%%name%%さんに%%type%%を召喚します。\n\
