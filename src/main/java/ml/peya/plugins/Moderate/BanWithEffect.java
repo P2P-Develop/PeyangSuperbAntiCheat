@@ -50,7 +50,7 @@ public class BanWithEffect extends BanModifier
                 if (Variables.config.getBoolean("decoration.lightning"))
                     Decorations.lighting(player);
 
-                BanModifier.ban(player.getUniqueId(), player.getName(), reason, date);
+                BanModifier.ban(player.getUniqueId(), reason, date);
                 WatchEyeManagement.deleteReportWithPlayerID(player.getUniqueId().toString());
 
                 String message = MessageEngine.get("ban.permReason", map);

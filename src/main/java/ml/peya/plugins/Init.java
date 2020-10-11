@@ -52,8 +52,8 @@ import java.util.logging.Level;
 
 import static ml.peya.plugins.PeyangSuperbAntiCheat.getPlugin;
 import static ml.peya.plugins.Variables.autoMessage;
-import static ml.peya.plugins.Variables.banKick;
-import static ml.peya.plugins.Variables.banKickPath;
+import static ml.peya.plugins.Variables.ban;
+import static ml.peya.plugins.Variables.banPath;
 import static ml.peya.plugins.Variables.bungeeChannel;
 import static ml.peya.plugins.Variables.bungeeCommand;
 import static ml.peya.plugins.Variables.config;
@@ -62,6 +62,8 @@ import static ml.peya.plugins.Variables.eye;
 import static ml.peya.plugins.Variables.isAutoMessageEnabled;
 import static ml.peya.plugins.Variables.isTrackEnabled;
 import static ml.peya.plugins.Variables.learnCount;
+import static ml.peya.plugins.Variables.log;
+import static ml.peya.plugins.Variables.logPath;
 import static ml.peya.plugins.Variables.logger;
 import static ml.peya.plugins.Variables.skin;
 import static ml.peya.plugins.Variables.time;
@@ -135,25 +137,30 @@ public class Init
     public static void initDataBase()
     {
         databasePath = config.getString("database.path");
-        banKickPath = config.getString("database.logPath");
+        logPath = config.getString("database.logPath");
         trustPath = config.getString("database.trustPath");
+        banPath = config.getString("database.banPath");
         if (!config.getString("database.method").contains("sqlite"))
         {
             eye = new HikariDataSource(Init.initMngDatabase(databasePath));
-            banKick = new HikariDataSource(Init.initMngDatabase(banKickPath));
+            log = new HikariDataSource(Init.initMngDatabase(logPath));
             trust = new HikariDataSource(Init.initMngDatabase(trustPath));
+            ban = new HikariDataSource(Init.initMngDatabase(banPath));
             return;
         }
 
         eye = new HikariDataSource(Init.initMngDatabase(Paths.get(databasePath).isAbsolute()
                 ? databasePath
                 : getPlugin().getDataFolder().getAbsolutePath() + "/" + databasePath));
-        banKick = new HikariDataSource(Init.initMngDatabase(Paths.get(banKickPath).isAbsolute()
-                ? banKickPath
-                : getPlugin().getDataFolder().getAbsolutePath() + "/" + banKickPath));
+        log = new HikariDataSource(Init.initMngDatabase(Paths.get(logPath).isAbsolute()
+                ? logPath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + logPath));
         trust = new HikariDataSource(Init.initMngDatabase(Paths.get(trustPath).isAbsolute()
                 ? trustPath
                 : getPlugin().getDataFolder().getAbsolutePath() + "/" + trustPath));
+        ban = new HikariDataSource(Init.initMngDatabase(Paths.get(banPath).isAbsolute()
+                ? banPath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + banPath));
     }
 
     /**
@@ -188,7 +195,7 @@ public class Init
             return false;
         }
 
-        try (Connection connection = banKick.getConnection();
+        try (Connection connection = log.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs kick(" +
@@ -201,15 +208,12 @@ public class Init
                     ");");
 
             statement.execute("CrEaTe TaBlE If NoT ExIsTs ban(" +
-                    "PLAYER nchar," +
                     "UUID nchar," +
                     "BANID nchar," +
                     "DATE bigint," +
                     "REASON nchar," +
-                    "EXPIRE nchar," +
-                    "STAFF int," +
-                    "UNBAN int," +
-                    "UNBANDATE nchar" +
+                    "UNBANDATE nchar," +
+                    "STAFF integer" +
                     ");");
 
         }
@@ -225,6 +229,27 @@ public class Init
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs trust(" +
                     "PLAYER nchar" +
+                    ");");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            Utils.errorNotification(Utils.getStackTrace(e));
+            return false;
+        }
+
+
+        try (Connection connection = ban.getConnection();
+             Statement statement = connection.createStatement())
+        {
+            statement.execute("CREATE TABLE IF NOT EXISTS ban(" +
+                    //"PLAYER text," +
+                    "UUID text," +
+                    "BANID text," +
+                    "DATE text," +
+                    "REASON text," +
+                    "EXPIRE text," +
+                    "STAFF integer" +
                     ");");
             return true;
         }

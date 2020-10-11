@@ -75,7 +75,7 @@ public class KickManager
             player.kickPlayer(message);
             return;
         }
-        try (Connection kickC = Variables.banKick.getConnection();
+        try (Connection kickC = Variables.log.getConnection();
              Connection eyeC = Variables.eye.getConnection();
              PreparedStatement statement = eyeC.prepareStatement("SELECT MNGID FROM watcheye WHERE UUID=?"))
         {

@@ -12,7 +12,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
-import static ml.peya.plugins.Variables.banKick;
+import static ml.peya.plugins.Variables.ban;
+import static ml.peya.plugins.Variables.log;
 
 /**
  * 定期メッセージを発行するタスク。
@@ -35,7 +36,7 @@ public class AutoMessageTask extends BukkitRunnable
         int watchdog = 0;
         int staff = 0;
 
-        try (Connection connection = banKick.getConnection();
+        try (Connection connection = log.getConnection();
              PreparedStatement wd = connection.prepareStatement("SELECT STAFF FROM kick WHERE DATE BETWEEN ? AND ?");
              PreparedStatement sr = connection.prepareStatement("SELECT STAFF FROM ban WHERE DATE BETWEEN ? AND ?"))
         {
@@ -50,6 +51,25 @@ public class AutoMessageTask extends BukkitRunnable
                 else
                     staff++;
 
+            ResultSet srr = sr.executeQuery();
+            while (srr.next())
+                if (srr.getInt("STAFF") == 0)
+                    watchdog++;
+                else
+                    staff++;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            Utils.errorNotification(Utils.getStackTrace(e));
+        }
+
+
+        try (Connection connection = ban.getConnection();
+             PreparedStatement sr = connection.prepareStatement("SELECT STAFF FROM ban WHERE DATE BETWEEN ? AND ?"))
+        {
+            sr.setLong(1, date.getTime());
+            sr.setLong(2, new Date().getTime());
             ResultSet srr = sr.executeQuery();
             while (srr.next())
                 if (srr.getInt("STAFF") == 0)

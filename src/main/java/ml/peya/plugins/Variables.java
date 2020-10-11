@@ -66,13 +66,17 @@ public class Variables
      */
     public static String databasePath;
     /**
-     * Bankickのデータベースの置き場所が入ります。
+     * Logのデータベースの置き場所が入ります。
      */
-    public static String banKickPath;
+    public static String logPath;
     /**
      * Trustのデータベースの置き場所が入ります。
      */
     public static String trustPath;
+    /**
+     * banのデータベースの置き場所が入ります。
+     */
+    public static String banPath;
     /**
      * BungeeCordのチャンネルです。
      */
@@ -123,9 +127,9 @@ public class Variables
      */
     public static HikariDataSource eye;
     /**
-     * Bankickデータベースをデシリアライズしてやります。
+     * Logデータベースをデシリアライズしてやります。
      */
-    public static HikariDataSource banKick;
+    public static HikariDataSource log;
     /**
      * Trustデータベースをデシリアライズしときます。
      */
@@ -134,6 +138,10 @@ public class Variables
      * Skinデータベースをデシリアライズしときます。
      */
     public static HikariDataSource skin;
+    /**
+     * Banデータベースをデシリアライズしときます。
+     */
+    public static HikariDataSource ban;
 
     //データベースここまで。こっからRunnable系
 

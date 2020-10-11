@@ -10,6 +10,10 @@ database:
   learnPath: "./learn.json"
   trustPath: "./trust.db"
 
+  #くっそ重要です。
+  #banされたときに格納されます。
+  banPath: "./bans.db"
+
 #npc関係のコンフィグです。
 npc:
   #指定された秒数、NPCを召喚します。

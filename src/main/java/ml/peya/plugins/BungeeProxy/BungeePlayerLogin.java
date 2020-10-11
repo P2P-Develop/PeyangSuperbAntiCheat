@@ -25,21 +25,18 @@ public class BungeePlayerLogin
     {
         HashMap<String, String> banInfo = new HashMap<>();
         boolean banned = false;
-        try (Connection connection = Variables.banKick.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT UNBAN, EXPIRE, BANID, REASON FROM ban WHERE UUID=?"))
+        try (Connection connection = Variables.ban.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT EXPIRE, BANID, REASON FROM ban WHERE UUID=?"))
         {
             statement.setString(1, uuid.toString().replace("-", ""));
             ResultSet set = statement.executeQuery();
             while (set.next())
             {
-                if (set.getInt("UNBAN") == 0)
-                {
-                    banInfo.put("id", set.getString("BANID"));
-                    banInfo.put("reason", set.getString("REASON"));
-                    banInfo.put("expire", set.getString("EXPIRE"));
-                    banned = true;
-                    break;
-                }
+                banInfo.put("id", set.getString("BANID"));
+                banInfo.put("reason", set.getString("REASON"));
+                banInfo.put("expire", set.getString("EXPIRE"));
+                banned = true;
+                break;
             }
         }
         catch (Exception ignored)

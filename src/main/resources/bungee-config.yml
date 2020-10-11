@@ -6,4 +6,5 @@ database:
   method: "org.sqlite.JDBC"
   url: "jdbc:sqlite:"
 
+  banPath: "./ban.db"
   logPath: "./log.db"

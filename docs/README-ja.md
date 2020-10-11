@@ -768,6 +768,7 @@ SQL関係は、[こ↓こ↑](https://github.com/P2P-Develop/PeyangSuperbAntiChe
 |   database.logPath   |    ./log.db     | キック情報などを保存する、SQLiteデータベースの置き場所です。                                                               |
 |  database.learnPath  |  ./learn.json   | 学習によって値が変更された「重み」と学習回数を保存する、JSONファイルの置き場所です。                                       |
 |  database.trustPath  |   ./trust.db    | 信用したプレイヤーを保存する、SQLiteデータベースの置き場所です。つまりこれ消せば信用データ消えます。やっぱ鯖を操る人最強。 |
+|   database.banPath   |    ./bans.db    | BANを管理するデータベースです。しっかり見直し設定をしてください。 |
 |     npc.seconds      |        3        | NPCがプレイヤーの周りを回る秒数です。                                                                                      |
 |       npc.time       |      0.35       | NPCが回る速さです。感覚で調整してください。                                                                                |
 |      npc.range       |    3.0, 1.5     | NPCが回る半径です。ロマンが全て。デフォルトが最高。これがPSACｸｵﾘﾃｨ。                                                       |

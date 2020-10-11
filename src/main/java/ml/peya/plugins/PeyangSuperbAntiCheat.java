@@ -24,7 +24,6 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 
 import static ml.peya.plugins.Variables.autoMessage;
-import static ml.peya.plugins.Variables.banKick;
 import static ml.peya.plugins.Variables.banLeft;
 import static ml.peya.plugins.Variables.cheatMeta;
 import static ml.peya.plugins.Variables.config;
@@ -34,6 +33,7 @@ import static ml.peya.plugins.Variables.initialized;
 import static ml.peya.plugins.Variables.item;
 import static ml.peya.plugins.Variables.learnCount;
 import static ml.peya.plugins.Variables.learnCountLimit;
+import static ml.peya.plugins.Variables.log;
 import static ml.peya.plugins.Variables.logger;
 import static ml.peya.plugins.Variables.network;
 import static ml.peya.plugins.Variables.protocolManager;
@@ -202,14 +202,14 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
 
         if (eye != null)
             eye.close();
-        if (banKick != null)
-            banKick.close();
+        if (log != null)
+            log.close();
         if (skin != null)
             skin.close();
         if (trust != null)
             trust.close();
         eye = null;
-        banKick = null;
+        log = null;
         trust = null;
         skin = null;
         if (autoMessage != null)

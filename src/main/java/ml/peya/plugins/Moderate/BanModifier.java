@@ -21,22 +21,19 @@ public class BanModifier
      * @param reason 理由
      * @param date   解除日時(Nullable)
      */
-    public static void ban(UUID player, String name, String reason, @Nullable Date date)
+    public static void ban(UUID player, String reason, @Nullable Date date)
     {
         String id = Abuse.genRandomId(8);
 
-        try (Connection connection = Variables.banKick.getConnection())
+        try (Connection connection = Variables.ban.getConnection())
         {
             SQL.insert(connection, "ban",
-                    name,
                     player.toString().replace("-", ""),
                     id,
                     new Date().getTime(),
                     reason,
                     date == null ? "_PERM": date.getTime(),
-                    1,
-                    0,
-                    ""
+                    1
             );
         }
         catch (Exception e)
@@ -53,27 +50,31 @@ public class BanModifier
      */
     public static void pardon(UUID player)
     {
-        try (Connection connection = Variables.banKick.getConnection();
-             PreparedStatement found = connection.prepareStatement("SELECT BANID, PLAYER FROM ban WHERE UNBAN=? AND UUID=?"))
+        try (Connection connection = Variables.ban.getConnection();
+             PreparedStatement found = connection.prepareStatement("SELECT BANID, DATE, REASON, EXPIRE, STAFF FROM ban WHERE UUID=?"))
         {
-            found.setInt(1, 0);
-            found.setString(2, player.toString().replace("-", ""));
+            found.setString(1, player.toString().replace("-", ""));
 
             ResultSet set = found.executeQuery();
 
             while (set.next())
             {
-                try (PreparedStatement update = connection.prepareStatement("UPDATE ban SET UNBAN=?, UNBANDATE=? WHERE BANID=?"))
+                try (Connection log = Variables.log.getConnection())
                 {
-                    update.setInt(1, 1);
-                    update.setString(2, String.valueOf(new Date().getTime()));
-                    update.setString(3, set.getString("BANID"));
-                    update.execute();
+                    SQL.insert(log, "ban",
+                            player.toString().replace("-", ""),
+                            set.getString("BANID"),
+                            set.getString("DATE"),
+                            set.getString("REASON"),
+                            set.getString("EXPIRE"),
+                            set.getString("STAFF")
+                    );
                 }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
+                
+                SQL.delete(connection, "ban", new HashMap<String, String>()
+                {{
+                    put("BANID", set.getString("BANID"));
+                }});
             }
         }
         catch (Exception e)
@@ -93,22 +94,20 @@ public class BanModifier
     {
         HashMap<String, String> banInfo = new HashMap<>();
         boolean banned = false;
-        try (Connection connection = Variables.banKick.getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT UNBAN, EXPIRE, BANID, REASON FROM ban WHERE UUID=?"))
+        try (Connection connection = Variables.ban.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT BANID, REASON, EXPIRE FROM ban WHERE UUID=?"))
         {
             statement.setString(1, uuid.toString().replace("-", ""));
             ResultSet set = statement.executeQuery();
-            while (set.next())
+            if (set.next())
             {
-                if (set.getInt("UNBAN") == 0)
-                {
-                    banInfo.put("id", set.getString("BANID"));
-                    banInfo.put("reason", set.getString("REASON"));
-                    banInfo.put("expire", set.getString("EXPIRE"));
-                    banned = true;
-                    break;
-                }
+                banInfo.put("id", set.getString("BANID"));
+                banInfo.put("reason", set.getString("REASON"));
+                banInfo.put("expire", set.getString("EXPIRE"));
+                banned = true;
+
             }
+
         }
         catch (Exception ignored)
         {

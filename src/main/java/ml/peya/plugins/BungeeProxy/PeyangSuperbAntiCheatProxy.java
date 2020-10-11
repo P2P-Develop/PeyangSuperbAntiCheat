@@ -15,10 +15,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-import static ml.peya.plugins.Variables.banKick;
-import static ml.peya.plugins.Variables.banKickPath;
+import static ml.peya.plugins.Variables.ban;
+import static ml.peya.plugins.Variables.banPath;
 import static ml.peya.plugins.Variables.bungeeChannel;
 import static ml.peya.plugins.Variables.bungeeCommand;
+import static ml.peya.plugins.Variables.log;
+import static ml.peya.plugins.Variables.logPath;
 import static ml.peya.plugins.Variables.logger;
 
 /**
@@ -117,7 +119,8 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
             severeDisable();
         }
 
-        banKickPath = config.getString("database.logPath");
+        banPath = config.getString("database.banPath");
+        logPath = config.getString("database.logPath");
 
         if (config.getString("database.method").contains("sqlite"))
         {
@@ -129,12 +132,16 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
                 severeDisable();
             }
 
-            banKick = new HikariDataSource(getDBSetting(Paths.get(banKickPath).isAbsolute()
-                    ? banKickPath
-                    : getPlugin().getDataFolder().getAbsolutePath() + "/" + banKickPath));
+            ban = new HikariDataSource(getDBSetting(Paths.get(banPath).isAbsolute()
+                    ? banPath
+                    : getPlugin().getDataFolder().getAbsolutePath() + "/" + banPath));
+
+            log = new HikariDataSource(getDBSetting(Paths.get(logPath).isAbsolute()
+                    ? logPath
+                    : getPlugin().getDataFolder().getAbsolutePath() + "/" + logPath));
         }
         else
-            banKick = new HikariDataSource(getDBSetting(banKickPath));
+            ban = new HikariDataSource(getDBSetting(banPath));
 
 
         getLogger().info("PeyangSuperbAntiCheatProxy has been activated!");
