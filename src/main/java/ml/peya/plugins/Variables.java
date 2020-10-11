@@ -28,22 +28,9 @@ public class Variables
      * プラグインのコンフィグを変更する入れ子。getConfig()により静的化します。
      */
     public static FileConfiguration config;
-    /**
-     * Watcheyeのデータベースの置き場所が入ります。
-     */
-    public static String databasePath;
-    /**
-     * Bankickのデータベースの置き場所が入ります。
-     */
-    public static String banKickPath;
-    /**
-     * Trustのデータベースの置き場所が入ります。
-     */
-    public static String trustPath;
-    /**
-     * BungeeCordのチャンネルです。
-     */
-    public static String bungeeChannel;
+
+    //ここまで基礎系。こっから自作クラス。
+
     /**
      * いろいろ値を入手するのに使います。
      * 地味に便利。
@@ -67,42 +54,32 @@ public class Variables
      */
     public static Tracker tracker;
     /**
-     * 定期メッセージに使います。なんかあったのか初期化されてる。
-     */
-    public static long time = 0L;
-    /**
-     * まだ学習しきれていないひよっこAIの代わりにVLリミットとして登場します。
-     */
-    public static int banLeft;
-    /**
-     * この数を超えたらムキムキAIが代わりにキック評価をしてくれるようになります。
-     */
-    public static int learnCountLimit;
-    /**
-     * 学習回数がここに格納されるそうです。
-     */
-    public static int learnCount;
-    /**
      * AIの脳ですね(パワーワード)。
      * ここにlearn()関数などをぶち込みます。
      */
     public static NeuralNetwork network;
+
+    //ここまで自作クラス。こっから文字列。
+
     /**
-     * Watcheyeデータベースをデシリアライズしてあげます。
+     * Watcheyeのデータベースの置き場所が入ります。
      */
-    public static HikariDataSource eye;
+    public static String databasePath;
     /**
-     * Bankickデータベースをデシリアライズしてやります。
+     * Bankickのデータベースの置き場所が入ります。
      */
-    public static HikariDataSource banKick;
+    public static String banKickPath;
     /**
-     * Trustデータベースをデシリアライズしときます。
+     * Trustのデータベースの置き場所が入ります。
      */
-    public static HikariDataSource trust;
+    public static String trustPath;
     /**
-     * Skinデータベースをデシリアライズしときます。
+     * BungeeCordのチャンネルです。
      */
-    public static HikariDataSource skin;
+    public static String bungeeChannel;
+
+    //ここまで文字列。こっからブーリアン。
+
     /**
      * 定期メッセージが有効になっているかどうか。
      */
@@ -119,6 +96,47 @@ public class Variables
      * 初期化完了
      */
     public static boolean initialized;
+
+    //ブーリアンここまで。こっから数値系。
+
+    /**
+     * 定期メッセージに使います。なんかあったのか初期化されてる。
+     */
+    public static long time = 1L;
+    /**
+     * まだ学習しきれていないひよっこAIの代わりにVLリミットとして登場します。
+     */
+    public static int banLeft;
+    /**
+     * この数を超えたらムキムキAIが代わりにキック評価をしてくれるようになります。
+     */
+    public static int learnCountLimit;
+    /**
+     * 学習回数がここに格納されるそうです。
+     */
+    public static int learnCount;
+
+    //数値系ここまで。こっからデータベース
+
+    /**
+     * Watcheyeデータベースをデシリアライズしてあげます。
+     */
+    public static HikariDataSource eye;
+    /**
+     * Bankickデータベースをデシリアライズしてやります。
+     */
+    public static HikariDataSource banKick;
+    /**
+     * Trustデータベースをデシリアライズしときます。
+     */
+    public static HikariDataSource trust;
+    /**
+     * Skinデータベースをデシリアライズしときます。
+     */
+    public static HikariDataSource skin;
+
+    //データベースここまで。こっからRunnable系
+
     /**
      * どういう定期メッセージを行うのかのアクション。
      */
