@@ -1,229 +1,238 @@
 base:
-  prefix: "%%aqua%%-----%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%]%%aqua%%-----"
-  true: "%%green%%True"
-  false: "%%red%%False"
-  enable: "%%green%%有効"
-  disable: "%%red%%無効"
-  day: "日"
-  hour: "時間"
-  minutes: "分"
-  seconds: "秒"
+    prefix: "%%aqua%%-----%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%]%%aqua%%-----"
+    true: "%%green%%True"
+    false: "%%red%%False"
+    enable: "%%green%%有効"
+    disable: "%%red%%無効"
+    day: "日"
+    hour: "時間"
+    minutes: "分"
+    seconds: "秒"
 
 error:
-  minArgs: "%%red%%エラー：引数が不足しています。/%%label%% help でヘルプを見てください。"
-  playerNotFound: "%%red%%エラー：対象プレイヤーが見つかりませんでした。"
-  unknownSQLError: "%%red%%エラー：不明なSQLエラーが発生しました。運営に報告しています。"
-  notHavePermission: "%%red%%エラー：権限がありません！"
-  invalidArgument: "%%red%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
-  requirePlayer: "%%red%%エラー：プレイヤーから実行してください。"
-  notPlayerFoundInRange: "%%red%%エラー：範囲内にプレイヤーが見つかりませんでした。"
-  processing: "%%red%%エラー：現在処理中です。"
-  trusted: "%%red%エラー：対象プレイヤーは信用されています！それでも実行するにはpsac.trust権限を持っているプレイヤーが実行してください！"
-  playerNotBanned: "%%red%%エラー：対象プレイヤーはアクセスを禁止されていません。"
+    minArgs: "%%red%%エラー：引数が不足しています。/%%label%% help でヘルプを見てください。"
+    playerNotFound: "%%red%%エラー：対象プレイヤーが見つかりませんでした。"
+    unknownSQLError: "%%red%%エラー：不明なSQLエラーが発生しました。運営に報告しています。"
+    notHavePermission: "%%red%%エラー：権限がありません！"
+    invalidArgument: "%%red%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
+    requirePlayer: "%%red%%エラー：プレイヤーから実行してください。"
+    notPlayerFoundInRange: "%%red%%エラー：範囲内にプレイヤーが見つかりませんでした。"
+    processing: "%%red%%エラー：現在処理中です。"
+    trusted: "%%red%エラー：対象プレイヤーは信用されています！それでも実行するにはpsac.trust権限を持っているプレイヤーが実行してください！"
+    playerNotBanned: "%%red%%エラー：対象プレイヤーはアクセスを禁止されていません。"
 
-  report:
-    invalidReason: "%%red%%エラー：理由が正しくありません！"
-    reasonNotSelected: "%%red%%エラー：理由が選択されていません！"
-    alreadyReported: "%%red%%エラー：既に報告済みです！"
+    report:
+        invalidReason: "%%red%%エラー：理由が正しくありません！"
+        reasonNotSelected: "%%red%%エラー：理由が選択されていません！"
+        alreadyReported: "%%red%%エラー：既に報告済みです！"
 
-  main:
-    notFoundCommand: "%%red%%エラー：対応するコマンドが見つかりませんでした。/%%label%% help でヘルプを見てください。"
+    main:
+        notFoundCommand: "%%red%%エラー：対応するコマンドが見つかりませんでした。/%%label%% help でヘルプを見てください。"
 
-  psac:
-    notPage: "%%red%%エラー：表示できるものが何もありません！"
+    psac:
+        notPage: "%%red%%エラー：表示できるものが何もありません！"
 
-  view:
-    notFoundReport: "%%red%%エラー：レポートが1件も見つかりませんでした。"
+    view:
+        notFoundReport: "%%red%%エラー：レポートが1件も見つかりませんでした。"
 
-  showDrop:
-    notFoundReport: "%%red%%エラー：IDに合致するレポートが見つかりませんでした！"
+    showDrop:
+        notFoundReport: "%%red%%エラー：IDに合致するレポートが見つかりませんでした！"
 
-  aura:
-    testingNow: "%%red%%エラー：対象プレイヤーは、現在テスト中です。"
-    notNumeric: "%%red%%エラー：指定された秒数が数字ではありません。/psac help でヘルプを見てください。"
+    aura:
+        testingNow: "%%red%%エラー：対象プレイヤーは、現在テスト中です。"
+        notNumeric: "%%red%%エラー：指定された秒数が数字ではありません。/psac help でヘルプを見てください。"
 
-  bans:
-    unknownSearchType: "%%red%%エラー：検索タイプが不明です。"
-    databaseInfoNotFound: "%%red%%エラー：データベースに情報が見つかりませんでした。"
+    bans:
+        unknownSearchType: "%%red%%エラー：検索タイプが不明です。"
+        databaseInfoNotFound: "%%red%%エラー：データベースに情報が見つかりませんでした。"
 
 command:
-  report:
-    help: "\
-    %%aqua%%/psac <PlayerName> [reason...]\n\
-    %%green%%プレイヤーを報告します。\n\
-    %%aqua%%/psac help\n\
-    %%green%%このコマンドです。
-    "
+    report:
+        help: "\
+        %%aqua%%/psac <PlayerName> [reason...]\n\
+        %%green%%プレイヤーを報告します。\n\
+        %%aqua%%/psac help\n\
+        %%green%%このコマンドです。
+        "
 
-  help:
-    report: "\
-    %%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>\n\
-    %%green%%プレイヤーをレポートします。\
-    "
+    help:
+        report: "\
+        %%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>\n\
+        %%green%%プレイヤーをレポートします。\
+        "
 
-    view: "\
-    %%aqua%%/psac view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]\n\
-    %%green%%レポートされた、対処されていない問題を重大度順に表示します。
-    "
+        view: "\
+        %%aqua%%/psac view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]\n\
+        %%green%%レポートされた、対処されていない問題を重大度順に表示します。
+        "
 
-    aurapanic: "\
-    %%aqua%%/acpanic %%dark_aqua%%<PlayerName>%%dark_purple%% [-rf]\n\
-    %%green%%指定したプレイヤーの背後に、NPCを召喚します。\n\
-    %%gray%%%%italic%%Tips：第2引数に、-rをセットすると、リーチモードとして召喚されます。
-    "
+        aurapanic: "\
+        %%aqua%%/acpanic %%dark_aqua%%<PlayerName>%%dark_purple%% [-rf]\n\
+        %%green%%指定したプレイヤーの背後に、NPCを召喚します。\n\
+        %%gray%%%%italic%%Tips：第2引数に、-rをセットすると、リーチモードとして召喚されます。
+        "
 
-    aurabot: "\
-    %%aqua%%/aurabot%%dark_aqua%% <PlayerName>%%dark_purple%% [-r]\n\
-    %%green%%指定したプレイヤーを中心に\n\
-    %%green%%回るNPCを召喚します。\n\
-    %%gray%%%%italic%%Tips：第2引数に、-rをセットすると、リーチモードとして召喚されます。
-    "
+        aurabot: "\
+        %%aqua%%/aurabot%%dark_aqua%% <PlayerName>%%dark_purple%% [-r]\n\
+        %%green%%指定したプレイヤーを中心に\n\
+        %%green%%回るNPCを召喚します。\n\
+        %%gray%%%%italic%%Tips：第2引数に、-rをセットすると、リーチモードとして召喚されます。
+        "
 
-    show: "\
-    %%aqua%%/psac show %%dark_aqua%%<管理iD>\n\
-    %%green%%レポートを表示します。
-    "
+        show: "\
+        %%aqua%%/psac show %%dark_aqua%%<管理iD>\n\
+        %%green%%レポートを表示します。
+        "
 
-    drop: "\
-    %%aqua%%/psac drop%%dark_aqua%% <管理iD>\n\
-    %%green%%レポートを削除します。
-    "
+        drop: "\
+        %%aqua%%/psac drop%%dark_aqua%% <管理iD>\n\
+        %%green%%レポートを削除します。
+        "
 
-    kick: "\
-    %%aqua%%/psac kick %%dark_aqua%% <PlayerName>%%dark_purple%% [理由...]\n\
-    %%green%%プレイヤーをキックします。\n\
-    %%gray%%%%italic%%Tips：第2引数に、testをセットすると、テストモードでキックされます。
-    "
+        kick: "\
+        %%aqua%%/psac kick %%dark_aqua%% <PlayerName>%%dark_purple%% [理由...]\n\
+        %%green%%プレイヤーをキックします。\n\
+        %%gray%%%%italic%%Tips：第2引数に、testをセットすると、テストモードでキックされます。
+        "
 
-    bans: "\
-    %%aqua%%/bans %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>\n\
-    %%green%%プレイヤーのBAN（キック）履歴を照会します。
-    "
+        bans: "\
+        %%aqua%%/bans %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>\n\
+        %%green%%プレイヤーのBAN（キック）履歴を照会します。
+        "
 
-    testkb: "\
-    %%aqua%%/testkb %%dark_aqua%%<PlayerName>\n\
-    %%green%%指定したプレイヤーに、見えない矢を打ち込みます。
-    "
+        testkb: "\
+        %%aqua%%/testkb %%dark_aqua%%<PlayerName>\n\
+        %%green%%指定したプレイヤーに、見えない矢を打ち込みます。
+        "
 
-    pull: "\
-    %%aqua%%/pull %%dark_aqua%%<PlayerName>\n\
-    %%green%%指定したプレイヤーを、自分側に引き寄せます。
-    "
+        pull: "\
+        %%aqua%%/pull %%dark_aqua%%<PlayerName>\n\
+        %%green%%指定したプレイヤーを、自分側に引き寄せます。
+        "
 
-    target: "\
-    %%aqua%%/target %%dark_aqua%%<PlayerName>\n\
-    %%green%%指定したプレイヤーを、ターゲットとします。\n\
-    %%green%%このとき、クリックでできる操作用アイテムが手に入ります。
-    "
+        target: "\
+        %%aqua%%/target %%dark_aqua%%<PlayerName>\n\
+        %%green%%指定したプレイヤーを、ターゲットとします。\n\
+        %%green%%このとき、クリックでできる操作用アイテムが手に入ります。
+        "
 
-    tracking: "\
-    %%aqua%%/track %%dark_purple%%[PlayerName]\n\
-    %%green%%指定したプレイヤーを、追跡します。\n\
-    %%green%%引数を付けずに実行すると、追跡モードを終了します。
-    "
+        tracking: "\
+        %%aqua%%/track %%dark_purple%%[PlayerName]\n\
+        %%green%%指定したプレイヤーを、追跡します。\n\
+        %%green%%引数を付けずに実行すると、追跡モードを終了します。
+        "
 
-    trust: "\
-    %%aqua%%/trust %%dark_aqua%%<PlayerName>\n\
-    %%green%%指定されたプレイヤーを信用します。\n\
-    %%green%%信用されたプレイヤーは、psac.admin権限を持つプレイヤー以外が実行したスキャンを通り抜けることができます。
-    "
+        trust: "\
+        %%aqua%%/trust %%dark_aqua%%<PlayerName>\n\
+        %%green%%指定されたプレイヤーを信用します。\n\
+        %%green%%信用されたプレイヤーは、psac.admin権限を持つプレイヤー以外が実行したスキャンを通り抜けることができます。
+        "
 
-    silentteleport: "\
-    %%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>\n\
-    %%green%%指定したプレイヤーにログを残さずにテレポートします。\n\
-    %%green%%引数を2つつけると、引数1のプレイヤーが、引数2のプレイヤーにテレポートします。
-    "
+        silentteleport: "\
+        %%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>\n\
+        %%green%%指定したプレイヤーにログを残さずにテレポートします。\n\
+        %%green%%引数を2つつけると、引数1のプレイヤーが、引数2のプレイヤーにテレポートします。
+        "
 
-    ban: "\
-    %%aqua%%/ban %%dark_aqua%%<PlayerName> %%dark_purple%% [理由...]\n\
-    %%green%%指定したプレイヤーを永久的にアクセスを禁止します。\n\
-    "
+        ban: "\
+        %%aqua%%/ban %%dark_aqua%%<PlayerName> %%dark_purple%% [理由...]\n\
+        %%green%%指定したプレイヤーを永久的にアクセスを禁止します。\n\
+        "
 
-    tempban: "\
-    %%aqua%%/tempban %%dark_aqua%%<期間> <PlayerName> %%dark_purple%% [理由...]\n\
-    %%green%%指定したプレイヤーを一時的にアクセス禁止にします。\n\
-    %%green%%期間指定方法は、8y 1mo 0d 9h 3m 1sで、8年1ヶ月9時間3分1秒間アクセス禁止にします。\n\
-    "
+        tempban: "\
+        %%aqua%%/tempban %%dark_aqua%%<期間> <PlayerName> %%dark_purple%% [理由...]\n\
+        %%green%%指定したプレイヤーを一時的にアクセス禁止にします。\n\
+        %%green%%期間指定方法は、8y 1mo 0d 9h 3m 1sで、8年1ヶ月9時間3分1秒間アクセス禁止にします。\n\
+        "
 
-    mngIdWarning: "\
-    %%yellow%%注意：管理IDはランダムで割り当てられる32文字の英数文字列です。\n\
-    %%yellow%%プレイヤーからも操作できますが、コンソールから操作することを推奨します。
-    "
+        mngIdWarning: "\
+        %%yellow%%注意：管理IDはランダムで割り当てられる32文字の英数文字列です。\n\
+        %%yellow%%プレイヤーからも操作できますが、コンソールから操作することを推奨します。
+        "
 
-  shelp:
-    report: "%%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>"
-    view: "%%aqua%%/psac view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]"
-    aurapanic: "%%aqua%%/acpanic %%dark_aqua%%<PlayerName>%%dark_purple%% [-rf]"
-    aurabot: "%%aqua%%/aurabot%%dark_aqua%% <PlayerName>%%dark_purple%% [-r]"
-    show: "%%aqua%%/psac show %%dark_aqua%%<管理iD>"
-    drop: "%%aqua%%/psac drop%%dark_aqua%% <管理iD>"
-    kick: "%%aqua%%/psac kick %%dark_aqua%% <PlayerName>%%dark_purple%% [理由...]"
-    bans: "%%aqua%%/bans %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>"
-    testkb: "%%aqua%%/testkb %%dark_aqua%%<PlayerName>"
-    pull: "%%aqua%%/pull %%dark_aqua%%<PlayerName>"
-    target: "%%aqua%%/target %%dark_aqua%%<PlayerName>"
-    tracking: "%%aqua%%/track %%dark_purple%%[PlayerName]"
-    trust: "%%aqua%%/trust %%dark_aqua%%<PlayerName>"
-    silentteleport: "%%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>"
-    ban: "%%aqua%%/ban %%dark_aqua%%<PlayerName> %%dark_purple%% [理由...]"
-    tempban: "%%aqua%%/tempban %%dark_aqua%%<期間> <PlayerName> %%dark_purple%% [理由...]"
+    shelp:
+        report: "%%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>"
+        view: "%%aqua%%/psac view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]"
+        aurapanic: "%%aqua%%/acpanic %%dark_aqua%%<PlayerName>%%dark_purple%% [-rf]"
+        aurabot: "%%aqua%%/aurabot%%dark_aqua%% <PlayerName>%%dark_purple%% [-r]"
+        show: "%%aqua%%/psac show %%dark_aqua%%<管理iD>"
+        drop: "%%aqua%%/psac drop%%dark_aqua%% <管理iD>"
+        kick: "%%aqua%%/psac kick %%dark_aqua%% <PlayerName>%%dark_purple%% [理由...]"
+        bans: "%%aqua%%/bans %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>"
+        testkb: "%%aqua%%/testkb %%dark_aqua%%<PlayerName>"
+        pull: "%%aqua%%/pull %%dark_aqua%%<PlayerName>"
+        target: "%%aqua%%/target %%dark_aqua%%<PlayerName>"
+        tracking: "%%aqua%%/track %%dark_purple%%[PlayerName]"
+        trust: "%%aqua%%/trust %%dark_aqua%%<PlayerName>"
+        silentteleport: "%%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>"
+        ban: "%%aqua%%/ban %%dark_aqua%%<PlayerName> %%dark_purple%% [理由...]"
+        tempban: "%%aqua%%/tempban %%dark_aqua%%<期間> <PlayerName> %%dark_purple%% [理由...]"
 
 message:
-  report:
-    thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの懸念を理解しており、できるだけ早急に審査いたします。"
-    cancel: "%%red%%報告を閉じました！"
+    report:
+        thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの懸念を理解しており、できるだけ早急に審査いたします。"
+        cancel: "%%red%%報告を閉じました！"
 
-  drop:
-    success: "%%green%%報告の削除に成功しました。"
+    drop:
+        success: "%%green%%報告の削除に成功しました。"
 
-  kick:
-    test: "%%green%%テストモード%%red%%で、プレイヤーをキックします。"
+    kick:
+        test: "%%green%%テストモード%%red%%で、プレイヤーをキックします。"
 
-  aura:
-    summon: "\
-    %%green%%%%name%%さんに%%type%%を召喚します。\n\
-    %%green%%%%seconds%%秒間お待ちください。
-    "
+    aura:
+        summon: "\
+        %%green%%%%name%%さんに%%type%%を召喚します。\n\
+        %%green%%%%seconds%%秒間お待ちください。
+        "
 
-    lynx: "%%yellow%%Testing, please wait…"
+        lynx: "%%yellow%%Testing, please wait…"
 
-  trust:
-    add: "%%green%%プレイヤー %%name%% を信用リストに追加しました！"
-    remove: "%%red%%プレイヤー %%name%% を信用リストから削除しました。"
+    trust:
+        add: "%%green%%プレイヤー %%name%% を信用リストに追加しました！"
+        remove: "%%red%%プレイヤー %%name%% を信用リストから削除しました。"
 
-  auraCheck:
-    result:
-      prefix: "%%green%%%%name%% さんのKillAuraチェック結果"
-      vl: "%%aqua%%VL%%white%%：%%blue%%%%vl%%"
-      vlGraph: "%%green%%0%   %%yellow%%50%   %%red%%100%"
-      result: "%%aqua%%結果%%white%%：%%result%%"
-      words:
-        kick: "%%red%%強制退出"
-        ok: "%%green%%問題なし"
-    bot:
-      lynx: "%%aqua%%Hit the player %%red%%%%hit%% %%aqua%%times!"
-    panic:
-      lynx: "%%yellow%%Hit them %%hit%%/%%max%%"
+    auraCheck:
+        result:
+            prefix: "%%green%%%%name%% さんのKillAuraチェック結果"
+            vl: "%%aqua%%VL%%white%%：%%blue%%%%vl%%"
+            vlGraph: "%%green%%0%     %%yellow%%50%     %%red%%100%"
+            result: "%%aqua%%結果%%white%%：%%result%%"
+            words:
+                kick: "%%red%%強制退出"
+                ok: "%%green%%問題なし"
 
-  testkb:
-    normal: "%%aqua%%Anti kbのために、 '%%name%%' をテストしました！"
-    lynx: "%%aqua%%Tested '%%name%%' for anti kb!"
-  pull:
-    normal: "%%yellow%%プレイヤー %%name%% を引き寄せました！"
-    lynx: "%%yellow%%Pulled player '%%name%%' to you!"
-  bans:
-    message: "%%prefix%%\n%%gold%%--- %%name%% さんのBAN情報 ---"
-    more:
-      lynx: "%%yellow%%More %%count%% Bans(Kicks)."
-      normal: "%%aqua%%ほか %%yellow%%%%count%% %%aqua%%件"
-    lynx: "%%gold%%--- Bans for %%name%% ---"
-  tracking:
-    track: "%%red%%%%player%%さんを追跡します。"
-    unTrack: "%%red%%追跡モードを解除しました。"
-  teleport:
-    teleport: "%%aqua%%%%player%% さんにテレポートしました。"
-  unban:
-    playerUnBanned: "%%player%% %%green%%さんのアクセス禁止を解除しました。"
+        bot:
+            lynx: "%%aqua%%Hit the player %%red%%%%hit%% %%aqua%%times!"
+
+        panic:
+            lynx: "%%yellow%%Hit them %%hit%%/%%max%%"
+
+    testkb:
+        normal: "%%aqua%%Anti kbのために、 '%%name%%' をテストしました！"
+        lynx: "%%aqua%%Tested '%%name%%' for anti kb!"
+
+    pull:
+        normal: "%%yellow%%プレイヤー %%name%% を引き寄せました！"
+        lynx: "%%yellow%%Pulled player '%%name%%' to you!"
+
+    bans:
+        message: "%%prefix%%\n%%gold%%--- %%name%% さんのBAN情報 ---"
+
+        more:
+            lynx: "%%yellow%%More %%count%% Bans(Kicks)."
+            normal: "%%aqua%%ほか %%yellow%%%%count%% %%aqua%%件"
+
+        lynx: "%%gold%%--- Bans for %%name%% ---"
+
+    tracking:
+        track: "%%red%%%%player%%さんを追跡します。"
+        unTrack: "%%red%%追跡モードを解除しました。"
+
+    teleport:
+        teleport: "%%aqua%%%%player%% さんにテレポートしました。"
+
+    unban:
+        playerUnBanned: "%%player%% %%green%%さんのアクセス禁止を解除しました。"
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\
@@ -233,91 +242,94 @@ autoMessage: "\
 "
 
 reportbook:
-  cheat: "どんなチートを使っていましたか？"
-  submit: "%%dark_green%%%%bold%%レポートを提出"
-  cancel: "%%red%%レポートをキャンセル"
+    cheat: "どんなチートを使っていましたか？"
+    submit: "%%dark_green%%%%bold%%レポートを提出"
+    cancel: "%%red%%レポートをキャンセル"
 
 book:
-  words:
-    next: "%%aqua%%次へ行く"
-    back: "%%aqua%%前へ戻る"
-    delete: "%%white%%[%%yellow%%%%bold%%削除%%reset%%%%white%%]"
-  clickable: "\
-  %%aqua%%クリックして\n\
-  %%aqua%%チャットに貼り付け
-  "
-  text:
-    report: "%%dark_green%%%%bold%%チートレポート"
-    uuid: "%%aqua%%%%bold%%UUID%%black%%：%%blue%%%%uuid%%"
-    unix: "%%aqua%%%%bold%%UNIX秒%%black%%：%%blue%%%%unix%%"
-    issueBy: "%%aqua%%%%bold%%報告者%%black%%：%%blue%%%%id%%"
-    issueTo: "%%aqua%%%%bold%%対象者%%black%%：%%blue%%%%id%%"
-    dateTime: "%%aqua%%%%bold%%報告日時%%black%%：%%blue%%%%time%%"
-    reason: "%%aqua%%%%bold%%報告理由%%black%%：%%blue%%%%reason%%"
-    severity: "%%aqua%%%%bold%%脅威判定%%black%%：%%color%%%%bold%%%%level%%"
+    words:
+        next: "%%aqua%%次へ行く"
+        back: "%%aqua%%前へ戻る"
+        delete: "%%white%%[%%yellow%%%%bold%%削除%%reset%%%%white%%]"
 
-  click:
-    openAbout: "%%green%%クリックして詳細を表示"
-    deleteReport: "%%green%%クリックしてレポートを%%red%%削除"
-    delete: "%%white%%[%%yellow%%%%bold%%削除%%reset%%]"
+    clickable: "\
+    %%aqua%%クリックして\n\
+    %%aqua%%チャットに貼り付け
+    "
+
+    text:
+        report: "%%dark_green%%%%bold%%チートレポート"
+        uuid: "%%aqua%%%%bold%%UUID%%black%%：%%blue%%%%uuid%%"
+        unix: "%%aqua%%%%bold%%UNIX秒%%black%%：%%blue%%%%unix%%"
+        issueBy: "%%aqua%%%%bold%%報告者%%black%%：%%blue%%%%id%%"
+        issueTo: "%%aqua%%%%bold%%対象者%%black%%：%%blue%%%%id%%"
+        dateTime: "%%aqua%%%%bold%%報告日時%%black%%：%%blue%%%%time%%"
+        reason: "%%aqua%%%%bold%%報告理由%%black%%：%%blue%%%%reason%%"
+        severity: "%%aqua%%%%bold%%脅威判定%%black%%：%%color%%%%bold%%%%level%%"
+
+    click:
+        openAbout: "%%green%%クリックして詳細を表示"
+        deleteReport: "%%green%%クリックしてレポートを%%red%%削除"
+        delete: "%%white%%[%%yellow%%%%bold%%削除%%reset%%]"
 
 kick:
-  broadcastWd: "\
-  [PEYANG CHEAT DETECTION]\n\
-  %%red%%%%bold%%ハッキング、または不適切な発言によってゲームからプレイヤーが削除\n\
-  %%red%%%%bold%%されました。
-  "
+    broadcastWd: "\
+    [PEYANG CHEAT DETECTION]\n\
+    %%red%%%%bold%%ハッキング、または不適切な発言によってゲームからプレイヤーが削除\n\
+    %%red%%%%bold%%されました。
+    "
 
-  broadcast: "\
-  %%red%%%%bold%%違反行為をしたプレイヤーをゲームから対処しました。\n\
-  %%reset%%%%aqua%%ご報告ありがとうございました！
-  "
+    broadcast: "\
+    %%red%%%%bold%%違反行為をしたプレイヤーをゲームから対処しました。\n\
+    %%reset%%%%aqua%%ご報告ありがとうございました！
+    "
 
-  broadcastAdmin: "\
-  %%aqua%%プレイヤー%%white%%：%%blue%%%%name%%\n\
-  %%aqua%%UUID%%white%%：%%blue%%%%uuid%%
-  "
+    broadcastAdmin: "\
+    %%aqua%%プレイヤー%%white%%：%%blue%%%%name%%\n\
+    %%aqua%%UUID%%white%%：%%blue%%%%uuid%%
+    "
 
-  reason: "\
-  %%red%%ゲームから退出させられました！\n\
-  \n\
-  %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
-  \n\
-  %%gray%%Kick ID：%%white%%%%id%%
-  "
+    reason: "\
+    %%red%%ゲームから退出させられました！\n\
+    \n\
+    %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+    \n\
+    %%gray%%Kick ID：%%white%%%%id%%
+    "
 
 ban:
-  permReason: "\
-  %%red%%このサーバーへのアクセスは永久に禁止されています！\n\
-  \n\
-  %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
-  \n\
-  %%gray%%アクセス禁止 ID：%%white%%%%id%%
-  "
+    permReason: "\
+    %%red%%このサーバーへのアクセスは永久に禁止されています！\n\
+    \n\
+    %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+    \n\
+    %%gray%%アクセス禁止 ID：%%white%%%%id%%
+    "
 
-  tempReason: "\
-  %%white%%%%date%% %%red%%の間このサーバーから一時的にアクセスを禁止されています！\n\
-  \n\
-  %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
-  \n\
-  %%gray%%アクセス禁止 ID：%%white%%%%id%%
-  "
+    tempReason: "\
+    %%white%%%%date%% %%red%%の間このサーバーから一時的にアクセスを禁止されています！\n\
+    \n\
+    %%gray%%理由：%%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+    \n\
+    %%gray%%アクセス禁止 ID：%%white%%%%id%%
+    "
 
 report:
-  submited: "%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%] プレイヤーがレポートを提出しました！"
-  click: "%%yellow%%クリックしてレポートを確認してください！"
-  lynx:
-    submited: "%%aqua%%[STAFF] %%red%%[ADMIN] Fishy%%white%%: Report of %%name%% %%reason%%"
+    submited: "%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%] プレイヤーがレポートを提出しました！"
+    click: "%%yellow%%クリックしてレポートを確認してください！"
+    lynx:
+        submited: "%%aqua%%[STAFF] %%red%%[ADMIN] Fishy%%white%%: Report of %%name%% %%reason%%"
 
 item:
-  execute: "%%red%%%%command%% %%green%%を実行する"
-  stopTarget: "%%red%%監視モードを止めました。"
-  compass: "%%green%%%%bold%%Compass Tracker %%reset%%%%red%%3000%%green%%%%bold%%™"
-  tracking:
-    noTarget: "%%red%%ターゲットなし"
-    text: "%%red%%%%bold%%ターゲット：%%reset%%%%green%%%%name%%%%red%%%%bold%%, ワールド：%%reset%%%%green%%%%world%%%%red%%%%bold%%, X：%%reset%%%%green%%%%x%%%%red%%%%bold%%, Y：%%reset%%%%green%%%%y%%%%red%%%%bold%%, Z：%%reset%%%%green%%%%z%%%%red%%%%bold%%, 距離： %%reset%%%%green%%%%distance%%%%red%%%%bold%%, 速度：%%reset%%%%green%%%%velocity%%m/Tick%%tests%%"
-    testing: "%%reset%%%%aqua%%(テスト中：%%red%%%%bold%%%%type%%%%reset%%%%aqua%%, VL：%%red%%%%bold%%%%vl%%%%reset%%%%aqua%%)"
-  banBook:
-    title: "%%red%%%%name%% の処罰一覧"
-  targetStick: "%%gold%%%%bold%%ターゲットスティック"
-  lead: "%%red%%プレイヤーを引き寄せる"
+    execute: "%%red%%%%command%% %%green%%を実行する"
+    stopTarget: "%%red%%監視モードを止めました。"
+    compass: "%%green%%%%bold%%Compass Tracker %%reset%%%%red%%3000%%green%%%%bold%%™"
+    tracking:
+        noTarget: "%%red%%ターゲットなし"
+        text: "%%red%%%%bold%%ターゲット：%%reset%%%%green%%%%name%%%%red%%%%bold%%, ワールド：%%reset%%%%green%%%%world%%%%red%%%%bold%%, X：%%reset%%%%green%%%%x%%%%red%%%%bold%%, Y：%%reset%%%%green%%%%y%%%%red%%%%bold%%, Z：%%reset%%%%green%%%%z%%%%red%%%%bold%%, 距離： %%reset%%%%green%%%%distance%%%%red%%%%bold%%, 速度：%%reset%%%%green%%%%velocity%%m/Tick%%tests%%"
+        testing: "%%reset%%%%aqua%%(テスト中：%%red%%%%bold%%%%type%%%%reset%%%%aqua%%, VL：%%red%%%%bold%%%%vl%%%%reset%%%%aqua%%)"
+
+    banBook:
+        title: "%%red%%%%name%% の処罰一覧"
+    targetStick: "%%gold%%%%bold%%ターゲットスティック"
+    lead: "%%red%%プレイヤーを引き寄せる"
