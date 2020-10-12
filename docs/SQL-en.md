@@ -110,6 +110,6 @@ fooPath3: "../rel/path/to/foo2.db"
 In this case, path is this format: `Hostname:Port/Database?user=username&password=a_password`.  
 An example is following:
 
-```yaml
+```yml
 fooPath: "localhost:3306/eyeData?user=peyang&password=P_young"
 ```

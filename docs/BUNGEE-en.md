@@ -30,11 +30,11 @@ PSAC takes advantage of it to implement a variety of new features.
 
 ## Installation
 
-1.Install PSAC on all servers and BungeeCord.
+1.  Install PSAC on all servers and BungeeCord.
 
     Binary releases is [here](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases).
 
-2._Optional_: Change the configuration of each server. Be careful when changing the configuration!
+2.  _Optional_: Change the configuration of each server. Be careful when changing the configuration!
 
 ## Precautions
 
