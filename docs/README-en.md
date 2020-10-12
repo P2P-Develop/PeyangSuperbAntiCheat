@@ -10,7 +10,7 @@
     - [Markdown formatting (This area is not so important)](#markdown-formatting-this-area-is-not-so-important)
   - [Installation](#installation)
     - [Download binary](#download-binary)
-    - [Auto Build (Only supported Linux, MacOS, Git Bash)](#auto-build-only-supported-linux-macos-git-bash)
+    - [Auto Build \(Only supports Linux, MacOS, Git Bash\)](#auto-build-only-supports-linux-macos-git-bash)
     - [Manual Build](#manual-build)
   - [Permissions](#permissions)
   - [Commands](#commands)
@@ -156,12 +156,12 @@ This allows the user to view more useful information.
 > [!IMPORTANT]
 > "hoge" can be used with "hogehoge" in Japanese, but there is absolutely no "foofoo".
 
--   /foo \<bar\> \[player\]
+- /foo \<bar\> \[player\]
 
 This list a represents command and arguments.  
 Argument enclosed in \<\>, it represents the necessary command, Enclosed in \[\] indicates an arbitrary command.
 
--   `fooperm.bar`
+- `fooperm.bar`
 
 This block of code represents a permission.
 
@@ -174,83 +174,83 @@ This block of code represents a permission.
 
 ### Download binary
 
--   Download binary jar file from [releases](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases).
+- Download binary jar file from [releases](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases).
 
-    ```bash
-    $ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/download/0.3a/PSAC.jar" -o (Your plugins dir)
-    ```
+  ```bash
+  $ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/download/0.3a/PSAC.jar" -o (Your plugins dir)
+  ```
 
-### Auto Build (Only supported Linux, MacOS, Git Bash)
+### Auto Build \(Only supports Linux, MacOS, Git Bash\)
 
-1.  Execute this command.
+1. Execute this command.
 
-    `maven` `curl` `make` `git` required.
+   `maven` `curl` `make` `git` required.
 
-    ```bash
-    $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/peyang-Celeron/PeyangSuperbAntiCheat/master/build)"
-    ```
+   ```bash
+   $ bash -c "$(curl -fsSL https://raw.githubusercontent.com/peyang-Celeron/PeyangSuperbAntiCheat/master/build)"
+   ```
 
-2.  Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` directory.
+2. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` directory.
 
-    ```bash
-    $ mv ProtocolLib.jar (Your plugins dir)
-    ```
+   ```bash
+   $ mv ProtocolLib.jar (Your plugins dir)
+   ```
 
-3.  Move / Copy the built plugin in the `plugins` directory.
+3. Move / Copy the built plugin in the `plugins` directory.
 
-    ```bash
-    $ mv PSACBuild/target/(PSAC jar file) (Your plugins dir)
-    ```
+   ```bash
+   $ mv PSACBuild/target/(PSAC jar file) (Your plugins dir)
+   ```
 
-4.  Start / Restart server.
+4. Start / Restart server.
 
-    ```tst
-    /stop
-    ```
+   ```tst
+   /stop
+   ```
 
-    or
+   or
 
-    ```bash
-    $ java -jar server.jar
-    ```
+   ```bash
+   $ java -jar server.jar
+   ```
 
 ### Manual Build
 
-1.  Clone this repository.
+1. Clone this repository.
 
-    ```bash
-    $ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git PSACBuild
-    ```
+   ```bash
+   $ git clone https://github.com/peyang-Celeron/PeyangSuperbAntiCheat.git PSACBuild
+   ```
 
-2.  Enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-yaml-resources-file)\).
+2. Enter repository root and build in Java environment **with Maven** \([`mvn shade` is not needed](#what-is-yaml-resources-file)\).
 
-    ```bash
-    $ cd PSACBuild && mvn package
-    ```
+   ```bash
+   $ cd PSACBuild && mvn package
+   ```
 
-3.  Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` directory.
+3. Move / Copy ProtocolLib \([\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)\) to the `plugins` directory.
 
-    ```bash
-    $ mv ProtocolLib.jar (Your plugins dir)
-    ```
+   ```bash
+   $ mv ProtocolLib.jar (Your plugins dir)
+   ```
 
-4.  Move / Copy the built plugin in the `plugins` directory.
+4. Move / Copy the built plugin in the `plugins` directory.
 
-    ```bash
-    $ mv target/(PSAC jar file) (Your plugins dir)
-    ```
+   ```bash
+   $ mv target/(PSAC jar file) (Your plugins dir)
+   ```
 
-5.  Start / Restart server.
+5. Start / Restart server.
 
-    ```bash
-    /stop
-    ```
+   ```bash
+   /stop
+   ```
 
-    or
+   or
 
-    ```bash
-    $ java -jar server.jar
-    ```
+   ```bash
+   $ java -jar server.jar
+   ```
 
 ---
 
@@ -298,11 +298,11 @@ This section are describe plugin commands.
 
 ### Aliases
 
--   /peyangreport
--   /pcr
--   /rep
--   /wdr
--   /watchdogreport
+- /peyangreport
+- /pcr
+- /rep
+- /wdr
+- /watchdogreport
 
 ### Description
 
@@ -331,20 +331,20 @@ This report format is lets them know who reported who and why.
 
 ### Usages
 
--   /report \<PlayerName\>
+- /report \<PlayerName\>
 
-    Player can execute this command with this argument to open a book where you can select the reason for the report.  
-    If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.
+  Player can execute this command with this argument to open a book where you can select the reason for the report.  
+  If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.
 
--   ![#008000](https://via.placeholder.com/15/008000/000000?text=+) Click to send report in "レポートを送信" , or:
+- ![#008000](https://via.placeholder.com/15/008000/000000?text=+) Click to send report in "レポートを送信" , or:
 
--   ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Click the "レポートをキャンセル" to discard.
+- ![#ff0000](https://via.placeholder.com/15/ff0000/000000?text=+) Click the "レポートをキャンセル" to discard.
 
--   /report \<PlayerName\> \<Reason1\> \[Reason2\]...
+- /report \<PlayerName\> \<Reason1\> \[Reason2\]...
 
-    Player can execute this command with this argument to report directly in chat/console without using a book.
+  Player can execute this command with this argument to report directly in chat/console without using a book.
 
-    > [!TIP] Can use an alias for this reason.
+  > [!TIP] Can use an alias for this reason.
 
 ### Reasons
 
@@ -364,15 +364,15 @@ The books are sorted in the order they are displayed.
 
 ### Permission
 
--   `psac.report`
+- `psac.report`
 
 ## /aurabot
 
 ### Aliases
 
--   /testaura
--   /auratest
--   /killauratest
+- /testaura
+- /auratest
+- /killauratest
 
 ### Description
 
@@ -383,17 +383,17 @@ Reach mode can scan the radius and check the reach.
 
 ### Usage
 
--   /aurabot \<PlayerName\>
+- /aurabot \<PlayerName\>
 
-    Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
+  Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
 
--   /aurabot \<PlayerName\> \[-r\]
+- /aurabot \<PlayerName\> \[-r\]
 
-    Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
+  Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
 
 ### Permission
 
--   `psac.aurabot`
+- `psac.aurabot`
 
 Manages the permission to execute the command on summoning of AuraBot.  
 Players with this permission can summon Watchdogs.
@@ -402,9 +402,9 @@ Players with this permission can summon Watchdogs.
 
 ### Aliases
 
--   /testpanic
--   /panictest
--   /aurapanictest
+- /testpanic
+- /panictest
+- /aurapanictest
 
 ### Description
 
@@ -414,25 +414,25 @@ Also, to use the reach mode, adds the "-r" argument to the first or second argum
 
 ### Usage
 
--   /acpanic \<PlayerName\>
+- /acpanic \<PlayerName\>
 
-    Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
+  Summon the NPC that performs the above actions to the player specified by \<PlayerName\>.
 
--   /acpanic \<PlayerName\> \[-r\]
+- /acpanic \<PlayerName\> \[-r\]
 
-    Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
+  Summon the NPC that performs the above actions to the player specified by \<PlayerName\> in reach mode.
 
 ### Permission
 
--   `psac.aurapanic`
+- `psac.aurapanic`
 
 ## /testkb
 
 ### Aliases
 
--   /testknockback
--   /kbtest
--   /knockbacktest
+- /testknockback
+- /kbtest
+- /knockbacktest
 
 ### Description
 
@@ -441,13 +441,13 @@ This allows you to see if the player is knocking back.
 
 ### Usage
 
--   /testkb \<PlayerName\>
+- /testkb \<PlayerName\>
 
-    Fire an invisible arrow at \<PlayerName\>.
+  Fire an invisible arrow at \<PlayerName\>.
 
 ### Permission
 
--   `psac.testkb`
+- `psac.testkb`
 
 ## /pull
 
@@ -455,7 +455,7 @@ Pull the specified player.
 
 ### Aliases
 
--   /pul
+- /pul
 
 ### Description
 
@@ -464,21 +464,21 @@ It cannot be run from console.
 
 ### Usage
 
--   /pull \<PlayerName\>
+- /pull \<PlayerName\>
 
-    Pull \<PlayerName\> to the executed player.
+  Pull \<PlayerName\> to the executed player.
 
 ### Permission
 
--   `psac.pull`
+- `psac.pull`
 
 ## /bans
 
 ### Aliases
 
--   /banlist
--   /playerbans
--   /banlookup
+- /banlist
+- /playerbans
+- /banlookup
 
 ### Description
 
@@ -486,14 +486,14 @@ Displays the player's kick (BAN) history **remaining in this plugin**.
 
 ### Usage
 
--   /bans \[\-a | ban | kick\] \<PlayerName\>
+- /bans \[\-a | ban | kick\] \<PlayerName\>
 
-    Displays the BAN history of player specified by \<PlayerName\>.  
-    Add \-a to show all bans and kicks.
+  Displays the BAN history of player specified by \<PlayerName\>.  
+  Add \-a to show all bans and kicks.
 
 ### Permission
 
--   `psac.bans`
+- `psac.bans`
 
 ## /target
 
@@ -507,13 +507,13 @@ Dropping a given item, clears all items.
 
 ### Usage
 
--   /target \<PlayerName\>
+- /target \<PlayerName\>
 
-    Start tracking \<PlayerName\> with utility items.
+  Start tracking \<PlayerName\> with utility items.
 
 ### Permission
 
--   `psac.target`
+- `psac.target`
 
 ## /tracking
 
@@ -523,7 +523,7 @@ Tracks the specified player as a target without utility items.
 
 ### Alias
 
--   /track
+- /track
 
 ### Description
 
@@ -532,17 +532,17 @@ If tracking is currently started and no argument is specified, tracking will be 
 
 ### Usages
 
--   /tracking \[PlayerName\]
+- /tracking \[PlayerName\]
 
-    Start tracking \[PlayerName\].
+  Start tracking \[PlayerName\].
 
--   /tracking
+- /tracking
 
-    Stop track if tracking.
+  Stop track if tracking.
 
 ### Permission
 
--   `psac.tracking`
+- `psac.tracking`
 
 ## /trust
 
@@ -550,8 +550,8 @@ Trust specified player.
 
 ## Alias
 
--   /noscan
--   /trustplayer
+- /noscan
+- /trustplayer
 
 ### Description
 
@@ -559,23 +559,23 @@ Adds the specified player as a "trusted player".
 If already trusted, can remove player from "trusted player".  
 Players without the `psac.trust` cannot run the following commands on trusted players.
 
--   [/aurabot](#aurabot)
--   [/acpanic](#acpanic)
--   [/testkb](#testkb)
--   [/pull](#pull)
--   [/target](#target)
--   [/track](#tracking)
--   [/psac kick](#arguments)
+- [/aurabot](#aurabot)
+- [/acpanic](#acpanic)
+- [/testkb](#testkb)
+- [/pull](#pull)
+- [/target](#target)
+- [/track](#tracking)
+- [/psac kick](#arguments)
 
 ### Usage
 
--   /trust \<PlayerName\>
+- /trust \<PlayerName\>
 
-    Add / Remove \<PlayerName\> into "trusted player".
+  Add / Remove \<PlayerName\> into "trusted player".
 
 ### Permission
 
--   `psac.trust`
+- `psac.trust`
 
 ## /userinfo
 
@@ -590,14 +590,14 @@ If `-f` is not specified or is not available, concise information is displayed.
 
 ### Usage
 
--   /userinfo \[f\] \<PlayerName\>
+- /userinfo \[f\] \<PlayerName\>
 
-    Displays information about \<PlayerName\>.  
-    If \[-f\] is specified, more detailed information will be displayed.
+  Displays information about \<PlayerName\>.  
+  If \[-f\] is specified, more detailed information will be displayed.
 
 ### Permission
 
--   `psac.userinfo`
+- `psac.userinfo`
 
 ## /silentteleport
 
@@ -607,8 +607,8 @@ It also suppresses broadcast messages on servers that do not have Essentials ins
 
 ### Aliases
 
--   /stp
--   /tpto
+- /stp
+- /tpto
 
 ### Description
 
@@ -616,17 +616,17 @@ Teleports to the player specified in the argument.
 
 ### Usages
 
--   /stp \[PlayerName\]
+- /stp \[PlayerName\]
 
-    Teleport to \[PlayerName\].
+  Teleport to \[PlayerName\].
 
--   /stp \[PlayerName\] \[DestPlayerName\]
+- /stp \[PlayerName\] \[DestPlayerName\]
 
-    Teleport \[PlayerName\] to \[DestPlayerName\].
+  Teleport \[PlayerName\] to \[DestPlayerName\].
 
 ### Permission
 
--   `psac.silentteleport`
+- `psac.silentteleport`
 
 ## /kick
 
@@ -639,17 +639,17 @@ Specifying \[test\] as the second argument kick player in _test mode_.
 
 ### Usages
 
--   /kick \<PlayerName\>
+- /kick \<PlayerName\>
 
-    Kick \<PlayerName\>.
+  Kick \<PlayerName\>.
 
--   /kick \<PlayerName\> test
+- /kick \<PlayerName\> test
 
-    Kick \<PlayerName\> as test mode.
+  Kick \<PlayerName\> as test mode.
 
 ### Permission
 
--   `psac.kick`.
+- `psac.kick`.
 
 ## /ban
 
@@ -657,8 +657,8 @@ Ban specified player **manually**.
 
 ### Aliases
 
--   /permban
--   /acban
+- /permban
+- /acban
 
 ### Description
 
@@ -667,13 +667,13 @@ If you not specify \[Reasons...\], ban \<PlayerName\> with reason `Banned by ope
 
 ### Usages
 
--   /ban \<PlayerName\> \[Reasons...\]
+- /ban \<PlayerName\> \[Reasons...\]
 
-    Ban \<PlayerName\> with \[Reasons...\].
+  Ban \<PlayerName\> with \[Reasons...\].
 
--   /ban \<PlayerName\>
+- /ban \<PlayerName\>
 
-    Ban \<PlayerName\> with `Kicked by operator`.
+  Ban \<PlayerName\> with `Kicked by operator`.
 
 ## /unban
 
@@ -681,7 +681,7 @@ Removes the ban on the specified player.
 
 ### Aliases
 
--   /pardon
+- /pardon
 
 ### Description
 
@@ -690,13 +690,13 @@ Even if it is permanent, the player's access ban will be lifted.
 
 ### Usage
 
--   /unban \<PlayerName\>
+- /unban \<PlayerName\>
 
-    Removes the ban on \<PlayerName\>.
+  Removes the ban on \<PlayerName\>.
 
 ### Permission
 
--   `psac.unban`
+- `psac.unban`
 
 ## /tempban
 
@@ -721,32 +721,32 @@ The period is specified in units and is in no particular order.
 
 ### Usage
 
--   /tempban \<Units...\> \<PlayerName\>
+- /tempban \<Units...\> \<PlayerName\>
 
-    Ban \<PlayerName\> for \<Units...\>.
+  Ban \<PlayerName\> for \<Units...\>.
 
--   /tempban \<Units...\> \<PlayerName\> \<Reasons...\>
+- /tempban \<Units...\> \<PlayerName\> \<Reasons...\>
 
-    Ban \<PlayerName\> for \<Units...\> with \<Reasons...\>.
+  Ban \<PlayerName\> for \<Units...\> with \<Reasons...\>.
 
 ### Example
 
--   /tempban 1y 1mo 4days 5hour 1min 4sec SaikyouPeyangsan Blacklisted Modifications
+- /tempban 1y 1mo 4days 5hour 1min 4sec SaikyouPeyangsan Blacklisted Modifications
 
-    In this case, ban SaikyouPeyangsan for One year, one month, four days, five hours, one minute, four seconds with Blacklisted Modifications.
+  In this case, ban SaikyouPeyangsan for One year, one month, four days, five hours, one minute, four seconds with Blacklisted Modifications.
 
 ### Permission
 
--   `psac.tempban`
+- `psac.tempban`
 
 ## /psac
 
 ### Aliases
 
--   /peyangsuperbanticheat
--   /psr
--   /wdadmin
--   /anticheat
+- /peyangsuperbanticheat
+- /psr
+- /wdadmin
+- /anticheat
 
 ### Description
 
@@ -923,8 +923,8 @@ I think that it will be handled by about two people, so please feel free to post
 
 Depending on the language of the problem, the following persons are responsible for resolution:
 
--   Japanese issue assignee: [@peyang-Celeron](https://github.com/peyang-Celeron) (and [@Lemonade19x](https://github.com/Lemonade19x)?)
--   English issue assignee: [@Potato1682](https://github.com/Potato1682)
+- Japanese issue assignee: [@peyang-Celeron](https://github.com/peyang-Celeron) (and [@Lemonade19x](https://github.com/Lemonade19x)?)
+- English issue assignee: [@Potato1682](https://github.com/Potato1682)
 
 ---
 
@@ -932,13 +932,13 @@ Depending on the language of the problem, the following persons are responsible 
 
 This plugin uses the following Libraries / APIs / Source codes:
 
--   [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
--   dmulloy2/ProtocolLib [\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)
--   [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)
--   [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
--   [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
--   [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
--   [Matrix API](https://matrix.rip/) [\[MC-Market\]](https://www.mc-market.org/resources/13999/)
+- [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
+- dmulloy2/ProtocolLib [\[Spigot\]](https://www.spigotmc.org/resources/protocollib.1997/) | [\[Bukkit\]](https://dev.bukkit.org/projects/protocollib)
+- [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)
+- [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
+- [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
+- [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
+- [Matrix API](https://matrix.rip/) [\[MC-Market\]](https://www.mc-market.org/resources/13999/)
 
 <br>
 <br>

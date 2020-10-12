@@ -185,37 +185,37 @@ NPC が出てくるたび 12 個くらいタイマーが増えます。
 
 ### インストール方法
 
--   [こ ↗ こ ↘](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases)からダウンロードします。
+- [こ ↗ こ ↘](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases)からダウンロードします。
 
 ・か・
 
--   適当に Clone をします。
--   Maven でビルドします。
+- 適当に Clone をします。
+- Maven でビルドします。
 
 そ → し → た ← ら ↗
 
--   [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) を plugins フォルダーに入れます。
--   このプラグインを plugins フォルダーに入れます。
--   再起動して、適用してください。
+- [ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/)[(\*)](https://dev.bukkit.org/projects/protocollib) を plugins フォルダーに入れます。
+- このプラグインを plugins フォルダーに入れます。
+- 再起動して、適用してください。
 
 ### コマンド
 
--   /wdr
+- /wdr
 
 Hypixel の**~~パクリ~~**コマンドです。  
 実際意識して作ってます。
 
 ### エイリアス
 
--   /peyangreport
--   /pcr
--   /rep
--   /report
--   /watchdogreport
+- /peyangreport
+- /pcr
+- /rep
+- /report
+- /watchdogreport
 
 ### 説明
 
--   プレイヤー側
+- プレイヤー側
 
 こんなものをつかってるぷれいやーがいるよ！みてみて！」というコマンドです。  
 あくまでも「みてみて！」と報告するだけで、BAN をするコマンドではありません。  
@@ -223,7 +223,7 @@ Hypixel の**~~パクリ~~**コマンドです。
 
 しらんけど。
 
--   スタッフ側
+- スタッフ側
 
 プレイヤーからのレポートは、2 形式で、表示されます。  
 「\[PeyangSuperbAntiCheat\] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ \[CLICK\]」  
@@ -239,7 +239,7 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 使用法
 
--   /wdr \<PlayerName\>
+- /wdr \<PlayerName\>
 
 この状態で実行すると、報告事由を選択できる本が開きます。  
 この本に表示されている、報告事由をクリックすると、報告内容として事由が追加されます。
@@ -247,7 +247,7 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 ![#008000](https://via.placeholder.com/15/008000/000000?text=+)**レポートを送信**をクリックで送信するか、  
 ![#008000](https://via.placeholder.com/15/ff0000/000000?text=+)**レポートを放棄**クリックで破棄します。
 
--   /wdr \<PlayerName\> \<理由 1\> \[理由 2\]…
+- /wdr \<PlayerName\> \<理由 1\> \[理由 2\]…
 
 このコマンドは、本を使用せずに、コマンドのみで報告できます。  
 本を開かないため、**全くもって意味を感じられませんが**、コンソールからでも報告できます。  
@@ -269,11 +269,11 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 | Reach         | reach                      | 通常より攻撃できる距離が伸びるチートです。                                                                          |
 | Dolphin       | dolphin                    | イルカのように、水を自動で泳ぐチートです。                                                                          |
 
--   報告をスパムに利用されることを避けるため、同じ人から同じ人への報告はできません。
+- 報告をスパムに利用されることを避けるため、同じ人から同じ人への報告はできません。
 
 ### 権限
 
--   psac.report
+- psac.report
 
 初期では、全員が持っている権限です。  
 この権限を剥奪されたプレイヤーは、報告できなくなります。
@@ -284,9 +284,9 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### エイリアス
 
--   /testaura
--   /auratest
--   /killauratest
+- /testaura
+- /auratest
+- /killauratest
 
 ### 説明
 
@@ -297,17 +297,17 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 使用法
 
--   /aurabot \<PlayerName\>
+- /aurabot \<PlayerName\>
 
 \<PlayerName\>に指定されたプレイヤーに、回転 NPC を召喚します。
 
--   /aurabot \<PlayerName\> \[-r\]
+- /aurabot \<PlayerName\> \[-r\]
 
 \<PlayerName\>に指定されたプレイヤーに、リーチモードとして回転 NPC を召喚します。
 
 ### 権限
 
--   psac.aurabot
+- psac.aurabot
 
 ---
 
@@ -315,9 +315,9 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### エイリアス
 
--   /testpanic
--   /panictest
--   /aurapanictest
+- /testpanic
+- /panictest
+- /aurapanictest
 
 ### 説明
 
@@ -326,17 +326,17 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 使用法
 
--   /acpanic \<PlayerName\>
+- /acpanic \<PlayerName\>
 
 \<PlayerName\>に指定されたプレイヤーの背後に、NPC を召喚します。
 
--   /acpanic \<PlayerName\> \[-r\]
+- /acpanic \<PlayerName\> \[-r\]
 
 \<PlayerName\>に指定されたプレイヤーの背後に、リーチモードとして NPC を召喚します。
 
 ### 権限
 
--   psac.aurapanic
+- psac.aurapanic
 
 ---
 
@@ -344,9 +344,9 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### エイリアス
 
--   /banlist
--   /playerbans
--   /banlookup
+- /banlist
+- /playerbans
+- /banlookup
 
 ### 説明
 
@@ -354,7 +354,7 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 使用法
 
--   /bans \[-a | ban | kick\] \<PlayerName\>
+- /bans \[-a | ban | kick\] \<PlayerName\>
 
 \<PlayerName\>に指定されたプレイヤーの、BAN 履歴を表示します。  
 ↑BAN も記録するんで間違ってないです。  
@@ -362,7 +362,7 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 権限
 
--   psac.bans
+- psac.bans
 
 ---
 
@@ -370,9 +370,9 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### エイリアス
 
--   /testknockback
--   /kbtest
--   /knockbacktest
+- /testknockback
+- /kbtest
+- /knockbacktest
 
 ### 説明
 
@@ -382,13 +382,13 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 使用法
 
--   /testkb \<PlayerName\>
+- /testkb \<PlayerName\>
 
 \<PlayerName\>に指定されたプレイヤーに、矢を**そこはかとなく**ぶち込みます。
 
 ### 権限
 
--   psac.testkb
+- psac.testkb
 
 ---
 
@@ -398,7 +398,7 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### エイリアス
 
--   /pul
+- /pul
 
 ### 説明
 
@@ -407,11 +407,11 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 使用法
 
--   /pull \<PlayerName\>
+- /pull \<PlayerName\>
 
 ### 権限
 
--   psac.pull
+- psac.pull
 
 ---
 
@@ -429,11 +429,11 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 使用法
 
--   /target \<PlayerName\>
+- /target \<PlayerName\>
 
 ### 権限
 
--   psac.target
+- psac.target
 
 ---
 
@@ -443,7 +443,7 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### エイリアス
 
--   /track
+- /track
 
 ### 説明
 
@@ -452,11 +452,11 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 使用法
 
--   /tracking \[PlayerName\]
+- /tracking \[PlayerName\]
 
 ### 権限
 
--   psac.tracking
+- psac.tracking
 
 ---
 
@@ -466,8 +466,8 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### エイリアス
 
--   /noscan
--   /trustplayer
+- /noscan
+- /trustplayer
 
 ### 説明
 
@@ -478,11 +478,11 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### 使用法
 
--   /trust \<PlayerName\>
+- /trust \<PlayerName\>
 
 ### 権限
 
--   psac.trust
+- psac.trust
 
 ---
 
@@ -492,7 +492,7 @@ BAN されたとしても~~マジで~~知りません。ほんとうです。_�
 
 ### エイリアス
 
--   just /**userinfo**　 ← 開発者が遊ぶんじゃねーよこの\[編集済\]！org の*people*共がどれだけ苦労してんのか分かってんのかぁ！！！
+- just /**userinfo**　 ← 開発者が遊ぶんじゃねーよこの\[編集済\]！org の*people*共がどれだけ苦労してんのか分かってんのかぁ！！！
 
 ### 説明
 
@@ -506,11 +506,11 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### 使用法
 
--   /userinfo \[-f\] \<PlayerName\>
+- /userinfo \[-f\] \<PlayerName\>
 
 ### 権限
 
--   psac.userinfo
+- psac.userinfo
 
 ---
 
@@ -520,8 +520,8 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### エイリアス
 
--   /stp
--   /tpto
+- /stp
+- /tpto
 
 ### 説明
 
@@ -530,11 +530,11 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### 使用法
 
--   /stp \[PlayerName\] \<PlayerName\>
+- /stp \[PlayerName\] \<PlayerName\>
 
 ### 権限
 
--   psac.silentteleport
+- psac.silentteleport
 
 ---
 
@@ -549,11 +549,11 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### 使用法
 
--   /kick \<PlayerName\> \[理由\]
+- /kick \<PlayerName\> \[理由\]
 
 ### 権限
 
--   psac.kick
+- psac.kick
 
 ---
 
@@ -563,8 +563,8 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### エイリアス
 
--   /permban
--   /acban
+- /permban
+- /acban
 
 ### 説明
 
@@ -573,11 +573,11 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### 使用法
 
--   /ban \<PlayerName\> \[理由\]
+- /ban \<PlayerName\> \[理由\]
 
 ### 権限
 
--   psac.ban
+- psac.ban
 
 ---
 
@@ -605,17 +605,17 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### 使用法
 
--   /tempban \<期間指定\> \<PlayerName\> \[理由\]
+- /tempban \<期間指定\> \<PlayerName\> \[理由\]
 
 ### 例
 
--   /tempban 1y 1mo 4days 5hour 1min 4sec SaikyouPeyangsan Blacklisted Modifications
+- /tempban 1y 1mo 4days 5hour 1min 4sec SaikyouPeyangsan Blacklisted Modifications
 
 この例ですと、SaikyouPeyangsan が「Blacklisted Modifications」という理由で、1 年 1 ヶ月 4 日 5 時間 1 分 4 秒間 BAN されます。
 
 ### 権限
 
--   psac.tempban
+- psac.tempban
 
 ---
 
@@ -625,7 +625,7 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### エイリアス
 
--   /pardon
+- /pardon
 
 ### 説明
 
@@ -633,11 +633,11 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### 使用法
 
--   /unban \<PlayerName\>
+- /unban \<PlayerName\>
 
 ### 権限
 
--   psac.unban
+- psac.unban
 
 ---
 
@@ -645,10 +645,10 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### エイリアス
 
--   /peyangsuperbanticheat
--   /psr
--   /wdadmin
--   /anticheat
+- /peyangsuperbanticheat
+- /psr
+- /wdadmin
+- /anticheat
 
 ### 説明
 
@@ -658,34 +658,34 @@ Lynx モード\(-f\)が有効の場合、Rank などの情報が最低限表示�
 
 ### 引数一覧
 
--   /psac help
+- /psac help
 
 このプラグインコマンドのヘルプを表示します。  
 `psac.mod`または、`psac.admin`権限を持っている人には以下のヘルプも表示されます。
 
--   /psac view \[ページ数\]
+- /psac view \[ページ数\]
 
 プレイヤーが提出した、レポートを確認できます。  
 危険度順に、5 件ずつ表示されます。
 
--   /psac show \<管理 ID\>
+- /psac show \<管理 ID\>
 
 プレイヤーが提出した、レポートの詳細を、表示します。  
 このコマンドを、プレイヤーから実行する、本が、開き、報告の詳細を、確認、できます。  
 コンソールから、実行した、場、合、コ、ン、ソ、ー、ル、にそのまま、表示、されます。
 
--   /psac drop \<管理 ID\>
+- /psac drop \<管理 ID\>
 
 プレイヤーが提出した報告を**完全**に破棄します。  
 **削除ログは一切記録されません。破棄する場合には十分ご注意ください。**
 
 ### 権限（上から順に）
 
--   psac.help
--   psac.view
--   psac.show
--   psac.drop
--   psac.kick
+- psac.help
+- psac.view
+- psac.show
+- psac.drop
+- psac.kick
 
 ---
 
@@ -847,19 +847,19 @@ message.yml をいじくり倒すことで、いろいろできますが、ま�
 
 このプラグインは、以下のライブラリ / API を使用しています。
 
--   [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
--   [dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*)](https://dev.bukkit.org/projects/protocollib)
--   [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)
--   [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
--   [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
--   [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
--   [Matrix API](https://matrix.rip/) [\(\*\)](https://www.mc-market.org/resources/13999/)
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    [縺吶 ∋ 縺ｦ縺ｯ隕 ∫ ｴ?↓ 驕弱 ℃ 縺ｾ縺帙ｓ縲ょ?縺ｦ縺ｯ?遨ｶ繝｡?縺ｫ譖ｸ縺?※縺ゅｊ縺ｾ縺吶?ゅ％縺薙ｒ繧ｯ繝ｪ繝?け縺励※隱ｭ繧?縺薙 → 縺後〒縺阪 ∪ 縺吶?](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/tree/master/docs/memo)
+- [brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
+- [dmulloy2/ProtocolLib](https://www.spigotmc.org/resources/protocollib.1997/) [(\*)](https://dev.bukkit.org/projects/protocollib)
+- [jedk1/BookUtil.java](https://www.spigotmc.org/threads/resource-bookutil-1-8-1-9.131549/)
+- [DarkBlade12/ReflectionUtils.java](https://github.com/DarkBlade12/ParticleEffect/blob/master/src/main/java/com/darkblade12/particleeffect/ReflectionUtils.java)
+- [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
+- [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
+- [Matrix API](https://matrix.rip/) [\(\*\)](https://www.mc-market.org/resources/13999/)
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  [縺吶 ∋ 縺ｦ縺ｯ隕 ∫ ｴ?↓ 驕弱 ℃ 縺ｾ縺帙ｓ縲ょ?縺ｦ縺ｯ?遨ｶ繝｡?縺ｫ譖ｸ縺?※縺ゅｊ縺ｾ縺吶?ゅ％縺薙ｒ繧ｯ繝ｪ繝?け縺励※隱ｭ繧?縺薙 → 縺後〒縺阪 ∪ 縺吶?](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/tree/master/docs/memo)

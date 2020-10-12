@@ -24,17 +24,17 @@ This document provides a way to enable BungeeCord integration.
 BungeeCord is well-known as a proxy server that manages all servers at the same time.  
 PSAC takes advantage of it to implement a variety of new features.
 
--   Receiving reports on all servers
--   Share BAN records with all servers
--   Distribute the processing time of each server
+- Receiving reports on all servers
+- Share BAN records with all servers
+- Distribute the processing time of each server
 
 ## Installation
 
-1.  Install PSAC on all servers and BungeeCord.
+1. Install PSAC on all servers and BungeeCord.
 
-    Binary releases is [here](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases).
+   Binary releases is [here](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases).
 
-2.  _Optional_: Change the configuration of each server. Be careful when changing the configuration!
+2. _Optional_: Change the configuration of each server. Be careful when changing the configuration!
 
 ## Precautions
 

@@ -7,14 +7,14 @@ PSAC では、SQL 設定を config ファイルに設定します。
 #データベースのパス
 #相対パスが利用できます。
 database:
-    #メソッド。sqliteなら org.sqlite.JDBC Mysqlなら com.mysql.jdbc.Driver
-    method: "org.sqlite.JDBC"
-    url: "jdbc:sqlite"
+  #メソッド。sqliteなら org.sqlite.JDBC Mysqlなら com.mysql.jdbc.Driver
+  method: "org.sqlite.JDBC"
+  url: "jdbc:sqlite"
 
-    path: "./eye.db"
-    logPath: "./log.db"
-    learnPath: "./learn.json"
-    trustPath: "./trust.db"
+  path: "./eye.db"
+  logPath: "./log.db"
+  learnPath: "./learn.json"
+  trustPath: "./trust.db"
 ```
 
 |     設定名      |  デフォルト値   | 説明                 |

@@ -45,15 +45,15 @@ The settings are described in following format:
 
 ```yml
 database:
-    # The database method
-    # SQLite is org.sqlite.JDBC, MySQL is com.mysql.jdbc.Driver
-    method: "org.sqlite.JDBC"
-    url: "jdbc:sqlite"
+  # The database method
+  # SQLite is org.sqlite.JDBC, MySQL is com.mysql.jdbc.Driver
+  method: "org.sqlite.JDBC"
+  url: "jdbc:sqlite"
 
-    path: "./eye.db"
-    logPath: "./log.db"
-    learnPath: "./learn.json"
-    trustPath: "./trust.db"
+  path: "./eye.db"
+  logPath: "./log.db"
+  learnPath: "./learn.json"
+  trustPath: "./trust.db"
 ```
 
 ## Config settings
