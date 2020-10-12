@@ -8,24 +8,23 @@ ESC=$(printf '\033')
 RESET="${ESC}[0m"
 BOLD="${ESC}[1m"
 RED="${ESC}[31m"
-YELLOW="${ESC}[33m"
 GREEN="${ESC}[32m"
 
 if type "git" > /dev/null 2>&1; then
-  git clone --depth 1 --recursive "$GITHUB_URL" "PSACBuild"
-elif type "curl" > /dev/null 2>&1 || type "wget" > /dev/null 2>&1; then
-  tarball="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/archive/stable.tar.gz"
+    git clone --depth 1 --recursive "$GITHUB_URL" "PSACBuild"
+    elif type "curl" > /dev/null 2>&1 || type "wget" > /dev/null 2>&1; then
+    tarball="https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/archive/stable.tar.gz"
 
-  if type "curl" > /dev/null 2>&1; then
-    curl -L "$tarball"
-  elif type "wget" > /dev/null 2>&1; then
-    wget -O - "$tarball"
-  fi | tar zx
+    if type "curl" > /dev/null 2>&1; then
+        curl -L "$tarball"
+        elif type "wget" > /dev/null 2>&1; then
+        wget -O - "$tarball"
+    fi | tar zx
 
-  mv -f PeyangSuperbAntiCheat-stable "PSACBuild"
+    mv -f PeyangSuperbAntiCheat-stable "PSACBuild"
 else
-  echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}curl${RESET} or ${BOLD}wget${RESET} required"
-  exit 1
+    echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}curl${RESET} or ${BOLD}wget${RESET} required"
+    exit 1
 fi
 
 cd "$(pwd)/PSACBuild" || echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}$BUILDPATH not found${RESET}" && exit 1
@@ -33,14 +32,14 @@ cd "$(pwd)/PSACBuild" || echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}$BUILDPATH not
 # Build
 
 if type "mvn" > /dev/null 2>&1 && type "make" > /dev/null 2>&1; then
-  make maven && \
-  echo "${GREEN}${BOLD}SUCCESS${RESET}: ${BOLD}PeyangSuperbAntiCheat successfly built${RESET}" && \
-  exit 0
-  echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}Unknown error occured${RESET}"
+    make maven && \
+    echo "${GREEN}${BOLD}SUCCESS${RESET}: ${BOLD}PeyangSuperbAntiCheat successfly built${RESET}" && \
+    exit 0
+    echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}Unknown error occured${RESET}"
 else
-  echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}maven${RESET} and ${BOLD}make${RESET} required"
+    echo "${RED}${BOLD}ERROR${RESET}: ${BOLD}maven${RESET} and ${BOLD}make${RESET} required"
 fi
 
 read -rn1 -p "Do you want to install PSAC? (y/N): " yn; [[ $yn =~ y|Y|\n ]] \
-  && make install \
-  || exit 0
+&& make install \
+|| exit 0
