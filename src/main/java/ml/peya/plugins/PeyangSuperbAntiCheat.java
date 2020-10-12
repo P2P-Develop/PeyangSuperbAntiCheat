@@ -186,8 +186,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
             {
                 logger.info("Saving learn weights to learning data file...");
                 Mapper mp = new Mapper();
-                mp.inputWeight = NeuralNetwork.inputWeight;
-                mp.middleWeight = NeuralNetwork.middleWeight;
+                mp.inputWeight = network.inputWeight;
+                mp.middleWeight = network.middleWeight;
                 mp.learnCount = learnCount;
                 pw.print(new ObjectMapper()
                     .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)

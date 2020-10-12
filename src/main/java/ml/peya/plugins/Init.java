@@ -34,7 +34,6 @@ import ml.peya.plugins.Gui.Items.Target.Lead;
 import ml.peya.plugins.Gui.Items.Target.Page2.BackToPage1;
 import ml.peya.plugins.Gui.Items.Target.TestKnockBack;
 import ml.peya.plugins.Gui.Items.Target.ToPage2;
-import ml.peya.plugins.Learn.NeuralNetwork;
 import ml.peya.plugins.Task.AutoMessageTask;
 import ml.peya.plugins.Task.TrackerTask;
 import ml.peya.plugins.Utils.Utils;
@@ -65,6 +64,7 @@ import static ml.peya.plugins.Variables.learnCount;
 import static ml.peya.plugins.Variables.log;
 import static ml.peya.plugins.Variables.logPath;
 import static ml.peya.plugins.Variables.logger;
+import static ml.peya.plugins.Variables.network;
 import static ml.peya.plugins.Variables.skin;
 import static ml.peya.plugins.Variables.time;
 import static ml.peya.plugins.Variables.trackerTask;
@@ -375,14 +375,17 @@ public class Init
                 JsonNode node = new ObjectMapper().readTree(file);
 
                 int i = 0;
-                for (double[] aIW : NeuralNetwork.inputWeight)
+                for (double[] aIW : network.inputWeight)
                     for (int i1 = 0; i1 < aIW.length; i1++)
-                        NeuralNetwork.inputWeight[i][i1] = node.get("inputWeight")
-                            .get(i++)
+                    {
+                        network.inputWeight[i][i1] = node.get("inputWeight")
+                            .get(i)
                             .get(i1)
                             .asDouble();
+                        i++;
+                    }
 
-                Arrays.parallelSetAll(NeuralNetwork.middleWeight, i2 -> node.get("middleWeight")
+                Arrays.parallelSetAll(network.middleWeight, i2 -> node.get("middleWeight")
                     .get(i2)
                     .asDouble());
 

@@ -27,11 +27,11 @@ public class NeuralNetwork
     /**
      * 前層の重み。
      */
-    public static final double[][] inputWeight = new double[][]{{RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}};
+    public final double[][] inputWeight = new double[][]{{RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}, {RandomWeight(), RandomWeight(), RandomWeight()}};
     /**
      * 中層の重み。
      */
-    public static final double[] middleWeight = new double[]{RandomWeight(), RandomWeight(), RandomWeight()};
+    public final double[] middleWeight = new double[]{RandomWeight(), RandomWeight(), RandomWeight()};
     /**
      * 前層のバイアス。
      */
