@@ -2,9 +2,9 @@
 #データベースのパス
 #相対パスが利用できます。
 database:
-  #メソッド。sqliteなら org.sqlite.JDBC Mysqlなら com.mysql.jdbc.Driver
-  method: "org.sqlite.JDBC"
-  url: "jdbc:sqlite:"
+    #メソッド。sqliteなら org.sqlite.JDBC Mysqlなら com.mysql.jdbc.Driver
+    method: "org.sqlite.JDBC"
+    url: "jdbc:sqlite:"
 
-  banPath: "./ban.db"
-  logPath: "./log.db"
+    banPath: "./ban.db"
+    logPath: "./log.db"

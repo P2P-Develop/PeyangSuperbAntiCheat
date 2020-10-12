@@ -1,117 +1,117 @@
 #データベースのパス
 #相対パスが利用できます。
 database:
-  #メソッド。sqliteなら org.sqlite.JDBC Mysqlなら com.mysql.jdbc.Driver
-  method: "org.sqlite.JDBC"
-  url: "jdbc:sqlite:"
+    #メソッド。sqliteなら org.sqlite.JDBC Mysqlなら com.mysql.jdbc.Driver
+    method: "org.sqlite.JDBC"
+    url: "jdbc:sqlite:"
 
-  path: "./eye.db"
-  logPath: "./log.db"
-  learnPath: "./learn.json"
-  trustPath: "./trust.db"
+    path: "./eye.db"
+    logPath: "./log.db"
+    learnPath: "./learn.json"
+    trustPath: "./trust.db"
 
-  #くっそ重要です。
-  #banされたときに格納されます。
-  banPath: "./bans.db"
+    #くっそ重要です。
+    #banされたときに格納されます。
+    banPath: "./bans.db"
 
 #npc関係のコンフィグです。
 npc:
-  #指定された秒数、NPCを召喚します。
-  #秒数が短いとその中でのVL評価を行います。
-  seconds: 3
+    #指定された秒数、NPCを召喚します。
+    #秒数が短いとその中でのVL評価を行います。
+    seconds: 3
 
-  #NPCの速度などを変えるとき、微調整してください。
-  #別の値に指定する場合、適切な値でないとIssue 17に対応できなくなる可能性があります。
-  time: 0.35
+    #NPCの速度などを変えるとき、微調整してください。
+    #別の値に指定する場合、適切な値でないとIssue 17に対応できなくなる可能性があります。
+    time: 0.35
 
-  #NPCのプレイヤーからの半径を指定します。
-  #この値が最も安定している値ですが、ハッククライアントによってはKillAuraの半径を変更している場合もあります。
-  range:
-    - 3.0
-    - 1.5
-  #NPC召喚に"-r"引数を付けた場合のプレイヤーからの半径を指定します。
-  #これはサバイバルモードの最大攻撃半径に0.1を足した値がデフォルトであり、Reachハックを使用しているかどうか確認することができます。
-  reachRange: 4.6
+    #NPCのプレイヤーからの半径を指定します。
+    #この値が最も安定している値ですが、ハッククライアントによってはKillAuraの半径を変更している場合もあります。
+    range:
+        - 3.0
+        - 1.5
+    #NPC召喚に"-r"引数を付けた場合のプレイヤーからの半径を指定します。
+    #これはサバイバルモードの最大攻撃半径に0.1を足した値がデフォルトであり、Reachハックを使用しているかどうか確認することができます。
+    reachRange: 4.6
 
-  #NPCがWaveを描くかどうかを指定します。
-  #falseにした場合、NPCはWaveを描かなくなりIssue 17に対応できなくなります。
-  wave: true
-
-  #Waveの最小単位を指定します。
-  #小さいほど動作が大きくなります。
-  waveMin: 0.3
-
-  #Panic NPCのプレイヤーからの半径を指定します。
-  #Panic NPCの場合、通常のNPCと異なり半径が大きいとうまく動作しない可能性があります。
-  panicRange: 1.5
-  #NPC召喚に"-r"引数を付けた場合のプレイヤーからの半径を指定します。
-  #これはサバイバルモードの最大攻撃半径に0.1を足した値がデフォルトであり、Reachハックを使用しているかどうか確認することができます。
-  reachPanicRange: 4.6
-
-  kill: 3
-
-  #NPCの学習係数を指定します。
-  #大きいほどニューラルネットワークでの処理の回数が少なくなりますが、精度は低くなります。サーバースペックに合わせて適切な値に変更してください。
-  #Doubleのため小数第一位以降も設定可能です。
-  learn: 0.3
-
-  #NPCがlearncountより学習出来ていない場合にこの値を利用してVLを評価します。
-  #VLがこの値より大きかった場合にキックされます。
-  vlLevel: 17
-
-  #学習機能がこの回数以上学習した場合にkickの評価を学習機能に譲渡します。
-  #適切な値に変更してください。
-  learncount: 15
-
-  speed:
-    #NPCが波を描くように周回するようになります。
+    #NPCがWaveを描くかどうかを指定します。
+    #falseにした場合、NPCはWaveを描かなくなりIssue 17に対応できなくなります。
     wave: true
-    #speed.waveをtrueにした際の波の大きさを設定します。
-    waveRange: 0.1
+
+    #Waveの最小単位を指定します。
+    #小さいほど動作が大きくなります。
+    waveMin: 0.3
+
+    #Panic NPCのプレイヤーからの半径を指定します。
+    #Panic NPCの場合、通常のNPCと異なり半径が大きいとうまく動作しない可能性があります。
+    panicRange: 1.5
+    #NPC召喚に"-r"引数を付けた場合のプレイヤーからの半径を指定します。
+    #これはサバイバルモードの最大攻撃半径に0.1を足した値がデフォルトであり、Reachハックを使用しているかどうか確認することができます。
+    reachPanicRange: 4.6
+
+    kill: 3
+
+    #NPCの学習係数を指定します。
+    #大きいほどニューラルネットワークでの処理の回数が少なくなりますが、精度は低くなります。サーバースペックに合わせて適切な値に変更してください。
+    #Doubleのため小数第一位以降も設定可能です。
+    learn: 0.3
+
+    #NPCがlearncountより学習出来ていない場合にこの値を利用してVLを評価します。
+    #VLがこの値より大きかった場合にキックされます。
+    vlLevel: 17
+
+    #学習機能がこの回数以上学習した場合にkickの評価を学習機能に譲渡します。
+    #適切な値に変更してください。
+    learncount: 15
+
+    speed:
+        #NPCが波を描くように周回するようになります。
+        wave: true
+        #speed.waveをtrueにした際の波の大きさを設定します。
+        waveRange: 0.1
 
 mod:
-  tracking:
-    ##有効/無効
-    enabled: true
-    #CompassTracker3000™のトラックインターバルです。
-    trackTicks: 10
+    tracking:
+        ##有効/無効
+        enabled: true
+        #CompassTracker3000™のトラックインターバルです。
+        trackTicks: 10
 
 kick:
-  #キックまでの遅延です。
-  #リアルにするなら、2(sec)が最強です。
-  delay: 2
-  #Kickまでのデータが見つからない場合のデフォルト値にこちらを指定します。
-  defaultKick: 25
+    #キックまでの遅延です。
+    #リアルにするなら、2(sec)が最強です。
+    delay: 2
+    #Kickまでのデータが見つからない場合のデフォルト値にこちらを指定します。
+    defaultKick: 25
 
 decoration:
-  #キックされた瞬間にダメージのない雷を落とします。
-  lighting: true
-  #ブレイズなどのパーティクルでよく見る炎のパーティクルを出します。
-  flame: true
-  #それっぽい魔法陣を表示します。
-  circle: true
+    #キックされた瞬間にダメージのない雷を落とします。
+    lighting: true
+    #ブレイズなどのパーティクルでよく見る炎のパーティクルを出します。
+    flame: true
+    #それっぽい魔法陣を表示します。
+    circle: true
 
-  #パーティクルによるレーザーを表示します。
-  laser: true
+    #パーティクルによるレーザーを表示します。
+    laser: true
 
 #メッセージ関連の設定です。
 #設定によってメッセージ内容が変わります。
 message:
-  #プレイヤーがレポートを提出した時などのメッセージにLynx Modと互換性をもたせます。
-  lynx: true
+    #プレイヤーがレポートを提出した時などのメッセージにLynx Modと互換性をもたせます。
+    lynx: true
 
 #定期メッセージ関連の設定です。
 autoMessage:
-  #定期メッセージの有効/無効です。
-  enabled: true
-  #定期メッセージの周期です。(分指定)
-  #パラメーターが0だと自動で1になりますが、それでもぶっ壊れるので注意です。
-  time: 15
+    #定期メッセージの有効/無効です。
+    enabled: true
+    #定期メッセージの周期です。(分指定)
+    #パラメーターが0だと自動で1になりますが、それでもぶっ壊れるので注意です。
+    time: 15
 
 commands:
-  override:
-    #kickコマンドのオーバーライド
-    kick:
-      enable: true
-    ban:
-      enable: true
+    override:
+        #kickコマンドのオーバーライド
+        kick:
+            enable: true
+        ban:
+            enable: true

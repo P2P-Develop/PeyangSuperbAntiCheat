@@ -12,42 +12,42 @@ list: ## Show source files in this repo
 	@$(foreach val, $(PSACFILES), /bin/ls -dF $(val);)
 
 pom: ## Show pom information
-	@mvn help:effective-pom
+	mvn help:effective-pom
 
 settings: ## Show settings file information
-	@mvn help:effective-settings
+	mvn help:effective-settings
 
 clean: ## Remove built files
-	@mvn clean
+	mvn clean
 
-help: ## Self-documented Makefile
+help: ## Self-documented makefile
+	@echo
+	@echo "Makefile help:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
 		| sort \
 		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 deps: ## Show dependency tree
-	@mvn dependency:tree
+	mvn dependency:tree
 
-maven: ## Compile and Package to .jar file
-	@mvn package
+maven: ## Compile and package into .jar file
+	mvn package
 
-install: ## Execute install command
-	@bash install
+install: ## Execute install commands
+	bash install
 
-ant: ## Build as ant
-	@mvn ant:ant
-	@ant compile
+ant: ## Build in ant
+	mvn ant:ant
+	ant compile
 
-eclipse: ## Generate eclipse projects
-	@mvn eclipse:eclipse
+eclipse: ## Generate a eclipse project
+	mvn eclipse:eclipse
 
-idea: ## Generate IntelliJ IDEA workspace
-	@mvn idea:idea
+idea: ## Generate a IntelliJ IDEA workspace
+	mvn idea:idea
 
-javadoc: ## Generate java document files
-	@mvn javadoc:javadoc
-	@rm -rf docs/javadoc
-	@cp -r target/site/apidocs docs/javadoc
+javadoc: ## Checkout javadoc branch
+	git checkout javadoc
 
 refresh: ## Refresh project files
 	mvn ant:ant

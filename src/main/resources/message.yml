@@ -54,11 +54,13 @@ command:
     %%aqua%%/psac help\n\
     %%green%%このコマンドです。
     "
+
   help:
     report: "\
     %%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>\n\
     %%green%%プレイヤーをレポートします。\
     "
+
     view: "\
     %%aqua%%/psac view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]\n\
     %%green%%レポートされた、対処されていない問題を重大度順に表示します。
@@ -69,25 +71,30 @@ command:
     %%green%%指定したプレイヤーの背後に、NPCを召喚します。\n\
     %%gray%%%%italic%%Tips：第2引数に、-rをセットすると、リーチモードとして召喚されます。
     "
+
     aurabot: "\
     %%aqua%%/aurabot%%dark_aqua%% <PlayerName>%%dark_purple%% [-r]\n\
     %%green%%指定したプレイヤーを中心に\n\
     %%green%%回るNPCを召喚します。\n\
     %%gray%%%%italic%%Tips：第2引数に、-rをセットすると、リーチモードとして召喚されます。
     "
+
     show: "\
     %%aqua%%/psac show %%dark_aqua%%<管理iD>\n\
     %%green%%レポートを表示します。
     "
+
     drop: "\
     %%aqua%%/psac drop%%dark_aqua%% <管理iD>\n\
     %%green%%レポートを削除します。
     "
+
     kick: "\
     %%aqua%%/psac kick %%dark_aqua%% <PlayerName>%%dark_purple%% [理由...]\n\
     %%green%%プレイヤーをキックします。\n\
     %%gray%%%%italic%%Tips：第2引数に、testをセットすると、テストモードでキックされます。
     "
+
     bans: "\
     %%aqua%%/bans %%dark_purple%%[-a | ban | kick] %%dark_aqua%%<PlayerName>\n\
     %%green%%プレイヤーのBAN（キック）履歴を照会します。
@@ -142,6 +149,7 @@ command:
     %%yellow%%注意：管理IDはランダムで割り当てられる32文字の英数文字列です。\n\
     %%yellow%%プレイヤーからも操作できますが、コンソールから操作することを推奨します。
     "
+
   shelp:
     report: "%%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>"
     view: "%%aqua%%/psac view %%dark_purple%% [ページ数 | プレイヤ名] [ページ数]"
@@ -164,16 +172,21 @@ message:
   report:
     thanks: "%%green%%不正行為の報告、ありがとうございます。私たちはあなたの懸念を理解しており、できるだけ早急に審査いたします。"
     cancel: "%%red%%報告を閉じました！"
+
   drop:
     success: "%%green%%報告の削除に成功しました。"
+
   kick:
     test: "%%green%%テストモード%%red%%で、プレイヤーをキックします。"
+
   aura:
     summon: "\
     %%green%%%%name%%さんに%%type%%を召喚します。\n\
     %%green%%%%seconds%%秒間お待ちください。
     "
+
     lynx: "%%yellow%%Testing, please wait…"
+
   trust:
     add: "%%green%%プレイヤー %%name%% を信用リストに追加しました！"
     remove: "%%red%%プレイヤー %%name%% を信用リストから削除しました。"

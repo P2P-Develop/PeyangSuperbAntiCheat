@@ -29,8 +29,8 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment**
 
--   OS: \[e.g. Ubuntu 20.04\]
--   Version \[e.g. 0.2a\] \[Releae Notes\]
+- OS: \[e.g. Ubuntu 20.04\]
+- Version \[e.g. 0.2a\] \[Releae Notes\]
 
 **Additional context**
 
