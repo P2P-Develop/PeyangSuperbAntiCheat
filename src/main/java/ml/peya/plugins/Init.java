@@ -432,6 +432,4 @@ public class Init
         Bukkit.getServer().getPluginManager().registerEvents(new Run(), getPlugin());
         Bukkit.getServer().getPluginManager().registerEvents(new Drop(), getPlugin());
     }
-
-
 }
