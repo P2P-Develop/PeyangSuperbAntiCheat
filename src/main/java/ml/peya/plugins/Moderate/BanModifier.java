@@ -28,12 +28,12 @@ public class BanModifier
         try (Connection connection = Variables.ban.getConnection())
         {
             SQL.insert(connection, "ban",
-                    player.toString().replace("-", ""),
-                    id,
-                    new Date().getTime(),
-                    reason,
-                    date == null ? "_PERM": date.getTime(),
-                    1
+                player.toString().replace("-", ""),
+                id,
+                new Date().getTime(),
+                reason,
+                date == null ? "_PERM": date.getTime(),
+                1
             );
         }
         catch (Exception e)
@@ -62,15 +62,15 @@ public class BanModifier
                 try (Connection log = Variables.log.getConnection())
                 {
                     SQL.insert(log, "ban",
-                            player.toString().replace("-", ""),
-                            set.getString("BANID"),
-                            set.getString("DATE"),
-                            set.getString("REASON"),
-                            set.getString("EXPIRE"),
-                            set.getString("STAFF")
+                        player.toString().replace("-", ""),
+                        set.getString("BANID"),
+                        set.getString("DATE"),
+                        set.getString("REASON"),
+                        set.getString("EXPIRE"),
+                        set.getString("STAFF")
                     );
                 }
-                
+
                 SQL.delete(connection, "ban", new HashMap<String, String>()
                 {{
                     put("BANID", set.getString("BANID"));

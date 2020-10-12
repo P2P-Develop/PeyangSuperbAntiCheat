@@ -487,8 +487,8 @@ public final class ReflectionUtils
         }
 
         private final Class<?>
-                primitive,
-                reference;
+            primitive,
+            reference;
 
         /**
          * Construct a new data type
@@ -544,8 +544,8 @@ public final class ReflectionUtils
         public static Class<?>[] getPrimitive(Class<?>[] classes)
         {
             return IntStream.range(0, classes == null ? 0: classes.length).parallel()
-                    .mapToObj(index -> getPrimitive(Objects.requireNonNull(classes)[index]))
-                    .toArray(Class<?>[]::new);
+                .mapToObj(index -> getPrimitive(Objects.requireNonNull(classes)[index]))
+                .toArray(Class<?>[]::new);
         }
 
         /**
@@ -557,8 +557,8 @@ public final class ReflectionUtils
         public static Class<?>[] getReference(Class<?>[] classes)
         {
             return IntStream.range(0, classes == null ? 0: classes.length).parallel()
-                    .mapToObj(index -> getReference(Objects.requireNonNull(classes)[index]))
-                    .toArray(Class<?>[]::new);
+                .mapToObj(index -> getReference(Objects.requireNonNull(classes)[index]))
+                .toArray(Class<?>[]::new);
         }
 
         /**
@@ -570,8 +570,8 @@ public final class ReflectionUtils
         public static Class<?>[] getPrimitive(Object[] objects)
         {
             return IntStream.range(0, objects == null ? 0: objects.length).parallel()
-                    .mapToObj(index -> getPrimitive(Objects.requireNonNull(objects)[index].getClass()))
-                    .toArray(Class<?>[]::new);
+                .mapToObj(index -> getPrimitive(Objects.requireNonNull(objects)[index].getClass()))
+                .toArray(Class<?>[]::new);
         }
 
         /**
@@ -583,8 +583,8 @@ public final class ReflectionUtils
         public static Class<?>[] getReference(Object[] objects)
         {
             return IntStream.range(0, objects == null ? 0: objects.length).parallel()
-                    .mapToObj(index -> getReference(Objects.requireNonNull(objects)[index].getClass()))
-                    .toArray(Class<?>[]::new);
+                .mapToObj(index -> getReference(Objects.requireNonNull(objects)[index].getClass()))
+                .toArray(Class<?>[]::new);
         }
 
         /**
@@ -597,9 +597,9 @@ public final class ReflectionUtils
         public static boolean compare(Class<?>[] primary, Class<?>[] secondary)
         {
             return primary != null && secondary != null && primary.length == secondary.length && IntStream
-                    .range(0, primary.length).parallel()
-                    .noneMatch(index -> !primary[index].equals(secondary[index]) && !primary[index]
-                            .isAssignableFrom(secondary[index]));
+                .range(0, primary.length).parallel()
+                .noneMatch(index -> !primary[index].equals(secondary[index]) && !primary[index]
+                    .isAssignableFrom(secondary[index]));
         }
 
         /**

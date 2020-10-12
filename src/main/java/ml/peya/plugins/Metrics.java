@@ -59,15 +59,15 @@ public class Metrics
     {
         // You can use the property to disable the check in your test environment
         if (System.getProperty("bstats.relocatecheck") == null || !System.getProperty("bstats.relocatecheck")
-                .equals("false"))
+            .equals("false"))
         {
             // Maven's Relocate is clever and changes strings, too. So we have to use this little "trick" ... :D
             final String defaultPackage = new String(
-                    new byte[]{'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'k', 'k', 'i', 't'});
+                new byte[]{'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'k', 'k', 'i', 't'});
             final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
             // We want to make sure nobody just copy & pastes the example and use the wrong package names
             if (Metrics.class.getPackage().getName().equals(defaultPackage) || Metrics.class.getPackage().getName()
-                    .equals(examplePackage))
+                .equals(examplePackage))
             {
                 throw new IllegalStateException("bStats Metrics class has not been relocated correctly!");
             }
@@ -121,10 +121,10 @@ public class Metrics
 
             // Inform the server owners about bStats
             config.options().header(
-                    "bStats collects some data for plugin authors like how many servers are using their plugins.\n" +
-                            "To honor their work, you should not disable it.\n" +
-                            "This has nearly no effect on the server performance!\n" +
-                            "Check out https://bStats.org/ to learn more :)"
+                "bStats collects some data for plugin authors like how many servers are using their plugins.\n" +
+                    "To honor their work, you should not disable it.\n" +
+                    "This has nearly no effect on the server performance!\n" +
+                    "Check out https://bStats.org/ to learn more :)"
             ).copyDefaults(true);
             try
             {
@@ -344,8 +344,8 @@ public class Metrics
             // This fixes java.lang.NoSuchMethodError: org.bukkit.Bukkit.getOnlinePlayers()Ljava/util/Collection;
             Method onlinePlayersMethod = Class.forName("org.bukkit.Server").getMethod("getOnlinePlayers");
             playerAmount = onlinePlayersMethod.getReturnType().equals(Collection.class)
-                    ? ((Collection<?>) onlinePlayersMethod.invoke(Bukkit.getServer())).size()
-                    : ((Player[]) onlinePlayersMethod.invoke(Bukkit.getServer())).length;
+                ? ((Collection<?>) onlinePlayersMethod.invoke(Bukkit.getServer())).size()
+                : ((Player[]) onlinePlayersMethod.invoke(Bukkit.getServer())).length;
         }
         catch (Exception e)
         {

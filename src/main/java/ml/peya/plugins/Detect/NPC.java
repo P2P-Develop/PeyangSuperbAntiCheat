@@ -66,10 +66,10 @@ public class NPC
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
         final ItemStack[] arm = {CraftItemStack.asNMSCopy(RandomArmor.getHelmet()),
-                CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
-                CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
-                CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
-                CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
+            CraftItemStack.asNMSCopy(RandomArmor.getChestPlate()),
+            CraftItemStack.asNMSCopy(RandomArmor.getLeggings()),
+            CraftItemStack.asNMSCopy(RandomArmor.getBoots()),
+            CraftItemStack.asNMSCopy(RandomArmor.getSwords())};
 
         new BukkitRunnable()
         {
@@ -94,25 +94,25 @@ public class NPC
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
                 Bukkit.getOnlinePlayers()
-                        .parallelStream()
-                        .filter(p -> p.hasPermission("psac.viewnpc"))
-                        .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
-                        .forEachOrdered(c ->
-                        {
-                            c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
-                            c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
-                        });
+                    .parallelStream()
+                    .filter(p -> p.hasPermission("psac.viewnpc"))
+                    .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
+                    .forEachOrdered(c ->
+                    {
+                        c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, npc));
+                        c.sendPacket(new PacketPlayOutNamedEntitySpawn(npc));
+                    });
 
                 NPCTeleport.teleport(player, npc, arm, teleportCase, reachMode);
 
                 player.hidePlayer(PeyangSuperbAntiCheat.getPlugin(), npc.getBukkitEntity());
 
                 Bukkit.getOnlinePlayers()
-                        .parallelStream()
-                        .filter(p -> p.hasPermission("psac.viewnpc"))
-                        .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
-                        .forEachOrdered(c ->
-                                c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
+                    .parallelStream()
+                    .filter(p -> p.hasPermission("psac.viewnpc"))
+                    .map(p -> ((CraftPlayer) p).getHandle().playerConnection)
+                    .forEachOrdered(c ->
+                        c.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, npc)));
 
                 new BukkitRunnable()
                 {
@@ -121,8 +121,8 @@ public class NPC
                     {
                         connection.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId()));
                         Bukkit.getOnlinePlayers().parallelStream().filter(p -> p.hasPermission("psac.viewnpc"))
-                                .map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c ->
-                                c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId())));
+                            .map(p -> ((CraftPlayer) p).getHandle().playerConnection).forEachOrdered(c ->
+                            c.sendPacket(new PacketPlayOutEntityDestroy(npc.getBukkitEntity().getEntityId())));
                     }
                 }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), Math.multiplyExact(config.getInt("npc.seconds"), 20));
             }
@@ -141,11 +141,11 @@ public class NPC
     public static void setArmor(Player target, EntityPlayer player, ItemStack[] arm)
     {
         Arrays.asList(
-                new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.HEAD, arm[0]),
-                new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.CHEST, arm[1]),
-                new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.LEGS, arm[2]),
-                new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]),
-                new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4])
+            new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.HEAD, arm[0]),
+            new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.CHEST, arm[1]),
+            new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.LEGS, arm[2]),
+            new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.FEET, arm[3]),
+            new PacketPlayOutEntityEquipment(player.getBukkitEntity().getEntityId(), EnumItemSlot.MAINHAND, arm[4])
         ).parallelStream().forEachOrdered(((CraftPlayer) target).getHandle().playerConnection::sendPacket);
     }
 }

@@ -34,13 +34,13 @@ public class WatchEyeManagement
         try (Connection connection = eye.getConnection())
         {
             SQL.insert(connection, "watcheye",
-                    target.getUniqueId().toString().replace("-", ""),
-                    target.getName(),
-                    new Date().getTime(),
-                    fromName,
-                    fromUUID,
-                    manageId,
-                    level
+                target.getUniqueId().toString().replace("-", ""),
+                target.getName(),
+                new Date().getTime(),
+                fromName,
+                fromUUID,
+                manageId,
+                level
             );
             return manageId;
         }
@@ -69,9 +69,9 @@ public class WatchEyeManagement
                 reasonString = reasonString.substring(0, reasonString.length() - 1);
 
             SQL.insert(connection, "watchreason",
-                    id,
-                    reasonString,
-                    vl
+                id,
+                reasonString,
+                vl
             );
             return true;
         }
@@ -145,16 +145,16 @@ public class WatchEyeManagement
             ResultSet result = statement.executeQuery();
             while (result.next())
                 SQL.delete(report, "watchreason", new HashMap<String, String>()
-                        {{
-                            put("MNGID", result.getString("MNGID"));
-                        }}
+                    {{
+                        put("MNGID", result.getString("MNGID"));
+                    }}
                 );
 
             SQL.delete(report, "watcheye",
-                    new HashMap<String, String>()
-                    {{
-                        put("UUID", uuid.replace("-", ""));
-                    }}
+                new HashMap<String, String>()
+                {{
+                    put("UUID", uuid.replace("-", ""));
+                }}
             );
 
         }

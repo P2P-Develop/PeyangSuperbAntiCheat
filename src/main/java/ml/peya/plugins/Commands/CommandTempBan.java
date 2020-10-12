@@ -67,8 +67,9 @@ public class CommandTempBan implements CommandExecutor
                     }
 
                     if (Pattern.compile(
-                            "^[0-9]+((year|y)|(month|mo)|(day|d)|(hour|h)|(minute|min|m)|(second|sec|s))(s)?$",
-                            Pattern.CASE_INSENSITIVE).matcher(arg).find())
+                        "^[0-9]+((year|y)|(month|mo)|(day|d)|(hour|h)|(minute|min|m)|(second|sec|s))(s)?$",
+                        Pattern.CASE_INSENSITIVE
+                    ).matcher(arg).find())
                         continue;
 
                     reason.append(arg).append(" ");

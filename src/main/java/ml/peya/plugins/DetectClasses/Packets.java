@@ -33,21 +33,21 @@ public class Packets
             field.setAccessible(true);
 
             cheatMeta.getMetas()
-                    .stream()
-                    .filter(meta ->
+                .stream()
+                .filter(meta ->
+                {
+                    try
                     {
-                        try
-                        {
-                            return meta.getId() == field.getInt(entity) &&
-                                    meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() ||
-                                    PlayerUtils.hasCritical(e.getPlayer());
-                        }
-                        catch (IllegalAccessException ex)
-                        {
-                            ex.printStackTrace();
-                        }
-                        return false;
-                    }).forEachOrdered(meta -> {
+                        return meta.getId() == field.getInt(entity) &&
+                            meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() ||
+                            PlayerUtils.hasCritical(e.getPlayer());
+                    }
+                    catch (IllegalAccessException ex)
+                    {
+                        ex.printStackTrace();
+                    }
+                    return false;
+                }).forEachOrdered(meta -> {
                 if (meta.getNpcLocation() != null)
                     meta.addAngle(meta.getTarget().getEyeLocation().getDirection().angle(meta.getNpcLocation().subtract(meta.getTarget().getEyeLocation().toVector())));
 

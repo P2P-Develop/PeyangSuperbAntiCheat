@@ -47,13 +47,13 @@ public class SeverityLevels
     public static ArrayList<EnumSeverity> getAllSeverity()
     {
         return new ArrayList<>(Arrays.asList(
-                EnumSeverity.FINE,
-                EnumSeverity.FINER,
-                EnumSeverity.FINEST,
-                EnumSeverity.NORMAL,
-                EnumSeverity.PRIORITY,
-                EnumSeverity.REQUIRE_FAST,
-                EnumSeverity.SEVERE
+            EnumSeverity.FINE,
+            EnumSeverity.FINER,
+            EnumSeverity.FINEST,
+            EnumSeverity.NORMAL,
+            EnumSeverity.PRIORITY,
+            EnumSeverity.REQUIRE_FAST,
+            EnumSeverity.SEVERE
         ));
     }
 

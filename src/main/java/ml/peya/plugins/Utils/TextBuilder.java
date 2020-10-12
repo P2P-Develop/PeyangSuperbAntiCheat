@@ -39,12 +39,12 @@ public class TextBuilder
     private static TextComponent getPrevNextButton(int bind, String button)
     {
         TextComponent nextBtn = new TextComponent(ChatColor.GREEN + "(" +
-                ChatColor.AQUA + button +
-                ChatColor.GREEN + ")");
+            ChatColor.AQUA + button +
+            ChatColor.GREEN + ")");
         nextBtn.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac view " + bind));
 
         nextBtn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.words.next"))
-                .create()));
+            .create()));
         return nextBtn;
     }
 
@@ -86,29 +86,29 @@ public class TextBuilder
         ComponentBuilder hover = new ComponentBuilder(get("book.clickable"));
 
         sender.spigot()
-                .sendMessage(new ComponentBuilder("    " + get("book.text.issueBy", pair("id", issueById)))
-                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                        .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid))
-                        .create());
+            .sendMessage(new ComponentBuilder("    " + get("book.text.issueBy", pair("id", issueById)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, issueByUuid))
+                .create());
 
         sender.spigot()
-                .sendMessage(new ComponentBuilder("    " + get("book.text.issueTo", pair("id", id)))
-                        .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
-                        .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid))
-                        .create());
+            .sendMessage(new ComponentBuilder("    " + get("book.text.issueTo", pair("id", id)))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, hover.create()))
+                .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, uuid))
+                .create());
 
         sender.sendMessage("    " + get("book.text.dateTime", pair("time", new SimpleDateFormat("yyyy/MM/dd hh:mm:ss")
-                .format(new Date(dateInt.longValue())))));
+            .format(new Date(dateInt.longValue())))));
 
         sender.sendMessage("    " + get("book.text.reason", pair("reason", types.parallelStream()
-                .map(type -> "        " + type.getText() + "\n")
-                .collect(Collectors.joining()))));
+            .map(type -> "        " + type.getText() + "\n")
+            .collect(Collectors.joining()))));
 
         HashMap<String, Object> serv = new HashMap<>();
         serv.put("color", SeverityLevels.getSeverity(types)
-                .getColor());
+            .getColor());
         serv.put("level", SeverityLevels.getSeverity(types)
-                .getText());
+            .getText());
         sender.sendMessage(get("book.text.severity", serv));
     }
 
@@ -127,23 +127,23 @@ public class TextBuilder
         EnumSeverity severity = SeverityLevels.getSeverity(types);
 
         ComponentBuilder b = new ComponentBuilder("")
-                .append(ChatColor.GREEN + id)
-                .append("   ")
-                .append(ChatColor.BLUE + issueById)
-                .append("   ")
-                .append(severity.getText())
-                .color(severity.getColor())
-                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + mngid))
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.click.openAbout"))
-                        .create()))
-                .append("   ");
+            .append(ChatColor.GREEN + id)
+            .append("   ")
+            .append(ChatColor.BLUE + issueById)
+            .append("   ")
+            .append(severity.getText())
+            .color(severity.getColor())
+            .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac show " + mngid))
+            .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.click.openAbout"))
+                .create()))
+            .append("   ");
 
         if (sender instanceof Player && sender.hasPermission("psac.drop"))
         {
             b.append(get("book.click.delete"))
-                    .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac drop " + mngid))
-                    .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.click.deleteReport"))
-                            .create()));
+                .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/psac drop " + mngid))
+                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("book.click.deleteReport"))
+                    .create()));
         }
         else
             b.append(ChatColor.YELLOW + mngid);
@@ -207,9 +207,9 @@ public class TextBuilder
         TextComponent uBar = new TextComponent("-----");
         uBar.setColor(net.md_5.bungee.api.ChatColor.AQUA);
         return new ComponentBuilder(prevFlag ? prev: uBar)
-                .append("------------------------")
-                .color(net.md_5.bungee.api.ChatColor.AQUA)
-                .append(nextFlag ? next: uBar);
+            .append("------------------------")
+            .color(net.md_5.bungee.api.ChatColor.AQUA)
+            .append(nextFlag ? next: uBar);
     }
 
     /**
@@ -233,11 +233,11 @@ public class TextBuilder
         HashMap<String, Object> map = new HashMap<>();
         map.put("name", player.getName());
         map.put("uuid", player.getUniqueId()
-                .toString());
+            .toString());
 
         return getBroadCastWdDetectionText()
-                .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("kick.broadcastAdmin", map))
-                        .create()));
+            .event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(get("kick.broadcastAdmin", map))
+                .create()));
     }
 
     /**
@@ -254,15 +254,15 @@ public class TextBuilder
             return new ComponentBuilder(get("message.auraCheck.bot.lynx", pair("hit", VL)));
 
         return new ComponentBuilder(get("base.prefix") + "\n")
-                .append(get("message.auraCheck.result.prefix", pair("name", name)))
-                .append("\n")
-                .append(get("message.auraCheck.result.vl", pair("vl", String.valueOf(VL))))
-                .append("\n")
-                .append(get("message.auraCheck.result.vlGraph"))
-                .append("\n")
-                .append(OptGraphGenerator.genGraph(VL, kickVL))
-                .append("\n")
-                .append(get("message.auraCheck.result.result", pair("result", VL >= kickVL ? get("message.auraCheck.result.words.kick"): get("message.auraCheck.result.words.ok"))));
+            .append(get("message.auraCheck.result.prefix", pair("name", name)))
+            .append("\n")
+            .append(get("message.auraCheck.result.vl", pair("vl", String.valueOf(VL))))
+            .append("\n")
+            .append(get("message.auraCheck.result.vlGraph"))
+            .append("\n")
+            .append(OptGraphGenerator.genGraph(VL, kickVL))
+            .append("\n")
+            .append(get("message.auraCheck.result.result", pair("result", VL >= kickVL ? get("message.auraCheck.result.words.kick"): get("message.auraCheck.result.words.ok"))));
     }
 
     /**
@@ -277,10 +277,10 @@ public class TextBuilder
         if (config.getBoolean("message.lynx"))
             return new ComponentBuilder("");
         return new ComponentBuilder(get("base.prefix"))
-                .append("\n")
-                .append(get("message.auraCheck.result.prefix", pair("name", name)))
-                .append("\n")
-                .append(get("message.auraCheck.result.vl", pair("vl", String.valueOf(vl))));
+            .append("\n")
+            .append(get("message.auraCheck.result.prefix", pair("name", name)))
+            .append("\n")
+            .append(get("message.auraCheck.result.vl", pair("vl", String.valueOf(vl))));
     }
 
     /**
@@ -306,8 +306,8 @@ public class TextBuilder
             reasonSet.setLength(reasonSet.length() - 2);
 
         return new ComponentBuilder(ChatColor.YELLOW + type.text())
-                .append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())))
-                .append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
+            .append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())))
+            .append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
     }
 
 }

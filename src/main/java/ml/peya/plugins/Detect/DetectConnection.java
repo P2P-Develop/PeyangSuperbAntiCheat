@@ -106,9 +106,9 @@ public class DetectConnection
                             case AURA_BOT:
                                 if (sender == null)
                                     Bukkit.getOnlinePlayers().parallelStream()
-                                            .filter(np -> np.hasPermission("psac.aurabot"))
-                                            .forEachOrdered(np ->
-                                                    np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create()));
+                                        .filter(np -> np.hasPermission("psac.aurabot"))
+                                        .forEachOrdered(np ->
+                                            np.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textTestRep(name, meta.getVL(), banLeft).create());
                                 break;
@@ -116,9 +116,9 @@ public class DetectConnection
                             case AURA_PANIC:
                                 if (sender == null)
                                     Bukkit.getOnlinePlayers()
-                                            .parallelStream()
-                                            .filter(np -> np.hasPermission("psac.aurapanic"))
-                                            .forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create()));
+                                        .parallelStream()
+                                        .filter(np -> np.hasPermission("psac.aurapanic"))
+                                        .forEachOrdered(np -> np.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create()));
                                 else
                                     sender.spigot().sendMessage(TextBuilder.textPanicRep(name, meta.getVL()).create());
                                 break;
@@ -138,7 +138,7 @@ public class DetectConnection
     /**
      * 学習回数を増やしAIを学習させる。
      *
-     * @param vl      評価したVL。
+     * @param vl    評価したVL。
      * @param angle あんぐるず
      */
     private static void learn(double vl, double angle)
@@ -157,10 +157,10 @@ public class DetectConnection
     private static boolean kick(final Player player)
     {
         KickManager.kickPlayer(
-                player,
-                "PEYANG CHEAT DETECTION",
-                true,
-                false
+            player,
+            "PEYANG CHEAT DETECTION",
+            true,
+            false
         );
         return true;
     }

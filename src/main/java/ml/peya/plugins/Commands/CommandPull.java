@@ -65,8 +65,8 @@ public class CommandPull implements CommandExecutor
             pull(player, playerSender.getLocation());
 
         sender.sendMessage(config.getBoolean("message.lynx")
-                ? get("message.pull.lynx", pair("name", player.getName()))
-                : get("message.pull.normal", pair("name", player.getName())));
+            ? get("message.pull.lynx", pair("name", player.getName()))
+            : get("message.pull.normal", pair("name", player.getName())));
 
         return true;
     }
@@ -85,15 +85,15 @@ public class CommandPull implements CommandExecutor
         final double distance = pullLocation.distance(entityLoc);
         Vector vector = player.getVelocity();
         vector.setX(((1.0D +
-                (0.1d * distance)) *
-                (pullLocation.getX() - entityLoc.getX())) / distance)
-                .setY((((1.0D +
-                        (0.03d * distance)) *
-                        (pullLocation.getY() - entityLoc.getY())) / distance) -
-                        ((0.5D * -0.08D) * distance))
-                .setZ(((1.0D +
-                        (0.1D * distance)) *
-                        (pullLocation.getZ() - entityLoc.getZ())) / distance);
+            (0.1d * distance)) *
+            (pullLocation.getX() - entityLoc.getX())) / distance)
+            .setY((((1.0D +
+                (0.03d * distance)) *
+                (pullLocation.getY() - entityLoc.getY())) / distance) -
+                ((0.5D * -0.08D) * distance))
+            .setZ(((1.0D +
+                (0.1D * distance)) *
+                (pullLocation.getZ() - entityLoc.getZ())) / distance);
         player.setVelocity(vector);
     }
 

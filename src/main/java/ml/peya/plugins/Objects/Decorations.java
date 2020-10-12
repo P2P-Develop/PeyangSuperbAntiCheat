@@ -42,13 +42,13 @@ public class Decorations
                     this.cancel();
 
                 player.getWorld().spawnParticle(
-                        Particle.FLAME,
-                        player.getLocation().add(0, 0.5, 0),
-                        30,
-                        0,
-                        0,
-                        0,
-                        0.65
+                    Particle.FLAME,
+                    player.getLocation().add(0, 0.5, 0),
+                    30,
+                    0,
+                    0,
+                    0,
+                    0.65
                 );
 
                 sec[0] += 5;
@@ -77,13 +77,13 @@ public class Decorations
     public static void particle(Location location, int size, Particle particle)
     {
         location.getWorld().spawnParticle(
-                particle,
-                location,
-                size,
-                0,
-                0,
-                0,
-                0.001
+            particle,
+            location,
+            size,
+            0,
+            0,
+            0,
+            0.001
         ); //XXX: 誰だよこんな引数多く設計したやつ
     }
 
@@ -142,10 +142,10 @@ public class Decorations
     public static void circle(Location center, int count, double radius)
     {
         Location n = new Location(
-                center.getWorld(),
-                particle_x(count, radius) + center.getX(),
-                center.getY(),
-                particle_z(count, radius) + center.getZ()
+            center.getWorld(),
+            particle_x(count, radius) + center.getX(),
+            center.getY(),
+            particle_z(count, radius) + center.getZ()
         );
 
         particle(n);
@@ -163,10 +163,10 @@ public class Decorations
     public static void circle(Location center, int count, double radius, Particle particle)
     {
         Location n = new Location(
-                center.getWorld(),
-                particle_x(count, radius) + center.getX(),
-                center.getY(),
-                particle_z(count, radius) + center.getZ()
+            center.getWorld(),
+            particle_x(count, radius) + center.getX(),
+            center.getY(),
+            particle_z(count, radius) + center.getZ()
         );
 
         particle(n, 5, particle);

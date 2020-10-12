@@ -81,12 +81,12 @@ public class KickManager
         {
 
             SQL.insert(kickC, "kick",
-                    player.getName(),
-                    player.getUniqueId().toString().replace("-", ""),
-                    id,
-                    new Date().getTime(),
-                    reason,
-                    opFlag ? 1: 0
+                player.getName(),
+                player.getUniqueId().toString().replace("-", ""),
+                id,
+                new Date().getTime(),
+                reason,
+                opFlag ? 1: 0
             );
 
             statement.setString(1, player.getUniqueId().toString().replace("-", ""));

@@ -56,15 +56,15 @@ public class Metrics
     {
         // You can use the property to disable the check in your test environment
         if (System.getProperty("bstats.relocatecheck") == null || !System.getProperty("bstats.relocatecheck")
-                .equals("false"))
+            .equals("false"))
         {
             // Maven's Relocate is clever and changes strings, too. So we have to use this little "trick" ... :D
             final String defaultPackage = new String(
-                    new byte[]{'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'n', 'g', 'e', 'e', 'c', 'o', 'r', 'd'});
+                new byte[]{'o', 'r', 'g', '.', 'b', 's', 't', 'a', 't', 's', '.', 'b', 'u', 'n', 'g', 'e', 'e', 'c', 'o', 'r', 'd'});
             final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
             // We want to make sure nobody just copy & pastes the example and use the wrong package names
             if (Metrics.class.getPackage().getName().equals(defaultPackage) || Metrics.class.getPackage().getName()
-                    .equals(examplePackage))
+                .equals(examplePackage))
             {
                 throw new IllegalStateException("bStats Metrics class has not been relocated correctly!");
             }
@@ -137,7 +137,7 @@ public class Metrics
                 if (logFailedRequests)
                 {
                     plugin.getLogger().log(Level.WARNING, "Failed to link to first metrics class " + usedMetricsClass
-                            .getName() + "!", e);
+                        .getName() + "!", e);
                 }
             }
         }
@@ -170,7 +170,7 @@ public class Metrics
         if (logSentData)
         {
             plugin.getLogger()
-                    .info("Sending data to bStats: " + data);
+                .info("Sending data to bStats: " + data);
         }
 
         HttpsURLConnection connection = (HttpsURLConnection) new URL(URL).openConnection();
@@ -199,13 +199,13 @@ public class Metrics
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
         {
             builder = bufferedReader.lines()
-                    .collect(Collectors.joining());
+                .collect(Collectors.joining());
         }
 
         if (logResponseStatusText)
         {
             plugin.getLogger()
-                    .info("Sent data to bStats and received response: " + builder);
+                .info("Sent data to bStats and received response: " + builder);
         }
     }
 
@@ -348,16 +348,16 @@ public class Metrics
         if (!configFile.exists())
         {
             writeFile(
-                    configFile,
-                    "#bStats collects some data for plugin authors like how many servers are using their plugins.",
-                    "#To honor their work, you should not disable it.",
-                    "#This has nearly no effect on the server performance!",
-                    "#Check out https://bStats.org/ to learn more :)",
-                    "enabled: true",
-                    "serverUuid: \"" + UUID.randomUUID() + "\"",
-                    "logFailedRequests: false",
-                    "logSentData: false",
-                    "logResponseStatusText: false"
+                configFile,
+                "#bStats collects some data for plugin authors like how many servers are using their plugins.",
+                "#To honor their work, you should not disable it.",
+                "#This has nearly no effect on the server performance!",
+                "#Check out https://bStats.org/ to learn more :)",
+                "enabled: true",
+                "serverUuid: \"" + UUID.randomUUID() + "\"",
+                "logFailedRequests: false",
+                "logSentData: false",
+                "logResponseStatusText: false"
             );
         }
 
@@ -457,22 +457,22 @@ public class Metrics
         final JsonArray pluginData = new JsonArray();
         // Search for all other bStats Metrics classes to get their plugin data
         knownMetricsInstances.parallelStream()
-                .forEachOrdered(metrics ->
+            .forEachOrdered(metrics ->
+            {
+                try
                 {
-                    try
+                    Object plugin = metrics.getClass()
+                        .getMethod("getPluginData")
+                        .invoke(metrics);
+                    if (plugin instanceof JsonObject)
                     {
-                        Object plugin = metrics.getClass()
-                                .getMethod("getPluginData")
-                                .invoke(metrics);
-                        if (plugin instanceof JsonObject)
-                        {
-                            pluginData.add((JsonObject) plugin);
-                        }
+                        pluginData.add((JsonObject) plugin);
                     }
-                    catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored)
-                    {
-                    }
-                });
+                }
+                catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException ignored)
+                {
+                }
+            });
 
         data.add("plugins", pluginData);
 
@@ -487,7 +487,7 @@ public class Metrics
             if (logFailedRequests)
             {
                 plugin.getLogger()
-                        .log(Level.WARNING, "Could not submit plugin stats!", e);
+                    .log(Level.WARNING, "Could not submit plugin stats!", e);
             }
         }
     }

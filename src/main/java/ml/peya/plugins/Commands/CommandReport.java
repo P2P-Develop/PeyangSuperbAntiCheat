@@ -82,15 +82,15 @@ public class CommandReport implements CommandExecutor
         ArrayList<String> reasons = new ArrayList<>();
 
         reasonsV.parallelStream()
-                .forEachOrdered(reason ->
+            .forEachOrdered(reason ->
+            {
+                if (reasons.contains(reason))
                 {
-                    if (reasons.contains(reason))
-                    {
-                        reasons.remove(reason);
-                        return;
-                    }
-                    reasons.add(reason);
-                });
+                    reasons.remove(reason);
+                    return;
+                }
+                reasons.add(reason);
+            });
 
         ArrayList<EnumCheatType> types = CheatTypeUtils.getCheatTypeArrayFromString(reasons.toArray(new String[0]));
 
@@ -134,8 +134,8 @@ public class CommandReport implements CommandExecutor
     private void report(CommandSender sender, final ArrayList<EnumCheatType> types, Player target)
     {
         final String senderUUID = sender instanceof ConsoleCommandSender
-                ? "[CONSOLE]"
-                : ((Player) sender).getUniqueId().toString().replace("-", "");
+            ? "[CONSOLE]"
+            : ((Player) sender).getUniqueId().toString().replace("-", "");
 
         if (WatchEyeManagement.isExistsRecord(target.getUniqueId().toString().replace("-", ""), senderUUID))
         {
@@ -144,8 +144,8 @@ public class CommandReport implements CommandExecutor
         }
 
         final String id = WatchEyeManagement.add(target, sender instanceof ConsoleCommandSender
-                ? "[CONSOLE]"
-                : sender.getName(), senderUUID, SeverityLevels.getSeverity(types).getLevel());
+            ? "[CONSOLE]"
+            : sender.getName(), senderUUID, SeverityLevels.getSeverity(types).getLevel());
         boolean successFlag = false;
         for (EnumCheatType type : types)
             successFlag = WatchEyeManagement.setReason(id, type, 0);
@@ -162,8 +162,8 @@ public class CommandReport implements CommandExecutor
             }
 
             Utils.adminNotification(target.getName(), id, types.parallelStream()
-                    .map(EnumCheatType::getText)
-                    .toArray(String[]::new));
+                .map(EnumCheatType::getText)
+                .toArray(String[]::new));
             Bungee.sendMessage("report " + id + " " + target.getName());
             return;
         }

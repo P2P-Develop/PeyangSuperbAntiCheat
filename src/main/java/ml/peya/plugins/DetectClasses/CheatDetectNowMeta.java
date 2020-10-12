@@ -29,6 +29,10 @@ public class CheatDetectNowMeta
      */
     private final DetectType type;
     /**
+     * アングル
+     */
+    private final ArrayList<Double> angles;
+    /**
      * 秒数。
      */
     private double seconds;
@@ -40,12 +44,6 @@ public class CheatDetectNowMeta
      * テスト中かどうか。
      */
     private boolean isTesting = false;
-
-    /**
-     * アングル
-     */
-    private final ArrayList<Double> angles;
-
     private Vector npcLocation = null;
 
     /**

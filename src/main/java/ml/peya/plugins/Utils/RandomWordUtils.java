@@ -38,13 +38,13 @@ public class RandomWordUtils
     public static String getRandomWord(int bound)
     {
         try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class
-                .getResourceAsStream("/wordsx256.txt"), StandardCharsets.UTF_8);
+            .getResourceAsStream("/wordsx256.txt"), StandardCharsets.UTF_8);
              BufferedReader bufferedReader = new BufferedReader(reader))
         {
             return bufferedReader.lines()
-                    .skip(new Random(bound).nextInt(__MaxLine - 1))
-                    .findFirst()
-                    .orElse("");
+                .skip(new Random(bound).nextInt(__MaxLine - 1))
+                .findFirst()
+                .orElse("");
         }
         catch (IOException e)
         {

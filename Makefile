@@ -49,6 +49,9 @@ idea: ## Generate a IntelliJ IDEA workspace
 javadoc: ## Checkout javadoc branch
 	git checkout javadoc
 
+format: ## Format documents with .editorconfig
+	mvn editorconfig:format
+
 refresh: ## Refresh project files
 	mvn ant:ant
 	make eclipse

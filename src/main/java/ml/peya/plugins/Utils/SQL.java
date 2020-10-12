@@ -15,32 +15,32 @@ public class SQL
         StringBuilder p = new StringBuilder();
 
         Arrays.stream(value)
-                .parallel()
-                .forEach(s -> {
-                    if (!p.toString().isEmpty())
-                        p.append(", ");
-                    p.append("?");
-                });
+            .parallel()
+            .forEach(s -> {
+                if (!p.toString().isEmpty())
+                    p.append(", ");
+                p.append("?");
+            });
 
         String sql = "INSERT INTO " + database + " VALUES (" +
-                p.toString() +
-                ")";
+            p.toString() +
+            ")";
 
         try (PreparedStatement s = connection.prepareStatement(sql))
         {
             int[] count = {0};
             Arrays.stream(value)
-                    .forEachOrdered(o -> {
-                        try
-                        {
-                            s.setObject(++count[0], o);
-                        }
-                        catch (SQLException e)
-                        {
-                            e.printStackTrace();
-                            Utils.errorNotification(Utils.getStackTrace(e));
-                        }
-                    });
+                .forEachOrdered(o -> {
+                    try
+                    {
+                        s.setObject(++count[0], o);
+                    }
+                    catch (SQLException e)
+                    {
+                        e.printStackTrace();
+                        Utils.errorNotification(Utils.getStackTrace(e));
+                    }
+                });
             s.execute();
         }
     }
@@ -50,12 +50,12 @@ public class SQL
         StringBuilder p = new StringBuilder();
 
         map.keySet()
-                .parallelStream()
-                .forEach(s -> {
-                    if (!p.toString().isEmpty())
-                        p.append(", ");
-                    p.append(s).append("=?");
-                });
+            .parallelStream()
+            .forEach(s -> {
+                if (!p.toString().isEmpty())
+                    p.append(", ");
+                p.append(s).append("=?");
+            });
 
         String sql = "DELETE FROM " + database + " WHERE " + p.toString();
 
@@ -66,17 +66,17 @@ public class SQL
         {
             AtomicInteger count = new AtomicInteger();
             map.values()
-                    .forEach(o -> {
-                        try
-                        {
-                            s.setObject(count.incrementAndGet(), o);
-                        }
-                        catch (SQLException e)
-                        {
-                            e.printStackTrace();
-                            Utils.errorNotification(Utils.getStackTrace(e));
-                        }
-                    });
+                .forEach(o -> {
+                    try
+                    {
+                        s.setObject(count.incrementAndGet(), o);
+                    }
+                    catch (SQLException e)
+                    {
+                        e.printStackTrace();
+                        Utils.errorNotification(Utils.getStackTrace(e));
+                    }
+                });
             s.execute();
         }
     }
@@ -89,16 +89,16 @@ public class SQL
             AtomicInteger integer = new AtomicInteger();
 
             Arrays.stream(values)
-                    .forEachOrdered(o -> {
-                        try
-                        {
-                            statement.setObject(integer.getAndIncrement(), o);
-                        }
-                        catch (SQLException throwable)
-                        {
-                            exception.set(throwable);
-                        }
-                    });
+                .forEachOrdered(o -> {
+                    try
+                    {
+                        statement.setObject(integer.getAndIncrement(), o);
+                    }
+                    catch (SQLException throwable)
+                    {
+                        exception.set(throwable);
+                    }
+                });
 
             if (exception.get() != null)
                 throw exception.get();

@@ -41,14 +41,21 @@ public class TrustModifier
                     if (isTrusted(player))
                     {
                         SQL.delete(connection, "trust",
-                                new HashMap<String, String>(){{put("PLAYER",
-                                        player.getUniqueId().toString().replace("-", ""));}});
+                            new HashMap<String, String>()
+                            {{
+                                put(
+                                    "PLAYER",
+                                    player.getUniqueId().toString().replace("-", "")
+                                );
+                            }}
+                        );
                         sender.sendMessage(get("message.trust.remove", pair("name", player.getName())));
                     }
                     else
                     {
                         SQL.insert(connection, "trust",
-                                player.getUniqueId().toString().replace("-", ""));
+                            player.getUniqueId().toString().replace("-", "")
+                        );
                         sender.sendMessage(get("message.trust.add", pair("name", player.getName())));
                     }
                 }

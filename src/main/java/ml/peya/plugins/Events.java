@@ -67,9 +67,9 @@ public class Events implements Listener
     public void onDamage(EntityDamageByEntityEvent e)
     {
         if (!(e.getEntity() instanceof CraftPlayer) ||
-                !(e.getDamager() instanceof CraftArrow) ||
-                !cheatMeta.exists(e.getEntity().getUniqueId()) ||
-                !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
+            !(e.getDamager() instanceof CraftArrow) ||
+            !cheatMeta.exists(e.getEntity().getUniqueId()) ||
+            !e.getDamager().hasMetadata("testArrow-" + e.getDamager().getUniqueId()))
             return;
 
         e.setDamage(0);
@@ -98,8 +98,8 @@ public class Events implements Listener
             return;
 
         e.getPlayer().setMetadata(
-                "speed",
-                new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo()))
+            "speed",
+            new FixedMetadataValue(PeyangSuperbAntiCheat.getPlugin(), e.getFrom().distance(e.getTo()))
         );
     }
 
@@ -117,20 +117,21 @@ public class Events implements Listener
         e.setCancelled(true);
 
         final String format = e.getFormat()
-                .replace("%1$s", e.getPlayer().getDisplayName())
-                .replace("%2$s", e.getMessage());
+            .replace("%1$s", e.getPlayer().getDisplayName())
+            .replace("%2$s", e.getMessage());
 
         e.getRecipients()
-                .parallelStream()
-                .forEachOrdered(receiver ->
-                        receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(
-                                new ComponentBuilder("").append(ChatColor.RED + "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED + "] ")
-                                        .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()))
-                                        .event(new HoverEvent(
-                                                HoverEvent.Action.SHOW_TEXT,
-                                                new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()
-                                        )).create(),
-                                new ComponentBuilder(format).create())));
+            .parallelStream()
+            .forEachOrdered(receiver ->
+                receiver.spigot().sendMessage((BaseComponent[]) ArrayUtils.addAll(
+                    new ComponentBuilder("").append(ChatColor.RED + "[" + ChatColor.YELLOW + "➤" + ChatColor.RESET + ChatColor.RED + "] ")
+                        .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/target " + e.getPlayer().getName()))
+                        .event(new HoverEvent(
+                            HoverEvent.Action.SHOW_TEXT,
+                            new ComponentBuilder(ChatColor.RED + "Target " + e.getPlayer().getName()).create()
+                        )).create(),
+                    new ComponentBuilder(format).create()
+                )));
         Bukkit.getConsoleSender().sendMessage(format);
     }
 
@@ -156,12 +157,12 @@ public class Events implements Listener
                 Pair<String, String> skin = PlayerUtils.getRandomSkin();
 
                 tab.getProfile().getProperties().put(
+                    "textures",
+                    new Property(
                         "textures",
-                        new Property(
-                                "textures",
-                                skin.getLeft(),
-                                skin.getRight()
-                        )
+                        skin.getLeft(),
+                        skin.getRight()
+                    )
                 );
 
                 connection.sendPacket(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, tab));
@@ -187,7 +188,7 @@ public class Events implements Listener
     public void onDrop(PlayerDropItemEvent e)
     {
         if (e.getItemDrop().getItemStack().getType() == Material.WRITTEN_BOOK &&
-                Books.hasPSACBook(e.getItemDrop().getItemStack()))
+            Books.hasPSACBook(e.getItemDrop().getItemStack()))
             e.setCancelled(true);
     }
 

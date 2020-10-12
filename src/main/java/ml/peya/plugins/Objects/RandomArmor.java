@@ -23,13 +23,13 @@ public class RandomArmor
     public static ItemStack getHelmet()
     {
         return getRandomItems(new ArrayList<>(Arrays.asList(
-                Material.CHAINMAIL_HELMET,
-                Material.DIAMOND_HELMET,
-                Material.GOLD_HELMET,
-                Material.GOLD_HELMET,
-                Material.IRON_HELMET,
-                Material.LEATHER_HELMET,
-                Material.AIR
+            Material.CHAINMAIL_HELMET,
+            Material.DIAMOND_HELMET,
+            Material.GOLD_HELMET,
+            Material.GOLD_HELMET,
+            Material.IRON_HELMET,
+            Material.LEATHER_HELMET,
+            Material.AIR
         )));
     }
 
@@ -41,12 +41,12 @@ public class RandomArmor
     public static ItemStack getChestPlate()
     {
         return getRandomItems(new ArrayList<>(Arrays.asList(
-                Material.CHAINMAIL_CHESTPLATE,
-                Material.DIAMOND_CHESTPLATE,
-                Material.GOLD_CHESTPLATE,
-                Material.IRON_CHESTPLATE,
-                Material.LEATHER_CHESTPLATE,
-                Material.AIR
+            Material.CHAINMAIL_CHESTPLATE,
+            Material.DIAMOND_CHESTPLATE,
+            Material.GOLD_CHESTPLATE,
+            Material.IRON_CHESTPLATE,
+            Material.LEATHER_CHESTPLATE,
+            Material.AIR
         )));
     }
 
@@ -58,12 +58,12 @@ public class RandomArmor
     public static ItemStack getLeggings()
     {
         return getRandomItems(new ArrayList<>(Arrays.asList(
-                Material.LEATHER_LEGGINGS,
-                Material.CHAINMAIL_LEGGINGS,
-                Material.DIAMOND_LEGGINGS,
-                Material.GOLD_LEGGINGS,
-                Material.IRON_LEGGINGS,
-                Material.AIR
+            Material.LEATHER_LEGGINGS,
+            Material.CHAINMAIL_LEGGINGS,
+            Material.DIAMOND_LEGGINGS,
+            Material.GOLD_LEGGINGS,
+            Material.IRON_LEGGINGS,
+            Material.AIR
         )));
     }
 
@@ -75,12 +75,12 @@ public class RandomArmor
     public static ItemStack getBoots()
     {
         return getRandomItems(new ArrayList<>(Arrays.asList(
-                Material.CHAINMAIL_BOOTS,
-                Material.DIAMOND_BOOTS,
-                Material.GOLD_BOOTS,
-                Material.IRON_BOOTS,
-                Material.LEATHER_BOOTS,
-                Material.AIR
+            Material.CHAINMAIL_BOOTS,
+            Material.DIAMOND_BOOTS,
+            Material.GOLD_BOOTS,
+            Material.IRON_BOOTS,
+            Material.LEATHER_BOOTS,
+            Material.AIR
         )));
     }
 
@@ -92,21 +92,21 @@ public class RandomArmor
     public static ItemStack getSwords()
     {
         return getRandomItems(new ArrayList<>(Arrays.asList(
-                Material.DIAMOND_SWORD,
-                Material.STONE_SWORD,
-                Material.GOLD_SWORD,
-                Material.IRON_SWORD,
-                Material.WOOD_SWORD,
-                Material.DIAMOND_AXE,
-                Material.GOLD_AXE,
-                Material.IRON_AXE,
-                Material.STONE_AXE,
-                Material.WOOD_AXE,
-                Material.AIR,
-                Material.AIR,
-                Material.AIR,
-                Material.AIR,
-                Material.AIR
+            Material.DIAMOND_SWORD,
+            Material.STONE_SWORD,
+            Material.GOLD_SWORD,
+            Material.IRON_SWORD,
+            Material.WOOD_SWORD,
+            Material.DIAMOND_AXE,
+            Material.GOLD_AXE,
+            Material.IRON_AXE,
+            Material.STONE_AXE,
+            Material.WOOD_AXE,
+            Material.AIR,
+            Material.AIR,
+            Material.AIR,
+            Material.AIR,
+            Material.AIR
         )));
     }
 
@@ -119,10 +119,10 @@ public class RandomArmor
     private static boolean isGold(Material item)
     {
         return new ArrayList<>(Arrays.asList(
-                Material.GOLD_BOOTS,
-                Material.GOLD_CHESTPLATE,
-                Material.GOLD_HELMET,
-                Material.GOLD_LEGGINGS
+            Material.GOLD_BOOTS,
+            Material.GOLD_CHESTPLATE,
+            Material.GOLD_HELMET,
+            Material.GOLD_LEGGINGS
         )).contains(item);
     }
 
@@ -154,9 +154,9 @@ public class RandomArmor
         {
             LeatherArmorMeta meta = (LeatherArmorMeta) stack.getItemMeta();
             meta.setColor(Color.fromRGB( //色を調整
-                    random.nextInt(254),
-                    random.nextInt(254),
-                    random.nextInt(254)
+                random.nextInt(254),
+                random.nextInt(254),
+                random.nextInt(254)
             ));
             stack.setItemMeta(meta);
         }

@@ -39,12 +39,12 @@ public class CommandSilentTeleport implements CommandExecutor
         }
 
         final Player target = args.length == 2
-                ? Bukkit.getPlayer(args[1])
-                : Bukkit.getPlayer(args[0]);
+            ? Bukkit.getPlayer(args[1])
+            : Bukkit.getPlayer(args[0]);
 
         final Player player = args.length == 2
-                ? Bukkit.getPlayer(args[0])
-                : (Player) sender;
+            ? Bukkit.getPlayer(args[0])
+            : (Player) sender;
 
         if (target == null || player == null)
         {

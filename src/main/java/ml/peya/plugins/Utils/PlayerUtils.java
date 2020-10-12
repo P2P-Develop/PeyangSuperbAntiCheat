@@ -50,7 +50,7 @@ public class PlayerUtils
     public static Player getLookingEntity(Player player)
     {
         for (Location location : player.getLineOfSight(null, 4).parallelStream().map(Block::getLocation)
-                .collect(Collectors.toCollection(ArrayList::new)))
+            .collect(Collectors.toCollection(ArrayList::new)))
             for (Entity entity : player.getNearbyEntities(3.5, 3.5, 3.5))
                 if (isLooking((Player) entity, location) && entity.getType() == EntityType.PLAYER)
                     return (Player) entity;
@@ -73,8 +73,8 @@ public class PlayerUtils
         {
             final Block block = it.next();
             if (block.getX() == location.getBlockX() &&
-                    block.getY() == location.getBlockY() &&
-                    block.getZ() == location.getBlockZ())
+                block.getY() == location.getBlockY() &&
+                block.getZ() == location.getBlockZ())
                 return true;
         }
         return false;
@@ -89,10 +89,10 @@ public class PlayerUtils
     public static boolean hasCritical(Player player)
     {
         return player.getFallDistance() > 0.0F &&
-                !player.getLocation().getBlock().isLiquid() &&
-                !player.isOnGround() &&
-                !player.hasPotionEffect(PotionEffectType.BLINDNESS) &&
-                player.getVehicle() == null;
+            !player.getLocation().getBlock().isLiquid() &&
+            !player.isOnGround() &&
+            !player.hasPotionEffect(PotionEffectType.BLINDNESS) &&
+            player.getVehicle() == null;
     }
 
     /**
@@ -105,11 +105,11 @@ public class PlayerUtils
     {
         Random random = new Random();
         String first = random.nextBoolean()
-                ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1)
-                : RandomWordUtils.getRandomWord();
+            ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1)
+            : RandomWordUtils.getRandomWord();
         String last = random.nextBoolean()
-                ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1)
-                : RandomWordUtils.getRandomWord();
+            ? RandomStringUtils.randomAlphanumeric(new Random().nextInt(13) + 1)
+            : RandomWordUtils.getRandomWord();
 
         if (random.nextBoolean())
         {
@@ -133,10 +133,10 @@ public class PlayerUtils
         profile.getProperties().put("textures", new Property("textures", skin.getLeft(), skin.getRight()));
 
         return new EntityPlayer(
-                ((CraftServer) Bukkit.getServer()).getServer(),
-                worldServer,
-                profile,
-                new PlayerInteractManager(worldServer)
+            ((CraftServer) Bukkit.getServer()).getServer(),
+            worldServer,
+            profile,
+            new PlayerInteractManager(worldServer)
         );
     }
 
@@ -152,8 +152,8 @@ public class PlayerUtils
         {
             ResultSet result = statement.executeQuery("SELECT Texture, Signature FROM Skin ORDER BY RANDOM() LIMIT 1");
             return !result.next()
-                    ? Pair.of("", "")
-                    : Pair.of(result.getString("Texture"), result.getString("Signature"));
+                ? Pair.of("", "")
+                : Pair.of(result.getString("Texture"), result.getString("Signature"));
         }
         catch (Exception e)
         {

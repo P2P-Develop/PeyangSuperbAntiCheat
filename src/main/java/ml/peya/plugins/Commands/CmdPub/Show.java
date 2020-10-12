@@ -47,9 +47,9 @@ public class Show
 
         try (Connection connection = eye.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement("SELECT UUID, ID, ISSUEBYID, ISSUEBYUUID, ISSUEDATE, UUID FROM watcheye WHERE MNGID=?");
+                 connection.prepareStatement("SELECT UUID, ID, ISSUEBYID, ISSUEBYUUID, ISSUEDATE, UUID FROM watcheye WHERE MNGID=?");
              PreparedStatement reasons =
-                     connection.prepareStatement("SELECT REASON FROM watchreason WHERE MNGID=?"))
+                 connection.prepareStatement("SELECT REASON FROM watchreason WHERE MNGID=?"))
         {
             statement.setString(1, mngid);
             ResultSet result = statement.executeQuery();

@@ -79,7 +79,7 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
     public static boolean isEnablePlugin(String name)
     {
         return Bukkit.getServer().getPluginManager().getPlugin(name) != null &&
-                Bukkit.getServer().getPluginManager().getPlugin(name).isEnabled();
+            Bukkit.getServer().getPluginManager().getPlugin(name).isEnabled();
     }
 
     /**
@@ -130,14 +130,14 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         protocolManager = ProtocolLibrary.getProtocolManager();
 
         protocolManager.addPacketListener(
-                new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
+            new PacketAdapter(this, ListenerPriority.NORMAL, PacketType.Play.Client.USE_ENTITY)
+            {
+                @Override
+                public void onPacketReceiving(PacketEvent event)
                 {
-                    @Override
-                    public void onPacketReceiving(PacketEvent event)
-                    {
-                        Packets.useEntity(event);
-                    }
+                    Packets.useEntity(event);
                 }
+            }
         );
 
         if (!Init.createDefaultTables())
@@ -180,8 +180,8 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
         if (initialized)
         {
             try (FileWriter fw = new FileWriter(Paths.get(config.getString("database.learnPath")).isAbsolute()
-                    ? config.getString("database.learnPath")
-                    : getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+                ? config.getString("database.learnPath")
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
                  PrintWriter pw = new PrintWriter(new BufferedWriter(fw)))
             {
                 logger.info("Saving learn weights to learning data file...");
@@ -190,9 +190,9 @@ public class PeyangSuperbAntiCheat extends JavaPlugin
                 mp.middleWeight = NeuralNetwork.middleWeight;
                 mp.learnCount = learnCount;
                 pw.print(new ObjectMapper()
-                        .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-                        .configure(SerializationFeature.INDENT_OUTPUT, true)
-                        .writeValueAsString(mp));
+                    .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+                    .configure(SerializationFeature.INDENT_OUTPUT, true)
+                    .writeValueAsString(mp));
             }
             catch (Exception e)
             {

@@ -75,6 +75,15 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
         return proxy;
     }
 
+    private static HikariConfig getDBSetting(String path)
+    {
+        HikariConfig hConfig = new HikariConfig();
+        new File(path).getParentFile().mkdirs();
+        hConfig.setDriverClassName(config.getString("database.method"));
+        hConfig.setJdbcUrl(config.getString("database.url") + path);
+        return hConfig;
+    }
+
     /**
      * プラグインを無効化
      */
@@ -133,27 +142,18 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
             }
 
             ban = new HikariDataSource(getDBSetting(Paths.get(banPath).isAbsolute()
-                    ? banPath
-                    : getPlugin().getDataFolder().getAbsolutePath() + "/" + banPath));
+                ? banPath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + banPath));
 
             log = new HikariDataSource(getDBSetting(Paths.get(logPath).isAbsolute()
-                    ? logPath
-                    : getPlugin().getDataFolder().getAbsolutePath() + "/" + logPath));
+                ? logPath
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + logPath));
         }
         else
             ban = new HikariDataSource(getDBSetting(banPath));
 
 
         getLogger().info("PeyangSuperbAntiCheatProxy has been activated!");
-    }
-
-    private static HikariConfig getDBSetting(String path)
-    {
-        HikariConfig hConfig = new HikariConfig();
-        new File(path).getParentFile().mkdirs();
-        hConfig.setDriverClassName(config.getString("database.method"));
-        hConfig.setJdbcUrl(config.getString("database.url") + path);
-        return hConfig;
     }
 
     /**
@@ -164,9 +164,9 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
     {
         getLogger().info("Sending Disconnect packet...");
         servers.parallelStream()
-                .forEach(s -> {
-                    sendData(getProxy().getServerInfo(s), "dc");
-                });
+            .forEach(s -> {
+                sendData(getProxy().getServerInfo(s), "dc");
+            });
 
         servers = null;
         getLogger().info("PeyangSuperbAntiCheatProxy has been disabled!");

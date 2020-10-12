@@ -39,11 +39,11 @@ public class BanAnalyzer
                     while (set.next())
                     {
                         abuses.add(new Bans(
-                                set.getLong("DATE"),
-                                set.getString("REASON"),
-                                set.getString("UUID"),
-                                set.getString("KICKID").replace("#", ""),
-                                Type.KICK
+                            set.getLong("DATE"),
+                            set.getString("REASON"),
+                            set.getString("UUID"),
+                            set.getString("KICKID").replace("#", ""),
+                            Type.KICK
                         ));
                     }
                 }
@@ -63,12 +63,12 @@ public class BanAnalyzer
                     while (set.next())
                     {
                         abuses.add(new Bans(
-                                set.getLong("DATE"),
-                                set.getString("REASON"),
-                                set.getString("UUID"),
-                                set.getString("BANID").replace("#", ""),
-                                Type.BAN,
-                                true
+                            set.getLong("DATE"),
+                            set.getString("REASON"),
+                            set.getString("UUID"),
+                            set.getString("BANID").replace("#", ""),
+                            Type.BAN,
+                            true
                         ));
                     }
                 }
@@ -86,12 +86,12 @@ public class BanAnalyzer
                     while (set.next())
                     {
                         abuses.add(new Bans(
-                                set.getLong("DATE"),
-                                set.getString("REASON"),
-                                set.getString("UUID"),
-                                set.getString("BANID").replace("#", ""),
-                                Type.BAN,
-                                false
+                            set.getLong("DATE"),
+                            set.getString("REASON"),
+                            set.getString("UUID"),
+                            set.getString("BANID").replace("#", ""),
+                            Type.BAN,
+                            false
                         ));
                     }
                 }

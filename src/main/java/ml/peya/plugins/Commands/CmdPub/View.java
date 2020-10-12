@@ -51,10 +51,10 @@ public class View
 
         try (Connection connection = Variables.eye.getConnection();
              PreparedStatement statement =
-                     connection.prepareStatement("SELECT ID, ISSUEBYID, MNGID FROM watcheye " + (nameFlag ? "WHERE ID=?": "") +
-                             "ORDER BY LEVEL DESC LIMIT 5 OFFSET ?");
+                 connection.prepareStatement("SELECT ID, ISSUEBYID, MNGID FROM watcheye " + (nameFlag ? "WHERE ID=?": "") +
+                     "ORDER BY LEVEL DESC LIMIT 5 OFFSET ?");
              PreparedStatement statement2 =
-                     connection.prepareStatement("SELECT REASON from watchreason WHERE MNGID=?"))
+                 connection.prepareStatement("SELECT REASON from watchreason WHERE MNGID=?"))
         {
             if (nameFlag)
             {

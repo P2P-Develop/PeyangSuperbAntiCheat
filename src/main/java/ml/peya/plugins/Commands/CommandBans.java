@@ -51,20 +51,20 @@ public class CommandBans implements CommandExecutor
         final UUID[] player = {null};
 
         Arrays.stream(Bukkit.getOfflinePlayers())
-                .parallel()
-                .forEachOrdered(ofPly ->
-                        player[0] = ofPly.getName().equalsIgnoreCase(name)
-                                ? ofPly.getUniqueId()
-                                : player[0]);
+            .parallel()
+            .forEachOrdered(ofPly ->
+                player[0] = ofPly.getName().equalsIgnoreCase(name)
+                    ? ofPly.getUniqueId()
+                    : player[0]);
 
         if (player[0] == null)
         {
             Arrays.stream(((Player[]) Bukkit.getOnlinePlayers().toArray()))
-                    .parallel()
-                    .forEachOrdered(onPly ->
-                            player[0] = onPly.getName().equalsIgnoreCase(name)
-                                    ? onPly.getUniqueId()
-                                    : player[0]);
+                .parallel()
+                .forEachOrdered(onPly ->
+                    player[0] = onPly.getName().equalsIgnoreCase(name)
+                        ? onPly.getUniqueId()
+                        : player[0]);
 
             if (player[0] == null)
             {
@@ -76,9 +76,9 @@ public class CommandBans implements CommandExecutor
         ArrayList<BanAnalyzer.Bans> bans = BanAnalyzer.getAbuse(player[0], BanAnalyzer.Type.toType(type));
 
         sender.sendMessage(
-                config.getBoolean("message.lynx")
-                        ? get("message.bans.lynx", pair("name", name))
-                        : get("message.bans.message", pair("name", name))
+            config.getBoolean("message.lynx")
+                ? get("message.bans.lynx", pair("name", name))
+                : get("message.bans.message", pair("name", name))
         );
 
         if (bans.size() == 0)
@@ -98,8 +98,8 @@ public class CommandBans implements CommandExecutor
 
         final int count = bans.size() - 5;
         sender.sendMessage(config.getBoolean("message.lynx")
-                ? get("message.bans.more.lynx", pair("count", count))
-                : get("message.bans.more.normal", pair("count", count)));
+            ? get("message.bans.more.lynx", pair("count", count))
+            : get("message.bans.more.normal", pair("count", count)));
 
         return true;
     }

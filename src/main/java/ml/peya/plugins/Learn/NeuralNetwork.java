@@ -88,9 +88,9 @@ public class NeuralNetwork
     private static ArrayList<Input> toInputData(double[] inputLayer, double[] inputWeight)
     {
         return IntStream.range(0, inputLayer.length)
-                .parallel()
-                .mapToObj(i -> new Input(inputLayer[i], inputWeight[i] - 1))
-                .collect(Collectors.toCollection(ArrayList::new));
+            .parallel()
+            .mapToObj(i -> new Input(inputLayer[i], inputWeight[i] - 1))
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 
     /**
@@ -106,13 +106,15 @@ public class NeuralNetwork
         outputLayer = new Neuron();
 
         IntStream.range(0, middleLayer.length)
-                .parallel()
-                .forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
+            .parallel()
+            .forEachOrdered(i -> middleLayer[i].input(toInputData(inputLayer, getColumn(inputWeight, i))));
 
         outputLayer.input(new ArrayList<>(Arrays
-                .asList(new Input(middleLayer[0].getValue(), middleWeight[0]),
-                        new Input(middleLayer[1].getValue(), middleWeight[1]),
-                        new Input(middleLayerBias, middleWeight[2]))
+            .asList(
+                new Input(middleLayer[0].getValue(), middleWeight[0]),
+                new Input(middleLayer[1].getValue(), middleWeight[1]),
+                new Input(middleLayerBias, middleWeight[2])
+            )
         ));
 
         return outputLayer.getValue();
@@ -127,9 +129,9 @@ public class NeuralNetwork
     public void learn(ArrayList<Triple<Double, Double, Double>> dataCollection, int count)
     {
         IntStream.range(0, count)
-                .parallel()
-                .forEachOrdered(i -> dataCollection.parallelStream()
-                        .forEachOrdered(this::learn));
+            .parallel()
+            .forEachOrdered(i -> dataCollection.parallelStream()
+                .forEachOrdered(this::learn));
     }
 
     /**
@@ -147,13 +149,13 @@ public class NeuralNetwork
         final double[] oldMiddleWeight = middleWeight.clone();
 
         IntStream.range(0, middleLayer.length).parallel()
-                .forEachOrdered(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
+            .forEachOrdered(i -> middleWeight[i] += new Neuron().getValue() * deltaMO * learningRate);
 
         middleWeight[2] += middleLayerBias * deltaMO * learningRate;
 
         final double[] deltaIM = new double[]{
-                deltaMO * oldMiddleWeight[0] * middleLayer[0].getValue() * (1.0 - middleLayer[0].getValue()),
-                deltaMO * oldMiddleWeight[1] * middleLayer[1].getValue() * (1.0 - middleLayer[1].getValue())
+            deltaMO * oldMiddleWeight[0] * middleLayer[0].getValue() * (1.0 - middleLayer[0].getValue()),
+            deltaMO * oldMiddleWeight[1] * middleLayer[1].getValue() * (1.0 - middleLayer[1].getValue())
         };
 
         inputWeight[0][0] += inputLayer[0] * deltaIM[0] * learningRate;

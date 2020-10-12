@@ -34,8 +34,8 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if ((ErrorMessageSender.invalidLengthMessage(sender, args, 1, 5)) ||
-                (Arrays.asList("help", "view", "show", "drop", "kick", "ban").contains(args[0]) &&
-                        ErrorMessageSender.unPermMessage(sender, "psac." + args[0])))
+            (Arrays.asList("help", "view", "show", "drop", "kick", "ban").contains(args[0]) &&
+                ErrorMessageSender.unPermMessage(sender, "psac." + args[0])))
             return true;
 
         ArrayList<String> argList = new ArrayList<>(Arrays.asList(args));

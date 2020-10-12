@@ -52,7 +52,7 @@ public class Item
         if (canGuiItem(item))
             return null;
         return item.getItemMeta().getLore().get(1)
-                .replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: ", "");
+            .replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Execution type: ", "");
     }
 
     /**
@@ -66,7 +66,7 @@ public class Item
         if (canGuiItem(item))
             return null;
         return item.getItemMeta().getLore().get(2)
-                .replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: ", "");
+            .replace(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: ", "");
     }
 
     /**
@@ -80,8 +80,8 @@ public class Item
     {
 
         ArrayList<String> list = new ArrayList<>(Arrays
-                .asList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.", ChatColor.GRAY + ChatColor.ITALIC
-                        .toString() + "Execution type: " + item.getExecName()));
+            .asList(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Lynx item.", ChatColor.GRAY + ChatColor.ITALIC
+                .toString() + "Execution type: " + item.getExecName()));
 
         if (item.getType() == IItems.Type.TARGET || item.getType() == IItems.Type.TARGET_2)
             list.add(ChatColor.GRAY + ChatColor.ITALIC.toString() + "Target: " + target);

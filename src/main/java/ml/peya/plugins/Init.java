@@ -105,7 +105,7 @@ public class Init
         AtomicInteger error = new AtomicInteger();
 
         Arrays.asList("npc.seconds", "npc.kill", "npc.vllevel", "npc.learncount", "mod.trackTicks", "kick.defaultKick", "autoMessage.time")
-                .parallelStream().forEachOrdered(path ->
+            .parallelStream().forEachOrdered(path ->
         {
             try
             {
@@ -150,17 +150,17 @@ public class Init
         }
 
         eye = new HikariDataSource(Init.initMngDatabase(Paths.get(databasePath).isAbsolute()
-                ? databasePath
-                : getPlugin().getDataFolder().getAbsolutePath() + "/" + databasePath));
+            ? databasePath
+            : getPlugin().getDataFolder().getAbsolutePath() + "/" + databasePath));
         log = new HikariDataSource(Init.initMngDatabase(Paths.get(logPath).isAbsolute()
-                ? logPath
-                : getPlugin().getDataFolder().getAbsolutePath() + "/" + logPath));
+            ? logPath
+            : getPlugin().getDataFolder().getAbsolutePath() + "/" + logPath));
         trust = new HikariDataSource(Init.initMngDatabase(Paths.get(trustPath).isAbsolute()
-                ? trustPath
-                : getPlugin().getDataFolder().getAbsolutePath() + "/" + trustPath));
+            ? trustPath
+            : getPlugin().getDataFolder().getAbsolutePath() + "/" + trustPath));
         ban = new HikariDataSource(Init.initMngDatabase(Paths.get(banPath).isAbsolute()
-                ? banPath
-                : getPlugin().getDataFolder().getAbsolutePath() + "/" + banPath));
+            ? banPath
+            : getPlugin().getDataFolder().getAbsolutePath() + "/" + banPath));
     }
 
     /**
@@ -174,19 +174,19 @@ public class Init
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs watchreason(" +
-                    "MNGID nchar," +
-                    "REASON nchar," +
-                    "VL int" +
-                    ");");
+                "MNGID nchar," +
+                "REASON nchar," +
+                "VL int" +
+                ");");
             statement.execute("CrEaTe TaBlE If NoT ExIsTs watcheye(" +
-                    "UUID nchar(32), " +
-                    "ID nchar, " +
-                    "ISSUEDATE int, " +
-                    "ISSUEBYID nchar," +
-                    "ISSUEBYUUID nchar," +
-                    "MNGID nchar," +
-                    "LEVEL int" +
-                    ");");
+                "UUID nchar(32), " +
+                "ID nchar, " +
+                "ISSUEDATE int, " +
+                "ISSUEBYID nchar," +
+                "ISSUEBYUUID nchar," +
+                "MNGID nchar," +
+                "LEVEL int" +
+                ");");
         }
         catch (Exception e)
         {
@@ -199,22 +199,22 @@ public class Init
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs kick(" +
-                    "PLAYER nchar," +
-                    "UUID nchar," +
-                    "KICKID nchar," +
-                    "DATE bigint," +
-                    "REASON nchar," +
-                    "STAFF int" +
-                    ");");
+                "PLAYER nchar," +
+                "UUID nchar," +
+                "KICKID nchar," +
+                "DATE bigint," +
+                "REASON nchar," +
+                "STAFF int" +
+                ");");
 
             statement.execute("CrEaTe TaBlE If NoT ExIsTs ban(" +
-                    "UUID nchar," +
-                    "BANID nchar," +
-                    "DATE bigint," +
-                    "REASON nchar," +
-                    "UNBANDATE nchar," +
-                    "STAFF integer" +
-                    ");");
+                "UUID nchar," +
+                "BANID nchar," +
+                "DATE bigint," +
+                "REASON nchar," +
+                "UNBANDATE nchar," +
+                "STAFF integer" +
+                ");");
 
         }
         catch (Exception e)
@@ -228,8 +228,8 @@ public class Init
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs trust(" +
-                    "PLAYER nchar" +
-                    ");");
+                "PLAYER nchar" +
+                ");");
         }
         catch (Exception e)
         {
@@ -243,14 +243,14 @@ public class Init
              Statement statement = connection.createStatement())
         {
             statement.execute("CREATE TABLE IF NOT EXISTS ban(" +
-                    //"PLAYER text," +
-                    "UUID text," +
-                    "BANID text," +
-                    "DATE text," +
-                    "REASON text," +
-                    "EXPIRE text," +
-                    "STAFF integer" +
-                    ");");
+                //"PLAYER text," +
+                "UUID text," +
+                "BANID text," +
+                "DATE text," +
+                "REASON text," +
+                "EXPIRE text," +
+                "STAFF integer" +
+                ");");
             return true;
         }
         catch (Exception e)
@@ -317,8 +317,8 @@ public class Init
         try
         {
             FileUtils.copyInputStreamToFile(
-                    getPlugin().getResource("skin.db"),
-                    new File(getPlugin().getDataFolder().getAbsolutePath() + "/skin.db")
+                getPlugin().getResource("skin.db"),
+                new File(getPlugin().getDataFolder().getAbsolutePath() + "/skin.db")
             );
         }
         catch (Exception e)
@@ -367,8 +367,8 @@ public class Init
         try
         {
             File file = new File(Paths.get(config.getString("database.learnPath")).isAbsolute()
-                    ? config.getString("database.learnPath")
-                    : getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
+                ? config.getString("database.learnPath")
+                : getPlugin().getDataFolder().getAbsolutePath() + "/" + config.getString("database.learnPath"));
 
             if (file.exists() && file.length() >= 16)
             {
@@ -378,13 +378,13 @@ public class Init
                 for (double[] aIW : NeuralNetwork.inputWeight)
                     for (int i1 = 0; i1 < aIW.length; i1++)
                         NeuralNetwork.inputWeight[i][i1] = node.get("inputWeight")
-                                .get(i++)
-                                .get(i1)
-                                .asDouble();
+                            .get(i++)
+                            .get(i1)
+                            .asDouble();
 
                 Arrays.parallelSetAll(NeuralNetwork.middleWeight, i2 -> node.get("middleWeight")
-                        .get(i2)
-                        .asDouble());
+                    .get(i2)
+                    .asDouble());
 
                 learnCount = node.get("learnCount").asInt();
                 logger.info("Weights setting completed successfully!");

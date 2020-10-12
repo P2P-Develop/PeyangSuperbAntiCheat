@@ -24,17 +24,17 @@ public class CheatTypeUtils
     private static ArrayList<EnumCheatType> createTypes()
     {
         ArrayList<EnumCheatType> types = new ArrayList<>(Arrays.asList(
-                EnumCheatType.FLY,
-                EnumCheatType.KILLAURA,
-                EnumCheatType.AUTOCLICKER,
-                EnumCheatType.SPEED,
-                EnumCheatType.ANTIKNOCKBACK,
-                EnumCheatType.REACH,
-                EnumCheatType.DOLPHIN
+            EnumCheatType.FLY,
+            EnumCheatType.KILLAURA,
+            EnumCheatType.AUTOCLICKER,
+            EnumCheatType.SPEED,
+            EnumCheatType.ANTIKNOCKBACK,
+            EnumCheatType.REACH,
+            EnumCheatType.DOLPHIN
         ));
 
         types.parallelStream()
-                .forEachOrdered(type -> type.setSelected(false));
+            .forEachOrdered(type -> type.setSelected(false));
 
         return types;
     }
@@ -66,9 +66,9 @@ public class CheatTypeUtils
     public static EnumCheatType getCheatTypeFromString(String sysname)
     {
         return createTypes().parallelStream()
-                .filter(type -> type.getSysName().equals(sysname))
-                .findFirst()
-                .orElse(null);
+            .filter(type -> type.getSysName().equals(sysname))
+            .findFirst()
+            .orElse(null);
     }
 
     /**

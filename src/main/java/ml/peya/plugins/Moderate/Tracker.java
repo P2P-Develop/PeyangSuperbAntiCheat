@@ -119,26 +119,26 @@ public class Tracker
             {
                 HashMap<String, Object> repKey = new HashMap<>();
                 repKey.put("type", String
-                        .valueOf(cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType().getName()));
+                    .valueOf(cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getType().getName()));
                 repKey.put("vl", cheatMeta.getMetaByPlayerUUID(target.getUniqueId())
-                        .getType() == DetectType.ANTI_KB ? "N/A": Integer
-                        .valueOf(cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getVL()));
+                    .getType() == DetectType.ANTI_KB ? "N/A": Integer
+                    .valueOf(cheatMeta.getMetaByPlayerUUID(target.getUniqueId()).getVL()));
                 map.put("tests", get("item.tracking.testing", repKey));
             }
             else
                 map.put("tests", "");
             if (target.hasMetadata("speed"))
                 target.getMetadata("speed").parallelStream().filter(value -> value.getOwningPlugin().getName()
-                        .equals(PeyangSuperbAntiCheat
-                                .getPlugin().getName()))
-                        .forEachOrdered(value -> map.put("velocity", scaleSet((Double) value.value(), 2)));
+                    .equals(PeyangSuperbAntiCheat
+                        .getPlugin().getName()))
+                    .forEachOrdered(value -> map.put("velocity", scaleSet((Double) value.value(), 2)));
             else
                 map.put("velocity", 0.0);
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(get("item.tracking.text", map)));
             Arrays.stream(player.getInventory().getContents()).parallel()
-                    .filter(itemStack -> !Item.canGuiItem(itemStack))
-                    .filter(itemStack -> Objects.equals(Item.getType(itemStack), "TRACKER")).map(itemStack -> location)
-                    .forEachOrdered(player::setCompassTarget);
+                .filter(itemStack -> !Item.canGuiItem(itemStack))
+                .filter(itemStack -> Objects.equals(Item.getType(itemStack), "TRACKER")).map(itemStack -> location)
+                .forEachOrdered(player::setCompassTarget);
             target.removeMetadata("speed", PeyangSuperbAntiCheat.getPlugin());
         });
     }

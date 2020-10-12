@@ -115,28 +115,28 @@ public class MessageEngine
     private static HashMap<String, ChatColor> getColor()
     {
         return Stream.of(
-                Pair.of("%%black%%", ChatColor.BLACK),
-                Pair.of("%%dark_blue%%", ChatColor.DARK_BLUE),
-                Pair.of("%%dark_green%%", ChatColor.DARK_GREEN),
-                Pair.of("%%dark_aqua%%", ChatColor.DARK_AQUA),
-                Pair.of("%%dark_red%%", ChatColor.DARK_RED),
-                Pair.of("%%dark_purple%%", ChatColor.DARK_PURPLE),
+            Pair.of("%%black%%", ChatColor.BLACK),
+            Pair.of("%%dark_blue%%", ChatColor.DARK_BLUE),
+            Pair.of("%%dark_green%%", ChatColor.DARK_GREEN),
+            Pair.of("%%dark_aqua%%", ChatColor.DARK_AQUA),
+            Pair.of("%%dark_red%%", ChatColor.DARK_RED),
+            Pair.of("%%dark_purple%%", ChatColor.DARK_PURPLE),
 
-                Pair.of("%%gold%%", ChatColor.GOLD),
-                Pair.of("%%gray%%", ChatColor.GRAY),
-                Pair.of("%%blue%%", ChatColor.BLUE),
-                Pair.of("%%green%%", ChatColor.GREEN),
-                Pair.of("%%aqua%%", ChatColor.AQUA),
-                Pair.of("%%red%%", ChatColor.RED),
-                Pair.of("%%light_purple%%", ChatColor.LIGHT_PURPLE),
-                Pair.of("%%yellow%%", ChatColor.YELLOW),
-                Pair.of("%%white%%", ChatColor.WHITE),
+            Pair.of("%%gold%%", ChatColor.GOLD),
+            Pair.of("%%gray%%", ChatColor.GRAY),
+            Pair.of("%%blue%%", ChatColor.BLUE),
+            Pair.of("%%green%%", ChatColor.GREEN),
+            Pair.of("%%aqua%%", ChatColor.AQUA),
+            Pair.of("%%red%%", ChatColor.RED),
+            Pair.of("%%light_purple%%", ChatColor.LIGHT_PURPLE),
+            Pair.of("%%yellow%%", ChatColor.YELLOW),
+            Pair.of("%%white%%", ChatColor.WHITE),
 
-                Pair.of("%%obfuscated%%", ChatColor.MAGIC),
-                Pair.of("%%bold%%", ChatColor.BOLD),
-                Pair.of("%%strikethrough%%", ChatColor.STRIKETHROUGH),
-                Pair.of("%%italic%%", ChatColor.ITALIC),
-                Pair.of("%%reset%%", ChatColor.RESET)
+            Pair.of("%%obfuscated%%", ChatColor.MAGIC),
+            Pair.of("%%bold%%", ChatColor.BOLD),
+            Pair.of("%%strikethrough%%", ChatColor.STRIKETHROUGH),
+            Pair.of("%%italic%%", ChatColor.ITALIC),
+            Pair.of("%%reset%%", ChatColor.RESET)
         ).collect(Collectors.toMap(Pair::getLeft, Pair::getRight, (a, b) -> b, HashMap::new));
     }
 }

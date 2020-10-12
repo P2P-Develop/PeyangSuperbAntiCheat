@@ -57,39 +57,39 @@ public class CommandManager
         String label = commands.remove(0);
 
         this.commands.parallelStream()
-                .forEachOrdered(cls ->
+            .forEachOrdered(cls ->
+            {
+                try
                 {
-                    try
-                    {
-                        for (Method method : cls.getMethods())
-                            if (method.getAnnotation(Command.class) != null && method.getAnnotation(Command.class).label().equals(label))
+                    for (Method method : cls.getMethods())
+                        if (method.getAnnotation(Command.class) != null && method.getAnnotation(Command.class).label().equals(label))
+                        {
+                            method.invoke(cls.newInstance(), new CommandComponent()
                             {
-                                method.invoke(cls.newInstance(), new CommandComponent()
+                                @Override
+                                public String getLabel()
                                 {
-                                    @Override
-                                    public String getLabel()
-                                    {
-                                        return label;
-                                    }
+                                    return label;
+                                }
 
-                                    @Override
-                                    public String[] getArgs()
-                                    {
-                                        return commands.toArray(new String[0]);
-                                    }
+                                @Override
+                                public String[] getArgs()
+                                {
+                                    return commands.toArray(new String[0]);
+                                }
 
-                                    @Override
-                                    public String getServer()
-                                    {
-                                        return server;
-                                    }
-                                });
-                            }
-                    }
-                    catch (Exception e)
-                    {
-                        e.printStackTrace();
-                    }
-                });
+                                @Override
+                                public String getServer()
+                                {
+                                    return server;
+                                }
+                            });
+                        }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            });
     }
 }

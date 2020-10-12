@@ -36,8 +36,14 @@ public class Drop
 
         try (Connection connection = eye.getConnection())
         {
-            SQL.delete(connection, "watcheye", new HashMap<String, String>(){{put("MNGID", args[1]);}});
-            SQL.delete(connection, "watchreason", new HashMap<String, String>(){{put("MNGID", args[1]);}});
+            SQL.delete(connection, "watcheye", new HashMap<String, String>()
+            {{
+                put("MNGID", args[1]);
+            }});
+            SQL.delete(connection, "watchreason", new HashMap<String, String>()
+            {{
+                put("MNGID", args[1]);
+            }});
             sender.sendMessage(get("message.drop.success"));
         }
         catch (Exception e)
