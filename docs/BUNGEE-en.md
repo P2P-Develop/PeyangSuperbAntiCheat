@@ -11,16 +11,17 @@
   - [Installation](#installation)
   - [Precautions](#precautions)
     - [How to change the plugin configuration](#how-to-change-the-plugin-configuration)
+
 </details>
 
 ## Overview
 
-PSAC can be managed through all servers using BungeeCord.
+PSAC can be managed through all servers using BungeeCord.  
 This document provides a way to enable BungeeCord integration.
 
 ## What changes with BungeeCord integration
 
-BungeeCord is well-known as a proxy server that manages all servers at the same time.
+BungeeCord is well-known as a proxy server that manages all servers at the same time.  
 PSAC takes advantage of it to implement a variety of new features.
 
 -   Receiving reports on all servers
@@ -29,17 +30,19 @@ PSAC takes advantage of it to implement a variety of new features.
 
 ## Installation
 
-1. Install PSAC on all servers and BungeeCord.
-   Binary releases is [here](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases).
-2. _Optional_: Change the configuration of each server. Be careful when changing the configuration!
+1.Install PSAC on all servers and BungeeCord.
+
+    Binary releases is [here](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases).
+
+2._Optional_: Change the configuration of each server. Be careful when changing the configuration!
 
 ## Precautions
 
 ### How to change the plugin configuration
 
-Edit `database.HogeHogePath`.
-The path supports the relative path and absolute path
-If the directories is:
+Edit `database.HogeHogePath`.  
+The path supports the relative path and absolute path.  
+If your directory tree is:
 
 ```tst
 servers/
@@ -63,6 +66,6 @@ servers/
 │  ├─ Bukkit.jar
 ```
 
-In such cases, the configuration path will be `../../../database.db`, counting from plugins.
+the configuration path will be `../../../database.db`, counting from plugins.  
 Also, if `eyePath` of one server is` ../../../database.db`,
-Set `eyePath` of all servers to which PSAC is linked to `../../../database.db`.
+set `eyePath` of all servers to which PSAC is linked to `../../../database.db`.

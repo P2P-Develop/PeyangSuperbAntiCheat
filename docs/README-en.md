@@ -101,7 +101,7 @@
   - [What is this NPC\(WatchDog\)?](#what-is-this-npcwatchdog)
     - [What is \<ManagementID\>?](#what-is-managementid)
     - [Why not automatically execute BAN commands in this plugin?](#why-not-automatically-execute-ban-commands-in-this-plugin)
-  - [What is learning function?](#what-is-learning-function)
+  - [What is a learning function?](#what-is-a-learning-function)
     - [Learning mechanism](#learning-mechanism)
   - [What is _YAML resources file_?](#what-is-yaml-resources-file)
   - [What utility items for /target?](#what-utility-items-for-target)
@@ -109,6 +109,7 @@
   - [Did you find any bugs or errors?](#did-you-find-any-bugs-or-errors)
       - [Assignees](#assignees)
   - [Thanks](#thanks)
+
 </details>
 
 > [!CAUTION]
@@ -280,7 +281,7 @@ Other settings can be done using permissions.
 |  `psac.chattarget`  |           none           | A mark will be added to the left of the chat for players with this permission.                                                            |      op       |     psac.mod     |
 |   `psac.userinfo`   |  [/userinfo](#userinfo)  | This permission can see the player information. If `message.lynx` enabled, add some information.                                          |      op       |     psac.mod     |
 |     `psac.ban`      |       [/ban](#ban)       | This permission allows you to restrict player access.                                                                                     |      op       |     psac.mod     |
-|   `psac.tempban`    |   [/tempban](#tempban)   | This permission allows you to restrict player access temporally.                                                                           |      op       |     psac.mod     |
+|   `psac.tempban`    |   [/tempban](#tempban)   | This permission allows you to restrict player access temporally.                                                                          |      op       |     psac.mod     |
 |    `psac.unban`     |     [/unban](#unban)     | This permission can removes the player's access ban.                                                                                      |      op       |     psac.mod     |
 |  **_psac.admin_**   |          group           | This permission can use all commands of the plugin.                                                                                       |     false     |       none       |
 |     `psac.drop`     | [/psac drop](#arguments) | This permission can delete submitted report.                                                                                              |     false     |    psac.admin    |
@@ -806,35 +807,36 @@ For staff kicks, you will only broadcast a secondary message.
 
 In this plugin, the following config is set by default.
 
-|     Setting name     |  Default value  | Description                                                                                                                       |
-| :------------------: | :-------------: | :-------------------------------------------------------------------------------------------------------------------------------- |
-|   database.method    | org.sqlite.JDBC | Specify the [database driver](SQL-en.md#methods). By default, the [SQLite driver](https://github.com/xerial/sqlite-jdbc) is used. |
-|     database.url     |   jdbc:sqlite   | Specify the [database access protocol](SQL-en.md#protocols). This used as a URL prefix.                                           |
-|   database.logPath   |    ./log.db     | Save kick information by specifying location of SQLite database path.                                                             |
-|  database.learnPath  |  ./learn.json   | Specify the path to the JSON file that stores the neural network weights and learning count from learning.                        |
-|  database.trustPath  |   ./trust.db    | Save trusted players information by specifying location of SQLite database path.                                                  |
-|     npc.seconds      |        3        | Specifies the number of seconds the [NPC](#aurabot) will orbit the player.                                                        |
-|       npc.time       |      0.35       | Specifies the value of [NPC](#aurabot) orbit speed.                                                                               |
-|      npc.range       |    3.0, 1.5     | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection.                           |
-|    npc.reachRange    |       4.6       | Specifies the radius that the NPC will rotate. The default distance is suitable for KillAura detection with reach mode.           |
-|    npc.panicRange    |       1.5       | Specifies the relative height of the [Panic NPC](#acpanic) and player.                                                            |
-| npc.panicReachRange  |       4.6       | Specifies the relative height of the [Panic NPC](#acpanic) and player with reach mode.                                            |
-|       npc.wave       |      true       | Whether the [NPC](#aurabot) spins like a wave.                                                                                    |
-|     npc.waveMin      |       0.3       | The minimum radius that the [NPC](#aurabot) orbits like a wave.                                                                   |
-|    npc.speed.wave    |      true       | Specify whether to make the orbital velocity of NPC variable.                                                                     |
-| npc.speed.waveRange  |      0.03       | Specify the speed change range.                                                                                                   |
-|       npc.kill       |        3        | Specifies the maximum number to call when an NPC is killed within 10 seconds.                                                     |
-|      npc.learn       |       0.3       | Specify the learning coefficient of the learning function. The higher the value, the less processing, but the less accurate.      |
-|     npc.vlLevel      |       17        | This value is used to evaluate the VL when the NPC has not learned beyond this npc.learnCount.                                    |
-|    npc.learnCount    |       15        | If the learn function learns more than this number of times, the kick rating will be transferred to the learn function.           |
-|      kick.delay      |        2        | Specifies the delay between sending a broadcast message and kicking the player.                                                   |
-|   kick.defaultKick   |       25        | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                            |
-| decoration.lightning |      true       | Specifies whether to drop lightning effect\(no damage\) when kicking.                                                             |
-|   decoration.flame   |      true       | Specifies whether to apply flame effect to player when kicking.                                                                   |
-|  decoration.circle   |      true       | Specifies whether to draw colored circle with effect to player when kicking.                                                      |
-|     message.lynx     |      true       | Specifies whether Lynx Mod compatible.                                                                                            |
-| autoMessage.enabled  |      true       | Toggle the presence or absence of regular messages.                                                                               |
-|   autoMessage.time   |       15        | Specify a minutes for recurring messages.                                                                                         |
+|     Setting name     |  Default value  | Description                                                                                                                                      |
+| :------------------: | :-------------: | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+|   database.method    | org.sqlite.JDBC | A SQL [database driver](SQL-en.md#methods). By default, the [SQLite driver](https://github.com/xerial/sqlite-jdbc) is used.                      |
+|     database.url     |   jdbc:sqlite   | A SQL [database access protocol](SQL-en.md#protocols). This used as a URL prefix.                                                                |
+|   database.logPath   |    ./log.db     | A SQL database path that stores the kick records.                                                                                                |
+|  database.learnPath  |  ./learn.json   | A JSON file path that stores the neural network weights and learning count from learning.                                                        |
+|  database.trustPath  |   ./trust.db    | A SQL database path that saves trusted players information.                                                                                      |
+|   database.banPath   |    ./bans.db    | A SQL database path that manages ban records.                                                                                                    |
+|     npc.seconds      |        3        | A number of seconds the [NPC](#aurabot) will orbit the player.                                                                                   |
+|       npc.time       |      0.35       | A value of [NPC](#aurabot) orbit speed.                                                                                                          |
+|      npc.range       |    3.0, 1.5     | A radius that the NPC will rotate. The default distance is suitable for KillAura detection.                                                      |
+|    npc.reachRange    |       4.6       | A radius that the NPC will rotate. The default distance is suitable for KillAura detection with reach mode.                                      |
+|    npc.panicRange    |       1.5       | A relative height of the [Panic NPC](#acpanic) and player.                                                                                       |
+| npc.panicReachRange  |       4.6       | A relative height of the [Panic NPC](#acpanic) and player with reach mode.                                                                       |
+|       npc.wave       |      true       | Whether the [NPC](#aurabot) spins like a wave.                                                                                                   |
+|     npc.waveMin      |       0.3       | A minimum radius that a [NPC](#aurabot) orbits like a wave.                                                                                      |
+|    npc.speed.wave    |      true       | An orbital velocity of NPC variable.                                                                                                             |
+| npc.speed.waveRange  |      0.03       | A [NPC](#aurabot) speed changing range.                                                                                                          |
+|       npc.kill       |        3        | A maximum number to call when an NPC is killed within 10 seconds.                                                                                |
+|      npc.learn       |       0.3       | A learning coefficient of the [learning function](#what-is-learning-function). The higher the value, the less processing, but the less accurate. |
+|     npc.vlLevel      |       17        | This value is used to evaluate the VL when the NPC has not learned beyond this npc.learnCount.                                                   |
+|    npc.learnCount    |       15        | If the learn function learns more than this number of times, the kick rating will be transferred to the learn function.                          |
+|      kick.delay      |        2        | A delay between sending a broadcast message and kicking the player.                                                                              |
+|   kick.defaultKick   |       25        | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                                           |
+| decoration.lightning |      true       | A boolean whether to drop lightning effect\(no damage\) when kicking.                                                                            |
+|   decoration.flame   |      true       | A boolean whether to apply flame effect to player when kicking.                                                                                  |
+|  decoration.circle   |      true       | A boolean whether to draw colored circle with effect to player when kicking.                                                                     |
+|     message.lynx     |      true       | A boolean whether Lynx Mod compatible.                                                                                                           |
+| autoMessage.enabled  |      true       | Toggle the presence or absence of regular messages.                                                                                              |
+|   autoMessage.time   |       15        | A minutes for recurring messages.                                                                                                                |
 
 ---
 
@@ -854,7 +856,7 @@ Also, can execute commands related to the \<ManagementID\> from the player.
 The plugin is concerned about falsely banning players due to false Watchdog detection.  
 Therefore, the plugin does not ban players **automatically**.
 
-## What is learning function?
+## What is a learning function?
 
 This plugin has a learning function that automatically adjusts the parameters using the actual cheat material.  
 Learning cheat data can improve the accuracy of function decision to kick or not.  

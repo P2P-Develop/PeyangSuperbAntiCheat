@@ -30,17 +30,17 @@ Each SQLs may require specific settings.
 
 ### SQLite
 
-Install [this plugin](https://www.spigotmc.org/resources/sqlite-for-bungeecord.57191/update?update=344657) and restart your server.
+Install [this plugin](https://www.spigotmc.org/resources/sqlite-for-bungeecord.57191/update?update=344657) and restart your server.  
 You can use SQLite by installed the plugin.
 
 ### MySQL
 
-No action is needed.
+No action is needed.  
 You can edit settings file and start database.
 
 ## Settings file format
 
-PSAC sets SQL configurations in settings file.
+PSAC sets SQL configurations in settings file.  
 The settings are described in following format:
 
 ```yml
@@ -76,8 +76,8 @@ Specify the JDBC driver namespace for the database.
 
 ## Protocols
 
-Specify the database access protocol.
-This used as a URL prefix.
+Specify the database access protocol.  
+This used as a URL prefix.  
 The driver is JDBC, so **first** prefix is starts `jdbc:`.
 
 |  Name  |    Prefix     |
@@ -91,7 +91,7 @@ The SQL path specification is different in each database.
 
 ### SQLite
 
-In this case, path can be set easily.
+In this case, path can be set easily.  
 An example is following:
 
 ```yml
@@ -107,7 +107,7 @@ fooPath3: "../rel/path/to/foo2.db"
 
 ### MySQL
 
-In this case, path is this format: `Hostname:Port/Database?user=username&password=password`
+In this case, path is this format: `Hostname:Port/Database?user=username&password=a_password`.  
 An example is following:
 
 ```yaml
