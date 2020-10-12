@@ -243,9 +243,7 @@ public class Decorations
     {
 
         final double[] time = {0.0};
-
         final double radius = 2.5;
-
 
         BukkitRunnable runnable = new BukkitRunnable()
         {
