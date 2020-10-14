@@ -30,13 +30,13 @@ public class BungeePlayerLogin
         {
             statement.setString(1, uuid.toString().replace("-", ""));
             ResultSet set = statement.executeQuery();
-            while (set.next())
+
+            if (set.next())
             {
                 banInfo.put("id", set.getString("BANID"));
                 banInfo.put("reason", set.getString("REASON"));
                 banInfo.put("expire", set.getString("EXPIRE"));
                 banned = true;
-                break;
             }
         }
         catch (Exception ignored)
