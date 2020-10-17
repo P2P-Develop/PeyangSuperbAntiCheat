@@ -376,7 +376,7 @@ public class Init
 
                 int i = 0;
                 for (double[] aIW : network.inputWeight)
-                    for (int i1 = 0; i1 < aIW.length; i1++)
+                    for (int i1 = 0; i1 < aIW.length - 1; i1++)
                     {
                         network.inputWeight[i][i1] = node.get("inputWeight")
                             .get(i)
