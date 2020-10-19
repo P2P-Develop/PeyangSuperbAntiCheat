@@ -68,11 +68,11 @@ PSAC を連携させるすべてのサーバの eyePath を`../../../database.db
 
 ##### Mysql を使いたいって?かんたんさ！
 
-[SQL.md](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/tree/develop/docs/SQL-ja.md) をミて後はいっしょ！かんたん！
+[ここ](SQL.md) をミて後はいっしょ！かんたん！
 
 ##### は?SQLite を使いたいって?
 
 さぁ、[このプラグイン](https://www.spigotmc.org/resources/sqlite-for-bungeecord.57191/update?update=344657)を入れよう！
 あとはいっしょ！
 
-## え?わからない?じゃぁ最強の[SQL.md](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/tree/develop/docs/SQL-ja.md) をミてみよう！
+## え?わからない?んじゃ[こいつ](SQL.md) をミてみよう！

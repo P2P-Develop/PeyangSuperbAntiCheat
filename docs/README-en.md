@@ -129,6 +129,8 @@ This plugin is a **Cheat Report Management** / **Cheat Detection Test** plugin.
 
 In the description of **hack**, the meaning of hacking (cracking) of the server itself is ambiguous, so it is written as **cheat**.
 
+Please note that this project is released with a [Contributor Code of Conduct](CODE-OF-CONDUCT-en.md). By participating in this project you agree to abide by its terms.
+
 ### Markdown formatting (This area is not so important)
 
 This document defines a simple markdown grammar to make it easy for users to understand.

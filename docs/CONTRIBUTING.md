@@ -47,4 +47,4 @@ PSAC には PSAC の貢献者として適切に貢献するために、少々の
 
 ### 参照
 
-[こちら](CODE_OF_CONDUCT.md)も見てね！
+[こちら](CODE-OF-CONDUCT.md)も見てね！
