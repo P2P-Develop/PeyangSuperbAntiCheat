@@ -3,6 +3,7 @@ package ml.peya.plugins.BungeeProxy;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,15 +41,7 @@ public class BungeeCordConfiguration
      */
     public void saveDefaultConfig() throws IOException
     {
-        if (file.exists())
-            return;
-
-        file.getParentFile().mkdirs();
-
-        try (InputStream stream = PeyangSuperbAntiCheatProxy.getPlugin().getResourceAsStream(file.getName()))
-        {
-            Files.copy(stream, file.toPath());
-        }
+        FileUtils.copyInputStreamToFile(PeyangSuperbAntiCheatProxy.getPlugin().getResourceAsStream(file.getName()), file);
     }
 
     /**
@@ -81,8 +74,10 @@ public class BungeeCordConfiguration
      */
     public void saveConfig() throws IOException
     {
-        if (this.configuration == null)
-            throw new NullPointerException("（  ・∀・）ぬるぽ");
+        if (this.configuration == null) {
+            //コンフィグがロードされていないと考えられるため、コンフィグに変更が無いと仮定して何もせず終了する
+            return;
+        }
         ConfigurationProvider.getProvider(YamlConfiguration.class).save(configuration, file);
     }
 
