@@ -22,6 +22,11 @@ public class BungeeMessageEngine
     private static boolean isInitialized = false;
 
     /**
+     * 文字列と {@link ChatColor} の1対1対応
+     */
+    private static HashMap<String, ChatColor> colorMap;
+
+    /**
      * 初期化
      */
     public static void initialize()
@@ -35,6 +40,29 @@ public class BungeeMessageEngine
             e.printStackTrace();
             isInitialized = false;
         }
+
+        colorMap.put("%%black%%", ChatColor.BLACK);
+        colorMap.put("%%dark_blue%%", ChatColor.DARK_BLUE);
+        colorMap.put("%%dark_green%%", ChatColor.DARK_GREEN);
+        colorMap.put("%%dark_aqua%%", ChatColor.DARK_AQUA);
+        colorMap.put("%%dark_red%%", ChatColor.DARK_RED);
+        colorMap.put("%%dark_purple%%", ChatColor.DARK_PURPLE);
+        colorMap.put("%%gold%%", ChatColor.GOLD);
+        colorMap.put("%%gray%%", ChatColor.GRAY);
+        colorMap.put("%%dark_gray%%", ChatColor.DARK_GRAY);
+        colorMap.put("%%blue%%", ChatColor.BLUE);
+        colorMap.put("%%green%%", ChatColor.GREEN);
+        colorMap.put("%%aqua%%", ChatColor.AQUA);
+        colorMap.put("%%red%%", ChatColor.RED);
+        colorMap.put("%%light_purple%%", ChatColor.LIGHT_PURPLE);
+        colorMap.put("%%yellow%%", ChatColor.YELLOW);
+        colorMap.put("%%white%%", ChatColor.WHITE);
+
+        colorMap.put("%%obfuscated%%", ChatColor.MAGIC);
+        colorMap.put("%%bold%%", ChatColor.BOLD);
+        colorMap.put("%%strikethrough%%", ChatColor.STRIKETHROUGH);
+        colorMap.put("%%italic%%", ChatColor.ITALIC);
+        colorMap.put("%%reset%%", ChatColor.RESET);
 
         isInitialized = true;
     }
@@ -87,51 +115,14 @@ public class BungeeMessageEngine
      */
     public static String format(String text, HashMap<String, Object> format)
     {
-        HashMap<String, ChatColor> map = getColor();
-
         String replaced = text;
 
-        for (String key : map.keySet())
-            replaced = replaced.replace(key, map.get(key).toString());
+        for (String key : colorMap.keySet())
+            replaced = replaced.replace(key, colorMap.get(key).toString());
 
         for (String key : format.keySet())
             replaced = replaced.replace("%%" + key + "%%", String.valueOf(format.get(key)));
 
         return replaced;
-    }
-
-    /**
-     * 特定の文字セットをEnumのChatColorに変更するためのリストをマップとして返すやつ。
-     *
-     * @return 変換した後のはっしゅまっぷ。
-     */
-    private static HashMap<String, ChatColor> getColor()
-    { //BungeeCordなのでPairつかえない
-        HashMap<String, ChatColor> map = new HashMap<>();
-
-        map.put("%%black%%", ChatColor.BLACK);
-        map.put("%%dark_blue%%", ChatColor.DARK_BLUE);
-        map.put("%%dark_green%%", ChatColor.DARK_GREEN);
-        map.put("%%dark_aqua%%", ChatColor.DARK_AQUA);
-        map.put("%%dark_red%%", ChatColor.DARK_RED);
-        map.put("%%dark_purple%%", ChatColor.DARK_PURPLE);
-        map.put("%%gold%%", ChatColor.GOLD);
-        map.put("%%gray%%", ChatColor.GRAY);
-        map.put("%%dark_gray%%", ChatColor.DARK_GRAY);
-        map.put("%%blue%%", ChatColor.BLUE);
-        map.put("%%green%%", ChatColor.GREEN);
-        map.put("%%aqua%%", ChatColor.AQUA);
-        map.put("%%red%%", ChatColor.RED);
-        map.put("%%light_purple%%", ChatColor.LIGHT_PURPLE);
-        map.put("%%yellow%%", ChatColor.YELLOW);
-        map.put("%%white%%", ChatColor.WHITE);
-
-        map.put("%%obfuscated%%", ChatColor.MAGIC);
-        map.put("%%bold%%", ChatColor.BOLD);
-        map.put("%%strikethrough%%", ChatColor.STRIKETHROUGH);
-        map.put("%%italic%%", ChatColor.ITALIC);
-        map.put("%%reset%%", ChatColor.RESET);
-
-        return map;
     }
 }
