@@ -137,7 +137,7 @@ public class PeyangSuperbAntiCheatProxy extends Plugin
             {
                 getLogger().log(Level.SEVERE, "This server doesn't support SQLite!\n");
                 getLogger().log(Level.INFO, "NOTE: Try installing SQLiteBungeeCord to solve this problem.");
-                getLogger().log(Level.INFO, "Download >>> https://www.spigotmc.org/resources/sqlite-for-bungeecord.57191/ <<<");
+                getLogger().log(Level.INFO, "Download >>> https://www.spigotmc.org/resources/sqlite-for-bungeecord.57191/update?update=344657 <<<");
                 severeDisable();
             }
 
