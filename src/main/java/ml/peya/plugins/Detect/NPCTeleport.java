@@ -132,7 +132,7 @@ public class NPCTeleport
                                 {
                                     ((CraftPlayer) p).getHandle().playerConnection
                                         .sendPacket(new PacketPlayOutEntityTeleport(target));
-                                    connection
+                                    ((CraftPlayer) p).getHandle().playerConnection
                                         .sendPacket(new PacketPlayOutEntityHeadRotation(target, (byte) finalHead));
                                     NPC.setArmor(p, target, arm);
                                 });
