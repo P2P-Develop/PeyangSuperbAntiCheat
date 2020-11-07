@@ -41,6 +41,8 @@ public class BungeeMessageEngine
             isInitialized = false;
         }
 
+        colorMap = new HashMap<>();
+
         colorMap.put("%%black%%", ChatColor.BLACK);
         colorMap.put("%%dark_blue%%", ChatColor.DARK_BLUE);
         colorMap.put("%%dark_green%%", ChatColor.DARK_GREEN);
