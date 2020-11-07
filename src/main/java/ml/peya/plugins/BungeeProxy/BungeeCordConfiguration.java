@@ -3,7 +3,6 @@ package ml.peya.plugins.BungeeProxy;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
-import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,10 +35,18 @@ public class BungeeCordConfiguration
      * デフォルトをコピー
      *
      * @throws IOException 何らかのエラーが発生した時。
-     */
+    */
     public void saveDefaultConfig() throws IOException
     {
-        FileUtils.copyInputStreamToFile(PeyangSuperbAntiCheatProxy.getPlugin().getResourceAsStream(file.getName()), file);
+        if (file.exists())
+            return;
+
+        file.getParentFile().mkdirs();
+
+        try (InputStream stream = PeyangSuperbAntiCheatProxy.getPlugin().getResourceAsStream(file.getName()))
+        {
+            Files.copy(stream, file.toPath());
+        }
     }
 
     /**
