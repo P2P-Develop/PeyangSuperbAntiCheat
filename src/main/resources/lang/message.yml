@@ -1,5 +1,5 @@
 base:
-  prefix: "%%aqua%%-----%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%]%%aqua%%-----"
+  prefix: "%%aqua%%-----%%green%%[%%blue%%PeyangAntiCheat%%green%%]%%aqua%%-----"
   true: "%%green%%True"
   false: "%%red%%False"
   enable: "%%green%%有効"
