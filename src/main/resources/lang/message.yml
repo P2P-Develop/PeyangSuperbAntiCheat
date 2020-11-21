@@ -20,7 +20,7 @@ error:
     alreadyReported: "%%red%%%%bold%%エラー：既に報告済みです！"
 
   main:
-    notFoundCommand: "%%red%%%%bold%%エラー：対応するコマンドが見つかりませんでした。/%%label%% help でヘルプを見てください。"
+    notFoundCommand: "%%red%%%%bold%%エラー：The command you entered was not found. Check /%%label%% help for help。"
 
   psac:
     notPage: "%%red%%%%bold%%エラー：表示できるものが何もありません！"
@@ -173,10 +173,10 @@ message:
     teleport: "%%aqua%%%%player%% さんにテレポートしました。"
 
 autoMessage: "\
-%%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\
-%%white%%Peyang Anti Cheat はこの７日間に %%red%%%%bold%%%%count%%%%reset%% 人のプレイヤーをキックしました。\n\
-%%white%%スタッフがこの７日間に追加で %%red%%%%bold%%%%staff_count%%%%reset%% 人をキックしました。\n\
-%%red%%禁止されている MOD はアクセス禁止の対象です！
+%%dark_red%%［PEYANG ANTI CHEAT NOTICE］\n\
+%%white%%Peyang Anti Cheat has punished %%red%%%%bold%%%%count%%%%reset%% users within the past 7 days.\n\
+%%white%%Staff have also punished an additional %%red%%%%bold%%%%staff_count%%%%reset%% users within the past 7 days. \n\
+%%red%%禁Using blacklisted mods will result in a ban！
 "
 
 reportbook:
