@@ -7,40 +7,40 @@ base:
 
 
 error:
-  minArgs: "%%red%%%%bold%%エラー：引数が不足しています。/%%label%% help でヘルプを見てください。"
-  playerNotFound: "%%red%%%%bold%%エラー：The selected player was not found。"
-  unknownSQLError: "%%red%%%%bold%%エラー：不明なSQLエラーが発生しました。運営に報告しています。"
-  notHavePermission: "%%red%%%%bold%%エラー：You are lacking the permissions required！"
-  invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
-  requirePlayer: "%%red%%%%bold%%エラー：You need to select a player。"
-  notPlayerFoundInRange: "%%red%%%%bold%%エラー：範囲内にプレイヤーが見つかりませんでした。"
+  minArgs: "%%red%%%%bold%%Error：There are not enough arguments. See help at /help."
+  playerNotFound: "%%red%%%%bold%%Error：The selected player was not found。"
+  unknownSQLError: "%%red%%%%bold%%Error：不明なSQLエラーが発生しました。運営に報告しています。"
+  notHavePermission: "%%red%%%%bold%%7Error：You are lacking the permissions required！"
+  invalidArgument: "%%red%%%%bold%%Error：引数の数が不正です。/psac help でヘルプを見てください。"
+  requirePlayer: "%%red%%%%bold%%Error：You need to select a player。"
+  notPlayerFoundInRange: "%%red%%%%bold%%Error：範囲内にプレイヤーが見つかりませんでした。"
   report:
-    invalidReason: "%%red%%%%bold%%エラー：That is an invalid reason to report."
-    reasonNotSelected: "%%red%%%%bold%%エラー：You did not select a reason."
-    alreadyReported: "%%red%%%%bold%%エラー：You have already reported that player！"
+    invalidReason: "%%red%%%%bold%%Error：That is an invalid reason to report."
+    reasonNotSelected: "%%red%%%%bold%%Error：You did not select a reason."
+    alreadyReported: "%%red%%%%bold%%Error：You have already reported that player！"
 
   main:
-    notFoundCommand: "%%red%%%%bold%%エラー：The command you entered was not found. Check /%%label%% help for help。"
+    notFoundCommand: "%%red%%%%bold%%Error：The command you entered was not found. Check /%%label%% help for help。"
 
   psac:
-    notPage: "%%red%%%%bold%%エラー：表示できるものが何もありません！"
+    notPage: "%%red%%%%bold%%エラー：There is nothing to display."
 
   view:
-    notFoundReport: "%%red%%%%bold%%エラー：レポートが1件も見つかりませんでした。"
+    notFoundReport: "%%red%%%%bold%%Error：Reports not found。"
 
   showDrop:
-    notFoundReport: "%%red%%%%bold%%エラー：IDに合致するレポートが見つかりませんでした！"
+    notFoundReport: "%%red%%%%bold%%Error：There was not a report matching the selected ID."
 
 
   aura:
-    testingNow: "%%red%%%%bold%%エラー：対象プレイヤーは、現在テスト中です。"
-    notNumeric: "%%red%%%%bold%%エラー：指定された秒数が数字ではありません。/psac help でヘルプを見てください。"
+    testingNow: "%%red%%%%bold%%Error：対象プレイヤーは、現在テスト中です。"
+    notNumeric: "%%red%%%%bold%%Error：指定された秒数が数字ではありません。/psac help でヘルプを見てください。"
 
   bans:
-    unknownSearchType: "%%red%%%%bold%%エラー：検索タイプが不明です。"
-    databaseInfoNotFound: "%%red%%%%bold%%エラー：データベースに情報が見つかりませんでした。"
+    unknownSearchType: "%%red%%%%bold%%Error：検索タイプが不明です。"
+    databaseInfoNotFound: "%%red%%%%bold%%Error：データベースに情報が見つかりませんでした。"
   mods:
-    noDataFound: "%%red%%%%bold%%エラー：このプレイヤーの導入しているMODが見つかりませんでした。"
+    noDataFound: "%%red%%%%bold%%Error：このプレイヤーの導入しているMODが見つかりませんでした。"
 
 command:
   report:
