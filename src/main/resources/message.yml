@@ -2,22 +2,22 @@ base:
   prefix: "%%aqua%%-----%%green%%[%%blue%%PeyangAntiCheat%%green%%]%%aqua%%-----"
   true: "%%green%%True"
   false: "%%red%%False"
-  enable: "%%green%%有効"
-  disable: "%%red%%無効"
+  enable: "%%green%%Enable"
+  disable: "%%red%%Disable"
 
 
 error:
   minArgs: "%%red%%%%bold%%エラー：引数が不足しています。/%%label%% help でヘルプを見てください。"
-  playerNotFound: "%%red%%%%bold%%エラー：対象プレイヤーが見つかりませんでした。"
+  playerNotFound: "%%red%%%%bold%%エラー：The selected player was not found。"
   unknownSQLError: "%%red%%%%bold%%エラー：不明なSQLエラーが発生しました。運営に報告しています。"
-  notHavePermission: "%%red%%%%bold%%エラー：権限がありません！"
+  notHavePermission: "%%red%%%%bold%%エラー：You are lacking the permissions required！"
   invalidArgument: "%%red%%%%bold%%エラー：引数の数が不正です。/psac help でヘルプを見てください。"
-  requirePlayer: "%%red%%%%bold%%エラー：プレイヤーから実行してください。"
+  requirePlayer: "%%red%%%%bold%%エラー：You need to select a player。"
   notPlayerFoundInRange: "%%red%%%%bold%%エラー：範囲内にプレイヤーが見つかりませんでした。"
   report:
-    invalidReason: "%%red%%%%bold%%エラー：理由が正しくありません！"
-    reasonNotSelected: "%%red%%%%bold%%エラー：理由が選択されていません！"
-    alreadyReported: "%%red%%%%bold%%エラー：既に報告済みです！"
+    invalidReason: "%%red%%%%bold%%エラー：That is an invalid reason to report."
+    reasonNotSelected: "%%red%%%%bold%%エラー：You did not select a reason."
+    alreadyReported: "%%red%%%%bold%%エラー：You have already reported that player！"
 
   main:
     notFoundCommand: "%%red%%%%bold%%エラー：The command you entered was not found. Check /%%label%% help for help。"
