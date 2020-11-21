@@ -31,7 +31,8 @@ public class BungeeMessageEngine
      */
     public static void initialize()
     {
-        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheatProxy.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
+        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheatProxy.class.getResourceAsStream(
+            "/" + PeyangSuperbAntiCheatProxy.config.getString("lang") + ".yml"), StandardCharsets.UTF_8))
         {
             config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(reader);
         }

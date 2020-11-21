@@ -8,3 +8,6 @@ database:
 
     banPath: "./ban.db"
     logPath: "./log.db"
+
+#言語ファイル
+lang: ja

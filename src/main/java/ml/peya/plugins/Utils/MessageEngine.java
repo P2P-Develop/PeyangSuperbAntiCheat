@@ -33,7 +33,8 @@ public class MessageEngine
      */
     public static void initialize()
     {
-        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream("/message.yml"), StandardCharsets.UTF_8))
+        try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream(
+            "/" + PeyangSuperbAntiCheat.getPlugin().getConfig().getString("lang") + ".yml"), StandardCharsets.UTF_8))
         {
             config = YamlConfiguration.loadConfiguration(new BufferedReader(reader));
         }

@@ -14,6 +14,9 @@ database:
     #banされたときに格納されます。
     banPath: "./bans.db"
 
+#言語ファイル。 日本語-> ja
+lang: ja
+
 #npc関係のコンフィグです。
 npc:
     #指定された秒数、NPCを召喚します。
