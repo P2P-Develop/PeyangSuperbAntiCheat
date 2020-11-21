@@ -212,8 +212,8 @@ book:
 kick:
   broadcastWd: "\
   [PEYANG CHEAT DETECTION]\n\
-  %%red%%%%bold%%ハッキング、または不適切な発言によってゲームからプレイヤーが削除\n\
-  %%red%%%%bold%%されました。
+  %%red%%%%bold%%A player in your lobby has been kicked for hacking and abuse.\n\
+  %%red%%%%bold%%Thanks for reporting!
   "
 
   broadcast: "\
