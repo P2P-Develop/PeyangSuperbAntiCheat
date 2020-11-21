@@ -63,14 +63,25 @@ message:
   lynx: true
 
 autoMessage:
-  #定期メッセージの有効/無効です
-  enabled: true
+# JP 
+#定期メッセージの有効/無効です
+
+# EN
+#Periodic message enabled / disabled
+
+ enabled: true
 
   #定期メッセージの周期です。(分指定)
   time: 15
 
+# JP
 #スキンのUUIDセットです。
 #ここにプレイヤーのUUIDを指定すれば、そのプレイヤーのスキンが使用されます。
+
+# EN
+#Skin UUID set.
+#If you specify a player's UUID here, that player's skin will be used.
+
 skins:
   - 6b93a8e658ee4794b69a56a3c2287010
   - 36f2cdbc77d545c7a205f5e8e6c0fb3b
@@ -92,3 +103,6 @@ skins:
   - 69e5aea0dd5e4cf88fcad8b4dd8b2243
   - 4e5959217b894ead96b9c50a4256da1e
   - c52fafa6e2234bddb884b39f641a4cf4
+  - 0b2c28eefd4843a59aefa00c08b8f801
+  - f7c77d999f154a66a87dc4a51ef30d19
+  - 0ce3887891a547d48b499a2757c51c9e
