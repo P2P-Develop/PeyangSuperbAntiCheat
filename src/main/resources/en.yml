@@ -236,29 +236,29 @@ message:
 
 autoMessage: "\
 %%dark_red%%［PEYANG ANTI CHEAT からのお知らせ］\n\
-%%white%%Peyang Anti Cheat はこの７日間に %%red%%%%bold%%%%count%%%%reset%% 人のプレイヤーを対処しました。\n\
-%%white%%スタッフがこの７日間に追加で %%red%%%%bold%%%%staff_count%%%%reset%% 人を対処しました。\n\
-%%red%%禁止されている MOD はアクセス禁止の対象です！
+%%white%%Peyang Anti Cheat has punished %%red%%%%bold%%%%count%%%%reset%% players in the past 7 days.。\n\
+%%white%%Additionally, staff have punished %%red%%%%bold%%%%staff_count%%%%reset%% players in the past 7 days.。\n\
+%%red%%Remember, using cheats are forbidden on this server！
 "
 
 reportbook:
-    cheat: "どんなチートを使っていましたか？"
-    submit: "%%dark_green%%%%bold%%レポートを提出"
-    cancel: "%%red%%レポートをキャンセル"
+    cheat: "What cheat did the offending player use?"
+    submit: "%%dark_green%%%%bold%%Submit Report"
+    cancel: "%%red%%Cancel Report"
 
 book:
     words:
-        next: "%%aqua%%次へ行く"
-        back: "%%aqua%%前へ戻る"
-        delete: "%%white%%[%%yellow%%%%bold%%削除%%reset%%%%white%%]"
+        next: "%%aqua%%Next"
+        back: "%%aqua%%Previous"
+        delete: "%%white%%[%%yellow%%%%bold%%Delete%%reset%%%%white%%]"
 
     clickable: "\
-    %%aqua%%クリックして\n\
-    %%aqua%%チャットに貼り付け
+    %%aqua%%Click\n\
+    %%aqua%%Paste in chat
     "
 
     text:
-        report: "%%dark_green%%%%bold%%チートレポート"
+        report: "%%dark_green%%%%bold%%Cheater Report"
         uuid: "%%aqua%%%%bold%%UUID%%black%%：%%blue%%%%uuid%%"
         unix: "%%aqua%%%%bold%%UNIX秒%%black%%：%%blue%%%%unix%%"
         issueBy: "%%aqua%%%%bold%%報告者%%black%%：%%blue%%%%id%%"
@@ -275,13 +275,13 @@ book:
 kick:
     broadcastWd: "\
     [PEYANG CHEAT DETECTION]\n\
-    %%red%%%%bold%%ハッキング、または不適切な発言によってゲームからプレイヤーが削除\n\
-    %%red%%%%bold%%されました。
+    %%red%%%%bold% A player from your game was removed for hacking or abuse.\n\
+    %%red%%%%bold%%Thank you for the report!
     "
 
     broadcast: "\
-    %%red%%%%bold%%違反行為をしたプレイヤーをゲームから対処しました。\n\
-    %%reset%%%%aqua%%ご報告ありがとうございました！
+    %%red%%%%bold%%A player was removed from the game.\n\
+    %%reset%%%%aqua%%Thank you for the report！
     "
 
     broadcastAdmin: "\
@@ -315,21 +315,21 @@ ban:
     "
 
 report:
-    submited: "%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%] プレイヤーがレポートを提出しました！"
-    click: "%%yellow%%クリックしてレポートを確認してください！"
+    submited: "%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%] There is a new report！"
+    click: "%%yellow%%Click to see the report."
     lynx:
         submited: "%%aqua%%[STAFF] %%red%%[ADMIN] Fishy%%white%%: Report of %%name%% %%reason%%"
 
 item:
-    execute: "%%red%%%%command%% %%green%%を実行する"
-    stopTarget: "%%red%%監視モードを止めました。"
+    execute: "%%red%%%%command%% %%green%%To run"
+    stopTarget: "%%red%%You have stopped targeting。"
     compass: "%%green%%%%bold%%Compass Tracker %%reset%%%%red%%3000%%green%%%%bold%%™"
     tracking:
-        noTarget: "%%red%%ターゲットなし"
-        text: "%%red%%%%bold%%ターゲット：%%reset%%%%green%%%%name%%%%red%%%%bold%%, ワールド：%%reset%%%%green%%%%world%%%%red%%%%bold%%, X：%%reset%%%%green%%%%x%%%%red%%%%bold%%, Y：%%reset%%%%green%%%%y%%%%red%%%%bold%%, Z：%%reset%%%%green%%%%z%%%%red%%%%bold%%, 距離： %%reset%%%%green%%%%distance%%%%red%%%%bold%%, 速度：%%reset%%%%green%%%%velocity%%m/Tick%%tests%%"
-        testing: "%%reset%%%%aqua%%(テスト中：%%red%%%%bold%%%%type%%%%reset%%%%aqua%%, VL：%%red%%%%bold%%%%vl%%%%reset%%%%aqua%%)"
+        noTarget: "%%red%%No target."
+        text: "%%red%%%%bold%%Target：%%reset%%%%green%%%%name%%%%red%%%%bold%%, World：%%reset%%%%green%%%%world%%%%red%%%%bold%%, X：%%reset%%%%green%%%%x%%%%red%%%%bold%%, Y：%%reset%%%%green%%%%y%%%%red%%%%bold%%, Z：%%reset%%%%green%%%%z%%%%red%%%%bold%%, Distance： %%reset%%%%green%%%%distance%%%%red%%%%bold%%, Speed：%%reset%%%%green%%%%velocity%%m/Tick%%tests%%"
+        testing: "%%reset%%%%aqua%%(Under testing：%%red%%%%bold%%%%type%%%%reset%%%%aqua%%, VL：%%red%%%%bold%%%%vl%%%%reset%%%%aqua%%)"
 
     banBook:
-        title: "%%red%%%%name%% の処罰一覧"
-    targetStick: "%%gold%%%%bold%%ターゲットスティック"
-    lead: "%%red%%プレイヤーを引き寄せる"
+        title: "%%red%%%%name%% Lists of Punishments"
+    targetStick: "%%gold%%%%bold%%Target Stick"
+    lead: "%%red%%Attract Players"
