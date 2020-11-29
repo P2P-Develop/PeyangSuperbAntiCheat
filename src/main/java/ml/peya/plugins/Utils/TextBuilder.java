@@ -2,8 +2,6 @@ package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.Enum.EnumCheatType;
 import ml.peya.plugins.Enum.EnumSeverity;
-import ml.peya.plugins.Moderate.BanAnalyzer;
-import ml.peya.plugins.Moderate.CheatTypeUtils;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -15,7 +13,6 @@ import org.bukkit.entity.Player;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.stream.Collectors;
@@ -282,32 +279,4 @@ public class TextBuilder
             .append("\n")
             .append(get("message.auraCheck.result.vl", pair("vl", String.valueOf(vl))));
     }
-
-    /**
-     * BanまたはKickのデータ入手やフォーマットに使用する。
-     *
-     * @param ban  Bansらしい
-     * @param type 判定タイプ？
-     * @return 完成後。
-     */
-    public static ComponentBuilder getTextBan(BanAnalyzer.Bans ban, BanAnalyzer.Type type)
-    {
-        StringBuilder reasonSet = new StringBuilder();
-        Arrays.stream(ban.getReason().split(", ")).parallel().forEachOrdered(reason ->
-        {
-            EnumCheatType tp = CheatTypeUtils.getCheatTypeFromString(reason);
-            if (tp == null)
-                reasonSet.append(reason).append(", ");
-            else
-                reasonSet.append(tp.getText());
-        });
-
-        if (reasonSet.toString().endsWith(", "))
-            reasonSet.setLength(reasonSet.length() - 2);
-
-        return new ComponentBuilder(ChatColor.YELLOW + type.text())
-            .append(" - " + new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(new Date(ban.getDate())))
-            .append(ChatColor.WHITE + " " + ChatColor.ITALIC + reasonSet.toString());
-    }
-
 }

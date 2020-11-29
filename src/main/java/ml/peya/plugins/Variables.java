@@ -66,17 +66,10 @@ public class Variables
      */
     public static String databasePath;
     /**
-     * Logのデータベースの置き場所が入ります。
-     */
-    public static String logPath;
-    /**
      * Trustのデータベースの置き場所が入ります。
      */
     public static String trustPath;
-    /**
-     * banのデータベースの置き場所が入ります。
-     */
-    public static String banPath;
+
     /**
      * BungeeCordのチャンネルです。
      */
@@ -84,10 +77,6 @@ public class Variables
 
     //ここまで文字列。こっからブーリアン。
 
-    /**
-     * 定期メッセージが有効になっているかどうか。
-     */
-    public static boolean isAutoMessageEnabled;
     /**
      * Trackingが有効だったまま投げ出していたかどうか。
      */
@@ -127,10 +116,6 @@ public class Variables
      */
     public static HikariDataSource eye;
     /**
-     * Logデータベースをデシリアライズしてやります。
-     */
-    public static HikariDataSource log;
-    /**
      * Trustデータベースをデシリアライズしときます。
      */
     public static HikariDataSource trust;
@@ -138,10 +123,6 @@ public class Variables
      * Skinデータベースをデシリアライズしときます。
      */
     public static HikariDataSource skin;
-    /**
-     * Banデータベースをデシリアライズしときます。
-     */
-    public static HikariDataSource ban;
 
     //データベースここまで。こっからRunnable系
 

@@ -8,18 +8,14 @@ import ml.peya.plugins.BungeeStructure.CommandManager;
 import ml.peya.plugins.Commands.CmdTst.AuraBot;
 import ml.peya.plugins.Commands.CmdTst.AuraPanic;
 import ml.peya.plugins.Commands.CmdTst.TestKnockback;
-import ml.peya.plugins.Commands.CommandBan;
-import ml.peya.plugins.Commands.CommandBans;
 import ml.peya.plugins.Commands.CommandKick;
 import ml.peya.plugins.Commands.CommandPeyangSuperbAntiCheat;
 import ml.peya.plugins.Commands.CommandPull;
 import ml.peya.plugins.Commands.CommandReport;
 import ml.peya.plugins.Commands.CommandSilentTeleport;
 import ml.peya.plugins.Commands.CommandTarget;
-import ml.peya.plugins.Commands.CommandTempBan;
 import ml.peya.plugins.Commands.CommandTracking;
 import ml.peya.plugins.Commands.CommandTrust;
-import ml.peya.plugins.Commands.CommandUnBan;
 import ml.peya.plugins.Commands.CommandUserInfo;
 import ml.peya.plugins.Gui.Events.Drop;
 import ml.peya.plugins.Gui.Events.Run;
@@ -28,13 +24,11 @@ import ml.peya.plugins.Gui.Items.Main.TargetStick;
 import ml.peya.plugins.Gui.Items.Target.AuraBotItem;
 import ml.peya.plugins.Gui.Items.Target.AuraPanicItem;
 import ml.peya.plugins.Gui.Items.Target.BackButton;
-import ml.peya.plugins.Gui.Items.Target.BanBook;
 import ml.peya.plugins.Gui.Items.Target.CompassTracker3000_tm;
 import ml.peya.plugins.Gui.Items.Target.Lead;
 import ml.peya.plugins.Gui.Items.Target.Page2.BackToPage1;
 import ml.peya.plugins.Gui.Items.Target.TestKnockBack;
 import ml.peya.plugins.Gui.Items.Target.ToPage2;
-import ml.peya.plugins.Task.AutoMessageTask;
 import ml.peya.plugins.Task.TrackerTask;
 import ml.peya.plugins.Utils.Utils;
 import org.apache.commons.io.FileUtils;
@@ -50,23 +44,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 
 import static ml.peya.plugins.PeyangSuperbAntiCheat.getPlugin;
-import static ml.peya.plugins.Variables.autoMessage;
-import static ml.peya.plugins.Variables.ban;
-import static ml.peya.plugins.Variables.banPath;
 import static ml.peya.plugins.Variables.bungeeChannel;
 import static ml.peya.plugins.Variables.bungeeCommand;
 import static ml.peya.plugins.Variables.config;
 import static ml.peya.plugins.Variables.databasePath;
 import static ml.peya.plugins.Variables.eye;
-import static ml.peya.plugins.Variables.isAutoMessageEnabled;
 import static ml.peya.plugins.Variables.isTrackEnabled;
 import static ml.peya.plugins.Variables.learnCount;
-import static ml.peya.plugins.Variables.log;
-import static ml.peya.plugins.Variables.logPath;
 import static ml.peya.plugins.Variables.logger;
 import static ml.peya.plugins.Variables.network;
 import static ml.peya.plugins.Variables.skin;
-import static ml.peya.plugins.Variables.time;
 import static ml.peya.plugins.Variables.trackerTask;
 import static ml.peya.plugins.Variables.trust;
 import static ml.peya.plugins.Variables.trustPath;
@@ -137,30 +124,20 @@ public class Init
     public static void initDataBase()
     {
         databasePath = config.getString("database.path");
-        logPath = config.getString("database.logPath");
         trustPath = config.getString("database.trustPath");
-        banPath = config.getString("database.banPath");
         if (!config.getString("database.method").contains("sqlite"))
         {
             eye = new HikariDataSource(Init.initMngDatabase(databasePath));
-            log = new HikariDataSource(Init.initMngDatabase(logPath));
             trust = new HikariDataSource(Init.initMngDatabase(trustPath));
-            ban = new HikariDataSource(Init.initMngDatabase(banPath));
             return;
         }
 
         eye = new HikariDataSource(Init.initMngDatabase(Paths.get(databasePath).isAbsolute()
             ? databasePath
             : getPlugin().getDataFolder().getAbsolutePath() + "/" + databasePath));
-        log = new HikariDataSource(Init.initMngDatabase(Paths.get(logPath).isAbsolute()
-            ? logPath
-            : getPlugin().getDataFolder().getAbsolutePath() + "/" + logPath));
         trust = new HikariDataSource(Init.initMngDatabase(Paths.get(trustPath).isAbsolute()
             ? trustPath
             : getPlugin().getDataFolder().getAbsolutePath() + "/" + trustPath));
-        ban = new HikariDataSource(Init.initMngDatabase(Paths.get(banPath).isAbsolute()
-            ? banPath
-            : getPlugin().getDataFolder().getAbsolutePath() + "/" + banPath));
     }
 
     /**
@@ -195,61 +172,11 @@ public class Init
             return false;
         }
 
-        try (Connection connection = log.getConnection();
-             Statement statement = connection.createStatement())
-        {
-            statement.execute("CrEaTe TaBlE If NoT ExIsTs kick(" +
-                "PLAYER nchar," +
-                "UUID nchar," +
-                "KICKID nchar," +
-                "DATE bigint," +
-                "REASON nchar," +
-                "STAFF int" +
-                ");");
-
-            statement.execute("CrEaTe TaBlE If NoT ExIsTs ban(" +
-                "UUID nchar," +
-                "BANID nchar," +
-                "DATE bigint," +
-                "REASON nchar," +
-                "UNBANDATE nchar," +
-                "STAFF integer" +
-                ");");
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            Utils.errorNotification(Utils.getStackTrace(e));
-            return false;
-        }
-
         try (Connection connection = trust.getConnection();
              Statement statement = connection.createStatement())
         {
             statement.execute("CrEaTe TaBlE If NoT ExIsTs trust(" +
                 "PLAYER nchar" +
-                ");");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            Utils.errorNotification(Utils.getStackTrace(e));
-            return false;
-        }
-
-
-        try (Connection connection = ban.getConnection();
-             Statement statement = connection.createStatement())
-        {
-            statement.execute("CREATE TABLE IF NOT EXISTS ban(" +
-                //"PLAYER text," +
-                "UUID text," +
-                "BANID text," +
-                "DATE text," +
-                "REASON text," +
-                "EXPIRE text," +
-                "STAFF integer" +
                 ");");
             return true;
         }
@@ -274,7 +201,7 @@ public class Init
         item.register(new AuraPanicItem());
         item.register(new TestKnockBack());
         item.register(new CompassTracker3000_tm());
-        item.register(new BanBook());
+        //item.register(new BanBook());
         item.register(new ToPage2());                                   //====Page2
         item.register(new BackButton());
 
@@ -296,7 +223,6 @@ public class Init
         getPlugin().getCommand("aurabot").setExecutor(new AuraBot());
         getPlugin().getCommand("acpanic").setExecutor(new AuraPanic());
         getPlugin().getCommand("testknockback").setExecutor(new TestKnockback());
-        getPlugin().getCommand("bans").setExecutor(new CommandBans());
         getPlugin().getCommand("pull").setExecutor(new CommandPull());
         getPlugin().getCommand("target").setExecutor(new CommandTarget());
         getPlugin().getCommand("tracking").setExecutor(new CommandTracking());
@@ -304,9 +230,6 @@ public class Init
         getPlugin().getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
         getPlugin().getCommand("userinfo").setExecutor(new CommandUserInfo());
         getPlugin().getCommand("kick").setExecutor(new CommandKick());
-        getPlugin().getCommand("ban").setExecutor(new CommandBan());
-        getPlugin().getCommand("unban").setExecutor(new CommandUnBan());
-        getPlugin().getCommand("tempban").setExecutor(new CommandTempBan());
     }
 
     /**
@@ -336,11 +259,6 @@ public class Init
      */
     public static void enableTimer()
     {
-        isAutoMessageEnabled = config.getBoolean("autoMessage.enabled");
-        if (time == 0L)
-            time = 1L;
-
-        autoMessage = new AutoMessageTask();
         trackerTask = new TrackerTask();
 
         isTrackEnabled = config.getBoolean("mod.tracking.enabled");
@@ -352,11 +270,6 @@ public class Init
             trackerTask.runTaskTimer(getPlugin(), 0, config.getInt("mod.tracking.trackTicks"));
         }
 
-        if (isAutoMessageEnabled)
-        {
-            logger.info("Starting Auto-Message Task...");
-            autoMessage.runTaskTimer(getPlugin(), 0, 20 * (time * 60));
-        }
     }
 
     /**

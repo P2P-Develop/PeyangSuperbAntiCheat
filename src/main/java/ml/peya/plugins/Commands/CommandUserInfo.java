@@ -1,6 +1,5 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.BanAnalyzer;
 import ml.peya.plugins.Moderate.ErrorMessageSender;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -107,22 +106,7 @@ public class CommandUserInfo implements CommandExecutor
         int kick = 0;
         int mute = 0;
 
-        for (BanAnalyzer.Bans b : BanAnalyzer.getAbuse(offline.getUniqueId(), BanAnalyzer.Type.ALL))
-            switch (b.getType())
-            {
-                case BAN:
-                    ban++;
-                    break;
-                case KICK:
-                    kick++;
-                    break;
-                case MUTE:
-                    mute++;
-                    break;
-                case ALL:
-                default:
-                    break;
-            }
+        //TODO: カウンタ
 
         p.add(t(String.format(
             "Punishments: §a§lBans §r§f%d §6- §a§lMutes §r§f%d §r§6- §a§lKicks §r§f%d",

@@ -15,7 +15,7 @@ loadbefore: ["ProtocolLib", "Matrix", "NoCheatPlus"]
 commands:
     report:
         aliases:
-            ["peyangreport", "pcr", "rep", "report", "wdr", "watchdogreport"]
+          ["peyangreport", "pcr", "rep", "report", "wdr", "watchdogreport"]
         usage: /report <PlayerName> [type]
         description: "プレイヤーをレポートします。"
     peyangsuperbanticheat:
@@ -29,10 +29,6 @@ commands:
         aliases: ["testpanic", "panictest", "aurapanictest", "aurapanic"]
         usage: /acpanic <PlayerName>
         description: "プレイヤーの背後にNPCを召喚します。"
-    bans:
-        aliases: ["banlist", "playerbans", "banlookup"]
-        usage: /bans [-a | kick | ban] <Player_Name>
-        description: "プレイヤーのBAN(Kick)履歴を参照します。"
     testknockback:
         aliases: ["testkb", "kbtest", "knockbacktest"]
         usage: /testkb <Player>
@@ -59,17 +55,6 @@ commands:
     kick:
         usage: /kick <Player> [Reason]
         description: "理由をつけてプレイヤーをキックします。"
-    ban:
-        aliases: ["acban", "permban"]
-        usage: /ban <Player> [Reason]
-        description: "理由をつけてプレイヤーをアクセス禁止にします。"
-    unban:
-        aliases: ["pardon"]
-        usage: /unban <Player>
-        description: "プレイヤーのBANを解除します。"
-    tempban:
-        usage: /tempban <Expire> <Player> [Reason]
-        description: "一定の期間の間、プレイヤーをアクセス禁止にします。"
     userinfo:
         usage: /userinfo [-f] <Player>
         description: "ユーザ情報を表示します。"
@@ -95,7 +80,6 @@ permissions:
             psac.viewnpc: true
             psac.view: true
             psac.show: true
-            psac.bans: true
             psac.ntfadmin: true
             psac.reportntf: true
             psac.pull: true
@@ -104,8 +88,6 @@ permissions:
             psac.tracking: true
             psac.silentteleport: true
             psac.userinfo: true
-            psac.ban: true
-            psac.tempban: true
             psac.member: true
 
     psac.admin:
@@ -132,17 +114,8 @@ permissions:
         default: true
 
     #Moderator
-    psac.tempban:
-        description: 他プレイヤーを一時的にアクセス禁止にできます。
-        default: op
-    psac.ban:
-        description: 他プレイヤーをアクセス禁止にできます。
-        default: op
     psac.kick:
         description: 他プレイヤーをキックできます。
-        default: op
-    psac.bans:
-        description: プレイヤーのBanを検索します。
         default: op
     psac.reportntf:
         description: プレイヤーがレポートを出したときに通知されます。

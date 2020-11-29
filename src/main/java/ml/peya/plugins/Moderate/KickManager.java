@@ -2,17 +2,11 @@ package ml.peya.plugins.Moderate;
 
 import ml.peya.plugins.Objects.Decorations;
 import ml.peya.plugins.PeyangSuperbAntiCheat;
-import ml.peya.plugins.Utils.SQL;
-import ml.peya.plugins.Utils.Utils;
 import ml.peya.plugins.Variables;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.Date;
 import java.util.HashMap;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
@@ -75,42 +69,7 @@ public class KickManager
             player.kickPlayer(message);
             return;
         }
-        try (Connection kickC = Variables.log.getConnection();
-             Connection eyeC = Variables.eye.getConnection();
-             PreparedStatement statement = eyeC.prepareStatement("SELECT MNGID FROM watcheye WHERE UUID=?"))
-        {
 
-            SQL.insert(kickC, "kick",
-                player.getName(),
-                player.getUniqueId().toString().replace("-", ""),
-                id,
-                new Date().getTime(),
-                reason,
-                opFlag ? 1: 0
-            );
-
-            statement.setString(1, player.getUniqueId().toString().replace("-", ""));
-            ResultSet eyeList = statement.executeQuery();
-
-            while (eyeList.next())
-            {
-                final String MNGID = eyeList.getString("MNGID");
-                SQL.delete(eyeC, "watchreason", new HashMap<String, String>()
-                {{
-                    put("MNGID", MNGID);
-                }});
-                SQL.delete(eyeC, "watcheye", new HashMap<String, String>()
-                {{
-                    put("MNGID", MNGID);
-                }});
-            }
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            Utils.errorNotification(Utils.getStackTrace(e));
-        }
         player.kickPlayer(message);
     }
 }
