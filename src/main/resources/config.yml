@@ -10,10 +10,6 @@ database:
     learnPath: "./learn.json"
     trustPath: "./trust.db"
 
-    #くっそ重要です。
-    #banされたときに格納されます。
-    banPath: "./bans.db"
-
 #言語ファイル。 日本語-> ja
 lang: ja
 

@@ -637,7 +637,6 @@ SQL 関係は、[こ ↓ こ ↑](SQL.md) を参照してください。
 |   database.logPath   |    ./log.db     | キック情報などを保存する、SQLite データベースの置き場所です。                                                               |
 |  database.learnPath  |  ./learn.json   | 学習によって値が変更された「重み」と学習回数を保存する、JSON ファイルの置き場所です。                                       |
 |  database.trustPath  |   ./trust.db    | 信用したプレイヤーを保存する、SQLite データベースの置き場所です。つまりこれ消せば信用データ消えます。やっぱ鯖を操る人最強。 |
-|   database.banPath   |    ./bans.db    | BAN を管理するデータベースです。しっかり見直し設定をしてください。                                                          |
 |     npc.seconds      |        3        | NPC がプレイヤーの周りを回る秒数です。                                                                                      |
 |       npc.time       |      0.35       | NPC が回る速さです。感覚で調整してください。                                                                                |
 |      npc.range       |    3.0, 1.5     | NPC が回る半径です。ロマンが全て。デフォルトが最高。これが PSAC ｸｵﾘﾃｨ。                                                     |
@@ -691,7 +690,6 @@ message.yml をいじくり倒すことで、いろいろできますが、ま�
 |                |                      |                                     |                         |
 |       矢       |       TEST_KB        | 対象に見えない矢が飛んでいきます。  |    /testkb <Target>     |
 |    コンパス    |       TRACKER        |      対象にテレポートします。       |     /tpto <Target>      |
-|       本       |         BANS         |   対象の処罰情報が表示されます。    |    /bans -a <Target>    |
 |       矢       |   TO*TARGET*<番号>   |        ページ 2 に飛びます。        | /target <Target> <番号> |
 |      時計      |         BACK         |             戻ります。              |           ---           |
 |       矢       | BACK*TOTARGET*<番号> |       (ページ 1 に)戻ります。       | /target <Target> <番号> |

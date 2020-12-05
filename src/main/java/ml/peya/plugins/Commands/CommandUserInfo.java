@@ -31,8 +31,8 @@ public class CommandUserInfo implements CommandExecutor
     {
         return new ComponentBuilder(ChatColor.GOLD + "Actions: ").append(ChatColor.AQUA + "[TPTO] ")
             .event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/tpto " + player))
-            .append(ChatColor.AQUA + "[BAN] ")
-            .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/ban " + player + " "))
+            //.append(ChatColor.AQUA + "[BAN] ")
+            //.event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/ban " + player + " "))
             .append(ChatColor.AQUA + "[TEMPBAN] ")
             .event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tempban " + player + " "))
             .append(ChatColor.AQUA + "[KICK] ")
