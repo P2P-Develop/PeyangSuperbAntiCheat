@@ -4,7 +4,6 @@ import ml.peya.plugins.Enum.EnumCheatType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Consumer;
 
 /**
  * 判定タイプ管理するやつ。
@@ -48,12 +47,11 @@ public class CheatTypeUtils
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
         ArrayList<EnumCheatType> types = createTypes();
-        Arrays.stream(values).parallel().<Consumer<? super EnumCheatType>>map(reason -> type ->
-        {
-            if (reason.equalsIgnoreCase(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
-                type.setSelected(true);
-        }).forEachOrdered(types.parallelStream()::forEachOrdered);
-
+        for (String reason : values)
+            for (EnumCheatType type : types)
+                if (reason.toLowerCase().equals(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
+                    type.setSelected(true);
+        //エラーによりリストア #Peyang
         return types;
     }
 
