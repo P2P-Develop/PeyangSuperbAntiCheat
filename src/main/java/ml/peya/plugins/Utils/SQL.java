@@ -15,7 +15,6 @@ public class SQL
         StringBuilder p = new StringBuilder();
 
         Arrays.stream(value)
-            .parallel()
             .forEach(s -> {
                 if (!p.toString().isEmpty())
                     p.append(", ");
@@ -50,7 +49,6 @@ public class SQL
         StringBuilder p = new StringBuilder();
 
         map.keySet()
-            .parallelStream()
             .forEach(s -> {
                 if (!p.toString().isEmpty())
                     p.append(", ");

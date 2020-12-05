@@ -6,11 +6,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.IntStream;
 
 /**
  * <b>ReflectionUtils</b>
@@ -24,10 +21,9 @@ import java.util.stream.IntStream;
  * </ul>
  * <p>
  * <i>It would be nice if you provide credit to me if you use this class in a published project</i>
- * <p>This class SUPER COMPRESSION patch applied by Potato1682.</p>
  *
  * @author DarkBlade12
- * @version 1.1-ptt
+ * @version 1.1
  */
 public final class ReflectionUtils
 {
@@ -49,10 +45,13 @@ public final class ReflectionUtils
      */
     public static Constructor<?> getConstructor(Class<?> clazz, Class<?>... parameterTypes) throws NoSuchMethodException
     {
+        Class<?>[] primitiveTypes = DataType.getPrimitive(parameterTypes);
         for (Constructor<?> constructor : clazz.getConstructors())
         {
-            if (!DataType.compare(DataType.getPrimitive(constructor.getParameterTypes()), DataType.getPrimitive(parameterTypes)))
+            if (!DataType.compare(DataType.getPrimitive(constructor.getParameterTypes()), primitiveTypes))
+            {
                 continue;
+            }
             return constructor;
         }
         throw new NoSuchMethodException("There is no such constructor in this class with the specified parameter types");
@@ -124,10 +123,13 @@ public final class ReflectionUtils
      */
     public static Method getMethod(Class<?> clazz, String methodName, Class<?>... parameterTypes) throws NoSuchMethodException
     {
+        Class<?>[] primitiveTypes = DataType.getPrimitive(parameterTypes);
         for (Method method : clazz.getMethods())
         {
-            if (!method.getName().equals(methodName) || !DataType.compare(DataType.getPrimitive(method.getParameterTypes()), DataType.getPrimitive(parameterTypes)))
+            if (!method.getName().equals(methodName) || !DataType.compare(DataType.getPrimitive(method.getParameterTypes()), primitiveTypes))
+            {
                 continue;
+            }
             return method;
         }
         throw new NoSuchMethodException("There is no such method in this class with the specified name and parameter types");
@@ -399,7 +401,7 @@ public final class ReflectionUtils
          *
          * @param path Path of the package
          */
-        PackageType(String path)
+        private PackageType(String path)
         {
             this.path = path;
         }
@@ -410,19 +412,9 @@ public final class ReflectionUtils
          * @param parent Parent package of the package
          * @param path   Path of the package
          */
-        PackageType(PackageType parent, String path)
+        private PackageType(PackageType parent, String path)
         {
             this(parent + "." + path);
-        }
-
-        /**
-         * Returns the version of your server
-         *
-         * @return The server version
-         */
-        public static String getServerVersion()
-        {
-            return Bukkit.getServer().getClass().getPackage().getName().substring(23);
         }
 
         /**
@@ -453,6 +445,16 @@ public final class ReflectionUtils
         {
             return path;
         }
+
+        /**
+         * Returns the version of your server
+         *
+         * @return The server version
+         */
+        public static String getServerVersion()
+        {
+            return Bukkit.getServer().getClass().getPackage().getName().substring(23);
+        }
     }
 
     /**
@@ -474,21 +476,19 @@ public final class ReflectionUtils
         DOUBLE(double.class, Double.class),
         BOOLEAN(boolean.class, Boolean.class);
 
-        private static final Map<Class<?>, DataType> CLASS_MAP = new HashMap<>();
+        private static final Map<Class<?>, DataType> CLASS_MAP = new HashMap<Class<?>, DataType>();
+        private final Class<?> primitive;
+        private final Class<?> reference;
 
         // Initialize map for quick class lookup
         static
         {
-            Arrays.stream(values()).parallel().forEachOrdered(type ->
+            for (DataType type : values())
             {
                 CLASS_MAP.put(type.primitive, type);
                 CLASS_MAP.put(type.reference, type);
-            });
+            }
         }
-
-        private final Class<?>
-            primitive,
-            reference;
 
         /**
          * Construct a new data type
@@ -496,10 +496,30 @@ public final class ReflectionUtils
          * @param primitive Primitive class of this data type
          * @param reference Reference class of this data type
          */
-        DataType(Class<?> primitive, Class<?> reference)
+        private DataType(Class<?> primitive, Class<?> reference)
         {
             this.primitive = primitive;
             this.reference = reference;
+        }
+
+        /**
+         * Returns the primitive class of this data type
+         *
+         * @return The primitive class
+         */
+        public Class<?> getPrimitive()
+        {
+            return primitive;
+        }
+
+        /**
+         * Returns the reference class of this data type
+         *
+         * @return The reference class
+         */
+        public Class<?> getReference()
+        {
+            return reference;
         }
 
         /**
@@ -521,7 +541,8 @@ public final class ReflectionUtils
          */
         public static Class<?> getPrimitive(Class<?> clazz)
         {
-            return fromClass(clazz) == null ? clazz: fromClass(clazz).getPrimitive();
+            DataType type = fromClass(clazz);
+            return type == null ? clazz: type.getPrimitive();
         }
 
         /**
@@ -532,7 +553,8 @@ public final class ReflectionUtils
          */
         public static Class<?> getReference(Class<?> clazz)
         {
-            return fromClass(clazz) == null ? clazz: fromClass(clazz).getReference();
+            DataType type = fromClass(clazz);
+            return type == null ? clazz: type.getReference();
         }
 
         /**
@@ -543,9 +565,13 @@ public final class ReflectionUtils
          */
         public static Class<?>[] getPrimitive(Class<?>[] classes)
         {
-            return IntStream.range(0, classes == null ? 0: classes.length).parallel()
-                .mapToObj(index -> getPrimitive(Objects.requireNonNull(classes)[index]))
-                .toArray(Class<?>[]::new);
+            int length = classes == null ? 0: classes.length;
+            Class<?>[] types = new Class<?>[length];
+            for (int index = 0; index < length; index++)
+            {
+                types[index] = getPrimitive(classes[index]);
+            }
+            return types;
         }
 
         /**
@@ -556,9 +582,13 @@ public final class ReflectionUtils
          */
         public static Class<?>[] getReference(Class<?>[] classes)
         {
-            return IntStream.range(0, classes == null ? 0: classes.length).parallel()
-                .mapToObj(index -> getReference(Objects.requireNonNull(classes)[index]))
-                .toArray(Class<?>[]::new);
+            int length = classes == null ? 0: classes.length;
+            Class<?>[] types = new Class<?>[length];
+            for (int index = 0; index < length; index++)
+            {
+                types[index] = getReference(classes[index]);
+            }
+            return types;
         }
 
         /**
@@ -569,9 +599,13 @@ public final class ReflectionUtils
          */
         public static Class<?>[] getPrimitive(Object[] objects)
         {
-            return IntStream.range(0, objects == null ? 0: objects.length).parallel()
-                .mapToObj(index -> getPrimitive(Objects.requireNonNull(objects)[index].getClass()))
-                .toArray(Class<?>[]::new);
+            int length = objects == null ? 0: objects.length;
+            Class<?>[] types = new Class<?>[length];
+            for (int index = 0; index < length; index++)
+            {
+                types[index] = getPrimitive(objects[index].getClass());
+            }
+            return types;
         }
 
         /**
@@ -582,9 +616,13 @@ public final class ReflectionUtils
          */
         public static Class<?>[] getReference(Object[] objects)
         {
-            return IntStream.range(0, objects == null ? 0: objects.length).parallel()
-                .mapToObj(index -> getReference(Objects.requireNonNull(objects)[index].getClass()))
-                .toArray(Class<?>[]::new);
+            int length = objects == null ? 0: objects.length;
+            Class<?>[] types = new Class<?>[length];
+            for (int index = 0; index < length; index++)
+            {
+                types[index] = getReference(objects[index].getClass());
+            }
+            return types;
         }
 
         /**
@@ -596,30 +634,21 @@ public final class ReflectionUtils
          */
         public static boolean compare(Class<?>[] primary, Class<?>[] secondary)
         {
-            return primary != null && secondary != null && primary.length == secondary.length && IntStream
-                .range(0, primary.length).parallel()
-                .noneMatch(index -> !primary[index].equals(secondary[index]) && !primary[index]
-                    .isAssignableFrom(secondary[index]));
-        }
-
-        /**
-         * Returns the primitive class of this data type
-         *
-         * @return The primitive class
-         */
-        public Class<?> getPrimitive()
-        {
-            return primitive;
-        }
-
-        /**
-         * Returns the reference class of this data type
-         *
-         * @return The reference class
-         */
-        public Class<?> getReference()
-        {
-            return reference;
+            if (primary == null || secondary == null || primary.length != secondary.length)
+            {
+                return false;
+            }
+            for (int index = 0; index < primary.length; index++)
+            {
+                Class<?> primaryClass = primary[index];
+                Class<?> secondaryClass = secondary[index];
+                if (primaryClass.equals(secondaryClass) || primaryClass.isAssignableFrom(secondaryClass))
+                {
+                    continue;
+                }
+                return false;
+            }
+            return true;
         }
     }
 }
