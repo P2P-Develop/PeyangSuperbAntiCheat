@@ -289,14 +289,14 @@ public class Init
 
                 int i = 0;
                 for (double[] aIW : network.inputWeight)
-                    for (int i1 = 0; i1 < aIW.length; i1++)
+                    for (int j = 0; j < aIW.length; j++)
                     {
                         if (i >= network.inputWeight.length)
                             break;
                         network.inputWeight[i]
-                            [i1] = node.get("inputWeight")
+                            [j] = node.get("inputWeight")
                             .get(i)
-                            .get(i1)
+                            .get(j)
                             .asDouble();
                         i++;
                     }
