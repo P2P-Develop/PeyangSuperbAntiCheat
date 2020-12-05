@@ -23,7 +23,7 @@ public class GuiItem
     {
         int i = 0;
 
-        Arrays.stream(player.getInventory().getContents()).parallel()
+        Arrays.stream(player.getInventory().getContents())
             .filter(stack -> stack != null && stack.getType() != Material.AIR).forEachOrdered(stack ->
         {
             if (Item.canGuiItem(stack))
