@@ -27,7 +27,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -215,21 +214,6 @@ public class Events implements Listener
             e.setCancelled(true);
             KickManager.kickPlayer(e.getPlayer(), e.getReason().replaceFirst("§7\\[§bMatrix§7]§r ", ""), true, false);
         }
-    }
-
-    @EventHandler(priority = EventPriority.MONITOR)
-    public void onLogin(PlayerLoginEvent e)
-    {
-        if (Variables.bungeeCord)
-            return;
-
-        final String login = PlayerUtils.preLoginPending(e.getPlayer().getUniqueId());
-
-        if (login.equals(""))
-            return;
-
-        e.setKickMessage(login);
-        e.setResult(PlayerLoginEvent.Result.KICK_OTHER);
     }
 }
 

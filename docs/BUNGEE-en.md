@@ -25,7 +25,6 @@ BungeeCord is well-known as a proxy server that manages all servers at the same 
 PSAC takes advantage of it to implement a variety of new features.
 
 - Receiving reports on all servers
-- Share BAN records with all servers
 - Distribute the processing time of each server
 
 ## Installation
