@@ -289,7 +289,7 @@ public class Init
 
                 int i = 0;
                 for (double[] aIW : network.inputWeight)
-                    for (int i1 = 0; i1 < aIW.length - 1; i1++)
+                    for (int i1 = 0; i1 < aIW.length; i1++)
                     {
                         if (i >= network.inputWeight.length)
                             break;
