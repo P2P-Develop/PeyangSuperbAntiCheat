@@ -8,6 +8,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 
+/**
+ * ブロードキャストメッセージを管理するクラス。
+ */
 public class BroadcastMessenger
 {
     /**
@@ -38,8 +41,7 @@ public class BroadcastMessenger
                 }
             }.runTaskLater(PeyangSuperbAntiCheat.getPlugin(), 15);
         }
-        else
-            Bukkit.broadcast(get("kick.broadcast"), "psac.notification");
+        else Bukkit.broadcast(get("kick.broadcast"), "psac.notification");
 
     }
 }
