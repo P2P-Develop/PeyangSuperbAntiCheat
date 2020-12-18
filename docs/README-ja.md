@@ -164,7 +164,7 @@ Firefoxと同様、メモリやCPUともにフードファイターの100倍く�
 - [ここ](https://github.com/P2P-Develop/PeyangSuperbAntiCheat/releases)からダウンロードします。
 - 適当にクローンします。
 - Mavenでビルドします。
-- [ProtocolLib](https://www.spigotmc.org/resources/1997/) をpluginsフォルダーに入れます。
+- [ProtocolLib](https://www.spigotmc.org/resources/1997/)をpluginsフォルダーに入れます。
 - このプラグインをpluginsフォルダーに入れます。
 - 再起動してください。
 
@@ -362,7 +362,7 @@ Hypixelはスタッフ以外がLynxを持っていた場合、Lynxを持って�
 ### 説明
 
 このコマンドを実行するといくつかのアイテムが手に入ります。  
-このアイテムをクリックすることによりプレイヤーにNPCを出したりできるマクロのようなものです。  
+アイテムをクリックすることによりプレイヤーにNPCを出したりできるマクロのようなものです。  
 ドロップすると全部消えます。
 
 ### 使用法
