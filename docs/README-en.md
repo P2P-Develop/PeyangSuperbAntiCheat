@@ -374,9 +374,9 @@ The books are sorted in the order they are displayed.
 ### Description
 
 Executing this command will summon an NPC that spins around the player at a constant speed.  
-When an NPC is attacked a certain number of times, it kicks that player.  
+When the NPC is attacked a certain number of times, it kicks that player.  
 Also, to use the reach mode, adds the "-r" argument to the first or second argument.  
-Reach mode can scan the radius and check the reach.
+Reach mode can scan the radius and check the reaching.
 
 ### Usage
 
@@ -498,7 +498,7 @@ Tracks the specified player as a target.
 
 ### Description
 
-Executing this command gives utility items.  
+When you executing this command, it gives utility items.  
 These items allow you to execute useful commands with a click.  
 Dropping a given item, clears all items.
 
@@ -552,9 +552,9 @@ Trust specified player.
 
 ### Description
 
-Adds the specified player as a "trusted player".  
-If already trusted, can remove player from "trusted player".  
-Players without the `psac.trust` cannot run the following commands on trusted players.
+Add the specified player as a "trusted player".  
+If already trusted, remove player from "trusted player".  
+Players without permission `psac.trust` cannot run the following commands on trusted players.
 
 - [/aurabot](#aurabot)
 - [/acpanic](#acpanic)
@@ -632,7 +632,7 @@ Kick specified player.
 ### Description
 
 Kick the player and record it on the record.  
-Specifying \[test\] as the second argument kick player in _test mode_.
+You can specify \[test\] as the second argument kick player in _test mode_.
 
 ### Usages
 
@@ -701,7 +701,7 @@ Temporarily bans the specified player.
 
 ### Description
 
-Specify the player ban limit in seconds to temporarily block access.  
+Specify the player's ban limit in seconds to temporarily block access.  
 This is recommended over banning access permanently, but you need to remember the time.  
 The period is specified in units and is in no particular order.
 
