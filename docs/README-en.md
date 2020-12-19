@@ -98,7 +98,10 @@
     - [Why not automatically execute BAN commands in this plugin?](#why-not-automatically-execute-ban-commands-in-this-plugin)
   - [What is a learning function?](#what-is-a-learning-function)
     - [Learning mechanism](#learning-mechanism)
-  - [What is _YAML resources file_?](#what-is-yaml-resources-file)
+  - [What is the `lang` property?](#what-is-the-lang-property)
+    - [English](#english)
+    - [Japanese](#japanese)
+  - [What is the _YAML resources file_?](#what-is-the-yaml-resources-file)
   - [What utility items for /target?](#what-utility-items-for-target)
   - [What library does this plugin use?](#what-library-does-this-plugin-use)
   - [Did you find any bugs or errors?](#did-you-find-any-bugs-or-errors)
@@ -865,7 +868,31 @@ The learning function of this plugin uses machine learning to use a neural netwo
 
 The learning feature of this plugin adjusts key parameters by iteratively calculating the average of the parameters when it detects a cheat or kick.
 
-## What is _[YAML resources file](../src/main/resources)_?
+## What is the `lang` property?
+
+This plugin includes multi languages and you can set `lang` property in _[config.yml](../src/main/resources/config.yml)_.  
+You can't set different languages to `lang`, but you can set two, Japanese and English.  
+The `lang` property can set value with aliases, and the value can be set even if lowercase and uppercase letters are mixed.  
+You can set `lang` with this:
+
+### English
+
+- en-US
+- en_US
+- en-UK
+- en_UK
+- English
+
+UK English is also included in the alias because this plugin's English is not much different from US English.
+
+### Japanese
+
+- ja-JP
+- ja_JP
+- jp
+- Japanese
+
+## What is the _[YAML resources file](../src/main/resources)_?
 
 When you build PeyangSuperbAntiCheat.jar with `mvn package`, `mvn shade` is automatically executed.  
 You can edit this file to change the plugin resources before building.

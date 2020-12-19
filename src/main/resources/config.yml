@@ -11,7 +11,7 @@ database:
     trustPath: "./trust.db"
 
 #言語ファイル。 日本語-> ja
-lang: ja
+lang: en
 
 #npc関係のコンフィグです。
 npc:
