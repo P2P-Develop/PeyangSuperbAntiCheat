@@ -1,25 +1,18 @@
 package ml.peya.plugins.Detect;
 
-import develop.p2p.lib.WaveCreator;
-import ml.peya.plugins.DetectClasses.CheatDetectNowMeta;
-import ml.peya.plugins.Enum.DetectType;
-import ml.peya.plugins.PeyangSuperbAntiCheat;
-import net.minecraft.server.v1_12_R1.EntityPlayer;
-import net.minecraft.server.v1_12_R1.ItemStack;
-import net.minecraft.server.v1_12_R1.PacketPlayOutAnimation;
-import net.minecraft.server.v1_12_R1.PacketPlayOutEntityHeadRotation;
-import net.minecraft.server.v1_12_R1.PacketPlayOutEntityTeleport;
-import net.minecraft.server.v1_12_R1.PlayerConnection;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftPlayer;
-import org.bukkit.entity.Player;
-import org.bukkit.metadata.MetadataValue;
-import org.bukkit.scheduler.BukkitRunnable;
+import develop.p2p.lib.*;
+import ml.peya.plugins.DetectClasses.*;
+import ml.peya.plugins.Enum.*;
+import ml.peya.plugins.*;
+import net.minecraft.server.v1_12_R1.*;
+import org.bukkit.*;
+import org.bukkit.command.*;
+import org.bukkit.craftbukkit.v1_12_R1.entity.*;
+import org.bukkit.entity.*;
+import org.bukkit.metadata.*;
+import org.bukkit.scheduler.*;
 
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Variables.cheatMeta;
@@ -143,10 +136,12 @@ public class NPCTeleport
 
                 clt[0] += 0.035;
                 if (clt[0] >= sec)
+                {
+                    Variables.logger.info("Finished");
                     this.cancel();
+                }
             }
         }.runTaskTimer(PeyangSuperbAntiCheat.getPlugin(), 0, 1);
-
     }
 
     /**
