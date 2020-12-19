@@ -37,13 +37,9 @@ public class MessageEngine
         String lang = PeyangSuperbAntiCheat.getPlugin().getConfig().getString("lang").toLowerCase();
 
         if (lang.equals("ja_jp") || lang.equals("ja-jp") || lang.equals("jp") || lang.equals("japanese"))
-        {
             lang = "ja";
-        }
         else if (lang.equals("en_us") || lang.equals("en-us") || lang.equals("en_uk") || lang.equals("en-uk") || lang.equals("english"))
-        {
             lang = "en";
-        }
         else
         {
             lang = "en";
