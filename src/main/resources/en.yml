@@ -1,0 +1,327 @@
+base:
+    prefix: "%%aqua%%-----%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%]%%aqua%%-----"
+    true: "%%green%%True"
+    false: "%%red%%False"
+    enable: "%%green%%Enabled"
+    disable: "%%red%%Disabled"
+    day: "day(s)"
+    hour: "hour(s)"
+    minutes: "minute(s)"
+    seconds: "second(s)"
+
+error:
+    minArgs: "%%red%%Error: Not enough arguments. /%%label%% help to see help."
+    playerNotFound: "%%red%%Error: Specified player not found."
+    unknownSQLError: "%%red%%Error: Unknown SQL error has occurred. This will report to admin."
+    notHavePermission: "%%red%%Error: Invalid permission!"
+    invalidArgument: "%%red%%Error: Invalid arguments. /psac help to see help."
+    requirePlayer: "%%red%%Error: Please run this command from any player."
+    notPlayerFoundInRange: "%%red%%Error: Any player not found in the range."
+    processing: "%%red%%Error: Now processing."
+    trusted: "%%red%%Error: The player is trusted! If you still want to do it, please run with psac.trust permission!"
+    playerNotBanned: "%%red%%Error: The player not banned."
+
+    report:
+        invalidReason: "%%red%%Error: Invalid reason."
+        reasonNotSelected: "%%red%%Error: The reasons not selected."
+        alreadyReported: "%%red%%Error: The player is already reported."
+
+    main:
+        notFoundCommand: "%%red%%Error: The command not found. /%%label%% help to see help."
+
+    psac:
+        notPage: "%%red%%Error: No information to see."
+
+    view:
+        notFoundReport: "%%red%%Error: The reports not found."
+
+    showDrop:
+        notFoundReport: "%%red%%Error: The report not found with the ID!"
+
+    aura:
+        testingNow: "%%red%%Error: The player is testing now."
+        notNumeric: "%%red%%Error: Specified time is not numeric. /psac help to see help."
+
+    bans:
+        unknownSearchType: "%%red%%Error: Unknown search type."
+        databaseInfoNotFound: "%%red%%Error: The information not found in the databases."
+
+command:
+    report:
+        help: "\
+        %%aqua%%/psac <PlayerName> [Reasons...]\n\
+        %%green%%Send the content of the report selected and submitted by the player to the staff.\n\
+        %%aqua%%/psac help\n\
+        %%green%%This command.
+        "
+
+    help:
+        report: "\
+        %%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>\n\
+        %%green%%Send the content of the report selected and submitted by the player to the staff.\
+        "
+
+        view: "\
+        %%aqua%%/psac view %%dark_purple%% [Page | PlayerName] [Page]\n\
+        %%green%%See the report submitted by the player.\n\
+        %%green%%The reports are sorted by highest risk, five at a time.
+        "
+
+        aurapanic: "\
+        %%aqua%%/acpanic %%dark_aqua%%<PlayerName>%%dark_purple%% [-rf]\n\
+        %%green%%This command always summons the NPC that is trying to move behind the player.\n\
+        %%green%%When an NPC is attacked a certain number of times, it kicks that player.\n\
+        %%gray%%Tips: To use the Reach Mode, adds the '-r' flag to the first or second argument.\n\
+        $$gray%%      Reach Mode can scan the radius and check the reaching.
+        "
+
+        aurabot: "\
+        %%aqua%%/aurabot%%dark_aqua%% <PlayerName>%%dark_purple%% [-r]\n\
+        %%green%%Executing this command will summon an NPC that spins around the player at a constant speed\n\
+        %%green%%When the NPC is attacked a certain number of times, it kicks that player\n\
+        %%gray%%Tips: To use the Reach Mode, adds the '-r' flag to the first or second argument.\n\
+        $$gray%%      Reach Mode can scan the radius and check the reaching.
+        "
+
+        show: "\
+        %%aqua%%/psac show %%dark_aqua%%<ManagementID>\n\
+        %%green%%View details of the report sent by the player.\n\
+        %%green%%You can run this command from the player to view the report details by the player's book.\n\
+        %%green%%If you run it from the console, it will appear as a log to the console.
+        "
+
+        drop: "\
+        %%aqua%%/psac drop%%dark_aqua%% <ManagementID>\n\
+        %%green%%Completely discards the reports sent by the player, except the command execution log.\n\
+        %%yellow%%Important: The log of the deletion itself is not displayed. Please be careful when discarding.
+        "
+
+        kick: "\
+        %%aqua%%/psac kick %%dark_aqua%% <PlayerName>%%dark_purple%% [Reason...]\n\
+        %%green%%Kick the player and record it on the record.\n\
+        %%gray%%Tips: You can specify test as the second argument kick player in Test Mode.
+        "
+
+        testkb: "\
+        %%aqua%%/testkb %%dark_aqua%%<PlayerName>\n\
+        %%green%%Fire a invisible arrow at the specified player.\n\
+        %%green%%This allows you to see if the player is knocking back.
+        "
+
+        pull: "\
+        %%aqua%%/pull %%dark_aqua%%<PlayerName>\n\
+        %%green%%Pull the specified player to the executed player.\n\
+        %%green%%It cannot be run from console.
+        "
+
+        target: "\
+        %%aqua%%/target %%dark_aqua%%<PlayerName>\n\
+        %%green%%Tracks the specified player as a target.\n\
+        %%green%%When you executing this command, it gives utility items.\n\
+        %%green%%These items allow you to execute useful commands with a click.\n\
+        %%green%%When you Dropping a given item, clears all items.
+        "
+
+        tracking: "\
+        %%aqua%%/track %%dark_purple%%[PlayerName]\n\
+        %%green%%Tracks the specified player.\n\
+        %%green%%If tracking is currently started and no argument is specified, tracking will be stopped.
+        "
+
+        trust: "\
+        %%aqua%%/trust %%dark_aqua%%<PlayerName>\n\
+        %%green%%Add the specified player as a 'trusted player'.\n\
+        %%green%%If already trusted, remove player from 'trusted player'.\n\
+        %%green%%Players without permission psac.trust cannot run the following commands on trusted players.
+        "
+
+        silentteleport: "\
+        %%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>\n\
+        %%green%%Causes the specified player to teleport you or the specified player.\n\
+        %%green%%Used for utility item internal commands in the /target.\n\
+        %%green%%It also suppresses broadcast messages on servers that do not have Essentials installed.
+        "
+
+        tempban: "\
+        %%aqua%%/tempban %%dark_aqua%%<Date> <PlayerName> %%dark_purple%% [Reasons...]\n\
+        %%green%%Specify the player's ban limit in seconds to temporarily block access.\n\
+        %%green%%This is recommended over banning access permanently, but you need to remember the time.\n\
+        %%green%%The period is specified in units and is in no particular order.\n\
+        %%gray%%Example: /tempban 1y 1mo 4days 5hour 1min 4sec SaikyouPeyangsan Blacklisted Modifications\n\
+        %%gray%%         In this case, ban SaikyouPeyangsan for 1 year, 1 month, 4 days, 5 hours, 1 minute, 4 seconds with Blacklisted Modifications.
+        "
+
+        mngIdWarning: "\
+        %%yellow%%Warning: ManagementID is a 32-character alphanumeric string that is automatically assigned when the player submits the report.\n\
+        %%yellow%%It can be managed from the player, but it is recommended to manage it from the console.
+        "
+
+    shelp:
+        report: "%%aqua%%/report(wdr)%%dark_aqua%% <PlayerName>"
+        view: "%%aqua%%/psac view %%dark_purple%% [Page | PlayerName] [Page]"
+        aurapanic: "%%aqua%%/acpanic %%dark_aqua%%<PlayerName>%%dark_purple%% [-rf]"
+        aurabot: "%%aqua%%/aurabot%%dark_aqua%% <PlayerName>%%dark_purple%% [-r]"
+        show: "%%aqua%%/psac show %%dark_aqua%%<ManagementID>"
+        drop: "%%aqua%%/psac drop%%dark_aqua%% <ManagementID>"
+        kick: "%%aqua%%/psac kick %%dark_aqua%% <PlayerName>%%dark_purple%% [Reasons...]"
+        testkb: "%%aqua%%/testkb %%dark_aqua%%<PlayerName>"
+        pull: "%%aqua%%/pull %%dark_aqua%%<PlayerName>"
+        target: "%%aqua%%/target %%dark_aqua%%<PlayerName>"
+        tracking: "%%aqua%%/track %%dark_purple%%[PlayerName]"
+        trust: "%%aqua%%/trust %%dark_aqua%%<PlayerName>"
+        silentteleport: "%%aqua%%/tpto %%dark_purple%%[PlayerName] %%dark_aqua%%<PlayerName>"
+
+message:
+    report:
+        thanks: "%%green%%Thanks for reporting, this helps to improve our system and the community! :)"
+        cancel: "%%red%%Closed your report!"
+
+    drop:
+        success: "%%green%%The report has been deleted successfly."
+
+    kick:
+        test: "%%red%%Kick the player as %%Test Mode%%."
+
+    aura:
+        summon: "\
+        %%green%%Summmoning %%type%% to %%name%%.\n\
+        %%green%%Please wait for %%seconds%%s...
+        "
+
+        lynx: "%%yellow%%Testing, please wait..."
+
+    trust:
+        add: "%%green%%Added %%name%% to Trusting List."
+        remove: "%%red%%Removed %%name%% from Trusting List."
+
+    auraCheck:
+        result:
+            prefix: "%%green%%KillAura Check Result for %%name%%"
+            vl: "%%aqua%%VL%%white%%: %%blue%%%%vl%%"
+            vlGraph: "%%green%%0%     %%yellow%%50%     %%red%%100%"
+            result: "%%aqua%%Result%%white%%: %%result%%"
+            words:
+                kick: "%%red%%KICK"
+                ok: "%%green%%OK"
+
+        bot:
+            lynx: "%%aqua%%Hit the player %%red%%%%hit%% %%aqua%%times!"
+
+        panic:
+            lynx: "%%yellow%%Hit them %%hit%%/%%max%%"
+
+    testkb:
+        normal: "%%aqua%%Tested '%%name%%' for anti kb!"
+        lynx: "%%aqua%%Tested '%%name%%' for anti kb!"
+
+    pull:
+        normal: "%%yellow%%Pulled player '%%name%%' to you!"
+        lynx: "%%yellow%%Pulled player '%%name%%' to you!"
+    tracking:
+        track: "%%red%%Tracking %%player%%."
+        unTrack: "%%red%%Stopped Tracking Mode."
+
+    teleport:
+        teleport: "%%aqua%%Teleported to %%player%%."
+
+    unban:
+        playerUnBanned: "%%green%%Cancelled restrictions from %%white%%%%player%%."
+
+autoMessage: "\
+%%dark_red%%［PEYANG ANTI CHEAT ANNOUNCEMENT］\n\
+%%white%%Peyang Anti Cheat has banned %%red%%%%bold%%%%count%%%%reset%% players in the last 7 days.
+%%white%%Staff have banned an additional %%red%%%%bold%%%%staff_count%%%%reset%% in the last 7 days.
+%%red%%Blacklisted modifications are a bannable offense!
+"
+
+reportbook:
+    cheat: "Which cheats do they use?"
+    submit: "%%dark_green%%%%bold%%Submit your report"
+    cancel: "%%red%%Cancel reporting"
+
+book:
+    words:
+        next: "%%aqua%%Next"
+        back: "%%aqua%%Previous"
+        delete: "%%white%%[%%yellow%%%%bold%%Delete%%reset%%%%white%%]"
+
+    clickable: "\
+    %%aqua%%Click to\n\
+    %%aqua%%paste the chat
+    "
+
+    text:
+        report: "%%dark_green%%%%bold%%Cheat Report"
+        uuid: "%%aqua%%%%bold%%UUID%%black%%: %%blue%%%%uuid%%"
+        unix: "%%aqua%%%%bold%%UNIX Seconds%%black%%: %%blue%%%%unix%%"
+        issueBy: "%%aqua%%%%bold%%Sent Player%%black%%: %%blue%%%%id%%"
+        issueTo: "%%aqua%%%%bold%%Target%%black%%: %%blue%%%%id%%"
+        dateTime: "%%aqua%%%%bold%%Date%%black%%: %%blue%%%%time%%"
+        reason: "%%aqua%%%%bold%%Reasons%%black%%: %%blue%%%%reason%%"
+        severity: "%%aqua%%%%bold%%Threat Level%%black%%: %%color%%%%bold%%%%level%%"
+
+    click:
+        openAbout: "%%green%%Click to see details"
+        deleteReport: "%%green%%Click to %%red%%delete %%green%%the report"
+        delete: "%%white%%[%%yellow%%%%bold%%Delete%%reset%%]"
+
+kick:
+    broadcastWd: "\
+    [PEYANG CHEAT DETECTION]\n\
+    %%red%%%%bold%%A player has been removed from your game for hacking or abuse.\n\
+    "
+
+    broadcast: "\
+    %%red%%%%bold%%A player has been removed from your game for abuse.\n\
+    %%reset%%%%aqua%%Thanks for reporting it!
+    "
+
+    broadcastAdmin: "\
+    %%aqua%%Player Name%%white%%: %%blue%%%%name%%\n\
+    %%aqua%%UUID%%white%%: %%blue%%%%uuid%%
+    "
+
+    reason: "\
+    %%red%%You are kicked from this server!\n\
+    \n\
+    %%gray%%Reason: %%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+    \n\
+    %%gray%%Kick ID：%%white%%%%id%%
+    "
+
+ban:
+    permReason: "\
+    %%red%%You are permanently stricted to access this server!\n\
+    \n\
+    %%gray%%Reason: %%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+    \n\
+    %%gray%%Access Denied ID: %%white%%%%id%%
+    "
+
+    tempReason: "\
+    %%red%%You are stricted to access this server until %%white%%%%date%%!\n\
+    \n\
+    %%gray%%Reason: %%white%%%%reason%% %%gray%%%%italic%%[GG-%%ggid%%]%%reset%%\n\
+    \n\
+    %%gray%%Access Denied ID: %%white%%%%id%%
+    "
+
+report:
+    submited: "%%green%%[%%blue%%PeyangSuperbAntiCheat%%green%%] The player sent a report!"
+    click: "%%yellow%%Click to see the report!"
+    lynx:
+        submited: "%%aqua%%[STAFF] %%red%%[ADMIN] Fishy%%white%%: Report of %%name%% %%reason%%"
+
+item:
+    execute: "%%green%%Run %%red%%%%command%%"
+    stopTarget: "%%red%%Stop Watching Mode"
+    compass: "%%green%%%%bold%%Compass Tracker %%reset%%%%red%%3000%%green%%%%bold%%™"
+    tracking:
+        noTarget: "%%red%%No Target"
+        text: "%%red%%%%bold%%Target: %%reset%%%%green%%%%name%%%%red%%%%bold%%, World: %%reset%%%%green%%%%world%%%%red%%%%bold%%, X: %%reset%%%%green%%%%x%%%%red%%%%bold%%, Y: %%reset%%%%green%%%%y%%%%red%%%%bold%%, Z: %%reset%%%%green%%%%z%%%%red%%%%bold%%, Distance: %%reset%%%%green%%%%distance%%%%red%%%%bold%%, Speed: %%reset%%%%green%%%%velocity%%m/Tick%%tests%%"
+        testing: "%%reset%%%%aqua%%(Testing: %%red%%%%bold%%%%type%%%%reset%%%%aqua%%, VL: %%red%%%%bold%%%%vl%%%%reset%%%%aqua%%)"
+
+    banBook:
+        title: "%%red%%Punishments List for %%name%%"
+    targetStick: "%%gold%%%%bold%%Target Stick"
+    lead: "%%red%%Pull the player to you"
