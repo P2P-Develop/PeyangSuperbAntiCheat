@@ -85,6 +85,9 @@ If possible.
     - [NPC について](#npc-について)
     - [コンフィグについて](#コンフィグについて)
     - [人工知能もどきについて](#人工知能もどきについて)
+    - [言語について](#言語について)
+        - [英語](#英語)
+        - [日本語](#日本語)
     - [message.yml について](#messageyml-について)
     - [ターゲットアイテムについて](#ターゲットアイテムについて)
     - [バグ等](#バグ等)
@@ -605,10 +608,11 @@ SQL関係は、[こ ↓ こ ↑](SQL.md)を参照してください。
 |        設定名        |  デフォルト値   | 説明                                                                                                                        |
 | :------------------: | :-------------: | --------------------------------------------------------------------------------------------------------------------------- |
 |   database.method    | org.sqlite.JDBC | SQLの設定（メソッド）                                                                                                        |
-|     database.url     |   jdbc:sqlite   | SQLの設定（URL）|
+|     database.url     |   jdbc:sqlite   | SQLの設定（URL）                                                                               |
 |   database.logPath   |    ./log.db     | キック情報などを保存するSQLiteデータベースの置き場所です。                                                               |
 |  database.learnPath  |  ./learn.json   | 学習によって値が変更された「重み」と学習回数を保存するJSONファイルの置き場所です。                                       |
 |  database.trustPath  |   ./trust.db    | 信用したプレイヤーを保存するSQLiteデータベースの置き場所です。これを消去すると信用データが消えます。 |
+|        lang          |       en        | [プラグインのメッセージの表示に使用する言語を設定します。](#言語について)                                                                   |
 |     npc.seconds      |        3        | NPCがプレイヤーの周りを回る秒数です。                                                                                      |
 |       npc.time       |      0.35       | NPCが回る速さです。感覚で調整してください。                                                                                |
 |      npc.range       |    3.0, 1.5     | NPCが回る半径です。                                                     |
@@ -641,6 +645,33 @@ SQL関係は、[こ ↓ こ ↑](SQL.md)を参照してください。
 BANされるべき人がBANされなくても~~上の通り~~知りません。誰かアルゴリズム作り直してください。
 
 ↑ ハハッ ＾＾；
+
+### 言語について
+
+とっても心の広い英語ドキュメント担当者がプラグインを多言語化しました。  
+ほぼすべての言語を扱えるわけではありませんが、英語 \(en\)、日本語 \(ja\)の2種類を扱うことができます。  
+[コンフィグについて](#コンフィグについて)に記載されている通り、`lang`プロパティに指定することで簡単に言語の変更ができます。  
+`lang`プロパティにはある程度曖昧な書き方ができるようにエイリアスも指定されています。  
+エイリアスは以下のとおりです。
+
+#### 英語
+
+- en-US
+- en_US
+- en-UK
+- en_UK
+- English
+
+イギリス英語も指定しているのは本プラグインの英語ではあまり違いがないと思われたためです。
+
+#### 日本語
+
+- ja-JP
+- ja_JP
+- jp
+- Japanese
+
+これらのエイリアスは小文字や大文字が混ざっていても認識できます。
 
 ### message.yml について
 
@@ -679,7 +710,7 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 
 ### [**こ ↑ こ ↓**](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)場所の担当者
 
-日本語：[ぺやんぐ](https://github.com/peyang-Celeron)←開発者
+日本語：[ぺやんぐ](https://github.com/peyang-Celeron)←開発者←らしいです。
 
 日本語校正したり翻訳してる人：[Lemonade19x](https://github.com/Lemonade19x)←ぺやんぐの文章は「、」が多すぎたりサーバーをサーバなど言ったりしてるのでここのコミット200回以上やり直しました。
 
@@ -696,8 +727,6 @@ message.ymlをいじくり倒すことで、いろいろできますが、まぁ
 - [P2P-Develop/PeyangSuperLibrary](https://github.com/P2P-Develop/PeyangSuperLibrary)
 - [PhantomUnicorns](https://stackoverflow.com/users/6727559/phantomunicorns)
 - [Matrix API](https://matrix.rip/) [\(\*\)](https://www.mc-market.org/resources/13999/)
-
-↓なんでここのbrがXHTMLのやつなんですかねぇ…わからんから訂正しといたよ。
 
   <br>
   <br>

@@ -1,6 +1,7 @@
 package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Variables;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -33,8 +34,21 @@ public class MessageEngine
      */
     public static void initialize()
     {
+        String lang = PeyangSuperbAntiCheat.getPlugin().getConfig().getString("lang").toLowerCase();
+
+        if (lang.equals("ja_jp") || lang.equals("ja-jp") || lang.equals("jp") || lang.equals("japanese"))
+            lang = "ja";
+        else if (lang.equals("en_us") || lang.equals("en-us") || lang.equals("en_uk") || lang.equals("en-uk") || lang.equals("english"))
+            lang = "en";
+        else
+        {
+            lang = "en";
+
+            Variables.logger.warning("Specified language '" + lang + "' not found, changing to fallback language 'en'");
+        }
+
         try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream(
-            "/" + PeyangSuperbAntiCheat.getPlugin().getConfig().getString("lang") + ".yml"), StandardCharsets.UTF_8))
+            "/" + lang + ".yml"), StandardCharsets.UTF_8))
         {
             config = YamlConfiguration.loadConfiguration(new BufferedReader(reader));
         }
