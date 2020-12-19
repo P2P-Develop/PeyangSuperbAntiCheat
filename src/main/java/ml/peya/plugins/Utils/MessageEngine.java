@@ -1,6 +1,7 @@
 package ml.peya.plugins.Utils;
 
 import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Variables;
 import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -33,7 +34,7 @@ public class MessageEngine
      */
     public static void initialize()
     {
-        final String lang = PeyangSuperbAntiCheat.getPlugin().getConfig().getString("lang").toLower();
+        String lang = PeyangSuperbAntiCheat.getPlugin().getConfig().getString("lang").toLowerCase();
 
         if (lang == "ja_jp" || lang == "ja-jp" || lang == "jp" || lang == "japanese")
         {
