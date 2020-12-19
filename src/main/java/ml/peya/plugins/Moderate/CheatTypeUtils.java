@@ -46,12 +46,11 @@ public class CheatTypeUtils
      */
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
-        ArrayList<EnumCheatType> types = createTypes();
-        Arrays.stream(values).parallel().forEachOrdered(value -> types.parallelStream().forEachOrdered(type -> {
+        for (EnumCheatType type : createTypes())
             if (reason.toLowerCase().equals(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
                 type.setSelected(true);
-        }));
 
+        //エラーによりリストア #Peyang
         return types;
     }
 

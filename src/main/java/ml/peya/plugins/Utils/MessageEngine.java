@@ -33,8 +33,25 @@ public class MessageEngine
      */
     public static void initialize()
     {
+        final String lang = PeyangSuperbAntiCheat.getPlugin().getConfig().getString("lang").toLower();
+
+        if (lang == "ja_jp" || lang == "ja-jp" || lang == "jp" || lang == "japanese")
+        {
+            lang = "ja";
+        }
+        else if (lang == "en_us" || lang == "en-us" || lang == "en_uk" || lang == "en-uk" || lang == "english")
+        {
+            lang = "en";
+        }
+        else
+        {
+            lang = "en";
+
+            Variables.logger.warn("Specified language '" + lang + "' not found, changing to fallback language 'en'");
+        }
+
         try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream(
-            "/" + PeyangSuperbAntiCheat.getPlugin().getConfig().getString("lang") + ".yml"), StandardCharsets.UTF_8))
+            "/" + lang + ".yml"), StandardCharsets.UTF_8))
         {
             config = YamlConfiguration.loadConfiguration(new BufferedReader(reader));
         }
