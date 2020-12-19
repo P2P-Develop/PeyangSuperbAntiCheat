@@ -36,11 +36,11 @@ public class MessageEngine
     {
         String lang = PeyangSuperbAntiCheat.getPlugin().getConfig().getString("lang").toLowerCase();
 
-        if (lang == "ja_jp" || lang == "ja-jp" || lang == "jp" || lang == "japanese")
+        if (lang.equals("ja_jp") || lang.equals("ja-jp") || lang.equals("jp") || lang.equals("japanese"))
         {
             lang = "ja";
         }
-        else if (lang == "en_us" || lang == "en-us" || lang == "en_uk" || lang == "en-uk" || lang == "english")
+        else if (lang.equals("en_us") || lang.equals("en-us") || lang.equals("en_uk") || lang.equals("en-uk") || lang.equals("english"))
         {
             lang = "en";
         }
