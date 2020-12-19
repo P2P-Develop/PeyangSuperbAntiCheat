@@ -48,7 +48,7 @@ public class MessageEngine
         {
             lang = "en";
 
-            Variables.logger.warn("Specified language '" + lang + "' not found, changing to fallback language 'en'");
+            Variables.logger.warning("Specified language '" + lang + "' not found, changing to fallback language 'en'");
         }
 
         try (InputStreamReader reader = new InputStreamReader(PeyangSuperbAntiCheat.class.getResourceAsStream(
