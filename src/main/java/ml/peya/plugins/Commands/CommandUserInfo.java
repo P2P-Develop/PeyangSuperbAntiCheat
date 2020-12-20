@@ -1,23 +1,14 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Moderate.ErrorMessageSender;
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.ClickEvent;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import ml.peya.plugins.Moderate.*;
+import net.md_5.bungee.api.chat.*;
+import org.bukkit.*;
+import org.bukkit.command.*;
+import org.bukkit.entity.*;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.stream.Stream;
+import java.text.*;
+import java.util.*;
+import java.util.stream.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 
@@ -163,7 +154,7 @@ public class CommandUserInfo implements CommandExecutor
         ComponentBuilder builder = new ComponentBuilder("");
         userInfo(player[0], lynx).parallelStream()
             .forEachOrdered(builder::append);
-        player[0].spigot().sendMessage(builder.append(action(player[0].getName())).create());
+        sender.spigot().sendMessage(builder.append(action(player[0].getName())).create());
         return true;
     }
 }
