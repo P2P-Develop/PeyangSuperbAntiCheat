@@ -47,10 +47,12 @@ public class CheatTypeUtils
     public static ArrayList<EnumCheatType> getCheatTypeArrayFromString(String[] values)
     {
         ArrayList<EnumCheatType> types = createTypes();
+
         for (String reason : values)
             for (EnumCheatType type : types)
                 if (reason.toLowerCase().equals(type.getSysName()) || aliasEquals(type, reason.toLowerCase()))
                     type.setSelected(true);
+
         //エラーによりリストア #Peyang
         return types;
     }

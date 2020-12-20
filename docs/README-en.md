@@ -98,7 +98,10 @@
     - [Why not automatically execute BAN commands in this plugin?](#why-not-automatically-execute-ban-commands-in-this-plugin)
   - [What is a learning function?](#what-is-a-learning-function)
     - [Learning mechanism](#learning-mechanism)
-  - [What is _YAML resources file_?](#what-is-yaml-resources-file)
+  - [What is the `lang` property?](#what-is-the-lang-property)
+    - [English](#english)
+    - [Japanese](#japanese)
+  - [What is the _YAML resources file_?](#what-is-the-yaml-resources-file)
   - [What utility items for /target?](#what-utility-items-for-target)
   - [What library does this plugin use?](#what-library-does-this-plugin-use)
   - [Did you find any bugs or errors?](#did-you-find-any-bugs-or-errors)
@@ -374,9 +377,9 @@ The books are sorted in the order they are displayed.
 ### Description
 
 Executing this command will summon an NPC that spins around the player at a constant speed.  
-When an NPC is attacked a certain number of times, it kicks that player.  
+When the NPC is attacked a certain number of times, it kicks that player.  
 Also, to use the reach mode, adds the "-r" argument to the first or second argument.  
-Reach mode can scan the radius and check the reach.
+Reach mode can scan the radius and check the reaching.
 
 ### Usage
 
@@ -498,7 +501,7 @@ Tracks the specified player as a target.
 
 ### Description
 
-Executing this command gives utility items.  
+When you executing this command, it gives utility items.  
 These items allow you to execute useful commands with a click.  
 Dropping a given item, clears all items.
 
@@ -552,9 +555,9 @@ Trust specified player.
 
 ### Description
 
-Adds the specified player as a "trusted player".  
-If already trusted, can remove player from "trusted player".  
-Players without the `psac.trust` cannot run the following commands on trusted players.
+Add the specified player as a "trusted player".  
+If already trusted, remove player from "trusted player".  
+Players without permission `psac.trust` cannot run the following commands on trusted players.
 
 - [/aurabot](#aurabot)
 - [/acpanic](#acpanic)
@@ -632,7 +635,7 @@ Kick specified player.
 ### Description
 
 Kick the player and record it on the record.  
-Specifying \[test\] as the second argument kick player in _test mode_.
+You can specify \[test\] as the second argument kick player in _test mode_.
 
 ### Usages
 
@@ -701,7 +704,7 @@ Temporarily bans the specified player.
 
 ### Description
 
-Specify the player ban limit in seconds to temporarily block access.  
+Specify the player's ban limit in seconds to temporarily block access.  
 This is recommended over banning access permanently, but you need to remember the time.  
 The period is specified in units and is in no particular order.
 
@@ -865,7 +868,31 @@ The learning function of this plugin uses machine learning to use a neural netwo
 
 The learning feature of this plugin adjusts key parameters by iteratively calculating the average of the parameters when it detects a cheat or kick.
 
-## What is _[YAML resources file](../src/main/resources)_?
+## What is the `lang` property?
+
+This plugin includes multi languages and you can set `lang` property in _[config.yml](../src/main/resources/config.yml)_.  
+You can't set different languages to `lang`, but you can set two, Japanese and English.  
+The `lang` property can set value with aliases, and the value can be set even if lowercase and uppercase letters are mixed.  
+You can set `lang` with this:
+
+### English
+
+- en-US
+- en_US
+- en-UK
+- en_UK
+- English
+
+UK English is also included in the alias because this plugin's English is not much different from US English.
+
+### Japanese
+
+- ja-JP
+- ja_JP
+- jp
+- Japanese
+
+## What is the _[YAML resources file](../src/main/resources)_?
 
 When you build PeyangSuperbAntiCheat.jar with `mvn package`, `mvn shade` is automatically executed.  
 You can edit this file to change the plugin resources before building.

@@ -3,19 +3,18 @@ package ml.peya.plugins.Moderate;
 import org.apache.commons.lang.RandomStringUtils;
 
 /**
- * やらかしたやつの末路
+ * 記録の一意化などを図る関数のセット。
  */
 public class Abuse
 {
     /**
-     * ランダムなIDを生成
+     * ランダムなIDを生成します。
      *
-     * @param len 桁数
-     * @return ID
+     * @param len IDの桁数。
+     * @return 生成したID。
      */
     public static String genRandomId(int len)
     {
         return RandomStringUtils.randomAlphanumeric(len);
     }
-
 }
