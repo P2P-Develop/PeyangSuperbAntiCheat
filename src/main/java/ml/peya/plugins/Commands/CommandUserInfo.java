@@ -37,7 +37,7 @@ public class CommandUserInfo implements CommandExecutor
     {
         //String opts = ChatColor.RESET + ChatColor.WHITE.toString();
         final String prefix = /*opts +*/ChatColor.GOLD.toString();
-        return new TextComponent(prefix + str + prefix + "\n");
+        return new TextComponent(prefix + str + "\n");
     }
 
     private static ArrayList<TextComponent> userInfo(OfflinePlayer offline, boolean lynx)
@@ -45,19 +45,8 @@ public class CommandUserInfo implements CommandExecutor
         Player player = offline.getPlayer();
         ArrayList<TextComponent> p = new ArrayList<>();
 
-        final String opts = ChatColor.RESET + ChatColor.WHITE.toString();
-        final String prefix = opts + ChatColor.GOLD;
-        final String data = ChatColor.WHITE.toString();
 
-        p.add(new TextComponent(ChatColor.RESET + ChatColor.WHITE.toString() +
-            prefix +
-            "--- Info about " +
-            player.getName() +
-            prefix +
-            " ---" +
-            opts +
-            prefix +
-            "\n"));
+        final String data = ChatColor.WHITE.toString();
         if (lynx)
             p.add(t("Most Recent Name: " + data + player.getName()));
         p.add(t("UUID: " + data + player.getUniqueId().toString()));
@@ -151,7 +140,13 @@ public class CommandUserInfo implements CommandExecutor
             }
         }
 
-        ComponentBuilder builder = new ComponentBuilder("");
+        final String opts = ChatColor.RESET + ChatColor.WHITE.toString();
+        final String prefix = opts + ChatColor.GOLD;
+        ComponentBuilder builder = new ComponentBuilder(ChatColor.GOLD +
+            "--- Info about " +
+            player[0].getName() +
+            prefix +
+            " ---\n");
         userInfo(player[0], lynx).parallelStream()
             .forEachOrdered(builder::append);
         sender.spigot().sendMessage(builder.append(action(player[0].getName())).create());
