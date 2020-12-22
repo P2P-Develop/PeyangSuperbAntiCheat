@@ -82,7 +82,7 @@ public class CommandUserInfo implements CommandExecutor
             "Boosters: "
         ).parallel().map(CommandUserInfo::t).forEachOrdered(p::add);
 
-        int ban = 0;
+        int ban = 8;
         int kick = 0;
         int mute = 0;
 

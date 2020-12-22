@@ -69,7 +69,8 @@ public class DetectConnection
 
                 if (learnCount > learnCountLimit)
                 {
-                    if (Arrays.stream(angles).mapToDouble(angle -> network.commit(Pair.of(vl, angle))).sum() / angles.length > 0.01)
+                    logger.info(String.valueOf(Arrays.stream(angles).mapToDouble(angle -> network.commit(Pair.of(vl, angle))).sum() / angles.length));
+                    if (Arrays.stream(angles).mapToDouble(angle -> network.commit(Pair.of(vl, angle))).sum() / angles.length > PeyangSuperbAntiCheat.lv)
                     {
                         Arrays.stream(angles).forEachOrdered(angle -> learn(vl, angle));
 

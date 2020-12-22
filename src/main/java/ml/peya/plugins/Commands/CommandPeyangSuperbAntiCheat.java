@@ -1,16 +1,11 @@
 package ml.peya.plugins.Commands;
 
-import ml.peya.plugins.Commands.CmdPub.Drop;
-import ml.peya.plugins.Commands.CmdPub.Help;
-import ml.peya.plugins.Commands.CmdPub.Show;
-import ml.peya.plugins.Commands.CmdPub.View;
-import ml.peya.plugins.Moderate.ErrorMessageSender;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import ml.peya.plugins.Commands.CmdPub.*;
+import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.*;
+import org.bukkit.command.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 import static ml.peya.plugins.Utils.MessageEngine.get;
 import static ml.peya.plugins.Utils.MessageEngine.pair;
@@ -34,7 +29,7 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if ((ErrorMessageSender.invalidLengthMessage(sender, args, 1, 5)) ||
-            (Arrays.asList("help", "view", "show", "drop", "kick", "ban").contains(args[0]) &&
+            (Arrays.asList("help", "view", "show", "drop", "kick", "ban", "c").contains(args[0]) &&
                 ErrorMessageSender.unPermMessage(sender, "psac." + args[0])))
             return true;
 
@@ -54,6 +49,11 @@ public class CommandPeyangSuperbAntiCheat implements CommandExecutor
                 break;
             case "drop":
                 Drop.run(sender, args);
+                break;
+            case "c":
+                if (args.length < 2)
+                    break;
+                PeyangSuperbAntiCheat.lv = Double.parseDouble(args[1]);
                 break;
             default:
                 sender.sendMessage(get("error.main.notFoundCommand", pair("label", label)));
