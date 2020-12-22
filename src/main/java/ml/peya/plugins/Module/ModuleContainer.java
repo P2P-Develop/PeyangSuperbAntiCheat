@@ -1,7 +1,8 @@
 package ml.peya.plugins.Module;
 
-import fr.neatmonster.nocheatplus.components.NoCheatPlusAPI;
-import me.rerere.matrix.api.MatrixAPI;
+import fr.neatmonster.nocheatplus.components.*;
+import me.rerere.matrix.api.*;
+import ml.peya.api.*;
 
 /**
  * モジュール保存
@@ -17,4 +18,9 @@ public class ModuleContainer
      * NCP
      */
     public static NoCheatPlusAPI ncp;
+
+    /**
+     * BanManager
+     */
+    public static BanManagerAPI ban;
 }

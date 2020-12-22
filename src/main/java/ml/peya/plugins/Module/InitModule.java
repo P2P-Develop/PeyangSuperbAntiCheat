@@ -1,8 +1,7 @@
 package ml.peya.plugins.Module;
 
-import ml.peya.plugins.Module.Load.Matrix;
-import ml.peya.plugins.Module.Load.NoCheatPlus;
-import ml.peya.plugins.PeyangSuperbAntiCheat;
+import ml.peya.plugins.Module.Load.*;
+import ml.peya.plugins.*;
 
 import static ml.peya.plugins.Variables.logger;
 import static ml.peya.plugins.Variables.module;
@@ -23,6 +22,8 @@ public class InitModule
             Matrix.matrix();
         if (PeyangSuperbAntiCheat.isEnablePlugin("NoCheatPlus"))
             NoCheatPlus.ncp();
+        if (PeyangSuperbAntiCheat.isEnablePlugin("PeyangGreatBanManager"))
+            Banmanager.ban();
     }
 
     /**

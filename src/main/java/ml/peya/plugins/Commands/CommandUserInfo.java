@@ -1,6 +1,7 @@
 package ml.peya.plugins.Commands;
 
 import ml.peya.plugins.Moderate.*;
+import ml.peya.plugins.Module.*;
 import net.md_5.bungee.api.chat.*;
 import org.bukkit.*;
 import org.bukkit.command.*;
@@ -82,7 +83,7 @@ public class CommandUserInfo implements CommandExecutor
             "Boosters: "
         ).parallel().map(CommandUserInfo::t).forEachOrdered(p::add);
 
-        int ban = 8;
+        int ban = ModuleContainer.ban.getBans(player.getUniqueId()).size();
         int kick = 0;
         int mute = 0;
 
