@@ -1,11 +1,10 @@
 package ml.peya.plugins.DetectClasses;
 
-import com.comphenix.protocol.events.PacketEvent;
-import com.comphenix.protocol.wrappers.EnumWrappers;
-import ml.peya.plugins.Utils.PlayerUtils;
-import net.minecraft.server.v1_12_R1.PacketPlayInUseEntity;
+import com.comphenix.protocol.events.*;
+import com.comphenix.protocol.wrappers.*;
+import net.minecraft.server.v1_12_R1.*;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.*;
 
 import static ml.peya.plugins.Variables.cheatMeta;
 
@@ -39,8 +38,7 @@ public class Packets
                     try
                     {
                         return meta.getId() == field.getInt(entity) &&
-                            meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId() ||
-                            PlayerUtils.hasCritical(e.getPlayer());
+                            meta.getTarget().getUniqueId() == e.getPlayer().getUniqueId();
                     }
                     catch (IllegalAccessException ex)
                     {
