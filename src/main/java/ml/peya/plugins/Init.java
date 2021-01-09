@@ -1,62 +1,31 @@
 package ml.peya.plugins;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import ml.peya.plugins.BungeeStructure.CommandManager;
+import com.fasterxml.jackson.databind.*;
+import com.zaxxer.hikari.*;
+import ml.peya.plugins.BungeeStructure.*;
 import ml.peya.plugins.Commands.CmdTst.AuraBot;
 import ml.peya.plugins.Commands.CmdTst.AuraPanic;
-import ml.peya.plugins.Commands.CmdTst.TestKnockback;
-import ml.peya.plugins.Commands.CommandKick;
-import ml.peya.plugins.Commands.CommandPeyangSuperbAntiCheat;
-import ml.peya.plugins.Commands.CommandPull;
-import ml.peya.plugins.Commands.CommandReport;
-import ml.peya.plugins.Commands.CommandSilentTeleport;
-import ml.peya.plugins.Commands.CommandTarget;
-import ml.peya.plugins.Commands.CommandTracking;
-import ml.peya.plugins.Commands.CommandTrust;
-import ml.peya.plugins.Commands.CommandUserInfo;
-import ml.peya.plugins.Gui.Events.Drop;
-import ml.peya.plugins.Gui.Events.Run;
-import ml.peya.plugins.Gui.Item;
-import ml.peya.plugins.Gui.Items.Main.TargetStick;
-import ml.peya.plugins.Gui.Items.Target.AuraBotItem;
-import ml.peya.plugins.Gui.Items.Target.AuraPanicItem;
-import ml.peya.plugins.Gui.Items.Target.BackButton;
-import ml.peya.plugins.Gui.Items.Target.CompassTracker3000_tm;
-import ml.peya.plugins.Gui.Items.Target.Lead;
-import ml.peya.plugins.Gui.Items.Target.Page2.BackToPage1;
-import ml.peya.plugins.Gui.Items.Target.TestKnockBack;
-import ml.peya.plugins.Gui.Items.Target.ToPage2;
-import ml.peya.plugins.Task.TrackerTask;
-import ml.peya.plugins.Utils.Utils;
-import org.apache.commons.io.FileUtils;
-import org.bukkit.Bukkit;
+import ml.peya.plugins.Commands.CmdTst.*;
+import ml.peya.plugins.Commands.*;
+import ml.peya.plugins.Gui.Events.*;
+import ml.peya.plugins.Gui.*;
+import ml.peya.plugins.Gui.Items.Main.*;
+import ml.peya.plugins.Gui.Items.Target.*;
+import ml.peya.plugins.Gui.Items.Target.Page2.*;
+import ml.peya.plugins.Task.*;
+import ml.peya.plugins.Utils.*;
+import org.apache.commons.io.*;
+import org.bukkit.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.Statement;
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
+import java.io.*;
+import java.nio.file.*;
+import java.sql.*;
+import java.util.*;
+import java.util.concurrent.atomic.*;
+import java.util.logging.*;
 
-import static ml.peya.plugins.PeyangSuperbAntiCheat.getPlugin;
-import static ml.peya.plugins.Variables.bungeeChannel;
-import static ml.peya.plugins.Variables.bungeeCommand;
-import static ml.peya.plugins.Variables.config;
-import static ml.peya.plugins.Variables.databasePath;
-import static ml.peya.plugins.Variables.eye;
-import static ml.peya.plugins.Variables.isTrackEnabled;
-import static ml.peya.plugins.Variables.learnCount;
-import static ml.peya.plugins.Variables.logger;
-import static ml.peya.plugins.Variables.network;
-import static ml.peya.plugins.Variables.skin;
-import static ml.peya.plugins.Variables.trackerTask;
-import static ml.peya.plugins.Variables.trust;
-import static ml.peya.plugins.Variables.trustPath;
+import static ml.peya.plugins.PeyangSuperbAntiCheat.*;
+import static ml.peya.plugins.Variables.*;
 
 /**
  * メインクラスではおさまらない初期化とかするとこ。
@@ -228,7 +197,6 @@ public class Init
         getPlugin().getCommand("tracking").setExecutor(new CommandTracking());
         getPlugin().getCommand("trust").setExecutor(new CommandTrust());
         getPlugin().getCommand("silentteleport").setExecutor(new CommandSilentTeleport());
-        getPlugin().getCommand("userinfo").setExecutor(new CommandUserInfo());
         getPlugin().getCommand("kick").setExecutor(new CommandKick());
     }
 

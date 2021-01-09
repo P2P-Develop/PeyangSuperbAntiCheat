@@ -55,9 +55,6 @@ commands:
     kick:
         usage: /kick <Player> [Reason]
         description: "理由をつけてプレイヤーをキックします。"
-    userinfo:
-        usage: /userinfo [-f] <Player>
-        description: "ユーザ情報を表示します。"
 permissions:
     #Core
     psac.member:
@@ -87,7 +84,6 @@ permissions:
             psac.chattarget: true
             psac.tracking: true
             psac.silentteleport: true
-            psac.userinfo: true
             psac.member: true
 
     psac.admin:
@@ -137,9 +133,6 @@ permissions:
         default: op
     psac.silentteleport:
         description: サイレントにテレポートします。
-        default: op
-    psac.userinfo:
-        description: プレイヤーの情報を表示します。
         default: op
     #Detect
     psac.aurapanic:
