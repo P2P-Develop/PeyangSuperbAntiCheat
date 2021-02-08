@@ -96,15 +96,14 @@ If possible.
 
 ### 注意
 
-このプラグインは、DetectOPMシステムを2個同時に稼働させることで4つのタイマーが常に動作しています。  
-NPCがスポーンするたびに、検査に必要なタイマーが12個ほど作成されます。  
+DetectOPMシステムを2個同時に稼働させることで4つのタイマーが常に動作しています。  
+NPCがスポーンするたびに、検査に必要なタイマーが12個ほど生成されます。  
 使用後すぐに停止されますが、停止時間は使用しているJVMによってある程度変わります。
 詳しくは[こちら](PluginThreads.txt)をご覧ください。
 
-このプラグインはRAMやCPUを大量に使用するため、リソースに余裕のあるサーバーで実行することをおすすめします。  
-リソースに余裕のないサーバーは推奨していません。
+RAMやCPUを大量に使用するため、リソースに余裕のあるサーバーで実行することをおすすめします。  
 
-このプラグインでは、初歩的な本の実装方法を使用しています。
+このプラグインでは、とても初歩的な本の実装方法を使用しています。
 
 ---
 
@@ -118,8 +117,8 @@ NPCがスポーンするたびに、検査に必要なタイマーが12個ほど
     リリース前に最新のjarがビルドされています。
   - 手動でビルドする  
   ビルドには以下のバイナリが必要です。
-    - `javac` - JVM付属のJavaコンパイラ
-    - `mvn`   - Maven プロジェクトマネージャー  
+    - `javac` - JVM付属のJavaコンパイラー
+    - `mvn`   - Mavenプロジェクトマネージャー  
     以下のコマンドでGitHubからリポジトリをクローンし、安定版をビルドします。
     ```bash
     $ git clone https://github.com/P2P-Develop/PeyangSuperbAntiCheat psac
@@ -135,11 +134,11 @@ NPCがスポーンするたびに、検査に必要なタイマーが12個ほど
     ```
 2. 依存プラグインのインストール
 
-[ProtocolLib](https://www.spigotmc.org/resources/1997)をダウンロードし、サーバーの`plugins`ディレクトリにコピーします。
+[ProtocolLib](https://www.spigotmc.org/resources/1997)をダウンロードし、サーバーの`plugins`ディレクトリにコピー・移動します。
 
 3. PeyangSuperbAntiCheatのインストール
 
-サーバーの`plugins`ディレクトリにjarをコピーします。
+サーバーの`plugins`ディレクトリにjarをコピー・移動します。
 
 ### コマンド
 
@@ -169,7 +168,7 @@ NPCがスポーンするたびに、検査に必要なタイマーが12個ほど
 [PeyangSuperbAntiCheat] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ [CLICK]
 ```
 
-このメッセージでは、前者よりも詳細なメッセージが表示されます。
+このメッセージでは前者よりも詳細なメッセージが表示されます。
 ただし、クリックは使用できません。
 
 ```tst
@@ -178,10 +177,10 @@ NPCがスポーンするたびに、検査に必要なタイマーが12個ほど
 
 これらのメッセージはコンフィグを編集することにより変更ができます。
 
-後者のフォーマットはとある人物によりリークされた、Hypixelのスタッフ向けModのHypixel Lynxと互換性を持たせる事ができるモードです。  
+後者のフォーマットは、とある人物によりリークされたHypixelのスタッフ向けModのHypixel Lynxと互換性を持たせる事ができるモードです。  
 Hypixel Lynxを導入したまま、Hypixelには参加しないでください。  
-AntiForgeを使用すれば回避が可能ですが、即座にBANされます。
-このModを作成したのは、すでに退職したAdminのSpencer Alderman氏だと思われます。
+ブラックリストModとして登録されているため、スタッフ以外のプレイヤーは即座にBANされます。
+このModを開発したのは、すでに退職したAdminのSpencer Alderman氏だと思われます。
 
 ### 使用法
 
@@ -190,7 +189,7 @@ AntiForgeを使用すれば回避が可能ですが、即座にBANされます�
 この状態で実行すると、報告の理由を選択できる本が開きます。  
 本に表示されている報告理由をクリックすると報告内容として追加されます。
 
-レポートを送信でクリックで送信するか、レポートを放棄をクリックで破棄します。
+「レポートを送信」でクリックで報告を送信するか、「レポートを放棄」でクリックで報告を破棄します。
 
 - /wdr \<PlayerName\> \<理由 1\> \[理由 2\]…
 
@@ -205,7 +204,7 @@ AntiForgeを使用すれば回避が可能ですが、即座にBANされます�
 | 理由          | エイリアス                 | 簡単な説明                                                                                                          |
 | :------------ | :------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | Fly           | flight                     | プレイヤーがクリエイティブやスペクテイターモード以外でも、空を飛べるようにできるチートです。                                          |
-| KillAura      | killaura, aura, ka         | 設定で異なりますが、範囲に入った人を全方向で攻撃できるチートです。                                                                      |
+| KillAura      | killaura, aura, ka         | クライアント側の設定で異なりますが、範囲に入った人を全方向で攻撃できるチートです。                                                                      |
 | AutoClicker   | autoclicker, ac, autoclick | 自動で左クリックができるチートです。マクロもAutoClickerになります。 |
 | Speed         | speed, bhop, timer         | とても早い速度で歩けるようになるチートです。Bunnyhopや、TimerもSpeedになります。                                 |
 | AntiKnockback | akb, velocity, antikb      | ノックバックを軽減するチートです。                                                                                  |
@@ -339,7 +338,6 @@ AntiForgeを使用すれば回避が可能ですが、即座にBANされます�
 
 このコマンドを実行すると、いくつかのアイテムが手に入ります。  
 いずれかのアイテムを持ってクリックすることにより、プレイヤーにNPCを出すなど様々な操作ができます。  
-ドロップすると全部消えます。
 
 ### 使用法
 
@@ -390,7 +388,7 @@ AntiForgeを使用すれば回避が可能ですが、即座にBANされます�
 信用されたプレイヤーに対してはpsac.trust権限を持っているプレイヤーしかスキャンやテストができなくなります。  
 信用するのにもpsac.trust権限が必要です。
 
-> 警告: この権限を乱用された場合、正しい運営に影響が発生する可能性があります。  
+> 警告：この権限を乱用された場合、正しい運営に影響が発生する可能性があります。  
 > 注意して使用してください。
 
 ### 使用法
@@ -469,13 +467,13 @@ AntiForgeを使用すれば回避が可能ですが、即座にBANされます�
 
 - /psac view \[ページ数\]
 
-プレイヤーが提出したレポートを確認できます。  
+プレイヤーが提出したレポートを確認できます。
 危険度順に5件ずつ表示されます。
 
 - /psac show \<管理 ID\>
 
 プレイヤーが提出したレポートの詳細を表示します。  
-このコマンドをプレイヤーから実行する本が開き、報告の詳細を確認できます。
+このコマンドをプレイヤーから実行すると本が開き、報告の詳細を確認できます。
 
 - /psac drop \<管理 ID\>
 
@@ -501,16 +499,16 @@ AntiForgeを使用すれば回避が可能ですが、即座にBANされます�
 | _**
 psac.member**_ |                             サーバーメンバー用の権限です。                              |                                                          |                true                 |             |
 |    psac.report    |                                     /wdr \(report\)                                     |                   レポートができます。                   |                true                 | psac.member |
-|    psac.report    |                                       /psac help                                        | このプラグインの（メンバー）ヘルプを見ることができます。 |                true                 | psac.member |
+|    psac.report    |                                       /psac help                                        | このプラグインの（メンバー）ヘルプを表示します。 |                true                 | psac.member |
 | psac.notification |                    プレイヤーが対処されたとき通知が飛ばされます。                     |                                                          |                true                 | psac.member |
 |   psac.regular    |                               定期メッセージが流れます。                                |                                                          |                true                 | psac.member |
 |  _**
 psac.mod**_   |                         プレイヤーのキックやテストをできます。                          |                                                          |                 op                  |             |
 |     psac.kick     |                                       /psac kick                                        |               プレイヤーをキックできます。               |                 op                  |  psac.mod   |
-|  psac.aurapanic   |                               /aurapanic \<\PlayerName\>                                |    プレイヤーに回るNPCを送りつけることができます。     |                 op                  |  psac.mod   |
+|  psac.aurapanic   |                               /aurapanic \<\PlayerName\>                                |    プレイヤーに回るNPCを送ります。     |                 op                  |  psac.mod   |
 |   psac.aurabot    |                                 /aurabot \<PlayerName\>                                 |      プレイヤーの背後に貼り付くNPCを召喚します。      |                 op                  |  psac.mod   |
 |    psac.testkb    |                                 /testkb \<PlayerName\>                                  | プレイヤーに見えない弓を放ち、ノックバックを確かめます。 |                 op                  |  psac.mod   |
-|   psac.viewnpc    |                    対象プレイヤー以外にNPCを見ることができます。                     |                                                          |                 op                  |  psac.mod   |
+|   psac.viewnpc    |                    対象プレイヤー以外にNPCを確認できるようにします。                     |                                                          |                 op                  |  psac.mod   |
 |     psac.view     |                                          /view                                          |                 レポートを表示できます。                 |                 op                  |  psac.mod   |
 |     psac.show     |                                 /show \<ManagementID\>                                  |                レポートを詳細表示します。                |                 op                  |  psac.mod   |
 |   psac.ntfadmin   |                       PEYANG CHEAT DETECTIONに名前を含みます。                       |                                                          |                 op                  |  psac.mod   |
@@ -654,9 +652,9 @@ psac.admin**_  |                   レポートの削除や、サーバーの根
 
 ### [Issue](https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/issues)の担当者
 
-日本語 (原文・[ネタ](README-py.md))：[ぺやんぐ](https://github.com/peyang-Celeron)
+日本語（原文・[READMEネタ版](README-py.md)[ぺやんぐ](https://github.com/peyang-Celeron)
 
-日本語校正：[れもねーど](https://github.com/lemonade19x) & [Potato1682](https://github.com/Potato1682)
+日本語校正：[れもねーど](https://github.com/lemonade19x)＆[Potato1682](https://github.com/Potato1682)
 
 英語：[Potato1682](https://github.com/Potato1682)
 
