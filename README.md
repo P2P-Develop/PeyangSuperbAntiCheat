@@ -52,40 +52,16 @@
 
 ---
 
-<p align="center"><strong>このプラグインのドキュメントは多言語に対応していますがネタ成分が次第に多くなっています。<br>
-  真面目なドキュメントを読みたい方は英語ドキュメントをお読みください。</strong><br>
-  This plugin document supported multi language.
-</p>
+<p align="center">The documentation for this plugin is available in two languages.</p>
 
 <p align="center">
-  <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/blob/stable/docs/README-en.md"
-    ><img
-      height="40"
-      src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/US.svg"
-      alt="English"
-  ></a>
-  <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/blob/stable/docs/README-ja.md"
-    ><img
-      height="40"
-      src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/JP.svg"
-      alt="日本語"
-  ></a>
+  <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/blob/develop/docs/README-en.md">
+    <img height="40" src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/US.svg" alt="English">
+  </a>
+  <a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/blob/develop/docs/README-ja.md">
+    <img height="40" src="https://raw.githubusercontent.com/google/region-flags/gh-pages/svg/JP.svg" alt="日本語">
+  </a>
+  <!--<a href="https://github.com/P2P-Develop/PeyangSuperbAntiCheat/blob/develop/docs/README-py.md">
+    <img height="40" src="https://user-images.githubusercontent.com/40102073/129471326-75c00088-12dd-4392-bdd9-a97749720610.png" alt="Peyanese">
+  </a>-->
 </p>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>Do not access docs/memo.</p>
