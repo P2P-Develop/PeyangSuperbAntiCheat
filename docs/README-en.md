@@ -111,8 +111,8 @@
 </details>
 
 > [!CAUTION]
-> This repository has jokes in commit messages and source by a developer(and a little contributor).
-> If you want to introduce an anti-cheat plugin with high detection rate, **please do not use this plugin.**
+> This repository has jokes in commit messages and sources by a developer(and a little contributor).
+> If you want to introduce an anti-cheat plugin with a high detection rate, **please do not use this plugin.**
 
 > [!WARNING] **With this plugin, DetectOPM will run +4 timers at the same time.
 > In other words, it may consume a certain amount of RAM or CPU, so please use a server with specifications.**
@@ -139,7 +139,7 @@ This document defines a simple markdown grammar to make it easy for users to und
 **This represents information that all users should know.**
 
 ```tst
-This is message[CLICK]
+This is a message[CLICK]
 ```
 
 This means that the messages within the code block will send to the Minecraft chat area.
@@ -154,19 +154,19 @@ This means important items that the user should read.
 This allows the user to view more useful information.
 
 > [!IMPORTANT]
-> "hoge" can be used with "hogehoge" in Japanese, but there is absolutely no "foofoo".
+> "hoge" can be used with "hogehoge" in Japanese, but there is no "foofoo".
 
 - /foo \<bar\> \[player\]
 
-This list a represents command and arguments.  
-Argument enclosed in \<\>, it represents the necessary command, Enclosed in \[\] indicates an arbitrary command.
+This list represents commands and arguments.  
+Argument enclosed in \<\>, represents the necessary command, Enclosed in \[\] indicates an arbitrary command.
 
 - `fooperm.bar`
 
-This block of code represents a permission.
+This block of code represents permission.
 
 > [!TIP]
-> No permission group is described. Before referring to permissions, make sure you understand it.
+> No permission group is described. Before referring to permissions, make sure you understand them.
 
 ---
 
@@ -180,7 +180,7 @@ This block of code represents a permission.
   $ curl -sL "https://github.com/peyang-Celeron/PeyangSuperbAntiCheat/releases/download/0.3a/PSAC.jar" -o (Your plugins dir)
   ```
 
-### Auto Build \(Only supports Linux, MacOS, Git Bash\)
+### Auto Build \(Only supports Linux, macOS, Git Bash\)
 
 1. Execute this command.
 
@@ -292,7 +292,7 @@ Other settings can be done using permissions.
 
 ## Commands
 
-This section are describe plugin commands.
+This section describes plugin commands.
 
 ## /report
 
@@ -311,7 +311,7 @@ Send the content of the report selected and submitted by the player to the staff
 > [!WARNING] It is not a command to automatically summon NPC.
 
 The staff can see if the player is doing the same as the report.  
-User can also set the format for the report.
+Users can also set the format for the report.
 
 ```tst
 [PeyangSuperbAntiCheat] プレイヤーがレポートを提出しました！クリックしてレポートを確認してください！ [CLICK]
@@ -323,17 +323,17 @@ Staff can check the contents of the report with the `[CLICK]` button.
 [STAFF] [ADMIN] Fishy: Report of <PlayerName> <Reason1>, [Reason2]...
 ```
 
-This report format is lets them know who reported who and why.
+This report format lets them know who reported who and why.
 
 > **WARNING: This report format is compatible with the Hypixel Lynx Mod (Keep leaking users down).
-> This mod may be bannable on Hypixel server, so never use this on Hypixel server.
+> This mod may be bannable on the Hypixel server, so never use this on the Hypixel server.
 > [Developer](https://github.com/peyang-Celeron) does not take any responsibility.**
 
 ### Usages
 
 - /report \<PlayerName\>
 
-  Player can execute this command with this argument to open a book where you can select the reason for the report.  
+  Players can execute this command with this argument to open a book where you can select the reason for the report.  
   If you click on the reporting reason displayed in the book, the reason will be added as the content of the report.
 
 - ![#008000](https://via.placeholder.com/15/008000/000000?text=+) Click to send report in "レポートを送信" , or:
@@ -342,7 +342,7 @@ This report format is lets them know who reported who and why.
 
 - /report \<PlayerName\> \<Reason1\> \[Reason2\]...
 
-  Player can execute this command with this argument to report directly in chat/console without using a book.
+  Players can execute this command with this argument to report directly in chat/console without using a book.
 
   > [!TIP] Can use an alias for this reason.
 
@@ -353,9 +353,9 @@ The books are sorted in the order they are displayed.
 |    Reason     |          Aliases           | Description                                                                                         |
 | :-----------: | :------------------------: | :-------------------------------------------------------------------------------------------------- |
 |      Fly      |           flight           | Fly without creative mode.                                                                          |
-|   KillAura    |     killaura, aura, ka     | Attack to entity without aiming.                                                                    |
+|   KillAura    |     killaura, aura, ka     | Attack to an entity without aiming.                                                                    |
 |  AutoClicker  | autoclicker, ac, autoclick | Click Entity/Block automatically(External software clickers and macros also belong to AutoClicker). |
-|     Speed     |     speed, bhop, timer     | Run at a impossible speed(Bunny hops and Timer belong to speed).                                    |
+|     Speed     |     speed, bhop, timer     | Run at an impossible speed(Bunny hops and Timer belong to speed).                                    |
 | AntiKnockback |   akb, velocity, antikb    | Never be knocked back.                                                                              |
 |     Reach     |           reach            | Extend the attack distance.                                                                         |
 |    Dolphin    |          dolphin           | Swimming automatically like a dolphin.                                                              |
@@ -378,7 +378,7 @@ The books are sorted in the order they are displayed.
 
 Executing this command will summon an NPC that spins around the player at a constant speed.  
 When the NPC is attacked a certain number of times, it kicks that player.  
-Also, to use the reach mode, adds the "-r" argument to the first or second argument.  
+Also, using the reach mode adds the "-r" argument to the first or second argument.  
 Reach mode can scan the radius and check the reaching.
 
 ### Usage
@@ -395,7 +395,7 @@ Reach mode can scan the radius and check the reaching.
 
 - `psac.aurabot`
 
-Manages the permission to execute the command on summoning of AuraBot.  
+Manages the permission to execute the command on the summoning of AuraBot.  
 Players with this permission can summon Watchdogs.
 
 ## /acpanic
@@ -410,7 +410,7 @@ Players with this permission can summon Watchdogs.
 
 This command always summons the NPC that is trying to move behind the player.  
 When an NPC is attacked a certain number of times, it kicks that player.  
-Also, to use the reach mode, adds the "-r" argument to the first or second argument.
+Also, using the reach mode adds the "-r" argument to the first or second argument.
 
 ### Usage
 
@@ -436,7 +436,7 @@ Also, to use the reach mode, adds the "-r" argument to the first or second argum
 
 ### Description
 
-Fire a **invisible arrow** at the specified player.  
+Fire an **invisible arrow** at the specified player.  
 This allows you to see if the player is knocking back.
 
 ### Usage
@@ -460,7 +460,7 @@ Pull the specified player.
 ### Description
 
 Pull the specified player to the executed player.  
-It cannot be run from console.
+It cannot be run from the console.
 
 ### Usage
 
@@ -488,7 +488,7 @@ Displays the player's kick (BAN) history **remaining in this plugin**.
 
 - /bans \[\-a | ban | kick\] \<PlayerName\>
 
-  Displays the BAN history of player specified by \<PlayerName\>.  
+  Displays the BAN history of the player specified by \<PlayerName\>.  
   Add \-a to show all bans and kicks.
 
 ### Permission
@@ -501,9 +501,9 @@ Tracks the specified player as a target.
 
 ### Description
 
-When you executing this command, it gives utility items.  
+When you execute this command, it gives utility items.  
 These items allow you to execute useful commands with a click.  
-Dropping a given item, clears all items.
+Dropping a given item clears all items.
 
 ### Usage
 
@@ -556,7 +556,7 @@ Trust specified player.
 ### Description
 
 Add the specified player as a "trusted player".  
-If already trusted, remove player from "trusted player".  
+If the player is already trusted, remove the player from "trusted player".  
 Players without permission `psac.trust` cannot run the following commands on trusted players.
 
 - [/aurabot](#aurabot)
@@ -585,7 +585,7 @@ Lists player information.
 
 Lists the information of the specified player.  
 If you add "-f" to the argument, more information (such as rank) will be displayed if "message.lynx" is enabled.  
-This command was created to be consistent with Lynx, but states that [main developer](https://github.com/peyang-Celeron) don't need it.  
+This command was created to be consistent with Lynx but states that [main developer](https://github.com/peyang-Celeron) doesn't need it.  
 If `-f` is not specified or is not available, concise information is displayed.
 
 ### Usage
@@ -772,7 +772,7 @@ The command's permission is `psac.view`.
 #### /psac show \<ManagementID\>
 
 View details of the report sent by the player.  
-You can run this command from the player to view the report details by the player's book.  
+You can run this command from the player to view the report details in the player's book.  
 If you run it from the console, it will appear as a log to the console.
 
 The command's permission is `psac.show`.
@@ -815,12 +815,12 @@ In this plugin, the following config is set by default.
 |  database.learnPath  |  ./learn.json   | A JSON file path that stores the neural network weights and learning count from learning.                                                        |
 |  database.trustPath  |   ./trust.db    | A SQL database path that saves trusted players information.                                                                                      |
 |   database.banPath   |    ./bans.db    | A SQL database path that manages ban records.                                                                                                    |
-|     npc.seconds      |        3        | A number of seconds the [NPC](#aurabot) will orbit the player.                                                                                   |
+|     npc.seconds      |        3        | Some seconds the [NPC](#aurabot) will orbit the player.                                                                                   |
 |       npc.time       |      0.35       | A value of [NPC](#aurabot) orbit speed.                                                                                                          |
 |      npc.range       |    3.0, 1.5     | A radius that the NPC will rotate. The default distance is suitable for KillAura detection.                                                      |
 |    npc.reachRange    |       4.6       | A radius that the NPC will rotate. The default distance is suitable for KillAura detection with reach mode.                                      |
 |    npc.panicRange    |       1.5       | A relative height of the [Panic NPC](#acpanic) and player.                                                                                       |
-| npc.panicReachRange  |       4.6       | A relative height of the [Panic NPC](#acpanic) and player with reach mode.                                                                       |
+| npc.panicReachRange  |       4.6       | A relative height of the [Panic NPC](#acpanic) and the player with reach mode.                                                                       |
 |       npc.wave       |      true       | Whether the [NPC](#aurabot) spins like a wave.                                                                                                   |
 |     npc.waveMin      |       0.3       | A minimum radius that a [NPC](#aurabot) orbits like a wave.                                                                                      |
 |    npc.speed.wave    |      true       | An orbital velocity of NPC variable.                                                                                                             |
@@ -828,12 +828,12 @@ In this plugin, the following config is set by default.
 |       npc.kill       |        3        | A maximum number to call when an NPC is killed within 10 seconds.                                                                                |
 |      npc.learn       |       0.3       | A learning coefficient of the [learning function](#what-is-learning-function). The higher the value, the less processing, but the less accurate. |
 |     npc.vlLevel      |       17        | This value is used to evaluate the VL when the NPC has not learned beyond this npc.learnCount.                                                   |
-|    npc.learnCount    |       15        | If the learn function learns more than this number of times, the kick rating will be transferred to the learn function.                          |
+|    npc.learnCount    |       15        | If the learn function learns more than this number of times, the kick rating will be transferred to the learning function.                          |
 |      kick.delay      |        2        | A delay between sending a broadcast message and kicking the player.                                                                              |
 |   kick.defaultKick   |       25        | Kick if the NPC is attacked above this value. This value takes precedence if no learned data is found.                                           |
 | decoration.lightning |      true       | A boolean whether to drop lightning effect\(no damage\) when kicking.                                                                            |
-|   decoration.flame   |      true       | A boolean whether to apply flame effect to player when kicking.                                                                                  |
-|  decoration.circle   |      true       | A boolean whether to draw colored circle with effect to player when kicking.                                                                     |
+|   decoration.flame   |      true       | A boolean whether to apply a flame effect to the player when kicking.                                                                                  |
+|  decoration.circle   |      true       | A boolean whether to draw a colored circle with effect to the player when kicking.                                                                     |
 |     message.lynx     |      true       | A boolean whether Lynx Mod compatible.                                                                                                           |
 | autoMessage.enabled  |      true       | Toggle the presence or absence of regular messages.                                                                                              |
 |   autoMessage.time   |       15        | A minutes for recurring messages.                                                                                                                |
@@ -848,7 +848,7 @@ The NPC skin is displayed randomly by included 1400 skin sets.
 ### What is \<ManagementID\>?
 
 \<ManagementID\> is a 32-character alphanumeric string that is automatically assigned when the player submits the report.  
-This ID is displayed when you run `/psac view` from console.  
+This ID is displayed when you run `/psac view` from the console.  
 Also, can execute commands related to the \<ManagementID\> from the player.
 
 ### Why not automatically execute BAN commands in this plugin?
@@ -862,15 +862,15 @@ This plugin has a learning function that automatically adjusts the parameters us
 Learning cheat data can improve the accuracy of function decision to kick or not.  
 The learning function of this plugin uses machine learning to use a neural network.
 
-> [!WARNING] This feature is under development. This function may cannot learn completely.
+> [!WARNING] This feature is under development. This function may not learn completely.
 
 ### Learning mechanism
 
-The learning feature of this plugin adjusts key parameters by iteratively calculating the average of the parameters when it detects a cheat or kick.
+The learning feature of this plugin adjusts key parameters by iteratively calculating the average of the parameters when it detects a cheat or kicks.
 
 ## What is the `lang` property?
 
-This plugin includes multi languages and you can set `lang` property in _[config.yml](../src/main/resources/config.yml)_.  
+This plugin includes multi-languages and you can set `lang` property in _[config.yml](../src/main/resources/config.yml)_.  
 You can't set different languages to `lang`, but you can set two, Japanese and English.  
 The `lang` property can set value with aliases, and the value can be set even if lowercase and uppercase letters are mixed.  
 You can set `lang` with this:
@@ -915,7 +915,7 @@ _[plugin.yml](../src/main/resources/plugin.yml)_ contains assembly information, 
 
 ## What utility items for [/target](#target)?
 
-Player can get the following utility items by executing [/target](#target).
+Players can get the following utility items by executing [/target](#target).
 
 |   Item    |           ID            | Description                                     |               Executing Command               |
 | :-------: | :---------------------: | :---------------------------------------------- | :-------------------------------------------: |
@@ -930,7 +930,7 @@ Player can get the following utility items by executing [/target](#target).
 |   Reed    |          PULL           | Pull the target.                                |           [/pull](#pull) \<Target\>           |
 | Blaze Rod |      TARGET_STICK       | Target the player you are looking at.           |     [/target](#target) \<Looking Player\>     |
 
-This example is replacing minecraft's default command to [/psac kick](#arguments).  
+This example is replacing Minecraft's default command to [/psac kick](#arguments).  
 [/psac kick](#arguments) can show particles, add decorations when kicking, and record to databases.
 
 ## What library does this plugin use?
