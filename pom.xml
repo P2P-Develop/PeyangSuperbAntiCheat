@@ -162,7 +162,7 @@
         <dependency>
             <groupId>com.github.P2P-Develop</groupId>
             <artifactId>PeyangSuperLibrary</artifactId>
-            <version>114.191.98.10</version>
+            <version>114.191.981.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
